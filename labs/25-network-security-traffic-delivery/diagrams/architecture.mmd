@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Protect clinical services and maintain predictable inbound, east-west, and outbound traffic through zonal or regional component failure."]
-    R --> C1["Establish segmentation and least-access flows"]
-    C1 --> C2["Validate centralized inspection and policy hierarchy"]
-    C2 --> C3["Prove global and regional HTTP protection"]
-    C3 --> C4["Validate private load balancing and explicit egress"]
-    C4 --> C5["Verify end-to-end routes and failure behavior"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_global_edge["Global security edge"]
+        N_front_door["Front Door Premium WAF"]
+    end
+    subgraph B_hub_network["Central inspection hub"]
+        N_app_gateway["Application Gateway WAF v2"]
+        N_firewall["Azure Firewall Premium"]
+    end
+    subgraph B_application_spokes["Private application spokes"]
+        N_load_balancer["Private Standard Load Balancer"]
+        N_applications["Segmented clinical APIs"]
+        N_nat_gateway["Explicit NAT Gateway egress"]
+    end
+    N_front_door -->|"global TLS and WAF policy"| N_app_gateway
+    N_app_gateway -->|"regional inspected ingress"| N_firewall
+    N_firewall -->|"allowed private flow"| N_load_balancer
+    N_load_balancer -->|"private service distribution"| N_applications
+    N_applications -->|"explicit outbound path"| N_nat_gateway
+    N_nat_gateway -->|"governed egress inspection"| N_firewall
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_front_door,N_app_gateway,N_firewall,N_load_balancer,N_applications,N_nat_gateway service
 %% END GENERATED AZ305 V1

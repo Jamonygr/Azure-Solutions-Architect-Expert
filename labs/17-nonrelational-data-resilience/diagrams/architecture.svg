@@ -1,44 +1,105 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-17 Semi-Structured and Unstructured Data Resilience</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:5caf3dac109ac7b3272b60c1141b3ec44f3bdbe8b77fcd7226e071246f380db9</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Keep the media platform usable through regional disruption without violating</tspan>
-    <tspan x="380" dy="20">content residency or silently losing accepted editorial changes.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Inventory nonrelational region placement</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Validate document consistency and conflict behavior</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Assess Blob durability and failover readiness</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Prove backup and restore integrity</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Rehearse coordinated regional recovery</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Coordinated nonrelational recovery topology</title>
+  <desc id="visual-desc">Topology showing global application traffic, Cosmos DB multi-region writes, GZRS Blob Storage, a secondary region, and backup and restore validation.</desc>
+  <metadata>source-sha256:1526eb1d597a06a1d52a78a4318642f2096d0825e2339de7759b38158b5f10af</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF5E5"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#8A4B00" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Global media application">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#D69E4F" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#73562E">Global media application</text>
+  </g>
+  <g role="group" aria-label="Boundary: Primary data region">
+    <rect x="496" y="116" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#D69E4F" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#73562E">Primary data region</text>
+  </g>
+  <g role="group" aria-label="Boundary: Secondary data region">
+    <rect x="51" y="446" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#D69E4F" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#73562E">Secondary data region</text>
+  </g>
+  <g role="group" aria-label="Boundary: Recovery evidence">
+    <rect x="941" y="446" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#D69E4F" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="957" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#73562E">Recovery evidence</text>
+  </g>
+  <g role="group" aria-label="document reads and writes: traffic to cosmos-primary">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="296.25" y="195" width="162.5" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">document reads and writes</text>
+  </g>
+  <g role="group" aria-label="asset reads and writes: traffic to blob-primary">
+    <path d="M232 220 C600 220 600 220 968 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="528.5" y="195" width="143" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="600" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">asset reads and writes</text>
+  </g>
+  <g role="group" aria-label="multi-region write replication: cosmos-primary to cosmos-secondary">
+    <path d="M538.151 265.866 C377.5 265.866 377.5 504.134 216.849 504.134" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="280" y="360" width="195" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="377.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">multi-region write replication</text>
+  </g>
+  <g role="group" aria-label="GZRS object replication: blob-primary to blob-secondary">
+    <path d="M983.151 265.866 C822.5 265.866 822.5 504.134 661.849 504.134" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="747.75" y="360" width="149.5" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="822.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">GZRS object replication</text>
+  </g>
+  <g role="group" aria-label="document recovery exercise: cosmos-secondary to restore-proof">
+    <path d="M232 550 C600 550 600 550 968 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="515.5" y="525" width="169" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="600" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">document recovery exercise</text>
+  </g>
+  <g role="group" aria-label="object recovery exercise: blob-secondary to restore-proof">
+    <path d="M677 550 C822.5 550 822.5 550 968 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="744.5" y="525" width="156" height="24" rx="12" fill="#ffffff" stroke="#D69E4F"/>
+    <text x="822.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#402600">object recovery exercise</text>
+  </g>
+  <g role="group" aria-label="Service node: Global media traffic" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjljMjRkZjUtZTBkZC00ODM4LWEzODUtN2MxMWMyZDM0MzA0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFhMmVlNjk3LWU4ZDEtNGRhMS1hOGM1LTY0YzhlYmJiNzRjZiIgeDE9IjkiIHkxPSIxMy44MyIgeDI9IjkiIHkyPSIxLjA3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1uZXR3b3JraW5nLTczPC90aXRsZT48cGF0aCBkPSJNMTgsOS44M0E0LDQsMCwwLDAsMTQuNDksNiw1LjEsNS4xLDAsMCwwLDkuMjQsMS4wN2E1LjIzLDUuMjMsMCwwLDAtNSwzLjQxQTQuODMsNC44MywwLDAsMCwwLDkuMTJhNC45LDQuOSwwLDAsMCw1LjA3LDQuNzFsLjQ0LDBoOC4yMWEuNzguNzgsMCwwLDAsLjIyLDBBNC4wOSw0LjA5LDAsMCwwLDE4LDkuODNaIiBmaWxsPSJ1cmwoI2FhMmVlNjk3LWU4ZDEtNGRhMS1hOGM1LTY0YzhlYmJiNzRjZikiIC8+PHBhdGggaWQ9ImYwMjc2MTM1LTAwNzktNDg5Ny1hNTE4LTIxZWI2MzQ3MmMxNiIgZD0iTTYuNjMsNi44Mmg1LjA2djdINi42M1oiIGZpbGw9IiNmMmYyZjIiIC8+PHBhdGggaWQ9ImU1Mjg4NzhkLTJlZDctNDM5Mi05NGU2LTk5YzZmYzk3MWJjYiIgZD0iTTEyLjYxLDYuMzdsLTMuNDktMmEuMjUuMjUsMCwwLDAtLjMxLjE1czAsLjA2LDAsLjA4VjE2LjY4YS4yNS4yNSwwLDAsMCwuMjQuMjVoLjA4bDMuNDktMi4wNmEuMjUuMjUsMCwwLDAsLjE3LS4yM3YtOEEuMjYuMjYsMCwwLDAsMTIuNjEsNi4zN1oiIGZpbGw9IiM1MGU2ZmYiIC8+PC9zdmc+"/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="155" dy="0">Global media traffic</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Cosmos multi-write region" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjA4OWNmY2EtMGRlMS00NTFjLWExY2EtNjY4MGVhNTBjYjRmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImIyNWQwODM2LTk2NGEtNGM4NC04YzIwLTg1NWY2NmU4MzQ1ZSIgY3g9Ii0xMDUuMDA2IiBjeT0iLTEwLjQwOSIgcj0iNS45NTQiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE3LjczOSAxOS42NDQpIHNjYWxlKDEuMDM2IDEuMDI3KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xODMiIHN0b3AtY29sb3I9IiM1ZWEwZWYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjwvcmFkaWFsR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJiMzZjN2Y1ZC0yZWYxLTQ3NjAtOGEyNS1lZWI5NjYxZjRlNDciPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9Im5vbmUiIC8+PC9jbGlwUGF0aD48L2RlZnM+PHRpdGxlPkljb24tZGF0YWJhc2VzLTEyMTwvdGl0bGU+PHBhdGggZD0iTTIuOTU0LDUuMjY2YS4xNzUuMTc1LDAsMCwxLS4xNzYtLjE3NmgwQTIuMDEyLDIuMDEyLDAsMCwwLC43NjksMy4wODFhLjE3Ni4xNzYsMCwwLDEtLjE3Ni0uMTc1aDBhLjE3Ni4xNzYsMCwwLDEsLjE3Ni0uMTc2QTIuMDEyLDIuMDEyLDAsMCwwLDIuNzc4LjcyLjE3NS4xNzUsMCwwLDEsMi45NTQuNTQ0aDBBLjE3NS4xNzUsMCwwLDEsMy4xMy43MmgwQTIuMDEyLDIuMDEyLDAsMCwwLDUuMTM5LDIuNzI5YS4xNzUuMTc1LDAsMCwxLC4xNzYuMTc2aDBhLjE3NS4xNzUsMCwwLDEtLjE3Ni4xNzZoMEEyLjAxMSwyLjAxMSwwLDAsMCwzLjEzLDUuMDkuMTc3LjE3NywwLDAsMSwyLjk1NCw1LjI2NloiIGZpbGw9IiM1MGU2ZmYiIC8+PHBhdGggZD0iTTE1LjYxMSwxNy40NTZhLjE0MS4xNDEsMCwwLDEtLjE0MS0uMTQxaDBhMS42MDksMS42MDksMCwwLDAtMS42MDctMS42MDcuMTQxLjE0MSwwLDAsMS0uMTQxLS4xNGgwYS4xNDEuMTQxLDAsMCwxLC4xNDEtLjE0MWgwYTEuNjA4LDEuNjA4LDAsMCwwLDEuNjA3LTEuNjA3LjE0MS4xNDEsMCwwLDEsLjE0MS0uMTQxaDBhLjE0MS4xNDEsMCwwLDEsLjE0MS4xNDFoMGExLjYwOCwxLjYwOCwwLDAsMCwxLjYwNywxLjYwNy4xNDEuMTQxLDAsMSwxLDAsLjI4MmgwYTEuNjA5LDEuNjA5LDAsMCwwLTEuNjA3LDEuNjA3QS4xNDEuMTQxLDAsMCwxLDE1LjYxMSwxNy40NTZaIiBmaWxsPSIjNTBlNmZmIiAvPjxnPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9InVybCgjYjI1ZDA4MzYtOTY0YS00Yzg0LThjMjAtODU1ZjY2ZTgzNDVlKSIgLz48ZyBjbGlwLXBhdGg9InVybCgjYjM2YzdmNWQtMmVmMS00NzYwLThhMjUtZWViOTY2MWY0ZTQ3KSI+PHBhdGggZD0iTTUuNzA5LDEzLjExNUExLjYzOCwxLjYzOCwwLDEsMCw1LjcxNCw5Ljg0LDEuMzA3LDEuMzA3LDAsMCwwLDUuNzIxLDkuNywxLjY1MSwxLjY1MSwwLDAsMCw0LjA2LDguMDY0SDIuODMyYTYuMjUxLDYuMjUxLDAsMCwwLDEuNTk1LDUuMDUxWiIgZmlsbD0iI2YyZjJmMiIgLz48cGF0aCBkPSJNMTUuMDQ1LDcuODE1YzAtLjAxNSwwLS4wMy0uMDA3LS4wNDRhNS45NzgsNS45NzgsMCwwLDAtMS40MDYtMi44OCwxLjgyNSwxLjgyNSwwLDAsMC0uMjg5LS4wOSwxLjgwNiwxLjgwNiwwLDAsMC0yLjMsMS42NjMsMiwyLDAsMCwwLS4yLS4wMTMsMS43MzcsMS43MzcsMCwwLDAtLjU4MSwzLjM3NCwxLjQ1MSwxLjQ1MSwwLDAsMCwuNTQxLjFoMi4wM0ExMy40NTMsMTMuNDUzLDAsMCwwLDE1LjA0NSw3LjgxNVoiIGZpbGw9IiNmMmYyZjIiIC8+PC9nPjwvZz48cGF0aCBkPSJNMTcuMTkxLDMuODMyYy0uNjI5LTEuMDQ3LTIuMS0xLjQ1NS00LjE1NS0xLjE0OWExNC42MDYsMTQuNjA2LDAsMCwwLTIuMDgyLjQ1Miw2LjQ1Niw2LjQ1NiwwLDAsMSwxLjUyOC43NjdjLjI0MS0uMDUzLjQ4My0uMTE2LjcxNS0uMTUxQTcuNDksNy40OSwwLDAsMSwxNC4zLDMuNjYyYTIuMTg4LDIuMTg4LDAsMCwxLDEuOTU5LjcyNWgwYy4zODMuNjM4LjA2LDEuNzI5LS44ODYsM2ExNi43MjMsMTYuNzIzLDAsMCwxLTQuNzQ5LDQuMDUxQTE2Ljc1OCwxNi43NTgsMCwwLDEsNC44LDEzLjdjLTEuNTY0LjIzNC0yLjY4MiwwLTMuMDY1LS42MzZzLS4wNi0xLjczLjg4Ni0yLjk5NWMuMTE3LS4xNTcuMTQ2LS4yMzQuMjc5LS4zOTJhNi4yNTIsNi4yNTIsMCwwLDEsLjAyNi0xLjYzQTExLjU1MiwxMS41NTIsMCwwLDAsMS43NTYsOS40MTlDLjUxNywxMS4wNzYuMTgxLDEyLjU2Ni44MDksMTMuNjEzYTMuMTY1LDMuMTY1LDAsMCwwLDIuOSwxLjI0OSw4LjQzNCw4LjQzNCwwLDAsMCwxLjI1MS0uMSwxNy44NTUsMTcuODU1LDAsMCwwLDYuMjE5LTIuNCwxNy44MDgsMTcuODA4LDAsMCwwLDUuMDYxLTQuMzMyQzE3LjQ4Myw2LjM2OSwxNy44MTksNC44OCwxNy4xOTEsMy44MzJaIiBmaWxsPSIjNTBlNmZmIiAvPjwvc3ZnPg=="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="600" dy="0">Cosmos multi-write</tspan>
+      <tspan x="600" dy="17">region</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: GZRS Blob primary" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="1045" dy="0">GZRS Blob primary</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Cosmos write region" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjA4OWNmY2EtMGRlMS00NTFjLWExY2EtNjY4MGVhNTBjYjRmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImIyNWQwODM2LTk2NGEtNGM4NC04YzIwLTg1NWY2NmU4MzQ1ZSIgY3g9Ii0xMDUuMDA2IiBjeT0iLTEwLjQwOSIgcj0iNS45NTQiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE3LjczOSAxOS42NDQpIHNjYWxlKDEuMDM2IDEuMDI3KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xODMiIHN0b3AtY29sb3I9IiM1ZWEwZWYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjwvcmFkaWFsR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJiMzZjN2Y1ZC0yZWYxLTQ3NjAtOGEyNS1lZWI5NjYxZjRlNDciPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9Im5vbmUiIC8+PC9jbGlwUGF0aD48L2RlZnM+PHRpdGxlPkljb24tZGF0YWJhc2VzLTEyMTwvdGl0bGU+PHBhdGggZD0iTTIuOTU0LDUuMjY2YS4xNzUuMTc1LDAsMCwxLS4xNzYtLjE3NmgwQTIuMDEyLDIuMDEyLDAsMCwwLC43NjksMy4wODFhLjE3Ni4xNzYsMCwwLDEtLjE3Ni0uMTc1aDBhLjE3Ni4xNzYsMCwwLDEsLjE3Ni0uMTc2QTIuMDEyLDIuMDEyLDAsMCwwLDIuNzc4LjcyLjE3NS4xNzUsMCwwLDEsMi45NTQuNTQ0aDBBLjE3NS4xNzUsMCwwLDEsMy4xMy43MmgwQTIuMDEyLDIuMDEyLDAsMCwwLDUuMTM5LDIuNzI5YS4xNzUuMTc1LDAsMCwxLC4xNzYuMTc2aDBhLjE3NS4xNzUsMCwwLDEtLjE3Ni4xNzZoMEEyLjAxMSwyLjAxMSwwLDAsMCwzLjEzLDUuMDkuMTc3LjE3NywwLDAsMSwyLjk1NCw1LjI2NloiIGZpbGw9IiM1MGU2ZmYiIC8+PHBhdGggZD0iTTE1LjYxMSwxNy40NTZhLjE0MS4xNDEsMCwwLDEtLjE0MS0uMTQxaDBhMS42MDksMS42MDksMCwwLDAtMS42MDctMS42MDcuMTQxLjE0MSwwLDAsMS0uMTQxLS4xNGgwYS4xNDEuMTQxLDAsMCwxLC4xNDEtLjE0MWgwYTEuNjA4LDEuNjA4LDAsMCwwLDEuNjA3LTEuNjA3LjE0MS4xNDEsMCwwLDEsLjE0MS0uMTQxaDBhLjE0MS4xNDEsMCwwLDEsLjE0MS4xNDFoMGExLjYwOCwxLjYwOCwwLDAsMCwxLjYwNywxLjYwNy4xNDEuMTQxLDAsMSwxLDAsLjI4MmgwYTEuNjA5LDEuNjA5LDAsMCwwLTEuNjA3LDEuNjA3QS4xNDEuMTQxLDAsMCwxLDE1LjYxMSwxNy40NTZaIiBmaWxsPSIjNTBlNmZmIiAvPjxnPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9InVybCgjYjI1ZDA4MzYtOTY0YS00Yzg0LThjMjAtODU1ZjY2ZTgzNDVlKSIgLz48ZyBjbGlwLXBhdGg9InVybCgjYjM2YzdmNWQtMmVmMS00NzYwLThhMjUtZWViOTY2MWY0ZTQ3KSI+PHBhdGggZD0iTTUuNzA5LDEzLjExNUExLjYzOCwxLjYzOCwwLDEsMCw1LjcxNCw5Ljg0LDEuMzA3LDEuMzA3LDAsMCwwLDUuNzIxLDkuNywxLjY1MSwxLjY1MSwwLDAsMCw0LjA2LDguMDY0SDIuODMyYTYuMjUxLDYuMjUxLDAsMCwwLDEuNTk1LDUuMDUxWiIgZmlsbD0iI2YyZjJmMiIgLz48cGF0aCBkPSJNMTUuMDQ1LDcuODE1YzAtLjAxNSwwLS4wMy0uMDA3LS4wNDRhNS45NzgsNS45NzgsMCwwLDAtMS40MDYtMi44OCwxLjgyNSwxLjgyNSwwLDAsMC0uMjg5LS4wOSwxLjgwNiwxLjgwNiwwLDAsMC0yLjMsMS42NjMsMiwyLDAsMCwwLS4yLS4wMTMsMS43MzcsMS43MzcsMCwwLDAtLjU4MSwzLjM3NCwxLjQ1MSwxLjQ1MSwwLDAsMCwuNTQxLjFoMi4wM0ExMy40NTMsMTMuNDUzLDAsMCwwLDE1LjA0NSw3LjgxNVoiIGZpbGw9IiNmMmYyZjIiIC8+PC9nPjwvZz48cGF0aCBkPSJNMTcuMTkxLDMuODMyYy0uNjI5LTEuMDQ3LTIuMS0xLjQ1NS00LjE1NS0xLjE0OWExNC42MDYsMTQuNjA2LDAsMCwwLTIuMDgyLjQ1Miw2LjQ1Niw2LjQ1NiwwLDAsMSwxLjUyOC43NjdjLjI0MS0uMDUzLjQ4My0uMTE2LjcxNS0uMTUxQTcuNDksNy40OSwwLDAsMSwxNC4zLDMuNjYyYTIuMTg4LDIuMTg4LDAsMCwxLDEuOTU5LjcyNWgwYy4zODMuNjM4LjA2LDEuNzI5LS44ODYsM2ExNi43MjMsMTYuNzIzLDAsMCwxLTQuNzQ5LDQuMDUxQTE2Ljc1OCwxNi43NTgsMCwwLDEsNC44LDEzLjdjLTEuNTY0LjIzNC0yLjY4MiwwLTMuMDY1LS42MzZzLS4wNi0xLjczLjg4Ni0yLjk5NWMuMTE3LS4xNTcuMTQ2LS4yMzQuMjc5LS4zOTJhNi4yNTIsNi4yNTIsMCwwLDEsLjAyNi0xLjYzQTExLjU1MiwxMS41NTIsMCwwLDAsMS43NTYsOS40MTlDLjUxNywxMS4wNzYuMTgxLDEyLjU2Ni44MDksMTMuNjEzYTMuMTY1LDMuMTY1LDAsMCwwLDIuOSwxLjI0OSw4LjQzNCw4LjQzNCwwLDAsMCwxLjI1MS0uMSwxNy44NTUsMTcuODU1LDAsMCwwLDYuMjE5LTIuNCwxNy44MDgsMTcuODA4LDAsMCwwLDUuMDYxLTQuMzMyQzE3LjQ4Myw2LjM2OSwxNy44MTksNC44OCwxNy4xOTEsMy44MzJaIiBmaWxsPSIjNTBlNmZmIiAvPjwvc3ZnPg=="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="155" dy="0">Cosmos write region</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Blob secondary copy" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="600" dy="0">Blob secondary copy</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Backup and restore proof" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#8A4B00" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjRkMGU2ZTItMTJjMS00Mjc1LWI3MTctODkwMDYwZGQxNTYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImYxYTMwZjllLTdmNDgtNDRlMi05NDgzLTZhNmRiODkyODk3NyIgeDE9IjExLjEzIiB5MT0iMTAuOTUiIHgyPSIxMS4xMyIgeTI9IjEuMjEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiNGE1ZWQ4ZC1hMjhkLTRkMjYtOWFhZC1hNTdlNmFkMGMwYjkiIHgxPSI3LjA2IiB5MT0iMTYuNzkiIHgyPSI3LjA2IiB5Mj0iNi43OCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAuMTMiIHN0b3AtY29sb3I9IiMyMWEwYzciIC8+PHN0b3Agb2Zmc2V0PSIwLjMxIiBzdG9wLWNvbG9yPSIjMjhiN2RiIiAvPjxzdG9wIG9mZnNldD0iMC41IiBzdG9wLWNvbG9yPSIjMmVjN2VhIiAvPjxzdG9wIG9mZnNldD0iMC43MiIgc3RvcC1jb2xvcj0iIzMxZDFmMiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmQ0ZjUiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tbWFuYWdlLTMxNTwvdGl0bGU+PHBhdGggZD0iTTE4LDcuOWEzLjA5LDMuMDksMCwwLDAtMi42OC0zLDMuODksMy44OSwwLDAsMC00LTMuNzJBNCw0LDAsMCwwLDcuNSwzLjgxLDMuNjgsMy42OCwwLDAsMCw0LjI2LDcuMzYsMy43NCwzLjc0LDAsMCwwLDguMTMsMTFsLjM0LDBoNi4yNmwuMTcsMEEzLjEzLDMuMTMsMCwwLDAsMTgsNy45WiIgZmlsbD0idXJsKCNmMWEzMGY5ZS03ZjQ4LTQ0ZTItOTQ4My02YTZkYjg5Mjg5NzcpIiAvPjxwYXRoIGQ9Ik0xNC4zOSw1LjIyLDEyLjU2LDMuNDRjLS4yLS4yLS4zNy0uMTMtLjM3LjE4di44YS4yMi4yMiwwLDAsMS0uMjMuMjJjLTEuMTgsMC00LjQ3LjMxLTQuNTksNC44MWEuMjMuMjMsMCwwLDAsLjIzLjIzSDguNzdBLjIzLjIzLDAsMCwwLDksOS40MywyLjc2LDIuNzYsMCwwLDEsMTIsNi4xYS4yMy4yMywwLDAsMSwuMjMuMjN2Ljc0YzAsLjM3LjEyLjQzLjM3LjE4TDE0LjM5LDUuNkEuMjMuMjMsMCwwLDAsMTQuMzksNS4yMloiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTE0LjEyLDEzLjY2YTMuMTcsMy4xNywwLDAsMC0yLjc1LTMuMDVBNCw0LDAsMCwwLDcuMjUsNi43OCw0LjEsNC4xLDAsMCwwLDMuMzMsOS40NiwzLjc4LDMuNzgsMCwwLDAsMCwxMy4xYTMuODQsMy44NCwwLDAsMCw0LDMuNjloNi43OGEuNDcuNDcsMCwwLDAsLjE3LDBBMy4yMSwzLjIxLDAsMCwwLDE0LjEyLDEzLjY2WiIgZmlsbD0idXJsKCNiNGE1ZWQ4ZC1hMjhkLTRkMjYtOWFhZC1hNTdlNmFkMGMwYjkpIiAvPjwvc3ZnPg=="/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#402600">
+      <tspan x="1045" dy="0">Backup and restore</tspan>
+      <tspan x="1045" dy="17">proof</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#73562E">Global application traffic uses multi-region document writes and durable object replication while recovery evidence covers both stores.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

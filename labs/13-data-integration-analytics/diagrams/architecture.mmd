@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Deliver traceable analytics datasets from cloud and private sources without creating unmanaged credentials or always-on analytics cost."]
-    R --> C1["Select integration patterns and runtimes"]
-    C1 --> C2["Use managed identity for linked services"]
-    C2 --> C3["Orchestrate idempotent ingestion"]
-    C3 --> C4["Serve governed analytical queries"]
-    C4 --> C5["Validate lineage operations and spend"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_source_estate["Regional and partner sources"]
+        N_sources["Files database changes telemetry"]
+    end
+    subgraph B_integration_platform["Managed integration platform"]
+        N_factory["Azure Data Factory"]
+        N_identity["Pipeline managed identity"]
+    end
+    subgraph B_analytics_platform["Governed analytics platform"]
+        N_lake["ADLS Gen2 curated zones"]
+        N_synapse["Synapse serverless SQL"]
+        N_operations["Lineage and spend signals"]
+    end
+    N_sources -->|"scheduled and incremental ingestion"| N_factory
+    N_identity -->|"secretless linked services"| N_factory
+    N_factory -->|"idempotent zone writes"| N_lake
+    N_lake -->|"governed serverless queries"| N_synapse
+    N_factory -->|"pipeline and lineage telemetry"| N_operations
+    N_synapse -->|"query and spend telemetry"| N_operations
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_sources,N_factory,N_identity,N_lake,N_synapse,N_operations service
 %% END GENERATED AZ305 V1

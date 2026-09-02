@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Make ownership, environment, cost, and residency consistently discoverable across a growing subscription estate."]
-    R --> C1["Design durable management-group archetypes"]
-    C1 --> C2["Place subscriptions by workload archetype"]
-    C2 --> C3["Align resource groups with lifecycle boundaries"]
-    C3 --> C4["Apply a controlled tag vocabulary"]
-    C4 --> C5["Query portfolio conformance"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_tenant_hierarchy["Tenant hierarchy"]
+        N_tenant_root["Tenant root group"]
+        N_platform_mg["Platform archetype"]
+        N_workload_mg["Workload archetype"]
+    end
+    subgraph B_subscription_estate["Subscription estate"]
+        N_subscriptions["Workload subscriptions"]
+    end
+    subgraph B_resource_lifecycle["Resource lifecycle boundaries"]
+        N_resource_groups["Lifecycle resource groups"]
+        N_tag_policy["Controlled tag policy"]
+    end
+    N_tenant_root -->|"platform inheritance"| N_platform_mg
+    N_tenant_root -->|"workload inheritance"| N_workload_mg
+    N_workload_mg -->|"archetype placement"| N_subscriptions
+    N_subscriptions -->|"lifecycle grouping"| N_resource_groups
+    N_tag_policy -->|"vocabulary enforcement"| N_resource_groups
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_tenant_root,N_platform_mg,N_workload_mg,N_subscriptions,N_resource_groups,N_tag_policy service
 %% END GENERATED AZ305 V1

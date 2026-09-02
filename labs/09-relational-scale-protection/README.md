@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-09 — Relational Scalability and Data Protection
 
+![Data banner showing a Hyperscale relational primary, named read replicas, encryption control, audit storage, and protected backups.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-08](../08-relational-platform-tier-selection/README.md) · [Lab catalog](../README.md) · [LAB-10 →](../10-semi-structured-data-design/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Relational Scalability and Data Protection](diagrams/architecture.svg)
+![Topology showing a ledger application splitting writes to a Hyperscale primary and reads to replicas, with key custody, auditing, and backup retention.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Writes target the Hyperscale primary, reads use named replicas, and protection evidence leaves the serving path. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing relational scale patterns and highlighting Hyperscale with named read replicas.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Primary writes, read routing, backup recovery, and regional continuity are validated as distinct mechanisms.
-- **Security:** Encryption, auditing, and tenant-aware access remain mandatory across primary and replica endpoints.
-- **Cost Optimization:** Named burst capacity and query telemetry make the exceptional tenant's demand attributable.
-- **Operational Excellence:** Replica lag, routing, protection, and audit evidence share one tenant-labeled operating view.
-- **Performance Efficiency:** Read replicas absorb unpredictable reporting load without scaling the transactional primary for every burst.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Primary writes, read routing, backup recovery, and regional continuity are validated as distinct mechanisms.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Encryption, auditing, and tenant-aware access remain mandatory across primary and replica endpoints.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Named burst capacity and query telemetry make the exceptional tenant&#x27;s demand attributable.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Replica lag, routing, protection, and audit evidence share one tenant-labeled operating view.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Read replicas absorb unpredictable reporting load without scaling the transactional primary for every burst.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-090001
 Synthetic sample: `{"labId":"LAB-09","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Choose the scale unit and capacity ceiling</a><span>LAB09-REQ-01 · LAB09-CP01</span></li>
+<li><a href="#checkpoint-2">Design read workload isolation</a><span>LAB09-REQ-02 · LAB09-CP02</span></li>
+<li><a href="#checkpoint-3">Verify transparent data encryption and key custody</a><span>LAB09-REQ-03 · LAB09-CP03</span></li>
+<li><a href="#checkpoint-4">Configure tamper-resistant auditing</a><span>LAB09-REQ-04 · LAB09-CP04</span></li>
+<li><a href="#checkpoint-5">Bound backup retention without claiming recovery</a><span>LAB09-REQ-05 · LAB09-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Choose the scale unit and capacity ceiling
 

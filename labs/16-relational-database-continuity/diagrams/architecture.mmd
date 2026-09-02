@@ -1,12 +1,25 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Preserve ticket sales and prevent overselling during zone or region disruption while meeting the five-minute RPO."]
-    R --> C1["Baseline database tier and availability settings"]
-    C1 --> C2["Validate failover-group topology"]
-    C2 --> C3["Prove connection and dependency readiness"]
-    C3 --> C4["Measure replication health against RPO"]
-    C4 --> C5["Rehearse failover decision and failback"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_application_tier["Reservation application"]
+        N_application["Reservation service"]
+        N_listener["Failover-group listener"]
+    end
+    subgraph B_primary_region["Primary Azure region"]
+        N_primary["Zone-redundant primary"]
+    end
+    subgraph B_secondary_region["Secondary Azure region"]
+        N_secondary["Zone-redundant secondary"]
+    end
+    subgraph B_continuity_evidence["Continuity evidence"]
+        N_backup["Database backup retention"]
+        N_health["Replication health and RPO"]
+    end
+    N_application -->|"stable connection endpoint"| N_listener
+    N_listener -->|"active database route"| N_primary
+    N_primary -->|"asynchronous geo-replication"| N_secondary
+    N_primary -->|"retention protection"| N_backup
+    N_secondary -->|"replication lag telemetry"| N_health
+    N_health -->|"failover decision evidence"| N_listener
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_application,N_listener,N_primary,N_secondary,N_backup,N_health service
 %% END GENERATED AZ305 V1

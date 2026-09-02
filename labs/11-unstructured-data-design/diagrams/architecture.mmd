@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Consolidate unstructured content for governed analytics while preserving scalable access and clear ownership."]
-    R --> C1["Match service semantics to access patterns"]
-    C1 --> C2["Create a hierarchical namespace boundary"]
-    C2 --> C3["Design filesystem and directory ownership"]
-    C3 --> C4["Define encryption and key dependency"]
-    C4 --> C5["Validate private endpoint access"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_data_producers["Data producers"]
+        N_producers["Files images and documents"]
+    end
+    subgraph B_data_lake["ADLS Gen2 boundary"]
+        N_private_endpoint["Storage private endpoint"]
+        N_account["HNS StorageV2 account"]
+        N_namespaces["Owned filesystems and directories"]
+        N_key["Encryption key dependency"]
+    end
+    subgraph B_data_consumers["Governed consumers"]
+        N_consumers["Analytics and departments"]
+    end
+    N_producers -->|"private file ingestion"| N_private_endpoint
+    N_private_endpoint -->|"private link resolution"| N_account
+    N_account -->|"hierarchical namespace"| N_namespaces
+    N_key -->|"customer-managed encryption"| N_account
+    N_namespaces -->|"ACL-governed access"| N_consumers
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_producers,N_private_endpoint,N_account,N_namespaces,N_key,N_consumers service
 %% END GENERATED AZ305 V1

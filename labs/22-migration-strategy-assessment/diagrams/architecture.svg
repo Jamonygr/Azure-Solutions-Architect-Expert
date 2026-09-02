@@ -1,45 +1,100 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-22 Migration Strategy and Portfolio Assessment</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:904e2d2615a867680c3d0bde003ce0c37ebd0f7da96a4517451688e5832650b1</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="81" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Exit the datacenters on schedule while prioritizing measurable value and</tspan>
-    <tspan x="380" dy="20">preventing unsupported or highly coupled workloads from entering unsafe</tspan>
-    <tspan x="380" dy="20">migration waves.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Define strategy, outcomes, and constraints</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Build and quality-check the portfolio inventory</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Assess dependencies and readiness</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Rationalize applications and form waves</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Validate the business case and landing-zone entry criteria</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Outcome-led migration assessment topology</title>
+  <desc id="visual-desc">Topology showing on-premises portfolio discovery, dependency assessment, application rationalization, migration waves, business case, and landing-zone readiness.</desc>
+  <metadata>source-sha256:4eeb8e85835222a2865bd9eae50eeb7149e7c4dd7572bf7deb2f1d6a1fb165ad</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0086A8"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#004E8C" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0086A8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: On-premises portfolio">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">On-premises portfolio</text>
+  </g>
+  <g role="group" aria-label="Boundary: Assessment and rationalization">
+    <rect x="51" y="116" width="1098" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Assessment and rationalization</text>
+  </g>
+  <g role="group" aria-label="Boundary: Cloud readiness gate">
+    <rect x="496" y="446" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Cloud readiness gate</text>
+  </g>
+  <g role="group" aria-label="discovery evidence: inventory to dependencies">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="319" y="195" width="117" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">discovery evidence</text>
+  </g>
+  <g role="group" aria-label="technical and business constraints: dependencies to rationalization">
+    <path d="M677 220 C822.5 220 822.5 220 968 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="717.5" y="195" width="210" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="822.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">technical and business constraints</text>
+  </g>
+  <g role="group" aria-label="disposition and sequence: rationalization to waves">
+    <path d="M972.803 246.77 C600 246.77 600 523.23 227.197 523.23" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="522" y="360" width="156" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">disposition and sequence</text>
+  </g>
+  <g role="group" aria-label="cost and outcome model: waves to business-case">
+    <path d="M232 550 C377.5 550 377.5 550 523 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="306" y="525" width="143" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">cost and outcome model</text>
+  </g>
+  <g role="group" aria-label="approved readiness gate: business-case to landing-zone">
+    <path d="M677 550 C822.5 550 822.5 550 968 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="747.75" y="525" width="149.5" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="822.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">approved readiness gate</text>
+  </g>
+  <g role="group" aria-label="Service node: Quality-checked inventory" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTIwNzFjMGEtNmU2Mi00Njk5LThlMzItMjg1ZjFiYzFlNDIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE4OWJlODRhLTM3NTItNDEyMy1hZGVlLTMyOTAxZWNlZmQzZCIgeDE9IjEwLjc1IiB5MT0iMTMuNTQiIHgyPSIxMC43NSIgeTI9IjIuOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhMmY5OTRjMi04NTgwLTQ0Y2YtOTJkMi0zMjY1NTMyOGZlZmUiIHgxPSI3LjQ1IiB5MT0iMTcuMjQiIHgyPSI3LjQ1IiB5Mj0iMS4xOSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOThhYjMiIC8+PHN0b3Agb2Zmc2V0PSIwLjExIiBzdG9wLWNvbG9yPSIjMjJhNWNiIiAvPjxzdG9wIG9mZnNldD0iMC4yMyIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuMzciIHN0b3AtY29sb3I9IiMyZWM5ZWIiIC8+PHN0b3Agb2Zmc2V0PSIwLjUzIiBzdG9wLWNvbG9yPSIjMzFkMWYzIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzMyZDRmNSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1taWdyYXRlLTI4MTwvdGl0bGU+PHBhdGggZD0iTTE4LDEwLjUzQTMuMjYsMy4yNiwwLDAsMCwxNS4xNyw3LjRhNC4xMSw0LjExLDAsMCwwLTQuMjMtMy45Myw0LjIyLDQuMjIsMCwwLDAtNCwyLjc1QTMuODksMy44OSwwLDAsMCwzLjUsMTBhNCw0LDAsMCwwLDQuMDgsMy43OWg3bC4xOCwwQTMuMjksMy4yOSwwLDAsMCwxOCwxMC41M1oiIGZpbGw9InVybCgjYTg5YmU4NGEtMzc1Mi00MTIzLWFkZWUtMzI5MDFlY2VmZDNkKSIgLz48cGF0aCBkPSJNMTQuOSwxMS4yMkEzLjM1LDMuMzUsMCwwLDAsMTIsOCw0LjIxLDQuMjEsMCwwLDAsNy42NSw0LDQuMzMsNC4zMywwLDAsMCwzLjUxLDYuNzksNCw0LDAsMCwwLDAsMTAuNjNhNC4wNiw0LjA2LDAsMCwwLDQuMiwzLjlsLjM3LDBoNi43OWwuMTgsMEEzLjM4LDMuMzgsMCwwLDAsMTQuOSwxMS4yMloiIGZpbGw9InVybCgjYTJmOTk0YzItODU4MC00NGNmLTkyZDItMzI2NTUzMjhmZWZlKSIgLz48ZyBpZD0iYjFiN2RkYjgtOGVjMi00ODBmLTk2N2YtYzJiZjg5ZDJmZTE2Ij48cGF0aCBkPSJNNC44Miw5LjM3aC44NWEuMjMuMjMsMCwwLDEsLjE3LjA3bDIsMmEuMjQuMjQsMCwwLDEsMCwuMzVMNS4xMiwxNC40NmEuMjQuMjQsMCwwLDEtLjE3LjA3SDQuMTRBLjI1LjI1LDAsMCwxLDQsMTQuMTFsMi4zMS0yLjM0YS4yMy4yMywwLDAsMCwwLS4zNEw0LjY1LDkuNzhBLjI0LjI0LDAsMCwxLDQuODIsOS4zN1pNOC4yNSw2aC44N2EuMjUuMjUsMCwwLDEsLjE3LjA4bDEuNTMsMS41NWEuMjQuMjQsMCwwLDEsMCwuMzRsLTIsMS45MWEuMjQuMjQsMCwwLDEtLjE3LjA3SDcuOTJhLjI1LjI1LDAsMCwxLS4xOC0uNDFMOS4yNyw4YS4yNS4yNSwwLDAsMCwwLS4zNEw4LjA4LDYuNDZBLjI0LjI0LDAsMCwxLDguMjUsNlptMS43OSw0aC44NWEuMjguMjgsMCwwLDEsLjE3LjA3bDEuMjUsMS4yNWEuMjUuMjUsMCwwLDEsMCwuMzRMMTAuNSwxMy40OWEuMjMuMjMsMCwwLDEtLjE3LjA3SDkuNTFhLjI0LjI0LDAsMCwxLS4xNy0uNDFsMS40Mi0xLjQ0YS4yNS4yNSwwLDAsMCwwLS4zNGwtLjg5LS45MUEuMjQuMjQsMCwwLDEsMTAsMTAuMDVaIiBmaWxsPSIjZmZmIiAvPjwvZz48L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Quality-checked</tspan>
+      <tspan x="155" dy="17">inventory</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Dependency and readiness map" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTIwNzFjMGEtNmU2Mi00Njk5LThlMzItMjg1ZjFiYzFlNDIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE4OWJlODRhLTM3NTItNDEyMy1hZGVlLTMyOTAxZWNlZmQzZCIgeDE9IjEwLjc1IiB5MT0iMTMuNTQiIHgyPSIxMC43NSIgeTI9IjIuOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhMmY5OTRjMi04NTgwLTQ0Y2YtOTJkMi0zMjY1NTMyOGZlZmUiIHgxPSI3LjQ1IiB5MT0iMTcuMjQiIHgyPSI3LjQ1IiB5Mj0iMS4xOSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOThhYjMiIC8+PHN0b3Agb2Zmc2V0PSIwLjExIiBzdG9wLWNvbG9yPSIjMjJhNWNiIiAvPjxzdG9wIG9mZnNldD0iMC4yMyIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuMzciIHN0b3AtY29sb3I9IiMyZWM5ZWIiIC8+PHN0b3Agb2Zmc2V0PSIwLjUzIiBzdG9wLWNvbG9yPSIjMzFkMWYzIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzMyZDRmNSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1taWdyYXRlLTI4MTwvdGl0bGU+PHBhdGggZD0iTTE4LDEwLjUzQTMuMjYsMy4yNiwwLDAsMCwxNS4xNyw3LjRhNC4xMSw0LjExLDAsMCwwLTQuMjMtMy45Myw0LjIyLDQuMjIsMCwwLDAtNCwyLjc1QTMuODksMy44OSwwLDAsMCwzLjUsMTBhNCw0LDAsMCwwLDQuMDgsMy43OWg3bC4xOCwwQTMuMjksMy4yOSwwLDAsMCwxOCwxMC41M1oiIGZpbGw9InVybCgjYTg5YmU4NGEtMzc1Mi00MTIzLWFkZWUtMzI5MDFlY2VmZDNkKSIgLz48cGF0aCBkPSJNMTQuOSwxMS4yMkEzLjM1LDMuMzUsMCwwLDAsMTIsOCw0LjIxLDQuMjEsMCwwLDAsNy42NSw0LDQuMzMsNC4zMywwLDAsMCwzLjUxLDYuNzksNCw0LDAsMCwwLDAsMTAuNjNhNC4wNiw0LjA2LDAsMCwwLDQuMiwzLjlsLjM3LDBoNi43OWwuMTgsMEEzLjM4LDMuMzgsMCwwLDAsMTQuOSwxMS4yMloiIGZpbGw9InVybCgjYTJmOTk0YzItODU4MC00NGNmLTkyZDItMzI2NTUzMjhmZWZlKSIgLz48ZyBpZD0iYjFiN2RkYjgtOGVjMi00ODBmLTk2N2YtYzJiZjg5ZDJmZTE2Ij48cGF0aCBkPSJNNC44Miw5LjM3aC44NWEuMjMuMjMsMCwwLDEsLjE3LjA3bDIsMmEuMjQuMjQsMCwwLDEsMCwuMzVMNS4xMiwxNC40NmEuMjQuMjQsMCwwLDEtLjE3LjA3SDQuMTRBLjI1LjI1LDAsMCwxLDQsMTQuMTFsMi4zMS0yLjM0YS4yMy4yMywwLDAsMCwwLS4zNEw0LjY1LDkuNzhBLjI0LjI0LDAsMCwxLDQuODIsOS4zN1pNOC4yNSw2aC44N2EuMjUuMjUsMCwwLDEsLjE3LjA4bDEuNTMsMS41NWEuMjQuMjQsMCwwLDEsMCwuMzRsLTIsMS45MWEuMjQuMjQsMCwwLDEtLjE3LjA3SDcuOTJhLjI1LjI1LDAsMCwxLS4xOC0uNDFMOS4yNyw4YS4yNS4yNSwwLDAsMCwwLS4zNEw4LjA4LDYuNDZBLjI0LjI0LDAsMCwxLDguMjUsNlptMS43OSw0aC44NWEuMjguMjgsMCwwLDEsLjE3LjA3bDEuMjUsMS4yNWEuMjUuMjUsMCwwLDEsMCwuMzRMMTAuNSwxMy40OWEuMjMuMjMsMCwwLDEtLjE3LjA3SDkuNTFhLjI0LjI0LDAsMCwxLS4xNy0uNDFsMS40Mi0xLjQ0YS4yNS4yNSwwLDAsMCwwLS4zNGwtLjg5LS45MUEuMjQuMjQsMCwwLDEsMTAsMTAuMDVaIiBmaWxsPSIjZmZmIiAvPjwvZz48L3N2Zz4="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Dependency and</tspan>
+      <tspan x="600" dy="17">readiness map</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Application rationalization" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTBjMmEyZjAtZTY0Ny00ZjAxLWI5MWItYWZiN2JmMTUwNDBkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE3ZjczMWE5LTVjNTgtNDRmNC04MDM3LTNjMzYyN2U5ODAwOCIgeDE9IjguNDUiIHkxPSIxMS40NyIgeDI9IjguNDUiIHkyPSI2LjI0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTk4YWIzIiAvPjxzdG9wIG9mZnNldD0iMC4xNiIgc3RvcC1jb2xvcj0iIzFmOWFjMiIgLz48c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuOCIgc3RvcC1jb2xvcj0iIzMwY2RlZiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmQ0ZjUiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tbWFuYWdlLTMxNjwvdGl0bGU+PGVsbGlwc2UgY3g9IjguNDUiIGN5PSI4Ljg1IiByeD0iMi42IiByeT0iMi42MSIgZmlsbD0idXJsKCNhN2Y3MzFhOS01YzU4LTQ0ZjQtODAzNy0zYzM2MjdlOTgwMDgpIiAvPjxlbGxpcHNlIGN4PSIxNS43MyIgY3k9IjQuNzciIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzMyYmVkZCIgLz48ZWxsaXBzZSBjeD0iMTUuNzMiIGN5PSI4Ljk1IiByeD0iMS4yNyIgcnk9IjEuMjgiIGZpbGw9IiMzMmJlZGQiIC8+PGVsbGlwc2UgY3g9IjE1LjczIiBjeT0iMTMuMTIiIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzMyYmVkZCIgLz48ZWxsaXBzZSBjeD0iMTIuODMiIGN5PSI2LjkxIiByeD0iMS4yNyIgcnk9IjEuMjgiIGZpbGw9IiM1MGU2ZmYiIC8+PGVsbGlwc2UgY3g9IjEyLjgzIiBjeT0iMTEuMDkiIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzUwZTZmZiIgLz48cGF0aCBkPSJNMi40MSw1LjU4QS4yNC4yNCwwLDAsMSwyLjUsNS41TDguMzIsMi4xMWMuMDgsMCw1LDIuNzgsNSwyLjc4YS4yNC4yNCwwLDAsMCwuMzYtLjIxVjMuNTlhLjI0LjI0LDAsMCwwLS4xMi0uMjFTOC40LjQ2LDguMzMuNUwxLjExLDQuNjQsMSw0LjcyWiIgZmlsbD0iIzk0OTQ5NCIgLz48cGF0aCBkPSJNMTMuMywxMy4xNCw4LjU2LDE1Ljg3YS4zNS4zNSwwLDAsMS0uMTEsMHYxLjZhLjIuMiwwLDAsMCwuMTEsMGw1LTIuODZhLjI0LjI0LDAsMCwwLC4xMi0uMlYxMy4zNUEuMjQuMjQsMCwwLDAsMTMuMywxMy4xNFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTguNDUsMTUuOWEuMzEuMzEsMCwwLDEtLjEzLDBMMi41LDEyLjQ3YS4yMi4yMiwwLDAsMS0uMTItLjJWNS43YS4yNy4yNywwLDAsMSwwLS4xMkwxLDQuNzJhLjI4LjI4LDAsMCwwLDAsLjEzdjguMjdhLjI0LjI0LDAsMCwwLC4xMS4yMWw3LjIyLDQuMTRhLjI0LjI0LDAsMCwwLC4xMiwwWiIgZmlsbD0iI2IzYjNiMyIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Application</tspan>
+      <tspan x="1045" dy="17">rationalization</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Dependency-based waves" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTIwNzFjMGEtNmU2Mi00Njk5LThlMzItMjg1ZjFiYzFlNDIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE4OWJlODRhLTM3NTItNDEyMy1hZGVlLTMyOTAxZWNlZmQzZCIgeDE9IjEwLjc1IiB5MT0iMTMuNTQiIHgyPSIxMC43NSIgeTI9IjIuOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhMmY5OTRjMi04NTgwLTQ0Y2YtOTJkMi0zMjY1NTMyOGZlZmUiIHgxPSI3LjQ1IiB5MT0iMTcuMjQiIHgyPSI3LjQ1IiB5Mj0iMS4xOSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOThhYjMiIC8+PHN0b3Agb2Zmc2V0PSIwLjExIiBzdG9wLWNvbG9yPSIjMjJhNWNiIiAvPjxzdG9wIG9mZnNldD0iMC4yMyIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuMzciIHN0b3AtY29sb3I9IiMyZWM5ZWIiIC8+PHN0b3Agb2Zmc2V0PSIwLjUzIiBzdG9wLWNvbG9yPSIjMzFkMWYzIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzMyZDRmNSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1taWdyYXRlLTI4MTwvdGl0bGU+PHBhdGggZD0iTTE4LDEwLjUzQTMuMjYsMy4yNiwwLDAsMCwxNS4xNyw3LjRhNC4xMSw0LjExLDAsMCwwLTQuMjMtMy45Myw0LjIyLDQuMjIsMCwwLDAtNCwyLjc1QTMuODksMy44OSwwLDAsMCwzLjUsMTBhNCw0LDAsMCwwLDQuMDgsMy43OWg3bC4xOCwwQTMuMjksMy4yOSwwLDAsMCwxOCwxMC41M1oiIGZpbGw9InVybCgjYTg5YmU4NGEtMzc1Mi00MTIzLWFkZWUtMzI5MDFlY2VmZDNkKSIgLz48cGF0aCBkPSJNMTQuOSwxMS4yMkEzLjM1LDMuMzUsMCwwLDAsMTIsOCw0LjIxLDQuMjEsMCwwLDAsNy42NSw0LDQuMzMsNC4zMywwLDAsMCwzLjUxLDYuNzksNCw0LDAsMCwwLDAsMTAuNjNhNC4wNiw0LjA2LDAsMCwwLDQuMiwzLjlsLjM3LDBoNi43OWwuMTgsMEEzLjM4LDMuMzgsMCwwLDAsMTQuOSwxMS4yMloiIGZpbGw9InVybCgjYTJmOTk0YzItODU4MC00NGNmLTkyZDItMzI2NTUzMjhmZWZlKSIgLz48ZyBpZD0iYjFiN2RkYjgtOGVjMi00ODBmLTk2N2YtYzJiZjg5ZDJmZTE2Ij48cGF0aCBkPSJNNC44Miw5LjM3aC44NWEuMjMuMjMsMCwwLDEsLjE3LjA3bDIsMmEuMjQuMjQsMCwwLDEsMCwuMzVMNS4xMiwxNC40NmEuMjQuMjQsMCwwLDEtLjE3LjA3SDQuMTRBLjI1LjI1LDAsMCwxLDQsMTQuMTFsMi4zMS0yLjM0YS4yMy4yMywwLDAsMCwwLS4zNEw0LjY1LDkuNzhBLjI0LjI0LDAsMCwxLDQuODIsOS4zN1pNOC4yNSw2aC44N2EuMjUuMjUsMCwwLDEsLjE3LjA4bDEuNTMsMS41NWEuMjQuMjQsMCwwLDEsMCwuMzRsLTIsMS45MWEuMjQuMjQsMCwwLDEtLjE3LjA3SDcuOTJhLjI1LjI1LDAsMCwxLS4xOC0uNDFMOS4yNyw4YS4yNS4yNSwwLDAsMCwwLS4zNEw4LjA4LDYuNDZBLjI0LjI0LDAsMCwxLDguMjUsNlptMS43OSw0aC44NWEuMjguMjgsMCwwLDEsLjE3LjA3bDEuMjUsMS4yNWEuMjUuMjUsMCwwLDEsMCwuMzRMMTAuNSwxMy40OWEuMjMuMjMsMCwwLDEtLjE3LjA3SDkuNTFhLjI0LjI0LDAsMCwxLS4xNy0uNDFsMS40Mi0xLjQ0YS4yNS4yNSwwLDAsMCwwLS4zNGwtLjg5LS45MUEuMjQuMjQsMCwwLDEsMTAsMTAuMDVaIiBmaWxsPSIjZmZmIiAvPjwvZz48L3N2Zz4="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Dependency-based</tspan>
+      <tspan x="155" dy="17">waves</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Outcome and business case" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTAwZmVmMzAtMTU2Yy00OTMwLThiNjUtM2E1OTM1NDNhYTFkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE0NWJhOWI1LTJlMDgtNGMzOS04OTE2LTBiYWIxODRmMDZlOSIgeDE9IjkiIHkxPSIxLjQ4IiB4Mj0iOSIgeTI9IjE3LjA3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNzZiYzJkIiAvPjxzdG9wIG9mZnNldD0iMC4zMiIgc3RvcC1jb2xvcj0iIzczYjgyYyIgLz48c3RvcCBvZmZzZXQ9IjAuNjUiIHN0b3AtY29sb3I9IiM2Y2FiMjkiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5IiBzdG9wLWNvbG9yPSIjNWU5NzI0IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVlOTYyNCIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iZTc0ZTJmMzYtZjcwZi00MzUxLTk2MDktYTA4NDUyMmE4YmE3IiB4MT0iNi4xMyIgeTE9IjkuMjgiIHgyPSIxMS44NyIgeTI9IjkuMjgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWdlbmVyYWwtMTk8L3RpdGxlPjxwYXRoIGQ9Ik0xMi4zNSwxLjQ4SDUuNjVhMiwyLDAsMCwwLTEuNzMsMUwuNTgsOC4yOGEyLDIsMCwwLDAsMCwybDMuMzQsNS43OWEyLDIsMCwwLDAsMS43MywxaDYuN2EyLDIsMCwwLDAsMS43My0xbDMuMzQtNS43OWEyLDIsMCwwLDAsMC0ybC0zLjM0LTUuOEEyLDIsMCwwLDAsMTIuMzUsMS40OFoiIGZpbGw9InVybCgjYTQ1YmE5YjUtMmUwOC00YzM5LTg5MTYtMGJhYjE4NGYwNmU5KSIgLz48cGF0aCBkPSJNOS4wNyw0LjgxQS44Mi44MiwwLDAsMSw4LjI1LDQsLjgyLjgyLDAsMCwxLDkuODksNCwuODIuODIsMCwwLDEsOS4wNyw0LjgxWm0tLjgyLDkuNzVhLjgyLjgyLDAsMSwwLDEuNjQsMCwuODIuODIsMCwwLDAtMS42NCwwWm0uODQtMi43QTEuNSwxLjUsMCwwLDEsNy41OCwxMWwtMS40NS4yOEEyLjY4LDIuNjgsMCwwLDAsOSwxM2MxLjY5LDAsMi45MS0uODksMi45MS0yLjEzYTIuMDcsMi4wNywwLDAsMC0xLjEyLTJBMTMsMTMsMCwwLDAsOSw4LjMzYy0uNjctLjE2LTEuMS0uNTMtMS4xLTFBMSwxLDAsMCwxLDksNi40NmExLjQsMS40LDAsMCwxLDEuMjkuNjlsMS4yNS0uNEEyLjU2LDIuNTYsMCwwLDAsOSw1LjQ1Yy0xLjE4LDAtMi41NS41Mi0yLjU1LDIsMCwxLjgxLDEuMTEsMi4xNywyLjY5LDIuNDguMzcuMDcsMS4yMy4zMiwxLjIzLDFDMTAuMzMsMTEuMzEsMTAsMTEuODYsOS4wOSwxMS44NloiIG9wYWNpdHk9IjAuOSIgZmlsbD0idXJsKCNlNzRlMmYzNi1mNzBmLTQzNTEtOTYwOS1hMDg0NTIyYThiYTcpIiAvPjwvc3ZnPg=="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Outcome and business</tspan>
+      <tspan x="600" dy="17">case</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Landing-zone entry criteria" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTQwMDg0OGMtYzgwNC00ODZhLTg5MDUtZjIzZjFjZTFmMjY0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImZlM2ExZmRjLTQ4OWMtNDIxNi05Mjg4LTk1NjQxMjMwODk1YyIgeDE9IjkiIHkxPSIyLjk1IiB4Mj0iOSIgeTI9IjYuMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNjNjlhZWIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNmY0YmIyIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiZWY2NzI4Zi02ZDQ2LTRhNTQtYjIxOS02YjMzNTJjODkzMjkiIHgxPSI4Ljk5IiB5MT0iNi43NiIgeDI9IjguOTkiIHkyPSI5LjIyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNTRhZWYwIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE5ODhkOSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1nZW5lcmFsLTExPC90aXRsZT48Zz48cG9seWdvbiBwb2ludHM9IjEzLjY5IDExLjIyIDEyLjE5IDcuOTIgOSA0LjIgNS43OSA3LjkxIDQuMjggMTEuMiA0LjgxIDExLjQ1IDYuMDQgOC43NyA3LjI1IDExLjQ1IDcuNzkgMTEuMjEgNi4zOSA4LjEyIDkgNS4xIDExLjYgOC4xMyAxMC4xOCAxMS4yMSAxMC43MSAxMS40NiAxMS45NCA4Ljc5IDEzLjE1IDExLjQ3IDEzLjY5IDExLjIyIiBmaWxsPSIjOTQ5NDk0IiAvPjxjaXJjbGUgY3g9IjkiIGN5PSI0LjY1IiByPSIxLjY5IiBmaWxsPSJ1cmwoI2ZlM2ExZmRjLTQ4OWMtNDIxNi05Mjg4LTk1NjQxMjMwODk1YykiIC8+PHBhdGggZD0iTTYsNi43NkExLjIzLDEuMjMsMCwxLDEsNC44Miw4LDEuMjMsMS4yMywwLDAsMSw2LDYuNzZaTTEwLjcyLDhhMS4yMiwxLjIyLDAsMCwwLDEuMjIsMS4yMkExLjIzLDEuMjMsMCwxLDAsMTAuNzIsOFoiIGZpbGw9InVybCgjYmVmNjcyOGYtNmQ0Ni00YTU0LWIyMTktNmIzMzUyYzg5MzI5KSIgLz48Zz48Zz48Y2lyY2xlIGN4PSI0LjU0IiBjeT0iMTEuMzIiIHI9IjAuOTciIGZpbGw9IiMzN2MyYjEiIC8+PGNpcmNsZSBjeD0iNy41MiIgY3k9IjExLjMzIiByPSIwLjk3IiBmaWxsPSIjMzdjMmIxIiAvPjwvZz48Zz48Y2lyY2xlIGN4PSIxMC40NCIgY3k9IjExLjM0IiByPSIwLjk3IiBmaWxsPSIjMzdjMmIxIiAvPjxjaXJjbGUgY3g9IjEzLjQyIiBjeT0iMTEuMzUiIHI9IjAuOTciIGZpbGw9IiMzN2MyYjEiIC8+PC9nPjwvZz48cGF0aCBkPSJNLjUsMTUuMjJhLjE2LjE2LDAsMCwwLC4wOC4xNEwxLjczLDE2bDIsMS4xNGEuMTguMTgsMCwwLDAsLjIzLS4wNkw0LjU3LDE2YS4xNS4xNSwwLDAsMC0uMDYtLjIyTDIuMjIsMTQuNDFhLjE2LjE2LDAsMCwxLS4wOC0uMTRWMy43M2EuMTYuMTYsMCwwLDEsLjA4LS4xNEw0LjUxLDIuMjZBLjE1LjE1LDAsMCwwLDQuNTcsMkwzLjkyLjg5QS4xOC4xOCwwLDAsMCwzLjY5LjgzTDEuNzcsMS45NGwtMS4xOS43YS4xNi4xNiwwLDAsMC0uMDguMTRWMTUuMjJaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik00LjU3LDIsMy45Mi44OUEuMTguMTgsMCwwLDAsMy43NS44MWwtLjA4LDBMMS43NSwxLjk0bC0xLjE5LjdhLjEuMSwwLDAsMC0uMDYsMGgwYS4yNC4yNCwwLDAsMCwwLC4wOGwxLjY0LDFhLjE2LjE2LDAsMCwxLC4wOC0uMTRMNC41MSwyLjI2QS4xNS4xNSwwLDAsMCw0LjU3LDJaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik00LjU3LDE2bC0uNjUsMS4xNWEuMTguMTgsMCwwLDEtLjE3LjA4LjEyLjEyLDAsMCwxLS4wOCwwTDEuNzUsMTYuMDZsLTEuMTktLjdhLjEuMSwwLDAsMS0uMDYsMGgwYS4yNC4yNCwwLDAsMSwwLS4wOGwxLjY0LTFhLjE2LjE2LDAsMCwwLC4wOC4xNGwyLjI5LDEuMzNBLjE2LjE2LDAsMCwxLDQuNTcsMTZaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik0xNy41LDIuNzhhLjE2LjE2LDAsMCwwLS4wOC0uMTRMMTYuMjcsMmwtMi0xLjE0YS4xOC4xOCwwLDAsMC0uMjMuMDZMMTMuNDMsMmEuMTUuMTUsMCwwLDAsLjA2LjIybDIuMjksMS4zM2EuMTYuMTYsMCwwLDEsLjA4LjE0VjE0LjI3YS4xNi4xNiwwLDAsMS0uMDguMTRsLTIuMjksMS4zM2EuMTUuMTUsMCwwLDAtLjA2LjIybC42NSwxLjE1YS4xOC4xOCwwLDAsMCwuMjMuMDZsMS45Mi0xLjExLDEuMTktLjdhLjE2LjE2LDAsMCwwLC4wOC0uMTRWMi43OFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTEzLjQzLDE2bC42NSwxLjE1YS4xOC4xOCwwLDAsMCwuMTcuMDhsLjA4LDAsMS45Mi0xLjExLDEuMTktLjdhLjEuMSwwLDAsMCwuMDYsMGgwYS4yNC4yNCwwLDAsMCwwLS4wOGwtMS42NC0xYS4xNi4xNiwwLDAsMS0uMDguMTRsLTIuMjksMS4zM0EuMTUuMTUsMCwwLDAsMTMuNDMsMTZaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik0xMy40MywyLDE0LjA4Ljg5YS4xOC4xOCwwLDAsMSwuMTctLjA4LjEyLjEyLDAsMCwxLC4wOCwwbDEuOTIsMS4xMSwxLjE5LjdhLjEuMSwwLDAsMSwuMDYsMGgwYS4yNC4yNCwwLDAsMSwwLC4wOGwtMS42NCwxYS4xNi4xNiwwLDAsMC0uMDgtLjE0TDEzLjQ5LDIuMjZBLjE2LjE2LDAsMCwxLDEzLjQzLDJaIiBmaWxsPSIjYTNhM2EzIiAvPjwvZz48L3N2Zz4="/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Landing-zone entry</tspan>
+      <tspan x="1045" dy="17">criteria</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#486581">A quality-checked inventory and dependency graph support rationalization, wave formation, business case, and landing-zone entry criteria.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

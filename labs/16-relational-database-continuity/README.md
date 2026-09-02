@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-16 — Relational Database Business Continuity
 
+![Continuity banner showing an application listener connected to zone-redundant SQL databases in primary and secondary regions.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-15](../15-compute-backup-ha/README.md) · [Lab catalog](../README.md) · [LAB-17 →](../17-nonrelational-data-resilience/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Relational Database Business Continuity](diagrams/architecture.svg)
+![Topology showing an application connecting through a failover-group listener to primary and secondary Azure SQL databases with backup and replication monitoring.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Applications use the failover-group listener while zone-redundant databases replicate across regions and expose measurable health. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing relational continuity options and highlighting a zone-redundant Azure SQL failover group.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Zonal databases, regional replication, listener failover, and application checks cover layered failure domains.
-- **Security:** Encrypted connections, private access, identity, and audit controls apply in both primary and secondary regions.
-- **Cost Optimization:** Secondary capacity is a funded RPO/RTO control and can serve approved reads rather than remain entirely idle.
-- **Operational Excellence:** Lag, failover, DNS, API transaction, and failback timestamps form the recovery scorecard.
-- **Performance Efficiency:** Both regions are sized and tested for doubled write throughput instead of assuming replication keeps pace.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Zonal databases, regional replication, listener failover, and application checks cover layered failure domains.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Encrypted connections, private access, identity, and audit controls apply in both primary and secondary regions.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Secondary capacity is a funded RPO/RTO control and can serve approved reads rather than remain entirely idle.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Lag, failover, DNS, API transaction, and failback timestamps form the recovery scorecard.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Both regions are sized and tested for doubled write throughput instead of assuming replication keeps pace.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-160001
 Synthetic sample: `{"labId":"LAB-16","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Baseline database tier and availability settings</a><span>LAB16-REQ-01 · LAB16-CP01</span></li>
+<li><a href="#checkpoint-2">Validate failover-group topology</a><span>LAB16-REQ-02 · LAB16-CP02</span></li>
+<li><a href="#checkpoint-3">Prove connection and dependency readiness</a><span>LAB16-REQ-03 · LAB16-CP03</span></li>
+<li><a href="#checkpoint-4">Measure replication health against RPO</a><span>LAB16-REQ-04 · LAB16-CP04</span></li>
+<li><a href="#checkpoint-5">Rehearse failover decision and failback</a><span>LAB16-REQ-05 · LAB16-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Baseline database tier and availability settings
 

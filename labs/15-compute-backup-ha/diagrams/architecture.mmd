@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Maintain appointment coordination through a datacenter failure and recover compromised virtual machines from trusted points without unsafe reconnection."]
-    R --> C1["Establish compute failure-domain evidence"]
-    C1 --> C2["Verify backup coverage and policy intent"]
-    C2 --> C3["Evaluate zone-resilient capacity"]
-    C3 --> C4["Design isolated restore and recovery validation"]
-    C4 --> C5["Exercise failover ordering and rollback"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_production_region["Production region zones"]
+        N_traffic["Appointment traffic"]
+        N_zone_one["VMSS capacity zone 1"]
+        N_zone_two["VMSS capacity zone 2"]
+        N_zone_three["VMSS capacity zone 3"]
+    end
+    subgraph B_recovery_services["Recovery services"]
+        N_backup["Azure Backup policy"]
+    end
+    subgraph B_isolated_validation["Isolated restore network"]
+        N_restore["Isolated restore validation"]
+    end
+    N_traffic -->|"zone-aware distribution"| N_zone_one
+    N_traffic -->|"zone-aware distribution"| N_zone_two
+    N_traffic -->|"zone-aware distribution"| N_zone_three
+    N_zone_one -->|"policy-protected state"| N_backup
+    N_backup -->|"isolated recovery test"| N_restore
+    N_restore -->|"validated rollback decision"| N_traffic
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_traffic,N_zone_one,N_zone_two,N_zone_three,N_backup,N_restore service
 %% END GENERATED AZ305 V1

@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-18 — Compute Requirements, Virtual Machines, and Batch Architecture
 
+![Infrastructure banner showing zone-spread control virtual machines coordinating an autoscaled Azure Batch pool and job evidence.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI + Bicep</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-17](../17-nonrelational-data-resilience/README.md) · [Lab catalog](../README.md) · [LAB-19 →](../19-container-serverless-architecture/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Compute Requirements, Virtual Machines, and Batch Architecture](diagrams/architecture.svg)
+![Topology showing a scheduler, zone-spread control virtual machines, Azure Batch autoscale pool, simulation storage, and operations monitoring.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+A resilient control tier submits burst simulations to an autoscaled Batch pool while storage and monitoring preserve job evidence. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing compute patterns and highlighting zonal control virtual machines with an autoscaled Azure Batch pool.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Zonal orchestration, durable task state, retry, and worker replacement keep the batch recoverable.
-- **Security:** Dedicated approved nodes, private data paths, and classified package handling enforce export controls.
-- **Cost Optimization:** Autoscale removes dedicated workers after the five-hour batch while preserving justified control capacity.
-- **Operational Excellence:** Queue depth, allocation, task failure, result integrity, and cleanup evidence provide one run ledger.
-- **Performance Efficiency:** Measured task throughput and parallelism size dedicated capacity for the shortened completion window.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Zonal orchestration, durable task state, retry, and worker replacement keep the batch recoverable.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Dedicated approved nodes, private data paths, and classified package handling enforce export controls.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Autoscale removes dedicated workers after the five-hour batch while preserving justified control capacity.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Queue depth, allocation, task failure, result integrity, and cleanup evidence provide one run ledger.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Measured task throughput and parallelism size dedicated capacity for the shortened completion window.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-180001
 Synthetic sample: `{"labId":"LAB-18","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Translate workload demand into compute requirements</a><span>LAB18-REQ-01 · LAB18-CP01</span></li>
+<li><a href="#checkpoint-2">Compile and lint the compute Bicep design</a><span>LAB18-REQ-02 · LAB18-CP02</span></li>
+<li><a href="#checkpoint-3">Preview the tagged reference deployment</a><span>LAB18-REQ-03 · LAB18-CP03</span></li>
+<li><a href="#checkpoint-4">Deploy and verify the compute reference</a><span>LAB18-REQ-04 · LAB18-CP04</span></li>
+<li><a href="#checkpoint-5">Validate Batch behavior and graceful degradation</a><span>LAB18-REQ-05 · LAB18-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Translate workload demand into compute requirements
 

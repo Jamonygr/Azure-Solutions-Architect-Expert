@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-07 — Compliance and Identity Governance
 
+![Compliance banner joining Azure Policy initiatives and evidence with identity governance catalogs, access reviews, and privileged access.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">PowerShell/Graph</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-06](../06-resource-hierarchy-tag-governance/README.md) · [Lab catalog](../README.md) · [LAB-08 →](../08-relational-platform-tier-selection/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Compliance and Identity Governance](diagrams/architecture.svg)
+![Topology showing control requirements mapped to Azure Policy initiatives and compliance evidence alongside entitlement catalogs, access reviews, and PIM.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Control mappings drive policy evidence while entitlement catalogs, access reviews, and PIM govern human access over time. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing compliance models and marking Azure Policy plus Entra ID Governance controls as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Deputy reviewers and deterministic campaign outcomes prevent governance from stalling on one unavailable owner.
-- **Security:** Expiring access packages and exemptions reduce standing privilege and policy bypass duration.
-- **Cost Optimization:** Automated recurring evidence replaces manual quarterly reconciliation while license scope remains explicit.
-- **Operational Excellence:** One trace joins policy state, review decisions, revocation, owners, and escalation timestamps.
-- **Performance Efficiency:** Campaign scoping and incremental compliance queries avoid reevaluating unrelated identities and resources.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Deputy reviewers and deterministic campaign outcomes prevent governance from stalling on one unavailable owner.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Expiring access packages and exemptions reduce standing privilege and policy bypass duration.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Automated recurring evidence replaces manual quarterly reconciliation while license scope remains explicit.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>One trace joins policy state, review decisions, revocation, owners, and escalation timestamps.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Campaign scoping and incremental compliance queries avoid reevaluating unrelated identities and resources.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-070001
 Synthetic sample: `{"labId":"LAB-07","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Map controls to policy initiatives</a><span>LAB07-REQ-01 · LAB07-CP01</span></li>
+<li><a href="#checkpoint-2">Evaluate assignments exemptions and compliance state</a><span>LAB07-REQ-02 · LAB07-CP02</span></li>
+<li><a href="#checkpoint-3">Design entitlement-management catalogs</a><span>LAB07-REQ-03 · LAB07-CP03</span></li>
+<li><a href="#checkpoint-4">Require recurring access reviews</a><span>LAB07-REQ-04 · LAB07-CP04</span></li>
+<li><a href="#checkpoint-5">Minimize standing privileged roles</a><span>LAB07-REQ-05 · LAB07-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Map controls to policy initiatives
 

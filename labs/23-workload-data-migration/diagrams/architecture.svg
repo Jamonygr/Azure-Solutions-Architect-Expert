@@ -1,44 +1,112 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-23 IaaS, PaaS, Database, and Unstructured Data Migration</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:1161ab2c5396a6668c7c87e7782a3f8915e01719e5c9ce2febcc942c64107ba4</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Move the approved manufacturing workload inside the outage window with</tspan>
-    <tspan x="380" dy="20">provable data integrity and a controlled return path.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Confirm approved wave and target prerequisites</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Design server replication and test migration</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Plan online relational database migration</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Stage and verify unstructured data transfer</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Rehearse cutover, validation, and rollback</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Multi-workload migration topology</title>
+  <desc id="visual-desc">Topology showing VMware servers moving through Azure Migrate, SQL Server through Database Migration Service, and files through AzCopy to separate Azure targets.</desc>
+  <metadata>source-sha256:6baaced74c476e4d68d798f37cf12872669012a7a0be0fab3def35e7b73741d7</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0086A8"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#004E8C" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0086A8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Approved migration wave">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Approved migration wave</text>
+  </g>
+  <g role="group" aria-label="Boundary: Migration tooling and staging">
+    <rect x="347.667" y="116" width="801.333" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="363.667" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Migration tooling and staging</text>
+  </g>
+  <g role="group" aria-label="Boundary: Validated Azure targets">
+    <rect x="199.333" y="446" width="801.333" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="215.333" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Validated Azure targets</text>
+  </g>
+  <g role="group" aria-label="server discovery and replication: source-wave to server-migration">
+    <path d="M232 220 C303.333 220 303.333 220 374.667 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="199.333" y="195" width="208" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="303.333" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">server discovery and replication</text>
+  </g>
+  <g role="group" aria-label="online database stream: source-wave to database-migration">
+    <path d="M232 220 C451.667 220 451.667 220 671.333 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="380.167" y="195" width="143" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="451.667" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">online database stream</text>
+  </g>
+  <g role="group" aria-label="staged file copy: source-wave to file-transfer">
+    <path d="M232 220 C600 220 600 220 968 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="548" y="195" width="104" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">staged file copy</text>
+  </g>
+  <g role="group" aria-label="test migration and cutover: server-migration to compute-target">
+    <path d="M420.098 290.231 C377.5 290.231 377.5 479.769 334.902 479.769" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="293" y="360" width="169" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">test migration and cutover</text>
+  </g>
+  <g role="group" aria-label="validated database cutover: database-migration to database-target">
+    <path d="M716.765 290.231 C674.167 290.231 674.167 479.769 631.569 479.769" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="589.667" y="360" width="169" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="674.167" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">validated database cutover</text>
+  </g>
+  <g role="group" aria-label="hash-verified object transfer: file-transfer to storage-target">
+    <path d="M1013.43 290.231 C970.833 290.231 970.833 479.769 928.235 479.769" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="876.583" y="360" width="188.5" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="970.833" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">hash-verified object transfer</text>
+  </g>
+  <g role="group" aria-label="Service node: VMware SQL and file sources" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImI2OWQyMTUwLWI0ZGEtNDYwYi05OWFlLWE5ZjVhOTYxYjMxMyIgeDE9Ii0xMTk0LjMyMSIgeTE9IjkuMTI4IiB4Mj0iLTExOTAuNzU1IiB5Mj0iOS4xMjgiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLTEsIDAsIDAsIDEsIC0xMTc5Ljg4NywgMCkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzMmJlZGQiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5OCIgc3RvcC1jb2xvcj0iIzljZWJmZiIgc3RvcC1vcGFjaXR5PSIwLjUiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImU2OTBjYzYyLWQxYTItNDMyNS05MGNhLWFjMmZlNTFhNWI1OCIgeDE9IjgwLjM2MyIgeTE9IjkuMTM1IiB4Mj0iODMuOTI5IiB5Mj0iOS4xMzUiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc2Ljc5NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5OCIgc3RvcC1jb2xvcj0iIzAwNWJhMSIgc3RvcC1vcGFjaXR5PSIwIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmZjY0OTg2NC02YjRjLTRmYTgtYmNjYS1jMTJiMmI5MTBmM2MiIHgxPSIzLjU1NSIgeTE9IjkuMzI2IiB4Mj0iMTQuNDM0IiB5Mj0iOS4zMjYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjk3NCIgc3RvcC1jb2xvcj0iIzMyYmVkZCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBpZD0iYTgyNmMwMTctNWU5ZS00MjA4LTg5N2YtMmFkZTJlYjU4Y2Q2Ij48cG9seWdvbiBwb2ludHM9IjcuMTMyIDQuNDY5IDMuNTY3IDYuNTQyIDAgNC40NjggMy41NjcgMi4zOTUgNy4xMzIgNC40NjkiIGZpbGw9IiM1ZWEwZWYiIC8+PHBvbHlnb24gcG9pbnRzPSI3LjEzMiAxMy43OTQgMy41NjYgMTEuNzM1IDMuNTY2IDE1Ljg2NyA3LjEzMiAxMy43OTQiIGZpbGw9IiMwMDViYTEiIC8+PHBvbHlnb24gcG9pbnRzPSIzLjU2NyA2LjU0MiAzLjU2NiA2LjU0MSAzLjU2NiA2LjU0MiAwIDQuNDY4IDAgMTMuODAxIDMuNTY2IDE1Ljg3NCA3LjEzMiAxMy44MDEgNy4xMzIgMTMuNzk0IDMuNTY2IDE1Ljg2NyAzLjU2NiAxMS43MzUgNy4xMzIgMTMuNzk0IDcuMTMyIDQuNDY5IDMuNTY3IDYuNTQyIiBmaWxsPSIjMDA3OGQ0IiAvPjxwb2x5Z29uIHBvaW50cz0iMTAuODY4IDQuNDY5IDE0LjQzMyA2LjU0MiAxOCA0LjQ2OCAxNC40MzMgMi4zOTUgMTAuODY4IDQuNDY5IiBmaWxsPSIjOWNlYmZmIiAvPjxwb2x5Z29uIHBvaW50cz0iMTAuODY4IDEzLjc5NCAxNC40MzQgMTEuNzM1IDE0LjQzNCAxNS44NjcgMTAuODY4IDEzLjc5NCIgZmlsbD0iIzMyYmVkZCIgLz48cG9seWdvbiBwb2ludHM9IjE0LjQzMyA2LjUzNSAxNC40MzQgNi41MzUgMTQuNDM0IDYuNTM1IDE0LjQzNCAxMS43MjggMTAuODY4IDEzLjc5NCAxMC44NjggNC40NjIgMTQuNDMzIDYuNTM1IiBmaWxsPSJ1cmwoI2I2OWQyMTUwLWI0ZGEtNDYwYi05OWFlLWE5ZjVhOTYxYjMxMykiIC8+PHBvbHlnb24gcG9pbnRzPSIxMC44NjggNC40NjkgMTQuNDMzIDYuNTQyIDE4IDQuNDY4IDE0LjQzMyAyLjM5NSAxMC44NjggNC40NjkiIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC40MzMgNi41NDIgMTAuODY4IDQuNDY5IDEwLjg2OCAxMy43OTQgMTQuNDM0IDExLjczNSAxNC40MzQgMTUuODY3IDEwLjg2OCAxMy43OTQgMTAuODY4IDEzLjgwMSAxNC40MzQgMTUuODc0IDE4IDEzLjgwMSAxOCA0LjQ2OCAxOCA0LjQ2OCAxNC40MzMgNi41NDIiIGZpbGw9IiM1MGU2ZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxMC44NjggMTMuNzk0IDE0LjQzNCAxMS43MzUgMTQuNDM0IDE1Ljg2NyAxMC44NjggMTMuNzk0IiBmaWxsPSIjMzJiZWRkIiAvPjxwb2x5Z29uIHBvaW50cz0iMTQuNDMzIDYuNTM1IDE0LjQzNCA2LjUzNSAxNC40MzQgNi41MzUgMTQuNDM0IDExLjcyOCAxMC44NjggMTMuNzk0IDEwLjg2OCA0LjQ2MiAxNC40MzMgNi41MzUiIGZpbGw9InVybCgjYjY5ZDIxNTAtYjRkYS00NjBiLTk5YWUtYTlmNWE5NjFiMzEzKSIgLz48cG9seWdvbiBwb2ludHM9IjMuNTY3IDYuNTQxIDMuNTY2IDYuNTQxIDMuNTY2IDYuNTQxIDMuNTY2IDExLjczNCA3LjEzMiAxMy44MDEgNy4xMzIgNC40NjkgMy41NjcgNi41NDEiIGZpbGw9InVybCgjZTY5MGNjNjItZDFhMi00MzI1LTkwY2EtYWMyZmU1MWE1YjU4KSIgLz48cGF0aCBkPSJNMTQuNDIzLDEwLjEyNmMtLjYyNCwxLjU1Ni0zLjA2NiwyLjU4NC01LjM0OCwyLjU4NGwtLjA4MSwwLS4wOCwwYy0yLjI4MiwwLTQuNzI0LTEuMDI4LTUuMzQ4LTIuNTg0LDAsMC0uMDI1LTEuNTYxLDAtMS43MTNDNC4wMiwxMC4xNSw2LjQsMTEuNDM1LDguODU5LDExLjQzNWwuMTM1LDAsLjEzNiwwYzIuNDU1LDAsNC44MzktMS4yODUsNS4yOTMtMy4wMjJDMTQuNDQ4LDguNTY1LDE0LjQyMywxMC4xMjYsMTQuNDIzLDEwLjEyNlpNMTMuNCw1Ljk0MkE2LjY1Myw2LjY1MywwLDAsMSw5LjEzLDcuNDE2bC0uMTM2LDAtLjEzNSwwYTYuNjU2LDYuNjU2LDAsMCwxLTQuMjY3LTEuNDdsLS44NTYuNUM0LjU1Myw3LjgwOSw2LjgsOC42OSw4LjkxNCw4LjY5aC4xNjFjMi4xMTUsMCw0LjM2Ni0uODgzLDUuMTgxLTIuMjUxWiIgZmlsbD0idXJsKCNmZjY0OTg2NC02YjRjLTRmYTgtYmNjYS1jMTJiMmI5MTBmM2MpIiAvPjwvZz48L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">VMware SQL and file</tspan>
+      <tspan x="155" dy="17">sources</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Azure Migrate replication" filter="url(#shadow)">
+    <rect x="373.667" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="423.667" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTIwNzFjMGEtNmU2Mi00Njk5LThlMzItMjg1ZjFiYzFlNDIwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE4OWJlODRhLTM3NTItNDEyMy1hZGVlLTMyOTAxZWNlZmQzZCIgeDE9IjEwLjc1IiB5MT0iMTMuNTQiIHgyPSIxMC43NSIgeTI9IjIuOTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhMmY5OTRjMi04NTgwLTQ0Y2YtOTJkMi0zMjY1NTMyOGZlZmUiIHgxPSI3LjQ1IiB5MT0iMTcuMjQiIHgyPSI3LjQ1IiB5Mj0iMS4xOSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOThhYjMiIC8+PHN0b3Agb2Zmc2V0PSIwLjExIiBzdG9wLWNvbG9yPSIjMjJhNWNiIiAvPjxzdG9wIG9mZnNldD0iMC4yMyIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuMzciIHN0b3AtY29sb3I9IiMyZWM5ZWIiIC8+PHN0b3Agb2Zmc2V0PSIwLjUzIiBzdG9wLWNvbG9yPSIjMzFkMWYzIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzMyZDRmNSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1taWdyYXRlLTI4MTwvdGl0bGU+PHBhdGggZD0iTTE4LDEwLjUzQTMuMjYsMy4yNiwwLDAsMCwxNS4xNyw3LjRhNC4xMSw0LjExLDAsMCwwLTQuMjMtMy45Myw0LjIyLDQuMjIsMCwwLDAtNCwyLjc1QTMuODksMy44OSwwLDAsMCwzLjUsMTBhNCw0LDAsMCwwLDQuMDgsMy43OWg3bC4xOCwwQTMuMjksMy4yOSwwLDAsMCwxOCwxMC41M1oiIGZpbGw9InVybCgjYTg5YmU4NGEtMzc1Mi00MTIzLWFkZWUtMzI5MDFlY2VmZDNkKSIgLz48cGF0aCBkPSJNMTQuOSwxMS4yMkEzLjM1LDMuMzUsMCwwLDAsMTIsOCw0LjIxLDQuMjEsMCwwLDAsNy42NSw0LDQuMzMsNC4zMywwLDAsMCwzLjUxLDYuNzksNCw0LDAsMCwwLDAsMTAuNjNhNC4wNiw0LjA2LDAsMCwwLDQuMiwzLjlsLjM3LDBoNi43OWwuMTgsMEEzLjM4LDMuMzgsMCwwLDAsMTQuOSwxMS4yMloiIGZpbGw9InVybCgjYTJmOTk0YzItODU4MC00NGNmLTkyZDItMzI2NTUzMjhmZWZlKSIgLz48ZyBpZD0iYjFiN2RkYjgtOGVjMi00ODBmLTk2N2YtYzJiZjg5ZDJmZTE2Ij48cGF0aCBkPSJNNC44Miw5LjM3aC44NWEuMjMuMjMsMCwwLDEsLjE3LjA3bDIsMmEuMjQuMjQsMCwwLDEsMCwuMzVMNS4xMiwxNC40NmEuMjQuMjQsMCwwLDEtLjE3LjA3SDQuMTRBLjI1LjI1LDAsMCwxLDQsMTQuMTFsMi4zMS0yLjM0YS4yMy4yMywwLDAsMCwwLS4zNEw0LjY1LDkuNzhBLjI0LjI0LDAsMCwxLDQuODIsOS4zN1pNOC4yNSw2aC44N2EuMjUuMjUsMCwwLDEsLjE3LjA4bDEuNTMsMS41NWEuMjQuMjQsMCwwLDEsMCwuMzRsLTIsMS45MWEuMjQuMjQsMCwwLDEtLjE3LjA3SDcuOTJhLjI1LjI1LDAsMCwxLS4xOC0uNDFMOS4yNyw4YS4yNS4yNSwwLDAsMCwwLS4zNEw4LjA4LDYuNDZBLjI0LjI0LDAsMCwxLDguMjUsNlptMS43OSw0aC44NWEuMjguMjgsMCwwLDEsLjE3LjA3bDEuMjUsMS4yNWEuMjUuMjUsMCwwLDEsMCwuMzRMMTAuNSwxMy40OWEuMjMuMjMsMCwwLDEtLjE3LjA3SDkuNTFhLjI0LjI0LDAsMCwxLS4xNy0uNDFsMS40Mi0xLjQ0YS4yNS4yNSwwLDAsMCwwLS4zNGwtLjg5LS45MUEuMjQuMjQsMCwwLDEsMTAsMTAuMDVaIiBmaWxsPSIjZmZmIiAvPjwvZz48L3N2Zz4="/>
+    <text x="451.667" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="451.667" dy="0">Azure Migrate</tspan>
+      <tspan x="451.667" dy="17">replication</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Database Migration Service" filter="url(#shadow)">
+    <rect x="670.333" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="720.333" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTYyOGY1MTQtY2YyNC00OGU4LTliZDktYjA4NDdiYzIyNGQwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImIwMWYyMzAyLTM4NWUtNGI0OS1hN2U5LWRhYzAyM2MxNTI5MyIgeDE9IjkiIHkxPSIxMS44NCIgeDI9IjkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjE2IiBzdG9wLWNvbG9yPSIjMTM4MGRhIiAvPjxzdG9wIG9mZnNldD0iMC41MyIgc3RvcC1jb2xvcj0iIzNjOTFlNSIgLz48c3RvcCBvZmZzZXQ9IjAuODIiIHN0b3AtY29sb3I9IiM1NTljZWMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmNzI0NmMzZi02MmQxLTQxYzYtYTNkMy1kNjkxODNkODBiYTAiIHgxPSI0LjYyIiB5MT0iMTMuNTQiIHgyPSIxMy40NyIgeTI9IjEzLjU0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMzJiZWRkIiAvPjxzdG9wIG9mZnNldD0iMC4wNiIgc3RvcC1jb2xvcj0iIzM3YzVlMyIgLz48c3RvcCBvZmZzZXQ9IjAuMyIgc3RvcC1jb2xvcj0iIzQ5ZGRmNyIgLz48c3RvcCBvZmZzZXQ9IjAuNDUiIHN0b3AtY29sb3I9IiM1MGU2ZmYiIC8+PHN0b3Agb2Zmc2V0PSIwLjU1IiBzdG9wLWNvbG9yPSIjNTBlNmZmIiAvPjxzdG9wIG9mZnNldD0iMC43IiBzdG9wLWNvbG9yPSIjNDlkZGY3IiAvPjxzdG9wIG9mZnNldD0iMC45NCIgc3RvcC1jb2xvcj0iIzM3YzVlMyIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmJlZGQiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tZGF0YWJhc2VzLTEzMzwvdGl0bGU+PHBhdGggZD0iTTE3LjM1LDguMTNhMy43NCwzLjc0LDAsMCwwLTMuMjUtMy42QTQuNzQsNC43NCwwLDAsMCw5LjIyLDAsNC44Nyw0Ljg3LDAsMCwwLDQuNTgsMy4xNiw0LjQ4LDQuNDgsMCwwLDAsLjY1LDcuNDdhNC41NCw0LjU0LDAsMCwwLDQuNyw0LjM3aDhhMS4yLDEuMiwwLDAsMCwuMiwwQTMuODEsMy44MSwwLDAsMCwxNy4zNSw4LjEzWiIgZmlsbD0idXJsKCNiMDFmMjMwMi0zODVlLTRiNDktYTdlOS1kYWMwMjNjMTUyOTMpIiAvPjxwYXRoIGQ9Ik05LjA1LDEwLjQ5Yy0yLjQ1LDAtNC40My0uNjMtNC40My0xLjQxdjcuNTFjMCwuNzcsMiwxLjQsNC4zNywxLjQxaC4wNmMyLjQ0LDAsNC40Mi0uNjMsNC40Mi0xLjQxVjkuMDhDMTMuNDcsOS44NiwxMS40OSwxMC40OSw5LjA1LDEwLjQ5WiIgZmlsbD0idXJsKCNmNzI0NmMzZi02MmQxLTQxYzYtYTNkMy1kNjkxODNkODBiYTApIiAvPjxwYXRoIGQ9Ik0xMy40Nyw5LjA4YzAsLjc4LTIsMS40MS00LjQyLDEuNDFTNC42Miw5Ljg2LDQuNjIsOS4wOHMyLTEuNDEsNC40My0xLjQxLDQuNDIuNjMsNC40MiwxLjQxIiBmaWxsPSIjZThlOGU4IiAvPjxwYXRoIGQ9Ik0xMi40NCw5YzAsLjQ5LTEuNTIuOS0zLjM5LjlzLTMuNC0uNDEtMy40LS45LDEuNTItLjksMy40LS45LDMuMzkuNCwzLjM5LjkiIGZpbGw9IiM1MGU2ZmYiIC8+PHBhdGggZD0iTTkuMDUsOS4xOGE5LjEzLDkuMTMsMCwwLDAtMi42OS4zNCw5LDksMCwwLDAsMi42OS4zNSw5LjA5LDkuMDksMCwwLDAsMi42OS0uMzVBOS4yMyw5LjIzLDAsMCwwLDkuMDUsOS4xOFoiIGZpbGw9IiMzMmJlZGQiIC8+PHBhdGggZD0iTTYuMjksNSw4Ljg4LDIuMzhhLjMuMywwLDAsMSwuNDMsMEwxMS45LDVhLjEzLjEzLDAsMCwxLS4xLjIzSDEwLjIxYS4xNC4xNCwwLDAsMC0uMTQuMTRWOC41OGEuMS4xLDAsMCwxLS4xMS4xMUg4LjIyYS4xMS4xMSwwLDAsMS0uMTEtLjExVjUuMzRBLjEzLjEzLDAsMCwwLDgsNS4ySDYuMzhBLjEzLjEzLDAsMCwxLDYuMjksNVoiIGZpbGw9IiNmMmYyZjIiIC8+PC9zdmc+"/>
+    <text x="748.333" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="748.333" dy="0">Database Migration</tspan>
+      <tspan x="748.333" dy="17">Service</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Staged AzCopy transfer" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Staged AzCopy</tspan>
+      <tspan x="1045" dy="17">transfer</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: IaaS and PaaS targets" filter="url(#shadow)">
+    <rect x="225.333" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="275.333" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZmQ0NTRmMWMtNTUwNi00NGI4LTg3NGUtODgxNGI4YjJmNzBiIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImYzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSIgeDE9IjguODgiIHkxPSIxMi4yMSIgeDI9IjguODgiIHkyPSIwLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYmRiNDVhMGItZWI1OC00OTcwLWE2MGEtZmIyY2UzMTRmODY2IiB4MT0iOC44OCIgeTE9IjE2Ljg0IiB4Mj0iOC44OCIgeTI9IjEyLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE1IiBzdG9wLWNvbG9yPSIjY2NjIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzcwNzA3MCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1jb21wdXRlLTIxPC90aXRsZT48cmVjdCB4PSItMC4xMiIgeT0iMC4yMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiByeD0iMC42IiBmaWxsPSJ1cmwoI2YzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSkiIC8+PHBvbHlnb24gcG9pbnRzPSIxMS44OCA0LjQ2IDExLjg4IDcuOTUgOC44OCA5LjcxIDguODggNi4yMSAxMS44OCA0LjQ2IiBmaWxsPSIjNTBlNmZmIiAvPjxwb2x5Z29uIHBvaW50cz0iMTEuODggNC40NiA4Ljg4IDYuMjIgNS44OCA0LjQ2IDguODggMi43MSAxMS44OCA0LjQ2IiBmaWxsPSIjYzNmMWZmIiAvPjxwb2x5Z29uIHBvaW50cz0iOC44OCA2LjIyIDguODggOS43MSA1Ljg4IDcuOTUgNS44OCA0LjQ2IDguODggNi4yMiIgZmlsbD0iIzljZWJmZiIgLz48cG9seWdvbiBwb2ludHM9IjUuODggNy45NSA4Ljg4IDYuMjEgOC44OCA5LjcxIDUuODggNy45NSIgZmlsbD0iI2MzZjFmZiIgLz48cG9seWdvbiBwb2ludHM9IjExLjg4IDcuOTUgOC44OCA2LjIxIDguODggOS43MSAxMS44OCA3Ljk1IiBmaWxsPSIjOWNlYmZmIiAvPjxwYXRoIGQ9Ik0xMi40OSwxNS44NGMtMS43OC0uMjgtMS44NS0xLjU2LTEuODUtMy42M0g3LjExYzAsMi4wNy0uMDYsMy4zNS0xLjg0LDMuNjNhMSwxLDAsMCwwLS44OSwxaDlBMSwxLDAsMCwwLDEyLjQ5LDE1Ljg0WiIgZmlsbD0idXJsKCNiZGI0NWEwYi1lYjU4LTQ5NzAtYTYwYS1mYjJjZTMxNGY4NjYpIiAvPjwvc3ZnPg=="/>
+    <text x="303.333" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="303.333" dy="0">IaaS and PaaS targets</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Managed database target" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTk2NzkyYjctY2UyOC00Y2EzLTk3NjctNGUwNjVlZjQ4MjBmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImVmMTZiZjlkLWE4YjYtNDE4MS1iNmNkLTY2ZmM1MjAzZjk1NiIgeDE9IjIuNTkiIHkxPSIxMC4xNiIgeDI9IjE1LjQxIiB5Mj0iMTAuMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjA3IiBzdG9wLWNvbG9yPSIjMDA2MGE5IiAvPjxzdG9wIG9mZnNldD0iMC4zNiIgc3RvcC1jb2xvcj0iIzAwNzFjOCIgLz48c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIwLjY0IiBzdG9wLWNvbG9yPSIjMDA3NGNkIiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzAwNmFiYiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PC9saW5lYXJHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9ImJmMzg0NmMzLTRkNzQtNDc0My1hYjlhLWYzMzRjMjQ4YmQ5MiIgY3g9IjkuMzYiIGN5PSIxMC41NyIgcj0iNy4wNyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2YyZjJmMiIgLz48c3RvcCBvZmZzZXQ9IjAuNTgiIHN0b3AtY29sb3I9IiNlZWUiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZTZlNmU2IiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWRhdGFiYXNlcy0xMzA8L3RpdGxlPjxwYXRoIGQ9Ik05LDUuMTRjLTMuNTQsMC02LjQxLTEtNi40MS0yLjMyVjE1LjE4YzAsMS4yNywyLjgyLDIuMyw2LjMyLDIuMzJIOWMzLjU0LDAsNi40MS0xLDYuNDEtMi4zMlYyLjgyQzE1LjQxLDQuMTEsMTIuNTQsNS4xNCw5LDUuMTRaIiBmaWxsPSJ1cmwoI2VmMTZiZjlkLWE4YjYtNDE4MS1iNmNkLTY2ZmM1MjAzZjk1NikiIC8+PHBhdGggZD0iTTE1LjQxLDIuODJjMCwxLjI5LTIuODcsMi4zMi02LjQxLDIuMzJzLTYuNDEtMS02LjQxLTIuMzJTNS40Ni41LDksLjVzNi40MSwxLDYuNDEsMi4zMiIgZmlsbD0iI2U4ZThlOCIgLz48cGF0aCBkPSJNMTMuOTIsMi42M2MwLC44Mi0yLjIxLDEuNDgtNC45MiwxLjQ4UzQuMDgsMy40NSw0LjA4LDIuNjMsNi4yOSwxLjE2LDksMS4xNnM0LjkyLjY2LDQuOTIsMS40NyIgZmlsbD0iIzUwZTZmZiIgLz48cGF0aCBkPSJNOSwzYTExLjU1LDExLjU1LDAsMCwwLTMuODkuNTdBMTEuNDIsMTEuNDIsMCwwLDAsOSw0LjExYTExLjE1LDExLjE1LDAsMCwwLDMuODktLjU4QTExLjg0LDExLjg0LDAsMCwwLDksM1oiIGZpbGw9IiMxOThhYjMiIC8+PHBhdGggZD0iTTEyLjksMTEuNFY4SDEydjQuMTNoMi40NlYxMS40Wk01Ljc2LDkuNzNhMS44MywxLjgzLDAsMCwxLS41MS0uMzEuNDQuNDQsMCwwLDEtLjEyLS4zMi4zNC4zNCwwLDAsMSwuMTUtLjMuNjguNjgsMCwwLDEsLjQyLS4xMiwxLjYyLDEuNjIsMCwwLDEsMSwuMjlWOC4xMWEyLjU4LDIuNTgsMCwwLDAtMS0uMTYsMS42NCwxLjY0LDAsMCwwLTEuMDkuMzQsMS4wOCwxLjA4LDAsMCwwLS40Mi44OWMwLC41MS4zMi45MSwxLDEuMjFhMi44OCwyLjg4LDAsMCwxLC42Mi4zNi40Mi40MiwwLDAsMSwuMTUuMzIuMzguMzgsMCwwLDEtLjE2LjMxLjgxLjgxLDAsMCwxLS40NS4xMSwxLjY2LDEuNjYsMCwwLDEtMS4wOS0uNDJWMTJhMi4xNywyLjE3LDAsMCwwLDEuMDcuMjQsMS44OCwxLjg4LDAsMCwwLDEuMTgtLjMzQTEuMDgsMS4wOCwwLDAsMCw2Ljg0LDExYTEuMDUsMS4wNSwwLDAsMC0uMjUtLjdBMi40MiwyLjQyLDAsMCwwLDUuNzYsOS43M1pNMTEsMTEuMzJhMi4zNCwyLjM0LDAsMCwwLC4zMy0xLjI2QTIuMzIsMi4zMiwwLDAsMCwxMSw5YTEuODEsMS44MSwwLDAsMC0uNy0uNzUsMiwyLDAsMCwwLTEtLjI2LDIuMTEsMi4xMSwwLDAsMC0xLjA4LjI3QTEuODYsMS44NiwwLDAsMCw3LjQ5LDlhMi40NiwyLjQ2LDAsMCwwLS4yNiwxLjE0LDIuMjYsMi4yNiwwLDAsMCwuMjQsMSwxLjc2LDEuNzYsMCwwLDAsLjY5Ljc0LDIuMDYsMi4wNiwwLDAsMCwxLC4zbC44NiwxaDEuMjFMMTAsMTIuMDhBMS43OSwxLjc5LDAsMCwwLDExLDExLjMyWk0xMCwxMS4wN2EuOTQuOTQsMCwwLDEtLjc2LjM1LjkyLjkyLDAsMCwxLS43Ni0uMzYsMS41MiwxLjUyLDAsMCwxLS4yOS0xLDEuNTMsMS41MywwLDAsMSwuMjktMSwxLDEsMCwwLDEsLjc4LS4zNy44Ny44NywwLDAsMSwuNzUuMzcsMS42MiwxLjYyLDAsMCwxLC4yNywxQTEuNDYsMS40NiwwLDAsMSwxMCwxMS4wN1oiIGZpbGw9InVybCgjYmYzODQ2YzMtNGQ3NC00NzQzLWFiOWEtZjMzNGMyNDhiZDkyKSIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Managed database</tspan>
+      <tspan x="600" dy="17">target</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Verified object target" filter="url(#shadow)">
+    <rect x="818.667" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="868.667" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="896.667" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="896.667" dy="0">Verified object</tspan>
+      <tspan x="896.667" dy="17">target</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#486581">Azure Migrate, Database Migration Service, and AzCopy move each workload type through its appropriate staged path.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

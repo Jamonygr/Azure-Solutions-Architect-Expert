@@ -1,0 +1,35 @@
+<!-- BEGIN GENERATED AZ305 V1 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">LAB-22 summary banner</title>
+  <desc id="visual-desc">Infrastructure banner showing a datacenter portfolio moving through discovery, dependency mapping, rationalization, business case, and landing-zone gates.</desc>
+  <metadata>registry-sha256:db21d1b48a1319f0b9e2d736c3a21f119247f575f8c276ea648252ecca1f5d90</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0086A8"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#004E8C" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0086A8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <circle cx="1040" cy="86" r="170" fill="#0086A8" opacity=".10"/>
+  <circle cx="1110" cy="245" r="126" fill="#6B3FA0" opacity=".12"/>
+  <path d="M785 228 C880 112 1000 96 1155 151" fill="none" stroke="#66B8D1" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+  <circle cx="802" cy="216" r="15" fill="#0086A8"/>
+  <circle cx="965" cy="122" r="15" fill="#6B3FA0"/>
+  <circle cx="1146" cy="150" r="15" fill="#004E8C"/>
+  <rect x="64" y="48" width="170" height="36" rx="18" fill="#004E8C"/>
+  <text x="149" y="72" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#ffffff">LAB-22 · INF</text>
+  <text x="64" y="118" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="32" font-weight="700" fill="#102A43">
+    <tspan x="64" dy="0">Migration Strategy and Portfolio Assessment</tspan>
+  </text>
+  <text x="64" y="206" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="400" fill="#486581">
+    <tspan x="64" dy="0">Turn business outcomes, inventory quality, dependencies,</tspan>
+    <tspan x="64" dy="23">rationalization, and readiness into migration waves.</tspan>
+  </text>
+  <rect x="64" y="266" width="158" height="32" rx="16" fill="#6B3FA0" opacity=".13" stroke="#6B3FA0"/>
+  <text x="143" y="287" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" fill="#102A43">design-simulation</text>
+  <rect x="234" y="266" width="150" height="32" rx="16" fill="#0086A8" opacity=".13" stroke="#0086A8"/>
+  <text x="309" y="287" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" fill="#102A43">Azure PowerShell</text>
+  <rect x="396" y="266" width="158" height="32" rx="16" fill="#004E8C" opacity=".13" stroke="#004E8C"/>
+  <text x="475" y="287" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" fill="#102A43">offline-validated</text>
+</svg>
+<!-- END GENERATED AZ305 V1 -->

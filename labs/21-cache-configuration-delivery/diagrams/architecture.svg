@@ -1,44 +1,103 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-21 Application Caching, Configuration, and Automated Delivery</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:adf0dc3aeb45b53fe686e30e66f3f219fae8892a0e10a5479659b858ddcde9de</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Accelerate storefront reads and release features consistently across regions</tspan>
-    <tspan x="380" dy="20">without embedding secrets or relying on manual configuration drift.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Define cache semantics and failure behavior</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Separate configuration, features, and secrets</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Compile the delivery contract</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Preview a bounded deployment</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Validate progressive configuration delivery</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Cache configuration and delivery topology</title>
+  <desc id="visual-desc">Topology showing a multi-region storefront connected to Azure Managed Redis, App Configuration, Key Vault, a delivery pipeline, and deployment stacks.</desc>
+  <metadata>source-sha256:326307aa0e1c3fa87b14f469f3b8300b7835df27d0125832e83c60649c6ba027</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0086A8"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#004E8C" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0086A8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Multi-region storefront">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Multi-region storefront</text>
+  </g>
+  <g role="group" aria-label="Boundary: Shared application services">
+    <rect x="51" y="116" width="1098" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Shared application services</text>
+  </g>
+  <g role="group" aria-label="Boundary: Delivery control plane">
+    <rect x="496" y="446" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Delivery control plane</text>
+  </g>
+  <g role="group" aria-label="cache-aside catalog reads: storefront to cache">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="296.25" y="195" width="162.5" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">cache-aside catalog reads</text>
+  </g>
+  <g role="group" aria-label="feature and configuration refresh: storefront to configuration">
+    <path d="M232 220 C600 220 600 220 968 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="495" y="195" width="210" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">feature and configuration refresh</text>
+  </g>
+  <g role="group" aria-label="managed-identity secret access: storefront to secrets">
+    <path d="M155 297 C155 297 155 473 155 473" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="57.5" y="360" width="195" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="155" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">managed-identity secret access</text>
+  </g>
+  <g role="group" aria-label="previewed infrastructure change: pipeline to deployment">
+    <path d="M677 550 C822.5 550 822.5 550 968 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="721.75" y="525" width="201.5" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="822.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">previewed infrastructure change</text>
+  </g>
+  <g role="group" aria-label="progressive regional rollout: deployment to storefront">
+    <path d="M972.803 523.23 C600 523.23 600 246.77 227.197 246.77" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="509" y="360" width="182" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">progressive regional rollout</text>
+  </g>
+  <g role="group" aria-label="bounded configuration release: deployment to configuration">
+    <path d="M1045 473 C1045 473 1045 297 1045 297" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="950.75" y="360" width="188.5" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="1045" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">bounded configuration release</text>
+  </g>
+  <g role="group" aria-label="Service node: Storefront application stamps" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEzYTQ0MDkzLWIxNTctNDI2ZS1hOGZlLWNlYzlmOWMyMzk3OCIgeDE9IjExLjcyOSIgeTE9IjQuODgiIHgyPSIxMS43MjkiIHkyPSIxMy4wOTkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAuMDAxIiBzdG9wLWNvbG9yPSIjNzczYWRjIiAvPjxzdG9wIG9mZnNldD0iMC41MjgiIHN0b3AtY29sb3I9IiM2NjM1YmIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNTUyZjk5IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhZDgzODg1OS0wM2Y0LTQ3MmYtODFiYy1lYmM5MjFkNzEzMzUiIHgxPSI2LjM1IiB5MT0iMTMuOTE0IiB4Mj0iNi4zNSIgeTI9IjQuMTk4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjAwMSIgc3RvcC1jb2xvcj0iIzc3M2FkYyIgLz48c3RvcCBvZmZzZXQ9IjAuMzA3IiBzdG9wLWNvbG9yPSIjNzkzZGRkIiAvPjxzdG9wIG9mZnNldD0iMC41MzIiIHN0b3AtY29sb3I9IiM4MDQ2ZTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjczMSIgc3RvcC1jb2xvcj0iIzhjNTZlNyIgLz48c3RvcCBvZmZzZXQ9IjAuOTE1IiBzdG9wLWNvbG9yPSIjOWM2ZGVmIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2E2N2FmNCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBpZD0iYWU4MjQ3MGQtN2E2Yy00ZGZlLTg1MzMtNTlkOGZmOTQ4NjI5Ij48Zz48cGF0aCBkPSJNOC42MTcsOC42NDRILjYzOVYxLjc4NEExLjE2LDEuMTYsMCwwLDEsMS43ODguNjI0SDguNjE3Wk0xLjYzLDcuNjUzaDZWMS41OTRIMS43ODhhLjE1OC4xNTgsMCwwLDAtLjE1OC4xNThoMFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTE3LjUsOC42NDRIOS41MjNWLjYyNGg2LjgyOEExLjE2LDEuMTYsMCwwLDEsMTcuNSwxLjc4NFptLTYuOTg3LS45OTFoNlYxLjc4NGEuMTU3LjE1NywwLDAsMC0uMTIzLS4xODcuMi4yLDAsMCwwLS4wMzUsMEgxMC41MTNaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik04LjYxNywxNy40ODVIMS43ODhBMS4xNDksMS4xNDksMCwwLDEsLjYzOSwxNi4zNDdWOS40NzZIOC42MTdaTTEuNjMsMTAuNDY3djUuODhhLjE1OC4xNTgsMCwwLDAsLjE1OC4xNThINy42MjZWMTAuNDY3WiIgZmlsbD0iIzk0OTQ5NCIgLz48cGF0aCBkPSJNMTYuMzUxLDE3LjQ4NUg5LjUyM1Y5LjQ3NkgxNy41djYuODcxQTEuMTQ5LDEuMTQ5LDAsMCwxLDE2LjM1MSwxNy40ODVabS01LjgzOC0uOTkxaDUuODM4YS4xNTcuMTU3LDAsMCwwLC4xNTgtLjE1OFYxMC40NjdoLTZaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik0xNC42LDYuMjk0YS4yOTQuMjk0LDAsMCwwLS4yLS4yNzhMOS4wNDQsNC4yMDVBLjEyOC4xMjgsMCwwLDAsOSw0LjJIOWEuMTMyLjEzMiwwLDAsMC0uMTMzLjEzM3Y5LjQ0NUEuMTMzLjEzMywwLDAsMCw5LDEzLjkxMUg5YS4xMzguMTM4LDAsMCwwLC4wNDktLjAxbDUuMzY1LTIuMTQ1YS4yOTIuMjkyLDAsMCwwLC4xODQtLjI3MloiIGZpbGw9InVybCgjYTNhNDQwOTMtYjE1Ny00MjZlLWE4ZmUtY2VjOWY5YzIzOTc4KSIgLz48cGF0aCBkPSJNOC45NjYsNC4ybC01LjI5My45NjZhLjE2MS4xNjEsMCwwLDAtLjEzLjE1OFYxMi42M2EuMTYuMTYsMCwwLDAsLjEyNi4xNTdMOC45NjIsMTMuOTFhLjE2MS4xNjEsMCwwLDAsLjE5MS0uMTIxLjIyLjIyLDAsMCwwLDAtLjAzNlY0LjM1OEEuMTYuMTYsMCwwLDAsOSw0LjIuMTYzLjE2MywwLDAsMCw4Ljk2Niw0LjJaIiBmaWxsPSJ1cmwoI2FkODM4ODU5LTAzZjQtNDcyZi04MWJjLWViYzkyMWQ3MTMzNSkiIC8+PHBhdGggZD0iTTYuNTIsNS42NTZ2Ni44bDEuODQyLjNWNS4zMzVabS0yLjI2Mi4zNjd2NS45NTVsMS42LjMyNlY1Ljc1NFoiIGZpbGw9IiNiNzk2ZjkiIG9wYWNpdHk9IjAuNSIgLz48L2c+PC9nPjwvc3ZnPg=="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Storefront</tspan>
+      <tspan x="155" dy="17">application stamps</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Azure Managed Redis" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0idXVpZC04ZTQ5ODc4ZS02ZjFlLTQ1ZGMtYjEzZi1kZTNmM2IwYTMwMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiB2aWV3Qm94PSIwIDAgMTggMTgiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0idXVpZC1lMjc1MjAwZi04MDQ3LTQ4M2QtOTE2NS0zMzU4ODFkYzA0OTIiIHgxPSIuNTYyIiB5MT0iMi42ODQiIHgyPSIxNy41NjEiIHkyPSIxOS40MzciIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAyMCkgc2NhbGUoMSAtMSkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3NTc1NzUiIC8+PHN0b3Agb2Zmc2V0PSIuOTE1IiBzdG9wLWNvbG9yPSIjYjBiMGIwIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJ1dWlkLWE4NDY3OTg4LWZiODEtNDdhOS05MzAwLTRmYWM5ZGNiOTdhNCIgeDE9IjEzLjMyMSIgeTE9IjE1LjMzOSIgeDI9IjQuNTgxIiB5Mj0iNi41NjMiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAyMCkgc2NhbGUoMSAtMSkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA1YmExIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGQ9Ik05LC41Yy4yNzYsMCwuNS4yMjQuNS41djFoMnYtMWMwLS4yNzYuMjI0LS41LjUtLjVzLjUuMjI0LjUuNXYxaDEuNWMxLjEwNSwwLDIsLjg5NSwyLDJ2MS41aDFjLjI3NiwwLC41LjIyNC41LjVzLS4yMjQuNS0uNS41aC0xdjJoMWMuMjc2LDAsLjUuMjI0LjUuNXMtLjIyNC41LS41LjVoLTF2MmgxYy4yNzYsMCwuNS4yMjQuNS41cy0uMjI0LjUtLjUuNWgtMXYxLjVjMCwxLjEwNS0uODk1LDItMiwyaC0xLjV2MWMwLC4yNzYtLjIyNC41LS41LjVzLS41LS4yMjQtLjUtLjV2LTFoLTJ2MWMwLC4yNzYtLjIyNC41LS41LjVzLS41LS4yMjQtLjUtLjV2LTFoLTJ2MWMwLC4yNzYtLjIyNC41LS41LjVzLS41LS4yMjQtLjUtLjV2LTFoLTEuNWMtMS4xMDUsMC0yLS44OTUtMi0ydi0xLjVoLTFjLS4yNzYsMC0uNS0uMjI0LS41LS41cy4yMjQtLjUuNS0uNWgxdi0yaC0xYy0uMjc2LDAtLjUtLjIyNC0uNS0uNXMuMjI0LS41LjUtLjVoMXYtMmgtMWMtLjI3NiwwLS41LS4yMjQtLjUtLjVzLjIyNC0uNS41LS41aDF2LTEuNWMwLTEuMTA1Ljg5NS0yLDItMmgxLjV2LTFjMC0uMjc2LjIyNC0uNS41LS41cy41LjIyNC41LjV2MWgydi0xYzAtLjI3Ni4yMjQtLjUuNS0uNVpNOC45ODQsM2gtMi45NjhjLS4wMDUsMC0uMDEsMC0uMDE2LDBzLS4wMTEsMC0uMDE2LDBoLTEuOTg0Yy0uNTUyLDAtMSwuNDQ4LTEsMXYxMGMwLC41NTIuNDQ4LDEsMSwxaDEuOTg0Yy4wMDUsMCwuMDEsMCwuMDE2LDBzLjAxMSwwLC4wMTYsMGgyLjk2OGMuMDA1LDAsLjAxLDAsLjAxNiwwcy4wMTEsMCwuMDE2LDBoMi45NjhjLjAwNSwwLC4wMSwwLC4wMTYsMCwuMDA1LDAsLjAxLDAsLjAxNiwwaDEuOTg0Yy41NTIsMCwxLS40NDgsMS0xdi0xLjk3OGMwLS4wMDcsMC0uMDE1LDAtLjAyMnMwLS4wMTUsMC0uMDIydi0yLjk1NWMwLS4wMDcsMC0uMDE1LDAtLjAyMnMwLS4wMTUsMC0uMDIydi0yLjk1NWMwLS4wMDcsMC0uMDE1LDAtLjAyMnMwLS4wMTUsMC0uMDIydi0xLjk3OGMwLS41NTItLjQ0OC0xLTEtMWgtMS45ODRjLS4wMDUsMC0uMDEsMC0uMDE2LDAtLjAwNSwwLS4wMTEsMC0uMDE2LDBoLTIuOTY4Yy0uMDA1LDAtLjAxLDAtLjAxNiwwcy0uMDExLDAtLjAxNiwwWiIgZmlsbD0idXJsKCN1dWlkLWUyNzUyMDBmLTgwNDctNDgzZC05MTY1LTMzNTg4MWRjMDQ5MikiIGZpbGwtcnVsZT0iZXZlbm9kZCIgLz48cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHJ4PSIuNSIgcnk9Ii41IiBmaWxsPSJ1cmwoI3V1aWQtYTg0Njc5ODgtZmI4MS00N2E5LTkzMDAtNGZhYzlkY2I5N2E0KSIgLz48cGF0aCBkPSJNMTIuMTI0LDkuMzFjLS40ODQuNTY3LTEuMDA3LDEuMjE0LTIuMDUzLDEuMjE0LS45MzQsMC0xLjI4Mi0uNzY1LTEuMzA3LTEuMzg3LjIwNS40MDIuNjA1LjcyOCwxLjIyOS43MTMsMS4yMDEtLjAzNiwyLjAyNC0xLjA0MywyLjAyNC0xLjk2MSwwLTEuMDk3LS44ODEtMS44ODktMi40MTEtMS44ODktMS4wOTQsMC0yLjQ1LjM4Ny0zLjM0MS45OTgtLjAxLjYzLjM2OCwxLjQ0OC41MDQsMS4zNTguNzcyLS41MTYsMS4zODUtLjg0OCwxLjk3OS0xLjAxNC0uODc5LjkxMS0yLjk4OSwzLjAyNi0zLjI0OCwzLjM5OC4wMjkuMzQyLjQ4NCwxLjI1OS43MDcsMS4yNTkuMDY4LDAsLjEyNi0uMDM2LjE5NC0uMDk5LjYzNi0uNjY0LDEuMTU1LTEuMjU5LDEuNjE2LTEuODMzLjA2NS44NDEuNTEsMS44NjksMS43NTQsMS44NjksMS4xMTQsMCwyLjIxOC0uNzQ3LDIuNzIxLTIuNDI5LjA1OC0uMjA3LS4yMTMtLjM2OS0uMzY4LS4xOThaTTEwLjg1NSw3Ljk1MmMwLC41MzEtLjU2Mi43OTItMS4wNzUuNzkyLS4yNzQsMC0uNDg1LS4wNjctLjY1Mi0uMTU0LjMwNy0uNDMxLjYxLS44NzQuOTM2LTEuMzQ3LjU3NS4wOS43OS4zODcuNzkuNzA5WiIgZmlsbD0iI2ZmZiIgLz48L3N2Zz4="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Azure Managed Redis</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Azure App Configuration" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjYyZmU1M2QtZDEwMi00ODhlLWJlZGYtM2I3YTQ4YWExNGJmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJiYWEyNDRkLTdhNzMtNGRlZi1hZTMzLWI2ODc4M2ZhNWI1MSIgeDE9IjkiIHkxPSIxNS42MyIgeDI9IjkiIHkyPSItMi41MSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzAwNzhkNCIgLz48c3RvcCBvZmZzZXQ9IjAuMTYiIHN0b3AtY29sb3I9IiMxMzgwZGEiIC8+PHN0b3Agb2Zmc2V0PSIwLjUzIiBzdG9wLWNvbG9yPSIjM2M5MWU1IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzU1OWNlYyIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM1ZWEwZWYiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZhNzRkMTQ4LWQ2ZDAtNGM3NS05NGY3LTk0NzMyYjhjNjJiMCIgeDE9IjEyLjI2IiB5MT0iNy4xNyIgeDI9IjEyLjI2IiB5Mj0iMTcuMjEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmQ3MGYiIC8+PHN0b3Agb2Zmc2V0PSIwLjI3IiBzdG9wLWNvbG9yPSIjZmZkMzEwIiAvPjxzdG9wIG9mZnNldD0iMC41NCIgc3RvcC1jb2xvcj0iI2ZmYzYxMyIgLz48c3RvcCBvZmZzZXQ9IjAuODMiIHN0b3AtY29sb3I9IiNmZWIyMTciIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmVhMTFiIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWludGVncmF0aW9uLTIxOTwvdGl0bGU+PHBhdGggZD0iTTE3LjQxLDguNGEzLjc3LDMuNzcsMCwwLDAtMy4yOC0zLjYzQTQuNzYsNC43NiwwLDAsMCw5LjIyLjIxLDQuOTIsNC45MiwwLDAsMCw0LjUzLDMuNCw0LjQ4LDQuNDgsMCwwLDAsLjU5LDcuNzNhNC41OCw0LjU4LDAsMCwwLDQuNzQsNC40LDIuNzUsMi43NSwwLDAsMCwuNDEsMGg3LjY3YS42NC42NCwwLDAsMCwuMiwwQTMuODIsMy44MiwwLDAsMCwxNy40MSw4LjRaIiBmaWxsPSJ1cmwoI2JiYWEyNDRkLTdhNzMtNGRlZi1hZTMzLWI2ODc4M2ZhNWI1MSkiIC8+PHBhdGggaWQ9ImJhN2IzNzYyLTQ3NTItNGM0YS04YTdlLWFmNGM1ZTM4Mzc5NiIgZD0iTTguMTQsMTZ2LS42bDAsMC0uNjEtLjIxLS4xNi0uNDEuMzEtLjYyLDAtLjA3LS4xOS0uMTktLjIzLS4yMy0uMDgsMC0uNi4zLS40MS0uMTEtLjI2LS42N0g1LjMybDAsMC0uMi42MUw0LjY3LDE0LDQsMTMuNjIsMy41NiwxNGwwLC4wOC4zLjU5LS4xNy40MUwzLDE1LjM4VjE2bC4wOSwwLC42My4yMS4xNy40MS0uMzIuNjkuNDIuNDIuMDgsMCwuNi0uMy40MS4xNy4yNi43MmguNTlsMC0uMDkuMjEtLjYzLjQtLjE3LjcuMzIuNDItLjQyLDAtLjA4LS4zLS41OS4xMS0uNDJabS0yLjUxLjU1YS44NC44NCwwLDEsMSwuODMtLjg0aDBBLjg0Ljg0LDAsMCwxLDUuNjMsMTYuNTFaIiBmaWxsPSIjNzZiYzJkIiAvPjxwYXRoIGlkPSJiZmY2ZmMzNy0zNzBkLTRiNTItOTQyNy00M2E1YTUzODUyNjciIGQ9Ik0xNy4yOCwxMi42NFYxMS40N2wtLjA2LS4wNUwxNiwxMWwtLjMxLS44TDE2LjMxLDlsLjA2LS4xM0wxNiw4LjQ3LDE1LjU2LDhsLS4xNi4wOC0xLjE3LjYtLjgtLjIzLS41MS0xLjNIMTEuNzZsLS4wNi4wNi0uNCwxLjE5LS44Mi4zMUw5LjEzLDguMDdsLS44Mi44Mi4wOC4xNkw5LDEwLjIxbC0uMzMuOC0xLjQxLjUxdjEuMTdsLjE3LjA1LDEuMjQuNDFMOSwxNGwtLjY0LDEuMzUuODIuODMuMTYtLjA3LDEuMTctLjYuOC4zMy41MSwxLjQxSDEzTDEzLDE3bC40MS0xLjI0Ljc5LS4zMywxLjM3LjYzLjgyLS44Mi0uMDgtLjE2TDE1Ljc0LDE0bC4yMy0uODJabS00LjkxLDEuMDhBMS42NCwxLjY0LDAsMSwxLDE0LDEyLjA3aDBBMS42NSwxLjY1LDAsMCwxLDEyLjM3LDEzLjcyWiIgZmlsbD0idXJsKCNmYTc0ZDE0OC1kNmQwLTRjNzUtOTRmNy05NDczMmI4YzYyYjApIiAvPjxwYXRoIGQ9Ik0xMi4zNywxMy43MkExLjY0LDEuNjQsMCwxLDEsMTQsMTIuMDdoMEExLjY1LDEuNjUsMCwwLDEsMTIuMzcsMTMuNzJaIiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg=="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Azure App</tspan>
+      <tspan x="1045" dy="17">Configuration</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Key Vault secrets" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYmM5MzE2OWEtMjRjNC00Njg2LTlmMzctYzdlNGY1M2IzZDM0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImZiMTE0YzkzLTdjMTYtNDU0MC04OTlhLTA3OTYwNDE2MjllNiIgY3g9IjkiIGN5PSI5IiByPSI4LjUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAuMTgiIHN0b3AtY29sb3I9IiM1ZWEwZWYiIC8+PHN0b3Agb2Zmc2V0PSIwLjU2IiBzdG9wLWNvbG9yPSIjNWM5ZmVlIiAvPjxzdG9wIG9mZnNldD0iMC42OSIgc3RvcC1jb2xvcj0iIzU1OWNlZCIgLz48c3RvcCBvZmZzZXQ9IjAuNzgiIHN0b3AtY29sb3I9IiM0YTk3ZTkiIC8+PHN0b3Agb2Zmc2V0PSIwLjg2IiBzdG9wLWNvbG9yPSIjMzk5MGU0IiAvPjxzdG9wIG9mZnNldD0iMC45MyIgc3RvcC1jb2xvcj0iIzIzODdkZSIgLz48c3RvcCBvZmZzZXQ9IjAuOTkiIHN0b3AtY29sb3I9IiMwODdiZDYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjwvcmFkaWFsR3JhZGllbnQ+PHJhZGlhbEdyYWRpZW50IGlkPSJlYzQ3OGJkMy01YjM4LTRlN2YtYjY2MS0xMWYzNTU1NzhiZmYiIGN4PSIzOC45NSIgY3k9IjE4Mi4wNyIgcj0iOS44OCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgtMjguNzEgLTE2My4yNCkgc2NhbGUoMC45NCAwLjk0KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4yNyIgc3RvcC1jb2xvcj0iI2ZmZDcwZiIgLz48c3RvcCBvZmZzZXQ9IjAuNDkiIHN0b3AtY29sb3I9IiNmZmNiMTIiIC8+PHN0b3Agb2Zmc2V0PSIwLjg4IiBzdG9wLWNvbG9yPSIjZmVhYzE5IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZlYTExYiIgLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1zZWN1cml0eS0yNDU8L3RpdGxlPjxwYXRoIGlkPSJhYWNmODMxMS1hMzE3LTQwMGYtYjYxMy03NGJkMDBkYTVjZTMiIGQ9Ik05LC41QTguNSw4LjUsMCwxLDAsMTcuNSw5LDguNTEsOC41MSwwLDAsMCw5LC41Wk05LDE2LjM0QTcuMzQsNy4zNCwwLDEsMSwxNi4zNCw5LDcuMzQsNy4zNCwwLDAsMSw5LDE2LjM0WiIgZmlsbD0idXJsKCNmYjExNGM5My03YzE2LTQ1NDAtODk5YS0wNzk2MDQxNjI5ZTYpIiAvPjxjaXJjbGUgY3g9IjkiIGN5PSI5IiByPSI3LjM0IiBmaWxsPSIjZmZmIiAvPjxnPjxwYXRoIGlkPSJiZDk4M2M0MS1kYjczLTQwZWMtYTRmNC1kYTEyMTNmYzk5MjQiIGQ9Ik0xMy40NCw3LjMzYTEuODQsMS44NCwwLDAsMCwwLTIuNTloMEwxMC4yOSwxLjU4YTEuODMsMS44MywwLDAsMC0yLjU4LDBoMEw0LjU2LDQuNzRhMS44NCwxLjg0LDAsMCwwLDAsMi41OUw3LjE4LDEwYS41MS41MSwwLDAsMSwuMTUuMzZ2NC44OGEuNjMuNjMsMCwwLDAsLjE4LjQ0bDEuMiwxLjJhLjQxLjQxLDAsMCwwLC41OCwwbDEuMTYtMS4xNmgwbC42OC0uNjhhLjI1LjI1LDAsMCwwLDAtLjM0bC0uNDktLjQ5YS4yNy4yNywwLDAsMSwwLS4zN2wuNDktLjQ5YS4yNS4yNSwwLDAsMCwwLS4zNGwtLjQ5LS40OWEuMjcuMjcsMCwwLDEsMC0uMzdsLjQ5LS40OWEuMjUuMjUsMCwwLDAsMC0uMzRsLS42OC0uNjl2LS4yNVpNOSwyLjM1QTEsMSwwLDAsMSw5LDQuNDIsMSwxLDAsMSwxLDksMi4zNVoiIGZpbGw9InVybCgjZWM0NzhiZDMtNWIzOC00ZTdmLWI2NjEtMTFmMzU1NTc4YmZmKSIgLz48cGF0aCBpZD0iYWQyZTdlNDQtOWJmZC00Nzc1LThiZjQtOGVmMjZhNTQ0OTIxIiBkPSJNOC4xOCwxNS4zaDBhLjIzLjIzLDAsMCwwLC4zOC0uMTd2LTRhLjI0LjI0LDAsMCwwLS4xMS0uMmgwYS4yMi4yMiwwLDAsMC0uMzQuMnY0QS4yOC4yOCwwLDAsMCw4LjE4LDE1LjNaIiBmaWxsPSIjZmY5MzAwIiBvcGFjaXR5PSIwLjc1IiAvPjxyZWN0IGlkPSJhOTk2ZmJmZi0zOTM2LTRiMjQtYjQwNy0zNjkzMzZjMTQzYmEiIHg9IjYuNDgiIHk9IjUuNzkiIHdpZHRoPSI1LjE3IiBoZWlnaHQ9IjAuNjEiIHJ4PSIwLjI4IiBmaWxsPSIjZmY5MzAwIiBvcGFjaXR5PSIwLjc1IiAvPjxyZWN0IGlkPSJiYjEyZDMxYy0zMzUyLTRhMTgtODdkZC1hMTY5YTRhODcyMWQiIHg9IjYuNDgiIHk9IjYuNzgiIHdpZHRoPSI1LjE3IiBoZWlnaHQ9IjAuNjEiIHJ4PSIwLjI4IiBmaWxsPSIjZmY5MzAwIiBvcGFjaXR5PSIwLjc1IiAvPjwvZz48L3N2Zz4="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Key Vault secrets</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Guarded delivery pipeline" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjQzMzc1MDYtNWQ5NS00ZTgwLWI3Y2EtNjg0OThjNmUwMDhlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJhNDIwMjc3LTcwMGUtNDJjYy05ZGU5LTUzODhhNWMxNmU1NCIgeDE9IjkiIHkxPSIxNi45NyIgeDI9IjkiIHkyPSIxLjAzIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC4xNiIgc3RvcC1jb2xvcj0iIzEzODBkYSIgLz48c3RvcCBvZmZzZXQ9IjAuNTMiIHN0b3AtY29sb3I9IiMzYzkxZTUiIC8+PHN0b3Agb2Zmc2V0PSIwLjgyIiBzdG9wLWNvbG9yPSIjNTU5Y2VjIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1kZXZvcHMtMjYxPC90aXRsZT48cGF0aCBpZD0iYTkxZjBjYTQtOGZiNy00MDE5LTljMDktMGE1MmUyYzA1NzU0IiBkPSJNMTcsNHY5Ljc0bC00LDMuMjgtNi4yLTIuMjZWMTdMMy4yOSwxMi40MWwxMC4yMy44VjQuNDRabS0zLjQxLjQ5TDcuODUsMVYzLjI5TDIuNTgsNC44NCwxLDYuODd2NC42MWwyLjI2LDFWNi41N1oiIGZpbGw9InVybCgjYmE0MjAyNzctNzAwZS00MmNjLTlkZTktNTM4OGE1YzE2ZTU0KSIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Guarded delivery</tspan>
+      <tspan x="600" dy="17">pipeline</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Bicep deployment stack" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTRiYTVkMmItZTZlNC00MTAxLTkzYWMtN2M2YjNkNTY4YTI3IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJkMmY5NDk0LWQzZmYtNDNiZC1iNTk5LTRlYzE3MGYwOTBiZCIgeDE9IjguNjMiIHkxPSIxNy41OSIgeDI9IjguNjMiIHkyPSIwLjU5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1nZW5lcmFsLTk8L3RpdGxlPjxwYXRoIGQ9Ik05LjU5LjcySDIuMzZhLjU2LjU2LDAsMCwwLS41Ny41N3YxNS42YS41Ni41NiwwLDAsMCwuNTcuNTdIMTQuODlhLjU3LjU3LDAsMCwwLC41OC0uNTdWNi41NkEuNTguNTgsMCwwLDAsMTQuODksNkgxMC43M2EuNTcuNTcsMCwwLDEtLjU3LS41N1YxLjI5QS41Ni41NiwwLDAsMCw5LjU5LjcyWiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNOS4zMywxLjQ1VjUuMzdBMS40MywxLjQzLDAsMCwwLDEwLjc2LDYuOGg0djkuOTNIMi41NFYxLjQ1SDkuMzNNOS42LjU5SDIuMjZhLjU4LjU4LDAsMCwwLS41OC41OFYxN2EuNTguNTgsMCwwLDAsLjU4LjU4SDE1YS41OC41OCwwLDAsMCwuNTgtLjU4VjYuNTNBLjU4LjU4LDAsMCwwLDE1LDZIMTAuNzZhLjU4LjU4LDAsMCwxLS41OC0uNThWMS4xN0EuNTguNTgsMCwwLDAsOS42LjU5WiIgZmlsbD0idXJsKCNiZDJmOTQ5NC1kM2ZmLTQzYmQtYjU5OS00ZWMxNzBmMDkwYmQpIiAvPjxwYXRoIGQ9Ik0xNS4zNSw2LjA2LDEwLC43MlY1LjA3YTEsMSwwLDAsMCwxLDFaIiBmaWxsPSIjMDA3OGQ0IiAvPjxwYXRoIGQ9Ik01LjI3LDEwLjU2YTEuMjEsMS4yMSwwLDAsMS0uMjYuODMuODkuODksMCwwLDEtLjcyLjI5LDEsMSwwLDAsMS0uMzktLjA4VjExYS41NS41NSwwLDAsMCwuMzUuMTJjLjI3LDAsLjQxLS4yMS40MS0uNjJWOC45M2guNjFabS40Niwxdi0uNmExLjMxLDEuMzEsMCwwLDAsLjM2LjIxLDEuMjIsMS4yMiwwLDAsMCwuMzguMDdsLjIsMCwuMTUtLjA2QS4zNC4zNCwwLDAsMCw2LjksMTFhLjIuMiwwLDAsMCwwLS4xMS4yMy4yMywwLDAsMCwwLS4xNC40Ny40NywwLDAsMC0uMTMtLjExLjc3Ljc3LDAsMCwwLS4xOC0uMWwtLjIzLS4xYTEuMjUsMS4yNSwwLDAsMS0uNDctLjMyLjY4LjY4LDAsMCwxLS4xNi0uNDYuODcuODcsMCwwLDEsLjA4LS4zN0EuOTIuOTIsMCwwLDEsNiw5LjA3YTEuMTYsMS4xNiwwLDAsMSwuMzQtLjE0LDEuODQsMS44NCwwLDAsMSwuNDEsMCwyLjA1LDIuMDUsMCwwLDEsLjM3LDAsMS4zMiwxLjMyLDAsMCwxLC4zLjA4di41NmEuNTMuNTMsMCwwLDAtLjE1LS4wOC40NC40NCwwLDAsMC0uMTYtLjA2TDcsOS4zN0g2LjgxbC0uMTksMGEuNTkuNTksMCwwLDAtLjE0LjA2LjIxLjIxLDAsMCwwLS4xMi4yLjI3LjI3LDAsMCwwLDAsLjEyLjU1LjU1LDAsMCwwLC4xMS4xbC4xNi4wOS4yMS4xYTIsMiwwLDAsMSwuMjkuMTQsMS4yOCwxLjI4LDAsMCwxLC4yMi4xNy43NC43NCwwLDAsMSwuMTQuMjIuODguODgsMCwwLDEsLjA1LjI5Ljc0Ljc0LDAsMCwxLS4wOS4zOC42OC42OCwwLDAsMS0uMjMuMjUuOTMuOTMsMCwwLDEtLjM0LjEzLDEuODQsMS44NCwwLDAsMS0uNDEsMCwyLjcyLDIuNzIsMCwwLDEtLjQyLDBBMS4xMSwxLjExLDAsMCwxLDUuNzMsMTEuNTJabTMuNDIuMTZhMS4yNiwxLjI2LDAsMCwxLS45NC0uMzgsMS4zOCwxLjM4LDAsMCwxLS4zNy0xLDEuNDgsMS40OCwwLDAsMSwuMzctMSwxLjMxLDEuMzEsMCwwLDEsMS0uNCwxLjI0LDEuMjQsMCwwLDEsLjk0LjM4LDEuNCwxLjQsMCwwLDEsLjM1LDEsMS40MywxLjQzLDAsMCwxLS4zNywxQTEuMjQsMS4yNCwwLDAsMSw5LjE1LDExLjY4Wm0wLTIuMjdhLjYxLjYxLDAsMCwwLS41MS4yNCwxLjE2LDEuMTYsMCwwLDAsMCwxLjI3LjYyLjYyLDAsMCwwLC40OS4yMy42MS42MSwwLDAsMCwuNS0uMjMsMSwxLDAsMCwwLC4xOC0uNjMsMSwxLDAsMCwwLS4xNy0uNjVBLjYxLjYxLDAsMCwwLDkuMTgsOS40MVptNC4xOCwyLjIyaC0uNjJsLTEuMTEtMS43YTIuMzQsMi4zNCwwLDAsMS0uMTMtLjIyaDBjMCwuMDksMCwuMjQsMCwuNDR2MS40OGgtLjU3VjguOTNoLjY2bDEuMDYsMS42NC4xNC4yMmgwYTIuNTEsMi41MSwwLDAsMSwwLS4zN1Y4LjkzaC41OFoiIGZpbGw9IiM1ZWEwZWYiIC8+PC9zdmc+"/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Bicep deployment</tspan>
+      <tspan x="1045" dy="17">stack</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#486581">Storefront instances use Managed Redis and App Configuration while secrets stay in Key Vault and deployments flow through bounded stacks.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

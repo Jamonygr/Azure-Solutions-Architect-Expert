@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Serve a variable global catalog workload with predictable latency and controlled throughput cost."]
-    R --> C1["Choose API and consistency deliberately"]
-    C1 --> C2["Design a high-cardinality partition key"]
-    C2 --> C3["Minimize indexing write amplification"]
-    C3 --> C4["Bound autoscale throughput"]
-    C4 --> C5["Restrict the account network boundary"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_global_clients["Global catalog clients"]
+        N_clients["Tenant catalog requests"]
+    end
+    subgraph B_application_boundary["Private application boundary"]
+        N_catalog_api["Private catalog API"]
+        N_private_endpoint["Cosmos private endpoint"]
+    end
+    subgraph B_cosmos_account["Cosmos DB account"]
+        N_container["Tenant-aware partitions"]
+        N_autoscale["Bounded autoscale throughput"]
+        N_replicas["Regional replicas"]
+    end
+    N_clients -->|"localized catalog reads"| N_catalog_api
+    N_catalog_api -->|"private document requests"| N_private_endpoint
+    N_private_endpoint -->|"partition-key routing"| N_container
+    N_autoscale -->|"throughput envelope"| N_container
+    N_container -->|"selected consistency replication"| N_replicas
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_clients,N_catalog_api,N_private_endpoint,N_container,N_autoscale,N_replicas service
 %% END GENERATED AZ305 V1

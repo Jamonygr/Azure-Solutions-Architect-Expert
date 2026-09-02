@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-15 — Compute Backup, Recovery, and High Availability
 
+![Continuity banner showing traffic distributed across zonal virtual machine instances with backup and an isolated restore network.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-14](../14-recovery-strategy-hybrid/README.md) · [Lab catalog](../README.md) · [LAB-16 →](../16-relational-database-continuity/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Compute Backup, Recovery, and High Availability](diagrams/architecture.svg)
+![Topology showing application traffic through a load balancer to virtual machine scale set instances across zones, Azure Backup, and an isolated restore environment.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+A regional load balancer distributes traffic across zone-spread capacity while protected recovery uses an isolated validation network. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing compute continuity patterns and highlighting zone-spread scale sets with Backup and isolated restore.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Zone placement, backup coverage, clean-point selection, and dependency-aware startup address distinct failure modes.
-- **Security:** Immutable recovery points and quarantined validation prevent compromised machines from rejoining automatically.
-- **Cost Optimization:** Permanent capacity covers zonal availability while secondary-region and restore resources remain risk-based.
-- **Operational Excellence:** Timed restore, forensic approval, transaction checks, and rollback form one rehearsable recovery record.
-- **Performance Efficiency:** SKU and degraded-capacity evidence ensure surviving zones and restore hosts can process the clinical load.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Zone placement, backup coverage, clean-point selection, and dependency-aware startup address distinct failure modes.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Immutable recovery points and quarantined validation prevent compromised machines from rejoining automatically.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Permanent capacity covers zonal availability while secondary-region and restore resources remain risk-based.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Timed restore, forensic approval, transaction checks, and rollback form one rehearsable recovery record.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>SKU and degraded-capacity evidence ensure surviving zones and restore hosts can process the clinical load.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-150001
 Synthetic sample: `{"labId":"LAB-15","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Establish compute failure-domain evidence</a><span>LAB15-REQ-01 · LAB15-CP01</span></li>
+<li><a href="#checkpoint-2">Verify backup coverage and policy intent</a><span>LAB15-REQ-02 · LAB15-CP02</span></li>
+<li><a href="#checkpoint-3">Evaluate zone-resilient capacity</a><span>LAB15-REQ-03 · LAB15-CP03</span></li>
+<li><a href="#checkpoint-4">Design isolated restore and recovery validation</a><span>LAB15-REQ-04 · LAB15-CP04</span></li>
+<li><a href="#checkpoint-5">Exercise failover ordering and rollback</a><span>LAB15-REQ-05 · LAB15-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Establish compute failure-domain evidence
 

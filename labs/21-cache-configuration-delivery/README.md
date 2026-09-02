@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-21 — Application Caching, Configuration, and Automated Delivery
 
+![Infrastructure banner showing storefront instances using Azure Managed Redis, App Configuration, Key Vault, and a guarded deployment pipeline.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure PowerShell + Bicep</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-20](../20-messaging-events-api/README.md) · [Lab catalog](../README.md) · [LAB-22 →](../22-migration-strategy-assessment/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Application Caching, Configuration, and Automated Delivery](diagrams/architecture.svg)
+![Topology showing a multi-region storefront connected to Azure Managed Redis, App Configuration, Key Vault, a delivery pipeline, and deployment stacks.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Storefront instances use Managed Redis and App Configuration while secrets stay in Key Vault and deployments flow through bounded stacks. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing application platform options and highlighting Managed Redis, App Configuration, and Bicep deployment stacks.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Versioned safe snapshots and cache fallback maintain catalog reads through configuration or source failure.
-- **Security:** Managed identities, private paths, and external secret references keep credentials out of images and templates.
-- **Cost Optimization:** Cache capacity is tied to the measured working set and avoids scaling the source for repeated reads.
-- **Operational Excellence:** Declarative stacks, configuration labels, snapshot versions, and rollback evidence control regional drift.
-- **Performance Efficiency:** Managed Redis handles the read working set while refresh and invalidation protect data freshness.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Versioned safe snapshots and cache fallback maintain catalog reads through configuration or source failure.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Managed identities, private paths, and external secret references keep credentials out of images and templates.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Cache capacity is tied to the measured working set and avoids scaling the source for repeated reads.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Declarative stacks, configuration labels, snapshot versions, and rollback evidence control regional drift.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Managed Redis handles the read working set while refresh and invalidation protect data freshness.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-210001
 Synthetic sample: `{"labId":"LAB-21","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Define cache semantics and failure behavior</a><span>LAB21-REQ-01 · LAB21-CP01</span></li>
+<li><a href="#checkpoint-2">Separate configuration, features, and secrets</a><span>LAB21-REQ-02 · LAB21-CP02</span></li>
+<li><a href="#checkpoint-3">Compile the delivery contract</a><span>LAB21-REQ-03 · LAB21-CP03</span></li>
+<li><a href="#checkpoint-4">Preview a bounded deployment</a><span>LAB21-REQ-04 · LAB21-CP04</span></li>
+<li><a href="#checkpoint-5">Validate progressive configuration delivery</a><span>LAB21-REQ-05 · LAB21-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Define cache semantics and failure behavior
 

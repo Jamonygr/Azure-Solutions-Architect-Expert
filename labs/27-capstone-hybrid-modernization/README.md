@@ -1,6 +1,16 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-27 — Hybrid Modernization and Migration
 
+![Capstone banner showing a hybrid estate moving through Arc-enabled discovery and migration waves into governed PaaS and data targets.](diagrams/summary.svg)
+
+![Original isometric hybrid modernization journey from a datacenter through migration waves into a governed cloud landing zone.](images/hero.png)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">design-simulation</span>
+  <span class="az305-lane-badge">Azure PowerShell + Bicep</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-26](../26-capstone-greenfield-platform/README.md) · [Lab catalog](../README.md)
@@ -108,9 +118,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Hybrid Modernization and Migration](diagrams/architecture.svg)
+![Topology showing an on-premises hybrid estate, Azure Arc evidence, dependency-based migration waves, managed application and data targets, recovery controls, and decommission review.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Arc and assessment evidence shape coexistence and migration waves into governed platform targets with continuity and decommission gates. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -124,6 +134,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing hybrid modernization patterns and highlighting Arc-informed dependency waves into governed PaaS targets.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -147,11 +159,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Edge persistence, staged coexistence, dependency waves, and rollback contain WAN, workload, and migration failure.
-- **Security:** Tenant and geography boundaries, Arc governance, classified message contracts, and least privilege preserve regulatory separation.
-- **Cost Optimization:** Wave business cases include coexistence and edge cost alongside eliminated facilities and managed-service value.
-- **Operational Excellence:** Portfolio, dependency, sync, conflict, evidence, cutover, and residual-risk records make modernization governable.
-- **Performance Efficiency:** Local branch writes avoid WAN latency and managed targets scale independently after each approved wave.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Edge persistence, staged coexistence, dependency waves, and rollback contain WAN, workload, and migration failure.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Tenant and geography boundaries, Arc governance, classified message contracts, and least privilege preserve regulatory separation.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Wave business cases include coexistence and edge cost alongside eliminated facilities and managed-service value.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Portfolio, dependency, sync, conflict, evidence, cutover, and residual-risk records make modernization governable.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Local branch writes avoid WAN latency and managed targets scale independently after each approved wave.</p></article>
+</div>
 
 ADR consequences:
 
@@ -179,6 +193,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-270001
 Synthetic sample: `{"labId":"LAB-27","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Validate the offline evidence pack and constraints</a><span>LAB27-REQ-01 · LAB27-CP01</span></li>
+<li><a href="#checkpoint-2">Rationalize the portfolio and hybrid coexistence model</a><span>LAB27-REQ-02 · LAB27-CP02</span></li>
+<li><a href="#checkpoint-3">Compile and inspect the hybrid foundation</a><span>LAB27-REQ-03 · LAB27-CP03</span></li>
+<li><a href="#checkpoint-4">Simulate migration, continuity, and security injects</a><span>LAB27-REQ-04 · LAB27-CP04</span></li>
+<li><a href="#checkpoint-5">Run the offline release and decommission review</a><span>LAB27-REQ-05 · LAB27-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Validate the offline evidence pack and constraints
 

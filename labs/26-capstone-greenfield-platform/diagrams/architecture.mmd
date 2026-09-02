@@ -1,12 +1,30 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Launch a secure global platform with controlled regional-failure behavior, fast product delivery, auditable governance, and a defensible production cost envelope."]
-    R --> C1["Reconcile requirements and architecture decisions"]
-    C1 --> C2["Compile the multi-region Bicep reference"]
-    C2 --> C3["Verify foundation observability and data guardrails"]
-    C3 --> C4["Preview cost and policy impact"]
-    C4 --> C5["Run the integrated regional-failure simulation"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_global_services["Global identity and edge"]
+        N_external_id["Microsoft Entra External ID"]
+        N_front_door["Front Door Premium"]
+    end
+    subgraph B_west_region["West Europe application stamp"]
+        N_west_app["West Europe PaaS stamp"]
+    end
+    subgraph B_north_region["North Europe application stamp"]
+        N_north_app["North Europe PaaS stamp"]
+    end
+    subgraph B_platform_governance["Shared governance and evidence"]
+        N_global_data["Globally coordinated data"]
+        N_policy["Landing-zone policy guardrails"]
+        N_observability["Cross-region observability"]
+    end
+    N_external_id -->|"customer authentication context"| N_front_door
+    N_front_door -->|"healthy global route"| N_west_app
+    N_front_door -->|"healthy global route"| N_north_app
+    N_west_app -->|"regional data operations"| N_global_data
+    N_north_app -->|"regional data operations"| N_global_data
+    N_policy -->|"deployment guardrails"| N_west_app
+    N_policy -->|"deployment guardrails"| N_north_app
+    N_west_app -->|"regional telemetry"| N_observability
+    N_north_app -->|"regional telemetry"| N_observability
+    N_observability -->|"failure simulation evidence"| N_front_door
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_external_id,N_front_door,N_west_app,N_north_app,N_global_data,N_policy,N_observability service
 %% END GENERATED AZ305 V1

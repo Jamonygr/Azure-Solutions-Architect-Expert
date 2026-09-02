@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-08 — Relational Data Platform and Service-Tier Selection
 
+![Data banner showing an application reaching Azure SQL Database serverless through a private endpoint with operational monitoring.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-07](../07-compliance-identity-governance/README.md) · [Lab catalog](../README.md) · [LAB-09 →](../09-relational-scale-protection/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Relational Data Platform and Service-Tier Selection](diagrams/architecture.svg)
+![Topology showing an application network, private endpoint, Azure SQL logical server, General Purpose serverless database, and monitoring workspace.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+The line-of-business application uses private connectivity to a serverless database within a governed logical-server boundary. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing relational services and marking Azure SQL Database General Purpose serverless as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Managed database high availability and tested rollback protect transactions during platform and migration failure.
-- **Security:** Private access, managed identity where supported, encryption, and least-privilege database roles remain target requirements.
-- **Cost Optimization:** Compute model follows measured utilization while compatibility prevents false savings that reappear as remediation work.
-- **Operational Excellence:** Compatibility findings, cutover gates, and post-migration assertions make the target decision auditable.
-- **Performance Efficiency:** Month-end benchmarks and workload-specific sizing replace an assumption that a larger tier fixes incompatibility.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Managed database high availability and tested rollback protect transactions during platform and migration failure.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Private access, managed identity where supported, encryption, and least-privilege database roles remain target requirements.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Compute model follows measured utilization while compatibility prevents false savings that reappear as remediation work.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Compatibility findings, cutover gates, and post-migration assertions make the target decision auditable.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Month-end benchmarks and workload-specific sizing replace an assumption that a larger tier fixes incompatibility.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-080001
 Synthetic sample: `{"labId":"LAB-08","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Convert workload facts into platform criteria</a><span>LAB08-REQ-01 · LAB08-CP01</span></li>
+<li><a href="#checkpoint-2">Establish a logical server boundary</a><span>LAB08-REQ-02 · LAB08-CP02</span></li>
+<li><a href="#checkpoint-3">Configure an elastic serverless database</a><span>LAB08-REQ-03 · LAB08-CP03</span></li>
+<li><a href="#checkpoint-4">Require private application connectivity</a><span>LAB08-REQ-04 · LAB08-CP04</span></li>
+<li><a href="#checkpoint-5">Validate the service-tier decision</a><span>LAB08-REQ-05 · LAB08-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Convert workload facts into platform criteria
 

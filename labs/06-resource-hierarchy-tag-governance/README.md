@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-06 — Azure Resource Hierarchy and Tag Governance
 
+![Governance banner showing a tenant hierarchy branching into platform and workload subscriptions with inherited policy and tag controls.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-05](../05-secrets-certificates-keys/README.md) · [Lab catalog](../README.md) · [LAB-07 →](../07-compliance-identity-governance/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Azure Resource Hierarchy and Tag Governance](diagrams/architecture.svg)
+![Topology showing the tenant root branching to platform and workload management groups, subscriptions, lifecycle resource groups, and policy-controlled tags.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+A durable management-group tree places platform and workload subscriptions before policy controls enforce the tag vocabulary. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing governance hierarchies and highlighting archetype management groups with governed tags.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Stable archetypes keep critical guardrails attached through organizational change and subscription growth.
-- **Security:** Inherited security and European-location policies establish a consistent subsidiary boundary.
-- **Cost Optimization:** Separate billing plus governed allocation tags makes shared and workload cost attributable.
-- **Operational Excellence:** Versioned hierarchy, policy, and exemption records expose drift and simplify onboarding.
-- **Performance Efficiency:** Management-group evaluation scales across subscriptions without duplicating assignments at every resource group.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Stable archetypes keep critical guardrails attached through organizational change and subscription growth.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Inherited security and European-location policies establish a consistent subsidiary boundary.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Separate billing plus governed allocation tags makes shared and workload cost attributable.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Versioned hierarchy, policy, and exemption records expose drift and simplify onboarding.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Management-group evaluation scales across subscriptions without duplicating assignments at every resource group.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-060001
 Synthetic sample: `{"labId":"LAB-06","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Design durable management-group archetypes</a><span>LAB06-REQ-01 · LAB06-CP01</span></li>
+<li><a href="#checkpoint-2">Place subscriptions by workload archetype</a><span>LAB06-REQ-02 · LAB06-CP02</span></li>
+<li><a href="#checkpoint-3">Align resource groups with lifecycle boundaries</a><span>LAB06-REQ-03 · LAB06-CP03</span></li>
+<li><a href="#checkpoint-4">Apply a controlled tag vocabulary</a><span>LAB06-REQ-04 · LAB06-CP04</span></li>
+<li><a href="#checkpoint-5">Query portfolio conformance</a><span>LAB06-REQ-05 · LAB06-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Design durable management-group archetypes
 

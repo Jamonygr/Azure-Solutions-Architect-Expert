@@ -1,12 +1,25 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Restore safety-critical planning and factory services in the required order while controlling recovery cost and meeting residency obligations."]
-    R --> C1["Classify services and recovery objectives"]
-    C1 --> C2["Map hybrid dependencies and failure domains"]
-    C2 --> C3["Select recovery patterns by tier"]
-    C3 --> C4["Design recovery orchestration and communications"]
-    C4 --> C5["Validate objectives with an exercise scorecard"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_production_estate["Azure and factory workloads"]
+        N_azure_workloads["Azure production services"]
+        N_vmware_workloads["Factory VMware services"]
+    end
+    subgraph B_protection_services["Protection services"]
+        N_recovery_tiers["RTO and RPO tiers"]
+        N_backup["Azure Backup"]
+        N_site_recovery["Azure Site Recovery"]
+        N_native_replication["Application-native replication"]
+    end
+    subgraph B_recovery_operations["Recovery operations"]
+        N_runbook["Recovery exercise runbook"]
+    end
+    N_azure_workloads -->|"business impact classification"| N_recovery_tiers
+    N_vmware_workloads -->|"dependency and failure mapping"| N_recovery_tiers
+    N_recovery_tiers -->|"retention protection"| N_backup
+    N_recovery_tiers -->|"orchestrated workload recovery"| N_site_recovery
+    N_recovery_tiers -->|"data-aware replication"| N_native_replication
+    N_backup -->|"restore sequence evidence"| N_runbook
+    N_site_recovery -->|"failover sequence evidence"| N_runbook
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_azure_workloads,N_vmware_workloads,N_recovery_tiers,N_backup,N_site_recovery,N_native_replication,N_runbook service
 %% END GENERATED AZ305 V1

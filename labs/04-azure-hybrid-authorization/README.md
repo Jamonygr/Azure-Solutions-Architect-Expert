@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-04 — Azure and Hybrid Authorization Architecture
 
+![Authorization banner showing governed groups, inherited Azure RBAC scopes, distinct data access, and hybrid Arc delegation.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-03](../03-authentication-identity-design/README.md) · [Lab catalog](../README.md) · [LAB-05 →](../05-secrets-certificates-keys/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Azure and Hybrid Authorization Architecture](diagrams/architecture.svg)
+![Topology showing Entra groups delegated through management group and subscription scopes, with separate data-plane access and Arc server authorization.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Stable groups receive narrow roles at durable scopes while control-plane, data-plane, and hybrid access remain distinct. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing authorization models and highlighting group-based Azure RBAC with Arc-aware delegation.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Deputy approval and scoped emergency access preserve support during an identity-owner absence.
-- **Security:** Group eligibility, minimal scopes, and Arc-specific delegation remove standing subscription and local-admin privilege.
-- **Cost Optimization:** Reusable groups reduce assignment administration while governance-license cost remains visible.
-- **Operational Excellence:** Expiry, access reviews, and assignment exports provide one auditable provider offboarding sequence.
-- **Performance Efficiency:** Stable group evaluation scales with personnel turnover without cloning role definitions per server.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Deputy approval and scoped emergency access preserve support during an identity-owner absence.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Group eligibility, minimal scopes, and Arc-specific delegation remove standing subscription and local-admin privilege.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Reusable groups reduce assignment administration while governance-license cost remains visible.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Expiry, access reviews, and assignment exports provide one auditable provider offboarding sequence.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Stable group evaluation scales with personnel turnover without cloning role definitions per server.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-040001
 Synthetic sample: `{"labId":"LAB-04","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Model scopes and inherited access</a><span>LAB04-REQ-01 · LAB04-CP01</span></li>
+<li><a href="#checkpoint-2">Delegate through groups rather than people</a><span>LAB04-REQ-02 · LAB04-CP02</span></li>
+<li><a href="#checkpoint-3">Constrain a custom control-plane role</a><span>LAB04-REQ-03 · LAB04-CP03</span></li>
+<li><a href="#checkpoint-4">Separate control-plane and data-plane access</a><span>LAB04-REQ-04 · LAB04-CP04</span></li>
+<li><a href="#checkpoint-5">Define the Azure Arc authorization boundary</a><span>LAB04-REQ-05 · LAB04-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Model scopes and inherited access
 

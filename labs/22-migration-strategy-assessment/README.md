@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-22 — Migration Strategy and Portfolio Assessment
 
+![Infrastructure banner showing a datacenter portfolio moving through discovery, dependency mapping, rationalization, business case, and landing-zone gates.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">design-simulation</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-21](../21-cache-configuration-delivery/README.md) · [Lab catalog](../README.md) · [LAB-23 →](../23-workload-data-migration/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Migration Strategy and Portfolio Assessment](diagrams/architecture.svg)
+![Topology showing on-premises portfolio discovery, dependency assessment, application rationalization, migration waves, business case, and landing-zone readiness.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+A quality-checked inventory and dependency graph support rationalization, wave formation, business case, and landing-zone entry criteria. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing migration assessment strategies and highlighting Cloud Adoption Framework outcome-led dependency waves.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Dependency-based waves, coexistence, and rollback protect service during portfolio transition.
-- **Security:** Classification and encryption evidence are hard gates rather than schedule-adjustable preferences.
-- **Cost Optimization:** Lease avoidance, dual running, remediation, and target run cost are evaluated in one wave business case.
-- **Operational Excellence:** Owners, decisions, readiness evidence, and outcome measures make wave approval reviewable.
-- **Performance Efficiency:** Migration-factory capacity is allocated to ready waves instead of blocked or low-value server batches.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Dependency-based waves, coexistence, and rollback protect service during portfolio transition.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Classification and encryption evidence are hard gates rather than schedule-adjustable preferences.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Lease avoidance, dual running, remediation, and target run cost are evaluated in one wave business case.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Owners, decisions, readiness evidence, and outcome measures make wave approval reviewable.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Migration-factory capacity is allocated to ready waves instead of blocked or low-value server batches.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-220001
 Synthetic sample: `{"labId":"LAB-22","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Define strategy, outcomes, and constraints</a><span>LAB22-REQ-01 · LAB22-CP01</span></li>
+<li><a href="#checkpoint-2">Build and quality-check the portfolio inventory</a><span>LAB22-REQ-02 · LAB22-CP02</span></li>
+<li><a href="#checkpoint-3">Assess dependencies and readiness</a><span>LAB22-REQ-03 · LAB22-CP03</span></li>
+<li><a href="#checkpoint-4">Rationalize applications and form waves</a><span>LAB22-REQ-04 · LAB22-CP04</span></li>
+<li><a href="#checkpoint-5">Validate the business case and landing-zone entry criteria</a><span>LAB22-REQ-05 · LAB22-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Define strategy, outcomes, and constraints
 

@@ -1,12 +1,25 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Decouple depot and partner changes while ensuring accepted shipments are processed once effectively and status events reach authorized consumers."]
-    R --> C1["Classify every interaction contract"]
-    C1 --> C2["Validate durable command processing"]
-    C2 --> C3["Prove event fan-out and telemetry separation"]
-    C3 --> C4["Govern partner APIs"]
-    C4 --> C5["Validate end-to-end failure handling"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_external_partners["External carriers and partners"]
+        N_partners["Partner applications"]
+    end
+    subgraph B_integration_services["Managed integration services"]
+        N_api["API Management gateway"]
+        N_commands["Service Bus commands"]
+        N_events["Event Grid state events"]
+        N_telemetry["Event Hubs telemetry"]
+    end
+    subgraph B_business_consumers["Business and analytical consumers"]
+        N_operational["Order and depot workers"]
+        N_analytics["Telemetry analytics"]
+    end
+    N_partners -->|"governed API requests"| N_api
+    N_api -->|"durable business commands"| N_commands
+    N_commands -->|"ordered competing delivery"| N_operational
+    N_operational -->|"state-change publication"| N_events
+    N_events -->|"filtered event fan-out"| N_partners
+    N_operational -->|"high-volume telemetry"| N_telemetry
+    N_telemetry -->|"partitioned event stream"| N_analytics
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_partners,N_api,N_commands,N_events,N_telemetry,N_operational,N_analytics service
 %% END GENERATED AZ305 V1

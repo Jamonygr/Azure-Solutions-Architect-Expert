@@ -1,6 +1,16 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-26 — Greenfield Multi-Region Digital Platform
 
+![Capstone banner showing global identity and edge services distributing traffic to two governed application regions with coordinated data and telemetry.](diagrams/summary.svg)
+
+![Original isometric greenfield platform architecture across a global edge and two governed regions.](images/hero.png)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI + Bicep</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-25](../25-network-security-traffic-delivery/README.md) · [Lab catalog](../README.md) · [LAB-27 →](../27-capstone-hybrid-modernization/README.md)
@@ -108,9 +118,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Greenfield Multi-Region Digital Platform](diagrams/architecture.svg)
+![Topology showing Microsoft Entra External ID, Front Door Premium, active application stamps in West and North Europe, coordinated data, policy guardrails, and monitoring.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+External ID and Front Door govern global entry into two regional PaaS stamps backed by coordinated data, policy, and observability. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -124,6 +134,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing greenfield platform architectures and highlighting active-active regional PaaS stamps behind Front Door Premium.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -147,11 +159,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Independent stamps and global routing keep catalog service available through regional loss while honoring profile boundaries.
-- **Security:** Premium edge controls, private origins, managed identities, policy, and geography-scoped data reduce exposure.
-- **Cost Optimization:** Shared global catalog capacity and market-specific profile stacks make continuity and residency spend attributable.
-- **Operational Excellence:** Declarative releases, regional assertions, failover exercises, governance evidence, and rollback support fast controlled delivery.
-- **Performance Efficiency:** Edge caching and regional PaaS autoscale serve anonymous demand while profile calls remain geography-local.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Independent stamps and global routing keep catalog service available through regional loss while honoring profile boundaries.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Premium edge controls, private origins, managed identities, policy, and geography-scoped data reduce exposure.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Shared global catalog capacity and market-specific profile stacks make continuity and residency spend attributable.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Declarative releases, regional assertions, failover exercises, governance evidence, and rollback support fast controlled delivery.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Edge caching and regional PaaS autoscale serve anonymous demand while profile calls remain geography-local.</p></article>
+</div>
 
 ADR consequences:
 
@@ -179,6 +193,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-260001
 Synthetic sample: `{"labId":"LAB-26","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Reconcile requirements and architecture decisions</a><span>LAB26-REQ-01 · LAB26-CP01</span></li>
+<li><a href="#checkpoint-2">Compile the multi-region Bicep reference</a><span>LAB26-REQ-02 · LAB26-CP02</span></li>
+<li><a href="#checkpoint-3">Verify foundation observability and data guardrails</a><span>LAB26-REQ-03 · LAB26-CP03</span></li>
+<li><a href="#checkpoint-4">Preview cost and policy impact</a><span>LAB26-REQ-04 · LAB26-CP04</span></li>
+<li><a href="#checkpoint-5">Run the integrated regional-failure simulation</a><span>LAB26-REQ-05 · LAB26-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Reconcile requirements and architecture decisions
 

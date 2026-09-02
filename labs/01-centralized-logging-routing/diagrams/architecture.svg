@@ -1,44 +1,103 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-01 Centralized Logging and Diagnostic Routing</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:dc526874606607c27d4efc048532fa1b7315c93bdf40e5196c5d595b182d4742</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Reduce incident investigation time while giving security and regional</tspan>
-    <tspan x="380" dy="20">operators governed access to complete, correctly routed telemetry.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Establish regional workspace boundaries</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Define an Azure Monitor Agent data collection rule</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Associate the rule with an explicit resource scope</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Route resource logs with diagnostic settings</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Validate retention and archive economics</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Regional logging and routing topology</title>
+  <desc id="visual-desc">Topology showing emitting workloads routed through data collection rules to two regional Log Analytics workspaces, archive storage, and operators.</desc>
+  <metadata>source-sha256:fc7fe758bd38e7059c1f30f6afdfcfd425474ba37de1a8e5154694f21af75753</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2ECFF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#00A6A6"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#5C2D91" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Emitting Azure resources">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Emitting Azure resources</text>
+  </g>
+  <g role="group" aria-label="Boundary: Regional monitoring boundary">
+    <rect x="51" y="116" width="1098" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Regional monitoring boundary</text>
+  </g>
+  <g role="group" aria-label="Boundary: Operations and evidence">
+    <rect x="496" y="446" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Operations and evidence</text>
+  </g>
+  <g role="group" aria-label="AMA streams: workloads to dcr">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="331.5" y="195" width="92" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">AMA streams</text>
+  </g>
+  <g role="group" aria-label="regional association: dcr to workspace-west">
+    <path d="M677 220 C822.5 220 822.5 220 968 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="757.5" y="195" width="130" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="822.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">regional association</text>
+  </g>
+  <g role="group" aria-label="regional association: dcr to workspace-north">
+    <path d="M538.151 265.866 C377.5 265.866 377.5 504.134 216.849 504.134" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="312.5" y="360" width="130" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="377.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">regional association</text>
+  </g>
+  <g role="group" aria-label="diagnostic export: workloads to archive">
+    <path d="M216.849 265.866 C377.5 265.866 377.5 504.134 538.151 504.134" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="322.25" y="360" width="110.5" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="377.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">diagnostic export</text>
+  </g>
+  <g role="group" aria-label="federated query: workspace-west to operator">
+    <path d="M1045 297 C1045 297 1045 473 1045 473" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="996.25" y="360" width="97.5" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="1045" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">federated query</text>
+  </g>
+  <g role="group" aria-label="federated query: workspace-north to operator">
+    <path d="M232 550 C600 550 600 550 968 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="551.25" y="525" width="97.5" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="600" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">federated query</text>
+  </g>
+  <g role="group" aria-label="Service node: Platform and application signals" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZmQ0NTRmMWMtNTUwNi00NGI4LTg3NGUtODgxNGI4YjJmNzBiIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImYzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSIgeDE9IjguODgiIHkxPSIxMi4yMSIgeDI9IjguODgiIHkyPSIwLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYmRiNDVhMGItZWI1OC00OTcwLWE2MGEtZmIyY2UzMTRmODY2IiB4MT0iOC44OCIgeTE9IjE2Ljg0IiB4Mj0iOC44OCIgeTI9IjEyLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE1IiBzdG9wLWNvbG9yPSIjY2NjIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzcwNzA3MCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1jb21wdXRlLTIxPC90aXRsZT48cmVjdCB4PSItMC4xMiIgeT0iMC4yMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiByeD0iMC42IiBmaWxsPSJ1cmwoI2YzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSkiIC8+PHBvbHlnb24gcG9pbnRzPSIxMS44OCA0LjQ2IDExLjg4IDcuOTUgOC44OCA5LjcxIDguODggNi4yMSAxMS44OCA0LjQ2IiBmaWxsPSIjNTBlNmZmIiAvPjxwb2x5Z29uIHBvaW50cz0iMTEuODggNC40NiA4Ljg4IDYuMjIgNS44OCA0LjQ2IDguODggMi43MSAxMS44OCA0LjQ2IiBmaWxsPSIjYzNmMWZmIiAvPjxwb2x5Z29uIHBvaW50cz0iOC44OCA2LjIyIDguODggOS43MSA1Ljg4IDcuOTUgNS44OCA0LjQ2IDguODggNi4yMiIgZmlsbD0iIzljZWJmZiIgLz48cG9seWdvbiBwb2ludHM9IjUuODggNy45NSA4Ljg4IDYuMjEgOC44OCA5LjcxIDUuODggNy45NSIgZmlsbD0iI2MzZjFmZiIgLz48cG9seWdvbiBwb2ludHM9IjExLjg4IDcuOTUgOC44OCA2LjIxIDguODggOS43MSAxMS44OCA3Ljk1IiBmaWxsPSIjOWNlYmZmIiAvPjxwYXRoIGQ9Ik0xMi40OSwxNS44NGMtMS43OC0uMjgtMS44NS0xLjU2LTEuODUtMy42M0g3LjExYzAsMi4wNy0uMDYsMy4zNS0xLjg0LDMuNjNhMSwxLDAsMCwwLS44OSwxaDlBMSwxLDAsMCwwLDEyLjQ5LDE1Ljg0WiIgZmlsbD0idXJsKCNiZGI0NWEwYi1lYjU4LTQ5NzAtYTYwYS1mYjJjZTMxNGY4NjYpIiAvPjwvc3ZnPg=="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="155" dy="0">Platform and</tspan>
+      <tspan x="155" dy="17">application signals</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: AMA data collection rule" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTRlNzY0Y2QtMmU3My00NzJmLWI4OGEtYmY4YmZjMmMyOTk0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImFjOGIzMmRhLTMwY2EtNGI5Mi04ZDBmLThkMmQ1ZWYyNzhhMCIgY3g9IjUuNzIiIGN5PSI3LjQ1IiByPSI4LjQyIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDMuMjMgMS41MSkgc2NhbGUoMS4wMSAxLjAxKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xOCIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48c3RvcCBvZmZzZXQ9IjAuNTYiIHN0b3AtY29sb3I9IiM1YzlmZWUiIC8+PHN0b3Agb2Zmc2V0PSIwLjY5IiBzdG9wLWNvbG9yPSIjNTU5Y2VkIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzRhOTdlOSIgLz48c3RvcCBvZmZzZXQ9IjAuODYiIHN0b3AtY29sb3I9IiMzOTkwZTQiIC8+PHN0b3Agb2Zmc2V0PSIwLjkzIiBzdG9wLWNvbG9yPSIjMjM4N2RlIiAvPjxzdG9wIG9mZnNldD0iMC45OSIgc3RvcC1jb2xvcj0iIzA4N2JkNiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PC9yYWRpYWxHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9ImE5OTU0ODIwLWNiMzgtNDk0My05ODQyLWYwYTU2OGQyYjAxNSIgY3g9IjI4LjE4IiBjeT0iMjAyLjI5IiByPSIyLjciIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Ljc3IC0xODUuMDEpIHNjYWxlKDAuOTUpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE5IiBzdG9wLWNvbG9yPSIjOGM4ZTkwIiAvPjxzdG9wIG9mZnNldD0iMC4zNSIgc3RvcC1jb2xvcj0iIzg0ODY4OCIgLz48c3RvcCBvZmZzZXQ9IjAuNiIgc3RvcC1jb2xvcj0iIzZlNzA3MSIgLz48c3RvcCBvZmZzZXQ9IjAuOTEiIHN0b3AtY29sb3I9IiM0YTRiNGMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjM2UzZjNmIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLW1hbmFnZS0zMTc8L3RpdGxlPjxlbGxpcHNlIGN4PSI5IiBjeT0iOSIgcng9IjguNSIgcnk9IjguNDciIGZpbGw9InVybCgjYWM4YjMyZGEtMzBjYS00YjkyLThkMGYtOGQyZDVlZjI3OGEwKSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSI3LjQiIHJ5PSI3LjM3IiBmaWxsPSIjZmZmIiAvPjxwYXRoIGQ9Ik0yLjcyLDkuNDRhNi4yNCw2LjI0LDAsMCwwLDEuODIsNGwyLTJhMy41MywzLjUzLDAsMCwxLTEtMloiIGZpbGw9IiM5Y2ViZmYiIC8+PHBhdGggZD0iTTEzLjEzLDQuMjdBNi4yNSw2LjI1LDAsMCwwLDkuNDQsMi43NFY1LjUzYTMuNDEsMy40MSwwLDAsMSwxLjcxLjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik00Ljg3LDQuMjdsMiwyYTMuNDEsMy40MSwwLDAsMSwxLjcxLS43VjIuNzRBNi4yNSw2LjI1LDAsMCwwLDQuODcsNC4yN1oiIGZpbGw9IiMzMmJlZGQiIC8+PHBhdGggZD0iTTExLjc4LDYuODVhMy42LDMuNiwwLDAsMSwuNzEsMS43MWgyLjc5YTYuMTYsNi4xNiwwLDAsMC0xLjUzLTMuNjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik02LjIyLDYuODVsLTItMkE2LjE2LDYuMTYsMCwwLDAsMi43Miw4LjU2SDUuNTFBMy42LDMuNiwwLDAsMSw2LjIyLDYuODVaIiBmaWxsPSIjNTBlNmZmIiAvPjxwYXRoIGQ9Ik0xNC4xNCw3YS40NS40NSwwLDAsMC0uNTctLjI1TDkuNDUsOC40MWwuMzIuODEsNC4xMi0xLjYzQS40NC40NCwwLDAsMCwxNC4xNCw3WiIgZmlsbD0iI2YwNDA0OSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSIxLjIiIHJ5PSIxLjIiIGZpbGw9InVybCgjYTk5NTQ4MjAtY2IzOC00OTQzLTk4NDItZjBhNTY4ZDJiMDE1KSIgLz48L3N2Zz4="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="600" dy="0">AMA data collection</tspan>
+      <tspan x="600" dy="17">rule</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: West Europe workspace" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjM4OGU5NDQtNTUwOS00OWM5LTg0ZDctZjM4YmZmYTk5NWIyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE5OTdlMjAzLTFkN2QtNGNiOS1iMTMxLTVkYzQ0ZTAyOWI0NiIgeDE9IjUuMjMiIHkxPSIxNy40NSIgeDI9IjUuMjMiIHkyPSI4LjA5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTk4OGQ5IiAvPjxzdG9wIG9mZnNldD0iMC45IiBzdG9wLWNvbG9yPSIjNTRhZWYwIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJlMTIyZTlkOC1hZWU1LTRmMWEtYTYwZS1iMWVhZTM1NWRhYTUiIHgxPSIxMS41IiB5MT0iMTIuNDUiIHgyPSIxMS41IiB5Mj0iMC41NSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAuMDEiIHN0b3AtY29sb3I9IiMxOThiYjQiIC8+PHN0b3Agb2Zmc2V0PSIwLjQ0IiBzdG9wLWNvbG9yPSIjMjdiMmQ3IiAvPjxzdG9wIG9mZnNldD0iMC43OSIgc3RvcC1jb2xvcj0iIzJmY2JlZCIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmQ0ZjUiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tbWFuYWdlLTMwNzwvdGl0bGU+PHBhdGggZD0iTTUuNTksMTMuMTNIOS45MXY0LjMySDUuNTlaTTEuMTUsMTcuNDVINC44N1YxMy4xM0guNTV2My43MkEuNi42LDAsMCwwLDEuMTUsMTcuNDVabS0uNi01SDQuODdWOC4wOUguNTVaIiBmaWxsPSJ1cmwoI2E5OTdlMjAzLTFkN2QtNGNiOS1iMTMxLTVkYzQ0ZTAyOWI0NikiIC8+PHBhdGggZD0iTTExLjUuNTVhNS44OSw1Ljg5LDAsMCwxLDUuOTUsNiw1Ljg5LDUuODksMCwwLDEtNS45NSw1Ljk1SDUuNTVWNi41QTUuODksNS44OSwwLDAsMSwxMS41LjU1WiIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSJ1cmwoI2UxMjJlOWQ4LWFlZTUtNGYxYS1hNjBlLWIxZWFlMzU1ZGFhNSkiIC8+PHJlY3QgeD0iNy41OSIgeT0iNS42NSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iNC4wOCIgZmlsbD0iI2ZmZiIgLz48cmVjdCB4PSIxMC4zMSIgeT0iNy4wMSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iMi43MiIgZmlsbD0iI2ZmZiIgLz48cmVjdCB4PSIxMy4wMyIgeT0iNC4yOSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iNS40NCIgZmlsbD0iI2ZmZiIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="1045" dy="0">West Europe workspace</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: North Europe workspace" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjM4OGU5NDQtNTUwOS00OWM5LTg0ZDctZjM4YmZmYTk5NWIyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE5OTdlMjAzLTFkN2QtNGNiOS1iMTMxLTVkYzQ0ZTAyOWI0NiIgeDE9IjUuMjMiIHkxPSIxNy40NSIgeDI9IjUuMjMiIHkyPSI4LjA5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTk4OGQ5IiAvPjxzdG9wIG9mZnNldD0iMC45IiBzdG9wLWNvbG9yPSIjNTRhZWYwIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJlMTIyZTlkOC1hZWU1LTRmMWEtYTYwZS1iMWVhZTM1NWRhYTUiIHgxPSIxMS41IiB5MT0iMTIuNDUiIHgyPSIxMS41IiB5Mj0iMC41NSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzE5OGFiMyIgLz48c3RvcCBvZmZzZXQ9IjAuMDEiIHN0b3AtY29sb3I9IiMxOThiYjQiIC8+PHN0b3Agb2Zmc2V0PSIwLjQ0IiBzdG9wLWNvbG9yPSIjMjdiMmQ3IiAvPjxzdG9wIG9mZnNldD0iMC43OSIgc3RvcC1jb2xvcj0iIzJmY2JlZCIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmQ0ZjUiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tbWFuYWdlLTMwNzwvdGl0bGU+PHBhdGggZD0iTTUuNTksMTMuMTNIOS45MXY0LjMySDUuNTlaTTEuMTUsMTcuNDVINC44N1YxMy4xM0guNTV2My43MkEuNi42LDAsMCwwLDEuMTUsMTcuNDVabS0uNi01SDQuODdWOC4wOUguNTVaIiBmaWxsPSJ1cmwoI2E5OTdlMjAzLTFkN2QtNGNiOS1iMTMxLTVkYzQ0ZTAyOWI0NikiIC8+PHBhdGggZD0iTTExLjUuNTVhNS44OSw1Ljg5LDAsMCwxLDUuOTUsNiw1Ljg5LDUuODksMCwwLDEtNS45NSw1Ljk1SDUuNTVWNi41QTUuODksNS44OSwwLDAsMSwxMS41LjU1WiIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSJ1cmwoI2UxMjJlOWQ4LWFlZTUtNGYxYS1hNjBlLWIxZWFlMzU1ZGFhNSkiIC8+PHJlY3QgeD0iNy41OSIgeT0iNS42NSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iNC4wOCIgZmlsbD0iI2ZmZiIgLz48cmVjdCB4PSIxMC4zMSIgeT0iNy4wMSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iMi43MiIgZmlsbD0iI2ZmZiIgLz48cmVjdCB4PSIxMy4wMyIgeT0iNC4yOSIgd2lkdGg9IjEuMzYiIGhlaWdodD0iNS40NCIgZmlsbD0iI2ZmZiIgLz48L3N2Zz4="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="155" dy="0">North Europe</tspan>
+      <tspan x="155" dy="17">workspace</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Immutable log archive" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="600" dy="0">Immutable log archive</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Cross-workspace operations" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFiZTI0MWIxLTVhOWEtNDVkNi1hYTZhLTAxODIxOGZjYjc5MCIgeDE9IjE1LjYwMSIgeTE9Ijc3MS43MzYiIHgyPSIyLjUzNyIgeTI9Ijc5My4wNyIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMCwgNzkxLjUxNikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMjg5YmYyIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhYThiMDNmYi1iZWQ3LTQwMDQtODI5ZS1lZGNiNjYzYTc0NGYiIHgxPSI1LjEzOCIgeTE9Ijc4OS4yNjQiIHgyPSIxMy4yNyIgeTI9Ijc3My43NyIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMCwgNzkxLjUxNikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMGNjZjkiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA5NWU2IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiNjJmNGIxMS1iOWM2LTQ0ZjAtYjljNC1hOGRjMjFkOTVmNDciIHgxPSI1Ljc2OCIgeTE9Ijc5MS41NzciIHgyPSI5LjcyIiB5Mj0iNzgwLjE2OCIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAtMSwgMCwgNzkxLjUxNikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM3Y2VjZmYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNTBlNmZmIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIGlkPSJiMjljNjc0YS00NmNkLTQxOTUtOTZkMC1iMjkyODRiODcwYjYiPjxnPjxwYXRoIGQ9Ik03Ljc3MywzLjY4MiwwLDExLjQ1NXY0LjkwOUExLjYzNywxLjYzNywwLDAsMCwxLjYzNiwxOEgxNi4zNjRBMS42MzcsMS42MzcsMCwwLDAsMTgsMTYuMzY0VjEuNjM2QTEuNjM3LDEuNjM3LDAsMCwwLDE2LjM2NCwwaC0uODE5TDkuODE4LDUuNzI3WiIgZmlsbD0idXJsKCNhYmUyNDFiMS01YTlhLTQ1ZDYtYWE2YS0wMTgyMThmY2I3OTApIiAvPjxwYXRoIGQ9Ik03Ljc3Myw4LjU5MS41ODYsMTUuNzc4YTEuMTk0LDEuMTk0LDAsMCwwLS4zODEsMS4zNzlBMS42MzUsMS42MzUsMCwwLDAsMS42MzYsMThIMTYuMzY0QTEuNjM3LDEuNjM3LDAsMCwwLDE4LDE2LjM2NFYyLjQ1NUw5LjgxOCwxMC42MzZaIiBmaWxsPSJ1cmwoI2FhOGIwM2ZiLWJlZDctNDAwNC04MjllLWVkY2I2NjNhNzQ0ZikiIC8+PHBhdGggZD0iTTkuODE4LDUuNzI3LDE1LjU0NSwwSDEuNjM2QTEuNjM3LDEuNjM3LDAsMCwwLDAsMS42MzZ2OS44MTlMNy43NzMsMy42ODJaIiBmaWxsPSJ1cmwoI2I2MmY0YjExLWI5YzYtNDRmMC1iOWM0LWE4ZGMyMWQ5NWY0NykiIC8+PC9nPjwvZz48L3N2Zz4="/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="1045" dy="0">Cross-workspace</tspan>
+      <tspan x="1045" dy="17">operations</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#65537A">Azure Monitor Agent and diagnostic settings route workload signals into regional workspaces and governed archive.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

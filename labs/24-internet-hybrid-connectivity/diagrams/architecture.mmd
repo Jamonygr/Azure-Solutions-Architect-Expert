@@ -1,12 +1,25 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Provide low-latency customer entry and predictable private access to risk systems while sustaining connectivity through a circuit or tunnel failure."]
-    R --> C1["Design global internet entry and DNS"]
-    C1 --> C2["Validate private circuit and VPN failover design"]
-    C2 --> C3["Prove transit routing and route ownership"]
-    C3 --> C4["Test reachability and name resolution"]
-    C4 --> C5["Establish capacity and performance baselines"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_global_edge["Global internet edge"]
+        N_front_door["Front Door Premium"]
+    end
+    subgraph B_hybrid_connections["Hybrid connectivity"]
+        N_datacenters["Two private datacenters"]
+        N_expressroute["Dual ExpressRoute circuits"]
+        N_vpn["VPN failover path"]
+    end
+    subgraph B_azure_transit["Azure transit and operations"]
+        N_virtual_wan["Virtual WAN transit"]
+        N_dns["Private name resolution"]
+        N_performance["Capacity and latency signals"]
+    end
+    N_front_door -->|"accelerated public application path"| N_virtual_wan
+    N_datacenters -->|"primary private connectivity"| N_expressroute
+    N_datacenters -->|"encrypted failover connectivity"| N_vpn
+    N_expressroute -->|"private circuit transit"| N_virtual_wan
+    N_vpn -->|"backup transit path"| N_virtual_wan
+    N_virtual_wan -->|"hybrid name resolution"| N_dns
+    N_virtual_wan -->|"reachability and capacity telemetry"| N_performance
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_front_door,N_datacenters,N_expressroute,N_vpn,N_virtual_wan,N_dns,N_performance service
 %% END GENERATED AZ305 V1

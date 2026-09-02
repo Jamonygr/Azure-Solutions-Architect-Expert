@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Protect payment cryptographic assets and reduce outage risk caused by unmanaged expiry or overprivileged access."]
-    R --> C1["Select vault boundary and service tier"]
-    C1 --> C2["Define key protection and rotation"]
-    C2 --> C3["Govern certificate issuance and renewal"]
-    C3 --> C4["Grant managed-identity data-plane access"]
-    C4 --> C5["Enforce a private network path"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_application_network["Application virtual network"]
+        N_application["Signing and TLS workload"]
+        N_identity["Managed identity"]
+    end
+    subgraph B_vault_boundary["Private vault boundary"]
+        N_private_endpoint["Private endpoint"]
+        N_vault["Key Vault Premium"]
+        N_keys["Rotated keys and secrets"]
+    end
+    subgraph B_certificate_authority["Certificate authority"]
+        N_issuer["Approved certificate issuer"]
+    end
+    N_application -->|"workload token request"| N_identity
+    N_identity -->|"RBAC-authorized access"| N_private_endpoint
+    N_private_endpoint -->|"private data path"| N_vault
+    N_vault -->|"rotation policy"| N_keys
+    N_issuer -->|"certificate lifecycle"| N_vault
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_application,N_identity,N_private_endpoint,N_vault,N_keys,N_issuer service
 %% END GENERATED AZ305 V1

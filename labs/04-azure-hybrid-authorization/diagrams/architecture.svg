@@ -1,44 +1,83 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-04 Azure and Hybrid Authorization Architecture</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:242778162e0b95ef99d18e4022f6e33547ac4ddc93117cf9e6715dacfdedc477</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Reduce standing privilege and audit ambiguity without preventing platform</tspan>
-    <tspan x="380" dy="20">and factory teams from meeting support obligations.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Model scopes and inherited access</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Delegate through groups rather than people</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Constrain a custom control-plane role</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Separate control-plane and data-plane access</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Define the Azure Arc authorization boundary</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Azure and hybrid authorization boundaries</title>
+  <desc id="visual-desc">Topology showing Entra groups delegated through management group and subscription scopes, with separate data-plane access and Arc server authorization.</desc>
+  <metadata>source-sha256:0053313be2cb622b17894b606e22f0a837f751447edfdd76d343bbdc2e750536</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2ECFF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#00A6A6"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#5C2D91" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Microsoft Entra identities">
+    <rect x="51" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Microsoft Entra identities</text>
+  </g>
+  <g role="group" aria-label="Boundary: Azure authorization scopes">
+    <rect x="273.5" y="116" width="875.5" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="289.5" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Azure authorization scopes</text>
+  </g>
+  <g role="group" aria-label="Boundary: Arc-enabled hybrid estate">
+    <rect x="718.5" y="446" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#A78BD4" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="734.5" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#65537A">Arc-enabled hybrid estate</text>
+  </g>
+  <g role="group" aria-label="custom control-plane role: groups to management-group">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="296.25" y="195" width="162.5" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">custom control-plane role</text>
+  </g>
+  <g role="group" aria-label="inherited assignment: management-group to subscription">
+    <path d="M677 220 C822.5 220 822.5 220 968 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="757.5" y="195" width="130" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="822.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">inherited assignment</text>
+  </g>
+  <g role="group" aria-label="separate data role: groups to data-plane">
+    <path d="M198.046 283.844 C266.25 283.844 266.25 486.156 334.454 486.156" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="207.75" y="360" width="117" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="266.25" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">separate data role</text>
+  </g>
+  <g role="group" aria-label="Arc-aware delegation: groups to arc-servers">
+    <path d="M224.025 254.125 C488.75 254.125 488.75 515.875 753.475 515.875" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="423.75" y="360" width="130" height="24" rx="12" fill="#ffffff" stroke="#A78BD4"/>
+    <text x="488.75" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#24113A">Arc-aware delegation</text>
+  </g>
+  <g role="group" aria-label="Service node: Governed role groups" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0idXVpZC1mOGQ0ZDM5Mi03YzEyLTRiZDktYmFmZi02NmZiZjc4MTRiOTEiIGRhdGEtbmFtZT0iTGF5ZXIgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgPHBhdGggZD0ibTMuODAyLDE0LjAzMmMuMzg4LjI0MiwxLjAzMy41MTEsMS43MTUuNTExLjYyMSwwLDEuMTk4LS4xOCwxLjY3Ni0uNDg3LDAsMCwuMDAxLDAsLjAwMi0uMDAxbDEuODA1LTEuMTI4djQuMDczYy0uMjg2LDAtLjU3NC0uMDc4LS44MjQtLjIzNGwtNC4zNzQtMi43MzRaIiBmaWxsPSIjMjI1MDg2Ii8+CiAgPHBhdGggZD0ibTcuODUzLDEuNTA3TC4zNTMsOS45NjdjLS41NzkuNjU0LS40MjgsMS42NDIuMzIzLDIuMTExLDAsMCwyLjc3NiwxLjczNSwzLjEyNiwxLjk1NC4zODguMjQyLDEuMDMzLjUxMSwxLjcxNS41MTEuNjIxLDAsMS4xOTgtLjE4LDEuNjc2LS40ODcsMCwwLC4wMDEsMCwuMDAyLS4wMDFsMS44MDUtMS4xMjgtNC4zNjQtMi43MjgsNC4zNjUtNC45MjRWMXMwLDAsMCwwYy0uNDI0LDAtLjg0Ny4xNjktMS4xNDcuNTA3WiIgZmlsbD0iIzZkZiIvPgogIDxwb2x5Z29uIHBvaW50cz0iNC42MzYgMTAuMTk5IDQuNjg4IDEwLjIzMSA5IDEyLjkyNyA5LjAwMSAxMi45MjcgOS4wMDEgMTIuOTI3IDkuMDAxIDUuMjc2IDkgNS4yNzUgNC42MzYgMTAuMTk5IiBmaWxsPSIjY2JmOGZmIi8+CiAgPHBhdGggZD0ibTE3LjMyNCwxMi4wNzhjLjc1MS0uNDY5LjkwMi0xLjQ1Ny4zMjMtMi4xMTFsLTQuOTIxLTUuNTUxYy0uMzk3LS4xODUtLjg0Mi0uMjkxLTEuMzEzLS4yOTEtLjkyNSwwLTEuNzUyLjM5OS0yLjMwMiwxLjAyNmwtLjEwOS4xMjNoMHM0LjM2NCw0LjkyNCw0LjM2NCw0LjkyNGgwczAsMCwwLDBsLTQuMzY1LDIuNzI4djQuMDczYy4yODcsMCwuNTczLS4wNzguODIzLS4yMzRsNy41LTQuNjg4WiIgZmlsbD0iIzA3NDc5MyIvPgogIDxwYXRoIGQ9Im05LjAwMSwxdjQuMjc1cy4xMDktLjEyMy4xMDktLjEyM2MuNTUtLjYyNywxLjM3Ny0xLjAyNiwyLjMwMi0xLjAyNi40NzIsMCwuOTE2LjEwNywxLjMxMy4yOTFsLTIuNTc5LTIuOTA5Yy0uMjk5LS4zMzgtLjcyMy0uNTA3LTEuMTQ2LS41MDdaIiBmaWxsPSIjMDI5NGU0Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIxMy4zNjUgMTAuMTk5IDEzLjM2NSAxMC4xOTkgMTMuMzY1IDEwLjE5OSA5LjAwMSA1LjI3NiA5LjAwMSAxMi45MjYgMTMuMzY1IDEwLjE5OSIgZmlsbD0iIzk2YmNjMiIvPgo8L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="155" dy="0">Governed role groups</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Management-group scope" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTQwMDg0OGMtYzgwNC00ODZhLTg5MDUtZjIzZjFjZTFmMjY0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImZlM2ExZmRjLTQ4OWMtNDIxNi05Mjg4LTk1NjQxMjMwODk1YyIgeDE9IjkiIHkxPSIyLjk1IiB4Mj0iOSIgeTI9IjYuMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNjNjlhZWIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNmY0YmIyIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJiZWY2NzI4Zi02ZDQ2LTRhNTQtYjIxOS02YjMzNTJjODkzMjkiIHgxPSI4Ljk5IiB5MT0iNi43NiIgeDI9IjguOTkiIHkyPSI5LjIyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNTRhZWYwIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE5ODhkOSIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1nZW5lcmFsLTExPC90aXRsZT48Zz48cG9seWdvbiBwb2ludHM9IjEzLjY5IDExLjIyIDEyLjE5IDcuOTIgOSA0LjIgNS43OSA3LjkxIDQuMjggMTEuMiA0LjgxIDExLjQ1IDYuMDQgOC43NyA3LjI1IDExLjQ1IDcuNzkgMTEuMjEgNi4zOSA4LjEyIDkgNS4xIDExLjYgOC4xMyAxMC4xOCAxMS4yMSAxMC43MSAxMS40NiAxMS45NCA4Ljc5IDEzLjE1IDExLjQ3IDEzLjY5IDExLjIyIiBmaWxsPSIjOTQ5NDk0IiAvPjxjaXJjbGUgY3g9IjkiIGN5PSI0LjY1IiByPSIxLjY5IiBmaWxsPSJ1cmwoI2ZlM2ExZmRjLTQ4OWMtNDIxNi05Mjg4LTk1NjQxMjMwODk1YykiIC8+PHBhdGggZD0iTTYsNi43NkExLjIzLDEuMjMsMCwxLDEsNC44Miw4LDEuMjMsMS4yMywwLDAsMSw2LDYuNzZaTTEwLjcyLDhhMS4yMiwxLjIyLDAsMCwwLDEuMjIsMS4yMkExLjIzLDEuMjMsMCwxLDAsMTAuNzIsOFoiIGZpbGw9InVybCgjYmVmNjcyOGYtNmQ0Ni00YTU0LWIyMTktNmIzMzUyYzg5MzI5KSIgLz48Zz48Zz48Y2lyY2xlIGN4PSI0LjU0IiBjeT0iMTEuMzIiIHI9IjAuOTciIGZpbGw9IiMzN2MyYjEiIC8+PGNpcmNsZSBjeD0iNy41MiIgY3k9IjExLjMzIiByPSIwLjk3IiBmaWxsPSIjMzdjMmIxIiAvPjwvZz48Zz48Y2lyY2xlIGN4PSIxMC40NCIgY3k9IjExLjM0IiByPSIwLjk3IiBmaWxsPSIjMzdjMmIxIiAvPjxjaXJjbGUgY3g9IjEzLjQyIiBjeT0iMTEuMzUiIHI9IjAuOTciIGZpbGw9IiMzN2MyYjEiIC8+PC9nPjwvZz48cGF0aCBkPSJNLjUsMTUuMjJhLjE2LjE2LDAsMCwwLC4wOC4xNEwxLjczLDE2bDIsMS4xNGEuMTguMTgsMCwwLDAsLjIzLS4wNkw0LjU3LDE2YS4xNS4xNSwwLDAsMC0uMDYtLjIyTDIuMjIsMTQuNDFhLjE2LjE2LDAsMCwxLS4wOC0uMTRWMy43M2EuMTYuMTYsMCwwLDEsLjA4LS4xNEw0LjUxLDIuMjZBLjE1LjE1LDAsMCwwLDQuNTcsMkwzLjkyLjg5QS4xOC4xOCwwLDAsMCwzLjY5LjgzTDEuNzcsMS45NGwtMS4xOS43YS4xNi4xNiwwLDAsMC0uMDguMTRWMTUuMjJaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik00LjU3LDIsMy45Mi44OUEuMTguMTgsMCwwLDAsMy43NS44MWwtLjA4LDBMMS43NSwxLjk0bC0xLjE5LjdhLjEuMSwwLDAsMC0uMDYsMGgwYS4yNC4yNCwwLDAsMCwwLC4wOGwxLjY0LDFhLjE2LjE2LDAsMCwxLC4wOC0uMTRMNC41MSwyLjI2QS4xNS4xNSwwLDAsMCw0LjU3LDJaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik00LjU3LDE2bC0uNjUsMS4xNWEuMTguMTgsMCwwLDEtLjE3LjA4LjEyLjEyLDAsMCwxLS4wOCwwTDEuNzUsMTYuMDZsLTEuMTktLjdhLjEuMSwwLDAsMS0uMDYsMGgwYS4yNC4yNCwwLDAsMSwwLS4wOGwxLjY0LTFhLjE2LjE2LDAsMCwwLC4wOC4xNGwyLjI5LDEuMzNBLjE2LjE2LDAsMCwxLDQuNTcsMTZaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik0xNy41LDIuNzhhLjE2LjE2LDAsMCwwLS4wOC0uMTRMMTYuMjcsMmwtMi0xLjE0YS4xOC4xOCwwLDAsMC0uMjMuMDZMMTMuNDMsMmEuMTUuMTUsMCwwLDAsLjA2LjIybDIuMjksMS4zM2EuMTYuMTYsMCwwLDEsLjA4LjE0VjE0LjI3YS4xNi4xNiwwLDAsMS0uMDguMTRsLTIuMjksMS4zM2EuMTUuMTUsMCwwLDAtLjA2LjIybC42NSwxLjE1YS4xOC4xOCwwLDAsMCwuMjMuMDZsMS45Mi0xLjExLDEuMTktLjdhLjE2LjE2LDAsMCwwLC4wOC0uMTRWMi43OFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTEzLjQzLDE2bC42NSwxLjE1YS4xOC4xOCwwLDAsMCwuMTcuMDhsLjA4LDAsMS45Mi0xLjExLDEuMTktLjdhLjEuMSwwLDAsMCwuMDYsMGgwYS4yNC4yNCwwLDAsMCwwLS4wOGwtMS42NC0xYS4xNi4xNiwwLDAsMS0uMDguMTRsLTIuMjksMS4zM0EuMTUuMTUsMCwwLDAsMTMuNDMsMTZaIiBmaWxsPSIjYTNhM2EzIiAvPjxwYXRoIGQ9Ik0xMy40MywyLDE0LjA4Ljg5YS4xOC4xOCwwLDAsMSwuMTctLjA4LjEyLjEyLDAsMCwxLC4wOCwwbDEuOTIsMS4xMSwxLjE5LjdhLjEuMSwwLDAsMSwuMDYsMGgwYS4yNC4yNCwwLDAsMSwwLC4wOGwtMS42NCwxYS4xNi4xNiwwLDAsMC0uMDgtLjE0TDEzLjQ5LDIuMjZBLjE2LjE2LDAsMCwxLDEzLjQzLDJaIiBmaWxsPSIjYTNhM2EzIiAvPjwvZz48L3N2Zz4="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="600" dy="0">Management-group</tspan>
+      <tspan x="600" dy="17">scope</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Workload subscription" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYmMxOGJhZGUtNTQ4MS00NDdlLWE5NTktNjU5ZDcyMzQ2NDc0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImE0NDVjNzE3LTlkNzUtNDRjNy1iYTZiLTBkOGYyMzgzZTU2MCIgY3g9Ii0zNi42MyIgY3k9IjE3LjEyIiByPSIxMS4xOCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg0MS44OCAtNy40KSBzY2FsZSgwLjk0IDAuOTQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjI3IiBzdG9wLWNvbG9yPSIjZmZkNzBmIiAvPjxzdG9wIG9mZnNldD0iMC40OSIgc3RvcC1jb2xvcj0iI2ZmY2IxMiIgLz48c3RvcCBvZmZzZXQ9IjAuODgiIHN0b3AtY29sb3I9IiNmZWFjMTkiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmVhMTFiIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWdlbmVyYWwtMjwvdGl0bGU+PHBhdGggaWQ9ImUzZDFlNThjLWY3OGUtNGZiNS05ODU3LTBjOTMzMWRhOTk3OSIgZD0iTTEzLjU2LDcuMTlhMi4wNywyLjA3LDAsMCwwLDAtMi45M2gwTDEwLC42OWEyLjA2LDIuMDYsMCwwLDAtMi45MiwwaDBMMy41Miw0LjI2YTIuMDksMi4wOSwwLDAsMCwwLDIuOTNsMywzYS42MS42MSwwLDAsMSwuMTcuNDF2NS41MmEuNy43LDAsMCwwLC4yLjVsMS4zNSwxLjM1YS40NS40NSwwLDAsMCwuNjYsMGwxLjMxLTEuMzFoMGwuNzctLjc3YS4yNi4yNiwwLDAsMCwwLS4zOGwtLjU1LS41NmEuMjkuMjksMCwwLDEsMC0uNDJsLjU1LS41NmEuMjYuMjYsMCwwLDAsMC0uMzhMMTAuNCwxM2EuMjguMjgsMCwwLDEsMC0uNDFMMTEsMTJhLjI2LjI2LDAsMCwwLDAtLjM4bC0uNzctLjc4di0uMjhabS01LTUuNjRBMS4xOCwxLjE4LDAsMSwxLDcuMzcsMi43MywxLjE3LDEuMTcsMCwwLDEsOC41NCwxLjU1WiIgZmlsbD0idXJsKCNhNDQ1YzcxNy05ZDc1LTQ0YzctYmE2Yi0wZDhmMjM4M2U1NjApIiAvPjxwYXRoIGlkPSJhMjFhOGY3YS02MWNjLTQwMzUtODQ0OS1lNWM4ZmU0ZDRkNWUiIGQ9Ik03LjYyLDE2LjIxaDBBLjI1LjI1LDAsMCwwLDgsMTZWMTEuNTVhLjI3LjI3LDAsMCwwLS4xMS0uMjJoMGEuMjUuMjUsMCwwLDAtLjM5LjIyVjE2QS4yNy4yNywwLDAsMCw3LjYyLDE2LjIxWiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48cmVjdCBpZD0iZWNkMzE4OWMtZmIxZS00YTBlLWEyYjYtYmEyZjExZGRhNDg0IiB4PSI1LjY5IiB5PSI1LjQ1IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48cmVjdCBpZD0iYTE5NDlhM2MtNDgxOC00YmQxLWIyMzYtMGQ5NzBiOTJmYzYyIiB4PSI1LjY5IiB5PSI2LjU3IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="1045" dy="0">Workload subscription</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Storage data plane" filter="url(#shadow)">
+    <rect x="299.5" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="349.5" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="377.5" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="377.5" dy="0">Storage data plane</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Azure Arc servers" filter="url(#shadow)">
+    <rect x="744.5" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+    <image x="794.5" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImI2OWQyMTUwLWI0ZGEtNDYwYi05OWFlLWE5ZjVhOTYxYjMxMyIgeDE9Ii0xMTk0LjMyMSIgeTE9IjkuMTI4IiB4Mj0iLTExOTAuNzU1IiB5Mj0iOS4xMjgiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLTEsIDAsIDAsIDEsIC0xMTc5Ljg4NywgMCkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzMmJlZGQiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5OCIgc3RvcC1jb2xvcj0iIzljZWJmZiIgc3RvcC1vcGFjaXR5PSIwLjUiIC8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImU2OTBjYzYyLWQxYTItNDMyNS05MGNhLWFjMmZlNTFhNWI1OCIgeDE9IjgwLjM2MyIgeTE9IjkuMTM1IiB4Mj0iODMuOTI5IiB5Mj0iOS4xMzUiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc2Ljc5NikiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5OCIgc3RvcC1jb2xvcj0iIzAwNWJhMSIgc3RvcC1vcGFjaXR5PSIwIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJmZjY0OTg2NC02YjRjLTRmYTgtYmNjYS1jMTJiMmI5MTBmM2MiIHgxPSIzLjU1NSIgeTE9IjkuMzI2IiB4Mj0iMTQuNDM0IiB5Mj0iOS4zMjYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDViYTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjk3NCIgc3RvcC1jb2xvcj0iIzMyYmVkZCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBpZD0iYTgyNmMwMTctNWU5ZS00MjA4LTg5N2YtMmFkZTJlYjU4Y2Q2Ij48cG9seWdvbiBwb2ludHM9IjcuMTMyIDQuNDY5IDMuNTY3IDYuNTQyIDAgNC40NjggMy41NjcgMi4zOTUgNy4xMzIgNC40NjkiIGZpbGw9IiM1ZWEwZWYiIC8+PHBvbHlnb24gcG9pbnRzPSI3LjEzMiAxMy43OTQgMy41NjYgMTEuNzM1IDMuNTY2IDE1Ljg2NyA3LjEzMiAxMy43OTQiIGZpbGw9IiMwMDViYTEiIC8+PHBvbHlnb24gcG9pbnRzPSIzLjU2NyA2LjU0MiAzLjU2NiA2LjU0MSAzLjU2NiA2LjU0MiAwIDQuNDY4IDAgMTMuODAxIDMuNTY2IDE1Ljg3NCA3LjEzMiAxMy44MDEgNy4xMzIgMTMuNzk0IDMuNTY2IDE1Ljg2NyAzLjU2NiAxMS43MzUgNy4xMzIgMTMuNzk0IDcuMTMyIDQuNDY5IDMuNTY3IDYuNTQyIiBmaWxsPSIjMDA3OGQ0IiAvPjxwb2x5Z29uIHBvaW50cz0iMTAuODY4IDQuNDY5IDE0LjQzMyA2LjU0MiAxOCA0LjQ2OCAxNC40MzMgMi4zOTUgMTAuODY4IDQuNDY5IiBmaWxsPSIjOWNlYmZmIiAvPjxwb2x5Z29uIHBvaW50cz0iMTAuODY4IDEzLjc5NCAxNC40MzQgMTEuNzM1IDE0LjQzNCAxNS44NjcgMTAuODY4IDEzLjc5NCIgZmlsbD0iIzMyYmVkZCIgLz48cG9seWdvbiBwb2ludHM9IjE0LjQzMyA2LjUzNSAxNC40MzQgNi41MzUgMTQuNDM0IDYuNTM1IDE0LjQzNCAxMS43MjggMTAuODY4IDEzLjc5NCAxMC44NjggNC40NjIgMTQuNDMzIDYuNTM1IiBmaWxsPSJ1cmwoI2I2OWQyMTUwLWI0ZGEtNDYwYi05OWFlLWE5ZjVhOTYxYjMxMykiIC8+PHBvbHlnb24gcG9pbnRzPSIxMC44NjggNC40NjkgMTQuNDMzIDYuNTQyIDE4IDQuNDY4IDE0LjQzMyAyLjM5NSAxMC44NjggNC40NjkiIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC40MzMgNi41NDIgMTAuODY4IDQuNDY5IDEwLjg2OCAxMy43OTQgMTQuNDM0IDExLjczNSAxNC40MzQgMTUuODY3IDEwLjg2OCAxMy43OTQgMTAuODY4IDEzLjgwMSAxNC40MzQgMTUuODc0IDE4IDEzLjgwMSAxOCA0LjQ2OCAxOCA0LjQ2OCAxNC40MzMgNi41NDIiIGZpbGw9IiM1MGU2ZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxMC44NjggMTMuNzk0IDE0LjQzNCAxMS43MzUgMTQuNDM0IDE1Ljg2NyAxMC44NjggMTMuNzk0IiBmaWxsPSIjMzJiZWRkIiAvPjxwb2x5Z29uIHBvaW50cz0iMTQuNDMzIDYuNTM1IDE0LjQzNCA2LjUzNSAxNC40MzQgNi41MzUgMTQuNDM0IDExLjcyOCAxMC44NjggMTMuNzk0IDEwLjg2OCA0LjQ2MiAxNC40MzMgNi41MzUiIGZpbGw9InVybCgjYjY5ZDIxNTAtYjRkYS00NjBiLTk5YWUtYTlmNWE5NjFiMzEzKSIgLz48cG9seWdvbiBwb2ludHM9IjMuNTY3IDYuNTQxIDMuNTY2IDYuNTQxIDMuNTY2IDYuNTQxIDMuNTY2IDExLjczNCA3LjEzMiAxMy44MDEgNy4xMzIgNC40NjkgMy41NjcgNi41NDEiIGZpbGw9InVybCgjZTY5MGNjNjItZDFhMi00MzI1LTkwY2EtYWMyZmU1MWE1YjU4KSIgLz48cGF0aCBkPSJNMTQuNDIzLDEwLjEyNmMtLjYyNCwxLjU1Ni0zLjA2NiwyLjU4NC01LjM0OCwyLjU4NGwtLjA4MSwwLS4wOCwwYy0yLjI4MiwwLTQuNzI0LTEuMDI4LTUuMzQ4LTIuNTg0LDAsMC0uMDI1LTEuNTYxLDAtMS43MTNDNC4wMiwxMC4xNSw2LjQsMTEuNDM1LDguODU5LDExLjQzNWwuMTM1LDAsLjEzNiwwYzIuNDU1LDAsNC44MzktMS4yODUsNS4yOTMtMy4wMjJDMTQuNDQ4LDguNTY1LDE0LjQyMywxMC4xMjYsMTQuNDIzLDEwLjEyNlpNMTMuNCw1Ljk0MkE2LjY1Myw2LjY1MywwLDAsMSw5LjEzLDcuNDE2bC0uMTM2LDAtLjEzNSwwYTYuNjU2LDYuNjU2LDAsMCwxLTQuMjY3LTEuNDdsLS44NTYuNUM0LjU1Myw3LjgwOSw2LjgsOC42OSw4LjkxNCw4LjY5aC4xNjFjMi4xMTUsMCw0LjM2Ni0uODgzLDUuMTgxLTIuMjUxWiIgZmlsbD0idXJsKCNmZjY0OTg2NC02YjRjLTRmYTgtYmNjYS1jMTJiMmI5MTBmM2MpIiAvPjwvZz48L3N2Zz4="/>
+    <text x="822.5" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#24113A">
+      <tspan x="822.5" dy="0">Azure Arc servers</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#65537A">Stable groups receive narrow roles at durable scopes while control-plane, data-plane, and hybrid access remain distinct.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

@@ -1,12 +1,20 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Modernize the database with less operational toil and cost while retaining transactional correctness and month-end capacity."]
-    R --> C1["Convert workload facts into platform criteria"]
-    C1 --> C2["Establish a logical server boundary"]
-    C2 --> C3["Configure an elastic serverless database"]
-    C3 --> C4["Require private application connectivity"]
-    C4 --> C5["Validate the service-tier decision"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_application_network["Application virtual network"]
+        N_application["Line-of-business application"]
+        N_private_endpoint["SQL private endpoint"]
+    end
+    subgraph B_data_platform["Relational data platform"]
+        N_logical_server["Logical SQL server"]
+        N_database["General Purpose serverless"]
+    end
+    subgraph B_operations["Data operations"]
+        N_monitoring["Database telemetry"]
+    end
+    N_application -->|"private SQL connection"| N_private_endpoint
+    N_private_endpoint -->|"private link resolution"| N_logical_server
+    N_logical_server -->|"serverless service objective"| N_database
+    N_database -->|"performance and cost signals"| N_monitoring
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_application,N_private_endpoint,N_logical_server,N_database,N_monitoring service
 %% END GENERATED AZ305 V1

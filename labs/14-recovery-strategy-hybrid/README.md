@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-14 — Recovery Strategy for Azure and Hybrid Workloads
 
+![Continuity banner showing Azure and VMware workloads mapped by recovery tier to backup, site recovery, native replication, and runbooks.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">design-simulation</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-13](../13-data-integration-analytics/README.md) · [Lab catalog](../README.md) · [LAB-15 →](../15-compute-backup-ha/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Recovery Strategy for Azure and Hybrid Workloads](diagrams/architecture.svg)
+![Topology showing Azure and factory VMware workloads classified by recovery objectives and routed to backup, Site Recovery, native replication, and an orchestration runbook.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Workload tiers map to Azure Backup, Site Recovery, or application-native replication before an exercise validates recovery order. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing hybrid recovery strategies and highlighting tiered Backup, Site Recovery, and native replication.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Dependency waves and tier-specific mechanisms align recovery behavior with validated business targets.
-- **Security:** Residency, privileged recovery identities, and isolated evidence remain explicit in every recovery pattern.
-- **Cost Optimization:** Warm capacity is limited to Tier 1 while slower tiers use lower-cost protection that meets their objectives.
-- **Operational Excellence:** Timed authority, technical, communication, and business gates expose where recovery actually spends time.
-- **Performance Efficiency:** Degraded-mode sizing reserves enough in-boundary capacity for Tier 1 without duplicating peak capacity everywhere.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Dependency waves and tier-specific mechanisms align recovery behavior with validated business targets.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Residency, privileged recovery identities, and isolated evidence remain explicit in every recovery pattern.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Warm capacity is limited to Tier 1 while slower tiers use lower-cost protection that meets their objectives.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Timed authority, technical, communication, and business gates expose where recovery actually spends time.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Degraded-mode sizing reserves enough in-boundary capacity for Tier 1 without duplicating peak capacity everywhere.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-140001
 Synthetic sample: `{"labId":"LAB-14","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Classify services and recovery objectives</a><span>LAB14-REQ-01 · LAB14-CP01</span></li>
+<li><a href="#checkpoint-2">Map hybrid dependencies and failure domains</a><span>LAB14-REQ-02 · LAB14-CP02</span></li>
+<li><a href="#checkpoint-3">Select recovery patterns by tier</a><span>LAB14-REQ-03 · LAB14-CP03</span></li>
+<li><a href="#checkpoint-4">Design recovery orchestration and communications</a><span>LAB14-REQ-04 · LAB14-CP04</span></li>
+<li><a href="#checkpoint-5">Validate objectives with an exercise scorecard</a><span>LAB14-REQ-05 · LAB14-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Classify services and recovery objectives
 

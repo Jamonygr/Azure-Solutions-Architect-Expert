@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Provide secure low-friction sign-in for three populations while reducing credential and tenant-boundary risk."]
-    R --> C1["Establish identity population and tenant boundaries"]
-    C1 --> C2["Select protocols and application registrations"]
-    C2 --> C3["Design authentication methods and recovery"]
-    C3 --> C4["Evaluate Conditional Access architecture"]
-    C4 --> C5["Prefer managed workload identities"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_workforce_tenant["Workforce tenant"]
+        N_employees["Employees and partners"]
+        N_workforce_app["Workforce application"]
+        N_conditional_access["Conditional Access"]
+    end
+    subgraph B_external_tenant["External ID tenant"]
+        N_customers["Customer identities"]
+        N_customer_app["Customer application"]
+    end
+    subgraph B_workload_boundary["Azure workloads"]
+        N_managed_identity["Managed workload identity"]
+    end
+    N_employees -->|"workforce authentication"| N_conditional_access
+    N_conditional_access -->|"policy-governed token"| N_workforce_app
+    N_customers -->|"External ID user flow"| N_customer_app
+    N_workforce_app -->|"secretless service access"| N_managed_identity
+    N_customer_app -->|"secretless service access"| N_managed_identity
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_employees,N_workforce_app,N_customers,N_customer_app,N_conditional_access,N_managed_identity service
 %% END GENERATED AZ305 V1

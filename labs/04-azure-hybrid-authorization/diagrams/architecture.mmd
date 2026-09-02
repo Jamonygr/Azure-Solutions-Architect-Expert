@@ -1,12 +1,20 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Reduce standing privilege and audit ambiguity without preventing platform and factory teams from meeting support obligations."]
-    R --> C1["Model scopes and inherited access"]
-    C1 --> C2["Delegate through groups rather than people"]
-    C2 --> C3["Constrain a custom control-plane role"]
-    C3 --> C4["Separate control-plane and data-plane access"]
-    C4 --> C5["Define the Azure Arc authorization boundary"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_identity_plane["Microsoft Entra identities"]
+        N_groups["Governed role groups"]
+    end
+    subgraph B_azure_scopes["Azure authorization scopes"]
+        N_management_group["Management-group scope"]
+        N_subscription["Workload subscription"]
+        N_data_plane["Storage data plane"]
+    end
+    subgraph B_hybrid_estate["Arc-enabled hybrid estate"]
+        N_arc_servers["Azure Arc servers"]
+    end
+    N_groups -->|"custom control-plane role"| N_management_group
+    N_management_group -->|"inherited assignment"| N_subscription
+    N_groups -->|"separate data role"| N_data_plane
+    N_groups -->|"Arc-aware delegation"| N_arc_servers
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_groups,N_management_group,N_subscription,N_data_plane,N_arc_servers service
 %% END GENERATED AZ305 V1

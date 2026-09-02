@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Reduce accidental cloud changes and make architecture experiments reproducible and independently auditable."]
-    R --> C1["Verify the offline tool contract"]
-    C1 --> C2["Declare intended context without authentication"]
-    C2 --> C3["Evaluate cost and tenant-change gates"]
-    C3 --> C4["Prove state-before-mutation ordering"]
-    C4 --> C5["Exercise ownership-aware cleanup"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_learner_workstation["Learner workstation"]
+        N_preflight["Toolchain preflight"]
+        N_inputs["Declared context"]
+        N_gates["Cost and tenant gates"]
+        N_cleanup["Ownership-aware cleanup"]
+    end
+    subgraph B_run_state["Private run state"]
+        N_state_record["Immutable run record"]
+    end
+    subgraph B_azure_scope["Intended Azure scope"]
+        N_operation["Bounded lab operation"]
+    end
+    N_preflight -->|"validated tools"| N_inputs
+    N_inputs -->|"declared IDs and regions"| N_gates
+    N_gates -->|"authorize run record"| N_state_record
+    N_state_record -->|"state precedes mutation"| N_operation
+    N_operation -->|"returned IDs and tags"| N_cleanup
+    N_cleanup -->|"post-cleanup status"| N_state_record
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_preflight,N_inputs,N_gates,N_state_record,N_operation,N_cleanup service
 %% END GENERATED AZ305 V1

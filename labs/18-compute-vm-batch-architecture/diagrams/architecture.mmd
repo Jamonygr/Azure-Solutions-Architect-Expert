@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Complete simulation batches inside the overnight window while keeping orchestration available and paying for burst capacity only when jobs require it."]
-    R --> C1["Translate workload demand into compute requirements"]
-    C1 --> C2["Compile and lint the compute Bicep design"]
-    C2 --> C3["Preview the tagged reference deployment"]
-    C3 --> C4["Deploy and verify the compute reference"]
-    C4 --> C5["Validate Batch behavior and graceful degradation"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_control_tier["Zonal control tier"]
+        N_scheduler["Simulation scheduler"]
+        N_control_vms["Zone-spread control VMs"]
+    end
+    subgraph B_batch_platform["Azure Batch platform"]
+        N_batch_account["Azure Batch account"]
+        N_batch_pool["Autoscaled Batch pool"]
+    end
+    subgraph B_job_evidence["Job data and evidence"]
+        N_simulation_data["Simulation input and output"]
+        N_monitoring["Capacity and job telemetry"]
+    end
+    N_scheduler -->|"orchestration requests"| N_control_vms
+    N_control_vms -->|"authenticated job submission"| N_batch_account
+    N_batch_account -->|"autoscale and scheduling"| N_batch_pool
+    N_simulation_data -->|"staged task inputs"| N_batch_pool
+    N_batch_pool -->|"simulation results"| N_simulation_data
+    N_batch_pool -->|"job and capacity signals"| N_monitoring
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_scheduler,N_control_vms,N_batch_account,N_batch_pool,N_simulation_data,N_monitoring service
 %% END GENERATED AZ305 V1

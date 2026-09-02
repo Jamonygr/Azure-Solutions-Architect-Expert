@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-01 — Centralized Logging and Diagnostic Routing
 
+![Identity and monitoring banner connecting Azure resource telemetry to regional workspaces, archive storage, and operators.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-00](../00-safe-architect-bootstrap/README.md) · [Lab catalog](../README.md) · [LAB-02 →](../02-monitoring-alerts-visibility/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Centralized Logging and Diagnostic Routing](diagrams/architecture.svg)
+![Topology showing emitting workloads routed through data collection rules to two regional Log Analytics workspaces, archive storage, and operators.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Azure Monitor Agent and diagnostic settings route workload signals into regional workspaces and governed archive. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing logging architectures and marking regional workspaces with governed routing as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Independent regional ingestion limits correlated collection loss and makes partial query behavior explicit.
-- **Security:** Workspace and table boundaries enforce residency and least-privilege access for security evidence.
-- **Cost Optimization:** Thirty-day trace search and archived audit retention align price with access frequency instead of duplicating streams.
-- **Operational Excellence:** Policy-assigned DCRs and shared workbooks make coverage drift and incident handoffs observable.
-- **Performance Efficiency:** Regional ingestion reduces collection paths, while scoped cross-workspace queries avoid scanning unrelated tables.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Independent regional ingestion limits correlated collection loss and makes partial query behavior explicit.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Workspace and table boundaries enforce residency and least-privilege access for security evidence.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Thirty-day trace search and archived audit retention align price with access frequency instead of duplicating streams.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Policy-assigned DCRs and shared workbooks make coverage drift and incident handoffs observable.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Regional ingestion reduces collection paths, while scoped cross-workspace queries avoid scanning unrelated tables.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-010001
 Synthetic sample: `{"labId":"LAB-01","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Establish regional workspace boundaries</a><span>LAB01-REQ-01 · LAB01-CP01</span></li>
+<li><a href="#checkpoint-2">Define an Azure Monitor Agent data collection rule</a><span>LAB01-REQ-02 · LAB01-CP02</span></li>
+<li><a href="#checkpoint-3">Associate the rule with an explicit resource scope</a><span>LAB01-REQ-03 · LAB01-CP03</span></li>
+<li><a href="#checkpoint-4">Route resource logs with diagnostic settings</a><span>LAB01-REQ-04 · LAB01-CP04</span></li>
+<li><a href="#checkpoint-5">Validate retention and archive economics</a><span>LAB01-REQ-05 · LAB01-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Establish regional workspace boundaries
 

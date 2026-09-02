@@ -1,45 +1,102 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-18 Compute Requirements, Virtual Machines, and Batch Architecture</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:b78c8cf970d79501a09169c2c824fbb3379bb9f3004fccdb688ad780d2db27ab</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="81" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Complete simulation batches inside the overnight window while keeping</tspan>
-    <tspan x="380" dy="20">orchestration available and paying for burst capacity only when jobs require</tspan>
-    <tspan x="380" dy="20">it.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Translate workload demand into compute requirements</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Compile and lint the compute Bicep design</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Preview the tagged reference deployment</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Deploy and verify the compute reference</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Validate Batch behavior and graceful degradation</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Zonal control and burst Batch topology</title>
+  <desc id="visual-desc">Topology showing a scheduler, zone-spread control virtual machines, Azure Batch autoscale pool, simulation storage, and operations monitoring.</desc>
+  <metadata>source-sha256:ae93cb1acfa121cae75c7c618889292f83080c0005ab6e3b0e5664d4070e42db</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0086A8"/><stop offset="1" stop-color="#6B3FA0"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#004E8C" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0086A8"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Zonal control tier">
+    <rect x="51" y="116" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Zonal control tier</text>
+  </g>
+  <g role="group" aria-label="Boundary: Azure Batch platform">
+    <rect x="51" y="116" width="1098" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Azure Batch platform</text>
+  </g>
+  <g role="group" aria-label="Boundary: Job data and evidence">
+    <rect x="496" y="446" width="653" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#66B8D1" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Job data and evidence</text>
+  </g>
+  <g role="group" aria-label="orchestration requests: scheduler to control-vms">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="306" y="195" width="143" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">orchestration requests</text>
+  </g>
+  <g role="group" aria-label="authenticated job submission: control-vms to batch-account">
+    <path d="M677 220 C822.5 220 822.5 220 968 220" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="731.5" y="195" width="182" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="822.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">authenticated job submission</text>
+  </g>
+  <g role="group" aria-label="autoscale and scheduling: batch-account to batch-pool">
+    <path d="M972.803 246.77 C600 246.77 600 523.23 227.197 523.23" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="522" y="360" width="156" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">autoscale and scheduling</text>
+  </g>
+  <g role="group" aria-label="staged task inputs: simulation-data to batch-pool">
+    <path d="M523 550 C377.5 550 377.5 550 232 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="319" y="525" width="117" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">staged task inputs</text>
+  </g>
+  <g role="group" aria-label="simulation results: batch-pool to simulation-data">
+    <path d="M232 550 C377.5 550 377.5 550 523 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="319" y="525" width="117" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="377.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">simulation results</text>
+  </g>
+  <g role="group" aria-label="job and capacity signals: batch-pool to monitoring">
+    <path d="M232 550 C600 550 600 550 968 550" fill="none" stroke="#0086A8" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="522" y="525" width="156" height="24" rx="12" fill="#ffffff" stroke="#66B8D1"/>
+    <text x="600" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">job and capacity signals</text>
+  </g>
+  <g role="group" aria-label="Service node: Simulation scheduler" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjE1NjVlOTctZTUzYS00NGE1LTk0NzktMTk5ZDhjM2M0MmQyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImVjNDM1OGZhLWM5NzctNDJlMi1hN2FiLTk5NGI1ZGU1NjgzMCIgeDE9IjkiIHkxPSIxNzcuOSIgeDI9IjkiIHkyPSIxNjAuMSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0xNjApIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC4wNjQiIHN0b3AtY29sb3I9IiMwYTdjZDciIC8+PHN0b3Agb2Zmc2V0PSIwLjMzOCIgc3RvcC1jb2xvcj0iIzJlOGNlMSIgLz48c3RvcCBvZmZzZXQ9IjAuNTk0IiBzdG9wLWNvbG9yPSIjNDg5N2U5IiAvPjxzdG9wIG9mZnNldD0iMC44MjIiIHN0b3AtY29sb3I9IiM1ODllZWQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhYWU5ZTQyYy0wOTFlLTRkYzctOGJlYy1hOTM0MThhZjkzYzQiIHgxPSItMjYuMTg5IiB5MT0iLTI5NS42IiB4Mj0iLTI2LjE4OSIgeTI9Ii0zMTEuMTA1IiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDM5LjQyNSAzMjEuNjEpIHNjYWxlKDEuMTU2IDEuMDI5KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZlYTExYiIgLz48c3RvcCBvZmZzZXQ9IjAuMjg0IiBzdG9wLWNvbG9yPSIjZmVhNTFhIiAvPjxzdG9wIG9mZnNldD0iMC41NDciIHN0b3AtY29sb3I9IiNmZWIwMTgiIC8+PHN0b3Agb2Zmc2V0PSIwLjgiIHN0b3AtY29sb3I9IiNmZmMzMTQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZkNzBmIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLTMyMkFydGJvYXJkIDE8L3RpdGxlPjxwYXRoIGQ9Ik0xNy45LDEwVjhsLS4zLS4xLTIuMi0uNy0uNi0xLjRMMTYsMy40LDE0LjUsMmwtLjMuMS0yLDEtMS40LS42TDEwLC4xSDhMNy44LjQsNy4xLDIuNmwtMS40LjVMMy40LDIsMiwzLjVsLjEuMywxLDJMMi42LDcuMi4xLDh2MmwuMy4xLDIuMi43LjYsMS40TDIsMTQuNiwzLjUsMTZsLjMtLjEsMi0xLDEuNC42TDgsMTcuOWgybC4xLS4zLjctMi4yLDEuNC0uNiwyLjMsMS4xLDEuNC0xLjQtLjEtLjMtMS0yLC42LTEuNFpNOSwxMi45QTMuODQyLDMuODQyLDAsMCwxLDUuMSw5LDMuODQyLDMuODQyLDAsMCwxLDksNS4xLDMuODQyLDMuODQyLDAsMCwxLDEyLjksOWgwQTMuODQyLDMuODQyLDAsMCwxLDksMTIuOVoiIGZpbGw9InVybCgjZWM0MzU4ZmEtYzk3Ny00MmUyLWE3YWItOTk0YjVkZTU2ODMwKSIgLz48cGF0aCBkPSJNOC41LDEwLjVINC45YS4yMTUuMjE1LDAsMCwxLS4yLS4ydi0uMUw5LDEuN2MwLS4xLjEtLjEuMi0uMWg0LjJhLjIxNS4yMTUsMCwwLDEsLjIuMnYuMUw4LjUsOC42aDQuOWEuMjE1LjIxNSwwLDAsMSwuMi4yLjEuMSwwLDAsMS0uMS4xTDUuMywxNy40Yy0uMSwwLS42LjUtLjQtLjJoMFoiIGZpbGw9InVybCgjYWFlOWU0MmMtMDkxZS00ZGM3LThiZWMtYTkzNDE4YWY5M2M0KSIgLz48L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Simulation scheduler</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Zone-spread control VMs" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZmQ0NTRmMWMtNTUwNi00NGI4LTg3NGUtODgxNGI4YjJmNzBiIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImYzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSIgeDE9IjguODgiIHkxPSIxMi4yMSIgeDI9IjguODgiIHkyPSIwLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYmRiNDVhMGItZWI1OC00OTcwLWE2MGEtZmIyY2UzMTRmODY2IiB4MT0iOC44OCIgeTE9IjE2Ljg0IiB4Mj0iOC44OCIgeTI9IjEyLjIxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE1IiBzdG9wLWNvbG9yPSIjY2NjIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzcwNzA3MCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1jb21wdXRlLTIxPC90aXRsZT48cmVjdCB4PSItMC4xMiIgeT0iMC4yMSIgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiByeD0iMC42IiBmaWxsPSJ1cmwoI2YzNGQ5NTY5LTJiZDAtNDAwMi04ZjE2LTNkMDFkODEwNmNiNSkiIC8+PHBvbHlnb24gcG9pbnRzPSIxMS44OCA0LjQ2IDExLjg4IDcuOTUgOC44OCA5LjcxIDguODggNi4yMSAxMS44OCA0LjQ2IiBmaWxsPSIjNTBlNmZmIiAvPjxwb2x5Z29uIHBvaW50cz0iMTEuODggNC40NiA4Ljg4IDYuMjIgNS44OCA0LjQ2IDguODggMi43MSAxMS44OCA0LjQ2IiBmaWxsPSIjYzNmMWZmIiAvPjxwb2x5Z29uIHBvaW50cz0iOC44OCA2LjIyIDguODggOS43MSA1Ljg4IDcuOTUgNS44OCA0LjQ2IDguODggNi4yMiIgZmlsbD0iIzljZWJmZiIgLz48cG9seWdvbiBwb2ludHM9IjUuODggNy45NSA4Ljg4IDYuMjEgOC44OCA5LjcxIDUuODggNy45NSIgZmlsbD0iI2MzZjFmZiIgLz48cG9seWdvbiBwb2ludHM9IjExLjg4IDcuOTUgOC44OCA2LjIxIDguODggOS43MSAxMS44OCA3Ljk1IiBmaWxsPSIjOWNlYmZmIiAvPjxwYXRoIGQ9Ik0xMi40OSwxNS44NGMtMS43OC0uMjgtMS44NS0xLjU2LTEuODUtMy42M0g3LjExYzAsMi4wNy0uMDYsMy4zNS0xLjg0LDMuNjNhMSwxLDAsMCwwLS44OSwxaDlBMSwxLDAsMCwwLDEyLjQ5LDE1Ljg0WiIgZmlsbD0idXJsKCNiZGI0NWEwYi1lYjU4LTQ5NzAtYTYwYS1mYjJjZTMxNGY4NjYpIiAvPjwvc3ZnPg=="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Zone-spread control</tspan>
+      <tspan x="600" dy="17">VMs</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Azure Batch account" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmOTJhODQtZDUxZC00N2U3LWFhNTItYzlkYzdjYjRmOTVlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJiNzM1OGZmLTg1ZDAtNGJlYS1hMWRhLWI2MTlmYTJiMGU1YSIgeDE9IjcuMDUiIHkxPSI4Ljk4IiB4Mj0iNy4wNSIgeTI9IjAuMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhNTE4ZmRjOS0xM2QzLTQ3NzctODMwZS04ZmE2ZDYxNDk5YzAiIHgxPSI3LjA1IiB5MT0iMy43OCIgeDI9IjcuMDUiIHkyPSIyLjQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOTRmOWIiIHN0b3Atb3BhY2l0eT0iMCIgLz48c3RvcCBvZmZzZXQ9IjAuMjYiIHN0b3AtY29sb3I9IiMxOTRmOWMiIHN0b3Atb3BhY2l0eT0iMC4wMSIgLz48c3RvcCBvZmZzZXQ9IjAuNDEiIHN0b3AtY29sb3I9IiMxODUxOWUiIHN0b3Atb3BhY2l0eT0iMC4wNSIgLz48c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMxNjU0YTIiIHN0b3Atb3BhY2l0eT0iMC4xMSIgLz48c3RvcCBvZmZzZXQ9IjAuNjIiIHN0b3AtY29sb3I9IiMxNDU3YTciIHN0b3Atb3BhY2l0eT0iMC4yMSIgLz48c3RvcCBvZmZzZXQ9IjAuNzEiIHN0b3AtY29sb3I9IiMxMTVjYWUiIHN0b3Atb3BhY2l0eT0iMC4zMyIgLz48c3RvcCBvZmZzZXQ9IjAuOCIgc3RvcC1jb2xvcj0iIzBkNjJiNiIgc3RvcC1vcGFjaXR5PSIwLjQ3IiAvPjxzdG9wIG9mZnNldD0iMC44OCIgc3RvcC1jb2xvcj0iIzA5NmFjMCIgc3RvcC1vcGFjaXR5PSIwLjY1IiAvPjxzdG9wIG9mZnNldD0iMC45NSIgc3RvcC1jb2xvcj0iIzA0NzJjYiIgc3RvcC1vcGFjaXR5PSIwLjg1IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwNzhkNCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNMTUuNzgsOC44OSwxNy42NSw3Yy4xNS0uMTYuMS0uMjktLjEzLS4yOWgtLjkzYS4yMy4yMywwLDAsMS0uMjMtLjI0YzAtMS4xOC0uMy00LjQ3LTQuOC00LjU4YS4yMy4yMywwLDAsMC0uMjQuMjNWMy4yNmEuMjMuMjMsMCwwLDAsLjI1LjIzLDIuNzUsMi43NSwwLDAsMSwzLjMzLDMsLjIzLjIzLDAsMCwxLS4yMy4yNEgxMy44Yy0uMjMsMC0uMjguMTMtLjEzLjNsMS43NCwxLjlBLjI0LjI0LDAsMCwwLDE1Ljc4LDguODlaIiBmaWxsPSIjOTQ5NDk0IiAvPjxnPjxyZWN0IHg9IjAuODIiIHk9IjAuMzQiIHdpZHRoPSIxMi40NiIgaGVpZ2h0PSI4LjY0IiByeD0iMC41NyIgZmlsbD0idXJsKCNiYjczNThmZi04NWQwLTRiZWEtYTFkYS1iNjE5ZmEyYjBlNWEpIiAvPjxwYXRoIGQ9Ik0xLjM4LjM0SDEyLjg3YS40MS40MSwwLDAsMSwuNDEuNDFWMi40YTAsMCwwLDAsMSwwLDBILjgyYTAsMCwwLDAsMSwwLDBWLjkxQS41Ny41NywwLDAsMSwxLjM4LjM0WiIgZmlsbD0iIzgzYjlmOSIgLz48cmVjdCB4PSIwLjgyIiB5PSIyLjQiIHdpZHRoPSIxMi40NiIgaGVpZ2h0PSIxLjM4IiBmaWxsPSJ1cmwoI2E1MThmZGM5LTEzZDMtNDc3Ny04MzBlLThmYTZkNjE0OTljMCkiIC8+PC9nPjxyZWN0IHg9IjkuOSIgeT0iMTAuOTUiIHdpZHRoPSI3LjkyIiBoZWlnaHQ9IjUuNDkiIHJ4PSIwLjM2IiBmaWxsPSIjMDA1YmExIiAvPjxwYXRoIGQ9Ik0yLjYxLDMuMTloOC44N2EuMTkuMTksMCwwLDEsLjE5LjE4VjQuM2EuMTkuMTksMCwwLDEtLjE5LjE3SDIuNjFhLjE4LjE4LDAsMCwxLS4xOS0uMTdWMy4zN0EuMTguMTgsMCwwLDEsMi42MSwzLjE5WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNMi42MSw1aDguODhhLjE3LjE3LDAsMCwxLC4xOC4xN3YuOTNhLjE4LjE4LDAsMCwxLS4xOC4xOEgyLjYxYS4xOC4xOCwwLDAsMS0uMTgtLjE4VjUuMjFBLjE3LjE3LDAsMCwxLDIuNjEsNVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuNjEsNi44OWg4Ljg4YS4xOC4xOCwwLDAsMSwuMTguMThWOGEuMTguMTgsMCwwLDEtLjE4LjE3SDIuNjFBLjE4LjE4LDAsMCwxLDIuNDMsOFY3LjA3QS4xOC4xOCwwLDAsMSwyLjYxLDYuODlaIiBmaWxsPSIjZmZmIiAvPjxnPjxyZWN0IHg9IjguNTkiIHk9IjkuNzciIHdpZHRoPSI3LjkyIiBoZWlnaHQ9IjUuNDkiIHJ4PSIwLjM2IiBmaWxsPSIjMDA3OGQ0IiAvPjxwYXRoIGQ9Ik05LDkuNzdoNy4zYS4yNi4yNiwwLDAsMSwuMjYuMjZ2MWEwLDAsMCwwLDEsMCwwSDguNTlhMCwwLDAsMCwxLDAsMHYtLjk1QS4zNi4zNiwwLDAsMSw5LDkuNzdaIiBmaWxsPSIjODNiOWY5IiAvPjwvZz48cGF0aCBkPSJNOS43MywxMS41OWg1LjY0YS4xMi4xMiwwLDAsMSwuMTIuMTF2LjU5YS4xMi4xMiwwLDAsMS0uMTIuMTFIOS43M2EuMTEuMTEsMCwwLDEtLjEyLS4xMVYxMS43QS4xMS4xMSwwLDAsMSw5LjczLDExLjU5WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNOS43MywxMi43Nmg1LjY0YS4xMS4xMSwwLDAsMSwuMTIuMTF2LjU5YS4xMS4xMSwwLDAsMS0uMTIuMTFIOS43M2EuMTIuMTIsMCwwLDEtLjEyLS4xMXYtLjU5QS4xMi4xMiwwLDAsMSw5LjczLDEyLjc2WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNOS43MywxMy45NGg1LjY0YS4xMS4xMSwwLDAsMSwuMTIuMTF2LjU5YS4xMS4xMSwwLDAsMS0uMTIuMTFIOS43M2EuMTIuMTIsMCwwLDEtLjEyLS4xMXYtLjU5QS4xMi4xMiwwLDAsMSw5LjczLDEzLjk0WiIgZmlsbD0iI2ZmZiIgLz48L3N2Zz4="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Azure Batch account</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Autoscaled Batch pool" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmOTJhODQtZDUxZC00N2U3LWFhNTItYzlkYzdjYjRmOTVlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImJiNzM1OGZmLTg1ZDAtNGJlYS1hMWRhLWI2MTlmYTJiMGU1YSIgeDE9IjcuMDUiIHkxPSI4Ljk4IiB4Mj0iNy4wNSIgeTI9IjAuMzQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhNTE4ZmRjOS0xM2QzLTQ3NzctODMwZS04ZmE2ZDYxNDk5YzAiIHgxPSI3LjA1IiB5MT0iMy43OCIgeDI9IjcuMDUiIHkyPSIyLjQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxOTRmOWIiIHN0b3Atb3BhY2l0eT0iMCIgLz48c3RvcCBvZmZzZXQ9IjAuMjYiIHN0b3AtY29sb3I9IiMxOTRmOWMiIHN0b3Atb3BhY2l0eT0iMC4wMSIgLz48c3RvcCBvZmZzZXQ9IjAuNDEiIHN0b3AtY29sb3I9IiMxODUxOWUiIHN0b3Atb3BhY2l0eT0iMC4wNSIgLz48c3RvcCBvZmZzZXQ9IjAuNTIiIHN0b3AtY29sb3I9IiMxNjU0YTIiIHN0b3Atb3BhY2l0eT0iMC4xMSIgLz48c3RvcCBvZmZzZXQ9IjAuNjIiIHN0b3AtY29sb3I9IiMxNDU3YTciIHN0b3Atb3BhY2l0eT0iMC4yMSIgLz48c3RvcCBvZmZzZXQ9IjAuNzEiIHN0b3AtY29sb3I9IiMxMTVjYWUiIHN0b3Atb3BhY2l0eT0iMC4zMyIgLz48c3RvcCBvZmZzZXQ9IjAuOCIgc3RvcC1jb2xvcj0iIzBkNjJiNiIgc3RvcC1vcGFjaXR5PSIwLjQ3IiAvPjxzdG9wIG9mZnNldD0iMC44OCIgc3RvcC1jb2xvcj0iIzA5NmFjMCIgc3RvcC1vcGFjaXR5PSIwLjY1IiAvPjxzdG9wIG9mZnNldD0iMC45NSIgc3RvcC1jb2xvcj0iIzA0NzJjYiIgc3RvcC1vcGFjaXR5PSIwLjg1IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzAwNzhkNCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNMTUuNzgsOC44OSwxNy42NSw3Yy4xNS0uMTYuMS0uMjktLjEzLS4yOWgtLjkzYS4yMy4yMywwLDAsMS0uMjMtLjI0YzAtMS4xOC0uMy00LjQ3LTQuOC00LjU4YS4yMy4yMywwLDAsMC0uMjQuMjNWMy4yNmEuMjMuMjMsMCwwLDAsLjI1LjIzLDIuNzUsMi43NSwwLDAsMSwzLjMzLDMsLjIzLjIzLDAsMCwxLS4yMy4yNEgxMy44Yy0uMjMsMC0uMjguMTMtLjEzLjNsMS43NCwxLjlBLjI0LjI0LDAsMCwwLDE1Ljc4LDguODlaIiBmaWxsPSIjOTQ5NDk0IiAvPjxnPjxyZWN0IHg9IjAuODIiIHk9IjAuMzQiIHdpZHRoPSIxMi40NiIgaGVpZ2h0PSI4LjY0IiByeD0iMC41NyIgZmlsbD0idXJsKCNiYjczNThmZi04NWQwLTRiZWEtYTFkYS1iNjE5ZmEyYjBlNWEpIiAvPjxwYXRoIGQ9Ik0xLjM4LjM0SDEyLjg3YS40MS40MSwwLDAsMSwuNDEuNDFWMi40YTAsMCwwLDAsMSwwLDBILjgyYTAsMCwwLDAsMSwwLDBWLjkxQS41Ny41NywwLDAsMSwxLjM4LjM0WiIgZmlsbD0iIzgzYjlmOSIgLz48cmVjdCB4PSIwLjgyIiB5PSIyLjQiIHdpZHRoPSIxMi40NiIgaGVpZ2h0PSIxLjM4IiBmaWxsPSJ1cmwoI2E1MThmZGM5LTEzZDMtNDc3Ny04MzBlLThmYTZkNjE0OTljMCkiIC8+PC9nPjxyZWN0IHg9IjkuOSIgeT0iMTAuOTUiIHdpZHRoPSI3LjkyIiBoZWlnaHQ9IjUuNDkiIHJ4PSIwLjM2IiBmaWxsPSIjMDA1YmExIiAvPjxwYXRoIGQ9Ik0yLjYxLDMuMTloOC44N2EuMTkuMTksMCwwLDEsLjE5LjE4VjQuM2EuMTkuMTksMCwwLDEtLjE5LjE3SDIuNjFhLjE4LjE4LDAsMCwxLS4xOS0uMTdWMy4zN0EuMTguMTgsMCwwLDEsMi42MSwzLjE5WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNMi42MSw1aDguODhhLjE3LjE3LDAsMCwxLC4xOC4xN3YuOTNhLjE4LjE4LDAsMCwxLS4xOC4xOEgyLjYxYS4xOC4xOCwwLDAsMS0uMTgtLjE4VjUuMjFBLjE3LjE3LDAsMCwxLDIuNjEsNVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuNjEsNi44OWg4Ljg4YS4xOC4xOCwwLDAsMSwuMTguMThWOGEuMTguMTgsMCwwLDEtLjE4LjE3SDIuNjFBLjE4LjE4LDAsMCwxLDIuNDMsOFY3LjA3QS4xOC4xOCwwLDAsMSwyLjYxLDYuODlaIiBmaWxsPSIjZmZmIiAvPjxnPjxyZWN0IHg9IjguNTkiIHk9IjkuNzciIHdpZHRoPSI3LjkyIiBoZWlnaHQ9IjUuNDkiIHJ4PSIwLjM2IiBmaWxsPSIjMDA3OGQ0IiAvPjxwYXRoIGQ9Ik05LDkuNzdoNy4zYS4yNi4yNiwwLDAsMSwuMjYuMjZ2MWEwLDAsMCwwLDEsMCwwSDguNTlhMCwwLDAsMCwxLDAsMHYtLjk1QS4zNi4zNiwwLDAsMSw5LDkuNzdaIiBmaWxsPSIjODNiOWY5IiAvPjwvZz48cGF0aCBkPSJNOS43MywxMS41OWg1LjY0YS4xMi4xMiwwLDAsMSwuMTIuMTF2LjU5YS4xMi4xMiwwLDAsMS0uMTIuMTFIOS43M2EuMTEuMTEsMCwwLDEtLjEyLS4xMVYxMS43QS4xMS4xMSwwLDAsMSw5LjczLDExLjU5WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNOS43MywxMi43Nmg1LjY0YS4xMS4xMSwwLDAsMSwuMTIuMTF2LjU5YS4xMS4xMSwwLDAsMS0uMTIuMTFIOS43M2EuMTIuMTIsMCwwLDEtLjEyLS4xMXYtLjU5QS4xMi4xMiwwLDAsMSw5LjczLDEyLjc2WiIgZmlsbD0iI2ZmZiIgLz48cGF0aCBkPSJNOS43MywxMy45NGg1LjY0YS4xMS4xMSwwLDAsMSwuMTIuMTF2LjU5YS4xMS4xMSwwLDAsMS0uMTIuMTFIOS43M2EuMTIuMTIsMCwwLDEtLjEyLS4xMXYtLjU5QS4xMi4xMiwwLDAsMSw5LjczLDEzLjk0WiIgZmlsbD0iI2ZmZiIgLz48L3N2Zz4="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Autoscaled Batch pool</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Simulation input and output" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Simulation input and</tspan>
+      <tspan x="600" dy="17">output</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Capacity and job telemetry" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#004E8C" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTRlNzY0Y2QtMmU3My00NzJmLWI4OGEtYmY4YmZjMmMyOTk0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImFjOGIzMmRhLTMwY2EtNGI5Mi04ZDBmLThkMmQ1ZWYyNzhhMCIgY3g9IjUuNzIiIGN5PSI3LjQ1IiByPSI4LjQyIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDMuMjMgMS41MSkgc2NhbGUoMS4wMSAxLjAxKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xOCIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48c3RvcCBvZmZzZXQ9IjAuNTYiIHN0b3AtY29sb3I9IiM1YzlmZWUiIC8+PHN0b3Agb2Zmc2V0PSIwLjY5IiBzdG9wLWNvbG9yPSIjNTU5Y2VkIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzRhOTdlOSIgLz48c3RvcCBvZmZzZXQ9IjAuODYiIHN0b3AtY29sb3I9IiMzOTkwZTQiIC8+PHN0b3Agb2Zmc2V0PSIwLjkzIiBzdG9wLWNvbG9yPSIjMjM4N2RlIiAvPjxzdG9wIG9mZnNldD0iMC45OSIgc3RvcC1jb2xvcj0iIzA4N2JkNiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PC9yYWRpYWxHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9ImE5OTU0ODIwLWNiMzgtNDk0My05ODQyLWYwYTU2OGQyYjAxNSIgY3g9IjI4LjE4IiBjeT0iMjAyLjI5IiByPSIyLjciIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Ljc3IC0xODUuMDEpIHNjYWxlKDAuOTUpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE5IiBzdG9wLWNvbG9yPSIjOGM4ZTkwIiAvPjxzdG9wIG9mZnNldD0iMC4zNSIgc3RvcC1jb2xvcj0iIzg0ODY4OCIgLz48c3RvcCBvZmZzZXQ9IjAuNiIgc3RvcC1jb2xvcj0iIzZlNzA3MSIgLz48c3RvcCBvZmZzZXQ9IjAuOTEiIHN0b3AtY29sb3I9IiM0YTRiNGMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjM2UzZjNmIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLW1hbmFnZS0zMTc8L3RpdGxlPjxlbGxpcHNlIGN4PSI5IiBjeT0iOSIgcng9IjguNSIgcnk9IjguNDciIGZpbGw9InVybCgjYWM4YjMyZGEtMzBjYS00YjkyLThkMGYtOGQyZDVlZjI3OGEwKSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSI3LjQiIHJ5PSI3LjM3IiBmaWxsPSIjZmZmIiAvPjxwYXRoIGQ9Ik0yLjcyLDkuNDRhNi4yNCw2LjI0LDAsMCwwLDEuODIsNGwyLTJhMy41MywzLjUzLDAsMCwxLTEtMloiIGZpbGw9IiM5Y2ViZmYiIC8+PHBhdGggZD0iTTEzLjEzLDQuMjdBNi4yNSw2LjI1LDAsMCwwLDkuNDQsMi43NFY1LjUzYTMuNDEsMy40MSwwLDAsMSwxLjcxLjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik00Ljg3LDQuMjdsMiwyYTMuNDEsMy40MSwwLDAsMSwxLjcxLS43VjIuNzRBNi4yNSw2LjI1LDAsMCwwLDQuODcsNC4yN1oiIGZpbGw9IiMzMmJlZGQiIC8+PHBhdGggZD0iTTExLjc4LDYuODVhMy42LDMuNiwwLDAsMSwuNzEsMS43MWgyLjc5YTYuMTYsNi4xNiwwLDAsMC0xLjUzLTMuNjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik02LjIyLDYuODVsLTItMkE2LjE2LDYuMTYsMCwwLDAsMi43Miw4LjU2SDUuNTFBMy42LDMuNiwwLDAsMSw2LjIyLDYuODVaIiBmaWxsPSIjNTBlNmZmIiAvPjxwYXRoIGQ9Ik0xNC4xNCw3YS40NS40NSwwLDAsMC0uNTctLjI1TDkuNDUsOC40MWwuMzIuODEsNC4xMi0xLjYzQS40NC40NCwwLDAsMCwxNC4xNCw3WiIgZmlsbD0iI2YwNDA0OSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSIxLjIiIHJ5PSIxLjIiIGZpbGw9InVybCgjYTk5NTQ4MjAtY2IzOC00OTQzLTk4NDItZjBhNTY4ZDJiMDE1KSIgLz48L3N2Zz4="/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Capacity and job</tspan>
+      <tspan x="1045" dy="17">telemetry</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#486581">A resilient control tier submits burst simulations to an autoscaled Batch pool while storage and monitoring preserve job evidence.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

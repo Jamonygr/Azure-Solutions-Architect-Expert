@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-12 — Storage Economics, Protection, and Durability
 
+![Data banner showing hot objects moving through lifecycle tiers with geo-zone replication, versions, and immutable evidence controls.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-11](../11-unstructured-data-design/README.md) · [Lab catalog](../README.md) · [LAB-13 →](../13-data-integration-analytics/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Storage Economics, Protection, and Durability](diagrams/architecture.svg)
+![Topology showing hot objects governed by lifecycle policy, cool and archive tiers, a secondary GZRS region, protected versions, and immutable evidence.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Classified objects transition through access tiers while GZRS, versioning, deletion controls, and immutability address separate risks. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing storage durability patterns and highlighting StorageV2 with GZRS and lifecycle policies.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** GZRS and per-class recovery tests protect durability without confusing immutability with availability.
-- **Security:** Locked audit containers, least-privilege data roles, and private access preserve evidence integrity.
-- **Cost Optimization:** Lifecycle timing follows actual retention and retrieval behavior for media and audit classes.
-- **Operational Excellence:** Classification, policy simulation, lock approval, and exception evidence form a controlled lifecycle process.
-- **Performance Efficiency:** Hot access remains available for active media while cold evidence uses capacity-efficient tiers.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>GZRS and per-class recovery tests protect durability without confusing immutability with availability.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Locked audit containers, least-privilege data roles, and private access preserve evidence integrity.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Lifecycle timing follows actual retention and retrieval behavior for media and audit classes.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Classification, policy simulation, lock approval, and exception evidence form a controlled lifecycle process.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Hot access remains available for active media while cold evidence uses capacity-efficient tiers.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-120001
 Synthetic sample: `{"labId":"LAB-12","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Classify access and cost drivers</a><span>LAB12-REQ-01 · LAB12-CP01</span></li>
+<li><a href="#checkpoint-2">Select regional durability</a><span>LAB12-REQ-02 · LAB12-CP02</span></li>
+<li><a href="#checkpoint-3">Automate lifecycle transitions</a><span>LAB12-REQ-03 · LAB12-CP03</span></li>
+<li><a href="#checkpoint-4">Layer versioning and delete protection</a><span>LAB12-REQ-04 · LAB12-CP04</span></li>
+<li><a href="#checkpoint-5">Validate immutable evidence boundaries</a><span>LAB12-REQ-05 · LAB12-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Classify access and cost drivers
 

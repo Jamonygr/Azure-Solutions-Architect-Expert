@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-24 — Internet and Hybrid Connectivity with Network Performance
 
+![Infrastructure banner showing global clients entering Front Door and datacenters connecting through redundant ExpressRoute and VPN into Azure transit.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-23](../23-workload-data-migration/README.md) · [Lab catalog](../README.md) · [LAB-25 →](../25-network-security-traffic-delivery/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Internet and Hybrid Connectivity with Network Performance](diagrams/architecture.svg)
+![Topology showing global clients through Front Door, two datacenters through dual ExpressRoute and VPN backup, Virtual WAN transit, private DNS, and monitoring.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Front Door accelerates internet entry while dual ExpressRoute circuits, VPN failover, and Virtual WAN provide governed hybrid transit. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing connectivity patterns and highlighting Front Door, dual ExpressRoute, VPN failover, and Virtual WAN.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Independent edge, dual-circuit, VPN, gateway, and route tests expose each connectivity failure domain.
-- **Security:** Premium edge controls and encrypted private transport protect both public entry and regulated transactions.
-- **Cost Optimization:** Redundant circuits and full VPN capacity are tied to regulatory continuity instead of duplicated indiscriminately.
-- **Operational Excellence:** Route, encryption, health, failover, and restoration evidence provide a deterministic network runbook.
-- **Performance Efficiency:** Measured encrypted throughput sizes gateways and tunnels for the full four-hour peak.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Independent edge, dual-circuit, VPN, gateway, and route tests expose each connectivity failure domain.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Premium edge controls and encrypted private transport protect both public entry and regulated transactions.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Redundant circuits and full VPN capacity are tied to regulatory continuity instead of duplicated indiscriminately.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Route, encryption, health, failover, and restoration evidence provide a deterministic network runbook.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Measured encrypted throughput sizes gateways and tunnels for the full four-hour peak.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-240001
 Synthetic sample: `{"labId":"LAB-24","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Design global internet entry and DNS</a><span>LAB24-REQ-01 · LAB24-CP01</span></li>
+<li><a href="#checkpoint-2">Validate private circuit and VPN failover design</a><span>LAB24-REQ-02 · LAB24-CP02</span></li>
+<li><a href="#checkpoint-3">Prove transit routing and route ownership</a><span>LAB24-REQ-03 · LAB24-CP03</span></li>
+<li><a href="#checkpoint-4">Test reachability and name resolution</a><span>LAB24-REQ-04 · LAB24-CP04</span></li>
+<li><a href="#checkpoint-5">Establish capacity and performance baselines</a><span>LAB24-REQ-05 · LAB24-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Design global internet entry and DNS
 

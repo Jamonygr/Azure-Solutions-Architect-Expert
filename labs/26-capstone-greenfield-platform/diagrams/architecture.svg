@@ -1,45 +1,136 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-26 Greenfield Multi-Region Digital Platform</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:c2a9b25a5a03b1e8119c350a07d2dbe301a48fb59657daf388063830f41a26e6</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="81" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Launch a secure global platform with controlled regional-failure behavior,</tspan>
-    <tspan x="380" dy="20">fast product delivery, auditable governance, and a defensible production</tspan>
-    <tspan x="380" dy="20">cost envelope.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Reconcile requirements and architecture decisions</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Compile the multi-region Bicep reference</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Verify foundation observability and data guardrails</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Preview cost and policy impact</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Run the integrated regional-failure simulation</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Active-active regulated platform topology</title>
+  <desc id="visual-desc">Topology showing Microsoft Entra External ID, Front Door Premium, active application stamps in West and North Europe, coordinated data, policy guardrails, and monitoring.</desc>
+  <metadata>source-sha256:fadb92efdb518c2605a1f57c794885ed2c1c5ec7c6ab21f6856152a968a202ec</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF1FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#008F88"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#383FA3" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Global identity and edge">
+    <rect x="51" y="116" width="504.667" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#8B94D8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#565D87">Global identity and edge</text>
+  </g>
+  <g role="group" aria-label="Boundary: West Europe application stamp">
+    <rect x="644.333" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#8B94D8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="660.333" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#565D87">West Europe application stamp</text>
+  </g>
+  <g role="group" aria-label="Boundary: North Europe application stamp">
+    <rect x="941" y="116" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#8B94D8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="957" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#565D87">North Europe application stamp</text>
+  </g>
+  <g role="group" aria-label="Boundary: Shared governance and evidence">
+    <rect x="199.333" y="446" width="801.333" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#8B94D8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="215.333" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#565D87">Shared governance and evidence</text>
+  </g>
+  <g role="group" aria-label="customer authentication context: external-id to front-door">
+    <path d="M232 220 C303.333 220 303.333 220 374.667 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="202.583" y="195" width="201.5" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="303.333" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">customer authentication context</text>
+  </g>
+  <g role="group" aria-label="healthy global route: front-door to west-app">
+    <path d="M528.667 220 C600 220 600 220 671.333 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="535" y="195" width="130" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="600" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">healthy global route</text>
+  </g>
+  <g role="group" aria-label="healthy global route: front-door to north-app">
+    <path d="M528.667 220 C748.333 220 748.333 220 968 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="683.333" y="195" width="130" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="748.333" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">healthy global route</text>
+  </g>
+  <g role="group" aria-label="regional data operations: west-app to global-data">
+    <path d="M686.484 265.866 C525.833 265.866 525.833 504.134 365.183 504.134" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="447.833" y="360" width="156" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="525.833" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">regional data operations</text>
+  </g>
+  <g role="group" aria-label="regional data operations: north-app to global-data">
+    <path d="M974.65 251.302 C674.167 251.302 674.167 518.698 373.684 518.698" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="596.167" y="360" width="156" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="674.167" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">regional data operations</text>
+  </g>
+  <g role="group" aria-label="deployment guardrails: policy to west-app">
+    <path d="M631.569 479.769 C674.167 479.769 674.167 290.231 716.765 290.231" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="605.917" y="360" width="136.5" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="674.167" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">deployment guardrails</text>
+  </g>
+  <g role="group" aria-label="deployment guardrails: policy to north-app">
+    <path d="M661.849 504.134 C822.5 504.134 822.5 265.866 983.151 265.866" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="754.25" y="360" width="136.5" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="822.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">deployment guardrails</text>
+  </g>
+  <g role="group" aria-label="regional telemetry: west-app to observability">
+    <path d="M779.902 290.231 C822.5 290.231 822.5 479.769 865.098 479.769" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="764" y="360" width="117" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="822.5" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">regional telemetry</text>
+  </g>
+  <g role="group" aria-label="regional telemetry: north-app to observability">
+    <path d="M1013.43 290.231 C970.833 290.231 970.833 479.769 928.235 479.769" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="912.333" y="360" width="117" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="970.833" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">regional telemetry</text>
+  </g>
+  <g role="group" aria-label="failure simulation evidence: observability to front-door">
+    <path d="M834.817 504.134 C674.167 504.134 674.167 265.866 513.516 265.866" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="586.417" y="360" width="175.5" height="24" rx="12" fill="#ffffff" stroke="#8B94D8"/>
+    <text x="674.167" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#1D234D">failure simulation evidence</text>
+  </g>
+  <g role="group" aria-label="Service node: Microsoft Entra External ID" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0idXVpZC1mOGQ0ZDM5Mi03YzEyLTRiZDktYmFmZi02NmZiZjc4MTRiOTEiIGRhdGEtbmFtZT0iTGF5ZXIgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCI+CiAgPHBhdGggZD0ibTMuODAyLDE0LjAzMmMuMzg4LjI0MiwxLjAzMy41MTEsMS43MTUuNTExLjYyMSwwLDEuMTk4LS4xOCwxLjY3Ni0uNDg3LDAsMCwuMDAxLDAsLjAwMi0uMDAxbDEuODA1LTEuMTI4djQuMDczYy0uMjg2LDAtLjU3NC0uMDc4LS44MjQtLjIzNGwtNC4zNzQtMi43MzRaIiBmaWxsPSIjMjI1MDg2Ii8+CiAgPHBhdGggZD0ibTcuODUzLDEuNTA3TC4zNTMsOS45NjdjLS41NzkuNjU0LS40MjgsMS42NDIuMzIzLDIuMTExLDAsMCwyLjc3NiwxLjczNSwzLjEyNiwxLjk1NC4zODguMjQyLDEuMDMzLjUxMSwxLjcxNS41MTEuNjIxLDAsMS4xOTgtLjE4LDEuNjc2LS40ODcsMCwwLC4wMDEsMCwuMDAyLS4wMDFsMS44MDUtMS4xMjgtNC4zNjQtMi43MjgsNC4zNjUtNC45MjRWMXMwLDAsMCwwYy0uNDI0LDAtLjg0Ny4xNjktMS4xNDcuNTA3WiIgZmlsbD0iIzZkZiIvPgogIDxwb2x5Z29uIHBvaW50cz0iNC42MzYgMTAuMTk5IDQuNjg4IDEwLjIzMSA5IDEyLjkyNyA5LjAwMSAxMi45MjcgOS4wMDEgMTIuOTI3IDkuMDAxIDUuMjc2IDkgNS4yNzUgNC42MzYgMTAuMTk5IiBmaWxsPSIjY2JmOGZmIi8+CiAgPHBhdGggZD0ibTE3LjMyNCwxMi4wNzhjLjc1MS0uNDY5LjkwMi0xLjQ1Ny4zMjMtMi4xMTFsLTQuOTIxLTUuNTUxYy0uMzk3LS4xODUtLjg0Mi0uMjkxLTEuMzEzLS4yOTEtLjkyNSwwLTEuNzUyLjM5OS0yLjMwMiwxLjAyNmwtLjEwOS4xMjNoMHM0LjM2NCw0LjkyNCw0LjM2NCw0LjkyNGgwczAsMCwwLDBsLTQuMzY1LDIuNzI4djQuMDczYy4yODcsMCwuNTczLS4wNzguODIzLS4yMzRsNy41LTQuNjg4WiIgZmlsbD0iIzA3NDc5MyIvPgogIDxwYXRoIGQ9Im05LjAwMSwxdjQuMjc1cy4xMDktLjEyMy4xMDktLjEyM2MuNTUtLjYyNywxLjM3Ny0xLjAyNiwyLjMwMi0xLjAyNi40NzIsMCwuOTE2LjEwNywxLjMxMy4yOTFsLTIuNTc5LTIuOTA5Yy0uMjk5LS4zMzgtLjcyMy0uNTA3LTEuMTQ2LS41MDdaIiBmaWxsPSIjMDI5NGU0Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIxMy4zNjUgMTAuMTk5IDEzLjM2NSAxMC4xOTkgMTMuMzY1IDEwLjE5OSA5LjAwMSA1LjI3NiA5LjAwMSAxMi45MjYgMTMuMzY1IDEwLjE5OSIgZmlsbD0iIzk2YmNjMiIvPgo8L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="155" dy="0">Microsoft Entra</tspan>
+      <tspan x="155" dy="17">External ID</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Front Door Premium" filter="url(#shadow)">
+    <rect x="373.667" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="423.667" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjljMjRkZjUtZTBkZC00ODM4LWEzODUtN2MxMWMyZDM0MzA0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFhMmVlNjk3LWU4ZDEtNGRhMS1hOGM1LTY0YzhlYmJiNzRjZiIgeDE9IjkiIHkxPSIxMy44MyIgeDI9IjkiIHkyPSIxLjA3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC44MiIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48dGl0bGU+SWNvbi1uZXR3b3JraW5nLTczPC90aXRsZT48cGF0aCBkPSJNMTgsOS44M0E0LDQsMCwwLDAsMTQuNDksNiw1LjEsNS4xLDAsMCwwLDkuMjQsMS4wN2E1LjIzLDUuMjMsMCwwLDAtNSwzLjQxQTQuODMsNC44MywwLDAsMCwwLDkuMTJhNC45LDQuOSwwLDAsMCw1LjA3LDQuNzFsLjQ0LDBoOC4yMWEuNzguNzgsMCwwLDAsLjIyLDBBNC4wOSw0LjA5LDAsMCwwLDE4LDkuODNaIiBmaWxsPSJ1cmwoI2FhMmVlNjk3LWU4ZDEtNGRhMS1hOGM1LTY0YzhlYmJiNzRjZikiIC8+PHBhdGggaWQ9ImYwMjc2MTM1LTAwNzktNDg5Ny1hNTE4LTIxZWI2MzQ3MmMxNiIgZD0iTTYuNjMsNi44Mmg1LjA2djdINi42M1oiIGZpbGw9IiNmMmYyZjIiIC8+PHBhdGggaWQ9ImU1Mjg4NzhkLTJlZDctNDM5Mi05NGU2LTk5YzZmYzk3MWJjYiIgZD0iTTEyLjYxLDYuMzdsLTMuNDktMmEuMjUuMjUsMCwwLDAtLjMxLjE1czAsLjA2LDAsLjA4VjE2LjY4YS4yNS4yNSwwLDAsMCwuMjQuMjVoLjA4bDMuNDktMi4wNmEuMjUuMjUsMCwwLDAsLjE3LS4yM3YtOEEuMjYuMjYsMCwwLDAsMTIuNjEsNi4zN1oiIGZpbGw9IiM1MGU2ZmYiIC8+PC9zdmc+"/>
+    <text x="451.667" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="451.667" dy="0">Front Door Premium</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: West Europe PaaS stamp" filter="url(#shadow)">
+    <rect x="670.333" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="720.333" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEzYTQ0MDkzLWIxNTctNDI2ZS1hOGZlLWNlYzlmOWMyMzk3OCIgeDE9IjExLjcyOSIgeTE9IjQuODgiIHgyPSIxMS43MjkiIHkyPSIxMy4wOTkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAuMDAxIiBzdG9wLWNvbG9yPSIjNzczYWRjIiAvPjxzdG9wIG9mZnNldD0iMC41MjgiIHN0b3AtY29sb3I9IiM2NjM1YmIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNTUyZjk5IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhZDgzODg1OS0wM2Y0LTQ3MmYtODFiYy1lYmM5MjFkNzEzMzUiIHgxPSI2LjM1IiB5MT0iMTMuOTE0IiB4Mj0iNi4zNSIgeTI9IjQuMTk4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjAwMSIgc3RvcC1jb2xvcj0iIzc3M2FkYyIgLz48c3RvcCBvZmZzZXQ9IjAuMzA3IiBzdG9wLWNvbG9yPSIjNzkzZGRkIiAvPjxzdG9wIG9mZnNldD0iMC41MzIiIHN0b3AtY29sb3I9IiM4MDQ2ZTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjczMSIgc3RvcC1jb2xvcj0iIzhjNTZlNyIgLz48c3RvcCBvZmZzZXQ9IjAuOTE1IiBzdG9wLWNvbG9yPSIjOWM2ZGVmIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2E2N2FmNCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBpZD0iYWU4MjQ3MGQtN2E2Yy00ZGZlLTg1MzMtNTlkOGZmOTQ4NjI5Ij48Zz48cGF0aCBkPSJNOC42MTcsOC42NDRILjYzOVYxLjc4NEExLjE2LDEuMTYsMCwwLDEsMS43ODguNjI0SDguNjE3Wk0xLjYzLDcuNjUzaDZWMS41OTRIMS43ODhhLjE1OC4xNTgsMCwwLDAtLjE1OC4xNThoMFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTE3LjUsOC42NDRIOS41MjNWLjYyNGg2LjgyOEExLjE2LDEuMTYsMCwwLDEsMTcuNSwxLjc4NFptLTYuOTg3LS45OTFoNlYxLjc4NGEuMTU3LjE1NywwLDAsMC0uMTIzLS4xODcuMi4yLDAsMCwwLS4wMzUsMEgxMC41MTNaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik04LjYxNywxNy40ODVIMS43ODhBMS4xNDksMS4xNDksMCwwLDEsLjYzOSwxNi4zNDdWOS40NzZIOC42MTdaTTEuNjMsMTAuNDY3djUuODhhLjE1OC4xNTgsMCwwLDAsLjE1OC4xNThINy42MjZWMTAuNDY3WiIgZmlsbD0iIzk0OTQ5NCIgLz48cGF0aCBkPSJNMTYuMzUxLDE3LjQ4NUg5LjUyM1Y5LjQ3NkgxNy41djYuODcxQTEuMTQ5LDEuMTQ5LDAsMCwxLDE2LjM1MSwxNy40ODVabS01LjgzOC0uOTkxaDUuODM4YS4xNTcuMTU3LDAsMCwwLC4xNTgtLjE1OFYxMC40NjdoLTZaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik0xNC42LDYuMjk0YS4yOTQuMjk0LDAsMCwwLS4yLS4yNzhMOS4wNDQsNC4yMDVBLjEyOC4xMjgsMCwwLDAsOSw0LjJIOWEuMTMyLjEzMiwwLDAsMC0uMTMzLjEzM3Y5LjQ0NUEuMTMzLjEzMywwLDAsMCw5LDEzLjkxMUg5YS4xMzguMTM4LDAsMCwwLC4wNDktLjAxbDUuMzY1LTIuMTQ1YS4yOTIuMjkyLDAsMCwwLC4xODQtLjI3MloiIGZpbGw9InVybCgjYTNhNDQwOTMtYjE1Ny00MjZlLWE4ZmUtY2VjOWY5YzIzOTc4KSIgLz48cGF0aCBkPSJNOC45NjYsNC4ybC01LjI5My45NjZhLjE2MS4xNjEsMCwwLDAtLjEzLjE1OFYxMi42M2EuMTYuMTYsMCwwLDAsLjEyNi4xNTdMOC45NjIsMTMuOTFhLjE2MS4xNjEsMCwwLDAsLjE5MS0uMTIxLjIyLjIyLDAsMCwwLDAtLjAzNlY0LjM1OEEuMTYuMTYsMCwwLDAsOSw0LjIuMTYzLjE2MywwLDAsMCw4Ljk2Niw0LjJaIiBmaWxsPSJ1cmwoI2FkODM4ODU5LTAzZjQtNDcyZi04MWJjLWViYzkyMWQ3MTMzNSkiIC8+PHBhdGggZD0iTTYuNTIsNS42NTZ2Ni44bDEuODQyLjNWNS4zMzVabS0yLjI2Mi4zNjd2NS45NTVsMS42LjMyNlY1Ljc1NFoiIGZpbGw9IiNiNzk2ZjkiIG9wYWNpdHk9IjAuNSIgLz48L2c+PC9nPjwvc3ZnPg=="/>
+    <text x="748.333" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="748.333" dy="0">West Europe PaaS</tspan>
+      <tspan x="748.333" dy="17">stamp</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: North Europe PaaS stamp" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEzYTQ0MDkzLWIxNTctNDI2ZS1hOGZlLWNlYzlmOWMyMzk3OCIgeDE9IjExLjcyOSIgeTE9IjQuODgiIHgyPSIxMS43MjkiIHkyPSIxMy4wOTkiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAuMDAxIiBzdG9wLWNvbG9yPSIjNzczYWRjIiAvPjxzdG9wIG9mZnNldD0iMC41MjgiIHN0b3AtY29sb3I9IiM2NjM1YmIiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNTUyZjk5IiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhZDgzODg1OS0wM2Y0LTQ3MmYtODFiYy1lYmM5MjFkNzEzMzUiIHgxPSI2LjM1IiB5MT0iMTMuOTE0IiB4Mj0iNi4zNSIgeTI9IjQuMTk4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjAwMSIgc3RvcC1jb2xvcj0iIzc3M2FkYyIgLz48c3RvcCBvZmZzZXQ9IjAuMzA3IiBzdG9wLWNvbG9yPSIjNzkzZGRkIiAvPjxzdG9wIG9mZnNldD0iMC41MzIiIHN0b3AtY29sb3I9IiM4MDQ2ZTEiIC8+PHN0b3Agb2Zmc2V0PSIwLjczMSIgc3RvcC1jb2xvcj0iIzhjNTZlNyIgLz48c3RvcCBvZmZzZXQ9IjAuOTE1IiBzdG9wLWNvbG9yPSIjOWM2ZGVmIiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2E2N2FmNCIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyBpZD0iYWU4MjQ3MGQtN2E2Yy00ZGZlLTg1MzMtNTlkOGZmOTQ4NjI5Ij48Zz48cGF0aCBkPSJNOC42MTcsOC42NDRILjYzOVYxLjc4NEExLjE2LDEuMTYsMCwwLDEsMS43ODguNjI0SDguNjE3Wk0xLjYzLDcuNjUzaDZWMS41OTRIMS43ODhhLjE1OC4xNTgsMCwwLDAtLjE1OC4xNThoMFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTE3LjUsOC42NDRIOS41MjNWLjYyNGg2LjgyOEExLjE2LDEuMTYsMCwwLDEsMTcuNSwxLjc4NFptLTYuOTg3LS45OTFoNlYxLjc4NGEuMTU3LjE1NywwLDAsMC0uMTIzLS4xODcuMi4yLDAsMCwwLS4wMzUsMEgxMC41MTNaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik04LjYxNywxNy40ODVIMS43ODhBMS4xNDksMS4xNDksMCwwLDEsLjYzOSwxNi4zNDdWOS40NzZIOC42MTdaTTEuNjMsMTAuNDY3djUuODhhLjE1OC4xNTgsMCwwLDAsLjE1OC4xNThINy42MjZWMTAuNDY3WiIgZmlsbD0iIzk0OTQ5NCIgLz48cGF0aCBkPSJNMTYuMzUxLDE3LjQ4NUg5LjUyM1Y5LjQ3NkgxNy41djYuODcxQTEuMTQ5LDEuMTQ5LDAsMCwxLDE2LjM1MSwxNy40ODVabS01LjgzOC0uOTkxaDUuODM4YS4xNTcuMTU3LDAsMCwwLC4xNTgtLjE1OFYxMC40NjdoLTZaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik0xNC42LDYuMjk0YS4yOTQuMjk0LDAsMCwwLS4yLS4yNzhMOS4wNDQsNC4yMDVBLjEyOC4xMjgsMCwwLDAsOSw0LjJIOWEuMTMyLjEzMiwwLDAsMC0uMTMzLjEzM3Y5LjQ0NUEuMTMzLjEzMywwLDAsMCw5LDEzLjkxMUg5YS4xMzguMTM4LDAsMCwwLC4wNDktLjAxbDUuMzY1LTIuMTQ1YS4yOTIuMjkyLDAsMCwwLC4xODQtLjI3MloiIGZpbGw9InVybCgjYTNhNDQwOTMtYjE1Ny00MjZlLWE4ZmUtY2VjOWY5YzIzOTc4KSIgLz48cGF0aCBkPSJNOC45NjYsNC4ybC01LjI5My45NjZhLjE2MS4xNjEsMCwwLDAtLjEzLjE1OFYxMi42M2EuMTYuMTYsMCwwLDAsLjEyNi4xNTdMOC45NjIsMTMuOTFhLjE2MS4xNjEsMCwwLDAsLjE5MS0uMTIxLjIyLjIyLDAsMCwwLDAtLjAzNlY0LjM1OEEuMTYuMTYsMCwwLDAsOSw0LjIuMTYzLjE2MywwLDAsMCw4Ljk2Niw0LjJaIiBmaWxsPSJ1cmwoI2FkODM4ODU5LTAzZjQtNDcyZi04MWJjLWViYzkyMWQ3MTMzNSkiIC8+PHBhdGggZD0iTTYuNTIsNS42NTZ2Ni44bDEuODQyLjNWNS4zMzVabS0yLjI2Mi4zNjd2NS45NTVsMS42LjMyNlY1Ljc1NFoiIGZpbGw9IiNiNzk2ZjkiIG9wYWNpdHk9IjAuNSIgLz48L2c+PC9nPjwvc3ZnPg=="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="1045" dy="0">North Europe PaaS</tspan>
+      <tspan x="1045" dy="17">stamp</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Globally coordinated data" filter="url(#shadow)">
+    <rect x="225.333" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="275.333" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjA4OWNmY2EtMGRlMS00NTFjLWExY2EtNjY4MGVhNTBjYjRmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImIyNWQwODM2LTk2NGEtNGM4NC04YzIwLTg1NWY2NmU4MzQ1ZSIgY3g9Ii0xMDUuMDA2IiBjeT0iLTEwLjQwOSIgcj0iNS45NTQiIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE3LjczOSAxOS42NDQpIHNjYWxlKDEuMDM2IDEuMDI3KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xODMiIHN0b3AtY29sb3I9IiM1ZWEwZWYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjwvcmFkaWFsR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSJiMzZjN2Y1ZC0yZWYxLTQ3NjAtOGEyNS1lZWI5NjYxZjRlNDciPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9Im5vbmUiIC8+PC9jbGlwUGF0aD48L2RlZnM+PHRpdGxlPkljb24tZGF0YWJhc2VzLTEyMTwvdGl0bGU+PHBhdGggZD0iTTIuOTU0LDUuMjY2YS4xNzUuMTc1LDAsMCwxLS4xNzYtLjE3NmgwQTIuMDEyLDIuMDEyLDAsMCwwLC43NjksMy4wODFhLjE3Ni4xNzYsMCwwLDEtLjE3Ni0uMTc1aDBhLjE3Ni4xNzYsMCwwLDEsLjE3Ni0uMTc2QTIuMDEyLDIuMDEyLDAsMCwwLDIuNzc4LjcyLjE3NS4xNzUsMCwwLDEsMi45NTQuNTQ0aDBBLjE3NS4xNzUsMCwwLDEsMy4xMy43MmgwQTIuMDEyLDIuMDEyLDAsMCwwLDUuMTM5LDIuNzI5YS4xNzUuMTc1LDAsMCwxLC4xNzYuMTc2aDBhLjE3NS4xNzUsMCwwLDEtLjE3Ni4xNzZoMEEyLjAxMSwyLjAxMSwwLDAsMCwzLjEzLDUuMDkuMTc3LjE3NywwLDAsMSwyLjk1NCw1LjI2NloiIGZpbGw9IiM1MGU2ZmYiIC8+PHBhdGggZD0iTTE1LjYxMSwxNy40NTZhLjE0MS4xNDEsMCwwLDEtLjE0MS0uMTQxaDBhMS42MDksMS42MDksMCwwLDAtMS42MDctMS42MDcuMTQxLjE0MSwwLDAsMS0uMTQxLS4xNGgwYS4xNDEuMTQxLDAsMCwxLC4xNDEtLjE0MWgwYTEuNjA4LDEuNjA4LDAsMCwwLDEuNjA3LTEuNjA3LjE0MS4xNDEsMCwwLDEsLjE0MS0uMTQxaDBhLjE0MS4xNDEsMCwwLDEsLjE0MS4xNDFoMGExLjYwOCwxLjYwOCwwLDAsMCwxLjYwNywxLjYwNy4xNDEuMTQxLDAsMSwxLDAsLjI4MmgwYTEuNjA5LDEuNjA5LDAsMCwwLTEuNjA3LDEuNjA3QS4xNDEuMTQxLDAsMCwxLDE1LjYxMSwxNy40NTZaIiBmaWxsPSIjNTBlNmZmIiAvPjxnPjxwYXRoIGQ9Ik0xNC45NjksNy41M0E2LjEzNyw2LjEzNywwLDEsMSw3LjU3NCwyLjk4Nyw2LjEzNyw2LjEzNywwLDAsMSwxNC45NjksNy41M1oiIGZpbGw9InVybCgjYjI1ZDA4MzYtOTY0YS00Yzg0LThjMjAtODU1ZjY2ZTgzNDVlKSIgLz48ZyBjbGlwLXBhdGg9InVybCgjYjM2YzdmNWQtMmVmMS00NzYwLThhMjUtZWViOTY2MWY0ZTQ3KSI+PHBhdGggZD0iTTUuNzA5LDEzLjExNUExLjYzOCwxLjYzOCwwLDEsMCw1LjcxNCw5Ljg0LDEuMzA3LDEuMzA3LDAsMCwwLDUuNzIxLDkuNywxLjY1MSwxLjY1MSwwLDAsMCw0LjA2LDguMDY0SDIuODMyYTYuMjUxLDYuMjUxLDAsMCwwLDEuNTk1LDUuMDUxWiIgZmlsbD0iI2YyZjJmMiIgLz48cGF0aCBkPSJNMTUuMDQ1LDcuODE1YzAtLjAxNSwwLS4wMy0uMDA3LS4wNDRhNS45NzgsNS45NzgsMCwwLDAtMS40MDYtMi44OCwxLjgyNSwxLjgyNSwwLDAsMC0uMjg5LS4wOSwxLjgwNiwxLjgwNiwwLDAsMC0yLjMsMS42NjMsMiwyLDAsMCwwLS4yLS4wMTMsMS43MzcsMS43MzcsMCwwLDAtLjU4MSwzLjM3NCwxLjQ1MSwxLjQ1MSwwLDAsMCwuNTQxLjFoMi4wM0ExMy40NTMsMTMuNDUzLDAsMCwwLDE1LjA0NSw3LjgxNVoiIGZpbGw9IiNmMmYyZjIiIC8+PC9nPjwvZz48cGF0aCBkPSJNMTcuMTkxLDMuODMyYy0uNjI5LTEuMDQ3LTIuMS0xLjQ1NS00LjE1NS0xLjE0OWExNC42MDYsMTQuNjA2LDAsMCwwLTIuMDgyLjQ1Miw2LjQ1Niw2LjQ1NiwwLDAsMSwxLjUyOC43NjdjLjI0MS0uMDUzLjQ4My0uMTE2LjcxNS0uMTUxQTcuNDksNy40OSwwLDAsMSwxNC4zLDMuNjYyYTIuMTg4LDIuMTg4LDAsMCwxLDEuOTU5LjcyNWgwYy4zODMuNjM4LjA2LDEuNzI5LS44ODYsM2ExNi43MjMsMTYuNzIzLDAsMCwxLTQuNzQ5LDQuMDUxQTE2Ljc1OCwxNi43NTgsMCwwLDEsNC44LDEzLjdjLTEuNTY0LjIzNC0yLjY4MiwwLTMuMDY1LS42MzZzLS4wNi0xLjczLjg4Ni0yLjk5NWMuMTE3LS4xNTcuMTQ2LS4yMzQuMjc5LS4zOTJhNi4yNTIsNi4yNTIsMCwwLDEsLjAyNi0xLjYzQTExLjU1MiwxMS41NTIsMCwwLDAsMS43NTYsOS40MTlDLjUxNywxMS4wNzYuMTgxLDEyLjU2Ni44MDksMTMuNjEzYTMuMTY1LDMuMTY1LDAsMCwwLDIuOSwxLjI0OSw4LjQzNCw4LjQzNCwwLDAsMCwxLjI1MS0uMSwxNy44NTUsMTcuODU1LDAsMCwwLDYuMjE5LTIuNCwxNy44MDgsMTcuODA4LDAsMCwwLDUuMDYxLTQuMzMyQzE3LjQ4Myw2LjM2OSwxNy44MTksNC44OCwxNy4xOTEsMy44MzJaIiBmaWxsPSIjNTBlNmZmIiAvPjwvc3ZnPg=="/>
+    <text x="303.333" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="303.333" dy="0">Globally coordinated</tspan>
+      <tspan x="303.333" dy="17">data</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Landing-zone policy guardrails" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTBjMmEyZjAtZTY0Ny00ZjAxLWI5MWItYWZiN2JmMTUwNDBkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE3ZjczMWE5LTVjNTgtNDRmNC04MDM3LTNjMzYyN2U5ODAwOCIgeDE9IjguNDUiIHkxPSIxMS40NyIgeDI9IjguNDUiIHkyPSI2LjI0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTk4YWIzIiAvPjxzdG9wIG9mZnNldD0iMC4xNiIgc3RvcC1jb2xvcj0iIzFmOWFjMiIgLz48c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iIzI5YmFkZSIgLz48c3RvcCBvZmZzZXQ9IjAuOCIgc3RvcC1jb2xvcj0iIzMwY2RlZiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzMmQ0ZjUiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tbWFuYWdlLTMxNjwvdGl0bGU+PGVsbGlwc2UgY3g9IjguNDUiIGN5PSI4Ljg1IiByeD0iMi42IiByeT0iMi42MSIgZmlsbD0idXJsKCNhN2Y3MzFhOS01YzU4LTQ0ZjQtODAzNy0zYzM2MjdlOTgwMDgpIiAvPjxlbGxpcHNlIGN4PSIxNS43MyIgY3k9IjQuNzciIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzMyYmVkZCIgLz48ZWxsaXBzZSBjeD0iMTUuNzMiIGN5PSI4Ljk1IiByeD0iMS4yNyIgcnk9IjEuMjgiIGZpbGw9IiMzMmJlZGQiIC8+PGVsbGlwc2UgY3g9IjE1LjczIiBjeT0iMTMuMTIiIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzMyYmVkZCIgLz48ZWxsaXBzZSBjeD0iMTIuODMiIGN5PSI2LjkxIiByeD0iMS4yNyIgcnk9IjEuMjgiIGZpbGw9IiM1MGU2ZmYiIC8+PGVsbGlwc2UgY3g9IjEyLjgzIiBjeT0iMTEuMDkiIHJ4PSIxLjI3IiByeT0iMS4yOCIgZmlsbD0iIzUwZTZmZiIgLz48cGF0aCBkPSJNMi40MSw1LjU4QS4yNC4yNCwwLDAsMSwyLjUsNS41TDguMzIsMi4xMWMuMDgsMCw1LDIuNzgsNSwyLjc4YS4yNC4yNCwwLDAsMCwuMzYtLjIxVjMuNTlhLjI0LjI0LDAsMCwwLS4xMi0uMjFTOC40LjQ2LDguMzMuNUwxLjExLDQuNjQsMSw0LjcyWiIgZmlsbD0iIzk0OTQ5NCIgLz48cGF0aCBkPSJNMTMuMywxMy4xNCw4LjU2LDE1Ljg3YS4zNS4zNSwwLDAsMS0uMTEsMHYxLjZhLjIuMiwwLDAsMCwuMTEsMGw1LTIuODZhLjI0LjI0LDAsMCwwLC4xMi0uMlYxMy4zNUEuMjQuMjQsMCwwLDAsMTMuMywxMy4xNFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTguNDUsMTUuOWEuMzEuMzEsMCwwLDEtLjEzLDBMMi41LDEyLjQ3YS4yMi4yMiwwLDAsMS0uMTItLjJWNS43YS4yNy4yNywwLDAsMSwwLS4xMkwxLDQuNzJhLjI4LjI4LDAsMCwwLDAsLjEzdjguMjdhLjI0LjI0LDAsMCwwLC4xMS4yMWw3LjIyLDQuMTRhLjI0LjI0LDAsMCwwLC4xMiwwWiIgZmlsbD0iI2IzYjNiMyIgLz48L3N2Zz4="/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="600" dy="0">Landing-zone policy</tspan>
+      <tspan x="600" dy="17">guardrails</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Cross-region observability" filter="url(#shadow)">
+    <rect x="818.667" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#383FA3" stroke-width="2"/>
+    <image x="868.667" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTRlNzY0Y2QtMmU3My00NzJmLWI4OGEtYmY4YmZjMmMyOTk0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImFjOGIzMmRhLTMwY2EtNGI5Mi04ZDBmLThkMmQ1ZWYyNzhhMCIgY3g9IjUuNzIiIGN5PSI3LjQ1IiByPSI4LjQyIiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDMuMjMgMS41MSkgc2NhbGUoMS4wMSAxLjAxKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMC4xOCIgc3RvcC1jb2xvcj0iIzVlYTBlZiIgLz48c3RvcCBvZmZzZXQ9IjAuNTYiIHN0b3AtY29sb3I9IiM1YzlmZWUiIC8+PHN0b3Agb2Zmc2V0PSIwLjY5IiBzdG9wLWNvbG9yPSIjNTU5Y2VkIiAvPjxzdG9wIG9mZnNldD0iMC43OCIgc3RvcC1jb2xvcj0iIzRhOTdlOSIgLz48c3RvcCBvZmZzZXQ9IjAuODYiIHN0b3AtY29sb3I9IiMzOTkwZTQiIC8+PHN0b3Agb2Zmc2V0PSIwLjkzIiBzdG9wLWNvbG9yPSIjMjM4N2RlIiAvPjxzdG9wIG9mZnNldD0iMC45OSIgc3RvcC1jb2xvcj0iIzA4N2JkNiIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDc4ZDQiIC8+PC9yYWRpYWxHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9ImE5OTU0ODIwLWNiMzgtNDk0My05ODQyLWYwYTU2OGQyYjAxNSIgY3g9IjI4LjE4IiBjeT0iMjAyLjI5IiByPSIyLjciIGdyYWRpZW50VHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE3Ljc3IC0xODUuMDEpIHNjYWxlKDAuOTUpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjE5IiBzdG9wLWNvbG9yPSIjOGM4ZTkwIiAvPjxzdG9wIG9mZnNldD0iMC4zNSIgc3RvcC1jb2xvcj0iIzg0ODY4OCIgLz48c3RvcCBvZmZzZXQ9IjAuNiIgc3RvcC1jb2xvcj0iIzZlNzA3MSIgLz48c3RvcCBvZmZzZXQ9IjAuOTEiIHN0b3AtY29sb3I9IiM0YTRiNGMiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjM2UzZjNmIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLW1hbmFnZS0zMTc8L3RpdGxlPjxlbGxpcHNlIGN4PSI5IiBjeT0iOSIgcng9IjguNSIgcnk9IjguNDciIGZpbGw9InVybCgjYWM4YjMyZGEtMzBjYS00YjkyLThkMGYtOGQyZDVlZjI3OGEwKSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSI3LjQiIHJ5PSI3LjM3IiBmaWxsPSIjZmZmIiAvPjxwYXRoIGQ9Ik0yLjcyLDkuNDRhNi4yNCw2LjI0LDAsMCwwLDEuODIsNGwyLTJhMy41MywzLjUzLDAsMCwxLTEtMloiIGZpbGw9IiM5Y2ViZmYiIC8+PHBhdGggZD0iTTEzLjEzLDQuMjdBNi4yNSw2LjI1LDAsMCwwLDkuNDQsMi43NFY1LjUzYTMuNDEsMy40MSwwLDAsMSwxLjcxLjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik00Ljg3LDQuMjdsMiwyYTMuNDEsMy40MSwwLDAsMSwxLjcxLS43VjIuNzRBNi4yNSw2LjI1LDAsMCwwLDQuODcsNC4yN1oiIGZpbGw9IiMzMmJlZGQiIC8+PHBhdGggZD0iTTExLjc4LDYuODVhMy42LDMuNiwwLDAsMSwuNzEsMS43MWgyLjc5YTYuMTYsNi4xNiwwLDAsMC0xLjUzLTMuNjdaIiBmaWxsPSIjMzJiZWRkIiAvPjxwYXRoIGQ9Ik02LjIyLDYuODVsLTItMkE2LjE2LDYuMTYsMCwwLDAsMi43Miw4LjU2SDUuNTFBMy42LDMuNiwwLDAsMSw2LjIyLDYuODVaIiBmaWxsPSIjNTBlNmZmIiAvPjxwYXRoIGQ9Ik0xNC4xNCw3YS40NS40NSwwLDAsMC0uNTctLjI1TDkuNDUsOC40MWwuMzIuODEsNC4xMi0xLjYzQS40NC40NCwwLDAsMCwxNC4xNCw3WiIgZmlsbD0iI2YwNDA0OSIgLz48ZWxsaXBzZSBjeD0iOSIgY3k9IjkiIHJ4PSIxLjIiIHJ5PSIxLjIiIGZpbGw9InVybCgjYTk5NTQ4MjAtY2IzOC00OTQzLTk4NDItZjBhNTY4ZDJiMDE1KSIgLz48L3N2Zz4="/>
+    <text x="896.667" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#1D234D">
+      <tspan x="896.667" dy="0">Cross-region</tspan>
+      <tspan x="896.667" dy="17">observability</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#565D87">External ID and Front Door govern global entry into two regional PaaS stamps backed by coordinated data, policy, and observability.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

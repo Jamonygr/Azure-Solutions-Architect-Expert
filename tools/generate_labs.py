@@ -5,14 +5,24 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import json
 import re
 from pathlib import Path
 from typing import Any, Optional
 
-from az305lib import ROOT, domain_name, load_model, markdown_escape, objective_map, ps_single, write_or_check, yaml_text
+from az305lib import ROOT, domain_name, load_model, load_yaml, markdown_escape, objective_map, ps_single, write_or_check, yaml_text
 
 VALID_COSTS = {"none", "low", "moderate", "elevated"}
+
+
+def visual_lab(lab_id: str) -> dict[str, Any]:
+    """Return the authoritative visual contract for one fixed lab."""
+    registry = load_yaml(ROOT / "curriculum" / "visuals.yml")
+    matches = [item for item in registry["labs"] if item["id"] == lab_id]
+    if len(matches) != 1:
+        raise ValueError(f"Expected one visual registry entry for {lab_id}; found {len(matches)}")
+    return matches[0]
 
 
 def checkpoint_objectives(objectives: list[str], checkpoint_index: int) -> list[str]:
@@ -1143,15 +1153,24 @@ exit 0
 def architecture_mermaid(lab: dict[str, Any], content: dict[str, Any]) -> str:
     def clean(value: str) -> str:
         return value.replace('"', "'").replace("[", "(").replace("]", ")")
-    lines = ["flowchart LR", f"    R[\"{clean(content['businessOutcome'])}\"]"]
-    previous = "R"
-    for index, cp in enumerate(content["checkpoints"], 1):
-        node = f"C{index}"
-        lines.append(f"    {previous} --> {node}[\"{clean(cp['title'])}\"]")
-        previous = node
-    lines.append(f"    {previous} --> E[\"Independent positive and negative evidence\"]")
-    lines.append("    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111")
-    lines.append("    class R,E boundary")
+    visual = visual_lab(lab["id"])["topology"]
+    node_ids = {item["id"]: "N_" + item["id"].replace("-", "_") for item in visual["nodes"]}
+    nodes_by_boundary: dict[str, list[dict[str, Any]]] = {}
+    for node in visual["nodes"]:
+        nodes_by_boundary.setdefault(node["boundaryId"], []).append(node)
+    lines = ["flowchart LR"]
+    for boundary in visual["boundaries"]:
+        boundary_id = "B_" + boundary["id"].replace("-", "_")
+        lines.append(f"    subgraph {boundary_id}[\"{clean(boundary['label'])}\"]")
+        for node in nodes_by_boundary.get(boundary["id"], []):
+            lines.append(f"        {node_ids[node['id']]}[\"{clean(node['label'])}\"]")
+        lines.append("    end")
+    for edge in visual["edges"]:
+        lines.append(
+            f"    {node_ids[edge['from']]} -->|\"{clean(edge['label'])}\"| {node_ids[edge['to']]}"
+        )
+    lines.append("    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px")
+    lines.append("    class " + ",".join(node_ids.values()) + " service")
     return "\n".join(lines) + "\n"
 
 
@@ -1250,6 +1269,28 @@ WAF consequence: {cp['waf']}
             ("performanceEfficiency", "Performance Efficiency"),
         )
     )
+    visual = visual_lab(lab["id"])
+    checkpoint_timeline = "\n".join(
+        f'<li><a href="#checkpoint-{index}">{html.escape(cp["title"])}</a><span>{html.escape(cp["requirement"])} · LAB{number}-CP0{index}</span></li>'
+        for index, cp in enumerate(content["checkpoints"], 1)
+    )
+    waf_cards = "\n".join(
+        f'<article class="az305-waf-card"><h3>{label}</h3><p>{html.escape(decision["waf"][key])}</p></article>'
+        for key, label in (
+            ("reliability", "Reliability"), ("security", "Security"),
+            ("costOptimization", "Cost Optimization"),
+            ("operationalExcellence", "Operational Excellence"),
+            ("performanceEfficiency", "Performance Efficiency"),
+        )
+    )
+    capstone_hero = ""
+    if lab["id"] in {"LAB-26", "LAB-27"}:
+        capstone_alt = (
+            "Original isometric greenfield platform architecture across a global edge and two governed regions."
+            if lab["id"] == "LAB-26" else
+            "Original isometric hybrid modernization journey from a datacenter through migration waves into a governed cloud landing zone."
+        )
+        capstone_hero = f'\n![{capstone_alt}](images/hero.png)\n'
     adr_consequences = "\n".join(f"- {item}" for item in decision["adr"]["consequences"])
     safe = decision["safeAnalogue"] or "The reference topology is deployable at bounded scope; preview remains the default and live verification is separate."
     appendix = []
@@ -1257,6 +1298,14 @@ WAF consequence: {cp['waf']}
         appendix.append(f"### {name}\n\n```powershell\n{scripts[name].rstrip()}\n```")
     sources = f"- [{content['primarySource']['title']}]({content['primarySource']['url']})\n- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)"
     return f"""# {lab['id']} — {lab['title']}
+
+![{visual['banner']['alt']}](diagrams/summary.svg)
+{capstone_hero}
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">{lab['implementationMode']}</span>
+  <span class="az305-lane-badge">{lab['laneLabel']}</span>
+  <span class="az305-status">{lab['status']}</span>
+</div>
 
 ## 1. Navigation
 
@@ -1299,9 +1348,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for {lab['title']}](diagrams/architecture.svg)
+![{visual['topology']['alt']}](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+{visual['topology']['caption']} The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -1312,6 +1361,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![{visual['decisionMatrix']['alt']}](diagrams/decision-matrix.svg)
 
 {matrix_markdown(decision)}
 
@@ -1327,7 +1378,9 @@ Architecture risks:
 
 Well-Architected consequences:
 
-{waf}
+<div class="az305-waf-grid">
+{waf_cards}
+</div>
 
 ADR consequences:
 
@@ -1354,6 +1407,10 @@ pwsh ./scripts/{lab['track']}/Preflight.ps1 -RunId synthetic-{number}0001
 Synthetic sample: `{{"labId":"{lab['id']}","track":"{lab['track']}","result":"pass","note":"Local tool discovery only"}}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+{checkpoint_timeline}
+</ol>
 
 {(chr(10) * 2).join(item.rstrip() for item in checkpoint_text)}
 

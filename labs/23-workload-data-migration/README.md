@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-23 — IaaS, PaaS, Database, and Unstructured Data Migration
 
+![Infrastructure banner showing VMware servers, SQL databases, and engineering files using distinct migration paths to Azure targets.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-22](../22-migration-strategy-assessment/README.md) · [Lab catalog](../README.md) · [LAB-24 →](../24-internet-hybrid-connectivity/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for IaaS, PaaS, Database, and Unstructured Data Migration](diagrams/architecture.svg)
+![Topology showing VMware servers moving through Azure Migrate, SQL Server through Database Migration Service, and files through AzCopy to separate Azure targets.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Azure Migrate, Database Migration Service, and AzCopy move each workload type through its appropriate staged path. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing workload migration patterns and highlighting Azure Migrate, Database Migration Service, and staged AzCopy.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Preseeding, independent consistency checks, and preserved source rollback reduce cutover failure impact.
-- **Security:** Managed identities, private transfer paths, sanitized evidence, and least-privilege migration roles protect source data.
-- **Cost Optimization:** Temporary replication and dual running are bounded to the period that buys a shorter controlled outage.
-- **Operational Excellence:** Timed gates, owners, integrity results, redirection, and rollback criteria create an executable cutover record.
-- **Performance Efficiency:** Only measured final deltas and validation remain inside the ninety-minute critical path.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Preseeding, independent consistency checks, and preserved source rollback reduce cutover failure impact.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Managed identities, private transfer paths, sanitized evidence, and least-privilege migration roles protect source data.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Temporary replication and dual running are bounded to the period that buys a shorter controlled outage.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Timed gates, owners, integrity results, redirection, and rollback criteria create an executable cutover record.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Only measured final deltas and validation remain inside the ninety-minute critical path.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-230001
 Synthetic sample: `{"labId":"LAB-23","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Confirm approved wave and target prerequisites</a><span>LAB23-REQ-01 · LAB23-CP01</span></li>
+<li><a href="#checkpoint-2">Design server replication and test migration</a><span>LAB23-REQ-02 · LAB23-CP02</span></li>
+<li><a href="#checkpoint-3">Plan online relational database migration</a><span>LAB23-REQ-03 · LAB23-CP03</span></li>
+<li><a href="#checkpoint-4">Stage and verify unstructured data transfer</a><span>LAB23-REQ-04 · LAB23-CP04</span></li>
+<li><a href="#checkpoint-5">Rehearse cutover, validation, and rollback</a><span>LAB23-REQ-05 · LAB23-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Confirm approved wave and target prerequisites
 

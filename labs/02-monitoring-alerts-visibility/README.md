@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-02 — Monitoring, Alerting, and Operational Visibility
 
+![Monitoring banner showing service signals moving through Azure Monitor into alerts, action routing, and an operator workbook.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-01](../01-centralized-logging-routing/README.md) · [Lab catalog](../README.md) · [LAB-03 →](../03-authentication-identity-design/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Monitoring, Alerting, and Operational Visibility](diagrams/architecture.svg)
+![Topology showing application and platform telemetry entering Azure Monitor, triggering service alerts, shared action groups, and curated workbooks.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Platform, health, and query signals converge in Azure Monitor before response and visualization paths separate. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing monitoring approaches and highlighting service-centric alerts with shared response assets.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Multi-signal service alerts detect degraded customer outcomes even when individual resources report healthy.
-- **Security:** Least-privilege action-group maintenance and sanitized alert payloads limit exposure through notification channels.
-- **Cost Optimization:** Curated rules reduce duplicate evaluations and the labor cost of unactionable pages.
-- **Operational Excellence:** Workbooks join SLO, dependency, deployment, and alert evidence into one triage sequence.
-- **Performance Efficiency:** Demand-relative thresholds absorb planned bursts while invariant failure signals protect sensitivity.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Multi-signal service alerts detect degraded customer outcomes even when individual resources report healthy.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Least-privilege action-group maintenance and sanitized alert payloads limit exposure through notification channels.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Curated rules reduce duplicate evaluations and the labor cost of unactionable pages.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Workbooks join SLO, dependency, deployment, and alert evidence into one triage sequence.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Demand-relative thresholds absorb planned bursts while invariant failure signals protect sensitivity.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-020001
 Synthetic sample: `{"labId":"LAB-02","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Build a layered signal inventory</a><span>LAB02-REQ-01 · LAB02-CP01</span></li>
+<li><a href="#checkpoint-2">Design platform and resource-health alerts</a><span>LAB02-REQ-02 · LAB02-CP02</span></li>
+<li><a href="#checkpoint-3">Define a query-based service-level alert</a><span>LAB02-REQ-03 · LAB02-CP03</span></li>
+<li><a href="#checkpoint-4">Curate an operator workbook</a><span>LAB02-REQ-04 · LAB02-CP04</span></li>
+<li><a href="#checkpoint-5">Verify action routing and noise controls</a><span>LAB02-REQ-05 · LAB02-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Build a layered signal inventory
 

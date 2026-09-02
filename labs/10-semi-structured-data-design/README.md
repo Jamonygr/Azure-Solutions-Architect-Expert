@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-10 — Semi-Structured Data Platform Selection
 
+![Data banner showing global catalog clients reaching a partitioned Cosmos DB service with autoscale, regional replicas, and private access.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-09](../09-relational-scale-protection/README.md) · [Lab catalog](../README.md) · [LAB-11 →](../11-unstructured-data-design/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Semi-Structured Data Platform Selection](diagrams/architecture.svg)
+![Topology showing global catalog clients, a private API, a Cosmos DB account, tenant-aware partitions, autoscale throughput, and regional replicas.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+A private global catalog API targets tenant-aware logical partitions replicated across the selected Cosmos DB regions. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing semi-structured data platforms and highlighting Cosmos DB for NoSQL with tenant-aware partitioning.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Explicit region, consistency, and failover behavior protects accepted catalog changes beyond simple data distribution.
-- **Security:** Tenant-aware data roles and an optional dedicated container provide enforceable isolation boundaries.
-- **Cost Optimization:** RU attribution and selective tenant separation avoid overprovisioning every catalog partition.
-- **Operational Excellence:** Hot-partition, throttling, policy, and tenant-routing evidence supports repeatable scale decisions.
-- **Performance Efficiency:** Hierarchical partitioning aligns common reads with physical distribution and isolates exceptional demand.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Explicit region, consistency, and failover behavior protects accepted catalog changes beyond simple data distribution.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Tenant-aware data roles and an optional dedicated container provide enforceable isolation boundaries.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>RU attribution and selective tenant separation avoid overprovisioning every catalog partition.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Hot-partition, throttling, policy, and tenant-routing evidence supports repeatable scale decisions.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Hierarchical partitioning aligns common reads with physical distribution and isolates exceptional demand.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-100001
 Synthetic sample: `{"labId":"LAB-10","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Choose API and consistency deliberately</a><span>LAB10-REQ-01 · LAB10-CP01</span></li>
+<li><a href="#checkpoint-2">Design a high-cardinality partition key</a><span>LAB10-REQ-02 · LAB10-CP02</span></li>
+<li><a href="#checkpoint-3">Minimize indexing write amplification</a><span>LAB10-REQ-03 · LAB10-CP03</span></li>
+<li><a href="#checkpoint-4">Bound autoscale throughput</a><span>LAB10-REQ-04 · LAB10-CP04</span></li>
+<li><a href="#checkpoint-5">Restrict the account network boundary</a><span>LAB10-REQ-05 · LAB10-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Choose API and consistency deliberately
 

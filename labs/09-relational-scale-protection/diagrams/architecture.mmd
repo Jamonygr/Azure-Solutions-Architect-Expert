@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Sustain ledger growth and read demand while meeting data-protection controls without overpromising disaster recovery."]
-    R --> C1["Choose the scale unit and capacity ceiling"]
-    C1 --> C2["Design read workload isolation"]
-    C2 --> C3["Verify transparent data encryption and key custody"]
-    C3 --> C4["Configure tamper-resistant auditing"]
-    C4 --> C5["Bound backup retention without claiming recovery"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_application_tier["Ledger application tier"]
+        N_ledger["Ledger application"]
+    end
+    subgraph B_hyperscale_service["Azure SQL Hyperscale"]
+        N_primary["Hyperscale primary"]
+        N_replicas["Named read replicas"]
+    end
+    subgraph B_protection_evidence["Protection and evidence"]
+        N_key_custody["TDE key custody"]
+        N_audit["Tamper-resistant audit"]
+        N_retention["Bounded backup retention"]
+    end
+    N_ledger -->|"transactional writes"| N_primary
+    N_ledger -->|"read-only traffic"| N_replicas
+    N_primary -->|"read-scale replication"| N_replicas
+    N_key_custody -->|"encryption dependency"| N_primary
+    N_primary -->|"immutable audit export"| N_audit
+    N_primary -->|"long-term backup policy"| N_retention
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_ledger,N_primary,N_replicas,N_key_custody,N_audit,N_retention service
 %% END GENERATED AZ305 V1

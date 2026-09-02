@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-25 — Network Security, Load Balancing, and Traffic Routing
 
+![Infrastructure banner showing Front Door, Application Gateway WAF, Azure Firewall, private load balancing, and NAT Gateway through a hub and spoke network.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-24](../24-internet-hybrid-connectivity/README.md) · [Lab catalog](../README.md) · [LAB-26 →](../26-capstone-greenfield-platform/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Network Security, Load Balancing, and Traffic Routing](diagrams/architecture.svg)
+![Topology showing Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, a private Standard Load Balancer, application spokes, and NAT Gateway.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Global HTTP traffic crosses two WAF layers before private services, while Firewall and NAT Gateway make inspection and outbound behavior explicit. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing network security patterns and highlighting layered Front Door, Application Gateway, Firewall, Load Balancer, and NAT.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Layered health probes, zonal capacity, regional routing, and explicit outbound remove implicit traffic dependencies.
-- **Security:** Premium WAF, firewall FQDN policy, TLS inspection, and a narrow pinned-certificate exception enforce flow intent.
-- **Cost Optimization:** Premium controls apply to classified clinical paths and capacity follows measured throughput and connection demand.
-- **Operational Excellence:** Effective routes, rule hits, certificates, probes, NAT ports, and exception ownership form the network evidence set.
-- **Performance Efficiency:** Each hop and inspection stage is measured so security does not silently consume the clinical latency budget.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Layered health probes, zonal capacity, regional routing, and explicit outbound remove implicit traffic dependencies.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Premium WAF, firewall FQDN policy, TLS inspection, and a narrow pinned-certificate exception enforce flow intent.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Premium controls apply to classified clinical paths and capacity follows measured throughput and connection demand.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Effective routes, rule hits, certificates, probes, NAT ports, and exception ownership form the network evidence set.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Each hop and inspection stage is measured so security does not silently consume the clinical latency budget.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-250001
 Synthetic sample: `{"labId":"LAB-25","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Establish segmentation and least-access flows</a><span>LAB25-REQ-01 · LAB25-CP01</span></li>
+<li><a href="#checkpoint-2">Validate centralized inspection and policy hierarchy</a><span>LAB25-REQ-02 · LAB25-CP02</span></li>
+<li><a href="#checkpoint-3">Prove global and regional HTTP protection</a><span>LAB25-REQ-03 · LAB25-CP03</span></li>
+<li><a href="#checkpoint-4">Validate private load balancing and explicit egress</a><span>LAB25-REQ-04 · LAB25-CP04</span></li>
+<li><a href="#checkpoint-5">Verify end-to-end routes and failure behavior</a><span>LAB25-REQ-05 · LAB25-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Establish segmentation and least-access flows
 

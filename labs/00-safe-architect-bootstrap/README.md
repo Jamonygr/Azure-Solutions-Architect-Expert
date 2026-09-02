@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-00 — Safe Bootstrap and Dual-Command Lab Contract
 
+![Foundation banner showing a guarded progression from local preflight through state capture, execution, validation, and cleanup.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">design-simulation</span>
+  <span class="az305-lane-badge">Dual bootstrap</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [Lab catalog](../README.md) · [LAB-01 →](../01-centralized-logging-routing/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Safe Bootstrap and Dual-Command Lab Contract](diagrams/architecture.svg)
+![Topology showing local preflight and context inputs feeding gates, a run-state record, a bounded operation, and ownership-aware cleanup.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Validated inputs and explicit gates create a run record before a bounded operation can begin. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing bootstrap safety contracts and highlighting the selected state-first guarded lifecycle.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Atomic state replacement and resumable status values preserve an intelligible recovery point after interruption.
-- **Security:** Explicit tenant and subscription inputs eliminate reliance on cached identity context and sensitive fields are recursively rejected.
-- **Cost Optimization:** An offline simulation produces the required evidence without standing cloud resources or idle automation accounts.
-- **Operational Excellence:** One lifecycle contract, fixed exit codes, and schema-validated artifacts make faults reproducible across copied labs.
-- **Performance Efficiency:** Local registry lookups and bounded JSON files avoid network latency and scale work only with the current run.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Atomic state replacement and resumable status values preserve an intelligible recovery point after interruption.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Explicit tenant and subscription inputs eliminate reliance on cached identity context and sensitive fields are recursively rejected.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>An offline simulation produces the required evidence without standing cloud resources or idle automation accounts.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>One lifecycle contract, fixed exit codes, and schema-validated artifacts make faults reproducible across copied labs.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Local registry lookups and bounded JSON files avoid network latency and scale work only with the current run.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/dual-bootstrap/Preflight.ps1 -RunId synthetic-000001
 Synthetic sample: `{"labId":"LAB-00","track":"dual-bootstrap","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Verify the offline tool contract</a><span>LAB00-REQ-01 · LAB00-CP01</span></li>
+<li><a href="#checkpoint-2">Declare intended context without authentication</a><span>LAB00-REQ-02 · LAB00-CP02</span></li>
+<li><a href="#checkpoint-3">Evaluate cost and tenant-change gates</a><span>LAB00-REQ-03 · LAB00-CP03</span></li>
+<li><a href="#checkpoint-4">Prove state-before-mutation ordering</a><span>LAB00-REQ-04 · LAB00-CP04</span></li>
+<li><a href="#checkpoint-5">Exercise ownership-aware cleanup</a><span>LAB00-REQ-05 · LAB00-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Verify the offline tool contract
 

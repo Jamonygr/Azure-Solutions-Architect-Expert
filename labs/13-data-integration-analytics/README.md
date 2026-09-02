@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-13 — Data Integration and Analytics Architecture
 
+![Data banner showing files, databases, and telemetry flowing through Data Factory into ADLS Gen2 and Synapse serverless SQL.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-12](../12-storage-economics-durability/README.md) · [Lab catalog](../README.md) · [LAB-14 →](../14-recovery-strategy-hybrid/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Data Integration and Analytics Architecture](diagrams/architecture.svg)
+![Topology showing partner files, database changes, and telemetry feeding Azure Data Factory, ADLS Gen2, Synapse serverless SQL, and monitoring.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Data Factory coordinates idempotent ingestion through managed identity before Synapse queries curated lake zones. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing integration and analytics platforms and marking Data Factory, ADLS Gen2, and Synapse serverless SQL as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Watermarks, checkpoints, replay rules, and reconciliation distinguish recoverable batch and streaming failures.
-- **Security:** Managed identities and hardened private runtimes keep credentials out of pipeline definitions.
-- **Cost Optimization:** Batch serverless processing and targeted Fabric capacity align spend with each flow's freshness requirement.
-- **Operational Excellence:** Lineage, schema, watermark, and reconciliation evidence give operators a common failure model.
-- **Performance Efficiency:** Near-real-time resources serve only the telemetry stream while hourly files retain efficient batch movement.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Watermarks, checkpoints, replay rules, and reconciliation distinguish recoverable batch and streaming failures.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Managed identities and hardened private runtimes keep credentials out of pipeline definitions.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Batch serverless processing and targeted Fabric capacity align spend with each flow&#x27;s freshness requirement.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Lineage, schema, watermark, and reconciliation evidence give operators a common failure model.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Near-real-time resources serve only the telemetry stream while hourly files retain efficient batch movement.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-130001
 Synthetic sample: `{"labId":"LAB-13","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Select integration patterns and runtimes</a><span>LAB13-REQ-01 · LAB13-CP01</span></li>
+<li><a href="#checkpoint-2">Use managed identity for linked services</a><span>LAB13-REQ-02 · LAB13-CP02</span></li>
+<li><a href="#checkpoint-3">Orchestrate idempotent ingestion</a><span>LAB13-REQ-03 · LAB13-CP03</span></li>
+<li><a href="#checkpoint-4">Serve governed analytical queries</a><span>LAB13-REQ-04 · LAB13-CP04</span></li>
+<li><a href="#checkpoint-5">Validate lineage operations and spend</a><span>LAB13-REQ-05 · LAB13-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Select integration patterns and runtimes
 

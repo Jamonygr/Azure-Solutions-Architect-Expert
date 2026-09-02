@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Reduce incident investigation time while giving security and regional operators governed access to complete, correctly routed telemetry."]
-    R --> C1["Establish regional workspace boundaries"]
-    C1 --> C2["Define an Azure Monitor Agent data collection rule"]
-    C2 --> C3["Associate the rule with an explicit resource scope"]
-    C3 --> C4["Route resource logs with diagnostic settings"]
-    C4 --> C5["Validate retention and archive economics"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_emitting_resources["Emitting Azure resources"]
+        N_workloads["Platform and application signals"]
+    end
+    subgraph B_regional_monitoring["Regional monitoring boundary"]
+        N_dcr["AMA data collection rule"]
+        N_workspace_west["West Europe workspace"]
+        N_workspace_north["North Europe workspace"]
+    end
+    subgraph B_operations_evidence["Operations and evidence"]
+        N_archive["Immutable log archive"]
+        N_operator["Cross-workspace operations"]
+    end
+    N_workloads -->|"AMA streams"| N_dcr
+    N_dcr -->|"regional association"| N_workspace_west
+    N_dcr -->|"regional association"| N_workspace_north
+    N_workloads -->|"diagnostic export"| N_archive
+    N_workspace_west -->|"federated query"| N_operator
+    N_workspace_north -->|"federated query"| N_operator
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_workloads,N_dcr,N_workspace_west,N_workspace_north,N_archive,N_operator service
 %% END GENERATED AZ305 V1

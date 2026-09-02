@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Replace manual attestations with repeatable technical evidence while ensuring access ends when business need ends."]
-    R --> C1["Map controls to policy initiatives"]
-    C1 --> C2["Evaluate assignments exemptions and compliance state"]
-    C2 --> C3["Design entitlement-management catalogs"]
-    C3 --> C4["Require recurring access reviews"]
-    C4 --> C5["Minimize standing privileged roles"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_azure_governance["Azure resource governance"]
+        N_control_set["Control requirements"]
+        N_initiative["Policy initiative"]
+    end
+    subgraph B_identity_governance["Microsoft Entra governance"]
+        N_catalog["Entitlement catalog"]
+        N_review["Recurring access review"]
+        N_pim["Eligible privileged roles"]
+    end
+    subgraph B_audit_evidence["Audit evidence"]
+        N_compliance["Compliance state"]
+    end
+    N_control_set -->|"mapped controls"| N_initiative
+    N_initiative -->|"assignment evidence"| N_compliance
+    N_catalog -->|"time-bound entitlement"| N_review
+    N_review -->|"least-standing access"| N_pim
+    N_review -->|"access evidence"| N_compliance
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_control_set,N_initiative,N_compliance,N_catalog,N_review,N_pim service
 %% END GENERATED AZ305 V1

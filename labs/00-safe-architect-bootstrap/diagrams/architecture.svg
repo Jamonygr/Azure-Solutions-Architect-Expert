@@ -1,44 +1,100 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
-  <title id="diagram-title">LAB-00 Safe Bootstrap and Dual-Command Lab Contract</title>
-  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
-  <metadata>source-sha256:81f0ff01705b43aa44094dd727b1a08bf4d4cbab9cfcb417815a2c81b95f67ee</metadata>
-  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
-  <rect width="100%" height="100%" fill="#ffffff"/>
-  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Reduce accidental cloud changes and make architecture experiments</tspan>
-    <tspan x="380" dy="20">reproducible and independently auditable.</tspan>
-  </text>
-  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Verify the offline tool contract</tspan>
-  </text>
-  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Declare intended context without authentication</tspan>
-  </text>
-  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Evaluate cost and tenant-change gates</tspan>
-  </text>
-  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Prove state-before-mutation ordering</tspan>
-  </text>
-  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Exercise ownership-aware cleanup</tspan>
-  </text>
-  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
-  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
-  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
-    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">State-before-mutation safety envelope</title>
+  <desc id="visual-desc">Topology showing local preflight and context inputs feeding gates, a run-state record, a bounded operation, and ownership-aware cleanup.</desc>
+  <metadata>source-sha256:621f159d403244b200e97779254d45666c8931729fce0258a9491413545952d5</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#7F3FBF"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#005EA8" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <g role="group" aria-label="Boundary: Learner workstation">
+    <rect x="51" y="116" width="1098" height="562" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#7DB7E8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="141" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Learner workstation</text>
+  </g>
+  <g role="group" aria-label="Boundary: Private run state">
+    <rect x="51" y="446" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#7DB7E8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="67" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Private run state</text>
+  </g>
+  <g role="group" aria-label="Boundary: Intended Azure scope">
+    <rect x="496" y="446" width="208" height="232" rx="24" fill="#FFFFFF" fill-opacity=".62" stroke="#7DB7E8" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="512" y="471" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700" fill="#486581">Intended Azure scope</text>
+  </g>
+  <g role="group" aria-label="validated tools: preflight to inputs">
+    <path d="M232 220 C377.5 220 377.5 220 523 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="328.75" y="195" width="97.5" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="377.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">validated tools</text>
+  </g>
+  <g role="group" aria-label="declared IDs and regions: inputs to gates">
+    <path d="M677 220 C822.5 220 822.5 220 968 220" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="744.5" y="195" width="156" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="822.5" y="211" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">declared IDs and regions</text>
+  </g>
+  <g role="group" aria-label="authorize run record: gates to state-record">
+    <path d="M972.803 246.77 C600 246.77 600 523.23 227.197 523.23" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="535" y="360" width="130" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="600" y="376" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">authorize run record</text>
+  </g>
+  <g role="group" aria-label="state precedes mutation: state-record to operation">
+    <path d="M232 550 C377.5 550 377.5 550 523 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="302.75" y="525" width="149.5" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="377.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">state precedes mutation</text>
+  </g>
+  <g role="group" aria-label="returned IDs and tags: operation to cleanup">
+    <path d="M677 550 C822.5 550 822.5 550 968 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="754.25" y="525" width="136.5" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="822.5" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">returned IDs and tags</text>
+  </g>
+  <g role="group" aria-label="post-cleanup status: cleanup to state-record">
+    <path d="M968 550 C600 550 600 550 232 550" fill="none" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="538.25" y="525" width="123.5" height="24" rx="12" fill="#ffffff" stroke="#7DB7E8"/>
+    <text x="600" y="541" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="11" fill="#102A43">post-cleanup status</text>
+  </g>
+  <g role="group" aria-label="Service node: Toolchain preflight" filter="url(#shadow)">
+    <rect x="77" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="127" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYjE1NjVlOTctZTUzYS00NGE1LTk0NzktMTk5ZDhjM2M0MmQyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImVjNDM1OGZhLWM5NzctNDJlMi1hN2FiLTk5NGI1ZGU1NjgzMCIgeDE9IjkiIHkxPSIxNzcuOSIgeDI9IjkiIHkyPSIxNjAuMSIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0xNjApIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMDA3OGQ0IiAvPjxzdG9wIG9mZnNldD0iMC4wNjQiIHN0b3AtY29sb3I9IiMwYTdjZDciIC8+PHN0b3Agb2Zmc2V0PSIwLjMzOCIgc3RvcC1jb2xvcj0iIzJlOGNlMSIgLz48c3RvcCBvZmZzZXQ9IjAuNTk0IiBzdG9wLWNvbG9yPSIjNDg5N2U5IiAvPjxzdG9wIG9mZnNldD0iMC44MjIiIHN0b3AtY29sb3I9IiM1ODllZWQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVhMGVmIiAvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJhYWU5ZTQyYy0wOTFlLTRkYzctOGJlYy1hOTM0MThhZjkzYzQiIHgxPSItMjYuMTg5IiB5MT0iLTI5NS42IiB4Mj0iLTI2LjE4OSIgeTI9Ii0zMTEuMTA1IiBncmFkaWVudFRyYW5zZm9ybT0idHJhbnNsYXRlKDM5LjQyNSAzMjEuNjEpIHNjYWxlKDEuMTU2IDEuMDI5KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZlYTExYiIgLz48c3RvcCBvZmZzZXQ9IjAuMjg0IiBzdG9wLWNvbG9yPSIjZmVhNTFhIiAvPjxzdG9wIG9mZnNldD0iMC41NDciIHN0b3AtY29sb3I9IiNmZWIwMTgiIC8+PHN0b3Agb2Zmc2V0PSIwLjgiIHN0b3AtY29sb3I9IiNmZmMzMTQiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZkNzBmIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLTMyMkFydGJvYXJkIDE8L3RpdGxlPjxwYXRoIGQ9Ik0xNy45LDEwVjhsLS4zLS4xLTIuMi0uNy0uNi0xLjRMMTYsMy40LDE0LjUsMmwtLjMuMS0yLDEtMS40LS42TDEwLC4xSDhMNy44LjQsNy4xLDIuNmwtMS40LjVMMy40LDIsMiwzLjVsLjEuMywxLDJMMi42LDcuMi4xLDh2MmwuMy4xLDIuMi43LjYsMS40TDIsMTQuNiwzLjUsMTZsLjMtLjEsMi0xLDEuNC42TDgsMTcuOWgybC4xLS4zLjctMi4yLDEuNC0uNiwyLjMsMS4xLDEuNC0xLjQtLjEtLjMtMS0yLC42LTEuNFpNOSwxMi45QTMuODQyLDMuODQyLDAsMCwxLDUuMSw5LDMuODQyLDMuODQyLDAsMCwxLDksNS4xLDMuODQyLDMuODQyLDAsMCwxLDEyLjksOWgwQTMuODQyLDMuODQyLDAsMCwxLDksMTIuOVoiIGZpbGw9InVybCgjZWM0MzU4ZmEtYzk3Ny00MmUyLWE3YWItOTk0YjVkZTU2ODMwKSIgLz48cGF0aCBkPSJNOC41LDEwLjVINC45YS4yMTUuMjE1LDAsMCwxLS4yLS4ydi0uMUw5LDEuN2MwLS4xLjEtLjEuMi0uMWg0LjJhLjIxNS4yMTUsMCwwLDEsLjIuMnYuMUw4LjUsOC42aDQuOWEuMjE1LjIxNSwwLDAsMSwuMi4yLjEuMSwwLDAsMS0uMS4xTDUuMywxNy40Yy0uMSwwLS42LjUtLjQtLjJoMFoiIGZpbGw9InVybCgjYWFlOWU0MmMtMDkxZS00ZGM3LThiZWMtYTkzNDE4YWY5M2M0KSIgLz48L3N2Zz4="/>
+    <text x="155" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Toolchain preflight</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Declared context" filter="url(#shadow)">
+    <rect x="522" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="572" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYmMxOGJhZGUtNTQ4MS00NDdlLWE5NTktNjU5ZDcyMzQ2NDc0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImE0NDVjNzE3LTlkNzUtNDRjNy1iYTZiLTBkOGYyMzgzZTU2MCIgY3g9Ii0zNi42MyIgY3k9IjE3LjEyIiByPSIxMS4xOCIgZ3JhZGllbnRUcmFuc2Zvcm09InRyYW5zbGF0ZSg0MS44OCAtNy40KSBzY2FsZSgwLjk0IDAuOTQpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwLjI3IiBzdG9wLWNvbG9yPSIjZmZkNzBmIiAvPjxzdG9wIG9mZnNldD0iMC40OSIgc3RvcC1jb2xvcj0iI2ZmY2IxMiIgLz48c3RvcCBvZmZzZXQ9IjAuODgiIHN0b3AtY29sb3I9IiNmZWFjMTkiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmVhMTFiIiAvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWdlbmVyYWwtMjwvdGl0bGU+PHBhdGggaWQ9ImUzZDFlNThjLWY3OGUtNGZiNS05ODU3LTBjOTMzMWRhOTk3OSIgZD0iTTEzLjU2LDcuMTlhMi4wNywyLjA3LDAsMCwwLDAtMi45M2gwTDEwLC42OWEyLjA2LDIuMDYsMCwwLDAtMi45MiwwaDBMMy41Miw0LjI2YTIuMDksMi4wOSwwLDAsMCwwLDIuOTNsMywzYS42MS42MSwwLDAsMSwuMTcuNDF2NS41MmEuNy43LDAsMCwwLC4yLjVsMS4zNSwxLjM1YS40NS40NSwwLDAsMCwuNjYsMGwxLjMxLTEuMzFoMGwuNzctLjc3YS4yNi4yNiwwLDAsMCwwLS4zOGwtLjU1LS41NmEuMjkuMjksMCwwLDEsMC0uNDJsLjU1LS41NmEuMjYuMjYsMCwwLDAsMC0uMzhMMTAuNCwxM2EuMjguMjgsMCwwLDEsMC0uNDFMMTEsMTJhLjI2LjI2LDAsMCwwLDAtLjM4bC0uNzctLjc4di0uMjhabS01LTUuNjRBMS4xOCwxLjE4LDAsMSwxLDcuMzcsMi43MywxLjE3LDEuMTcsMCwwLDEsOC41NCwxLjU1WiIgZmlsbD0idXJsKCNhNDQ1YzcxNy05ZDc1LTQ0YzctYmE2Yi0wZDhmMjM4M2U1NjApIiAvPjxwYXRoIGlkPSJhMjFhOGY3YS02MWNjLTQwMzUtODQ0OS1lNWM4ZmU0ZDRkNWUiIGQ9Ik03LjYyLDE2LjIxaDBBLjI1LjI1LDAsMCwwLDgsMTZWMTEuNTVhLjI3LjI3LDAsMCwwLS4xMS0uMjJoMGEuMjUuMjUsMCwwLDAtLjM5LjIyVjE2QS4yNy4yNywwLDAsMCw3LjYyLDE2LjIxWiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48cmVjdCBpZD0iZWNkMzE4OWMtZmIxZS00YTBlLWEyYjYtYmEyZjExZGRhNDg0IiB4PSI1LjY5IiB5PSI1LjQ1IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48cmVjdCBpZD0iYTE5NDlhM2MtNDgxOC00YmQxLWIyMzYtMGQ5NzBiOTJmYzYyIiB4PSI1LjY5IiB5PSI2LjU3IiB3aWR0aD0iNS44NiIgaGVpZ2h0PSIwLjY5IiByeD0iMC4zMiIgZmlsbD0iI2ZmOTMwMCIgb3BhY2l0eT0iMC43NSIgLz48L3N2Zz4="/>
+    <text x="600" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Declared context</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Cost and tenant gates" filter="url(#shadow)">
+    <rect x="967" y="148" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="1017" y="168" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZTAwZmVmMzAtMTU2Yy00OTMwLThiNjUtM2E1OTM1NDNhYTFkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImE0NWJhOWI1LTJlMDgtNGMzOS04OTE2LTBiYWIxODRmMDZlOSIgeDE9IjkiIHkxPSIxLjQ4IiB4Mj0iOSIgeTI9IjE3LjA3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNzZiYzJkIiAvPjxzdG9wIG9mZnNldD0iMC4zMiIgc3RvcC1jb2xvcj0iIzczYjgyYyIgLz48c3RvcCBvZmZzZXQ9IjAuNjUiIHN0b3AtY29sb3I9IiM2Y2FiMjkiIC8+PHN0b3Agb2Zmc2V0PSIwLjk5IiBzdG9wLWNvbG9yPSIjNWU5NzI0IiAvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzVlOTYyNCIgLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iZTc0ZTJmMzYtZjcwZi00MzUxLTk2MDktYTA4NDUyMmE4YmE3IiB4MT0iNi4xMyIgeTE9IjkuMjgiIHgyPSIxMS44NyIgeTI9IjkuMjgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmYiIC8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5JY29uLWdlbmVyYWwtMTk8L3RpdGxlPjxwYXRoIGQ9Ik0xMi4zNSwxLjQ4SDUuNjVhMiwyLDAsMCwwLTEuNzMsMUwuNTgsOC4yOGEyLDIsMCwwLDAsMCwybDMuMzQsNS43OWEyLDIsMCwwLDAsMS43MywxaDYuN2EyLDIsMCwwLDAsMS43My0xbDMuMzQtNS43OWEyLDIsMCwwLDAsMC0ybC0zLjM0LTUuOEEyLDIsMCwwLDAsMTIuMzUsMS40OFoiIGZpbGw9InVybCgjYTQ1YmE5YjUtMmUwOC00YzM5LTg5MTYtMGJhYjE4NGYwNmU5KSIgLz48cGF0aCBkPSJNOS4wNyw0LjgxQS44Mi44MiwwLDAsMSw4LjI1LDQsLjgyLjgyLDAsMCwxLDkuODksNCwuODIuODIsMCwwLDEsOS4wNyw0LjgxWm0tLjgyLDkuNzVhLjgyLjgyLDAsMSwwLDEuNjQsMCwuODIuODIsMCwwLDAtMS42NCwwWm0uODQtMi43QTEuNSwxLjUsMCwwLDEsNy41OCwxMWwtMS40NS4yOEEyLjY4LDIuNjgsMCwwLDAsOSwxM2MxLjY5LDAsMi45MS0uODksMi45MS0yLjEzYTIuMDcsMi4wNywwLDAsMC0xLjEyLTJBMTMsMTMsMCwwLDAsOSw4LjMzYy0uNjctLjE2LTEuMS0uNTMtMS4xLTFBMSwxLDAsMCwxLDksNi40NmExLjQsMS40LDAsMCwxLDEuMjkuNjlsMS4yNS0uNEEyLjU2LDIuNTYsMCwwLDAsOSw1LjQ1Yy0xLjE4LDAtMi41NS41Mi0yLjU1LDIsMCwxLjgxLDEuMTEsMi4xNywyLjY5LDIuNDguMzcuMDcsMS4yMy4zMiwxLjIzLDFDMTAuMzMsMTEuMzEsMTAsMTEuODYsOS4wOSwxMS44NloiIG9wYWNpdHk9IjAuOSIgZmlsbD0idXJsKCNlNzRlMmYzNi1mNzBmLTQzNTEtOTYwOS1hMDg0NTIyYThiYTcpIiAvPjwvc3ZnPg=="/>
+    <text x="1045" y="247" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Cost and tenant gates</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Immutable run record" filter="url(#shadow)">
+    <rect x="77" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="127" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iZjJmMDQzNDktOGFlZS00NDEzLTg0YzktYTkwNTM2MTFiMzE5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFkNGM0Zjk2LTA5YWEtNGY5MS1iYTEwLTVjYjhhZDUzMGY3NCIgeDE9IjkiIHkxPSIxNS44MyIgeDI9IjkiIHkyPSI1Ljc5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYjNiM2IzIiAvPjxzdG9wIG9mZnNldD0iMC4yNiIgc3RvcC1jb2xvcj0iI2MxYzFjMSIgLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNmU2ZTYiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPkljb24tc3RvcmFnZS04NjwvdGl0bGU+PHBhdGggZD0iTS41LDUuNzloMTdhMCwwLDAsMCwxLDAsMHY5LjQ4YS41Ny41NywwLDAsMS0uNTcuNTdIMS4wN2EuNTcuNTcsMCwwLDEtLjU3LS41N1Y1Ljc5QTAsMCwwLDAsMSwuNSw1Ljc5WiIgZmlsbD0idXJsKCNhZDRjNGY5Ni0wOWFhLTRmOTEtYmExMC01Y2I4YWQ1MzBmNzQpIiAvPjxwYXRoIGQ9Ik0xLjA3LDIuMTdIMTYuOTNhLjU3LjU3LDAsMCwxLC41Ny41N1Y1Ljc5YTAsMCwwLDAsMSwwLDBILjVhMCwwLDAsMCwxLDAsMFYyLjczQS41Ny41NywwLDAsMSwxLjA3LDIuMTdaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgxLDYuODlIMTUuMThhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjRhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgxYS4yNy4yNywwLDAsMS0uMjYtLjI3VjcuMTZBLjI3LjI3LDAsMCwxLDIuODEsNi44OVoiIGZpbGw9IiNmZmYiIC8+PHBhdGggZD0iTTIuODIsOS42OEgxNS4xOWEuMjcuMjcsMCwwLDEsLjI2LjI3djEuNDFhLjI3LjI3LDAsMCwxLS4yNi4yN0gyLjgyYS4yNy4yNywwLDAsMS0uMjYtLjI3VjEwQS4yNy4yNywwLDAsMSwyLjgyLDkuNjhaIiBmaWxsPSIjMzdjMmIxIiAvPjxwYXRoIGQ9Ik0yLjgyLDEyLjVIMTUuMTlhLjI3LjI3LDAsMCwxLC4yNi4yN3YxLjQxYS4yNy4yNywwLDAsMS0uMjYuMjdIMi44MmEuMjcuMjcsMCwwLDEtLjI2LS4yN1YxMi43N0EuMjcuMjcsMCwwLDEsMi44MiwxMi41WiIgZmlsbD0iIzI1ODI3NyIgLz48L3N2Zz4="/>
+    <text x="155" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="155" dy="0">Immutable run record</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Bounded lab operation" filter="url(#shadow)">
+    <rect x="522" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="572" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTY4NWNjOGMtMzJiYS00ZDU0LTkxZGEtM2ExMjVjYjU4ZGVkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48dGl0bGU+SWNvbi1nZW5lcmFsLTc8L3RpdGxlPjxnPjxnPjxwYXRoIGQ9Ik0uNSwxNS4wOGEuMTYuMTYsMCwwLDAsLjA4LjE0bDEuMTYuNjVMMy43LDE3YS4xNy4xNywwLDAsMCwuMjMtLjA2bC42Ni0xLjEyYS4xNi4xNiwwLDAsMC0uMDYtLjIxbC0yLjMtMS4zYS4xNy4xNywwLDAsMS0uMDgtLjE0VjMuODVhLjE2LjE2LDAsMCwxLC4wOC0uMTRsMi4zLTEuM2EuMTYuMTYsMCwwLDAsLjA2LS4yMUwzLjkzLDEuMDhBLjE3LjE3LDAsMCwwLDMuNywxTDEuNzgsMi4xMWwtMS4yLjY3YS4xNi4xNiwwLDAsMC0uMDguMTRWMTUuMDhaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik0yLjE0LDMuNzdsLjA2LS4wNiwyLjMtMS4zYS4xNC4xNCwwLDAsMCwuMDYtLjIxTDMuOSwxLjA4QS4xNS4xNSwwLDAsMCwzLjY4LDFMMS43NSwyLjExLjU2LDIuNzhzLS4wNSwwLS4wNi4wNmwuOS41MVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBhdGggZD0iTTQuNSwxNS41OWwtMi4zLTEuM2EuMjIuMjIsMCwwLDEtLjA3LS4wOWwtMS42MiwxLC4wNSwwLDEuMTUuNjUsMiwxLjExYS4xNS4xNSwwLDAsMCwuMjItLjA2bC42Ni0xLjEyQS4xNC4xNCwwLDAsMCw0LjUsMTUuNTlaIiBmaWxsPSIjYTNhM2EzIiAvPjwvZz48cGF0aCBkPSJNMTcuNSwxNS4wOGEuMTYuMTYsMCwwLDEtLjA4LjE0bC0xLjE2LjY1TDE0LjMsMTdhLjE3LjE3LDAsMCwxLS4yMy0uMDZsLS42Ni0xLjEyYS4xNi4xNiwwLDAsMSwuMDYtLjIxbDIuMy0xLjNhLjE3LjE3LDAsMCwwLC4wOC0uMTRWMy44NWEuMTYuMTYsMCwwLDAtLjA4LS4xNGwtMi4zLTEuM2EuMTYuMTYsMCwwLDEtLjA2LS4yMWwuNjYtMS4xMkEuMTcuMTcsMCwwLDEsMTQuMywxbDEuOTIsMS4wOSwxLjIuNjdhLjE2LjE2LDAsMCwxLC4wOC4xNFYxNS4wOFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTE1Ljg2LDMuNzdsLS4wNi0uMDYtMi4zLTEuM2EuMTQuMTQsMCwwLDEtLjA2LS4yMWwuNjYtMS4xMkEuMTUuMTUsMCwwLDEsMTQuMzIsMWwxLjkzLDEuMDksMS4xOS42N3MwLDAsLjA2LjA2bC0uOS41MVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBhdGggZD0iTTEzLjUsMTUuNTlsMi4zLTEuM2EuMjIuMjIsMCwwLDAsLjA3LS4wOWwxLjYyLDEsMCwwLTEuMTUuNjUtMiwxLjExYS4xNS4xNSwwLDAsMS0uMjItLjA2bC0uNjYtMS4xMkEuMTQuMTQsMCwwLDEsMTMuNSwxNS41OVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSA1LjkzIDE0LjMxIDEyLjA3IDguOTkgMTUuMTYgOC45OSA5LjAxIDE0LjMxIDUuOTMiIGZpbGw9IiMzMmJlZGQiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSA1LjkzIDkgOS4wMiAzLjY4IDUuOTMgOSAyLjg0IDE0LjMxIDUuOTMiIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSI4Ljk5IDkuMDIgOC45OSAxNS4xNiAzLjY4IDEyLjA3IDMuNjggNS45MyA4Ljk5IDkuMDIiIGZpbGw9IiM1MGU2ZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIzLjY4IDEyLjA3IDguOTkgOS4wMSA4Ljk5IDE1LjE2IDMuNjggMTIuMDciIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSAxMi4wNyA4Ljk5IDkuMDEgOC45OSAxNS4xNiAxNC4zMSAxMi4wNyIgZmlsbD0iIzUwZTZmZiIgLz48L2c+PC9zdmc+"/>
+    <text x="600" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="600" dy="0">Bounded lab operation</tspan>
+    </text>
+  </g>
+  <g role="group" aria-label="Service node: Ownership-aware cleanup" filter="url(#shadow)">
+    <rect x="967" y="478" width="156" height="146" rx="22" fill="#FFFFFF" stroke="#005EA8" stroke-width="2"/>
+    <image x="1017" y="498" width="56" height="56" preserveAspectRatio="xMidYMid meet" href="data:image/svg+xml;base64,PHN2ZyBpZD0iYTY4NWNjOGMtMzJiYS00ZDU0LTkxZGEtM2ExMjVjYjU4ZGVkIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij48dGl0bGU+SWNvbi1nZW5lcmFsLTc8L3RpdGxlPjxnPjxnPjxwYXRoIGQ9Ik0uNSwxNS4wOGEuMTYuMTYsMCwwLDAsLjA4LjE0bDEuMTYuNjVMMy43LDE3YS4xNy4xNywwLDAsMCwuMjMtLjA2bC42Ni0xLjEyYS4xNi4xNiwwLDAsMC0uMDYtLjIxbC0yLjMtMS4zYS4xNy4xNywwLDAsMS0uMDgtLjE0VjMuODVhLjE2LjE2LDAsMCwxLC4wOC0uMTRsMi4zLTEuM2EuMTYuMTYsMCwwLDAsLjA2LS4yMUwzLjkzLDEuMDhBLjE3LjE3LDAsMCwwLDMuNywxTDEuNzgsMi4xMWwtMS4yLjY3YS4xNi4xNiwwLDAsMC0uMDguMTRWMTUuMDhaIiBmaWxsPSIjOTQ5NDk0IiAvPjxwYXRoIGQ9Ik0yLjE0LDMuNzdsLjA2LS4wNiwyLjMtMS4zYS4xNC4xNCwwLDAsMCwuMDYtLjIxTDMuOSwxLjA4QS4xNS4xNSwwLDAsMCwzLjY4LDFMMS43NSwyLjExLjU2LDIuNzhzLS4wNSwwLS4wNi4wNmwuOS41MVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBhdGggZD0iTTQuNSwxNS41OWwtMi4zLTEuM2EuMjIuMjIsMCwwLDEtLjA3LS4wOWwtMS42MiwxLC4wNSwwLDEuMTUuNjUsMiwxLjExYS4xNS4xNSwwLDAsMCwuMjItLjA2bC42Ni0xLjEyQS4xNC4xNCwwLDAsMCw0LjUsMTUuNTlaIiBmaWxsPSIjYTNhM2EzIiAvPjwvZz48cGF0aCBkPSJNMTcuNSwxNS4wOGEuMTYuMTYsMCwwLDEtLjA4LjE0bC0xLjE2LjY1TDE0LjMsMTdhLjE3LjE3LDAsMCwxLS4yMy0uMDZsLS42Ni0xLjEyYS4xNi4xNiwwLDAsMSwuMDYtLjIxbDIuMy0xLjNhLjE3LjE3LDAsMCwwLC4wOC0uMTRWMy44NWEuMTYuMTYsMCwwLDAtLjA4LS4xNGwtMi4zLTEuM2EuMTYuMTYsMCwwLDEtLjA2LS4yMWwuNjYtMS4xMkEuMTcuMTcsMCwwLDEsMTQuMywxbDEuOTIsMS4wOSwxLjIuNjdhLjE2LjE2LDAsMCwxLC4wOC4xNFYxNS4wOFoiIGZpbGw9IiM5NDk0OTQiIC8+PHBhdGggZD0iTTE1Ljg2LDMuNzdsLS4wNi0uMDYtMi4zLTEuM2EuMTQuMTQsMCwwLDEtLjA2LS4yMWwuNjYtMS4xMkEuMTUuMTUsMCwwLDEsMTQuMzIsMWwxLjkzLDEuMDksMS4xOS42N3MwLDAsLjA2LjA2bC0uOS41MVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBhdGggZD0iTTEzLjUsMTUuNTlsMi4zLTEuM2EuMjIuMjIsMCwwLDAsLjA3LS4wOWwxLjYyLDEsMCwwLTEuMTUuNjUtMiwxLjExYS4xNS4xNSwwLDAsMS0uMjItLjA2bC0uNjYtMS4xMkEuMTQuMTQsMCwwLDEsMTMuNSwxNS41OVoiIGZpbGw9IiNhM2EzYTMiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSA1LjkzIDE0LjMxIDEyLjA3IDguOTkgMTUuMTYgOC45OSA5LjAxIDE0LjMxIDUuOTMiIGZpbGw9IiMzMmJlZGQiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSA1LjkzIDkgOS4wMiAzLjY4IDUuOTMgOSAyLjg0IDE0LjMxIDUuOTMiIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSI4Ljk5IDkuMDIgOC45OSAxNS4xNiAzLjY4IDEyLjA3IDMuNjggNS45MyA4Ljk5IDkuMDIiIGZpbGw9IiM1MGU2ZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIzLjY4IDEyLjA3IDguOTkgOS4wMSA4Ljk5IDE1LjE2IDMuNjggMTIuMDciIGZpbGw9IiM5Y2ViZmYiIC8+PHBvbHlnb24gcG9pbnRzPSIxNC4zMSAxMi4wNyA4Ljk5IDkuMDEgOC45OSAxNS4xNiAxNC4zMSAxMi4wNyIgZmlsbD0iIzUwZTZmZiIgLz48L2c+PC9zdmc+"/>
+    <text x="1045" y="577" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#102A43">
+      <tspan x="1045" dy="0">Ownership-aware</tspan>
+      <tspan x="1045" dy="17">cleanup</tspan>
+    </text>
+  </g>
+  <text x="600" y="730" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="14" fill="#486581">Validated inputs and explicit gates create a run record before a bounded operation can begin.</text>
 </svg>
 <!-- END GENERATED AZ305 V1 -->

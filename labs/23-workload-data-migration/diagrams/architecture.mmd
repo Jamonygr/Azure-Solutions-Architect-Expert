@@ -1,12 +1,24 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Move the approved manufacturing workload inside the outage window with provable data integrity and a controlled return path."]
-    R --> C1["Confirm approved wave and target prerequisites"]
-    C1 --> C2["Design server replication and test migration"]
-    C2 --> C3["Plan online relational database migration"]
-    C3 --> C4["Stage and verify unstructured data transfer"]
-    C4 --> C5["Rehearse cutover, validation, and rollback"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_source_datacenter["Approved migration wave"]
+        N_source_wave["VMware SQL and file sources"]
+    end
+    subgraph B_migration_fabric["Migration tooling and staging"]
+        N_server_migration["Azure Migrate replication"]
+        N_database_migration["Database Migration Service"]
+        N_file_transfer["Staged AzCopy transfer"]
+    end
+    subgraph B_azure_targets["Validated Azure targets"]
+        N_compute_target["IaaS and PaaS targets"]
+        N_database_target["Managed database target"]
+        N_storage_target["Verified object target"]
+    end
+    N_source_wave -->|"server discovery and replication"| N_server_migration
+    N_source_wave -->|"online database stream"| N_database_migration
+    N_source_wave -->|"staged file copy"| N_file_transfer
+    N_server_migration -->|"test migration and cutover"| N_compute_target
+    N_database_migration -->|"validated database cutover"| N_database_target
+    N_file_transfer -->|"hash-verified object transfer"| N_storage_target
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_source_wave,N_server_migration,N_database_migration,N_file_transfer,N_compute_target,N_database_target,N_storage_target service
 %% END GENERATED AZ305 V1

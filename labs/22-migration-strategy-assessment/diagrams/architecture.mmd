@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Exit the datacenters on schedule while prioritizing measurable value and preventing unsupported or highly coupled workloads from entering unsafe migration waves."]
-    R --> C1["Define strategy, outcomes, and constraints"]
-    C1 --> C2["Build and quality-check the portfolio inventory"]
-    C2 --> C3["Assess dependencies and readiness"]
-    C3 --> C4["Rationalize applications and form waves"]
-    C4 --> C5["Validate the business case and landing-zone entry criteria"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_source_portfolio["On-premises portfolio"]
+        N_inventory["Quality-checked inventory"]
+    end
+    subgraph B_assessment_factory["Assessment and rationalization"]
+        N_dependencies["Dependency and readiness map"]
+        N_rationalization["Application rationalization"]
+        N_waves["Dependency-based waves"]
+    end
+    subgraph B_cloud_readiness["Cloud readiness gate"]
+        N_business_case["Outcome and business case"]
+        N_landing_zone["Landing-zone entry criteria"]
+    end
+    N_inventory -->|"discovery evidence"| N_dependencies
+    N_dependencies -->|"technical and business constraints"| N_rationalization
+    N_rationalization -->|"disposition and sequence"| N_waves
+    N_waves -->|"cost and outcome model"| N_business_case
+    N_business_case -->|"approved readiness gate"| N_landing_zone
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_inventory,N_dependencies,N_rationalization,N_waves,N_business_case,N_landing_zone service
 %% END GENERATED AZ305 V1

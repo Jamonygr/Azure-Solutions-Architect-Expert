@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-05 — Secrets, Certificates, and Key Management
 
+![Key management banner showing managed workload identity reaching a private premium vault with rotated keys and governed certificates.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-04](../04-azure-hybrid-authorization/README.md) · [Lab catalog](../README.md) · [LAB-06 →](../06-resource-hierarchy-tag-governance/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Secrets, Certificates, and Key Management](diagrams/architecture.svg)
+![Topology showing an application and managed identity using a private endpoint to reach Key Vault Premium, rotated keys, and a certificate issuer.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Managed identities traverse a private endpoint to a premium vault while key rotation and certificate issuance remain governed. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing key management options and marking private Key Vault Premium with RBAC as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Soft delete, purge protection, tested rotation, and explicit HSM recovery ownership reduce key-loss outages.
-- **Security:** RBAC, private endpoints, managed identities, and a separate single-tenant HSM boundary enforce cryptographic least privilege.
-- **Cost Optimization:** Premium vaults remain the economical shared service and Managed HSM is limited to the workload that mandates it.
-- **Operational Excellence:** Expiry inventory, rotation alerts, and recovery drills turn cryptographic lifecycle into an auditable runbook.
-- **Performance Efficiency:** Applications reuse managed identities and private endpoints while key-operation throughput is benchmarked per service.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Soft delete, purge protection, tested rotation, and explicit HSM recovery ownership reduce key-loss outages.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>RBAC, private endpoints, managed identities, and a separate single-tenant HSM boundary enforce cryptographic least privilege.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Premium vaults remain the economical shared service and Managed HSM is limited to the workload that mandates it.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Expiry inventory, rotation alerts, and recovery drills turn cryptographic lifecycle into an auditable runbook.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Applications reuse managed identities and private endpoints while key-operation throughput is benchmarked per service.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-050001
 Synthetic sample: `{"labId":"LAB-05","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Select vault boundary and service tier</a><span>LAB05-REQ-01 · LAB05-CP01</span></li>
+<li><a href="#checkpoint-2">Define key protection and rotation</a><span>LAB05-REQ-02 · LAB05-CP02</span></li>
+<li><a href="#checkpoint-3">Govern certificate issuance and renewal</a><span>LAB05-REQ-03 · LAB05-CP03</span></li>
+<li><a href="#checkpoint-4">Grant managed-identity data-plane access</a><span>LAB05-REQ-04 · LAB05-CP04</span></li>
+<li><a href="#checkpoint-5">Enforce a private network path</a><span>LAB05-REQ-05 · LAB05-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Select vault boundary and service tier
 

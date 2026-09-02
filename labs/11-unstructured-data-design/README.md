@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-11 — Unstructured Data Platform Selection
 
+![Data banner showing source systems entering an ADLS Gen2 hierarchical namespace through private connectivity for governed consumption.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-10](../10-semi-structured-data-design/README.md) · [Lab catalog](../README.md) · [LAB-12 →](../12-storage-economics-durability/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Unstructured Data Platform Selection](diagrams/architecture.svg)
+![Topology showing file producers and analytical consumers connected privately to an ADLS Gen2 account with governed filesystems and key custody.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Producers and consumers use a private endpoint while filesystems, directories, access control, and key dependency remain explicit. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing unstructured data services and marking ADLS Gen2 with hierarchical namespace as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Independent redundancy, snapshots, and replay paths match the failure behavior of lake objects and collaborative files.
-- **Security:** ACLs, service-specific private endpoints, and classified ingress keep legal and analytics data in distinct trust boundaries.
-- **Cost Optimization:** SMB-priced capacity is reserved for collaboration and lower-cost object tiers serve analytics retention.
-- **Operational Excellence:** Separate owners, inventories, lifecycle rules, and restore assertions prevent protocol ambiguity.
-- **Performance Efficiency:** Object-native parallelism serves analytics while Azure Files supplies locking and metadata behavior for users.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Independent redundancy, snapshots, and replay paths match the failure behavior of lake objects and collaborative files.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>ACLs, service-specific private endpoints, and classified ingress keep legal and analytics data in distinct trust boundaries.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>SMB-priced capacity is reserved for collaboration and lower-cost object tiers serve analytics retention.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Separate owners, inventories, lifecycle rules, and restore assertions prevent protocol ambiguity.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Object-native parallelism serves analytics while Azure Files supplies locking and metadata behavior for users.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-110001
 Synthetic sample: `{"labId":"LAB-11","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Match service semantics to access patterns</a><span>LAB11-REQ-01 · LAB11-CP01</span></li>
+<li><a href="#checkpoint-2">Create a hierarchical namespace boundary</a><span>LAB11-REQ-02 · LAB11-CP02</span></li>
+<li><a href="#checkpoint-3">Design filesystem and directory ownership</a><span>LAB11-REQ-03 · LAB11-CP03</span></li>
+<li><a href="#checkpoint-4">Define encryption and key dependency</a><span>LAB11-REQ-04 · LAB11-CP04</span></li>
+<li><a href="#checkpoint-5">Validate private endpoint access</a><span>LAB11-REQ-05 · LAB11-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Match service semantics to access patterns
 

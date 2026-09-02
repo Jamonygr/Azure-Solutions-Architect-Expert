@@ -1,12 +1,21 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Detect and triage material service degradation before customers report it while reducing unactionable alerts."]
-    R --> C1["Build a layered signal inventory"]
-    C1 --> C2["Design platform and resource-health alerts"]
-    C2 --> C3["Define a query-based service-level alert"]
-    C3 --> C4["Curate an operator workbook"]
-    C4 --> C5["Verify action routing and noise controls"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_service_signals["Service signal sources"]
+        N_telemetry["Metrics logs and health"]
+    end
+    subgraph B_monitoring_control["Monitoring control plane"]
+        N_monitor["Azure Monitor"]
+        N_alert["Service-level alert rules"]
+    end
+    subgraph B_response["Operator response"]
+        N_action["Shared action groups"]
+        N_workbook["Curated operator workbook"]
+    end
+    N_telemetry -->|"layered signals"| N_monitor
+    N_monitor -->|"metric health and query rules"| N_alert
+    N_alert -->|"severity-aware routing"| N_action
+    N_monitor -->|"curated queries"| N_workbook
+    N_action -->|"incident context"| N_workbook
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_telemetry,N_monitor,N_alert,N_action,N_workbook service
 %% END GENERATED AZ305 V1

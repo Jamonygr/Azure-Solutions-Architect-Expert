@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-03 — Authentication and Identity Management Architecture
 
+![Identity banner showing workforce and external tenant boundaries connected to applications through modern authentication and workload identity.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">PowerShell/Graph</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-02](../02-monitoring-alerts-visibility/README.md) · [Lab catalog](../README.md) · [LAB-04 →](../04-azure-hybrid-authorization/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Authentication and Identity Management Architecture](diagrams/architecture.svg)
+![Topology showing workforce users and applications in one tenant, customer identities in an External ID tenant, Conditional Access, and managed workload identities.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Separate tenant boundaries serve employees and customers while managed identities remove workload secrets. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing identity architectures and marking the workforce plus External ID tenant model as selected.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Separate populations and provider-aware journeys contain authentication failure to the affected trust path.
-- **Security:** External ID, minimal claims, managed identities, and isolated health profiles reduce credential and data exposure.
-- **Cost Optimization:** Monthly-active-user billing and managed federation avoid funding custom password infrastructure.
-- **Operational Excellence:** Lifecycle owners and journey-specific evidence make failed federation and provisioning easier to diagnose.
-- **Performance Efficiency:** Tokens carry only authorization context and defer regulated profile retrieval to the workload data tier.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Separate populations and provider-aware journeys contain authentication failure to the affected trust path.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>External ID, minimal claims, managed identities, and isolated health profiles reduce credential and data exposure.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Monthly-active-user billing and managed federation avoid funding custom password infrastructure.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Lifecycle owners and journey-specific evidence make failed federation and provisioning easier to diagnose.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Tokens carry only authorization context and defer regulated profile retrieval to the workload data tier.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-030001
 Synthetic sample: `{"labId":"LAB-03","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Establish identity population and tenant boundaries</a><span>LAB03-REQ-01 · LAB03-CP01</span></li>
+<li><a href="#checkpoint-2">Select protocols and application registrations</a><span>LAB03-REQ-02 · LAB03-CP02</span></li>
+<li><a href="#checkpoint-3">Design authentication methods and recovery</a><span>LAB03-REQ-03 · LAB03-CP03</span></li>
+<li><a href="#checkpoint-4">Evaluate Conditional Access architecture</a><span>LAB03-REQ-04 · LAB03-CP04</span></li>
+<li><a href="#checkpoint-5">Prefer managed workload identities</a><span>LAB03-REQ-05 · LAB03-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Establish identity population and tenant boundaries
 

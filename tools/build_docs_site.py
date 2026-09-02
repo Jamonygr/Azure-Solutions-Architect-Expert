@@ -177,11 +177,15 @@ def expected_files() -> dict[Path, bytes]:
     for lab in catalog["labs"]:
         source_lab = ROOT / "labs" / lab["folder"]
         readme = source_lab / "README.md"
-        diagram = source_lab / "diagrams" / "architecture.svg"
+        diagrams = {
+            name: source_lab / "diagrams" / name
+            for name in ("summary.svg", "architecture.svg", "decision-matrix.svg")
+        }
         if not readme.is_file():
             raise FileNotFoundError(f"Missing generated lab README: {readme.relative_to(ROOT)}")
-        if not diagram.is_file():
-            raise FileNotFoundError(f"Missing generated architecture SVG: {diagram.relative_to(ROOT)}")
+        for diagram in diagrams.values():
+            if not diagram.is_file():
+                raise FileNotFoundError(f"Missing generated visual: {diagram.relative_to(ROOT)}")
         base = Path("labs") / lab["folder"]
         number = int(lab["number"])
         lab_readme = readme.read_text(encoding="utf-8")
@@ -192,7 +196,13 @@ def expected_files() -> dict[Path, bytes]:
                 "Its answer key is not present in this site.\n"
             )
         expected[base / "README.md"] = normalized_text(lab_readme)
-        expected[base / "diagrams" / "architecture.svg"] = diagram.read_bytes()
+        for name, diagram in diagrams.items():
+            expected[base / "diagrams" / name] = diagram.read_bytes()
+        images = source_lab / "images"
+        if images.is_dir():
+            for image in sorted(images.iterdir()):
+                if image.is_file():
+                    expected[base / "images" / image.name] = image.read_bytes()
         learner_questions = source_lab / "assessment" / "QUESTIONS.md"
         if 1 <= number <= 25:
             if not learner_questions.is_file():

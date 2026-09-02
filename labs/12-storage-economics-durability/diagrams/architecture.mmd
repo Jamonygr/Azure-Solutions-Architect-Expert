@@ -1,12 +1,22 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Lower long-term storage cost while preserving the durability and evidentiary controls each data class requires."]
-    R --> C1["Classify access and cost drivers"]
-    C1 --> C2["Select regional durability"]
-    C2 --> C3["Automate lifecycle transitions"]
-    C3 --> C4["Layer versioning and delete protection"]
-    C4 --> C5["Validate immutable evidence boundaries"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_primary_region["Primary storage region"]
+        N_hot_objects["Classified hot objects"]
+        N_lifecycle["Lifecycle management policy"]
+        N_cool_archive["Cool and archive tiers"]
+        N_versions["Versions and soft delete"]
+    end
+    subgraph B_secondary_region["Paired storage region"]
+        N_geo_copy["GZRS secondary copy"]
+    end
+    subgraph B_compliance_boundary["Compliance evidence"]
+        N_immutable["Immutable audit boundary"]
+    end
+    N_hot_objects -->|"age and access signals"| N_lifecycle
+    N_lifecycle -->|"tier transitions"| N_cool_archive
+    N_hot_objects -->|"geo-zone replication"| N_geo_copy
+    N_hot_objects -->|"overwrite and delete guard"| N_versions
+    N_hot_objects -->|"evidence retention policy"| N_immutable
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_hot_objects,N_lifecycle,N_cool_archive,N_geo_copy,N_versions,N_immutable service
 %% END GENERATED AZ305 V1

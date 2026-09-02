@@ -1,12 +1,28 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Reduce datacenter dependency through controlled modernization while maintaining branch service, regulatory evidence, reversibility, and transparent residual risk."]
-    R --> C1["Validate the offline evidence pack and constraints"]
-    C1 --> C2["Rationalize the portfolio and hybrid coexistence model"]
-    C2 --> C3["Compile and inspect the hybrid foundation"]
-    C3 --> C4["Simulate migration, continuity, and security injects"]
-    C4 --> C5["Run the offline release and decommission review"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_hybrid_estate["On-premises and branch estate"]
+        N_portfolio["VMware branch SQL and files"]
+    end
+    subgraph B_coexistence_control["Hybrid coexistence and migration"]
+        N_arc_evidence["Azure Arc evidence plane"]
+        N_migration_waves["Dependency-based migration waves"]
+    end
+    subgraph B_cloud_landing_zone["Governed Azure landing zone"]
+        N_application_targets["Managed PaaS application targets"]
+        N_data_targets["Managed database and storage targets"]
+    end
+    subgraph B_release_evidence["Continuity and release evidence"]
+        N_continuity["Recovery and security injects"]
+        N_decommission["Release and decommission review"]
+    end
+    N_portfolio -->|"inventory and policy evidence"| N_arc_evidence
+    N_arc_evidence -->|"dependencies and readiness"| N_migration_waves
+    N_migration_waves -->|"application modernization sequence"| N_application_targets
+    N_migration_waves -->|"database and file migration sequence"| N_data_targets
+    N_application_targets -->|"application recovery evidence"| N_continuity
+    N_data_targets -->|"data protection evidence"| N_continuity
+    N_continuity -->|"validated release gate"| N_decommission
+    N_decommission -->|"approved retirement scope"| N_portfolio
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_portfolio,N_arc_evidence,N_migration_waves,N_application_targets,N_data_targets,N_continuity,N_decommission service
 %% END GENERATED AZ305 V1

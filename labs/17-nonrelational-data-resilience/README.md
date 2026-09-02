@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-17 — Semi-Structured and Unstructured Data Resilience
 
+![Continuity banner showing global traffic using multi-region Cosmos DB and geo-zone-redundant Blob Storage with restore evidence.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">safe-analogue</span>
+  <span class="az305-lane-badge">Azure PowerShell</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-16](../16-relational-database-continuity/README.md) · [Lab catalog](../README.md) · [LAB-18 →](../18-compute-vm-batch-architecture/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Semi-Structured and Unstructured Data Resilience](diagrams/architecture.svg)
+![Topology showing global application traffic, Cosmos DB multi-region writes, GZRS Blob Storage, a secondary region, and backup and restore validation.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+Global application traffic uses multi-region document writes and durable object replication while recovery evidence covers both stores. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing nonrelational resilience patterns and highlighting Cosmos multi-write plus GZRS Blob Storage.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Multi-region document writes and global public media delivery reduce regional outage while exposing conflict behavior.
-- **Security:** Classification and country-bound storage keep rights-controlled content out of global replication paths.
-- **Cost Optimization:** Replication and throughput are allocated by content class instead of copying every object worldwide.
-- **Operational Excellence:** Conflict, classification, failover, and publication evidence make regional recovery auditable.
-- **Performance Efficiency:** Public objects use globally distributed retrieval while restricted content avoids unnecessary egress and replicas.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Multi-region document writes and global public media delivery reduce regional outage while exposing conflict behavior.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>Classification and country-bound storage keep rights-controlled content out of global replication paths.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Replication and throughput are allocated by content class instead of copying every object worldwide.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Conflict, classification, failover, and publication evidence make regional recovery auditable.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Public objects use globally distributed retrieval while restricted content avoids unnecessary egress and replicas.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-powershell/Preflight.ps1 -RunId synthetic-170001
 Synthetic sample: `{"labId":"LAB-17","track":"azure-powershell","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Inventory nonrelational region placement</a><span>LAB17-REQ-01 · LAB17-CP01</span></li>
+<li><a href="#checkpoint-2">Validate document consistency and conflict behavior</a><span>LAB17-REQ-02 · LAB17-CP02</span></li>
+<li><a href="#checkpoint-3">Assess Blob durability and failover readiness</a><span>LAB17-REQ-03 · LAB17-CP03</span></li>
+<li><a href="#checkpoint-4">Prove backup and restore integrity</a><span>LAB17-REQ-04 · LAB17-CP04</span></li>
+<li><a href="#checkpoint-5">Rehearse coordinated regional recovery</a><span>LAB17-REQ-05 · LAB17-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Inventory nonrelational region placement
 

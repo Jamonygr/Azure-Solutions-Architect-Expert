@@ -1,6 +1,14 @@
 <!-- BEGIN GENERATED AZ305 V1 -->
 # LAB-20 — Messaging, Event-Driven, and API Integration Architecture
 
+![Infrastructure banner showing partner APIs, reliable commands, event fan-out, telemetry streaming, and independent consumers.](diagrams/summary.svg)
+
+<div class="az305-badges" aria-label="Lab classification">
+  <span class="az305-mode-badge">reference-deployable</span>
+  <span class="az305-lane-badge">Azure CLI</span>
+  <span class="az305-status">offline-validated</span>
+</div>
+
 ## 1. Navigation
 
 [← LAB-19](../19-container-serverless-architecture/README.md) · [Lab catalog](../README.md) · [LAB-21 →](../21-cache-configuration-delivery/README.md)
@@ -64,9 +72,9 @@ Assumptions:
 
 ## 5. Architecture diagram and walkthrough
 
-![Accessible architecture for Messaging, Event-Driven, and API Integration Architecture](diagrams/architecture.svg)
+![Topology showing partner calls through API Management, durable commands through Service Bus, state events through Event Grid, telemetry through Event Hubs, and separate consumers.](diagrams/architecture.svg)
 
-The flow begins with the business outcome, crosses five independently validated design capabilities, and ends with positive and negative evidence. The SVG is deterministically rendered from `diagrams/architecture.mmd`.
+API Management governs partners while Service Bus, Event Grid, and Event Hubs carry distinct reliability and throughput semantics. The labelled nodes, boundaries, and edges are deterministically rendered from the portable `diagrams/architecture.mmd` source and the frozen visual registry.
 
 ## 6. Concept primer and candidate architectures
 
@@ -80,6 +88,8 @@ Architecture decisions translate measurable requirements into a deliberate servi
 ## 7. Decision, ADR, and Well-Architected review
 
 Criteria weights are C1 30, C2 25, C3 20, C4 15, and C5 10. Weighted totals use `sum(weight × score) / 5`.
+
+![Decision matrix comparing integration patterns and highlighting Service Bus, Event Grid, Event Hubs, and API Management by contract.](diagrams/decision-matrix.svg)
 
 | Candidate | Eligible | C1 | C2 | C3 | C4 | C5 | Weighted /100 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -103,11 +113,13 @@ Architecture risks:
 
 Well-Architected consequences:
 
-- **Reliability:** Durable sessions, dead letters, isolated subscriptions, and idempotent consumers preserve shipment processing.
-- **Security:** APIM policy, managed identities, and recipient-specific subscriptions constrain partner and event access.
-- **Cost Optimization:** Broker features and capacity are purchased per message class instead of overengineering telemetry or commands.
-- **Operational Excellence:** Correlation IDs join API acceptance, command settlement, state events, telemetry, and repair actions.
-- **Performance Efficiency:** Event Hubs absorbs tenfold telemetry while Service Bus session capacity scales on ordered shipment demand.
+<div class="az305-waf-grid">
+<article class="az305-waf-card"><h3>Reliability</h3><p>Durable sessions, dead letters, isolated subscriptions, and idempotent consumers preserve shipment processing.</p></article>
+<article class="az305-waf-card"><h3>Security</h3><p>APIM policy, managed identities, and recipient-specific subscriptions constrain partner and event access.</p></article>
+<article class="az305-waf-card"><h3>Cost Optimization</h3><p>Broker features and capacity are purchased per message class instead of overengineering telemetry or commands.</p></article>
+<article class="az305-waf-card"><h3>Operational Excellence</h3><p>Correlation IDs join API acceptance, command settlement, state events, telemetry, and repair actions.</p></article>
+<article class="az305-waf-card"><h3>Performance Efficiency</h3><p>Event Hubs absorbs tenfold telemetry while Service Bus session capacity scales on ordered shipment demand.</p></article>
+</div>
 
 ADR consequences:
 
@@ -135,6 +147,14 @@ pwsh ./scripts/azure-cli/Preflight.ps1 -RunId synthetic-200001
 Synthetic sample: `{"labId":"LAB-20","track":"azure-cli","result":"pass","note":"Local tool discovery only"}`. This is illustrative local output, not evidence captured from Azure.
 
 ## 10. Five guided checkpoints
+
+<ol class="az305-checkpoint-timeline" aria-label="Five checkpoint learning path">
+<li><a href="#checkpoint-1">Classify every interaction contract</a><span>LAB20-REQ-01 · LAB20-CP01</span></li>
+<li><a href="#checkpoint-2">Validate durable command processing</a><span>LAB20-REQ-02 · LAB20-CP02</span></li>
+<li><a href="#checkpoint-3">Prove event fan-out and telemetry separation</a><span>LAB20-REQ-03 · LAB20-CP03</span></li>
+<li><a href="#checkpoint-4">Govern partner APIs</a><span>LAB20-REQ-04 · LAB20-CP04</span></li>
+<li><a href="#checkpoint-5">Validate end-to-end failure handling</a><span>LAB20-REQ-05 · LAB20-CP05</span></li>
+</ol>
 
 ### Checkpoint 1: Classify every interaction contract
 

@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Accelerate storefront reads and release features consistently across regions without embedding secrets or relying on manual configuration drift."]
-    R --> C1["Define cache semantics and failure behavior"]
-    C1 --> C2["Separate configuration, features, and secrets"]
-    C2 --> C3["Compile the delivery contract"]
-    C3 --> C4["Preview a bounded deployment"]
-    C4 --> C5["Validate progressive configuration delivery"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_storefront_platform["Multi-region storefront"]
+        N_storefront["Storefront application stamps"]
+    end
+    subgraph B_shared_services["Shared application services"]
+        N_cache["Azure Managed Redis"]
+        N_configuration["Azure App Configuration"]
+        N_secrets["Key Vault secrets"]
+    end
+    subgraph B_delivery_control["Delivery control plane"]
+        N_pipeline["Guarded delivery pipeline"]
+        N_deployment["Bicep deployment stack"]
+    end
+    N_storefront -->|"cache-aside catalog reads"| N_cache
+    N_storefront -->|"feature and configuration refresh"| N_configuration
+    N_storefront -->|"managed-identity secret access"| N_secrets
+    N_pipeline -->|"previewed infrastructure change"| N_deployment
+    N_deployment -->|"progressive regional rollout"| N_storefront
+    N_deployment -->|"bounded configuration release"| N_configuration
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_storefront,N_cache,N_configuration,N_secrets,N_pipeline,N_deployment service
 %% END GENERATED AZ305 V1

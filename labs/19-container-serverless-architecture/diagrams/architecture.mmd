@@ -1,12 +1,23 @@
 %% BEGIN GENERATED AZ305 V1
 flowchart LR
-    R["Absorb catastrophe-driven claim spikes without permanent cluster overhead or credential-bearing application images."]
-    R --> C1["Partition workloads by execution characteristics"]
-    C1 --> C2["Assess Container Apps environment and revisions"]
-    C2 --> C3["Validate Functions triggers and scale constraints"]
-    C3 --> C4["Prove identity, secrets, and network posture"]
-    C4 --> C5["Model surge behavior and graceful degradation"]
-    C5 --> E["Independent positive and negative evidence"]
-    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
-    class R,E boundary
+    subgraph B_application_edge["Claims application edge"]
+        N_http_intake["HTTP claims intake"]
+    end
+    subgraph B_managed_compute["Managed compute environment"]
+        N_api["Container Apps API"]
+        N_workers["Long-running container workers"]
+        N_functions["Event-triggered Functions"]
+    end
+    subgraph B_platform_dependencies["Platform dependencies"]
+        N_messages["Durable work queue"]
+        N_identity["Managed identity and secrets"]
+    end
+    N_http_intake -->|"HTTPS claim requests"| N_api
+    N_api -->|"durable work commands"| N_messages
+    N_messages -->|"long-running claims work"| N_workers
+    N_messages -->|"event-triggered handlers"| N_functions
+    N_identity -->|"secretless dependency access"| N_api
+    N_identity -->|"secretless dependency access"| N_functions
+    classDef service fill:#ffffff,stroke:#0078d4,color:#102a43,stroke-width:2px
+    class N_http_intake,N_api,N_workers,N_functions,N_messages,N_identity service
 %% END GENERATED AZ305 V1
