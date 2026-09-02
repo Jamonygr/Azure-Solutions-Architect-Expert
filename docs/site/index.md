@@ -1,6 +1,16 @@
-# AZ-305 architecture practice, offline first
+# AZ-305 visual architecture practice
 
 <p class="az305-lede">Turn the 49 measured skills into repeatable architecture decisions, evidence, and explanations. The environment contains 28 portable labs, 25 assessment banks, two capstones, and one safety-first execution contract.</p>
+
+<figure class="az305-hero">
+  <img src="assets/visuals/home-hero.png" alt="Isometric cloud architecture connecting identity, data, continuity, and infrastructure practice areas" width="1536" height="1024">
+  <figcaption>Follow architecture choices from business requirements through topology, evidence, and review.</figcaption>
+</figure>
+
+<figure class="az305-visual">
+  <img src="assets/infographics/learning-loop.svg" alt="Learning loop from requirements through decisions, implementation, evidence, assessment, and revision">
+  <figcaption>The repeatable learning loop used across all 28 labs.</figcaption>
+</figure>
 
 !!! important "Offline validation is not live verification"
     Repository status proves structure, arithmetic, safety behavior, and fixture results. It does not prove that a command succeeded against an Azure tenant. Every lab begins in preview mode, and `lastLiveVerified` remains `null` until a future owner performs and records an authorized live verification.

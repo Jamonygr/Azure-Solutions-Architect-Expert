@@ -2,6 +2,11 @@
 
 Evidence connects a design claim to an observable result. It must be sufficient for a reviewer, safe to retain, and honest about whether it is synthetic, offline, or live.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/evidence-chain.svg" alt="Evidence chain pairing each checkpoint with independent positive and negative assertions and a sanitized result record">
+  <figcaption>Evidence is useful when it is independent, attributable, minimal, and traceable.</figcaption>
+</figure>
+
 ## Pair every assertion
 
 For each checkpoint, keep two independent assertions:

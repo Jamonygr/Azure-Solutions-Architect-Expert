@@ -2,6 +2,11 @@
 
 The official wording and ownership below are staged from `curriculum/blueprint.yml`. Each of the 49 measured skills has exactly one primary lab. Foundation objectives use `FD-*` identifiers and are explicitly non-exam prerequisites.
 
+<figure class="az305-visual">
+  <img src="assets/infographics/objective-coverage.svg" alt="Traceability map connecting 49 AZ-305 objectives to their primary labs, requirements, checkpoints, and assessment questions">
+  <figcaption>Every measured skill follows one primary trace through the learning environment.</figcaption>
+</figure>
+
 !!! note
     `offline-validated` means repository contracts, generated artifacts, tests, and synthetic fixtures passed. Live Azure and Microsoft Graph verification is outside this release, so `lastLiveVerified` remains `null`.
 

@@ -2,6 +2,11 @@
 
 Cost Optimization begins with workload facts and ownership, not a price lookup. The labs use bounded examples in West Europe and North Europe, but no offline fixture claims a current charge.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/cost-levers.svg" alt="Cloud cost levers for compute, storage, data transfer, observability, resilience, licenses, and nonproduction usage">
+  <figcaption>Model the units that move, then test sensitivity and ownership before approving spend.</figcaption>
+</figure>
+
 ## Build the cost model
 
 Model the units that change the bill:

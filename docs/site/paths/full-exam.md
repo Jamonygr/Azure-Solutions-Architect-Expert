@@ -2,6 +2,18 @@
 
 This path covers all 49 measured skills once as a primary objective and reinforces them in the capstones. Complete the labs in sequence because later scenarios assume the decision and evidence habits established earlier.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/exam-domains.svg" alt="Full AZ-305 path across foundation, identity and governance, data, continuity, infrastructure, and capstones">
+  <figcaption>The complete route balances blueprint ownership with cumulative architecture practice.</figcaption>
+</figure>
+
+<div class="az305-domain-gallery" aria-label="Four AZ-305 design domains">
+  <figure class="az305-visual"><img src="../assets/visuals/domain-identity-governance-monitoring.png" alt="Isometric identity, governance, and monitoring architecture"><figcaption>Identity, governance, and monitoring</figcaption></figure>
+  <figure class="az305-visual"><img src="../assets/visuals/domain-data.png" alt="Isometric data storage, integration, protection, and analytics architecture"><figcaption>Data storage and integration</figcaption></figure>
+  <figure class="az305-visual"><img src="../assets/visuals/domain-continuity.png" alt="Isometric dual-region availability, backup, replication, and recovery architecture"><figcaption>Business continuity</figcaption></figure>
+  <figure class="az305-visual"><img src="../assets/visuals/domain-infrastructure.png" alt="Isometric network, compute, application, and hybrid infrastructure architecture"><figcaption>Infrastructure</figcaption></figure>
+</div>
+
 ## Wave sequence
 
 | Wave | Labs | Focus | Questions |

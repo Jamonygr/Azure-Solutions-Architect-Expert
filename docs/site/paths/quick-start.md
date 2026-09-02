@@ -2,6 +2,11 @@
 
 Use this route when you want a safe tour of the environment before committing to the full curriculum. Allow roughly six focused sessions.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/learning-loop.svg" alt="Six-session quick-start learning loop from safety contract through four domain samples and a capstone design pass">
+  <figcaption>A compact route through the same requirements, decisions, evidence, and reflection loop.</figcaption>
+</figure>
+
 ## Session 1 — learn the contract
 
 Complete **LAB-00**. Inspect the four lifecycle scripts, run preview-only preflight and setup, and explain why state must exist before a potential mutation. Confirm the three exit codes: `0` for success, `1` for failed assertions, and `2` for a gated or partial outcome requiring review.

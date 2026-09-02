@@ -2,6 +2,11 @@
 
 Architecture work separates the identity that designs a change, the identity that deploys it, and the identity that validates or approves it. Granting broad rights to make a lab convenient defeats the authorization learning outcome.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/permission-boundary.svg" alt="Permission boundaries across Azure Resource Manager, Microsoft Graph, data plane, CI/CD, and operations roles">
+  <figcaption>Map every operation to its control plane, narrowest scope, approval owner, and removal condition.</figcaption>
+</figure>
+
 ## Plan by control plane
 
 | Plane | Typical concern | Design question |

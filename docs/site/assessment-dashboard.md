@@ -2,6 +2,11 @@
 
 Track the five checkpoints for all 28 labs and an optional score for each 50-question bank in Labs 01–25. Foundation Lab 00 and Capstones 26–27 are intentionally unscored.
 
+<figure class="az305-visual">
+  <img src="assets/infographics/assessment-coverage.svg" alt="Assessment coverage across 25 question banks, five checkpoints per lab, and three difficulty levels">
+  <figcaption>Use coverage and difficulty signals to target remediation, not just a total score.</figcaption>
+</figure>
+
 !!! warning "Private, local, and explicit"
     Progress is stored only in this browser under `az305LearnerProgress.v1`. It is never sent to analytics, a server, Azure, Microsoft Graph, or the CLI. Browser and CLI progress do not synchronize. Use the explicit JSON export and import buttons to move progress yourself.
 

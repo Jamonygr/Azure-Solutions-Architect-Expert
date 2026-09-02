@@ -1,6 +1,10 @@
 # Azure Solutions Architect Expert — AZ-305
 
-An offline-first, architecture-decision learning environment for the Microsoft AZ-305 blueprint effective April 17, 2026. It contains 28 portable labs, maps every one of the 49 measured skills to one primary lab, and provides 1,250 original questions across Labs 01–25.
+A visual, architecture-first learning environment for the Microsoft AZ-305 blueprint effective April 17, 2026.
+
+![Isometric overview of the AZ-305 learning environment, connecting identity, data, continuity, and infrastructure architecture](docs/site-assets/visuals/home-hero.png)
+
+It contains 28 portable labs, maps every one of the 49 measured skills to one primary lab, and provides 1,250 original questions across Labs 01–25.
 
 ## Start here
 

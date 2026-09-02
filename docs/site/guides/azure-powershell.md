@@ -2,6 +2,11 @@
 
 Labs assigned to the `azure-powershell` track place lifecycle scripts under `scripts/azure-powershell`. Labs 03 and 07 may also use the pinned GA Microsoft Graph PowerShell v1.0 submodules. No Beta module is part of this environment.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/command-lanes.svg" alt="Parallel Azure PowerShell and Azure CLI lifecycle lanes from preflight through setup, validation, cleanup, and post-cleanup validation">
+  <figcaption>The command lanes share one safety contract while keeping their syntax explicit.</figcaption>
+</figure>
+
 ## Lifecycle entry points
 
 ```powershell

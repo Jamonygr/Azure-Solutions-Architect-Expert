@@ -2,6 +2,11 @@
 
 The schedule assumes about eight hours each week. Adjust session length in your private `learner.config.yml`; the browser dashboard does not read that file and never synchronizes with it.
 
+<figure class="az305-visual">
+  <img src="assets/infographics/study-roadmap.svg" alt="Eight-week AZ-305 study roadmap moving through foundation, four domain waves, capstones, and remediation">
+  <figcaption>Build skill in waves, with retrieval and remediation integrated each week.</figcaption>
+</figure>
+
 | Week | Labs | Main outcome | Retrieval practice |
 | ---: | --- | --- | --- |
 | 1 | 00–03 | Safe lifecycle, logging, monitoring, identity | Explain state-before-mutation and compare identity boundaries |

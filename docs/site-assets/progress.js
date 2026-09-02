@@ -37,6 +37,14 @@
   const LAB_IDS = Object.freeze(LABS.map((entry) => entry[0]));
   const LAB_TITLES = Object.freeze(Object.fromEntries(LABS));
   const SCORED_LABS = new Set(LAB_IDS.slice(1, 26));
+  const DOMAIN_GROUPS = Object.freeze([
+    ['Foundation', ['LAB-00']],
+    ['Identity, governance, and monitoring', LAB_IDS.slice(1, 8)],
+    ['Data', LAB_IDS.slice(8, 14)],
+    ['Business continuity', LAB_IDS.slice(14, 18)],
+    ['Infrastructure', LAB_IDS.slice(18, 26)],
+    ['Capstones', LAB_IDS.slice(26, 28)]
+  ]);
   const ROOT_KEYS = new Set(['schemaVersion', 'exportedAt', 'labs']);
   const LAB_KEYS = new Set(['completed', 'checkpoints', 'score']);
   const SENSITIVE_EXACT_KEYS = new Set([
@@ -243,7 +251,38 @@
     const resetButton = element(documentRef, 'button', { type: 'button' }, 'Reset local progress');
     toolbar.append(exportButton, importButton, importInput, resetButton);
 
+    const overview = element(documentRef, 'div', { className: 'az305-progress__overview' });
+    const completionRing = element(documentRef, 'div', {
+      className: 'az305-completion-ring',
+      role: 'img',
+      'aria-label': '0 percent of labs complete'
+    });
+    const completionLabel = element(documentRef, 'span', { className: 'az305-completion-ring__label', 'aria-hidden': 'true' }, '0%');
+    completionRing.append(completionLabel);
+    const overviewCopy = element(documentRef, 'div', { className: 'az305-progress__overview-copy' });
     const summary = element(documentRef, 'p', { className: 'az305-progress__summary', 'aria-live': 'polite' });
+    const domainProgress = element(documentRef, 'div', { className: 'az305-domain-progress', 'aria-label': 'Completion by curriculum area' });
+    const domainRows = new Map();
+    DOMAIN_GROUPS.forEach(([label, ids]) => {
+      const row = element(documentRef, 'div', { className: 'az305-domain-progress__row' });
+      const name = element(documentRef, 'span', {}, label);
+      const track = element(documentRef, 'span', {
+        className: 'az305-domain-progress__track',
+        role: 'progressbar',
+        'aria-label': `${label} completion`,
+        'aria-valuemin': '0',
+        'aria-valuemax': String(ids.length),
+        'aria-valuenow': '0'
+      });
+      const fill = element(documentRef, 'span', { className: 'az305-domain-progress__fill', style: 'width: 0%' });
+      const count = element(documentRef, 'span', { className: 'az305-domain-progress__count' }, `0/${ids.length}`);
+      track.append(fill);
+      row.append(name, track, count);
+      domainProgress.append(row);
+      domainRows.set(label, { ids, track, fill, count });
+    });
+    overviewCopy.append(summary, domainProgress);
+    overview.append(completionRing, overviewCopy);
     const message = element(documentRef, 'p', { className: 'az305-progress__notice', role: 'status', 'aria-live': 'polite' }, initialNotice);
     const tableWrap = element(documentRef, 'div', { className: 'az305-table-scroll' });
     const table = element(documentRef, 'table', { className: 'az305-progress__table' });
@@ -254,7 +293,7 @@
     const tbody = element(documentRef, 'tbody');
     table.append(thead, tbody);
     tableWrap.append(table);
-    mount.replaceChildren(toolbar, summary, message, tableWrap);
+    mount.replaceChildren(toolbar, overview, message, tableWrap);
 
     function persist() {
       if (persistenceAvailable) {
@@ -271,9 +310,20 @@
 
     function updateSummary() {
       const complete = LAB_IDS.filter((id) => progress.labs[id].completed).length;
+      const percent = Math.round((complete / LAB_IDS.length) * 100);
       const scores = LAB_IDS.filter((id) => SCORED_LABS.has(id) && progress.labs[id].score !== null).map((id) => progress.labs[id].score);
       const average = scores.length ? `${(scores.reduce((sum, score) => sum + score, 0) / scores.length).toFixed(1)}/50 average across ${scores.length} scored lab${scores.length === 1 ? '' : 's'}` : 'no assessment scores recorded';
       summary.textContent = `${complete}/28 labs complete · ${average}`;
+      completionRing.setAttribute('style', `--az305-progress: ${percent}%`);
+      completionRing.setAttribute('aria-label', `${percent} percent of labs complete`);
+      completionLabel.textContent = `${percent}%`;
+      domainRows.forEach(({ ids, track, fill, count }) => {
+        const groupComplete = ids.filter((id) => progress.labs[id].completed).length;
+        const groupPercent = Math.round((groupComplete / ids.length) * 100);
+        track.setAttribute('aria-valuenow', String(groupComplete));
+        fill.setAttribute('style', `width: ${groupPercent}%`);
+        count.textContent = `${groupComplete}/${ids.length}`;
+      });
     }
 
     function renderRows() {

@@ -2,6 +2,11 @@
 
 The certification blueprint is the syllabus; the deliverables below make the practice transferable to architecture work. Use the full requirements and decision artifacts rather than treating a service name as the answer.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/job-ready.svg" alt="Job-ready architecture portfolio connecting requirements, topology, decision matrix, ADR, evidence, review, and change response">
+  <figcaption>Turn lab reasoning into a sanitized portfolio packet and a concise design-review story.</figcaption>
+</figure>
+
 ## Portfolio packet
 
 For one lab in each domain, produce a sanitized packet containing:

@@ -2,6 +2,11 @@
 
 Labs assigned to the `azure-cli` track place lifecycle scripts under `scripts/azure-cli`. The commands below are study references; generating or building this site does not run them against Azure.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/command-lanes.svg" alt="Parallel Azure CLI and Azure PowerShell lifecycle lanes from preflight through setup, validation, cleanup, and post-cleanup validation">
+  <figcaption>The command lanes share one safety contract while keeping their syntax explicit.</figcaption>
+</figure>
+
 ## Lifecycle entry points
 
 ```powershell

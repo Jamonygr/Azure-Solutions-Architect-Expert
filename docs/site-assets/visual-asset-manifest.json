@@ -1,0 +1,2599 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedFrom": "curriculum/visuals.yml",
+  "counts": {
+    "registeredRasters": 7,
+    "labSvgs": 84,
+    "siteInfographics": 16,
+    "officialIcons": 49
+  },
+  "assets": [
+    {
+      "path": "docs/site-assets/visuals/home-hero.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 1986893,
+      "sha256": "7de8a3a5b76bb77d2efd66f2b03c44aa3ea4dcc91cb1dbd63ae723dab35a07f8",
+      "alt": "Isometric Azure learning landscape connecting identity, data, continuity, observability, and infrastructure architecture layers.",
+      "usage": [
+        "README.md",
+        "docs/site/index.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/visuals/domain-identity-governance-monitoring.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 1858326,
+      "sha256": "960733f0b57012c3c2625efb827ff5bde5dabb6aa8a15b8b30bfbd64fff91c2f",
+      "alt": "Isometric identity and governance architecture with protected trust boundaries, access paths, policy controls, and monitoring signals.",
+      "usage": [
+        "docs/site/catalog.md",
+        "docs/site/paths/full-exam.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/visuals/domain-data.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 2023054,
+      "sha256": "d71590e6aeba98192cc7b2234fe0e4792ef6904924c77dc5c06c347035494235",
+      "alt": "Isometric data architecture showing relational, document, object, integration, and analytical layers linked by governed flows.",
+      "usage": [
+        "docs/site/catalog.md",
+        "docs/site/paths/full-exam.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/visuals/domain-continuity.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 1908833,
+      "sha256": "3738db305a3a5ba8aa42b8582a4ea76997dc57904cd9b6b4622a7a31690a9f9d",
+      "alt": "Isometric dual-region continuity architecture with replication, backup, recovery paths, health signals, and controlled failover.",
+      "usage": [
+        "docs/site/catalog.md",
+        "docs/site/paths/full-exam.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/visuals/domain-infrastructure.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 2024568,
+      "sha256": "5baabbac7bbaa325045ac73ca58d181813ad7b2ce6c8ef824db31e9ff292aa4c",
+      "alt": "Isometric cloud infrastructure with global ingress, hub and spoke networking, compute, messaging, migration, and protected egress.",
+      "usage": [
+        "docs/site/catalog.md",
+        "docs/site/paths/full-exam.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/26-capstone-greenfield-platform/images/hero.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 2025194,
+      "sha256": "f2b5a60a77120c4d317226d149a5d97be011d5df545a52c7376aad3a7380d80e",
+      "alt": "Isometric greenfield platform with global edge, twin active regions, shared identity, coordinated data, policy, and observability.",
+      "usage": [
+        "labs/26-capstone-greenfield-platform/README.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/27-capstone-hybrid-modernization/images/hero.png",
+      "type": "raster-illustration",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "byteSize": 1997044,
+      "sha256": "6500e56df7ee11fbfb2432eac0c7bd01f566c2c1d4ee4d664a6e91c5c96ed5ad",
+      "alt": "Isometric hybrid modernization landscape connecting a datacenter to governed cloud landing zones through staged migration waves.",
+      "usage": [
+        "labs/27-capstone-hybrid-modernization/README.md"
+      ],
+      "origin": "OpenAI image generation",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/assessment-coverage.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6462,
+      "sha256": "a701d03993bcad0c2f25754920db169f3e0b9168b5f72e567903c94713575e37",
+      "alt": "Assessment flow from a question through answer evidence, objective coverage, remediation, and a new attempt.",
+      "usage": [
+        "docs/site/assessment-dashboard.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/command-lanes.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6559,
+      "sha256": "6e12f0c2b21a3bd25389e4f6cfce5197afc16c5c1bfa6c6c76654f7c5c42e8cd",
+      "alt": "Two parallel command lanes moving through preview, state capture, execution, validation, and cleanup.",
+      "usage": [
+        "docs/site/guides/azure-cli.md",
+        "docs/site/guides/azure-powershell.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/continuity-targets.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6656,
+      "sha256": "5133304cc8ba2df8779922660694cbb2093c5a7a7346aa8b490ff240c1ae3968",
+      "alt": "Continuity target flow from business impact to RTO and RPO, protection pattern, recovery sequence, and exercise evidence.",
+      "usage": [
+        "docs/site/guides/continuity.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/cost-levers.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 8018,
+      "sha256": "72c81815f1147042aa4fa2e0131b8793591c8b4e46a0ae621829f9fbd5b9511b",
+      "alt": "Six cost levers surrounding an architecture decision: demand, tier, resilience, transfer, operations, and licensing.",
+      "usage": [
+        "docs/site/guides/cost.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/decision-workflow.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6642,
+      "sha256": "b20231cde7222467803b0c050953186cff21c829377f8d62db2c69d149086a64",
+      "alt": "Decision workflow linking context, candidate analysis, selected option, consequences, and revised decision.",
+      "usage": [
+        "docs/site/guidance/architecture-decisions.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/evidence-chain.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 5534,
+      "sha256": "d2d1ef0d6704cfa854534a6a3b4199cf60ab7a27131f5179c87261746c32093d",
+      "alt": "Evidence ladder progressing from expected output to negative assertion, provenance, and verified cleanup.",
+      "usage": [
+        "docs/site/guidance/evidence.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/exam-domains.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 5547,
+      "sha256": "5697f4f58643ae981463caf3067e4b1d3529a2032712d6a683724edd4eb2dd8a",
+      "alt": "Four proportional domain bars for identity and governance, data, continuity, and infrastructure coverage.",
+      "usage": [
+        "docs/site/catalog.md",
+        "docs/site/paths/full-exam.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/job-ready.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 5621,
+      "sha256": "42f93e742e89bd26d7ea6a943a965f84fabfaaa9eefd705ab387b20a2747e986",
+      "alt": "Roadmap from focused design labs through cross-domain capstones to an architecture evidence portfolio.",
+      "usage": [
+        "docs/site/paths/job-ready.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/learning-loop.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6604,
+      "sha256": "9bacfc3ea2a606836bee98b6b225c6c9f8ad2b51c4ea04f2386a0bbdf101f580",
+      "alt": "Five-stage circular learning loop linking requirements, options, decisions, validation evidence, and revision.",
+      "usage": [
+        "docs/site/index.md",
+        "docs/site/paths/quick-start.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/licensing-boundary.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 5649,
+      "sha256": "07033c9fe1eddc842c205ac9680e26c0791bf5cf18bb5196592434ecb14e1816",
+      "alt": "Boundary diagram separating technical architecture fit, required feature plan, tenant entitlement, and commercial verification.",
+      "usage": [
+        "docs/site/guides/licensing.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/migration-waves.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 8075,
+      "sha256": "b6b5dd8cd54d8c077ddffde60986b2bb33263fda2a308a2b914c44cb61833168",
+      "alt": "Migration waves flowing from discovery and dependency mapping through target readiness, rehearsal, cutover, and decommissioning.",
+      "usage": [
+        "docs/site/guides/migration.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/objective-coverage.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6596,
+      "sha256": "ac7b406013b75c16944af53a9199552f084e92e582c0a6ceb1eea42032d23d6e",
+      "alt": "Traceability flow from an official objective to a primary lab, requirement, checkpoint, evidence, and question.",
+      "usage": [
+        "docs/site/objective-map.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/permission-boundary.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6666,
+      "sha256": "2bec5ebab410ab40b7a30268a1a42944a21a92bcba63bb24d75cccbca5a5a9f0",
+      "alt": "Nested permission boundaries for identity, control plane, data plane, scope, delegated group, and eligible activation.",
+      "usage": [
+        "docs/site/guides/permissions.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/study-roadmap.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 8307,
+      "sha256": "b02a7f8a0bf1aae8a534140b020a2b94d82a42ebea00de72495868563949a20f",
+      "alt": "Eight-step roadmap showing foundation, four domain waves, mixed assessment, and two capstone rehearsals.",
+      "usage": [
+        "docs/site/study-plan.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/troubleshooting-flow.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6849,
+      "sha256": "f496598176b9f462f7a8e178803aa8a7f6d266ca2076a482dc72c4136dbaab5c",
+      "alt": "Decision tree from a failed assertion through input, ownership, dependency, retry, cleanup, and evidence outcomes.",
+      "usage": [
+        "docs/site/guides/troubleshooting.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/infographics/waf-pillars.svg",
+      "type": "site-infographic",
+      "dimensions": {
+        "width": 1200,
+        "height": 520
+      },
+      "byteSize": 6631,
+      "sha256": "0ccb68cad529566cf9a10b3b6fd5c92b14c98e1f12567d478f9d8f671e4e8f6d",
+      "alt": "Five equal cards representing reliability, security, cost optimization, operational excellence, and performance efficiency.",
+      "usage": [
+        "docs/site/guidance/well-architected.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/00-safe-architect-bootstrap/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 20943,
+      "sha256": "0f8818aded667d8e1033b0601bee382906ef4be4b8e15cae6ecd1467300636e1",
+      "alt": "Topology showing local preflight and context inputs feeding gates, a run-state record, a bounded operation, and ownership-aware cleanup.",
+      "usage": [
+        "labs/00-safe-architect-bootstrap/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/00-safe-architect-bootstrap/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16871,
+      "sha256": "00ff32f385096b31fb1ae5467483dddacd0a394108fe9d20c525af2652942b16",
+      "alt": "Decision matrix comparing bootstrap safety contracts and highlighting the selected state-first guarded lifecycle.",
+      "usage": [
+        "labs/00-safe-architect-bootstrap/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/00-safe-architect-bootstrap/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3187,
+      "sha256": "6b3dd3282da712ac69e8184356ee463790586f3b5ce29ed27aee5ee8721964b6",
+      "alt": "Foundation banner showing a guarded progression from local preflight through state capture, execution, validation, and cleanup.",
+      "usage": [
+        "labs/00-safe-architect-bootstrap/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/01-centralized-logging-routing/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 20149,
+      "sha256": "e1ac9da44a04ea2a0f20b1583d5dfe512d29178ea29facd8986d4e1b3d37774e",
+      "alt": "Topology showing emitting workloads routed through data collection rules to two regional Log Analytics workspaces, archive storage, and operators.",
+      "usage": [
+        "labs/01-centralized-logging-routing/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/01-centralized-logging-routing/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16914,
+      "sha256": "4a98461d448780ea8f26c6bd2365e9103d743e9a795006785de54f90d834461d",
+      "alt": "Decision matrix comparing logging architectures and marking regional workspaces with governed routing as selected.",
+      "usage": [
+        "labs/01-centralized-logging-routing/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/01-centralized-logging-routing/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3178,
+      "sha256": "f63cc4843ee29a3d1f51866376b18f70aa1bafb94e9ef6b6b354b0d1d9d9eeba",
+      "alt": "Identity and monitoring banner connecting Azure resource telemetry to regional workspaces, archive storage, and operators.",
+      "usage": [
+        "labs/01-centralized-logging-routing/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/02-monitoring-alerts-visibility/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 18032,
+      "sha256": "fef627d638f8329673486daec87b834352b9f0e1479b6d3a7fb0122fdd6ec905",
+      "alt": "Topology showing application and platform telemetry entering Azure Monitor, triggering service alerts, shared action groups, and curated workbooks.",
+      "usage": [
+        "labs/02-monitoring-alerts-visibility/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/02-monitoring-alerts-visibility/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16881,
+      "sha256": "3e9f307ddc5c1798b6776f33a2aa3d4b684f9628db23a4714157c64dfe0f1afb",
+      "alt": "Decision matrix comparing monitoring approaches and highlighting service-centric alerts with shared response assets.",
+      "usage": [
+        "labs/02-monitoring-alerts-visibility/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/02-monitoring-alerts-visibility/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3192,
+      "sha256": "dad3a33cf4ec63feb79fbeafd902bc07db70d4dc0afffc8d83803ccd2bf35cdc",
+      "alt": "Monitoring banner showing service signals moving through Azure Monitor into alerts, action routing, and an operator workbook.",
+      "usage": [
+        "labs/02-monitoring-alerts-visibility/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/03-authentication-identity-design/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 20073,
+      "sha256": "446f16f330ab818f9ce27aa2b34d591793ce0ddcada523016c5850c6008197c9",
+      "alt": "Topology showing workforce users and applications in one tenant, customer identities in an External ID tenant, Conditional Access, and managed workload identities.",
+      "usage": [
+        "labs/03-authentication-identity-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/03-authentication-identity-design/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16963,
+      "sha256": "e428707f19317fb7dbeccf107ef235cdc2e2442bbde2a9d52a74a88d583c77dd",
+      "alt": "Decision matrix comparing identity architectures and marking the workforce plus External ID tenant model as selected.",
+      "usage": [
+        "labs/03-authentication-identity-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/03-authentication-identity-design/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3245,
+      "sha256": "2b7801080a6b9ada6e679864b8bee76cc560f883995043ad5238f25d1c94f47e",
+      "alt": "Identity banner showing workforce and external tenant boundaries connected to applications through modern authentication and workload identity.",
+      "usage": [
+        "labs/03-authentication-identity-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/04-azure-hybrid-authorization/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 19946,
+      "sha256": "4e2a8273a90c56cf8b9415c095e30d06bdfc299fe464fdc70b6140d7083f7789",
+      "alt": "Topology showing Entra groups delegated through management group and subscription scopes, with separate data-plane access and Arc server authorization.",
+      "usage": [
+        "labs/04-azure-hybrid-authorization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/04-azure-hybrid-authorization/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16914,
+      "sha256": "f34b7788fddce95c9876d0c411cab93436199bd6c859bc00b09ad7c70e6e1abd",
+      "alt": "Decision matrix comparing authorization models and highlighting group-based Azure RBAC with Arc-aware delegation.",
+      "usage": [
+        "labs/04-azure-hybrid-authorization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/04-azure-hybrid-authorization/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3172,
+      "sha256": "8172d38f3a34ccfe23a3ca30403c0ff08365998441457b24449f4bde2d2d85c1",
+      "alt": "Authorization banner showing governed groups, inherited Azure RBAC scopes, distinct data access, and hybrid Arc delegation.",
+      "usage": [
+        "labs/04-azure-hybrid-authorization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/05-secrets-certificates-keys/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 25233,
+      "sha256": "00e10b3c90fa7576478f2e7f16eb04e8d83d7ea0462d66726656e26e04e61a14",
+      "alt": "Topology showing an application and managed identity using a private endpoint to reach Key Vault Premium, rotated keys, and a certificate issuer.",
+      "usage": [
+        "labs/05-secrets-certificates-keys/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/05-secrets-certificates-keys/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16830,
+      "sha256": "1e2845892bd9930166f2e8a380b400e5256d2696a3985154355831202a5628b7",
+      "alt": "Decision matrix comparing key management options and marking private Key Vault Premium with RBAC as selected.",
+      "usage": [
+        "labs/05-secrets-certificates-keys/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/05-secrets-certificates-keys/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3201,
+      "sha256": "00f73a8f1938e5b0a7c48cdb131069f9654e5ba5c2f3645ad3768a2b939ad0db",
+      "alt": "Key management banner showing managed workload identity reaching a private premium vault with rotated keys and governed certificates.",
+      "usage": [
+        "labs/05-secrets-certificates-keys/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/06-resource-hierarchy-tag-governance/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 25244,
+      "sha256": "e63998e948d4c12dd3e76251f68ba6c13aa673b4fc5a5d7dfcc091a936b4301f",
+      "alt": "Topology showing the tenant root branching to platform and workload management groups, subscriptions, lifecycle resource groups, and policy-controlled tags.",
+      "usage": [
+        "labs/06-resource-hierarchy-tag-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/06-resource-hierarchy-tag-governance/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16905,
+      "sha256": "111ecc70ab92e1cefe12e0f9ba36ed290e6b35a492dd742eaf129bb3c18c8d75",
+      "alt": "Decision matrix comparing governance hierarchies and highlighting archetype management groups with governed tags.",
+      "usage": [
+        "labs/06-resource-hierarchy-tag-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/06-resource-hierarchy-tag-governance/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3188,
+      "sha256": "a09bc0ca16e25bf427bfa90a8b2c025d052e2293fcd8addb75f8e3a63c72537f",
+      "alt": "Governance banner showing a tenant hierarchy branching into platform and workload subscriptions with inherited policy and tag controls.",
+      "usage": [
+        "labs/06-resource-hierarchy-tag-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/07-compliance-identity-governance/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24161,
+      "sha256": "3f1f501b150cbab29c600630bbb26d2d9794503da106c9d2516ec08779eb380a",
+      "alt": "Topology showing control requirements mapped to Azure Policy initiatives and compliance evidence alongside entitlement catalogs, access reviews, and PIM.",
+      "usage": [
+        "labs/07-compliance-identity-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/07-compliance-identity-governance/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16909,
+      "sha256": "74ebc6756d1a3a6b85e2258d124df17a289366138b9fe6ab1c573904cd3bfdd9",
+      "alt": "Decision matrix comparing compliance models and marking Azure Policy plus Entra ID Governance controls as selected.",
+      "usage": [
+        "labs/07-compliance-identity-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/07-compliance-identity-governance/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3199,
+      "sha256": "a1b52bc4ee7862900f437068659f461b9dd38cebe66f67891302898099f35c70",
+      "alt": "Compliance banner joining Azure Policy initiatives and evidence with identity governance catalogs, access reviews, and privileged access.",
+      "usage": [
+        "labs/07-compliance-identity-governance/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/08-relational-platform-tier-selection/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 21314,
+      "sha256": "69c4249dbabf60ff2fc50d448de9481fd8f790b13bd5bf5df72110e6ba562075",
+      "alt": "Topology showing an application network, private endpoint, Azure SQL logical server, General Purpose serverless database, and monitoring workspace.",
+      "usage": [
+        "labs/08-relational-platform-tier-selection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/08-relational-platform-tier-selection/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16756,
+      "sha256": "eb84458784d7e211005e2f723176a84ef91b10d72b3d99bdf8df8e3caa239a1f",
+      "alt": "Decision matrix comparing relational services and marking Azure SQL Database General Purpose serverless as selected.",
+      "usage": [
+        "labs/08-relational-platform-tier-selection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/08-relational-platform-tier-selection/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3246,
+      "sha256": "0b451cd258ab6e19785ec6a680528048fea683fa4dd81fff45399dbcb1640086",
+      "alt": "Data banner showing an application reaching Azure SQL Database serverless through a private endpoint with operational monitoring.",
+      "usage": [
+        "labs/08-relational-platform-tier-selection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/09-relational-scale-protection/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 23581,
+      "sha256": "8186f23547b34eee1c2086f4885128aa28f7f5cacc09944c1f7bc4166c2685eb",
+      "alt": "Topology showing a ledger application splitting writes to a Hyperscale primary and reads to replicas, with key custody, auditing, and backup retention.",
+      "usage": [
+        "labs/09-relational-scale-protection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/09-relational-scale-protection/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16806,
+      "sha256": "97ccd1c9ce0f94be584433e00cb8039e07c496dcf73f9cd5103aac78dbb38c33",
+      "alt": "Decision matrix comparing relational scale patterns and highlighting Hyperscale with named read replicas.",
+      "usage": [
+        "labs/09-relational-scale-protection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/09-relational-scale-protection/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3200,
+      "sha256": "203eb0b51bee371444f94ecaf47813453c1598ca6ee434946beedc4b63da3a37",
+      "alt": "Data banner showing a Hyperscale relational primary, named read replicas, encryption control, audit storage, and protected backups.",
+      "usage": [
+        "labs/09-relational-scale-protection/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/10-semi-structured-data-design/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 25874,
+      "sha256": "cefec12b986151ebb81b348cc852a65d91671dd9336871eac47fbbc426aaa0b4",
+      "alt": "Topology showing global catalog clients, a private API, a Cosmos DB account, tenant-aware partitions, autoscale throughput, and regional replicas.",
+      "usage": [
+        "labs/10-semi-structured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/10-semi-structured-data-design/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16862,
+      "sha256": "087fefada7487723bf8900ba1ae60c74ec8390587077aa5389e6d145607b935d",
+      "alt": "Decision matrix comparing semi-structured data platforms and highlighting Cosmos DB for NoSQL with tenant-aware partitioning.",
+      "usage": [
+        "labs/10-semi-structured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/10-semi-structured-data-design/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3217,
+      "sha256": "959bad65ffab897b5eaa92df93d55d5b625fa6275e0a1c22e02638c65a63b2a9",
+      "alt": "Data banner showing global catalog clients reaching a partitioned Cosmos DB service with autoscale, regional replicas, and private access.",
+      "usage": [
+        "labs/10-semi-structured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/11-unstructured-data-design/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 21569,
+      "sha256": "7da62a5c9c3ab55b3cfef1a7f4df875e6a2c28edca696db77df6dfc8582abc3c",
+      "alt": "Topology showing file producers and analytical consumers connected privately to an ADLS Gen2 account with governed filesystems and key custody.",
+      "usage": [
+        "labs/11-unstructured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/11-unstructured-data-design/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16843,
+      "sha256": "e040671408a617535a0e19852a7ff97cd59bd75354aca7bb4cda140e4d5533a5",
+      "alt": "Decision matrix comparing unstructured data services and marking ADLS Gen2 with hierarchical namespace as selected.",
+      "usage": [
+        "labs/11-unstructured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/11-unstructured-data-design/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3190,
+      "sha256": "3c2cc2a66b1c0200c1dfbffd3e9027ecbd06bc73f896b8fcf6f542523370d018",
+      "alt": "Data banner showing source systems entering an ADLS Gen2 hierarchical namespace through private connectivity for governed consumption.",
+      "usage": [
+        "labs/11-unstructured-data-design/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/12-storage-economics-durability/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 18034,
+      "sha256": "ee53b83040fe9b8c5025ffa5c835e9a70c38978576d5e2a42a129d12842c0b9e",
+      "alt": "Topology showing hot objects governed by lifecycle policy, cool and archive tiers, a secondary GZRS region, protected versions, and immutable evidence.",
+      "usage": [
+        "labs/12-storage-economics-durability/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/12-storage-economics-durability/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16858,
+      "sha256": "3b78763e3ad781e0f38de51e962f94830cb05f1d5e8d8fcb9c1e4d51ee9051be",
+      "alt": "Decision matrix comparing storage durability patterns and highlighting StorageV2 with GZRS and lifecycle policies.",
+      "usage": [
+        "labs/12-storage-economics-durability/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/12-storage-economics-durability/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3208,
+      "sha256": "f868ed99d89409f739ac10a6160919f6c51945eaac782bb13a45ad38e0de13b3",
+      "alt": "Data banner showing hot objects moving through lifecycle tiers with geo-zone replication, versions, and immutable evidence controls.",
+      "usage": [
+        "labs/12-storage-economics-durability/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/13-data-integration-analytics/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 23853,
+      "sha256": "34d52d284fd12dee293664e9aab358efee7e8d5ae2535368280f595cb082cd49",
+      "alt": "Topology showing partner files, database changes, and telemetry feeding Azure Data Factory, ADLS Gen2, Synapse serverless SQL, and monitoring.",
+      "usage": [
+        "labs/13-data-integration-analytics/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/13-data-integration-analytics/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16931,
+      "sha256": "25c52ca208e2e87ffc676e8908530008daaab05a8996018ee7643cab815f221e",
+      "alt": "Decision matrix comparing integration and analytics platforms and marking Data Factory, ADLS Gen2, and Synapse serverless SQL as selected.",
+      "usage": [
+        "labs/13-data-integration-analytics/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/13-data-integration-analytics/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3187,
+      "sha256": "ec2a9543754f6b4ccca675210d281576163b4e68d5e1a469c96f7be34e0699f3",
+      "alt": "Data banner showing files, databases, and telemetry flowing through Data Factory into ADLS Gen2 and Synapse serverless SQL.",
+      "usage": [
+        "labs/13-data-integration-analytics/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/14-recovery-strategy-hybrid/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 27514,
+      "sha256": "c6be21471ebab62ca53c2d94a2522a59c37474c68afd7fc0257877a58dc1ba69",
+      "alt": "Topology showing Azure and factory VMware workloads classified by recovery objectives and routed to backup, Site Recovery, native replication, and an orchestration runbook.",
+      "usage": [
+        "labs/14-recovery-strategy-hybrid/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/14-recovery-strategy-hybrid/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16944,
+      "sha256": "6195260a45b959b13613edcc929327ead94071846ea7bfde8c17778bc04f42bd",
+      "alt": "Decision matrix comparing hybrid recovery strategies and highlighting tiered Backup, Site Recovery, and native replication.",
+      "usage": [
+        "labs/14-recovery-strategy-hybrid/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/14-recovery-strategy-hybrid/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3206,
+      "sha256": "66dc8a58d398c998cb091266e4e3e9efe26c3fdf5c886a10af6779f9f08122c2",
+      "alt": "Continuity banner showing Azure and VMware workloads mapped by recovery tier to backup, site recovery, native replication, and runbooks.",
+      "usage": [
+        "labs/14-recovery-strategy-hybrid/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/15-compute-backup-ha/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 23375,
+      "sha256": "a968b39ad13e685ac62daa0b9ec02e63ee584365a88f2b524647c99ca14eda56",
+      "alt": "Topology showing application traffic through a load balancer to virtual machine scale set instances across zones, Azure Backup, and an isolated restore environment.",
+      "usage": [
+        "labs/15-compute-backup-ha/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/15-compute-backup-ha/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16951,
+      "sha256": "9175d3317b1be72739cd954b8a61ef20551f3a524d7b1a4112ab3cf03d8e6671",
+      "alt": "Decision matrix comparing compute continuity patterns and highlighting zone-spread scale sets with Backup and isolated restore.",
+      "usage": [
+        "labs/15-compute-backup-ha/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/15-compute-backup-ha/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3201,
+      "sha256": "fd56f81896da1049097b7d641348b5f87d4e7a781a2ee24ae1eb4c585c57449b",
+      "alt": "Continuity banner showing traffic distributed across zonal virtual machine instances with backup and an isolated restore network.",
+      "usage": [
+        "labs/15-compute-backup-ha/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/16-relational-database-continuity/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 26404,
+      "sha256": "8da5cd003777eab9748ee0fae57bb01e56bb0f7d44663c26ceab6d389713c29c",
+      "alt": "Topology showing an application connecting through a failover-group listener to primary and secondary Azure SQL databases with backup and replication monitoring.",
+      "usage": [
+        "labs/16-relational-database-continuity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/16-relational-database-continuity/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16958,
+      "sha256": "18b2dd8e1efaccf8f50e054900d88d4f294412fb6bfe6d36ca749a78ef9d6d14",
+      "alt": "Decision matrix comparing relational continuity options and highlighting a zone-redundant Azure SQL failover group.",
+      "usage": [
+        "labs/16-relational-database-continuity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/16-relational-database-continuity/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3187,
+      "sha256": "c9d35a35de8e4816fa16f36f7c25ee7dd46222707c34ff39ebbda1e927d13139",
+      "alt": "Continuity banner showing an application listener connected to zone-redundant SQL databases in primary and secondary regions.",
+      "usage": [
+        "labs/16-relational-database-continuity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/17-nonrelational-data-resilience/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 22614,
+      "sha256": "176e4c41e253652b5bb0cdfd00e331fa195cc08f7f88b8fda38b917264cd8414",
+      "alt": "Topology showing global application traffic, Cosmos DB multi-region writes, GZRS Blob Storage, a secondary region, and backup and restore validation.",
+      "usage": [
+        "labs/17-nonrelational-data-resilience/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/17-nonrelational-data-resilience/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16939,
+      "sha256": "a4d4e9376e4f9b600bfe43c39c4b56803f1f6ba2995aa1b2efcb0244af86334f",
+      "alt": "Decision matrix comparing nonrelational resilience patterns and highlighting Cosmos multi-write plus GZRS Blob Storage.",
+      "usage": [
+        "labs/17-nonrelational-data-resilience/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/17-nonrelational-data-resilience/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3188,
+      "sha256": "91db94732b8137b8c7e75f9a0b06bdb10a3779bea0f04eb3309653d998f81293",
+      "alt": "Continuity banner showing global traffic using multi-region Cosmos DB and geo-zone-redundant Blob Storage with restore evidence.",
+      "usage": [
+        "labs/17-nonrelational-data-resilience/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/18-compute-vm-batch-architecture/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24422,
+      "sha256": "ade48e8410f908c29223a8fa9516b5dadfe81b60265847c28062e2bd2159c764",
+      "alt": "Topology showing a scheduler, zone-spread control virtual machines, Azure Batch autoscale pool, simulation storage, and operations monitoring.",
+      "usage": [
+        "labs/18-compute-vm-batch-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/18-compute-vm-batch-architecture/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16904,
+      "sha256": "379fe43e2e6fc91d55b9e27114aa88fbc36e01cac0697c10ee5d02ac3f35870e",
+      "alt": "Decision matrix comparing compute patterns and highlighting zonal control virtual machines with an autoscaled Azure Batch pool.",
+      "usage": [
+        "labs/18-compute-vm-batch-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/18-compute-vm-batch-architecture/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3253,
+      "sha256": "5587694c5c2c3c9448165c271fe5d3661631f28a2246fc519dc13601187092ef",
+      "alt": "Infrastructure banner showing zone-spread control virtual machines coordinating an autoscaled Azure Batch pool and job evidence.",
+      "usage": [
+        "labs/18-compute-vm-batch-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/19-container-serverless-architecture/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24480,
+      "sha256": "837a24ac189f7da004fa3b4c858e23170f3bfc67e837f3a4ec8418e9cf37c307",
+      "alt": "Topology showing claims traffic entering Container Apps APIs, durable messages reaching workers, events triggering Azure Functions, and managed identity accessing secrets.",
+      "usage": [
+        "labs/19-container-serverless-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/19-container-serverless-architecture/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16902,
+      "sha256": "9d7fc9e357619c4b2e38a1df1e621b83247da7d5ad95b2388f1300d1da38e3e5",
+      "alt": "Decision matrix comparing container and serverless choices and highlighting Container Apps with Azure Functions.",
+      "usage": [
+        "labs/19-container-serverless-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/19-container-serverless-architecture/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3194,
+      "sha256": "f8613433d8d133eecac681e3239753b7e7070626514f4780ce98ae680d5c4c59",
+      "alt": "Infrastructure banner showing HTTP traffic, containerized APIs and workers, serverless handlers, messaging, and secretless identity.",
+      "usage": [
+        "labs/19-container-serverless-architecture/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/20-messaging-events-api/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 29549,
+      "sha256": "417e8e31fafbee2c20260d4e537295e5b5ce114912dc320652b4fffa25dbdabc",
+      "alt": "Topology showing partner calls through API Management, durable commands through Service Bus, state events through Event Grid, telemetry through Event Hubs, and separate consumers.",
+      "usage": [
+        "labs/20-messaging-events-api/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/20-messaging-events-api/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17017,
+      "sha256": "920c26972b9825f5528ee2de6662f05f6f65acaa563ed2206b24e1cd97cefcf1",
+      "alt": "Decision matrix comparing integration patterns and highlighting Service Bus, Event Grid, Event Hubs, and API Management by contract.",
+      "usage": [
+        "labs/20-messaging-events-api/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/20-messaging-events-api/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3244,
+      "sha256": "028eddc7a95ad0780c99357b64ffeb1c010f4f7c716784962fc584db4e8ad4fd",
+      "alt": "Infrastructure banner showing partner APIs, reliable commands, event fan-out, telemetry streaming, and independent consumers.",
+      "usage": [
+        "labs/20-messaging-events-api/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/21-cache-configuration-delivery/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24880,
+      "sha256": "e908e7971eb646a8366ba7cb9f0563dc6ed3789626fadbebbf93c5e062d18aee",
+      "alt": "Topology showing a multi-region storefront connected to Azure Managed Redis, App Configuration, Key Vault, a delivery pipeline, and deployment stacks.",
+      "usage": [
+        "labs/21-cache-configuration-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/21-cache-configuration-delivery/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17003,
+      "sha256": "593546e3b69864220ef40d5afbc5adf76eadc6dc8c2dd387476f279421dbf7db",
+      "alt": "Decision matrix comparing application platform options and highlighting Managed Redis, App Configuration, and Bicep deployment stacks.",
+      "usage": [
+        "labs/21-cache-configuration-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/21-cache-configuration-delivery/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3266,
+      "sha256": "dfa6132be3e0b5bead36311fc2dfab3957b17d115b5d724cbee21ea5cf6b2d78",
+      "alt": "Infrastructure banner showing storefront instances using Azure Managed Redis, App Configuration, Key Vault, and a guarded deployment pipeline.",
+      "usage": [
+        "labs/21-cache-configuration-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/22-migration-strategy-assessment/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24144,
+      "sha256": "ad88f3db93c5571be957b257b79dda68d5d109c582a7a82dd1c4cf6482b54aa3",
+      "alt": "Topology showing on-premises portfolio discovery, dependency assessment, application rationalization, migration waves, business case, and landing-zone readiness.",
+      "usage": [
+        "labs/22-migration-strategy-assessment/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/22-migration-strategy-assessment/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16998,
+      "sha256": "76d692bfbfa33590b04266c572bb1d05de95d3fdbcff0056bbbb4ab74ea4a96b",
+      "alt": "Decision matrix comparing migration assessment strategies and highlighting Cloud Adoption Framework outcome-led dependency waves.",
+      "usage": [
+        "labs/22-migration-strategy-assessment/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/22-migration-strategy-assessment/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3228,
+      "sha256": "b37abb41a95a3a4ff887968e9492e975e5a59d45016ce5e2bfa3e9dcf1e6487d",
+      "alt": "Infrastructure banner showing a datacenter portfolio moving through discovery, dependency mapping, rationalization, business case, and landing-zone gates.",
+      "usage": [
+        "labs/22-migration-strategy-assessment/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/23-workload-data-migration/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 26975,
+      "sha256": "b491d6ed5ffe08ac77764f92dd04b70ae015fe8c8e4eb91351ca64b132d16c6b",
+      "alt": "Topology showing VMware servers moving through Azure Migrate, SQL Server through Database Migration Service, and files through AzCopy to separate Azure targets.",
+      "usage": [
+        "labs/23-workload-data-migration/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/23-workload-data-migration/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 16966,
+      "sha256": "67ad882722dd1b7e35c34018042adbfd97cf61fc782ff403b31225504292df6e",
+      "alt": "Decision matrix comparing workload migration patterns and highlighting Azure Migrate, Database Migration Service, and staged AzCopy.",
+      "usage": [
+        "labs/23-workload-data-migration/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/23-workload-data-migration/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3244,
+      "sha256": "d51be3eb042e4043acd4d77ae129dd0fd14e19c68c288b21058968097d83ec33",
+      "alt": "Infrastructure banner showing VMware servers, SQL databases, and engineering files using distinct migration paths to Azure targets.",
+      "usage": [
+        "labs/23-workload-data-migration/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/24-internet-hybrid-connectivity/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 31751,
+      "sha256": "5e253e294cf17e95d2842842d86f407fe59fb2f9617a65471305e9efdee39f4f",
+      "alt": "Topology showing global clients through Front Door, two datacenters through dual ExpressRoute and VPN backup, Virtual WAN transit, private DNS, and monitoring.",
+      "usage": [
+        "labs/24-internet-hybrid-connectivity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/24-internet-hybrid-connectivity/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17044,
+      "sha256": "272f480c87d57374ee989fa047ff611b80da28152242f70c6a900312b7e930e5",
+      "alt": "Decision matrix comparing connectivity patterns and highlighting Front Door, dual ExpressRoute, VPN failover, and Virtual WAN.",
+      "usage": [
+        "labs/24-internet-hybrid-connectivity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/24-internet-hybrid-connectivity/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3272,
+      "sha256": "2d5172f01cf39caef5b827d612cd98ed78df217635a618778ff49cb843df74f6",
+      "alt": "Infrastructure banner showing global clients entering Front Door and datacenters connecting through redundant ExpressRoute and VPN into Azure transit.",
+      "usage": [
+        "labs/24-internet-hybrid-connectivity/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/25-network-security-traffic-delivery/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 24038,
+      "sha256": "018fe9f56519c49b6e008abf779011cc2e41c1f946e66f5046d1a1e3b578df99",
+      "alt": "Topology showing Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, a private Standard Load Balancer, application spokes, and NAT Gateway.",
+      "usage": [
+        "labs/25-network-security-traffic-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/25-network-security-traffic-delivery/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17099,
+      "sha256": "0e793a74991600df5b0fcbf6aa6ed1906c12f3c9846541964493328cafd49799",
+      "alt": "Decision matrix comparing network security patterns and highlighting layered Front Door, Application Gateway, Firewall, Load Balancer, and NAT.",
+      "usage": [
+        "labs/25-network-security-traffic-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/25-network-security-traffic-delivery/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3274,
+      "sha256": "a5a9919d1b9651b73a04c115477c08a9d09a953d2a254aafc89f18b3cc1eb0ca",
+      "alt": "Infrastructure banner showing Front Door, Application Gateway WAF, Azure Firewall, private load balancing, and NAT Gateway through a hub and spoke network.",
+      "usage": [
+        "labs/25-network-security-traffic-delivery/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/26-capstone-greenfield-platform/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 28402,
+      "sha256": "20f94b9d0e28daf59d12f5cd70f15524e517845b02fd3a26d46ceaea70b0da52",
+      "alt": "Topology showing Microsoft Entra External ID, Front Door Premium, active application stamps in West and North Europe, coordinated data, policy guardrails, and monitoring.",
+      "usage": [
+        "labs/26-capstone-greenfield-platform/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/26-capstone-greenfield-platform/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17022,
+      "sha256": "527d06267acec92ed38e701b82882ab722c9a7f444d2eb8bf4b7a5bb55a433e0",
+      "alt": "Decision matrix comparing greenfield platform architectures and highlighting active-active regional PaaS stamps behind Front Door Premium.",
+      "usage": [
+        "labs/26-capstone-greenfield-platform/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/26-capstone-greenfield-platform/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3242,
+      "sha256": "086d72d7a86464c58d8f836bdee9c55b6ba95b35826dfe18a5ec9d24a3600f36",
+      "alt": "Capstone banner showing global identity and edge services distributing traffic to two governed application regions with coordinated data and telemetry.",
+      "usage": [
+        "labs/26-capstone-greenfield-platform/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/27-capstone-hybrid-modernization/diagrams/architecture.svg",
+      "type": "lab-topology",
+      "dimensions": {
+        "width": 1200,
+        "height": 760
+      },
+      "byteSize": 31759,
+      "sha256": "ff23774e2dadca18b941ce16b0f5ed101a642096031ee2210cba2615f7418f1d",
+      "alt": "Topology showing an on-premises hybrid estate, Azure Arc evidence, dependency-based migration waves, managed application and data targets, recovery controls, and decommission review.",
+      "usage": [
+        "labs/27-capstone-hybrid-modernization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/27-capstone-hybrid-modernization/diagrams/decision-matrix.svg",
+      "type": "lab-decision",
+      "dimensions": {
+        "width": 1200,
+        "height": 736
+      },
+      "byteSize": 17048,
+      "sha256": "2038c48a6d0289f4558a0e21b79f1f74af483d09c56fa5adf7636ce7fff4ad1e",
+      "alt": "Decision matrix comparing hybrid modernization patterns and highlighting Arc-informed dependency waves into governed PaaS targets.",
+      "usage": [
+        "labs/27-capstone-hybrid-modernization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "labs/27-capstone-hybrid-modernization/diagrams/summary.svg",
+      "type": "lab-summary",
+      "dimensions": {
+        "width": 1200,
+        "height": 320
+      },
+      "byteSize": 3225,
+      "sha256": "2348177b0b0f3d81e3d5cc2345bac47762578a7e14fff7cf9a91efb047ef4a7c",
+      "alt": "Capstone banner showing a hybrid estate moving through Arc-enabled discovery and migration waves into governed PaaS and data targets.",
+      "usage": [
+        "labs/27-capstone-hybrid-modernization/README.md"
+      ],
+      "origin": "deterministic renderer",
+      "license": "MIT"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-alerts.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 973,
+      "sha256": "7aef6aec8edcee33270555d2ed7cbaa65737266beced0649de3f484623512bc9",
+      "alt": "Azure Alerts service icon",
+      "usage": [
+        "LAB-02"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-api-management.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1533,
+      "sha256": "cf794288575f2f7b080c50aa8319d42b02a2f2ae5351e4712c574353fc801f9a",
+      "alt": "API Management service icon",
+      "usage": [
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-app-configuration.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2131,
+      "sha256": "d39322382b9894cee4c3608e56e44217376ac8e4fa98a5d2e9c0c7ed27155e6a",
+      "alt": "App Configuration service icon",
+      "usage": [
+        "LAB-21"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-application-gateways.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 3351,
+      "sha256": "531e668e47cf61872b2811ec67dcc103cee2ecc1d272f07132d6196d68ba6c19",
+      "alt": "Application Gateway service icon",
+      "usage": [
+        "LAB-25"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-application-insights.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2320,
+      "sha256": "36c73dea8b1598fbfff84890a2b409600f1339eec8c1bf1a896439e9da8f9dca",
+      "alt": "Application Insights service icon",
+      "usage": [
+        "LAB-02"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-arc.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2870,
+      "sha256": "00f4a57d6e0391bec619a9298d114f783dbb7dd4165d44242202ca37d00d9bfa",
+      "alt": "Azure Arc service icon",
+      "usage": [
+        "LAB-04",
+        "LAB-14",
+        "LAB-23",
+        "LAB-24",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-automation-accounts.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1676,
+      "sha256": "4ad2825c024842fa6ea8875cf4098a8574b33b329301163282a7c6df43d6d7b4",
+      "alt": "Automation Accounts service icon",
+      "usage": [
+        "LAB-00",
+        "LAB-14",
+        "LAB-18"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-batch-accounts.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2843,
+      "sha256": "1868b4c6597d8d009df1d62dd24e7a53d7d50326a540d3ec07e7ce860dbbe418",
+      "alt": "Azure Batch service icon",
+      "usage": [
+        "LAB-18"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-container-apps.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2029,
+      "sha256": "3cf4ba9242e31496f778a27e92c9c2b2a09664f105c58325d5e2dcb142d3c3b9",
+      "alt": "Azure Container Apps service icon",
+      "usage": [
+        "LAB-10",
+        "LAB-16",
+        "LAB-19",
+        "LAB-21",
+        "LAB-25",
+        "LAB-26",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-cosmos-db.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2599,
+      "sha256": "b6f1f2afac15762d1de44366d34984c5a3e6e58f94d9e81407ac01565212e8e3",
+      "alt": "Azure Cosmos DB service icon",
+      "usage": [
+        "LAB-10",
+        "LAB-17",
+        "LAB-26"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-cost-management.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1495,
+      "sha256": "2eea56741367379e70fd785e1dba255bcf634ca9ca0bfaca70466ca74b76da51",
+      "alt": "Cost Management service icon",
+      "usage": [
+        "LAB-00",
+        "LAB-22"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-data-factory.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1479,
+      "sha256": "a16a9c345c72e9342874425ea5883900df601ec815e5babbcf67085d5e2fa582",
+      "alt": "Azure Data Factory service icon",
+      "usage": [
+        "LAB-13"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-database-migration-services.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2010,
+      "sha256": "b1bdd74c980623b7524b6ef43f9c2f8704ec0ad84bb1ea35b235ee4aadf5c61e",
+      "alt": "Azure Database Migration Service icon",
+      "usage": [
+        "LAB-23"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-deployment-stacks.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2271,
+      "sha256": "0954b8e97393268d70a32c7979b39d19625f9fddd21411e41efa601799f4e9ca",
+      "alt": "Azure deployment template service icon",
+      "usage": [
+        "LAB-21"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-devops.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 740,
+      "sha256": "15b5068ceeb28f0f3cf566aa8cf99619f99d47059d7a91fda0ef47091a71a041",
+      "alt": "Azure DevOps service icon",
+      "usage": [
+        "LAB-21"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-dns-private-resolver.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 3933,
+      "sha256": "990d109df8bac6312c886afdf0b521145baa88df78701afca51d7c8f8eaba9ce",
+      "alt": "Azure DNS Private Resolver service icon",
+      "usage": [
+        "LAB-24"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-event-grid.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2930,
+      "sha256": "106cc8427fde7c558fb90dccb381372954d436ac8122cb7afc442b05f7ef2b82",
+      "alt": "Azure Event Grid service icon",
+      "usage": [
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-event-hubs.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2497,
+      "sha256": "55187fecea1de7b135e53cc100bc765ad06ab419365263456bf548906c3107f8",
+      "alt": "Azure Event Hubs service icon",
+      "usage": [
+        "LAB-13",
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-expressroute-circuits.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1525,
+      "sha256": "0087cb8e3027b750c18249915b620e67348d12cb6d147f10c6a701976c948696",
+      "alt": "Azure ExpressRoute circuits service icon",
+      "usage": [
+        "LAB-24"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-firewalls.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1474,
+      "sha256": "154c416cc15b95b7c6c1ab61a5ecb33f14845197b7d163bd9dc6f1968c14be1e",
+      "alt": "Azure Firewall service icon",
+      "usage": [
+        "LAB-25"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-front-door.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 942,
+      "sha256": "b2e9c9a8b091a0694532257354dea94bb8c65b33876826e44dbc9b2aae01cf17",
+      "alt": "Azure Front Door service icon",
+      "usage": [
+        "LAB-10",
+        "LAB-17",
+        "LAB-19",
+        "LAB-24",
+        "LAB-25",
+        "LAB-26"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-function-apps.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1747,
+      "sha256": "1a6c9c108d5f63f7b78bc6fbc464059acd2eaa8c1d111e9bcd28a8b2cdf470b9",
+      "alt": "Azure Functions service icon",
+      "usage": [
+        "LAB-19",
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-key-vault.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2231,
+      "sha256": "712b426f54f0fc50d0816dc79df709daa7ac5f93ccaf4e9b3527f627f6e9ad97",
+      "alt": "Azure Key Vault service icon",
+      "usage": [
+        "LAB-05",
+        "LAB-09",
+        "LAB-11",
+        "LAB-21"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-load-balancers.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1457,
+      "sha256": "169edfa4edbc0cab6fdc1eef9243925588504a16f7729734e0e2161a9ca1d16c",
+      "alt": "Azure Load Balancer service icon",
+      "usage": [
+        "LAB-15",
+        "LAB-25"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-log-analytics-workspaces.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1295,
+      "sha256": "7a244a8d7260e84be5c904185db7b04994fe6ed345e2b224163bc5f7e3d97ce0",
+      "alt": "Log Analytics workspaces service icon",
+      "usage": [
+        "LAB-01"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-managed-identities.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2352,
+      "sha256": "fa2e0fb863e81d7923b5708bed196e19310867a194d23bea96dddc42e302693c",
+      "alt": "Managed Identities service icon",
+      "usage": [
+        "LAB-03",
+        "LAB-05",
+        "LAB-13",
+        "LAB-19"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-managed-redis.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2612,
+      "sha256": "fa4b65d5946115084be1e842ecb934ab7f01b3019a450d19640ea3c3eaf9bab0",
+      "alt": "Azure Managed Redis service icon",
+      "usage": [
+        "LAB-21"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-management-groups.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2690,
+      "sha256": "d8371735319fa4971c01e682810d0b67207c2c901f4fd19c2374a80c3e328829",
+      "alt": "Azure management groups service icon",
+      "usage": [
+        "LAB-04",
+        "LAB-06",
+        "LAB-22"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-migrate.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2030,
+      "sha256": "8298e248913fbbb5f0ad36b1e0f7954146e8026c5ab39c58cf47d0477c8dc4f2",
+      "alt": "Azure Migrate service icon",
+      "usage": [
+        "LAB-22",
+        "LAB-23",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-monitor.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1934,
+      "sha256": "1396f59a7d8fd7505a423842b987c9b343a092263d1ab5c7b0d94d58d8b17448",
+      "alt": "Azure Monitor service icon",
+      "usage": [
+        "LAB-01",
+        "LAB-02",
+        "LAB-07",
+        "LAB-08",
+        "LAB-13",
+        "LAB-16",
+        "LAB-18",
+        "LAB-26"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-nat-gateways.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2073,
+      "sha256": "0cd798c39a99ca7dee22069851b71cc1ae76a0cd5dc3cdff315e0f34b6ddb941",
+      "alt": "Azure NAT Gateway service icon",
+      "usage": [
+        "LAB-25"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-network-watcher.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2574,
+      "sha256": "1e4b0ae5284577e33bbbc05b9e38e58acfa9b7947041e4768e8c82d4fff43413",
+      "alt": "Network Watcher service icon",
+      "usage": [
+        "LAB-24"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-policy.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1472,
+      "sha256": "c3dc70003e793bf73b497f8d8501cdc81f930ce1777fdbfe9b7450afe477771a",
+      "alt": "Azure Policy service icon",
+      "usage": [
+        "LAB-06",
+        "LAB-07",
+        "LAB-12",
+        "LAB-14",
+        "LAB-22",
+        "LAB-26",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-private-link.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2402,
+      "sha256": "9990bbce78fc1ef3838fbe86e2ff3b297e721b1f6a6d037b4d3f3ce9abf4a5a2",
+      "alt": "Azure Private Link service icon",
+      "usage": [
+        "LAB-05",
+        "LAB-08",
+        "LAB-10",
+        "LAB-11"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-recovery-services-vaults.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1663,
+      "sha256": "f086695b1a1afd7e2988e3a858e68105a0f3ad5ef798d7ab37f4266c4f32a6b8",
+      "alt": "Recovery Services vault service icon",
+      "usage": [
+        "LAB-09",
+        "LAB-14",
+        "LAB-15",
+        "LAB-16",
+        "LAB-17",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-resource-groups.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1746,
+      "sha256": "4d2b2eacb37735849d2e556074ac8564f92fada70672b40985c77ea666e82977",
+      "alt": "Azure resource groups service icon",
+      "usage": [
+        "LAB-00",
+        "LAB-06"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-service-bus.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2683,
+      "sha256": "eaf42cb87aedf608f60d40b601eb86491daaa71b8eab40a935e8e7fa2e62a2cf",
+      "alt": "Azure Service Bus service icon",
+      "usage": [
+        "LAB-19",
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-sql-database.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2420,
+      "sha256": "a26124a2b188ccf910520c935c726f7364e0f5935d7a4319ebcab9c80a40e475",
+      "alt": "Azure SQL Database service icon",
+      "usage": [
+        "LAB-08",
+        "LAB-09",
+        "LAB-14",
+        "LAB-16",
+        "LAB-23",
+        "LAB-27"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-storage-accounts.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1157,
+      "sha256": "7190d3bb14ce30ce74bd0af873915830fe821e8c5f6ef6f3149e6f7cfb2aa4f7",
+      "alt": "Azure Storage accounts service icon",
+      "usage": [
+        "LAB-00",
+        "LAB-01",
+        "LAB-04",
+        "LAB-09",
+        "LAB-11",
+        "LAB-12",
+        "LAB-13",
+        "LAB-17",
+        "LAB-18",
+        "LAB-23"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-subscriptions.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1505,
+      "sha256": "d69843a70bd38eefa5b70a4d0b803502f95cdf061c59aed48b435170a15919b4",
+      "alt": "Azure subscriptions service icon",
+      "usage": [
+        "LAB-00",
+        "LAB-04",
+        "LAB-06"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-synapse-analytics.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1799,
+      "sha256": "7eacb3ab0ffd5b76cc06e34ff41333aed79db0d41852397468486ddb63c2c314",
+      "alt": "Azure Synapse Analytics service icon",
+      "usage": [
+        "LAB-11",
+        "LAB-13",
+        "LAB-20"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-virtual-machine-scale-sets.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2027,
+      "sha256": "a53772c07fe89cdbb876ce77e22dba0863c1459173b77a1eec73fbdd2048637f",
+      "alt": "Virtual Machine Scale Sets service icon",
+      "usage": [
+        "LAB-15"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-virtual-machines.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1330,
+      "sha256": "092d18ffadec9ec0e5af129186dc7bc2a80544011e55f965604ed4b13873e0fc",
+      "alt": "Azure Virtual Machines service icon",
+      "usage": [
+        "LAB-01",
+        "LAB-05",
+        "LAB-08",
+        "LAB-09",
+        "LAB-14",
+        "LAB-18",
+        "LAB-23"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-virtual-network-gateways.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2078,
+      "sha256": "5ed14416dafff4e946fae5b68b9c86e8c9a9bbaa37ab94324a5d94c5cfbcb106",
+      "alt": "Virtual Network Gateway service icon",
+      "usage": [
+        "LAB-24"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-virtual-network.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1860,
+      "sha256": "64a5e75ecef2f9f69067faa2eb131266cb8f2858706f8ab74bfea5ad0d98b14d",
+      "alt": "Azure Virtual Network service icon",
+      "usage": [
+        "LAB-15"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-virtual-wans.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2360,
+      "sha256": "c0d0f5fe0d2c8e26fe4317ed7227ba4bb6a7d577afac631fb8141401346c4694",
+      "alt": "Azure Virtual WAN service icon",
+      "usage": [
+        "LAB-24"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/azure/azure-workbooks.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1550,
+      "sha256": "20b3064d62ff3c7944d71f852d34f0ecba8b3bcd2f3ff3e8d14634a116e57da4",
+      "alt": "Azure Workbooks service icon",
+      "usage": [
+        "LAB-01",
+        "LAB-02"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/entra/microsoft-entra-id-governance.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 2375,
+      "sha256": "b19ae8a696a9c351444d1ae37602a29b8ac2e29a1779089d436f09feb61249e3",
+      "alt": "Microsoft Entra ID Governance product icon",
+      "usage": [
+        "LAB-07"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/entra/architecture/architecture-icons",
+      "license": "Microsoft icon terms"
+    },
+    {
+      "path": "docs/site-assets/icons/entra/microsoft-entra-id.svg",
+      "type": "official-service-icon",
+      "dimensions": {
+        "width": 18,
+        "height": 18
+      },
+      "byteSize": 1301,
+      "sha256": "efd9f54562bfb78bf3c77aecdd5fc31b61fce8a1cec78c4370b41fc470e54eda",
+      "alt": "Microsoft Entra ID product icon",
+      "usage": [
+        "LAB-03",
+        "LAB-04",
+        "LAB-26"
+      ],
+      "origin": "https://learn.microsoft.com/en-us/entra/architecture/architecture-icons",
+      "license": "Microsoft icon terms"
+    }
+  ]
+}

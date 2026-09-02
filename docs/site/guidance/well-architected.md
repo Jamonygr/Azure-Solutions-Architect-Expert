@@ -2,6 +2,11 @@
 
 Use all five Azure Well-Architected Framework pillars for every decision. A statement about one pillar cannot stand in for another, and an improvement often transfers cost or complexity elsewhere.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/waf-pillars.svg" alt="Five Azure Well-Architected pillars surrounding an architecture decision and its trade-offs">
+  <figcaption>Review Reliability, Security, Cost Optimization, Operational Excellence, and Performance Efficiency together.</figcaption>
+</figure>
+
 | Pillar | Ask | Useful evidence | Common hidden trade-off |
 | --- | --- | --- | --- |
 | Reliability | What fails, at what scope, and how does service recover? | Failure-domain map, recovery test, RTO/RPO assertion | Extra replicas without a tested recovery process |

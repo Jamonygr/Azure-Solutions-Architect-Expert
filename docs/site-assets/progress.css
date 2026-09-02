@@ -1,8 +1,10 @@
 .az305-progress {
+  background: var(--az305-surface);
   border: 1px solid var(--az305-border);
-  border-radius: 0.5rem;
-  padding: 1rem;
+  border-radius: var(--az305-radius);
+  box-shadow: var(--az305-shadow);
   margin: 1rem 0;
+  padding: clamp(0.8rem, 2vw, 1.25rem);
 }
 
 .az305-progress__toolbar {
@@ -15,25 +17,38 @@
 
 .az305-progress button,
 .az305-progress input[type="number"] {
-  border: 1px solid var(--az305-border);
-  border-radius: 0.3rem;
-  color: inherit;
   background: var(--md-default-bg-color);
+  border: 1px solid var(--az305-border);
+  border-radius: 0.4rem;
+  color: inherit;
   padding: 0.45rem 0.65rem;
 }
 
 .az305-progress button {
   cursor: pointer;
+  font-weight: 650;
 }
 
-.az305-progress button:hover,
-.az305-progress button:focus-visible {
+.az305-progress button:hover {
   border-color: var(--az305-blue);
 }
 
-.az305-progress__summary {
-  font-weight: 600;
+.az305-progress__overview {
+  align-items: center;
+  background: var(--az305-surface-alt);
+  border: 1px solid var(--az305-border);
+  border-radius: var(--az305-radius);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
   margin: 0 0 1rem;
+  padding: 1rem;
+}
+
+.az305-progress__summary {
+  color: var(--az305-ink);
+  font-weight: 700;
+  margin: 0 0 0.75rem;
 }
 
 .az305-progress__table {
@@ -44,9 +59,13 @@
 .az305-progress__table th,
 .az305-progress__table td {
   border-bottom: 1px solid var(--az305-border);
-  padding: 0.5rem;
+  padding: 0.55rem;
   text-align: left;
   vertical-align: middle;
+}
+
+.az305-progress__table tbody tr:hover {
+  background: var(--az305-surface-alt);
 }
 
 .az305-progress__checks {
@@ -61,6 +80,12 @@
   gap: 0.15rem;
 }
 
+.az305-progress__checks input {
+  accent-color: var(--az305-blue);
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
 .az305-progress__notice {
   border-left: 0.25rem solid var(--az305-cyan);
   padding-left: 0.75rem;
@@ -68,16 +93,29 @@
 
 .az305-progress__error {
   color: #b42318;
-  font-weight: 600;
+  font-weight: 650;
+}
+
+[data-md-color-scheme="slate"] .az305-progress__error {
+  color: #ff9b91;
 }
 
 @media (max-width: 44rem) {
+  .az305-progress__overview {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .az305-progress__overview-copy {
+    width: 100%;
+  }
+
   .az305-progress__table thead {
-    position: absolute;
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;
     overflow: hidden;
+    position: absolute;
     white-space: nowrap;
     width: 1px;
   }
@@ -92,5 +130,11 @@
   .az305-progress__table td {
     border: 0;
     padding: 0;
+  }
+}
+
+@media print {
+  .az305-progress {
+    box-shadow: none;
   }
 }

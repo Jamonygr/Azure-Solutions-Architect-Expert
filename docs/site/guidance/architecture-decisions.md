@@ -2,6 +2,11 @@
 
 An architecture recommendation is a traceable response to requirements, not a preferred product list. Every lab uses the same decision chain:
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/decision-workflow.svg" alt="Architecture decision workflow from requirements and eligibility through weighted analysis, ADR, evidence, and revision">
+  <figcaption>A defensible decision keeps constraints, scoring, alternatives, and change history visible.</figcaption>
+</figure>
+
 `objective → requirement → candidate eligibility → weighted analysis → ADR → checkpoint → evidence`
 
 ## Start with discriminating requirements

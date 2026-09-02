@@ -1,0 +1,109 @@
+<!-- BEGIN GENERATED AZ305 V1 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">Eight-week study roadmap</title>
+  <desc id="visual-desc">Eight-step roadmap showing foundation, four domain waves, mixed assessment, and two capstone rehearsals.</desc>
+  <metadata>registry-sha256:30e8810c988dfeb26f84833cc9a536946102af3a207b132fe090601d9fc4fccb</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#7F3FBF"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#005EA8" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <text x="58" y="64" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="700" fill="#102A43">
+    <tspan x="58" dy="0">Eight-week study roadmap</tspan>
+  </text>
+  <text x="58" y="116" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="400" fill="#486581">
+    <tspan x="58" dy="0">A paced route moves from safe foundations through four domain waves and finishes with integrated capstone</tspan>
+    <tspan x="58" dy="20">rehearsal.</tspan>
+  </text>
+  <g role="group" aria-label="Foundation and identity: Establish safety, logging, monitoring, and identity." filter="url(#shadow)">
+    <rect x="60" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="141.667" cy="241" r="32" fill="url(#accent)"/>
+    <text x="141.667" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">1</text>
+    <text x="141.667" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="141.667" dy="0">Foundation and</tspan>
+      <tspan x="141.667" dy="20">identity</tspan>
+    </text>
+    <text x="141.667" y="361" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="141.667" dy="0">Establish safety,</tspan>
+      <tspan x="141.667" dy="17">logging, monitoring,</tspan>
+      <tspan x="141.667" dy="17">and identity.</tspan>
+    </text>
+  </g>
+  <line x1="223.333" y1="302" x2="240.333" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Governance: Complete authorization, keys, hierarchy, and compliance." filter="url(#shadow)">
+    <rect x="243.333" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="325" cy="241" r="32" fill="url(#accent)"/>
+    <text x="325" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">2</text>
+    <text x="325" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="325" dy="0">Governance</tspan>
+    </text>
+    <text x="325" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="325" dy="0">Complete</tspan>
+      <tspan x="325" dy="17">authorization, keys,</tspan>
+      <tspan x="325" dy="17">hierarchy, and</tspan>
+      <tspan x="325" dy="17">compliance.</tspan>
+    </text>
+  </g>
+  <line x1="406.667" y1="302" x2="423.667" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Relational data: Compare relational platform, scale, and protection." filter="url(#shadow)">
+    <rect x="426.667" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="508.333" cy="241" r="32" fill="url(#accent)"/>
+    <text x="508.333" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">3</text>
+    <text x="508.333" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="508.333" dy="0">Relational data</tspan>
+    </text>
+    <text x="508.333" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="508.333" dy="0">Compare relational</tspan>
+      <tspan x="508.333" dy="17">platform, scale, and</tspan>
+      <tspan x="508.333" dy="17">protection.</tspan>
+    </text>
+  </g>
+  <line x1="590" y1="302" x2="607" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Data services: Cover nonrelational storage, integration, and analytics." filter="url(#shadow)">
+    <rect x="610" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="691.667" cy="241" r="32" fill="url(#accent)"/>
+    <text x="691.667" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">4</text>
+    <text x="691.667" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="691.667" dy="0">Data services</tspan>
+    </text>
+    <text x="691.667" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="691.667" dy="0">Cover nonrelational</tspan>
+      <tspan x="691.667" dy="17">storage,</tspan>
+      <tspan x="691.667" dy="17">integration, and</tspan>
+      <tspan x="691.667" dy="17">analytics.</tspan>
+    </text>
+  </g>
+  <line x1="773.333" y1="302" x2="790.333" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Continuity: Model recovery, availability, backup, and resilience." filter="url(#shadow)">
+    <rect x="793.333" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="875" cy="241" r="32" fill="url(#accent)"/>
+    <text x="875" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">5</text>
+    <text x="875" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="875" dy="0">Continuity</tspan>
+    </text>
+    <text x="875" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="875" dy="0">Model recovery,</tspan>
+      <tspan x="875" dy="17">availability,</tspan>
+      <tspan x="875" dy="17">backup, and</tspan>
+      <tspan x="875" dy="17">resilience.</tspan>
+    </text>
+  </g>
+  <line x1="956.667" y1="302" x2="973.667" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Infrastructure and capstones: Integrate compute, apps, migration, and networks." filter="url(#shadow)">
+    <rect x="976.667" y="184" width="163.333" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="1058.33" cy="241" r="32" fill="url(#accent)"/>
+    <text x="1058.33" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">6</text>
+    <text x="1058.33" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="1058.33" dy="0">Infrastructure and</tspan>
+      <tspan x="1058.33" dy="20">capstones</tspan>
+    </text>
+    <text x="1058.33" y="361" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="1058.33" dy="0">Integrate compute,</tspan>
+      <tspan x="1058.33" dy="17">apps, migration, and</tspan>
+      <tspan x="1058.33" dy="17">networks.</tspan>
+    </text>
+  </g>
+</svg>
+<!-- END GENERATED AZ305 V1 -->

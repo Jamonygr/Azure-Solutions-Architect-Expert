@@ -1,5 +1,5 @@
-site_name: Azure Solutions Architect Expert — AZ-305
-site_description: Offline-first architecture decision practice for AZ-305
+site_name: AZ-305 visual architecture practice
+site_description: Visual, architecture-first decision practice for AZ-305
 site_author: Jamon
 copyright: Copyright © 2026 Jamon
 docs_dir: .site-docs
@@ -85,4 +85,3 @@ nav:
       - Continuity: guides/continuity.md
       - Troubleshooting: guides/troubleshooting.md
   - Labs: labs/README.md
-

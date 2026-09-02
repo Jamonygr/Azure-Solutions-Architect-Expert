@@ -1,0 +1,71 @@
+<!-- BEGIN GENERATED AZ305 V1 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="visual-title visual-desc">
+  <title id="visual-title">AZ-305 domain coverage</title>
+  <desc id="visual-desc">Four proportional domain bars for identity and governance, data, continuity, and infrastructure coverage.</desc>
+  <metadata>registry-sha256:136c45129aa0a5f1c494ca42677ccb279c40b13e361c2613ee9d263344b3a177</metadata>
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAF4FF"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0078D4"/><stop offset="1" stop-color="#7F3FBF"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#005EA8" flood-opacity=".14"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0078D4"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#wash)"/>
+  <text x="58" y="64" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="700" fill="#102A43">
+    <tspan x="58" dy="0">AZ-305 domain coverage</tspan>
+  </text>
+  <text x="58" y="116" text-anchor="start" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="400" fill="#486581">
+    <tspan x="58" dy="0">The practice sequence mirrors the blueprint weights while preserving one primary lab for every objective.</tspan>
+  </text>
+  <g role="group" aria-label="Identity and governance: Seven labs cover eleven primary objectives." filter="url(#shadow)">
+    <rect x="70" y="184" width="250" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="195" cy="241" r="32" fill="url(#accent)"/>
+    <text x="195" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">1</text>
+    <text x="195" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="195" dy="0">Identity and governance</tspan>
+    </text>
+    <text x="195" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="195" dy="0">Seven labs cover eleven primary</tspan>
+      <tspan x="195" dy="17">objectives.</tspan>
+    </text>
+  </g>
+  <line x1="320" y1="302" x2="337" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Data storage: Six labs cover ten primary objectives." filter="url(#shadow)">
+    <rect x="340" y="184" width="250" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="465" cy="241" r="32" fill="url(#accent)"/>
+    <text x="465" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">2</text>
+    <text x="465" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="465" dy="0">Data storage</tspan>
+    </text>
+    <text x="465" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="465" dy="0">Six labs cover ten primary</tspan>
+      <tspan x="465" dy="17">objectives.</tspan>
+    </text>
+  </g>
+  <line x1="590" y1="302" x2="607" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Business continuity: Four labs cover seven primary objectives." filter="url(#shadow)">
+    <rect x="610" y="184" width="250" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="735" cy="241" r="32" fill="url(#accent)"/>
+    <text x="735" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">3</text>
+    <text x="735" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="735" dy="0">Business continuity</tspan>
+    </text>
+    <text x="735" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="735" dy="0">Four labs cover seven primary</tspan>
+      <tspan x="735" dy="17">objectives.</tspan>
+    </text>
+  </g>
+  <line x1="860" y1="302" x2="877" y2="302" stroke="#0078D4" stroke-width="3" marker-end="url(#arrow)"/>
+  <g role="group" aria-label="Infrastructure: Eight labs cover twenty-one primary objectives." filter="url(#shadow)">
+    <rect x="880" y="184" width="250" height="246" rx="22" fill="#FFFFFF" stroke="#7DB7E8" stroke-width="2"/>
+    <circle cx="1005" cy="241" r="32" fill="url(#accent)"/>
+    <text x="1005" y="249" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">4</text>
+    <text x="1005" y="303" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="16" font-weight="700" fill="#102A43">
+      <tspan x="1005" dy="0">Infrastructure</tspan>
+    </text>
+    <text x="1005" y="349" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="12" fill="#486581">
+      <tspan x="1005" dy="0">Eight labs cover twenty-one</tspan>
+      <tspan x="1005" dy="17">primary objectives.</tspan>
+    </text>
+  </g>
+</svg>
+<!-- END GENERATED AZ305 V1 -->

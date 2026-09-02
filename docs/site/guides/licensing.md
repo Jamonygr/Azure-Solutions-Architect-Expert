@@ -2,6 +2,11 @@
 
 Licensing is an architecture constraint when a control exists only in a particular service tier, identity plan, support plan, or commercial offer. Do not infer entitlement from a product name in a scenario.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/licensing-boundary.svg" alt="Licensing boundary connecting required capability, covered population, service tier, availability, evidence date, and fallback design">
+  <figcaption>Treat entitlement as a dated, testable architecture input with a fallback.</figcaption>
+</figure>
+
 ## Licensing decision record
 
 Capture these facts before scoring candidates:

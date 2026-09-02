@@ -2,6 +2,11 @@
 
 Troubleshoot from contracts and evidence. Do not widen scope, delete broadly, or rerun a partial mutation until state and ownership are understood.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/troubleshooting-flow.svg" alt="Safe troubleshooting flow from symptom classification through state inspection, ownership proof, isolated assertion, recovery, and verification">
+  <figcaption>Preserve state, isolate the failing contract, and verify ownership before retrying or cleaning up.</figcaption>
+</figure>
+
 ## First classification
 
 | Symptom | Check first | Safe response |

@@ -2,6 +2,11 @@
 
 Migration is a controlled change to a business system, not a copy command. The target architecture, dependency map, coexistence period, data movement, cutover, rollback, and operating ownership must agree.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/migration-waves.svg" alt="Migration waves progressing from discovery and assessment through landing design, rehearsal, cutover, operations, and decommissioning">
+  <figcaption>Sequence migration by dependencies, reversibility, and measurable acceptance gates.</figcaption>
+</figure>
+
 ## Discovery to waves
 
 1. **Discover** workloads, identities, network flows, data stores, certificates, schedules, and operational dependencies.

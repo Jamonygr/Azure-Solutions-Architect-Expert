@@ -2,6 +2,11 @@
 
 Begin with business impact. Service labels such as “zone redundant” or “geo replicated” are design inputs; they are not a recovery strategy by themselves.
 
+<figure class="az305-visual">
+  <img src="../assets/infographics/continuity-targets.svg" alt="Continuity design connecting business impact, failure scope, RTO, RPO, replication, backup, and recovery exercises">
+  <figcaption>Recovery targets become credible only when dependencies, sequencing, and tests agree.</figcaption>
+</figure>
+
 ## Translate impact into targets
 
 | Input | Question | Resulting decision |
