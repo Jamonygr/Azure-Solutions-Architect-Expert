@@ -29,4 +29,4 @@ The adaptation reference was read at Git commit `a532eb73711f7b8eb02ba95baa06a3a
 
 ## Operational boundary
 
-Research used public documentation and dependency acquisition only. Implementation performed no Azure or Microsoft Graph sign-in or query, tenant or subscription mutation, Portal interaction, screenshot processing, remote push, Pages deployment, or external-setting change. All completed lab status is `offline-validated`; every `lastLiveVerified` value is `null`.
+Research used public documentation and dependency acquisition only. Through the definitive gate and tagged offline release, implementation performed no Azure or Microsoft Graph sign-in or query, tenant or subscription mutation, Portal interaction, screenshot processing, remote push, Pages deployment, or external-setting change. Afterward, a separate explicit user instruction authorized only creation of a private GitHub repository and pushing `main` plus the release tag. Pages was not deployed. All completed lab status is `offline-validated`; every `lastLiveVerified` value is `null`.
