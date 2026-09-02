@@ -1,6 +1,6 @@
 # AZ-305 Complete Learning Environment
 
-![AZ-305 Complete Learning Environment cover showing connected identity, data, continuity, and infrastructure architecture](docs/site-assets/visuals/home-hero.png)
+![Wide AZ-305 learning environment cover connecting identity and governance, data and storage, continuity, compute, migration, networking, and capstone practice](docs/site-assets/visuals/home-hero.png)
 
 A visual, architecture-first learning environment for the Microsoft AZ-305 blueprint.
 

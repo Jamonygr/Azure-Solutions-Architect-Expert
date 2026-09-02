@@ -12,7 +12,7 @@ This repository implements the AZ-305 learning environment against the Microsoft
 - Exactly five checkpoints in every lab, for 140 checkpoints total.
 - Four `design-simulation`, ten `reference-deployable`, and fourteen `safe-analogue` labs.
 - 28 lab-specific Mermaid topology sources and exactly 84 deterministic, accessible lab SVGs: one summary banner, one service topology, and one decision matrix per lab.
-- Seven registered original 1536×1024 isometric PNG illustrations and 16 reusable deterministic site infographics, with a generated manifest covering dimensions, byte sizes, SHA-256 hashes, alt text, usage, origin, and license.
+- Seven registered PNG illustrations—six original 1536×1024 isometric scenes and one user-supplied 1672×941 home cover—and 16 reusable deterministic site infographics, with a generated manifest covering dimensions, byte sizes, SHA-256 hashes, alt text, usage, origin, and license.
 - Forty-nine unchanged official Azure and Microsoft Entra SVG files used only inside labelled architecture diagrams under Microsoft's separate icon terms; these files are explicitly outside the MIT grant.
 - Seven self-contained Bicep source files across Labs 18, 21, 26, and 27.
 - Browser-local progress under `az305LearnerProgress.v1`, with explicit JSON import/export and no silent browser/CLI synchronization.
@@ -21,7 +21,7 @@ This repository implements the AZ-305 learning environment against the Microsoft
 
 The root and site now use the heading “AZ-305 visual architecture practice” and introduce the environment as visual and architecture-first. Promotional “offline-first” wording was removed while Lab 00's technical operating-contract language and every offline/live safety warning were retained. All 28 lab READMEs preserve their established 16-section order and now include mode/lane/status badges, a five-checkpoint timeline, all five WAF pillar cards, and registered visual evidence. All 19 main documentation pages contain a relevant local visual. The presentation layer supports light and dark themes, responsive layouts, keyboard focus, print output, reduced motion, progress bars, and completion rings without changing the browser progress contract.
 
-The seven original illustrations were generated as separate clean isometric compositions using OpenAI image generation, inspected for composition and accidental text, logos, watermarks, and interface imagery, then stripped of all ancillary PNG metadata. No screenshot or rasterized Portal content is included.
+Six original illustrations were generated as separate clean isometric compositions using OpenAI image generation and inspected for composition and accidental text, logos, watermarks, and interface imagery. The main README cover was later replaced with wide-format artwork supplied directly by the repository owner. Every registered PNG was stripped of ancillary metadata; no screenshot or rasterized Portal content is included.
 
 ## Validation classification
 

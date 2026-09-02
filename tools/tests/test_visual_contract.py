@@ -70,7 +70,10 @@ class VisualContractTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(payload).hexdigest(), asset["sha256"], asset["path"])
         for raster in self.registry["rasterAssets"]:
             payload = (ROOT / raster["path"]).read_bytes()
-            self.assertEqual((1536, 1024), struct.unpack(">II", payload[16:24]))
+            declared = (raster["dimensions"]["width"], raster["dimensions"]["height"])
+            expected = (1672, 941) if raster["role"] == "home-hero" else (1536, 1024)
+            self.assertEqual(expected, declared)
+            self.assertEqual(declared, struct.unpack(">II", payload[16:24]))
             position = 8
             while position + 12 <= len(payload):
                 size = struct.unpack(">I", payload[position:position + 4])[0]

@@ -69,20 +69,20 @@ rasterAssets:
     path: "docs/site-assets/visuals/home-hero.png"
     role: "home-hero"
     paletteId: "FOUNDATION"
-    dimensions: {width: 1536, height: 1024}
-    alt: "Isometric Azure learning landscape connecting identity, data, continuity, observability, and infrastructure architecture layers."
-    caption: "The full learning environment connects evidence-led decisions across all four AZ-305 design domains."
-    usage: ["README.md", "docs/site/index.md"]
+    dimensions: {width: 1672, height: 941}
+    alt: "Wide AZ-305 learning environment cover connecting identity and governance, data and storage, continuity, compute, migration, networking, and capstone practice."
+    caption: "The complete architecture environment connects 28 labs, 49 measured skills, 1,250 questions, and two capstones."
+    usage: ["README.md"]
     origin:
-      type: "generated-original"
-      generator: "OpenAI image generation"
-      generatedDate: "2026-09-02"
-      prompt: >-
-        Create a clean 1536 by 1024 isometric cloud architecture illustration with layered identity, monitoring, data, continuity, and infrastructure systems connected into one coherent learning landscape; use Azure blue, cyan, and purple, no text, people, user interface, logos, identifiers, watermarks, or photographic elements.
+      type: "user-supplied"
+      source: "User-supplied artwork"
+      acquiredDate: "2026-09-02"
+      description: >-
+        Finished wide-format cover artwork supplied directly by the repository owner for use as the single image in the AZ-305 main README.
     license:
       holder: "Jamon"
       grant: "MIT"
-      notice: "Original project artwork licensed under the repository MIT terms."
+      notice: "User-supplied project artwork licensed under the repository MIT terms."
   - id: "RASTER-DOMAIN-IGM"
     path: "docs/site-assets/visuals/domain-identity-governance-monitoring.png"
     role: "domain-banner"

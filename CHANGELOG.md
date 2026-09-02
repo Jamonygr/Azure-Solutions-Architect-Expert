@@ -2,8 +2,9 @@
 
 ## 2026-09-02 — Whole-environment visual refresh
 
+- Replaced the main README cover with the repository owner's supplied wide-format AZ-305 artwork.
 - Reframed the learning environment as visual and architecture-first while preserving all technical safety guidance.
-- Added seven original isometric illustrations, 84 lab SVGs, 28 service-topology sources, and 16 reusable site infographics.
+- Added seven registered isometric illustrations, 84 lab SVGs, 28 service-topology sources, and 16 reusable site infographics.
 - Added a closed visual registry, generated asset manifest, licensed local Azure and Microsoft Entra icons, and visual integrity checks.
 - Added responsive light/dark presentation, five-checkpoint timelines, WAF cards, badges, progress bars, completion rings, print support, and reduced-motion support across all labs and main documentation pages.
 - Kept the existing release tag unchanged and GitHub Pages disabled.

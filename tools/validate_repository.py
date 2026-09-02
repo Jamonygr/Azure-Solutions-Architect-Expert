@@ -1037,7 +1037,9 @@ def validate_visual_assets(labs: dict[str, dict[str, Any]], report: Report) -> N
             report.issue(rel(path), str(exc))
             continue
         declared = raster.get("dimensions", {})
-        report.require(dimensions == (declared.get("width"), declared.get("height")) == (1536, 1024), rel(path), f"registered raster dimensions differ: {dimensions}")
+        declared_dimensions = (declared.get("width"), declared.get("height"))
+        expected_dimensions = (1672, 941) if raster.get("role") == "home-hero" else (1536, 1024)
+        report.require(dimensions == declared_dimensions == expected_dimensions, rel(path), f"registered raster dimensions differ: {dimensions}")
         report.require(all(not (name and ord(name[0]) & 32) for name in chunks), rel(path), f"PNG contains nonessential ancillary metadata chunks: {chunks}")
         report.require(bool(str(raster.get("alt", "")).strip()) and bool(raster.get("usage")), rel(path), "raster needs alt text and page usage")
         for usage in raster.get("usage", []):
@@ -1169,7 +1171,7 @@ def validate_repository_hygiene(report: Report) -> None:
             report.require(
                 path.suffix.casefold() == ".png" and relative in allowed_rasters,
                 relative,
-                "raster asset is not one of the seven registered original PNG illustrations",
+                "raster asset is not one of the seven registered PNG illustrations",
             )
         for token in legacy_tokens:
             report.require(token.casefold() not in lower_name, relative, "filename contains a legacy reference-exam identifier")

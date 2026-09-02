@@ -366,8 +366,9 @@ def write_manifest(registry: dict[str, Any], expected_svgs: dict[Path, tuple[byt
         path = ROOT / raster["path"]
         if not path.is_file():
             raise FileNotFoundError(f"Missing registered raster: {raster['path']}")
+        origin = raster["origin"].get("generator", raster["origin"].get("source", "registered artwork"))
         assets.append(asset_record(path, "raster-illustration", raster["alt"], raster["usage"],
-                                   raster["origin"]["generator"], raster["license"]["grant"]))
+                                   origin, raster["license"]["grant"]))
     for path, (payload, alt, usage, asset_type) in sorted(expected_svgs.items(), key=lambda item: item[0].as_posix()):
         assets.append(asset_record(path, asset_type, alt, usage, "deterministic renderer", "MIT",
                                    payload=payload))

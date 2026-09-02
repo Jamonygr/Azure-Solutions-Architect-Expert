@@ -73,11 +73,11 @@
       "additionalProperties": false,
       "required": ["width", "height"],
       "properties": {
-        "width": {"const": 1536},
-        "height": {"const": 1024}
+        "width": {"type": "integer", "minimum": 1200, "maximum": 2048},
+        "height": {"type": "integer", "minimum": 768, "maximum": 1200}
       }
     },
-    "rasterOrigin": {
+    "generatedRasterOrigin": {
       "type": "object",
       "additionalProperties": false,
       "required": ["type", "generator", "generatedDate", "prompt"],
@@ -87,6 +87,23 @@
         "generatedDate": {"type": "string", "format": "date"},
         "prompt": {"type": "string", "minLength": 120}
       }
+    },
+    "userSuppliedRasterOrigin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "source", "acquiredDate", "description"],
+      "properties": {
+        "type": {"const": "user-supplied"},
+        "source": {"const": "User-supplied artwork"},
+        "acquiredDate": {"type": "string", "format": "date"},
+        "description": {"type": "string", "minLength": 80}
+      }
+    },
+    "rasterOrigin": {
+      "oneOf": [
+        {"$ref": "#/$defs/generatedRasterOrigin"},
+        {"$ref": "#/$defs/userSuppliedRasterOrigin"}
+      ]
     },
     "rasterLicense": {
       "type": "object",
@@ -102,6 +119,25 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["id", "path", "role", "paletteId", "dimensions", "alt", "caption", "usage", "origin", "license"],
+      "allOf": [
+        {
+          "if": {"properties": {"role": {"const": "home-hero"}}, "required": ["role"]},
+          "then": {
+            "properties": {
+              "dimensions": {
+                "properties": {"width": {"const": 1672}, "height": {"const": 941}}
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "dimensions": {
+                "properties": {"width": {"const": 1536}, "height": {"const": 1024}}
+              }
+            }
+          }
+        }
+      ],
       "properties": {
         "id": {"pattern": "^RASTER-(HOME|DOMAIN-(IGM|DATA|BC|INF)|CAPSTONE-(26|27))$"},
         "path": {"type": "string", "pattern": "^(docs/site-assets/visuals|labs/[0-2][0-9]-[a-z0-9-]+/images)/[a-z0-9-]+\\.png$"},

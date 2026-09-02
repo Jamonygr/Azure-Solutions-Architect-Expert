@@ -12,17 +12,16 @@
       "path": "docs/site-assets/visuals/home-hero.png",
       "type": "raster-illustration",
       "dimensions": {
-        "width": 1536,
-        "height": 1024
+        "width": 1672,
+        "height": 941
       },
-      "byteSize": 1986893,
-      "sha256": "7de8a3a5b76bb77d2efd66f2b03c44aa3ea4dcc91cb1dbd63ae723dab35a07f8",
-      "alt": "Isometric Azure learning landscape connecting identity, data, continuity, observability, and infrastructure architecture layers.",
+      "byteSize": 2090102,
+      "sha256": "8e9ef091fb138e2e8c5a9205639b408fc4824d9b186b89f74512227213e15d1e",
+      "alt": "Wide AZ-305 learning environment cover connecting identity and governance, data and storage, continuity, compute, migration, networking, and capstone practice.",
       "usage": [
-        "README.md",
-        "docs/site/index.md"
+        "README.md"
       ],
-      "origin": "OpenAI image generation",
+      "origin": "User-supplied artwork",
       "license": "MIT"
     },
     {
