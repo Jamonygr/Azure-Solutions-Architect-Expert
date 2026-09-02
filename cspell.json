@@ -27,6 +27,6 @@
     "runid", "subscriptionid", "targetcontainern", "targetdatabasena", "targetresourcegr", "tspan",
     "uefi", "ufffd", "undeployable", "unredacted", "unreplicated", "unscored", "unsanitized",
     "untaggable", "vhub", "vmsku", "vmss", "vnet", "webtiervmname", "workbookdisplayn",
-    "workervmsku", "azcontext", "azext"
+    "workervmsku", "azcontext", "azext", "Segoe", "SVGs", "WANs"
   ]
 }

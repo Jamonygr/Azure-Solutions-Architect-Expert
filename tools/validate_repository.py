@@ -9,6 +9,7 @@ build is actionable.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import math
@@ -18,6 +19,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import struct
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
@@ -35,6 +37,24 @@ SCHEMA_VERSION = "1.0.0"
 
 EXPECTED_LABS = [f"LAB-{index:02d}" for index in range(28)]
 INSTRUCTIONAL_LABS = [f"LAB-{index:02d}" for index in range(1, 26)]
+INFOGRAPHIC_FILENAMES = {
+    "VIS-LEARNING-LOOP": "learning-loop.svg",
+    "VIS-DOMAIN-COVERAGE": "exam-domains.svg",
+    "VIS-JOB-READY": "job-ready.svg",
+    "VIS-OBJECTIVE-TRACE": "objective-coverage.svg",
+    "VIS-STUDY-ROADMAP": "study-roadmap.svg",
+    "VIS-ASSESSMENT-FLOW": "assessment-coverage.svg",
+    "VIS-ADR-LOOP": "decision-workflow.svg",
+    "VIS-WAF-PILLARS": "waf-pillars.svg",
+    "VIS-EVIDENCE-CHAIN": "evidence-chain.svg",
+    "VIS-COMMAND-LANES": "command-lanes.svg",
+    "VIS-CONTINUITY": "continuity-targets.svg",
+    "VIS-COST": "cost-levers.svg",
+    "VIS-LICENSING": "licensing-boundary.svg",
+    "VIS-MIGRATION": "migration-waves.svg",
+    "VIS-PERMISSIONS": "permission-boundary.svg",
+    "VIS-TROUBLESHOOTING": "troubleshooting-flow.svg",
+}
 FOUNDATION_IDS = {
     "FD-TOOLS-01",
     "FD-CONTEXT-01",
@@ -214,6 +234,7 @@ def validate_source_models(report: Report) -> tuple[dict[str, Any], dict[str, An
         ("curriculum/sources.yml", "schemas/source-registry-schema.json"),
         ("curriculum/commands.yml", "schemas/command-registry-schema.json"),
         ("curriculum/tool-versions.yml", "schemas/tool-versions-schema.json"),
+        ("curriculum/visuals.yml", "schemas/visual-registry-schema.json"),
     )
     values: list[dict[str, Any] | None] = []
     for document, schema in targets:
@@ -437,7 +458,9 @@ def expected_generated_paths(lab: dict[str, Any]) -> list[Path]:
         folder / "design/requirements.yml",
         folder / "design/decision.yml",
         folder / "diagrams/architecture.mmd",
+        folder / "diagrams/summary.svg",
         folder / "diagrams/architecture.svg",
+        folder / "diagrams/decision-matrix.svg",
         folder / "README.md",
         folder / "solution/README.md",
         folder / "tests/README.md",
@@ -875,6 +898,208 @@ def validate_diagrams(labs: dict[str, dict[str, Any]], report: Report) -> None:
         report.require(not re.search(r"(?:href|src)=[\"']https?://", svg, re.IGNORECASE), rel(svg_path), "SVG must not load an external active asset")
 
 
+def png_chunks(payload: bytes) -> tuple[tuple[int, int], list[str]]:
+    if len(payload) < 24 or payload[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("invalid PNG signature")
+    dimensions = struct.unpack(">II", payload[16:24])
+    chunks: list[str] = []
+    position = 8
+    while position + 12 <= len(payload):
+        size = struct.unpack(">I", payload[position:position + 4])[0]
+        chunk_type = payload[position + 4:position + 8].decode("ascii", errors="replace")
+        chunks.append(chunk_type)
+        position += size + 12
+    if position != len(payload):
+        raise ValueError("malformed PNG chunk length")
+    return dimensions, chunks
+
+
+def validate_visual_assets(labs: dict[str, dict[str, Any]], report: Report) -> None:
+    registry = load_data(ROOT / "curriculum/visuals.yml", report)
+    icon_registry = load_data(ROOT / "docs/site-assets/icons/icons.yml", report)
+    if registry is None or icon_registry is None:
+        return
+    visual_labs = registry.get("labs", [])
+    infographics = registry.get("siteInfographics", [])
+    rasters = registry.get("rasterAssets", [])
+    report.require(len(rasters) == 7, "curriculum/visuals.yml", f"expected exactly 7 raster illustrations, found {len(rasters)}")
+    report.require(len(visual_labs) == 28, "curriculum/visuals.yml", f"expected 28 lab visual records, found {len(visual_labs)}")
+    report.require(len(infographics) == 16, "curriculum/visuals.yml", f"expected 16 site infographics, found {len(infographics)}")
+    report.require(set(INFOGRAPHIC_FILENAMES) == {str(item.get("id")) for item in infographics}, "curriculum/visuals.yml", "infographic IDs differ from the fixed visual set")
+
+    actual_lab_svgs = sorted((ROOT / "labs").glob("*/diagrams/*.svg"))
+    actual_mermaid = sorted((ROOT / "labs").glob("*/diagrams/*.mmd"))
+    actual_infographics = sorted((ROOT / "docs/site-assets/infographics").glob("*.svg"))
+    report.require(len(actual_lab_svgs) == 84, "labs/*/diagrams", f"expected exactly 84 lab SVGs, found {len(actual_lab_svgs)}")
+    report.require(len(actual_mermaid) == 28, "labs/*/diagrams", f"expected exactly 28 Mermaid topology sources, found {len(actual_mermaid)}")
+    report.require(len(actual_infographics) == 16, "docs/site-assets/infographics", f"expected exactly 16 site infographics, found {len(actual_infographics)}")
+    report.require({path.name for path in actual_infographics} == set(INFOGRAPHIC_FILENAMES.values()), "docs/site-assets/infographics", "infographic filenames differ from the registered set")
+
+    icons: dict[str, dict[str, Any]] = {}
+    source_records = icon_registry.get("sources", {})
+    for authored in icon_registry.get("icons", []):
+        if not isinstance(authored, dict):
+            continue
+        item = dict(authored)
+        source = source_records.get(item.get("source"), {})
+        item["sourceUrl"] = source.get("termsUrl")
+        icons[str(item.get("key"))] = item
+        for alias in item.get("aliases", []):
+            icons[str(alias)] = item
+
+    topology_signatures: set[str] = set()
+    expected_visual_paths: set[str] = set()
+    for visual in visual_labs:
+        lab_id = str(visual.get("id"))
+        lab = labs.get(lab_id)
+        if lab is None:
+            report.issue(lab_id, "visual record has no catalog lab")
+            continue
+        report.require(visual.get("folder") == lab.get("folder"), lab_id, "visual folder differs from the lab catalog")
+        topology = visual.get("topology", {})
+        nodes = topology.get("nodes", [])
+        edges = topology.get("edges", [])
+        signature = json.dumps({"nodes": nodes, "edges": edges}, sort_keys=True, ensure_ascii=False)
+        report.require(signature not in topology_signatures, lab_id, "topology duplicates another lab instead of being lab-specific")
+        topology_signatures.add(signature)
+        node_ids = {str(node.get("id")) for node in nodes}
+        report.require(len(nodes) >= 4 and len(node_ids) == len(nodes), lab_id, "topology needs at least four uniquely identified service nodes")
+        report.require(len(edges) >= 3, lab_id, "topology needs at least three labelled relationships")
+        report.require(all(str(edge.get("from")) in node_ids and str(edge.get("to")) in node_ids and str(edge.get("label", "")).strip() for edge in edges), lab_id, "topology edge is unlabelled or refers to an unknown node")
+        report.require(all(str(node.get("iconKey")) in icons for node in nodes), lab_id, "topology references an unregistered official icon")
+
+        folder = ROOT / "labs" / str(lab.get("folder"))
+        readme_path = folder / "README.md"
+        source_path = folder / "diagrams/architecture.mmd"
+        banner_path = folder / "diagrams/summary.svg"
+        topology_path = folder / "diagrams/architecture.svg"
+        decision_path = folder / "diagrams/decision-matrix.svg"
+        expected_visual_paths.update(rel(path) for path in (banner_path, topology_path, decision_path))
+        if readme_path.is_file():
+            readme = read_text(readme_path)
+            for name in ("summary.svg", "architecture.svg", "decision-matrix.svg"):
+                report.require(f"diagrams/{name}" in readme, rel(readme_path), f"README does not expose {name}")
+            report.require(len(re.findall(r'<li><a href="#checkpoint-[1-5]">', readme)) == 5, rel(readme_path), "README must render a five-checkpoint timeline")
+            report.require(readme.count('class="az305-waf-card"') == 5, rel(readme_path), "README must render all five WAF pillar cards")
+            if lab_id in {"LAB-26", "LAB-27"}:
+                report.require("images/hero.png" in readme and (folder / "images/hero.png").is_file(), rel(readme_path), "capstone hero is missing from the standalone lab")
+        if source_path.is_file():
+            source = read_text(source_path)
+            report.require("business outcome" not in source.casefold() and "independent positive and negative evidence" not in source.casefold(), rel(source_path), "generic checkpoint flow remains instead of a service topology")
+            for node in nodes:
+                report.require(str(node.get("label")) in source, rel(source_path), f"Mermaid source omits node label {node.get('label')!r}")
+            for edge in edges:
+                report.require(str(edge.get("label")) in source, rel(source_path), f"Mermaid source omits edge label {edge.get('label')!r}")
+        for path, expected_alt in (
+            (banner_path, visual.get("banner", {}).get("alt")),
+            (topology_path, topology.get("alt")),
+            (decision_path, visual.get("decisionMatrix", {}).get("alt")),
+        ):
+            if not path.is_file():
+                continue
+            svg = read_text(path)
+            for signal in ('role="img"', "aria-labelledby=", "<title", "<desc"):
+                report.require(signal in svg, rel(path), f"accessible SVG signal is missing: {signal}")
+            report.require(bool(str(expected_alt).strip()), rel(path), "registered alt text is empty")
+            report.require("<script" not in svg.casefold(), rel(path), "SVG must not execute script")
+            report.require(not re.search(r"(?:href|src)=[\"']https?://", svg, re.IGNORECASE), rel(path), "SVG must not load an external active asset")
+        if topology_path.is_file() and source_path.is_file():
+            svg = read_text(topology_path)
+            report.require(svg.count('aria-label="Service node:') == len(nodes), rel(topology_path), "rendered topology does not label every service node")
+            report.require(svg.count('aria-label="') >= len(nodes) + len(edges), rel(topology_path), "rendered topology does not label every edge")
+            encoded_icons = re.findall(r'href="data:image/svg\+xml;base64,([A-Za-z0-9+/=]+)"', svg)
+            report.require(len(encoded_icons) == len(nodes), rel(topology_path), "rendered topology must embed one official icon for every node")
+            for node, encoded in zip(nodes, encoded_icons):
+                icon = icons.get(str(node.get("iconKey")), {})
+                icon_path = ROOT / str(icon.get("path", ""))
+                if icon_path.is_file():
+                    report.require(base64.b64decode(encoded) == icon_path.read_bytes(), rel(topology_path), f"embedded icon bytes changed for {node.get('iconKey')}")
+        if decision_path.is_file():
+            decision_source = ROOT / str(visual.get("decisionMatrix", {}).get("sourcePath", ""))
+            decision = load_data(decision_source, report) if decision_source.is_file() else None
+            if decision:
+                svg = read_text(decision_path)
+                digest = hashlib.sha256(json.dumps(decision, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+                report.require(f"decision-sha256:{digest}" in svg, rel(decision_path), "decision visualization does not match decision.yml")
+                report.require(svg.count('aria-label="Candidate ') == len(decision.get("candidates", [])), rel(decision_path), "decision visualization omits one or more candidates")
+
+    expected_rasters = {str(item.get("path")) for item in rasters}
+    actual_rasters = {rel(path) for path in iter_repository_files() if path.suffix.casefold() in {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".tiff"}}
+    report.require(actual_rasters == expected_rasters, "curriculum/visuals.yml", f"registered raster set differs from repository; missing={sorted(expected_rasters-actual_rasters)}, extra={sorted(actual_rasters-expected_rasters)}")
+    for raster in rasters:
+        path = ROOT / str(raster.get("path"))
+        expected_visual_paths.add(str(raster.get("path")))
+        if not report.require(path.is_file(), rel(path), "registered raster is missing"):
+            continue
+        try:
+            dimensions, chunks = png_chunks(path.read_bytes())
+        except ValueError as exc:
+            report.issue(rel(path), str(exc))
+            continue
+        declared = raster.get("dimensions", {})
+        report.require(dimensions == (declared.get("width"), declared.get("height")) == (1536, 1024), rel(path), f"registered raster dimensions differ: {dimensions}")
+        report.require(all(not (name and ord(name[0]) & 32) for name in chunks), rel(path), f"PNG contains nonessential ancillary metadata chunks: {chunks}")
+        report.require(bool(str(raster.get("alt", "")).strip()) and bool(raster.get("usage")), rel(path), "raster needs alt text and page usage")
+        for usage in raster.get("usage", []):
+            usage_path = ROOT / str(usage)
+            report.require(usage_path.is_file(), str(usage), "registered raster usage page is missing")
+            if usage_path.is_file():
+                report.require(path.name in read_text(usage_path), str(usage), f"registered raster usage is missing: {path.name}")
+
+    docs_pages = sorted((ROOT / "docs/site").rglob("*.md"))
+    report.require(len(docs_pages) == 19, "docs/site", f"expected 19 main documentation pages, found {len(docs_pages)}")
+    registered_usage = {str(path) for spec in infographics for path in spec.get("usage", [])}
+    report.require(registered_usage == {rel(path) for path in docs_pages}, "curriculum/visuals.yml", "infographic usage does not cover exactly all 19 main documentation pages")
+    for page in docs_pages:
+        text = read_text(page)
+        has_visual = bool(
+            re.search(r"!\[[^\]]+\]\([^)]+\.(?:svg|png)\)", text, re.IGNORECASE)
+            or re.search(r"<img\b[^>]*\bsrc=[\"'][^\"']+\.(?:svg|png)[\"'][^>]*\balt=[\"'][^\"']+[\"']", text, re.IGNORECASE)
+        )
+        report.require(has_visual, rel(page), "main documentation page has no relevant visual")
+    for spec in infographics:
+        filename = INFOGRAPHIC_FILENAMES.get(str(spec.get("id")), "")
+        path = ROOT / "docs/site-assets/infographics" / filename
+        expected_visual_paths.add(rel(path))
+        for usage in spec.get("usage", []):
+            page = ROOT / str(usage)
+            if page.is_file():
+                report.require(filename in read_text(page), rel(page), f"registered infographic usage is missing: {filename}")
+
+    for item in icon_registry.get("icons", []):
+        path = ROOT / str(item.get("path"))
+        expected_visual_paths.add(rel(path))
+        if not report.require(path.is_file(), rel(path), "registered official icon is missing"):
+            continue
+        text = read_text(path)
+        report.require("<script" not in text.casefold(), rel(path), "official icon contains script")
+        report.require(not re.search(r"(?:href|src)=[\"']https?://", text, re.IGNORECASE), rel(path), "official icon makes an external request")
+
+    manifest_path = ROOT / str(registry.get("generatedManifestPath"))
+    manifest = load_data(manifest_path, report)
+    if manifest:
+        counts = manifest.get("counts", {})
+        report.require(counts.get("registeredRasters") == 7 and counts.get("labSvgs") == 84 and counts.get("siteInfographics") == 16, rel(manifest_path), "visual manifest counts must be exactly 7/84/16")
+        manifest_paths: set[str] = set()
+        for asset in manifest.get("assets", []):
+            path_value = str(asset.get("path"))
+            manifest_paths.add(path_value)
+            path = ROOT / path_value
+            if not report.require(path.is_file(), path_value, "manifest asset is missing"):
+                continue
+            payload = path.read_bytes()
+            report.require(asset.get("byteSize") == len(payload), path_value, "manifest byte size differs")
+            report.require(asset.get("sha256") == hashlib.sha256(payload).hexdigest(), path_value, "manifest SHA-256 differs")
+            if path.suffix.casefold() == ".png":
+                dimensions = png_chunks(payload)[0]
+            else:
+                match = re.search(rb'viewBox="0 0 ([0-9]+) ([0-9]+)"', payload)
+                dimensions = (int(match.group(1)), int(match.group(2))) if match else (0, 0)
+            report.require(asset.get("dimensions") == {"width": dimensions[0], "height": dimensions[1]}, path_value, "manifest dimensions differ")
+            report.require(bool(str(asset.get("alt", "")).strip()) and bool(asset.get("usage")) and bool(asset.get("origin")) and bool(asset.get("license")), path_value, "manifest metadata is incomplete")
+        report.require(manifest_paths == expected_visual_paths, rel(manifest_path), f"manifest asset set differs from registered visual set; missing={sorted(expected_visual_paths-manifest_paths)}, extra={sorted(manifest_paths-expected_visual_paths)}")
+
+
 def validate_bicep_files(labs: dict[str, dict[str, Any]], report: Report) -> None:
     for lab_id in EXPECTED_BICEP:
         lab = labs.get(lab_id, {})
@@ -919,6 +1144,12 @@ def validate_repository_hygiene(report: Report) -> None:
     legacy_tokens = ("AZ-" + "104", "az" + "104", "Azure Administrator" + " Associate", "AZ" + "104_")
     filler_tokens = ("TO" + "DO", "FIX" + "ME", "T" + "BD", "TK" + "TK", "lorem " + "ipsum", "place" + "holder")
     forbidden_extensions = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".tiff"}
+    visual_registry = load_data(ROOT / "curriculum/visuals.yml", report)
+    allowed_rasters = {
+        str(item.get("path"))
+        for item in (visual_registry or {}).get("rasterAssets", [])
+        if isinstance(item, dict)
+    }
     guid_pattern = re.compile(r"(?i)\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b")
     secret_patterns = [
         re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
@@ -934,7 +1165,12 @@ def validate_repository_hygiene(report: Report) -> None:
         seen.add(resolved)
         relative = rel(path)
         lower_name = relative.casefold()
-        report.require(path.suffix.casefold() not in forbidden_extensions, relative, "raster/screenshot-like assets are excluded from this release")
+        if path.suffix.casefold() in forbidden_extensions:
+            report.require(
+                path.suffix.casefold() == ".png" and relative in allowed_rasters,
+                relative,
+                "raster asset is not one of the seven registered original PNG illustrations",
+            )
         for token in legacy_tokens:
             report.require(token.casefold() not in lower_name, relative, "filename contains a legacy reference-exam identifier")
         if path.suffix.casefold() not in TEXT_SUFFIXES and path.name not in {"Dockerfile", "LICENSE", ".gitignore", ".gitattributes", ".editorconfig", ".dockerignore"}:
@@ -964,7 +1200,9 @@ def validate_repository_hygiene(report: Report) -> None:
                 guid,
             )) or guid == "00000000-0000-4000-8000-000000000000"
             platform_definition = "roledefinition" in context or "policydefinition" in context or "microsoft.authorization/roledefinitions" in context
-            report.require(synthetic or platform_definition, relative, f"contains a non-reserved, non-platform GUID: {guid}")
+            official_icon_metadata = relative.startswith("docs/site-assets/icons/") and path.suffix.casefold() == ".svg"
+            microsoft_download_identifier = "download.microsoft.com/download/" in context
+            report.require(synthetic or platform_definition or official_icon_metadata or microsoft_download_identifier, relative, f"contains a non-reserved, non-platform GUID: {guid}")
         verbs = "(?:" + "|".join(("op" + "en", "bro" + "wse", "navi" + "gate", "cl" + "ick", "sel" + "ect")) + ")"
         destination = "(?:azure\\s+" + "por" + "tal|" + "por" + "tal)"
         procedure = re.search(rf"(?i)\b{verbs}\b[^\r\n]{{0,80}}\b{destination}\b", text)
@@ -1120,13 +1358,17 @@ def validate_portable_copies(labs: dict[str, dict[str, Any]], report: Report) ->
                 destination / "design/requirements.yml",
                 destination / "design/decision.yml",
                 destination / "diagrams/architecture.mmd",
+                destination / "diagrams/summary.svg",
                 destination / "diagrams/architecture.svg",
+                destination / "diagrams/decision-matrix.svg",
                 destination / "README.md",
                 destination / "solution/README.md",
                 destination / "tests/Contract.Tests.ps1",
                 *(destination / "scripts" / track / name for name in LIFECYCLE_SCRIPTS),
             ]
             report.require(all(path.is_file() for path in required), lab_id, "isolated copy lacks one or more self-contained required artifacts")
+            if lab_id in {"LAB-26", "LAB-27"}:
+                report.require((destination / "images/hero.png").is_file(), lab_id, "isolated capstone copy lacks its registered hero")
             for path in destination.joinpath("scripts", track).glob("*.ps1") if destination.joinpath("scripts", track).is_dir() else []:
                 text = read_text(path)
                 report.require("curriculum/" not in text and "tools/" not in text and "$PSScriptRoot/../../" not in text, lab_id, f"{path.name} depends on the repository root")
@@ -1163,6 +1405,7 @@ def run_validation(site: Path | None = None, portability: bool = True) -> Report
         validate_lifecycle_contracts(labs, report)
         validate_assessment_totals(labs, report)
         validate_diagrams(labs, report)
+        validate_visual_assets(labs, report)
         validate_bicep_files(labs, report)
         if portability:
             validate_portable_copies(labs, report)
