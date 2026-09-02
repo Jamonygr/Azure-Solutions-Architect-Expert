@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:az305:schema:visual-registry:1.0.0",
+  "title": "AZ-305 visual registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryId",
+    "generatedManifestPath",
+    "palettes",
+    "rasterAssets",
+    "siteInfographics",
+    "labs"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "registryId": {"const": "AZ305-VISUALS-V1"},
+    "generatedManifestPath": {"const": "docs/site-assets/visual-asset-manifest.json"},
+    "palettes": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/palette"}
+    },
+    "rasterAssets": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/rasterAsset"}
+    },
+    "siteInfographics": {
+      "type": "array",
+      "minItems": 16,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/siteInfographic"}
+    },
+    "labs": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/labVisual"}
+    }
+  },
+  "$defs": {
+    "hexColor": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "palette": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "background", "surface", "primary", "accent", "highlight", "text", "muted", "line"],
+      "properties": {
+        "id": {"enum": ["FOUNDATION", "IGM", "DATA", "BC", "INF", "CAPSTONE"]},
+        "name": {"type": "string", "minLength": 4},
+        "background": {"$ref": "#/$defs/hexColor"},
+        "surface": {"$ref": "#/$defs/hexColor"},
+        "primary": {"$ref": "#/$defs/hexColor"},
+        "accent": {"$ref": "#/$defs/hexColor"},
+        "highlight": {"$ref": "#/$defs/hexColor"},
+        "text": {"$ref": "#/$defs/hexColor"},
+        "muted": {"$ref": "#/$defs/hexColor"},
+        "line": {"$ref": "#/$defs/hexColor"}
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"const": 1536},
+        "height": {"const": 1024}
+      }
+    },
+    "rasterOrigin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "generator", "generatedDate", "prompt"],
+      "properties": {
+        "type": {"const": "generated-original"},
+        "generator": {"const": "OpenAI image generation"},
+        "generatedDate": {"type": "string", "format": "date"},
+        "prompt": {"type": "string", "minLength": 120}
+      }
+    },
+    "rasterLicense": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["holder", "grant", "notice"],
+      "properties": {
+        "holder": {"const": "Jamon"},
+        "grant": {"const": "MIT"},
+        "notice": {"type": "string", "minLength": 30}
+      }
+    },
+    "rasterAsset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "role", "paletteId", "dimensions", "alt", "caption", "usage", "origin", "license"],
+      "properties": {
+        "id": {"pattern": "^RASTER-(HOME|DOMAIN-(IGM|DATA|BC|INF)|CAPSTONE-(26|27))$"},
+        "path": {"type": "string", "pattern": "^(docs/site-assets/visuals|labs/[0-2][0-9]-[a-z0-9-]+/images)/[a-z0-9-]+\\.png$"},
+        "role": {"enum": ["home-hero", "domain-banner", "capstone-hero"]},
+        "paletteId": {"enum": ["FOUNDATION", "IGM", "DATA", "BC", "INF", "CAPSTONE"]},
+        "dimensions": {"$ref": "#/$defs/dimensions"},
+        "alt": {"type": "string", "minLength": 40, "maxLength": 240},
+        "caption": {"type": "string", "minLength": 30, "maxLength": 240},
+        "usage": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^(README\\.md|docs/site/[a-z0-9./-]+\\.md|labs/[0-2][0-9]-[a-z0-9-]+/README\\.md)$"}
+        },
+        "origin": {"$ref": "#/$defs/rasterOrigin"},
+        "license": {"$ref": "#/$defs/rasterLicense"}
+      }
+    },
+    "infographicStage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "detail"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "label": {"type": "string", "minLength": 3, "maxLength": 48},
+        "detail": {"type": "string", "minLength": 12, "maxLength": 100}
+      }
+    },
+    "siteInfographic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "caption", "alt", "paletteId", "kind", "usage", "stages"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^VIS-[A-Z0-9-]+$"},
+        "title": {"type": "string", "minLength": 8, "maxLength": 80},
+        "caption": {"type": "string", "minLength": 30, "maxLength": 220},
+        "alt": {"type": "string", "minLength": 40, "maxLength": 240},
+        "paletteId": {"enum": ["FOUNDATION", "IGM", "DATA", "BC", "INF", "CAPSTONE"]},
+        "kind": {"enum": ["cycle", "stacked-bars", "roadmap", "flow", "pillars", "swimlanes", "target", "levers", "boundary", "waves", "decision-tree"]},
+        "usage": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^docs/site/[a-z0-9./-]+\\.md$"}
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/infographicStage"}
+        }
+      }
+    },
+    "banner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "eyebrow", "caption", "alt"],
+      "properties": {
+        "title": {"type": "string", "minLength": 8, "maxLength": 100},
+        "eyebrow": {"type": "string", "minLength": 4, "maxLength": 72},
+        "caption": {"type": "string", "minLength": 30, "maxLength": 220},
+        "alt": {"type": "string", "minLength": 40, "maxLength": 240}
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "label": {"type": "string", "minLength": 3, "maxLength": 60}
+      }
+    },
+    "topologyNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "iconKey", "boundaryId"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "label": {"type": "string", "minLength": 3, "maxLength": 52},
+        "iconKey": {"type": "string", "pattern": "^(azure|entra):[a-z0-9-]+$"},
+        "boundaryId": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"}
+      }
+    },
+    "topologyEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "label"],
+      "properties": {
+        "from": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "to": {"type": "string", "pattern": "^[a-z][a-z0-9-]{1,31}$"},
+        "label": {"type": "string", "minLength": 3, "maxLength": 56}
+      }
+    },
+    "topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "caption", "alt", "boundaries", "nodes", "edges"],
+      "properties": {
+        "title": {"type": "string", "minLength": 8, "maxLength": 100},
+        "caption": {"type": "string", "minLength": 30, "maxLength": 220},
+        "alt": {"type": "string", "minLength": 40, "maxLength": 240},
+        "boundaries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/boundary"}
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/topologyNode"}
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/topologyEdge"}
+        }
+      }
+    },
+    "decisionMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "caption", "alt", "sourcePath"],
+      "properties": {
+        "title": {"type": "string", "minLength": 8, "maxLength": 100},
+        "caption": {"type": "string", "minLength": 30, "maxLength": 220},
+        "alt": {"type": "string", "minLength": 40, "maxLength": 240},
+        "sourcePath": {"type": "string", "pattern": "^labs/[0-2][0-9]-[a-z0-9-]+/design/decision\\.yml$"}
+      }
+    },
+    "labVisual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "folder", "paletteId", "banner", "topology", "decisionMatrix"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^LAB-[0-2][0-9]$"},
+        "folder": {"type": "string", "pattern": "^[0-2][0-9]-[a-z0-9-]+$"},
+        "paletteId": {"enum": ["FOUNDATION", "IGM", "DATA", "BC", "INF", "CAPSTONE"]},
+        "banner": {"$ref": "#/$defs/banner"},
+        "topology": {"$ref": "#/$defs/topology"},
+        "decisionMatrix": {"$ref": "#/$defs/decisionMatrix"}
+      }
+    }
+  }
+}

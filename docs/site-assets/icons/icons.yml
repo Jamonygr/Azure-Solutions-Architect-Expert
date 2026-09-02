@@ -1,0 +1,70 @@
+schemaVersion: 1.0.0
+sources:
+  azure:
+    termsUrl: https://learn.microsoft.com/en-us/azure/architecture/icons/
+    downloadUrl: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip
+    acquiredDate: '2026-09-02'
+    packageSha256: 921594ccd1bf3d9c0a1bd7b6d924e050551a59342f2b353bb74bdcf761c35141
+  entra:
+    termsUrl: https://learn.microsoft.com/en-us/entra/architecture/architecture-icons
+    downloadUrl: https://download.microsoft.com/download/3/1/a/31a56038-856a-4489-88e4-ee5a1c4352be/Microsoft%20Entra%20architecture%20icons%20-%20Oct%202023.zip
+    acquiredDate: '2026-09-02'
+    packageSha256: 4e07536706a2d092e6524e5417e2c861333fdbdb41c36f78d44dfa07ccc5eedc
+icons:
+  - {key: 'azure:monitor', path: docs/site-assets/icons/azure/azure-monitor.svg, alt: Azure Monitor service icon, source: azure}
+  - {key: 'azure:alerts', aliases: ['azure:action-groups'], path: docs/site-assets/icons/azure/azure-alerts.svg, alt: Azure Alerts service icon, source: azure}
+  - {key: 'azure:application-insights', path: docs/site-assets/icons/azure/azure-application-insights.svg, alt: Application Insights service icon, source: azure}
+  - {key: 'azure:log-analytics-workspaces', path: docs/site-assets/icons/azure/azure-log-analytics-workspaces.svg, alt: Log Analytics workspaces service icon, source: azure}
+  - {key: 'azure:workbooks', path: docs/site-assets/icons/azure/azure-workbooks.svg, alt: Azure Workbooks service icon, source: azure}
+  - {key: 'azure:api-management', path: docs/site-assets/icons/azure/azure-api-management.svg, alt: API Management service icon, source: azure}
+  - {key: 'azure:app-configuration', path: docs/site-assets/icons/azure/azure-app-configuration.svg, alt: App Configuration service icon, source: azure}
+  - {key: 'azure:application-gateways', path: docs/site-assets/icons/azure/azure-application-gateways.svg, alt: Application Gateway service icon, source: azure}
+  - {key: 'azure:arc', path: docs/site-assets/icons/azure/azure-arc.svg, alt: Azure Arc service icon, source: azure}
+  - {key: 'azure:automation-accounts', path: docs/site-assets/icons/azure/azure-automation-accounts.svg, alt: Automation Accounts service icon, source: azure}
+  - {key: 'azure:batch-accounts', path: docs/site-assets/icons/azure/azure-batch-accounts.svg, alt: Azure Batch service icon, source: azure}
+  - {key: 'azure:container-apps', path: docs/site-assets/icons/azure/azure-container-apps.svg, alt: Azure Container Apps service icon, source: azure}
+  - {key: 'azure:cosmos-db', path: docs/site-assets/icons/azure/azure-cosmos-db.svg, alt: Azure Cosmos DB service icon, source: azure}
+  - {key: 'azure:cost-management', path: docs/site-assets/icons/azure/azure-cost-management.svg, alt: Cost Management service icon, source: azure}
+  - {key: 'azure:data-factory', path: docs/site-assets/icons/azure/azure-data-factory.svg, alt: Azure Data Factory service icon, source: azure}
+  - {key: 'azure:storage-accounts', aliases: ['azure:data-lake-storage'], path: docs/site-assets/icons/azure/azure-storage-accounts.svg, alt: Azure Storage accounts service icon, source: azure}
+  - {key: 'azure:database-migration-services', path: docs/site-assets/icons/azure/azure-database-migration-services.svg, alt: Azure Database Migration Service icon, source: azure}
+  - {key: 'azure:deployment-stacks', path: docs/site-assets/icons/azure/azure-deployment-stacks.svg, alt: Azure deployment template service icon, source: azure}
+  - {key: 'azure:devops', path: docs/site-assets/icons/azure/azure-devops.svg, alt: Azure DevOps service icon, source: azure}
+  - {key: 'azure:dns-private-resolver', path: docs/site-assets/icons/azure/azure-dns-private-resolver.svg, alt: Azure DNS Private Resolver service icon, source: azure}
+  - {key: 'azure:event-grid', path: docs/site-assets/icons/azure/azure-event-grid.svg, alt: Azure Event Grid service icon, source: azure}
+  - {key: 'azure:event-hubs', path: docs/site-assets/icons/azure/azure-event-hubs.svg, alt: Azure Event Hubs service icon, source: azure}
+  - {key: 'azure:expressroute-circuits', path: docs/site-assets/icons/azure/azure-expressroute-circuits.svg, alt: Azure ExpressRoute circuits service icon, source: azure}
+  - {key: 'azure:firewalls', path: docs/site-assets/icons/azure/azure-firewalls.svg, alt: Azure Firewall service icon, source: azure}
+  - {key: 'azure:front-door', path: docs/site-assets/icons/azure/azure-front-door.svg, alt: Azure Front Door service icon, source: azure}
+  - {key: 'azure:function-apps', path: docs/site-assets/icons/azure/azure-function-apps.svg, alt: Azure Functions service icon, source: azure}
+  - {key: 'azure:key-vault', path: docs/site-assets/icons/azure/azure-key-vault.svg, alt: Azure Key Vault service icon, source: azure}
+  - {key: 'azure:load-balancers', path: docs/site-assets/icons/azure/azure-load-balancers.svg, alt: Azure Load Balancer service icon, source: azure}
+  - {key: 'azure:managed-identities', path: docs/site-assets/icons/azure/azure-managed-identities.svg, alt: Managed Identities service icon, source: azure}
+  - {key: 'azure:managed-redis', path: docs/site-assets/icons/azure/azure-managed-redis.svg, alt: Azure Managed Redis service icon, source: azure}
+  - {key: 'azure:management-groups', path: docs/site-assets/icons/azure/azure-management-groups.svg, alt: Azure management groups service icon, source: azure}
+  - {key: 'azure:migrate', path: docs/site-assets/icons/azure/azure-migrate.svg, alt: Azure Migrate service icon, source: azure}
+  - {key: 'azure:nat-gateways', path: docs/site-assets/icons/azure/azure-nat-gateways.svg, alt: Azure NAT Gateway service icon, source: azure}
+  - {key: 'azure:network-watcher', path: docs/site-assets/icons/azure/azure-network-watcher.svg, alt: Network Watcher service icon, source: azure}
+  - {key: 'azure:policy', path: docs/site-assets/icons/azure/azure-policy.svg, alt: Azure Policy service icon, source: azure}
+  - {key: 'azure:private-link', path: docs/site-assets/icons/azure/azure-private-link.svg, alt: Azure Private Link service icon, source: azure}
+  - {key: 'azure:recovery-services-vaults', aliases: ['azure:site-recovery'], path: docs/site-assets/icons/azure/azure-recovery-services-vaults.svg, alt: Recovery Services vault service icon, source: azure}
+  - {key: 'azure:resource-groups', path: docs/site-assets/icons/azure/azure-resource-groups.svg, alt: Azure resource groups service icon, source: azure}
+  - {key: 'azure:service-bus', path: docs/site-assets/icons/azure/azure-service-bus.svg, alt: Azure Service Bus service icon, source: azure}
+  - {key: 'azure:sql-database', path: docs/site-assets/icons/azure/azure-sql-database.svg, alt: Azure SQL Database service icon, source: azure}
+  - {key: 'azure:subscriptions', path: docs/site-assets/icons/azure/azure-subscriptions.svg, alt: Azure subscriptions service icon, source: azure}
+  - {key: 'azure:synapse-analytics', path: docs/site-assets/icons/azure/azure-synapse-analytics.svg, alt: Azure Synapse Analytics service icon, source: azure}
+  - {key: 'azure:virtual-machine-scale-sets', path: docs/site-assets/icons/azure/azure-virtual-machine-scale-sets.svg, alt: Virtual Machine Scale Sets service icon, source: azure}
+  - {key: 'azure:virtual-machines', path: docs/site-assets/icons/azure/azure-virtual-machines.svg, alt: Azure Virtual Machines service icon, source: azure}
+  - {key: 'azure:virtual-network', path: docs/site-assets/icons/azure/azure-virtual-network.svg, alt: Azure Virtual Network service icon, source: azure}
+  - {key: 'azure:virtual-network-gateways', path: docs/site-assets/icons/azure/azure-virtual-network-gateways.svg, alt: Virtual Network Gateway service icon, source: azure}
+  - {key: 'azure:virtual-wans', path: docs/site-assets/icons/azure/azure-virtual-wans.svg, alt: Azure Virtual WAN service icon, source: azure}
+  - key: 'entra:users'
+    aliases: ['entra:applications', 'entra:conditional-access', 'entra:external-identities', 'entra:groups']
+    path: docs/site-assets/icons/entra/microsoft-entra-id.svg
+    alt: Microsoft Entra ID product icon
+    source: entra
+  - key: 'entra:identity-governance'
+    aliases: ['entra:access-reviews', 'entra:privileged-identity-management']
+    path: docs/site-assets/icons/entra/microsoft-entra-id-governance.svg
+    alt: Microsoft Entra ID Governance product icon
+    source: entra

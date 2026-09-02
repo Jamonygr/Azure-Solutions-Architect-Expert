@@ -20,3 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+The Microsoft Azure and Microsoft Entra icons under
+`docs/site-assets/icons/` are excluded from this MIT license. Those assets are
+provided under Microsoft's separate icon terms described in
+`THIRD-PARTY-NOTICES.md`.

@@ -1,0 +1,1414 @@
+schemaVersion: "1.0.0"
+registryId: "AZ305-VISUALS-V1"
+generatedManifestPath: "docs/site-assets/visual-asset-manifest.json"
+
+palettes:
+  - id: "FOUNDATION"
+    name: "Foundation blue"
+    background: "#EAF4FF"
+    surface: "#FFFFFF"
+    primary: "#005EA8"
+    accent: "#0078D4"
+    highlight: "#7F3FBF"
+    text: "#102A43"
+    muted: "#486581"
+    line: "#7DB7E8"
+  - id: "IGM"
+    name: "Identity violet"
+    background: "#F2ECFF"
+    surface: "#FFFFFF"
+    primary: "#5C2D91"
+    accent: "#0078D4"
+    highlight: "#00A6A6"
+    text: "#24113A"
+    muted: "#65537A"
+    line: "#A78BD4"
+  - id: "DATA"
+    name: "Data teal"
+    background: "#E7FAF8"
+    surface: "#FFFFFF"
+    primary: "#006B6B"
+    accent: "#0078D4"
+    highlight: "#6B3FA0"
+    text: "#103A3A"
+    muted: "#416B6B"
+    line: "#69BDB4"
+  - id: "BC"
+    name: "Continuity amber"
+    background: "#FFF5E5"
+    surface: "#FFFFFF"
+    primary: "#8A4B00"
+    accent: "#0078D4"
+    highlight: "#6B3FA0"
+    text: "#402600"
+    muted: "#73562E"
+    line: "#D69E4F"
+  - id: "INF"
+    name: "Infrastructure cyan"
+    background: "#EAF4FF"
+    surface: "#FFFFFF"
+    primary: "#004E8C"
+    accent: "#0086A8"
+    highlight: "#6B3FA0"
+    text: "#102A43"
+    muted: "#486581"
+    line: "#66B8D1"
+  - id: "CAPSTONE"
+    name: "Capstone indigo"
+    background: "#EEF1FF"
+    surface: "#FFFFFF"
+    primary: "#383FA3"
+    accent: "#0078D4"
+    highlight: "#008F88"
+    text: "#1D234D"
+    muted: "#565D87"
+    line: "#8B94D8"
+
+rasterAssets:
+  - id: "RASTER-HOME"
+    path: "docs/site-assets/visuals/home-hero.png"
+    role: "home-hero"
+    paletteId: "FOUNDATION"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric Azure learning landscape connecting identity, data, continuity, observability, and infrastructure architecture layers."
+    caption: "The full learning environment connects evidence-led decisions across all four AZ-305 design domains."
+    usage: ["README.md", "docs/site/index.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric cloud architecture illustration with layered identity, monitoring, data, continuity, and infrastructure systems connected into one coherent learning landscape; use Azure blue, cyan, and purple, no text, people, user interface, logos, identifiers, watermarks, or photographic elements.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-DOMAIN-IGM"
+    path: "docs/site-assets/visuals/domain-identity-governance-monitoring.png"
+    role: "domain-banner"
+    paletteId: "IGM"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric identity and governance architecture with protected trust boundaries, access paths, policy controls, and monitoring signals."
+    caption: "Identity, governance, and monitoring decisions connect trust, policy, and operational evidence."
+    usage: ["docs/site/paths/full-exam.md", "docs/site/catalog.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric cloud illustration of identity trust boundaries, authentication paths, governance controls, secure keys, telemetry signals, and compliance evidence; emphasize violet, Azure blue, and cyan accents, with no text, people, interface screens, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-DOMAIN-DATA"
+    path: "docs/site-assets/visuals/domain-data.png"
+    role: "domain-banner"
+    paletteId: "DATA"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric data architecture showing relational, document, object, integration, and analytical layers linked by governed flows."
+    caption: "Data architecture balances shape, scale, protection, integration, performance, and cost."
+    usage: ["docs/site/paths/full-exam.md", "docs/site/catalog.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric cloud data architecture with relational databases, document stores, object storage, governed pipelines, and analytical query layers linked by luminous data flows; use teal, Azure blue, and purple accents, with no text, people, UI, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-DOMAIN-BC"
+    path: "docs/site-assets/visuals/domain-continuity.png"
+    role: "domain-banner"
+    paletteId: "BC"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric dual-region continuity architecture with replication, backup, recovery paths, health signals, and controlled failover."
+    caption: "Continuity designs translate recovery objectives into tested protection and failover paths."
+    usage: ["docs/site/paths/full-exam.md", "docs/site/catalog.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric dual-region cloud continuity scene with protected workloads, backup vaults, replication paths, health beacons, recovery sequencing, and a hybrid edge; use Azure blue, cyan, purple, and restrained amber accents, with no text, people, UI, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-DOMAIN-INF"
+    path: "docs/site-assets/visuals/domain-infrastructure.png"
+    role: "domain-banner"
+    paletteId: "INF"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric cloud infrastructure with global ingress, hub and spoke networking, compute, messaging, migration, and protected egress."
+    caption: "Infrastructure architecture joins compute, applications, networks, delivery, and migration into an operable system."
+    usage: ["docs/site/paths/full-exam.md", "docs/site/catalog.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric cloud infrastructure illustration with global ingress, hub and spoke networks, virtual machines, containers, serverless functions, messaging, secure egress, and migration paths; use Azure blue, cyan, and purple, with no text, people, UI, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-CAPSTONE-26"
+    path: "labs/26-capstone-greenfield-platform/images/hero.png"
+    role: "capstone-hero"
+    paletteId: "CAPSTONE"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric greenfield platform with global edge, twin active regions, shared identity, coordinated data, policy, and observability."
+    caption: "The greenfield capstone integrates all four design domains into a multi-region platform decision."
+    usage: ["labs/26-capstone-greenfield-platform/README.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric greenfield digital platform with a global cloud edge, two balanced active regions, coordinated data, external identity, policy guardrails, and observability; use Azure blue, cyan, indigo, and restrained green accents, with no text, people, UI, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+  - id: "RASTER-CAPSTONE-27"
+    path: "labs/27-capstone-hybrid-modernization/images/hero.png"
+    role: "capstone-hero"
+    paletteId: "CAPSTONE"
+    dimensions: {width: 1536, height: 1024}
+    alt: "Isometric hybrid modernization landscape connecting a datacenter to governed cloud landing zones through staged migration waves."
+    caption: "The hybrid capstone coordinates coexistence, migration waves, continuity, security, and evidence-led decommissioning."
+    usage: ["labs/27-capstone-hybrid-modernization/README.md"]
+    origin:
+      type: "generated-original"
+      generator: "OpenAI image generation"
+      generatedDate: "2026-09-02"
+      prompt: >-
+        Create a clean 1536 by 1024 isometric hybrid modernization scene with a legacy datacenter, secure cloud bridge, dependency-aware migration waves, modern platform targets, validation gates, and decommissioning path; use Azure blue, purple, cyan, and restrained orange accents, with no text, people, UI, logos, identifiers, or watermarks.
+    license:
+      holder: "Jamon"
+      grant: "MIT"
+      notice: "Original project artwork licensed under the repository MIT terms."
+
+siteInfographics:
+  - id: "VIS-LEARNING-LOOP"
+    title: "Architecture learning loop"
+    caption: "Move from requirements to an evidence-backed decision, validate it safely, and revise it when facts change."
+    alt: "Five-stage circular learning loop linking requirements, options, decisions, validation evidence, and revision."
+    paletteId: "FOUNDATION"
+    kind: "cycle"
+    usage: ["docs/site/index.md", "docs/site/paths/quick-start.md"]
+    stages:
+      - {id: "requirements", label: "Frame requirements", detail: "Separate mandatory facts from preferences."}
+      - {id: "options", label: "Compare options", detail: "Apply weights, disqualifiers, and constraints."}
+      - {id: "decision", label: "Record the decision", detail: "Select one candidate and state consequences."}
+      - {id: "evidence", label: "Validate evidence", detail: "Run independent positive and negative checks."}
+      - {id: "revision", label: "Revise deliberately", detail: "Respond to the material change request."}
+  - id: "VIS-DOMAIN-COVERAGE"
+    title: "AZ-305 domain coverage"
+    caption: "The practice sequence mirrors the blueprint weights while preserving one primary lab for every objective."
+    alt: "Four proportional domain bars for identity and governance, data, continuity, and infrastructure coverage."
+    paletteId: "FOUNDATION"
+    kind: "stacked-bars"
+    usage: ["docs/site/paths/full-exam.md", "docs/site/catalog.md"]
+    stages:
+      - {id: "igm", label: "Identity and governance", detail: "Seven labs cover eleven primary objectives."}
+      - {id: "data", label: "Data storage", detail: "Six labs cover ten primary objectives."}
+      - {id: "bc", label: "Business continuity", detail: "Four labs cover seven primary objectives."}
+      - {id: "inf", label: "Infrastructure", detail: "Eight labs cover twenty-one primary objectives."}
+  - id: "VIS-JOB-READY"
+    title: "Job-ready architecture pathway"
+    caption: "Build reusable design habits through focused labs, integrated capstones, and a defensible evidence record."
+    alt: "Roadmap from focused design labs through cross-domain capstones to an architecture evidence portfolio."
+    paletteId: "CAPSTONE"
+    kind: "roadmap"
+    usage: ["docs/site/paths/job-ready.md"]
+    stages:
+      - {id: "focus", label: "Focused decisions", detail: "Practice bounded service and platform choices."}
+      - {id: "integrate", label: "Integrated systems", detail: "Connect identity, data, continuity, and infrastructure."}
+      - {id: "challenge", label: "Change pressure", detail: "Revise architecture when a mandatory fact changes."}
+      - {id: "portfolio", label: "Evidence portfolio", detail: "Retain ADRs, diagrams, checks, and consequences."}
+  - id: "VIS-OBJECTIVE-TRACE"
+    title: "Objective traceability chain"
+    caption: "Every official objective owns one primary lab and connects to requirements, checkpoints, evidence, and assessment items."
+    alt: "Traceability flow from an official objective to a primary lab, requirement, checkpoint, evidence, and question."
+    paletteId: "FOUNDATION"
+    kind: "flow"
+    usage: ["docs/site/objective-map.md"]
+    stages:
+      - {id: "objective", label: "Objective", detail: "Use the exact official blueprint wording."}
+      - {id: "lab", label: "Primary lab", detail: "Assign exactly one lab as objective owner."}
+      - {id: "requirement", label: "Requirement", detail: "Translate the objective into an architecture need."}
+      - {id: "checkpoint", label: "Checkpoint", detail: "Produce independently verifiable evidence."}
+      - {id: "assessment", label: "Assessment", detail: "Test the same decision without exposing answers."}
+  - id: "VIS-STUDY-ROADMAP"
+    title: "Eight-week study roadmap"
+    caption: "A paced route moves from safe foundations through four domain waves and finishes with integrated capstone rehearsal."
+    alt: "Eight-step roadmap showing foundation, four domain waves, mixed assessment, and two capstone rehearsals."
+    paletteId: "FOUNDATION"
+    kind: "roadmap"
+    usage: ["docs/site/study-plan.md"]
+    stages:
+      - {id: "week-one", label: "Foundation and identity", detail: "Establish safety, logging, monitoring, and identity."}
+      - {id: "week-two", label: "Governance", detail: "Complete authorization, keys, hierarchy, and compliance."}
+      - {id: "week-three", label: "Relational data", detail: "Compare relational platform, scale, and protection."}
+      - {id: "week-four", label: "Data services", detail: "Cover nonrelational storage, integration, and analytics."}
+      - {id: "week-five", label: "Continuity", detail: "Model recovery, availability, backup, and resilience."}
+      - {id: "weeks-six-eight", label: "Infrastructure and capstones", detail: "Integrate compute, apps, migration, and networks."}
+  - id: "VIS-ASSESSMENT-FLOW"
+    title: "Assessment feedback cycle"
+    caption: "Questions map to objectives and checkpoints, then direct weak areas back to the exact remediation anchor."
+    alt: "Assessment flow from a question through answer evidence, objective coverage, remediation, and a new attempt."
+    paletteId: "FOUNDATION"
+    kind: "cycle"
+    usage: ["docs/site/assessment-dashboard.md"]
+    stages:
+      - {id: "attempt", label: "Attempt", detail: "Answer without consulting the protected key."}
+      - {id: "explain", label: "Explain", detail: "Compare every option-specific rationale."}
+      - {id: "map", label: "Map the gap", detail: "Locate the primary objective and checkpoint."}
+      - {id: "remediate", label: "Remediate", detail: "Revisit the linked lab decision evidence."}
+      - {id: "retry", label: "Retry", detail: "Confirm improvement with a later question set."}
+  - id: "VIS-ADR-LOOP"
+    title: "Architecture decision record workflow"
+    caption: "An ADR preserves context, options, decision logic, consequences, and the trigger for a controlled revision."
+    alt: "Decision workflow linking context, candidate analysis, selected option, consequences, and revised decision."
+    paletteId: "CAPSTONE"
+    kind: "flow"
+    usage: ["docs/site/guidance/architecture-decisions.md"]
+    stages:
+      - {id: "context", label: "Context", detail: "Capture stakeholders, facts, constraints, and assumptions."}
+      - {id: "candidates", label: "Candidates", detail: "Score eligible choices and apply disqualifiers."}
+      - {id: "selection", label: "Selection", detail: "Choose the highest defensible eligible candidate."}
+      - {id: "consequences", label: "Consequences", detail: "State tradeoffs, risks, and mitigations."}
+      - {id: "change", label: "Controlled revision", detail: "Cite the mandatory requirement that changed."}
+  - id: "VIS-WAF-PILLARS"
+    title: "Well-Architected review lenses"
+    caption: "Every checkpoint and decision is reviewed through all five Well-Architected Framework pillars."
+    alt: "Five equal cards representing reliability, security, cost optimization, operational excellence, and performance efficiency."
+    paletteId: "CAPSTONE"
+    kind: "pillars"
+    usage: ["docs/site/guidance/well-architected.md"]
+    stages:
+      - {id: "reliability", label: "Reliability", detail: "Meet availability and recovery commitments."}
+      - {id: "security", label: "Security", detail: "Protect identities, data, networks, and operations."}
+      - {id: "cost", label: "Cost optimization", detail: "Align spend to business value and demand."}
+      - {id: "operations", label: "Operational excellence", detail: "Make change observable, repeatable, and safe."}
+      - {id: "performance", label: "Performance efficiency", detail: "Match capacity and architecture to workload behavior."}
+  - id: "VIS-EVIDENCE-CHAIN"
+    title: "Evidence confidence ladder"
+    caption: "Confidence rises when an expected result, a negative assertion, provenance, and cleanup state agree."
+    alt: "Evidence ladder progressing from expected output to negative assertion, provenance, and verified cleanup."
+    paletteId: "IGM"
+    kind: "roadmap"
+    usage: ["docs/site/guidance/evidence.md"]
+    stages:
+      - {id: "expected", label: "Expected result", detail: "Record the precise positive condition."}
+      - {id: "negative", label: "Negative assertion", detail: "Prove a prohibited or unsafe state is absent."}
+      - {id: "provenance", label: "Provenance", detail: "Bind evidence to lab, run, source, and command."}
+      - {id: "cleanup", label: "Cleanup proof", detail: "Show that no active managed object remains."}
+  - id: "VIS-COMMAND-LANES"
+    title: "Command lane lifecycle"
+    caption: "Azure CLI and Azure PowerShell follow the same guarded lifecycle while keeping commands lane-correct."
+    alt: "Two parallel command lanes moving through preview, state capture, execution, validation, and cleanup."
+    paletteId: "INF"
+    kind: "swimlanes"
+    usage: ["docs/site/guides/azure-cli.md", "docs/site/guides/azure-powershell.md"]
+    stages:
+      - {id: "preview", label: "Preview", detail: "Validate inputs without a cloud call or state file."}
+      - {id: "state", label: "State first", detail: "Write the run record before potential mutation."}
+      - {id: "execute", label: "Execute", detail: "Require explicit cost and tenant acknowledgements."}
+      - {id: "validate", label: "Validate", detail: "Run independent deployment assertions."}
+      - {id: "cleanup", label: "Cleanup", detail: "Verify ownership and remove in dependency order."}
+  - id: "VIS-CONTINUITY"
+    title: "Continuity objective stack"
+    caption: "Business impact establishes RTO and RPO, which drive protection, recovery order, and exercise evidence."
+    alt: "Continuity target flow from business impact to RTO and RPO, protection pattern, recovery sequence, and exercise evidence."
+    paletteId: "BC"
+    kind: "target"
+    usage: ["docs/site/guides/continuity.md"]
+    stages:
+      - {id: "impact", label: "Business impact", detail: "Classify critical services and tolerated loss."}
+      - {id: "objectives", label: "RTO and RPO", detail: "Set measurable time and data-loss targets."}
+      - {id: "protection", label: "Protection pattern", detail: "Choose backup, replication, availability, or a mix."}
+      - {id: "orchestration", label: "Recovery order", detail: "Respect dependencies and communication gates."}
+      - {id: "exercise", label: "Exercise evidence", detail: "Measure outcomes without assuming recoverability."}
+  - id: "VIS-COST"
+    title: "Architecture cost levers"
+    caption: "Design costs respond to demand shape, service tier, resilience, data movement, operations, and licensing."
+    alt: "Six cost levers surrounding an architecture decision: demand, tier, resilience, transfer, operations, and licensing."
+    paletteId: "DATA"
+    kind: "levers"
+    usage: ["docs/site/guides/cost.md"]
+    stages:
+      - {id: "demand", label: "Demand shape", detail: "Separate steady, burst, seasonal, and batch load."}
+      - {id: "tier", label: "Service tier", detail: "Pay for only the capabilities requirements mandate."}
+      - {id: "resilience", label: "Resilience", detail: "Price replicas, zones, regions, and retained backups."}
+      - {id: "transfer", label: "Data movement", detail: "Account for ingress patterns, egress, and replication."}
+      - {id: "operations", label: "Operations", detail: "Include monitoring, support, and engineering effort."}
+      - {id: "licensing", label: "Licensing", detail: "Validate plan and entitlement dependencies."}
+  - id: "VIS-LICENSING"
+    title: "Licensing decision boundary"
+    caption: "A sound recommendation separates technical fit from tenant entitlement, feature plan, and commercial verification."
+    alt: "Boundary diagram separating technical architecture fit, required feature plan, tenant entitlement, and commercial verification."
+    paletteId: "IGM"
+    kind: "boundary"
+    usage: ["docs/site/guides/licensing.md"]
+    stages:
+      - {id: "technical", label: "Technical fit", detail: "Confirm that the service meets functional needs."}
+      - {id: "feature", label: "Feature plan", detail: "Identify the specific plan-dependent capability."}
+      - {id: "tenant", label: "Tenant entitlement", detail: "Verify who is licensed and where it applies."}
+      - {id: "commercial", label: "Commercial check", detail: "Record pricing assumptions without inventing terms."}
+  - id: "VIS-MIGRATION"
+    title: "Dependency-aware migration waves"
+    caption: "Discovery and rationalization shape waves that progress through readiness, rehearsal, cutover, and decommissioning."
+    alt: "Migration waves flowing from discovery and dependency mapping through target readiness, rehearsal, cutover, and decommissioning."
+    paletteId: "INF"
+    kind: "waves"
+    usage: ["docs/site/guides/migration.md"]
+    stages:
+      - {id: "discover", label: "Discover", detail: "Inventory servers, applications, data, owners, and facts."}
+      - {id: "dependencies", label: "Map dependencies", detail: "Find technical and business sequence constraints."}
+      - {id: "rationalize", label: "Rationalize", detail: "Choose retain, rehost, replatform, refactor, or retire."}
+      - {id: "rehearse", label: "Ready and rehearse", detail: "Validate landing zones, replication, and rollback."}
+      - {id: "cutover", label: "Cut over", detail: "Use acceptance gates and measured stabilization."}
+      - {id: "decommission", label: "Decommission", detail: "Remove legacy dependencies only after evidence."}
+  - id: "VIS-PERMISSIONS"
+    title: "Permission scope model"
+    caption: "Permission design distinguishes identity, control plane, data plane, scope, delegation, and time boundary."
+    alt: "Nested permission boundaries for identity, control plane, data plane, scope, delegated group, and eligible activation."
+    paletteId: "IGM"
+    kind: "boundary"
+    usage: ["docs/site/guides/permissions.md"]
+    stages:
+      - {id: "identity", label: "Identity", detail: "Prefer workload identity or stable governed groups."}
+      - {id: "plane", label: "Access plane", detail: "Separate management operations from data access."}
+      - {id: "scope", label: "Narrow scope", detail: "Assign at the lowest durable boundary."}
+      - {id: "delegation", label: "Delegation", detail: "Use role definitions that omit unrelated actions."}
+      - {id: "time", label: "Time boundary", detail: "Prefer eligible and reviewed access over standing rights."}
+  - id: "VIS-TROUBLESHOOTING"
+    title: "Evidence-led troubleshooting tree"
+    caption: "Troubleshooting starts with the failed assertion, isolates ownership and dependency state, then retries safely."
+    alt: "Decision tree from a failed assertion through input, ownership, dependency, retry, cleanup, and evidence outcomes."
+    paletteId: "BC"
+    kind: "decision-tree"
+    usage: ["docs/site/guides/troubleshooting.md"]
+    stages:
+      - {id: "assertion", label: "Locate failed assertion", detail: "Start from the exact positive or negative check."}
+      - {id: "inputs", label: "Verify inputs", detail: "Confirm run ID, context, mode, and acknowledgements."}
+      - {id: "ownership", label: "Check ownership", detail: "Match exact IDs, tags, and recorded state."}
+      - {id: "dependencies", label: "Inspect dependencies", detail: "Identify partial completion and removal order."}
+      - {id: "retry", label: "Retry safely", detail: "Use idempotent commands and retain recovery evidence."}
+
+labs:
+  - id: "LAB-00"
+    folder: "00-safe-architect-bootstrap"
+    paletteId: "FOUNDATION"
+    banner:
+      title: "Safe Bootstrap and Dual-Command Lab Contract"
+      eyebrow: "Foundation · guarded lifecycle"
+      caption: "Establish the state-first, acknowledgement-gated contract used by every architecture lab."
+      alt: "Foundation banner showing a guarded progression from local preflight through state capture, execution, validation, and cleanup."
+    topology:
+      title: "State-before-mutation safety envelope"
+      caption: "Validated inputs and explicit gates create a run record before a bounded operation can begin."
+      alt: "Topology showing local preflight and context inputs feeding gates, a run-state record, a bounded operation, and ownership-aware cleanup."
+      boundaries:
+        - {id: "learner-workstation", label: "Learner workstation"}
+        - {id: "run-state", label: "Private run state"}
+        - {id: "azure-scope", label: "Intended Azure scope"}
+      nodes:
+        - {id: "preflight", label: "Toolchain preflight", iconKey: "azure:automation-accounts", boundaryId: "learner-workstation"}
+        - {id: "inputs", label: "Declared context", iconKey: "azure:subscriptions", boundaryId: "learner-workstation"}
+        - {id: "gates", label: "Cost and tenant gates", iconKey: "azure:cost-management", boundaryId: "learner-workstation"}
+        - {id: "state-record", label: "Immutable run record", iconKey: "azure:storage-accounts", boundaryId: "run-state"}
+        - {id: "operation", label: "Bounded lab operation", iconKey: "azure:resource-groups", boundaryId: "azure-scope"}
+        - {id: "cleanup", label: "Ownership-aware cleanup", iconKey: "azure:resource-groups", boundaryId: "learner-workstation"}
+      edges:
+        - {from: "preflight", to: "inputs", label: "validated tools"}
+        - {from: "inputs", to: "gates", label: "declared IDs and regions"}
+        - {from: "gates", to: "state-record", label: "authorize run record"}
+        - {from: "state-record", to: "operation", label: "state precedes mutation"}
+        - {from: "operation", to: "cleanup", label: "returned IDs and tags"}
+        - {from: "cleanup", to: "state-record", label: "post-cleanup status"}
+    decisionMatrix:
+      title: "Bootstrap contract candidate scorecard"
+      caption: "Render weights, scores, eligibility, disqualifiers, and the selected safety contract from the lab decision record."
+      alt: "Decision matrix comparing bootstrap safety contracts and highlighting the selected state-first guarded lifecycle."
+      sourcePath: "labs/00-safe-architect-bootstrap/design/decision.yml"
+
+  - id: "LAB-01"
+    folder: "01-centralized-logging-routing"
+    paletteId: "IGM"
+    banner:
+      title: "Centralized Logging and Diagnostic Routing"
+      eyebrow: "Identity, governance, and monitoring · logging"
+      caption: "Design regional collection boundaries, policy-driven routing, retention, and economical archive."
+      alt: "Identity and monitoring banner connecting Azure resource telemetry to regional workspaces, archive storage, and operators."
+    topology:
+      title: "Regional logging and routing topology"
+      caption: "Azure Monitor Agent and diagnostic settings route workload signals into regional workspaces and governed archive."
+      alt: "Topology showing emitting workloads routed through data collection rules to two regional Log Analytics workspaces, archive storage, and operators."
+      boundaries:
+        - {id: "emitting-resources", label: "Emitting Azure resources"}
+        - {id: "regional-monitoring", label: "Regional monitoring boundary"}
+        - {id: "operations-evidence", label: "Operations and evidence"}
+      nodes:
+        - {id: "workloads", label: "Platform and application signals", iconKey: "azure:virtual-machines", boundaryId: "emitting-resources"}
+        - {id: "dcr", label: "AMA data collection rule", iconKey: "azure:monitor", boundaryId: "regional-monitoring"}
+        - {id: "workspace-west", label: "West Europe workspace", iconKey: "azure:log-analytics-workspaces", boundaryId: "regional-monitoring"}
+        - {id: "workspace-north", label: "North Europe workspace", iconKey: "azure:log-analytics-workspaces", boundaryId: "regional-monitoring"}
+        - {id: "archive", label: "Immutable log archive", iconKey: "azure:storage-accounts", boundaryId: "operations-evidence"}
+        - {id: "operator", label: "Cross-workspace operations", iconKey: "azure:workbooks", boundaryId: "operations-evidence"}
+      edges:
+        - {from: "workloads", to: "dcr", label: "AMA streams"}
+        - {from: "dcr", to: "workspace-west", label: "regional association"}
+        - {from: "dcr", to: "workspace-north", label: "regional association"}
+        - {from: "workloads", to: "archive", label: "diagnostic export"}
+        - {from: "workspace-west", to: "operator", label: "federated query"}
+        - {from: "workspace-north", to: "operator", label: "federated query"}
+    decisionMatrix:
+      title: "Logging architecture candidate scorecard"
+      caption: "The chart is calculated from the weighted logging candidates and their recorded eligibility constraints."
+      alt: "Decision matrix comparing logging architectures and marking regional workspaces with governed routing as selected."
+      sourcePath: "labs/01-centralized-logging-routing/design/decision.yml"
+
+  - id: "LAB-02"
+    folder: "02-monitoring-alerts-visibility"
+    paletteId: "IGM"
+    banner:
+      title: "Monitoring, Alerting, and Operational Visibility"
+      eyebrow: "Identity, governance, and monitoring · operations"
+      caption: "Turn layered platform and service signals into actionable alerts, routing, and operator views."
+      alt: "Monitoring banner showing service signals moving through Azure Monitor into alerts, action routing, and an operator workbook."
+    topology:
+      title: "Signal-to-response monitoring topology"
+      caption: "Platform, health, and query signals converge in Azure Monitor before response and visualization paths separate."
+      alt: "Topology showing application and platform telemetry entering Azure Monitor, triggering service alerts, shared action groups, and curated workbooks."
+      boundaries:
+        - {id: "service-signals", label: "Service signal sources"}
+        - {id: "monitoring-control", label: "Monitoring control plane"}
+        - {id: "response", label: "Operator response"}
+      nodes:
+        - {id: "telemetry", label: "Metrics logs and health", iconKey: "azure:application-insights", boundaryId: "service-signals"}
+        - {id: "monitor", label: "Azure Monitor", iconKey: "azure:monitor", boundaryId: "monitoring-control"}
+        - {id: "alert", label: "Service-level alert rules", iconKey: "azure:alerts", boundaryId: "monitoring-control"}
+        - {id: "action", label: "Shared action groups", iconKey: "azure:action-groups", boundaryId: "response"}
+        - {id: "workbook", label: "Curated operator workbook", iconKey: "azure:workbooks", boundaryId: "response"}
+      edges:
+        - {from: "telemetry", to: "monitor", label: "layered signals"}
+        - {from: "monitor", to: "alert", label: "metric health and query rules"}
+        - {from: "alert", to: "action", label: "severity-aware routing"}
+        - {from: "monitor", to: "workbook", label: "curated queries"}
+        - {from: "action", to: "workbook", label: "incident context"}
+    decisionMatrix:
+      title: "Monitoring approach candidate scorecard"
+      caption: "The visual derives signal coverage, operational fit, and disqualification status from the authored decision record."
+      alt: "Decision matrix comparing monitoring approaches and highlighting service-centric alerts with shared response assets."
+      sourcePath: "labs/02-monitoring-alerts-visibility/design/decision.yml"
+
+  - id: "LAB-03"
+    folder: "03-authentication-identity-design"
+    paletteId: "IGM"
+    banner:
+      title: "Authentication and Identity Management Architecture"
+      eyebrow: "Identity, governance, and monitoring · authentication"
+      caption: "Separate workforce, partner, customer, and workload identities across intentional trust boundaries."
+      alt: "Identity banner showing workforce and external tenant boundaries connected to applications through modern authentication and workload identity."
+    topology:
+      title: "Workforce and External ID trust topology"
+      caption: "Separate tenant boundaries serve employees and customers while managed identities remove workload secrets."
+      alt: "Topology showing workforce users and applications in one tenant, customer identities in an External ID tenant, Conditional Access, and managed workload identities."
+      boundaries:
+        - {id: "workforce-tenant", label: "Workforce tenant"}
+        - {id: "external-tenant", label: "External ID tenant"}
+        - {id: "workload-boundary", label: "Azure workloads"}
+      nodes:
+        - {id: "employees", label: "Employees and partners", iconKey: "entra:users", boundaryId: "workforce-tenant"}
+        - {id: "workforce-app", label: "Workforce application", iconKey: "entra:applications", boundaryId: "workforce-tenant"}
+        - {id: "customers", label: "Customer identities", iconKey: "entra:external-identities", boundaryId: "external-tenant"}
+        - {id: "customer-app", label: "Customer application", iconKey: "entra:applications", boundaryId: "external-tenant"}
+        - {id: "conditional-access", label: "Conditional Access", iconKey: "entra:conditional-access", boundaryId: "workforce-tenant"}
+        - {id: "managed-identity", label: "Managed workload identity", iconKey: "azure:managed-identities", boundaryId: "workload-boundary"}
+      edges:
+        - {from: "employees", to: "conditional-access", label: "workforce authentication"}
+        - {from: "conditional-access", to: "workforce-app", label: "policy-governed token"}
+        - {from: "customers", to: "customer-app", label: "External ID user flow"}
+        - {from: "workforce-app", to: "managed-identity", label: "secretless service access"}
+        - {from: "customer-app", to: "managed-identity", label: "secretless service access"}
+    decisionMatrix:
+      title: "Identity architecture candidate scorecard"
+      caption: "Tenant separation, user populations, protocol fit, and workload identity are calculated from the decision source."
+      alt: "Decision matrix comparing identity architectures and marking the workforce plus External ID tenant model as selected."
+      sourcePath: "labs/03-authentication-identity-design/design/decision.yml"
+
+  - id: "LAB-04"
+    folder: "04-azure-hybrid-authorization"
+    paletteId: "IGM"
+    banner:
+      title: "Azure and Hybrid Authorization Architecture"
+      eyebrow: "Identity, governance, and monitoring · authorization"
+      caption: "Design stable group-based delegation across Azure scopes, data planes, and Arc-enabled servers."
+      alt: "Authorization banner showing governed groups, inherited Azure RBAC scopes, distinct data access, and hybrid Arc delegation."
+    topology:
+      title: "Azure and hybrid authorization boundaries"
+      caption: "Stable groups receive narrow roles at durable scopes while control-plane, data-plane, and hybrid access remain distinct."
+      alt: "Topology showing Entra groups delegated through management group and subscription scopes, with separate data-plane access and Arc server authorization."
+      boundaries:
+        - {id: "identity-plane", label: "Microsoft Entra identities"}
+        - {id: "azure-scopes", label: "Azure authorization scopes"}
+        - {id: "hybrid-estate", label: "Arc-enabled hybrid estate"}
+      nodes:
+        - {id: "groups", label: "Governed role groups", iconKey: "entra:groups", boundaryId: "identity-plane"}
+        - {id: "management-group", label: "Management-group scope", iconKey: "azure:management-groups", boundaryId: "azure-scopes"}
+        - {id: "subscription", label: "Workload subscription", iconKey: "azure:subscriptions", boundaryId: "azure-scopes"}
+        - {id: "data-plane", label: "Storage data plane", iconKey: "azure:storage-accounts", boundaryId: "azure-scopes"}
+        - {id: "arc-servers", label: "Azure Arc servers", iconKey: "azure:arc", boundaryId: "hybrid-estate"}
+      edges:
+        - {from: "groups", to: "management-group", label: "custom control-plane role"}
+        - {from: "management-group", to: "subscription", label: "inherited assignment"}
+        - {from: "groups", to: "data-plane", label: "separate data role"}
+        - {from: "groups", to: "arc-servers", label: "Arc-aware delegation"}
+    decisionMatrix:
+      title: "Authorization model candidate scorecard"
+      caption: "The chart derives scope stability, privilege separation, and hybrid fit from the weighted decision record."
+      alt: "Decision matrix comparing authorization models and highlighting group-based Azure RBAC with Arc-aware delegation."
+      sourcePath: "labs/04-azure-hybrid-authorization/design/decision.yml"
+
+  - id: "LAB-05"
+    folder: "05-secrets-certificates-keys"
+    paletteId: "IGM"
+    banner:
+      title: "Secrets, Certificates, and Key Management"
+      eyebrow: "Identity, governance, and monitoring · key management"
+      caption: "Protect cryptographic material with tier, identity, rotation, issuance, and private-network decisions."
+      alt: "Key management banner showing managed workload identity reaching a private premium vault with rotated keys and governed certificates."
+    topology:
+      title: "Private Key Vault access topology"
+      caption: "Managed identities traverse a private endpoint to a premium vault while key rotation and certificate issuance remain governed."
+      alt: "Topology showing an application and managed identity using a private endpoint to reach Key Vault Premium, rotated keys, and a certificate issuer."
+      boundaries:
+        - {id: "application-network", label: "Application virtual network"}
+        - {id: "vault-boundary", label: "Private vault boundary"}
+        - {id: "certificate-authority", label: "Certificate authority"}
+      nodes:
+        - {id: "application", label: "Signing and TLS workload", iconKey: "azure:virtual-machines", boundaryId: "application-network"}
+        - {id: "identity", label: "Managed identity", iconKey: "azure:managed-identities", boundaryId: "application-network"}
+        - {id: "private-endpoint", label: "Private endpoint", iconKey: "azure:private-link", boundaryId: "vault-boundary"}
+        - {id: "vault", label: "Key Vault Premium", iconKey: "azure:key-vault", boundaryId: "vault-boundary"}
+        - {id: "keys", label: "Rotated keys and secrets", iconKey: "azure:key-vault", boundaryId: "vault-boundary"}
+        - {id: "issuer", label: "Approved certificate issuer", iconKey: "azure:key-vault", boundaryId: "certificate-authority"}
+      edges:
+        - {from: "application", to: "identity", label: "workload token request"}
+        - {from: "identity", to: "private-endpoint", label: "RBAC-authorized access"}
+        - {from: "private-endpoint", to: "vault", label: "private data path"}
+        - {from: "vault", to: "keys", label: "rotation policy"}
+        - {from: "issuer", to: "vault", label: "certificate lifecycle"}
+    decisionMatrix:
+      title: "Key management candidate scorecard"
+      caption: "The rendered comparison uses the lab's weighted tier, protection, identity, and network criteria."
+      alt: "Decision matrix comparing key management options and marking private Key Vault Premium with RBAC as selected."
+      sourcePath: "labs/05-secrets-certificates-keys/design/decision.yml"
+
+  - id: "LAB-06"
+    folder: "06-resource-hierarchy-tag-governance"
+    paletteId: "IGM"
+    banner:
+      title: "Azure Resource Hierarchy and Tag Governance"
+      eyebrow: "Identity, governance, and monitoring · hierarchy"
+      caption: "Create durable management-group archetypes, lifecycle-aligned resource groups, and controlled tags."
+      alt: "Governance banner showing a tenant hierarchy branching into platform and workload subscriptions with inherited policy and tag controls."
+    topology:
+      title: "Archetype-based governance hierarchy"
+      caption: "A durable management-group tree places platform and workload subscriptions before policy controls enforce the tag vocabulary."
+      alt: "Topology showing the tenant root branching to platform and workload management groups, subscriptions, lifecycle resource groups, and policy-controlled tags."
+      boundaries:
+        - {id: "tenant-hierarchy", label: "Tenant hierarchy"}
+        - {id: "subscription-estate", label: "Subscription estate"}
+        - {id: "resource-lifecycle", label: "Resource lifecycle boundaries"}
+      nodes:
+        - {id: "tenant-root", label: "Tenant root group", iconKey: "azure:management-groups", boundaryId: "tenant-hierarchy"}
+        - {id: "platform-mg", label: "Platform archetype", iconKey: "azure:management-groups", boundaryId: "tenant-hierarchy"}
+        - {id: "workload-mg", label: "Workload archetype", iconKey: "azure:management-groups", boundaryId: "tenant-hierarchy"}
+        - {id: "subscriptions", label: "Workload subscriptions", iconKey: "azure:subscriptions", boundaryId: "subscription-estate"}
+        - {id: "resource-groups", label: "Lifecycle resource groups", iconKey: "azure:resource-groups", boundaryId: "resource-lifecycle"}
+        - {id: "tag-policy", label: "Controlled tag policy", iconKey: "azure:policy", boundaryId: "resource-lifecycle"}
+      edges:
+        - {from: "tenant-root", to: "platform-mg", label: "platform inheritance"}
+        - {from: "tenant-root", to: "workload-mg", label: "workload inheritance"}
+        - {from: "workload-mg", to: "subscriptions", label: "archetype placement"}
+        - {from: "subscriptions", to: "resource-groups", label: "lifecycle grouping"}
+        - {from: "tag-policy", to: "resource-groups", label: "vocabulary enforcement"}
+    decisionMatrix:
+      title: "Governance hierarchy candidate scorecard"
+      caption: "The visualization derives organizational durability, policy inheritance, and lifecycle fit from the decision record."
+      alt: "Decision matrix comparing governance hierarchies and highlighting archetype management groups with governed tags."
+      sourcePath: "labs/06-resource-hierarchy-tag-governance/design/decision.yml"
+
+  - id: "LAB-07"
+    folder: "07-compliance-identity-governance"
+    paletteId: "IGM"
+    banner:
+      title: "Compliance and Identity Governance"
+      eyebrow: "Identity, governance, and monitoring · compliance"
+      caption: "Link Azure Policy compliance evidence with entitlement, access-review, and privileged-role lifecycle controls."
+      alt: "Compliance banner joining Azure Policy initiatives and evidence with identity governance catalogs, access reviews, and privileged access."
+    topology:
+      title: "Compliance and access lifecycle topology"
+      caption: "Control mappings drive policy evidence while entitlement catalogs, access reviews, and PIM govern human access over time."
+      alt: "Topology showing control requirements mapped to Azure Policy initiatives and compliance evidence alongside entitlement catalogs, access reviews, and PIM."
+      boundaries:
+        - {id: "azure-governance", label: "Azure resource governance"}
+        - {id: "identity-governance", label: "Microsoft Entra governance"}
+        - {id: "audit-evidence", label: "Audit evidence"}
+      nodes:
+        - {id: "control-set", label: "Control requirements", iconKey: "azure:policy", boundaryId: "azure-governance"}
+        - {id: "initiative", label: "Policy initiative", iconKey: "azure:policy", boundaryId: "azure-governance"}
+        - {id: "compliance", label: "Compliance state", iconKey: "azure:monitor", boundaryId: "audit-evidence"}
+        - {id: "catalog", label: "Entitlement catalog", iconKey: "entra:identity-governance", boundaryId: "identity-governance"}
+        - {id: "review", label: "Recurring access review", iconKey: "entra:access-reviews", boundaryId: "identity-governance"}
+        - {id: "pim", label: "Eligible privileged roles", iconKey: "entra:privileged-identity-management", boundaryId: "identity-governance"}
+      edges:
+        - {from: "control-set", to: "initiative", label: "mapped controls"}
+        - {from: "initiative", to: "compliance", label: "assignment evidence"}
+        - {from: "catalog", to: "review", label: "time-bound entitlement"}
+        - {from: "review", to: "pim", label: "least-standing access"}
+        - {from: "review", to: "compliance", label: "access evidence"}
+    decisionMatrix:
+      title: "Compliance governance candidate scorecard"
+      caption: "The visual combines weighted resource-compliance and identity-lifecycle criteria from the authored decision."
+      alt: "Decision matrix comparing compliance models and marking Azure Policy plus Entra ID Governance controls as selected."
+      sourcePath: "labs/07-compliance-identity-governance/design/decision.yml"
+
+  - id: "LAB-08"
+    folder: "08-relational-platform-tier-selection"
+    paletteId: "DATA"
+    banner:
+      title: "Relational Data Platform and Service-Tier Selection"
+      eyebrow: "Data storage · relational platform"
+      caption: "Translate transactional workload facts into a serverless SQL tier, private path, and observable service boundary."
+      alt: "Data banner showing an application reaching Azure SQL Database serverless through a private endpoint with operational monitoring."
+    topology:
+      title: "Private serverless relational topology"
+      caption: "The line-of-business application uses private connectivity to a serverless database within a governed logical-server boundary."
+      alt: "Topology showing an application network, private endpoint, Azure SQL logical server, General Purpose serverless database, and monitoring workspace."
+      boundaries:
+        - {id: "application-network", label: "Application virtual network"}
+        - {id: "data-platform", label: "Relational data platform"}
+        - {id: "operations", label: "Data operations"}
+      nodes:
+        - {id: "application", label: "Line-of-business application", iconKey: "azure:virtual-machines", boundaryId: "application-network"}
+        - {id: "private-endpoint", label: "SQL private endpoint", iconKey: "azure:private-link", boundaryId: "application-network"}
+        - {id: "logical-server", label: "Logical SQL server", iconKey: "azure:sql-database", boundaryId: "data-platform"}
+        - {id: "database", label: "General Purpose serverless", iconKey: "azure:sql-database", boundaryId: "data-platform"}
+        - {id: "monitoring", label: "Database telemetry", iconKey: "azure:monitor", boundaryId: "operations"}
+      edges:
+        - {from: "application", to: "private-endpoint", label: "private SQL connection"}
+        - {from: "private-endpoint", to: "logical-server", label: "private link resolution"}
+        - {from: "logical-server", to: "database", label: "serverless service objective"}
+        - {from: "database", to: "monitoring", label: "performance and cost signals"}
+    decisionMatrix:
+      title: "Relational platform candidate scorecard"
+      caption: "The visual derives platform fit, service tier, compute behavior, connectivity, and cost from the decision source."
+      alt: "Decision matrix comparing relational services and marking Azure SQL Database General Purpose serverless as selected."
+      sourcePath: "labs/08-relational-platform-tier-selection/design/decision.yml"
+
+  - id: "LAB-09"
+    folder: "09-relational-scale-protection"
+    paletteId: "DATA"
+    banner:
+      title: "Relational Scalability and Data Protection"
+      eyebrow: "Data storage · relational scale"
+      caption: "Combine Hyperscale capacity, read isolation, transparent encryption, auditing, and bounded retention."
+      alt: "Data banner showing a Hyperscale relational primary, named read replicas, encryption control, audit storage, and protected backups."
+    topology:
+      title: "Hyperscale read and protection topology"
+      caption: "Writes target the Hyperscale primary, reads use named replicas, and protection evidence leaves the serving path."
+      alt: "Topology showing a ledger application splitting writes to a Hyperscale primary and reads to replicas, with key custody, auditing, and backup retention."
+      boundaries:
+        - {id: "application-tier", label: "Ledger application tier"}
+        - {id: "hyperscale-service", label: "Azure SQL Hyperscale"}
+        - {id: "protection-evidence", label: "Protection and evidence"}
+      nodes:
+        - {id: "ledger", label: "Ledger application", iconKey: "azure:virtual-machines", boundaryId: "application-tier"}
+        - {id: "primary", label: "Hyperscale primary", iconKey: "azure:sql-database", boundaryId: "hyperscale-service"}
+        - {id: "replicas", label: "Named read replicas", iconKey: "azure:sql-database", boundaryId: "hyperscale-service"}
+        - {id: "key-custody", label: "TDE key custody", iconKey: "azure:key-vault", boundaryId: "protection-evidence"}
+        - {id: "audit", label: "Tamper-resistant audit", iconKey: "azure:storage-accounts", boundaryId: "protection-evidence"}
+        - {id: "retention", label: "Bounded backup retention", iconKey: "azure:recovery-services-vaults", boundaryId: "protection-evidence"}
+      edges:
+        - {from: "ledger", to: "primary", label: "transactional writes"}
+        - {from: "ledger", to: "replicas", label: "read-only traffic"}
+        - {from: "primary", to: "replicas", label: "read-scale replication"}
+        - {from: "key-custody", to: "primary", label: "encryption dependency"}
+        - {from: "primary", to: "audit", label: "immutable audit export"}
+        - {from: "primary", to: "retention", label: "long-term backup policy"}
+    decisionMatrix:
+      title: "Relational scale candidate scorecard"
+      caption: "The chart calculates capacity, read isolation, protection, and operational criteria from the decision record."
+      alt: "Decision matrix comparing relational scale patterns and highlighting Hyperscale with named read replicas."
+      sourcePath: "labs/09-relational-scale-protection/design/decision.yml"
+
+  - id: "LAB-10"
+    folder: "10-semi-structured-data-design"
+    paletteId: "DATA"
+    banner:
+      title: "Semi-Structured Data Platform Selection"
+      eyebrow: "Data storage · document data"
+      caption: "Design a global document API around partition-key cardinality, consistency, indexing, throughput, and network boundaries."
+      alt: "Data banner showing global catalog clients reaching a partitioned Cosmos DB service with autoscale, regional replicas, and private access."
+    topology:
+      title: "Tenant-aware Cosmos DB topology"
+      caption: "A private global catalog API targets tenant-aware logical partitions replicated across the selected Cosmos DB regions."
+      alt: "Topology showing global catalog clients, a private API, a Cosmos DB account, tenant-aware partitions, autoscale throughput, and regional replicas."
+      boundaries:
+        - {id: "global-clients", label: "Global catalog clients"}
+        - {id: "application-boundary", label: "Private application boundary"}
+        - {id: "cosmos-account", label: "Cosmos DB account"}
+      nodes:
+        - {id: "clients", label: "Tenant catalog requests", iconKey: "azure:front-door", boundaryId: "global-clients"}
+        - {id: "catalog-api", label: "Private catalog API", iconKey: "azure:container-apps", boundaryId: "application-boundary"}
+        - {id: "private-endpoint", label: "Cosmos private endpoint", iconKey: "azure:private-link", boundaryId: "application-boundary"}
+        - {id: "container", label: "Tenant-aware partitions", iconKey: "azure:cosmos-db", boundaryId: "cosmos-account"}
+        - {id: "autoscale", label: "Bounded autoscale throughput", iconKey: "azure:cosmos-db", boundaryId: "cosmos-account"}
+        - {id: "replicas", label: "Regional replicas", iconKey: "azure:cosmos-db", boundaryId: "cosmos-account"}
+      edges:
+        - {from: "clients", to: "catalog-api", label: "localized catalog reads"}
+        - {from: "catalog-api", to: "private-endpoint", label: "private document requests"}
+        - {from: "private-endpoint", to: "container", label: "partition-key routing"}
+        - {from: "autoscale", to: "container", label: "throughput envelope"}
+        - {from: "container", to: "replicas", label: "selected consistency replication"}
+    decisionMatrix:
+      title: "Document platform candidate scorecard"
+      caption: "The rendered matrix uses API, partitioning, consistency, scale, indexing, and network criteria from the decision source."
+      alt: "Decision matrix comparing semi-structured data platforms and highlighting Cosmos DB for NoSQL with tenant-aware partitioning."
+      sourcePath: "labs/10-semi-structured-data-design/design/decision.yml"
+
+  - id: "LAB-11"
+    folder: "11-unstructured-data-design"
+    paletteId: "DATA"
+    banner:
+      title: "Unstructured Data Platform Selection"
+      eyebrow: "Data storage · hierarchical object data"
+      caption: "Organize mixed files in an ADLS Gen2 hierarchy with ownership, encryption, and private access."
+      alt: "Data banner showing source systems entering an ADLS Gen2 hierarchical namespace through private connectivity for governed consumption."
+    topology:
+      title: "Private ADLS Gen2 namespace topology"
+      caption: "Producers and consumers use a private endpoint while filesystems, directories, access control, and key dependency remain explicit."
+      alt: "Topology showing file producers and analytical consumers connected privately to an ADLS Gen2 account with governed filesystems and key custody."
+      boundaries:
+        - {id: "data-producers", label: "Data producers"}
+        - {id: "data-lake", label: "ADLS Gen2 boundary"}
+        - {id: "data-consumers", label: "Governed consumers"}
+      nodes:
+        - {id: "producers", label: "Files images and documents", iconKey: "azure:storage-accounts", boundaryId: "data-producers"}
+        - {id: "private-endpoint", label: "Storage private endpoint", iconKey: "azure:private-link", boundaryId: "data-lake"}
+        - {id: "account", label: "HNS StorageV2 account", iconKey: "azure:storage-accounts", boundaryId: "data-lake"}
+        - {id: "namespaces", label: "Owned filesystems and directories", iconKey: "azure:data-lake-storage", boundaryId: "data-lake"}
+        - {id: "key", label: "Encryption key dependency", iconKey: "azure:key-vault", boundaryId: "data-lake"}
+        - {id: "consumers", label: "Analytics and departments", iconKey: "azure:synapse-analytics", boundaryId: "data-consumers"}
+      edges:
+        - {from: "producers", to: "private-endpoint", label: "private file ingestion"}
+        - {from: "private-endpoint", to: "account", label: "private link resolution"}
+        - {from: "account", to: "namespaces", label: "hierarchical namespace"}
+        - {from: "key", to: "account", label: "customer-managed encryption"}
+        - {from: "namespaces", to: "consumers", label: "ACL-governed access"}
+    decisionMatrix:
+      title: "Unstructured data candidate scorecard"
+      caption: "The visual derives namespace, access pattern, governance, encryption, and network fit from the decision record."
+      alt: "Decision matrix comparing unstructured data services and marking ADLS Gen2 with hierarchical namespace as selected."
+      sourcePath: "labs/11-unstructured-data-design/design/decision.yml"
+
+  - id: "LAB-12"
+    folder: "12-storage-economics-durability"
+    paletteId: "DATA"
+    banner:
+      title: "Storage Economics, Protection, and Durability"
+      eyebrow: "Data storage · lifecycle and durability"
+      caption: "Balance GZRS durability, access-tier economics, lifecycle automation, delete protection, and immutable evidence."
+      alt: "Data banner showing hot objects moving through lifecycle tiers with geo-zone replication, versions, and immutable evidence controls."
+    topology:
+      title: "Lifecycle and GZRS protection topology"
+      caption: "Classified objects transition through access tiers while GZRS, versioning, deletion controls, and immutability address separate risks."
+      alt: "Topology showing hot objects governed by lifecycle policy, cool and archive tiers, a secondary GZRS region, protected versions, and immutable evidence."
+      boundaries:
+        - {id: "primary-region", label: "Primary storage region"}
+        - {id: "secondary-region", label: "Paired storage region"}
+        - {id: "compliance-boundary", label: "Compliance evidence"}
+      nodes:
+        - {id: "hot-objects", label: "Classified hot objects", iconKey: "azure:storage-accounts", boundaryId: "primary-region"}
+        - {id: "lifecycle", label: "Lifecycle management policy", iconKey: "azure:policy", boundaryId: "primary-region"}
+        - {id: "cool-archive", label: "Cool and archive tiers", iconKey: "azure:storage-accounts", boundaryId: "primary-region"}
+        - {id: "geo-copy", label: "GZRS secondary copy", iconKey: "azure:storage-accounts", boundaryId: "secondary-region"}
+        - {id: "versions", label: "Versions and soft delete", iconKey: "azure:storage-accounts", boundaryId: "primary-region"}
+        - {id: "immutable", label: "Immutable audit boundary", iconKey: "azure:storage-accounts", boundaryId: "compliance-boundary"}
+      edges:
+        - {from: "hot-objects", to: "lifecycle", label: "age and access signals"}
+        - {from: "lifecycle", to: "cool-archive", label: "tier transitions"}
+        - {from: "hot-objects", to: "geo-copy", label: "geo-zone replication"}
+        - {from: "hot-objects", to: "versions", label: "overwrite and delete guard"}
+        - {from: "hot-objects", to: "immutable", label: "evidence retention policy"}
+    decisionMatrix:
+      title: "Storage economics candidate scorecard"
+      caption: "Durability, tiering, protection, evidence, and budget criteria are rendered directly from the decision record."
+      alt: "Decision matrix comparing storage durability patterns and highlighting StorageV2 with GZRS and lifecycle policies."
+      sourcePath: "labs/12-storage-economics-durability/design/decision.yml"
+
+  - id: "LAB-13"
+    folder: "13-data-integration-analytics"
+    paletteId: "DATA"
+    banner:
+      title: "Data Integration and Analytics Architecture"
+      eyebrow: "Data storage · integration and analysis"
+      caption: "Orchestrate managed-identity ingestion into a governed lake and serve elastic serverless SQL analysis."
+      alt: "Data banner showing files, databases, and telemetry flowing through Data Factory into ADLS Gen2 and Synapse serverless SQL."
+    topology:
+      title: "Governed ingestion and analytics topology"
+      caption: "Data Factory coordinates idempotent ingestion through managed identity before Synapse queries curated lake zones."
+      alt: "Topology showing partner files, database changes, and telemetry feeding Azure Data Factory, ADLS Gen2, Synapse serverless SQL, and monitoring."
+      boundaries:
+        - {id: "source-estate", label: "Regional and partner sources"}
+        - {id: "integration-platform", label: "Managed integration platform"}
+        - {id: "analytics-platform", label: "Governed analytics platform"}
+      nodes:
+        - {id: "sources", label: "Files database changes telemetry", iconKey: "azure:event-hubs", boundaryId: "source-estate"}
+        - {id: "factory", label: "Azure Data Factory", iconKey: "azure:data-factory", boundaryId: "integration-platform"}
+        - {id: "identity", label: "Pipeline managed identity", iconKey: "azure:managed-identities", boundaryId: "integration-platform"}
+        - {id: "lake", label: "ADLS Gen2 curated zones", iconKey: "azure:data-lake-storage", boundaryId: "analytics-platform"}
+        - {id: "synapse", label: "Synapse serverless SQL", iconKey: "azure:synapse-analytics", boundaryId: "analytics-platform"}
+        - {id: "operations", label: "Lineage and spend signals", iconKey: "azure:monitor", boundaryId: "analytics-platform"}
+      edges:
+        - {from: "sources", to: "factory", label: "scheduled and incremental ingestion"}
+        - {from: "identity", to: "factory", label: "secretless linked services"}
+        - {from: "factory", to: "lake", label: "idempotent zone writes"}
+        - {from: "lake", to: "synapse", label: "governed serverless queries"}
+        - {from: "factory", to: "operations", label: "pipeline and lineage telemetry"}
+        - {from: "synapse", to: "operations", label: "query and spend telemetry"}
+    decisionMatrix:
+      title: "Integration architecture candidate scorecard"
+      caption: "The chart derives ingestion, identity, governance, analytical access, operations, and spend fit from the decision source."
+      alt: "Decision matrix comparing integration and analytics platforms and marking Data Factory, ADLS Gen2, and Synapse serverless SQL as selected."
+      sourcePath: "labs/13-data-integration-analytics/design/decision.yml"
+
+  - id: "LAB-14"
+    folder: "14-recovery-strategy-hybrid"
+    paletteId: "BC"
+    banner:
+      title: "Recovery Strategy for Azure and Hybrid Workloads"
+      eyebrow: "Business continuity · recovery strategy"
+      caption: "Classify services by RTO and RPO, map failure domains, select tiered protection, and rehearse orchestration."
+      alt: "Continuity banner showing Azure and VMware workloads mapped by recovery tier to backup, site recovery, native replication, and runbooks."
+    topology:
+      title: "Tiered hybrid recovery topology"
+      caption: "Workload tiers map to Azure Backup, Site Recovery, or application-native replication before an exercise validates recovery order."
+      alt: "Topology showing Azure and factory VMware workloads classified by recovery objectives and routed to backup, Site Recovery, native replication, and an orchestration runbook."
+      boundaries:
+        - {id: "production-estate", label: "Azure and factory workloads"}
+        - {id: "protection-services", label: "Protection services"}
+        - {id: "recovery-operations", label: "Recovery operations"}
+      nodes:
+        - {id: "azure-workloads", label: "Azure production services", iconKey: "azure:virtual-machines", boundaryId: "production-estate"}
+        - {id: "vmware-workloads", label: "Factory VMware services", iconKey: "azure:arc", boundaryId: "production-estate"}
+        - {id: "recovery-tiers", label: "RTO and RPO tiers", iconKey: "azure:policy", boundaryId: "protection-services"}
+        - {id: "backup", label: "Azure Backup", iconKey: "azure:recovery-services-vaults", boundaryId: "protection-services"}
+        - {id: "site-recovery", label: "Azure Site Recovery", iconKey: "azure:site-recovery", boundaryId: "protection-services"}
+        - {id: "native-replication", label: "Application-native replication", iconKey: "azure:sql-database", boundaryId: "protection-services"}
+        - {id: "runbook", label: "Recovery exercise runbook", iconKey: "azure:automation-accounts", boundaryId: "recovery-operations"}
+      edges:
+        - {from: "azure-workloads", to: "recovery-tiers", label: "business impact classification"}
+        - {from: "vmware-workloads", to: "recovery-tiers", label: "dependency and failure mapping"}
+        - {from: "recovery-tiers", to: "backup", label: "retention protection"}
+        - {from: "recovery-tiers", to: "site-recovery", label: "orchestrated workload recovery"}
+        - {from: "recovery-tiers", to: "native-replication", label: "data-aware replication"}
+        - {from: "backup", to: "runbook", label: "restore sequence evidence"}
+        - {from: "site-recovery", to: "runbook", label: "failover sequence evidence"}
+    decisionMatrix:
+      title: "Hybrid recovery candidate scorecard"
+      caption: "Recovery objective fit, workload coverage, orchestration, and exercise evidence are derived from the decision source."
+      alt: "Decision matrix comparing hybrid recovery strategies and highlighting tiered Backup, Site Recovery, and native replication."
+      sourcePath: "labs/14-recovery-strategy-hybrid/design/decision.yml"
+
+  - id: "LAB-15"
+    folder: "15-compute-backup-ha"
+    paletteId: "BC"
+    banner:
+      title: "Compute Backup, Recovery, and High Availability"
+      eyebrow: "Business continuity · compute resilience"
+      caption: "Spread compute across zones, verify backup intent, isolate restores, and rehearse dependency-aware failover."
+      alt: "Continuity banner showing traffic distributed across zonal virtual machine instances with backup and an isolated restore network."
+    topology:
+      title: "Zonal compute and isolated restore topology"
+      caption: "A regional load balancer distributes traffic across zone-spread capacity while protected recovery uses an isolated validation network."
+      alt: "Topology showing application traffic through a load balancer to virtual machine scale set instances across zones, Azure Backup, and an isolated restore environment."
+      boundaries:
+        - {id: "production-region", label: "Production region zones"}
+        - {id: "recovery-services", label: "Recovery services"}
+        - {id: "isolated-validation", label: "Isolated restore network"}
+      nodes:
+        - {id: "traffic", label: "Appointment traffic", iconKey: "azure:load-balancers", boundaryId: "production-region"}
+        - {id: "zone-one", label: "VMSS capacity zone 1", iconKey: "azure:virtual-machine-scale-sets", boundaryId: "production-region"}
+        - {id: "zone-two", label: "VMSS capacity zone 2", iconKey: "azure:virtual-machine-scale-sets", boundaryId: "production-region"}
+        - {id: "zone-three", label: "VMSS capacity zone 3", iconKey: "azure:virtual-machine-scale-sets", boundaryId: "production-region"}
+        - {id: "backup", label: "Azure Backup policy", iconKey: "azure:recovery-services-vaults", boundaryId: "recovery-services"}
+        - {id: "restore", label: "Isolated restore validation", iconKey: "azure:virtual-network", boundaryId: "isolated-validation"}
+      edges:
+        - {from: "traffic", to: "zone-one", label: "zone-aware distribution"}
+        - {from: "traffic", to: "zone-two", label: "zone-aware distribution"}
+        - {from: "traffic", to: "zone-three", label: "zone-aware distribution"}
+        - {from: "zone-one", to: "backup", label: "policy-protected state"}
+        - {from: "backup", to: "restore", label: "isolated recovery test"}
+        - {from: "restore", to: "traffic", label: "validated rollback decision"}
+    decisionMatrix:
+      title: "Compute continuity candidate scorecard"
+      caption: "Availability domains, capacity, backup coverage, restore isolation, and operational fit come from the decision record."
+      alt: "Decision matrix comparing compute continuity patterns and highlighting zone-spread scale sets with Backup and isolated restore."
+      sourcePath: "labs/15-compute-backup-ha/design/decision.yml"
+
+  - id: "LAB-16"
+    folder: "16-relational-database-continuity"
+    paletteId: "BC"
+    banner:
+      title: "Relational Database Business Continuity"
+      eyebrow: "Business continuity · relational data"
+      caption: "Coordinate zone redundancy, cross-region failover groups, connection readiness, replication health, and failback."
+      alt: "Continuity banner showing an application listener connected to zone-redundant SQL databases in primary and secondary regions."
+    topology:
+      title: "SQL failover-group continuity topology"
+      caption: "Applications use the failover-group listener while zone-redundant databases replicate across regions and expose measurable health."
+      alt: "Topology showing an application connecting through a failover-group listener to primary and secondary Azure SQL databases with backup and replication monitoring."
+      boundaries:
+        - {id: "application-tier", label: "Reservation application"}
+        - {id: "primary-region", label: "Primary Azure region"}
+        - {id: "secondary-region", label: "Secondary Azure region"}
+        - {id: "continuity-evidence", label: "Continuity evidence"}
+      nodes:
+        - {id: "application", label: "Reservation service", iconKey: "azure:container-apps", boundaryId: "application-tier"}
+        - {id: "listener", label: "Failover-group listener", iconKey: "azure:sql-database", boundaryId: "application-tier"}
+        - {id: "primary", label: "Zone-redundant primary", iconKey: "azure:sql-database", boundaryId: "primary-region"}
+        - {id: "secondary", label: "Zone-redundant secondary", iconKey: "azure:sql-database", boundaryId: "secondary-region"}
+        - {id: "backup", label: "Database backup retention", iconKey: "azure:recovery-services-vaults", boundaryId: "continuity-evidence"}
+        - {id: "health", label: "Replication health and RPO", iconKey: "azure:monitor", boundaryId: "continuity-evidence"}
+      edges:
+        - {from: "application", to: "listener", label: "stable connection endpoint"}
+        - {from: "listener", to: "primary", label: "active database route"}
+        - {from: "primary", to: "secondary", label: "asynchronous geo-replication"}
+        - {from: "primary", to: "backup", label: "retention protection"}
+        - {from: "secondary", to: "health", label: "replication lag telemetry"}
+        - {from: "health", to: "listener", label: "failover decision evidence"}
+    decisionMatrix:
+      title: "Database continuity candidate scorecard"
+      caption: "The rendered comparison derives availability, recovery, application readiness, and operational criteria from the decision."
+      alt: "Decision matrix comparing relational continuity options and highlighting a zone-redundant Azure SQL failover group."
+      sourcePath: "labs/16-relational-database-continuity/design/decision.yml"
+
+  - id: "LAB-17"
+    folder: "17-nonrelational-data-resilience"
+    paletteId: "BC"
+    banner:
+      title: "Semi-Structured and Unstructured Data Resilience"
+      eyebrow: "Business continuity · nonrelational data"
+      caption: "Coordinate Cosmos DB multi-region writes, Blob GZRS durability, backups, and regional recovery."
+      alt: "Continuity banner showing global traffic using multi-region Cosmos DB and geo-zone-redundant Blob Storage with restore evidence."
+    topology:
+      title: "Coordinated nonrelational recovery topology"
+      caption: "Global application traffic uses multi-region document writes and durable object replication while recovery evidence covers both stores."
+      alt: "Topology showing global application traffic, Cosmos DB multi-region writes, GZRS Blob Storage, a secondary region, and backup and restore validation."
+      boundaries:
+        - {id: "global-application", label: "Global media application"}
+        - {id: "primary-data", label: "Primary data region"}
+        - {id: "secondary-data", label: "Secondary data region"}
+        - {id: "recovery-evidence", label: "Recovery evidence"}
+      nodes:
+        - {id: "traffic", label: "Global media traffic", iconKey: "azure:front-door", boundaryId: "global-application"}
+        - {id: "cosmos-primary", label: "Cosmos multi-write region", iconKey: "azure:cosmos-db", boundaryId: "primary-data"}
+        - {id: "blob-primary", label: "GZRS Blob primary", iconKey: "azure:storage-accounts", boundaryId: "primary-data"}
+        - {id: "cosmos-secondary", label: "Cosmos write region", iconKey: "azure:cosmos-db", boundaryId: "secondary-data"}
+        - {id: "blob-secondary", label: "Blob secondary copy", iconKey: "azure:storage-accounts", boundaryId: "secondary-data"}
+        - {id: "restore-proof", label: "Backup and restore proof", iconKey: "azure:recovery-services-vaults", boundaryId: "recovery-evidence"}
+      edges:
+        - {from: "traffic", to: "cosmos-primary", label: "document reads and writes"}
+        - {from: "traffic", to: "blob-primary", label: "asset reads and writes"}
+        - {from: "cosmos-primary", to: "cosmos-secondary", label: "multi-region write replication"}
+        - {from: "blob-primary", to: "blob-secondary", label: "GZRS object replication"}
+        - {from: "cosmos-secondary", to: "restore-proof", label: "document recovery exercise"}
+        - {from: "blob-secondary", to: "restore-proof", label: "object recovery exercise"}
+    decisionMatrix:
+      title: "Nonrelational resilience candidate scorecard"
+      caption: "Consistency, durability, region placement, backup, and coordinated recovery criteria are taken from the decision source."
+      alt: "Decision matrix comparing nonrelational resilience patterns and highlighting Cosmos multi-write plus GZRS Blob Storage."
+      sourcePath: "labs/17-nonrelational-data-resilience/design/decision.yml"
+
+  - id: "LAB-18"
+    folder: "18-compute-vm-batch-architecture"
+    paletteId: "INF"
+    banner:
+      title: "Compute Requirements, Virtual Machines, and Batch Architecture"
+      eyebrow: "Infrastructure · virtual machines and batch"
+      caption: "Separate available orchestration capacity from burst simulation pools and validate the design as Bicep."
+      alt: "Infrastructure banner showing zone-spread control virtual machines coordinating an autoscaled Azure Batch pool and job evidence."
+    topology:
+      title: "Zonal control and burst Batch topology"
+      caption: "A resilient control tier submits burst simulations to an autoscaled Batch pool while storage and monitoring preserve job evidence."
+      alt: "Topology showing a scheduler, zone-spread control virtual machines, Azure Batch autoscale pool, simulation storage, and operations monitoring."
+      boundaries:
+        - {id: "control-tier", label: "Zonal control tier"}
+        - {id: "batch-platform", label: "Azure Batch platform"}
+        - {id: "job-evidence", label: "Job data and evidence"}
+      nodes:
+        - {id: "scheduler", label: "Simulation scheduler", iconKey: "azure:automation-accounts", boundaryId: "control-tier"}
+        - {id: "control-vms", label: "Zone-spread control VMs", iconKey: "azure:virtual-machines", boundaryId: "control-tier"}
+        - {id: "batch-account", label: "Azure Batch account", iconKey: "azure:batch-accounts", boundaryId: "batch-platform"}
+        - {id: "batch-pool", label: "Autoscaled Batch pool", iconKey: "azure:batch-accounts", boundaryId: "batch-platform"}
+        - {id: "simulation-data", label: "Simulation input and output", iconKey: "azure:storage-accounts", boundaryId: "job-evidence"}
+        - {id: "monitoring", label: "Capacity and job telemetry", iconKey: "azure:monitor", boundaryId: "job-evidence"}
+      edges:
+        - {from: "scheduler", to: "control-vms", label: "orchestration requests"}
+        - {from: "control-vms", to: "batch-account", label: "authenticated job submission"}
+        - {from: "batch-account", to: "batch-pool", label: "autoscale and scheduling"}
+        - {from: "simulation-data", to: "batch-pool", label: "staged task inputs"}
+        - {from: "batch-pool", to: "simulation-data", label: "simulation results"}
+        - {from: "batch-pool", to: "monitoring", label: "job and capacity signals"}
+    decisionMatrix:
+      title: "Compute architecture candidate scorecard"
+      caption: "The visualization derives availability, burst scale, batch fit, operations, and cost from the lab decision record."
+      alt: "Decision matrix comparing compute patterns and highlighting zonal control virtual machines with an autoscaled Azure Batch pool."
+      sourcePath: "labs/18-compute-vm-batch-architecture/design/decision.yml"
+
+  - id: "LAB-19"
+    folder: "19-container-serverless-architecture"
+    paletteId: "INF"
+    banner:
+      title: "Container and Serverless Compute Architecture"
+      eyebrow: "Infrastructure · container and serverless compute"
+      caption: "Partition APIs, long-running workers, and event handlers across Container Apps and Azure Functions."
+      alt: "Infrastructure banner showing HTTP traffic, containerized APIs and workers, serverless handlers, messaging, and secretless identity."
+    topology:
+      title: "Container Apps and Functions topology"
+      caption: "HTTP APIs and long-running workers share a Container Apps environment while event handlers scale independently in Functions."
+      alt: "Topology showing claims traffic entering Container Apps APIs, durable messages reaching workers, events triggering Azure Functions, and managed identity accessing secrets."
+      boundaries:
+        - {id: "application-edge", label: "Claims application edge"}
+        - {id: "managed-compute", label: "Managed compute environment"}
+        - {id: "platform-dependencies", label: "Platform dependencies"}
+      nodes:
+        - {id: "http-intake", label: "HTTP claims intake", iconKey: "azure:front-door", boundaryId: "application-edge"}
+        - {id: "api", label: "Container Apps API", iconKey: "azure:container-apps", boundaryId: "managed-compute"}
+        - {id: "workers", label: "Long-running container workers", iconKey: "azure:container-apps", boundaryId: "managed-compute"}
+        - {id: "functions", label: "Event-triggered Functions", iconKey: "azure:function-apps", boundaryId: "managed-compute"}
+        - {id: "messages", label: "Durable work queue", iconKey: "azure:service-bus", boundaryId: "platform-dependencies"}
+        - {id: "identity", label: "Managed identity and secrets", iconKey: "azure:managed-identities", boundaryId: "platform-dependencies"}
+      edges:
+        - {from: "http-intake", to: "api", label: "HTTPS claim requests"}
+        - {from: "api", to: "messages", label: "durable work commands"}
+        - {from: "messages", to: "workers", label: "long-running claims work"}
+        - {from: "messages", to: "functions", label: "event-triggered handlers"}
+        - {from: "identity", to: "api", label: "secretless dependency access"}
+        - {from: "identity", to: "functions", label: "secretless dependency access"}
+    decisionMatrix:
+      title: "Managed compute candidate scorecard"
+      caption: "Execution duration, trigger model, scaling, networking, identity, and cost criteria come from the decision source."
+      alt: "Decision matrix comparing container and serverless choices and highlighting Container Apps with Azure Functions."
+      sourcePath: "labs/19-container-serverless-architecture/design/decision.yml"
+
+  - id: "LAB-20"
+    folder: "20-messaging-events-api"
+    paletteId: "INF"
+    banner:
+      title: "Messaging, Event-Driven, and API Integration Architecture"
+      eyebrow: "Infrastructure · application integration"
+      caption: "Separate durable commands, state events, telemetry streams, and governed partner APIs by interaction contract."
+      alt: "Infrastructure banner showing partner APIs, reliable commands, event fan-out, telemetry streaming, and independent consumers."
+    topology:
+      title: "Contract-specific integration topology"
+      caption: "API Management governs partners while Service Bus, Event Grid, and Event Hubs carry distinct reliability and throughput semantics."
+      alt: "Topology showing partner calls through API Management, durable commands through Service Bus, state events through Event Grid, telemetry through Event Hubs, and separate consumers."
+      boundaries:
+        - {id: "external-partners", label: "External carriers and partners"}
+        - {id: "integration-services", label: "Managed integration services"}
+        - {id: "business-consumers", label: "Business and analytical consumers"}
+      nodes:
+        - {id: "partners", label: "Partner applications", iconKey: "azure:api-management", boundaryId: "external-partners"}
+        - {id: "api", label: "API Management gateway", iconKey: "azure:api-management", boundaryId: "integration-services"}
+        - {id: "commands", label: "Service Bus commands", iconKey: "azure:service-bus", boundaryId: "integration-services"}
+        - {id: "events", label: "Event Grid state events", iconKey: "azure:event-grid", boundaryId: "integration-services"}
+        - {id: "telemetry", label: "Event Hubs telemetry", iconKey: "azure:event-hubs", boundaryId: "integration-services"}
+        - {id: "operational", label: "Order and depot workers", iconKey: "azure:function-apps", boundaryId: "business-consumers"}
+        - {id: "analytics", label: "Telemetry analytics", iconKey: "azure:synapse-analytics", boundaryId: "business-consumers"}
+      edges:
+        - {from: "partners", to: "api", label: "governed API requests"}
+        - {from: "api", to: "commands", label: "durable business commands"}
+        - {from: "commands", to: "operational", label: "ordered competing delivery"}
+        - {from: "operational", to: "events", label: "state-change publication"}
+        - {from: "events", to: "partners", label: "filtered event fan-out"}
+        - {from: "operational", to: "telemetry", label: "high-volume telemetry"}
+        - {from: "telemetry", to: "analytics", label: "partitioned event stream"}
+    decisionMatrix:
+      title: "Integration services candidate scorecard"
+      caption: "The chart reads delivery semantics, fan-out, throughput, API governance, and failure handling from the decision record."
+      alt: "Decision matrix comparing integration patterns and highlighting Service Bus, Event Grid, Event Hubs, and API Management by contract."
+      sourcePath: "labs/20-messaging-events-api/design/decision.yml"
+
+  - id: "LAB-21"
+    folder: "21-cache-configuration-delivery"
+    paletteId: "INF"
+    banner:
+      title: "Application Caching, Configuration, and Automated Delivery"
+      eyebrow: "Infrastructure · application platform"
+      caption: "Separate cache, configuration, feature, and secret concerns under a bounded progressive delivery contract."
+      alt: "Infrastructure banner showing storefront instances using Azure Managed Redis, App Configuration, Key Vault, and a guarded deployment pipeline."
+    topology:
+      title: "Cache configuration and delivery topology"
+      caption: "Storefront instances use Managed Redis and App Configuration while secrets stay in Key Vault and deployments flow through bounded stacks."
+      alt: "Topology showing a multi-region storefront connected to Azure Managed Redis, App Configuration, Key Vault, a delivery pipeline, and deployment stacks."
+      boundaries:
+        - {id: "storefront-platform", label: "Multi-region storefront"}
+        - {id: "shared-services", label: "Shared application services"}
+        - {id: "delivery-control", label: "Delivery control plane"}
+      nodes:
+        - {id: "storefront", label: "Storefront application stamps", iconKey: "azure:container-apps", boundaryId: "storefront-platform"}
+        - {id: "cache", label: "Azure Managed Redis", iconKey: "azure:managed-redis", boundaryId: "shared-services"}
+        - {id: "configuration", label: "Azure App Configuration", iconKey: "azure:app-configuration", boundaryId: "shared-services"}
+        - {id: "secrets", label: "Key Vault secrets", iconKey: "azure:key-vault", boundaryId: "shared-services"}
+        - {id: "pipeline", label: "Guarded delivery pipeline", iconKey: "azure:devops", boundaryId: "delivery-control"}
+        - {id: "deployment", label: "Bicep deployment stack", iconKey: "azure:deployment-stacks", boundaryId: "delivery-control"}
+      edges:
+        - {from: "storefront", to: "cache", label: "cache-aside catalog reads"}
+        - {from: "storefront", to: "configuration", label: "feature and configuration refresh"}
+        - {from: "storefront", to: "secrets", label: "managed-identity secret access"}
+        - {from: "pipeline", to: "deployment", label: "previewed infrastructure change"}
+        - {from: "deployment", to: "storefront", label: "progressive regional rollout"}
+        - {from: "deployment", to: "configuration", label: "bounded configuration release"}
+    decisionMatrix:
+      title: "Application platform candidate scorecard"
+      caption: "Cache behavior, configuration separation, secret handling, delivery safety, and cost are derived from the decision source."
+      alt: "Decision matrix comparing application platform options and highlighting Managed Redis, App Configuration, and Bicep deployment stacks."
+      sourcePath: "labs/21-cache-configuration-delivery/design/decision.yml"
+
+  - id: "LAB-22"
+    folder: "22-migration-strategy-assessment"
+    paletteId: "INF"
+    banner:
+      title: "Migration Strategy and Portfolio Assessment"
+      eyebrow: "Infrastructure · migration strategy"
+      caption: "Turn business outcomes, inventory quality, dependencies, rationalization, and readiness into migration waves."
+      alt: "Infrastructure banner showing a datacenter portfolio moving through discovery, dependency mapping, rationalization, business case, and landing-zone gates."
+    topology:
+      title: "Outcome-led migration assessment topology"
+      caption: "A quality-checked inventory and dependency graph support rationalization, wave formation, business case, and landing-zone entry criteria."
+      alt: "Topology showing on-premises portfolio discovery, dependency assessment, application rationalization, migration waves, business case, and landing-zone readiness."
+      boundaries:
+        - {id: "source-portfolio", label: "On-premises portfolio"}
+        - {id: "assessment-factory", label: "Assessment and rationalization"}
+        - {id: "cloud-readiness", label: "Cloud readiness gate"}
+      nodes:
+        - {id: "inventory", label: "Quality-checked inventory", iconKey: "azure:migrate", boundaryId: "source-portfolio"}
+        - {id: "dependencies", label: "Dependency and readiness map", iconKey: "azure:migrate", boundaryId: "assessment-factory"}
+        - {id: "rationalization", label: "Application rationalization", iconKey: "azure:policy", boundaryId: "assessment-factory"}
+        - {id: "waves", label: "Dependency-based waves", iconKey: "azure:migrate", boundaryId: "assessment-factory"}
+        - {id: "business-case", label: "Outcome and business case", iconKey: "azure:cost-management", boundaryId: "cloud-readiness"}
+        - {id: "landing-zone", label: "Landing-zone entry criteria", iconKey: "azure:management-groups", boundaryId: "cloud-readiness"}
+      edges:
+        - {from: "inventory", to: "dependencies", label: "discovery evidence"}
+        - {from: "dependencies", to: "rationalization", label: "technical and business constraints"}
+        - {from: "rationalization", to: "waves", label: "disposition and sequence"}
+        - {from: "waves", to: "business-case", label: "cost and outcome model"}
+        - {from: "business-case", to: "landing-zone", label: "approved readiness gate"}
+    decisionMatrix:
+      title: "Migration strategy candidate scorecard"
+      caption: "Portfolio evidence, framework alignment, dependency sequencing, outcomes, and readiness are rendered from the decision record."
+      alt: "Decision matrix comparing migration assessment strategies and highlighting Cloud Adoption Framework outcome-led dependency waves."
+      sourcePath: "labs/22-migration-strategy-assessment/design/decision.yml"
+
+  - id: "LAB-23"
+    folder: "23-workload-data-migration"
+    paletteId: "INF"
+    banner:
+      title: "IaaS, PaaS, Database, and Unstructured Data Migration"
+      eyebrow: "Infrastructure · migration execution"
+      caption: "Coordinate server replication, online database migration, staged object transfer, cutover validation, and rollback."
+      alt: "Infrastructure banner showing VMware servers, SQL databases, and engineering files using distinct migration paths to Azure targets."
+    topology:
+      title: "Multi-workload migration topology"
+      caption: "Azure Migrate, Database Migration Service, and AzCopy move each workload type through its appropriate staged path."
+      alt: "Topology showing VMware servers moving through Azure Migrate, SQL Server through Database Migration Service, and files through AzCopy to separate Azure targets."
+      boundaries:
+        - {id: "source-datacenter", label: "Approved migration wave"}
+        - {id: "migration-fabric", label: "Migration tooling and staging"}
+        - {id: "azure-targets", label: "Validated Azure targets"}
+      nodes:
+        - {id: "source-wave", label: "VMware SQL and file sources", iconKey: "azure:arc", boundaryId: "source-datacenter"}
+        - {id: "server-migration", label: "Azure Migrate replication", iconKey: "azure:migrate", boundaryId: "migration-fabric"}
+        - {id: "database-migration", label: "Database Migration Service", iconKey: "azure:database-migration-services", boundaryId: "migration-fabric"}
+        - {id: "file-transfer", label: "Staged AzCopy transfer", iconKey: "azure:storage-accounts", boundaryId: "migration-fabric"}
+        - {id: "compute-target", label: "IaaS and PaaS targets", iconKey: "azure:virtual-machines", boundaryId: "azure-targets"}
+        - {id: "database-target", label: "Managed database target", iconKey: "azure:sql-database", boundaryId: "azure-targets"}
+        - {id: "storage-target", label: "Verified object target", iconKey: "azure:storage-accounts", boundaryId: "azure-targets"}
+      edges:
+        - {from: "source-wave", to: "server-migration", label: "server discovery and replication"}
+        - {from: "source-wave", to: "database-migration", label: "online database stream"}
+        - {from: "source-wave", to: "file-transfer", label: "staged file copy"}
+        - {from: "server-migration", to: "compute-target", label: "test migration and cutover"}
+        - {from: "database-migration", to: "database-target", label: "validated database cutover"}
+        - {from: "file-transfer", to: "storage-target", label: "hash-verified object transfer"}
+    decisionMatrix:
+      title: "Migration execution candidate scorecard"
+      caption: "The visual reads workload fit, downtime, integrity, target readiness, cutover, and rollback criteria from the decision."
+      alt: "Decision matrix comparing workload migration patterns and highlighting Azure Migrate, Database Migration Service, and staged AzCopy."
+      sourcePath: "labs/23-workload-data-migration/design/decision.yml"
+
+  - id: "LAB-24"
+    folder: "24-internet-hybrid-connectivity"
+    paletteId: "INF"
+    banner:
+      title: "Internet and Hybrid Connectivity with Network Performance"
+      eyebrow: "Infrastructure · global and hybrid connectivity"
+      caption: "Combine accelerated public entry, resilient private circuits, VPN failover, transit routing, DNS, and capacity evidence."
+      alt: "Infrastructure banner showing global clients entering Front Door and datacenters connecting through redundant ExpressRoute and VPN into Azure transit."
+    topology:
+      title: "Global edge and hybrid transit topology"
+      caption: "Front Door accelerates internet entry while dual ExpressRoute circuits, VPN failover, and Virtual WAN provide governed hybrid transit."
+      alt: "Topology showing global clients through Front Door, two datacenters through dual ExpressRoute and VPN backup, Virtual WAN transit, private DNS, and monitoring."
+      boundaries:
+        - {id: "global-edge", label: "Global internet edge"}
+        - {id: "hybrid-connections", label: "Hybrid connectivity"}
+        - {id: "azure-transit", label: "Azure transit and operations"}
+      nodes:
+        - {id: "front-door", label: "Front Door Premium", iconKey: "azure:front-door", boundaryId: "global-edge"}
+        - {id: "datacenters", label: "Two private datacenters", iconKey: "azure:arc", boundaryId: "hybrid-connections"}
+        - {id: "expressroute", label: "Dual ExpressRoute circuits", iconKey: "azure:expressroute-circuits", boundaryId: "hybrid-connections"}
+        - {id: "vpn", label: "VPN failover path", iconKey: "azure:virtual-network-gateways", boundaryId: "hybrid-connections"}
+        - {id: "virtual-wan", label: "Virtual WAN transit", iconKey: "azure:virtual-wans", boundaryId: "azure-transit"}
+        - {id: "dns", label: "Private name resolution", iconKey: "azure:dns-private-resolver", boundaryId: "azure-transit"}
+        - {id: "performance", label: "Capacity and latency signals", iconKey: "azure:network-watcher", boundaryId: "azure-transit"}
+      edges:
+        - {from: "front-door", to: "virtual-wan", label: "accelerated public application path"}
+        - {from: "datacenters", to: "expressroute", label: "primary private connectivity"}
+        - {from: "datacenters", to: "vpn", label: "encrypted failover connectivity"}
+        - {from: "expressroute", to: "virtual-wan", label: "private circuit transit"}
+        - {from: "vpn", to: "virtual-wan", label: "backup transit path"}
+        - {from: "virtual-wan", to: "dns", label: "hybrid name resolution"}
+        - {from: "virtual-wan", to: "performance", label: "reachability and capacity telemetry"}
+    decisionMatrix:
+      title: "Connectivity architecture candidate scorecard"
+      caption: "Global performance, private resilience, routing ownership, DNS, capacity, and cost are derived from the decision source."
+      alt: "Decision matrix comparing connectivity patterns and highlighting Front Door, dual ExpressRoute, VPN failover, and Virtual WAN."
+      sourcePath: "labs/24-internet-hybrid-connectivity/design/decision.yml"
+
+  - id: "LAB-25"
+    folder: "25-network-security-traffic-delivery"
+    paletteId: "INF"
+    banner:
+      title: "Network Security, Load Balancing, and Traffic Routing"
+      eyebrow: "Infrastructure · secure traffic delivery"
+      caption: "Layer global and regional WAF, centralized inspection, private load balancing, and explicit outbound connectivity."
+      alt: "Infrastructure banner showing Front Door, Application Gateway WAF, Azure Firewall, private load balancing, and NAT Gateway through a hub and spoke network."
+    topology:
+      title: "Layered ingress inspection and egress topology"
+      caption: "Global HTTP traffic crosses two WAF layers before private services, while Firewall and NAT Gateway make inspection and outbound behavior explicit."
+      alt: "Topology showing Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, a private Standard Load Balancer, application spokes, and NAT Gateway."
+      boundaries:
+        - {id: "global-edge", label: "Global security edge"}
+        - {id: "hub-network", label: "Central inspection hub"}
+        - {id: "application-spokes", label: "Private application spokes"}
+      nodes:
+        - {id: "front-door", label: "Front Door Premium WAF", iconKey: "azure:front-door", boundaryId: "global-edge"}
+        - {id: "app-gateway", label: "Application Gateway WAF v2", iconKey: "azure:application-gateways", boundaryId: "hub-network"}
+        - {id: "firewall", label: "Azure Firewall Premium", iconKey: "azure:firewalls", boundaryId: "hub-network"}
+        - {id: "load-balancer", label: "Private Standard Load Balancer", iconKey: "azure:load-balancers", boundaryId: "application-spokes"}
+        - {id: "applications", label: "Segmented clinical APIs", iconKey: "azure:container-apps", boundaryId: "application-spokes"}
+        - {id: "nat-gateway", label: "Explicit NAT Gateway egress", iconKey: "azure:nat-gateways", boundaryId: "application-spokes"}
+      edges:
+        - {from: "front-door", to: "app-gateway", label: "global TLS and WAF policy"}
+        - {from: "app-gateway", to: "firewall", label: "regional inspected ingress"}
+        - {from: "firewall", to: "load-balancer", label: "allowed private flow"}
+        - {from: "load-balancer", to: "applications", label: "private service distribution"}
+        - {from: "applications", to: "nat-gateway", label: "explicit outbound path"}
+        - {from: "nat-gateway", to: "firewall", label: "governed egress inspection"}
+    decisionMatrix:
+      title: "Secure traffic delivery candidate scorecard"
+      caption: "Segmentation, inspection, WAF coverage, private distribution, explicit egress, and failure behavior come from the decision."
+      alt: "Decision matrix comparing network security patterns and highlighting layered Front Door, Application Gateway, Firewall, Load Balancer, and NAT."
+      sourcePath: "labs/25-network-security-traffic-delivery/design/decision.yml"
+
+  - id: "LAB-26"
+    folder: "26-capstone-greenfield-platform"
+    paletteId: "CAPSTONE"
+    banner:
+      title: "Greenfield Multi-Region Digital Platform"
+      eyebrow: "Capstone · integrated greenfield architecture"
+      caption: "Integrate external identity, active-active application stamps, coordinated data, observability, policy, and failure simulation."
+      alt: "Capstone banner showing global identity and edge services distributing traffic to two governed application regions with coordinated data and telemetry."
+    topology:
+      title: "Active-active regulated platform topology"
+      caption: "External ID and Front Door govern global entry into two regional PaaS stamps backed by coordinated data, policy, and observability."
+      alt: "Topology showing Microsoft Entra External ID, Front Door Premium, active application stamps in West and North Europe, coordinated data, policy guardrails, and monitoring."
+      boundaries:
+        - {id: "global-services", label: "Global identity and edge"}
+        - {id: "west-region", label: "West Europe application stamp"}
+        - {id: "north-region", label: "North Europe application stamp"}
+        - {id: "platform-governance", label: "Shared governance and evidence"}
+      nodes:
+        - {id: "external-id", label: "Microsoft Entra External ID", iconKey: "entra:external-identities", boundaryId: "global-services"}
+        - {id: "front-door", label: "Front Door Premium", iconKey: "azure:front-door", boundaryId: "global-services"}
+        - {id: "west-app", label: "West Europe PaaS stamp", iconKey: "azure:container-apps", boundaryId: "west-region"}
+        - {id: "north-app", label: "North Europe PaaS stamp", iconKey: "azure:container-apps", boundaryId: "north-region"}
+        - {id: "global-data", label: "Globally coordinated data", iconKey: "azure:cosmos-db", boundaryId: "platform-governance"}
+        - {id: "policy", label: "Landing-zone policy guardrails", iconKey: "azure:policy", boundaryId: "platform-governance"}
+        - {id: "observability", label: "Cross-region observability", iconKey: "azure:monitor", boundaryId: "platform-governance"}
+      edges:
+        - {from: "external-id", to: "front-door", label: "customer authentication context"}
+        - {from: "front-door", to: "west-app", label: "healthy global route"}
+        - {from: "front-door", to: "north-app", label: "healthy global route"}
+        - {from: "west-app", to: "global-data", label: "regional data operations"}
+        - {from: "north-app", to: "global-data", label: "regional data operations"}
+        - {from: "policy", to: "west-app", label: "deployment guardrails"}
+        - {from: "policy", to: "north-app", label: "deployment guardrails"}
+        - {from: "west-app", to: "observability", label: "regional telemetry"}
+        - {from: "north-app", to: "observability", label: "regional telemetry"}
+        - {from: "observability", to: "front-door", label: "failure simulation evidence"}
+    decisionMatrix:
+      title: "Greenfield platform candidate scorecard"
+      caption: "The chart integrates weighted identity, data, continuity, infrastructure, cost, and policy criteria from the capstone decision record."
+      alt: "Decision matrix comparing greenfield platform architectures and highlighting active-active regional PaaS stamps behind Front Door Premium."
+      sourcePath: "labs/26-capstone-greenfield-platform/design/decision.yml"
+
+  - id: "LAB-27"
+    folder: "27-capstone-hybrid-modernization"
+    paletteId: "CAPSTONE"
+    banner:
+      title: "Hybrid Modernization and Migration"
+      eyebrow: "Capstone · integrated hybrid modernization"
+      caption: "Coordinate evidence, rationalization, coexistence, landing-zone controls, migration waves, resilience, and decommissioning."
+      alt: "Capstone banner showing a hybrid estate moving through Arc-enabled discovery and migration waves into governed PaaS and data targets."
+    topology:
+      title: "Dependency-wave hybrid modernization topology"
+      caption: "Arc and assessment evidence shape coexistence and migration waves into governed platform targets with continuity and decommission gates."
+      alt: "Topology showing an on-premises hybrid estate, Azure Arc evidence, dependency-based migration waves, managed application and data targets, recovery controls, and decommission review."
+      boundaries:
+        - {id: "hybrid-estate", label: "On-premises and branch estate"}
+        - {id: "coexistence-control", label: "Hybrid coexistence and migration"}
+        - {id: "cloud-landing-zone", label: "Governed Azure landing zone"}
+        - {id: "release-evidence", label: "Continuity and release evidence"}
+      nodes:
+        - {id: "portfolio", label: "VMware branch SQL and files", iconKey: "azure:arc", boundaryId: "hybrid-estate"}
+        - {id: "arc-evidence", label: "Azure Arc evidence plane", iconKey: "azure:arc", boundaryId: "coexistence-control"}
+        - {id: "migration-waves", label: "Dependency-based migration waves", iconKey: "azure:migrate", boundaryId: "coexistence-control"}
+        - {id: "application-targets", label: "Managed PaaS application targets", iconKey: "azure:container-apps", boundaryId: "cloud-landing-zone"}
+        - {id: "data-targets", label: "Managed database and storage targets", iconKey: "azure:sql-database", boundaryId: "cloud-landing-zone"}
+        - {id: "continuity", label: "Recovery and security injects", iconKey: "azure:recovery-services-vaults", boundaryId: "release-evidence"}
+        - {id: "decommission", label: "Release and decommission review", iconKey: "azure:policy", boundaryId: "release-evidence"}
+      edges:
+        - {from: "portfolio", to: "arc-evidence", label: "inventory and policy evidence"}
+        - {from: "arc-evidence", to: "migration-waves", label: "dependencies and readiness"}
+        - {from: "migration-waves", to: "application-targets", label: "application modernization sequence"}
+        - {from: "migration-waves", to: "data-targets", label: "database and file migration sequence"}
+        - {from: "application-targets", to: "continuity", label: "application recovery evidence"}
+        - {from: "data-targets", to: "continuity", label: "data protection evidence"}
+        - {from: "continuity", to: "decommission", label: "validated release gate"}
+        - {from: "decommission", to: "portfolio", label: "approved retirement scope"}
+    decisionMatrix:
+      title: "Hybrid modernization candidate scorecard"
+      caption: "The visual derives coexistence, dependency sequencing, target modernization, continuity, security, and decommission criteria from the decision."
+      alt: "Decision matrix comparing hybrid modernization patterns and highlighting Arc-informed dependency waves into governed PaaS targets."
+      sourcePath: "labs/27-capstone-hybrid-modernization/design/decision.yml"
