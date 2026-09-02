@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-16
+number: 16
+slug: 16-relational-database-continuity
+title: Relational Database Business Continuity
+domain: business-continuity
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Relational data continuity architect
+outcome: Select and validate a relational continuity pattern that covers zonal availability, regional failover,
+  application connectivity, data loss, and controlled failback.
+duration: 150 minutes
+difficulty: advanced
+costClass: low
+permissions: SQL account and failover configuration read access supports assessment; database creation, replication,
+  failover, DNS, or connection changes require separate authorization.
+licensing: Primary and secondary database compute, backup storage, zone redundancy, geo-replication traffic, and
+  test capacity affect price.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+objectives:
+  primary:
+  - BC-DR-03
+  - BC-HA-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApplicationSqlEndpoint
+- DatabaseName
+- DatabaseResourceId
+- FailoverGroupName
+- ResourceGroupName
+- SqlServerName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB16-CP01
+  title: Baseline database tier and availability settings
+  requirementIds:
+  - LAB16-REQ-01
+  objectiveIds:
+  - BC-DR-03
+- id: LAB16-CP02
+  title: Validate failover-group topology
+  requirementIds:
+  - LAB16-REQ-02
+  objectiveIds:
+  - BC-HA-02
+- id: LAB16-CP03
+  title: Prove connection and dependency readiness
+  requirementIds:
+  - LAB16-REQ-03
+  objectiveIds:
+  - BC-DR-03
+- id: LAB16-CP04
+  title: Measure replication health against RPO
+  requirementIds:
+  - LAB16-REQ-04
+  objectiveIds:
+  - BC-HA-02
+- id: LAB16-CP05
+  title: Rehearse failover decision and failback
+  requirementIds:
+  - LAB16-REQ-05
+  objectiveIds:
+  - BC-DR-03
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

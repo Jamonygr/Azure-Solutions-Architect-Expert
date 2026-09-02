@@ -1,0 +1,143 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-17
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 4
+    C4: 4
+    C5: 5
+  weightedTotal: 93.0
+  rationale: Multi-write Cosmos DB supports global editorial availability and explicit conflicts while GZRS protects
+    and serves public objects.
+- id: CAND-B
+  name: Single write region with secondary reads plus RA-GRS Blob Storage and manual failover
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 3
+    C3: 4
+    C4: 3
+    C5: 4
+  weightedTotal: 72.0
+  rationale: A single writer simplifies consistency and cost, but manual promotion increases outage and accepted-write
+    risk.
+- id: CAND-C
+  name: Independent regional data stacks synchronized by an application-owned event log
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 5
+    C4: 2
+    C5: 2
+  weightedTotal: 74.0
+  rationale: Independent stacks can enforce geography boundaries precisely but transfer ordering, replay, and conflict
+    correctness to application code.
+- id: CAND-D
+  name: Replicate every document and media object to all regions
+  eligible: false
+  disqualifiers:
+  - LAB17-REQ-03 requires explicit object-replication boundaries and documented geography behavior.
+  scores:
+    C1: 1
+    C2: 5
+    C3: 1
+    C4: 4
+    C5: 2
+  weightedTotal: 51.0
+  rationale: Universal replication maximizes reach but ignores content-specific legal boundaries and egress cost.
+selectedCandidate: Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage
+rejectedAlternatives:
+- candidate: Single write region with secondary reads plus RA-GRS Blob Storage and manual failover
+  reason: Its slower recovery and manual decision path are weaker for active global editorial operations.
+- candidate: Independent regional data stacks synchronized by an application-owned event log
+  reason: The custom synchronization burden is not justified before the new restricted-content boundary appears.
+- candidate: Replicate every document and media object to all regions
+  reason: It is disqualified because restricted-document replication would breach the mandatory rights agreement.
+risks:
+- risk: Misclassification can send a restricted document into globally replicated public storage.
+  mitigation: Enforce classification at ingestion and assert account, container, and replication placement before
+    publication.
+- risk: Multi-write conflict resolution can preserve a technically valid but editorially wrong version.
+  mitigation: Use deterministic domain rules, retain conflicting versions, and require an editor-owned reconciliation
+    workflow.
+waf:
+  reliability: Multi-region document writes and global public media delivery reduce regional outage while exposing
+    conflict behavior.
+  security: Classification and country-bound storage keep rights-controlled content out of global replication paths.
+  costOptimization: Replication and throughput are allocated by content class instead of copying every object worldwide.
+  operationalExcellence: Conflict, classification, failover, and publication evidence make regional recovery auditable.
+  performanceEfficiency: Public objects use globally distributed retrieval while restricted content avoids unnecessary
+    egress and replicas.
+safeAnalogue: Simulate classification, conflict resolution, regional unavailability, and public-media timing with
+  synthetic documents and object manifests.
+traceability:
+- objectiveId: BC-DR-04
+  requirementId: LAB17-REQ-01
+  checkpointId: LAB17-CP01
+- objectiveId: BC-HA-03
+  requirementId: LAB17-REQ-02
+  checkpointId: LAB17-CP02
+- objectiveId: BC-DR-04
+  requirementId: LAB17-REQ-03
+  checkpointId: LAB17-CP03
+- objectiveId: BC-HA-03
+  requirementId: LAB17-REQ-04
+  checkpointId: LAB17-CP04
+- objectiveId: BC-DR-04
+  requirementId: LAB17-REQ-05
+  checkpointId: LAB17-CP05
+adr:
+  id: ADR-LAB17-001
+  status: accepted
+  context: Adventure Works Media stores personalization documents in Azure Cosmos DB and millions of production
+    assets in Azure Blob Storage. The service has grown across continents, but the current design confuses durability
+    with availability and has no consistent method to demonstrate RPO, restore integrity, or application behavior
+    when a write region is unavailable. Legal policy requires assets for one market to remain within an approved
+    geography, while editorial teams need rapid access to current metadata. Running duplicate high-scale accounts
+    solely for a lab is unjustified. The team will use Azure PowerShell discovery and synthetic evidence to design
+    a safe analogue for multi-region reads, controlled writes, backup recovery, and storage-account failover.
+  decision: 'Select Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage: Multi-write Cosmos
+    DB supports global editorial availability and explicit conflicts while GZRS protects and serves public objects.'
+  consequences:
+  - Storage topology becomes content-class aware and publishing must verify the classification boundary.
+  - Editors own conflict outcomes; infrastructure health alone cannot declare recovery successful.
+revisedDecision:
+  changeRequestId: LAB17-CR-01
+  selectedCandidate: Independent regional data stacks synchronized by an application-owned event log
+  reason: LAB17-REQ-03 makes object replication boundaries explicit, so restricted documents move to an independent
+    in-country stack while public media remains globally distributed.
+  mandatoryRequirementId: LAB17-REQ-03
+  waf:
+    reliability: Public media stays multi-region while restricted content accepts the documented in-country failure
+      domain.
+    security: Rights-controlled bytes never enter the cross-region event or blob replication path.
+    costOptimization: Only globally consumable media carries worldwide replication and egress cost.
+    operationalExcellence: Classification and event-contract tests become mandatory publication gates.
+    performanceEfficiency: Edge-served public media meets the two-second target without exporting restricted documents.
+# END GENERATED AZ305 V1

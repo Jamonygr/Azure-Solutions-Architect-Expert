@@ -1,0 +1,146 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-14
+implementationMode: design-simulation
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 4
+    C4: 4
+    C5: 4
+  weightedTotal: 91.0
+  rationale: Tiering maps recovery technology and retained capacity to business targets while keeping residency
+    and dependency decisions explicit.
+- id: CAND-B
+  name: Uniform paired-region warm standby for every business service
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 5
+    C3: 3
+    C4: 4
+    C5: 1
+  weightedTotal: 69.0
+  rationale: Uniform standby simplifies a headline recovery pattern but overfunds low tiers and can cross regulated
+    data boundaries.
+- id: CAND-C
+  name: Active-active deployment across two Azure regions with independent factory edges
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 5
+    C3: 3
+    C4: 2
+    C5: 1
+  weightedTotal: 63.0
+  rationale: Active-active minimizes outage for suitable services but requires conflict handling, duplicate capacity,
+    and independent edge operations.
+- id: CAND-D
+  name: Untested backup-only plan with no dependency or business validation
+  eligible: false
+  disqualifiers:
+  - LAB14-REQ-05 requires measured end-to-end recovery against tier RTO and RPO objectives.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 3
+    C4: 1
+    C5: 4
+  weightedTotal: 34.0
+  rationale: Backup retention preserves copies but does not prove sequencing, application usability, capacity, or
+    business acceptance.
+selectedCandidate: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+rejectedAlternatives:
+- candidate: Uniform paired-region warm standby for every business service
+  reason: It spends continuously on workloads that tolerate slower recovery and weakens residency fit.
+- candidate: Active-active deployment across two Azure regions with independent factory edges
+  reason: Its cost and operational complexity exceed most tiers and do not inherently solve residency constraints.
+- candidate: Untested backup-only plan with no dependency or business validation
+  reason: It is disqualified because restore media alone cannot satisfy end-to-end recovery evidence.
+risks:
+- risk: Shared identity or network dependencies can consume most of the forty-five-minute Tier 1 window.
+  mitigation: Place prerequisites in recovery wave zero, assign decision timestamps, and measure their degraded-mode
+    startup independently.
+- risk: Warm in-boundary capacity can sit idle and be removed during cost optimization.
+  mitigation: Tag the capacity to the Tier 1 objective, include it in exercises, and report its cost as an explicit
+    resilience control.
+waf:
+  reliability: Dependency waves and tier-specific mechanisms align recovery behavior with validated business targets.
+  security: Residency, privileged recovery identities, and isolated evidence remain explicit in every recovery pattern.
+  costOptimization: Warm capacity is limited to Tier 1 while slower tiers use lower-cost protection that meets their
+    objectives.
+  operationalExcellence: Timed authority, technical, communication, and business gates expose where recovery actually
+    spends time.
+  performanceEfficiency: Degraded-mode sizing reserves enough in-boundary capacity for Tier 1 without duplicating
+    peak capacity everywhere.
+safeAnalogue: Traverse the synthetic dependency graph, inject failed approvals and services, and calculate recovery
+  waves locally without issuing Azure queries.
+traceability:
+- objectiveId: BC-DR-01
+  requirementId: LAB14-REQ-01
+  checkpointId: LAB14-CP01
+- objectiveId: BC-DR-01
+  requirementId: LAB14-REQ-02
+  checkpointId: LAB14-CP02
+- objectiveId: BC-DR-01
+  requirementId: LAB14-REQ-03
+  checkpointId: LAB14-CP03
+- objectiveId: BC-DR-01
+  requirementId: LAB14-REQ-04
+  checkpointId: LAB14-CP04
+- objectiveId: BC-DR-01
+  requirementId: LAB14-REQ-05
+  checkpointId: LAB14-CP05
+adr:
+  id: ADR-LAB14-001
+  status: accepted
+  context: Contoso Industrial operates production-planning services in Azure and two factories that still host latency-sensitive
+    control applications on VMware. A recent regional network incident exposed that recovery plans were organized
+    by technology rather than by business service. The executive resilience committee now requires a single strategy
+    that classifies workloads, maps dependencies, assigns measurable recovery time and recovery point objectives,
+    and distinguishes backup, high availability, disaster recovery, and cyber-recovery controls. Data residency
+    limits cross-border replication, factory connectivity is intermittent, and the annual resilience budget cannot
+    support active-active deployment for every workload. The architecture must be testable without failing over
+    production systems or provisioning the expensive target estate.
+  decision: 'Select Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication:
+    Tiering maps recovery technology and retained capacity to business targets while keeping residency and dependency
+    decisions explicit.'
+  consequences:
+  - Tier owners must fund and exercise the recovery mechanism attached to their declared objective.
+  - Tier 1 accepts warm capacity cost and residual same-geography correlated risk to preserve residency.
+revisedDecision:
+  changeRequestId: LAB14-CR-01
+  selectedCandidate: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+  reason: LAB14-REQ-05 now requires a forty-five-minute Tier 1 recovery without cross-border replication, so tiering
+    is retained with warm capacity inside the approved geography and faster orchestration gates.
+  mandatoryRequirementId: LAB14-REQ-05
+  waf:
+    reliability: Warm Tier 1 capacity removes provisioning from the critical recovery path.
+    security: Data remains within the approved geography and emergency identities stay time-bound.
+    costOptimization: Only Tier 1 carries the new standby premium.
+    operationalExcellence: Shorter authority and dependency gates require more frequent timed exercises.
+    performanceEfficiency: Degraded-mode capacity is sized to the recovery load rather than ordinary peak demand.
+# END GENERATED AZ305 V1

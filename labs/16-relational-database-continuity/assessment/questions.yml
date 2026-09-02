@@ -1,0 +1,1831 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-16
+questions:
+- id: LAB16-Q01
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'The implementation review has reached ''Baseline database tier and availability settings''. Approval requires
+    a positive result plus this independent negative assertion: A regional design based on a tier that cannot satisfy
+    the local availability requirement must fail before failover planning. Which recommendation supplies the acceptance
+    rule that makes LAB16-REQ-01 testable?'
+  options:
+    A: Select Active geo-replication with application-managed endpoints and failover before checking Baseline database
+      tier and availability settings; as an independent condition, use as justification the claim that a successful
+      deployment will later prove the architecture constraint.
+    B: Use the passing result from Validate failover-group topology to approve Baseline database tier and availability
+      settings; before closing the checkpoint, accept without proof that one control establishes an unrelated acceptance
+      boundary.
+    C: Choose SQL Server on Azure Virtual Machines with an Always On availability group and skip the Baseline database
+      tier and availability settings negative assertion. Then, rely on the claim that the candidate has the lowest
+      implementation effort.
+    D: Require the documented positive state for Baseline database tier and availability settings; for this decision,
+      verify that a regional design based on a tier that cannot satisfy the local availability requirement must
+      fail before failover planning.
+  answer: D
+  explanations:
+    A: The retained result must be reconciled with the fact that a regional design based on a tier that cannot satisfy
+      the local availability requirement must fail before failover planning. Consequently, a deployment result cannot
+      prove LAB16-REQ-01, and Active geo-replication with application-managed endpoints and failover still has to
+      meet the mandatory boundary.
+    B: The decision tension comes from the fact that the partner region, database membership, endpoint policy, grace
+      period, residency, and capacity assumptions match the approved design. Consequently, that outcome belongs
+      to Validate failover-group topology and leaves Baseline database tier and availability settings unverified.
+    C: The safe operating boundary says that preserve ticket sales and prevent overselling during zone or region
+      disruption while meeting the five-minute RPO. Consequently, implementation effort cannot justify skipping
+      the negative assertion or displace LAB16-REQ-01.
+    D: 'The review is governed by this fact: the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. Consequently, the positive state and
+      an independent negative assertion jointly make LAB16-REQ-01 testable.'
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q02
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: The approach to 'Baseline database tier and availability settings' is challenged by database engineering
+    lead. The selected architecture is Azure SQL Database failover group with zone-redundant primary and secondary
+    databases; object existence alone is not success. Choose the intended successful finding.
+  options:
+    A: Use only the negative assertion 'A regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning' as the success result, and then use the premise that absence
+      proves every required positive property.
+    B: Record the baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints,
+      dependencies, and observed workload demand. Then, classify it as success for LAB16-REQ-01.
+    C: Use the successful finding from Prove connection and dependency readiness as the result for Baseline database
+      tier and availability settings. Also, consider it sufficient that a property from the current checkpoint does
+      not need to be inspected.
+    D: Record the failure condition 'Unsupported tier or region combinations can invalidate the selected continuity
+      pattern' as a successful state; in a separate step, take it as conclusive that the command returned an object.
+  answer: B
+  explanations:
+    A: The failure model establishes that a regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning. Consequently, this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: The traceable checkpoint outcome is that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. Consequently, this is the authored target
+      state for Baseline database tier and availability settings and directly supports LAB16-REQ-01.
+    C: The recovery guidance assumes that applications use the read-write listener, retry transient failures, preserve
+      idempotency, and can reach every regional dependency after redirection. Consequently, evidence for Prove connection
+      and dependency readiness cannot substitute for the properties required at Baseline database tier and availability
+      settings.
+    D: The WAF consequence identifies that unsupported tier or region combinations can invalidate the selected continuity
+      pattern. Consequently, resource existence or command output does not convert the documented failure condition
+      into success.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q03
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'A decision test for ''Baseline database tier and availability settings'' includes payment compliance officer.
+    Evidence must address this risk without retaining credentials: Unsupported tier or region combinations can invalidate
+    the selected continuity pattern. Which answer describes sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Measure replication health against RPO for Baseline database tier and availability
+      settings. In addition, rely on the belief that a related checkpoint proves the current expected state.
+    B: Retain store the normalized database configuration and the requirement-to-capability comparison. Next, exclude
+      credentials and unrelated response fields.
+    C: Store unredacted Baseline database tier and availability settings output with operator, tenant, token, and
+      request context; before approval, proceed on the belief that reproduction requires every captured field.
+    D: Record only the Baseline database tier and availability settings positive inspection's exit status. Separately,
+      treat as decisive the assertion that projected properties and assertion results can be reconstructed later.
+  answer: B
+  explanations:
+    A: archive metric samples, transaction watermarks, timestamps, and the calculated worst-case data-loss interval.
+      For this case, that evidence supports Measure replication health against RPO, so it cannot demonstrate The
+      baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies,
+      and observed workload demand.
+    B: The command-level assertion is anchored in the fact that store the normalized database configuration and
+      the requirement-to-capability comparison. Consequently, it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+    C: The controlling fact is that unredacted implementation output. For this case, identity, tenant, or token
+      material exceeds the non-secret evidence contract.
+    D: The authored acceptance boundary states that the positive inspection's exit status. For this case, an exit
+      code alone does not show whether the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q04
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: The architecture board reconsiders 'Baseline database tier and availability settings' with site reliability
+    engineering lead. The target is The baseline identifies service tier, zone redundancy, backup redundancy, maintenance
+    constraints, dependencies, and observed workload demand, but the latest evidence does not show it. What should
+    be recorded as the most likely cause?
+  options:
+    A: Treat 'Premature failback can cause a second outage or overwrite the most current data path' as grounds to
+      reject Baseline database tier and availability settings. Then, treat it as established that rehearse failover
+      decision and failback's failure model applies unchanged here.
+    B: Ignore the negative assertion 'A regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning'; afterward, use as justification the claim that a later material
+      change will make it unnecessary.
+    C: Investigate Validate failover-group topology instead of diagnosing Baseline database tier and availability
+      settings; then accept without proof that a passing result at Validate failover-group topology identifies the
+      current cause.
+    D: Investigate unsupported tier or region combinations can invalidate the selected continuity pattern. As another
+      control, isolate that cause before changing Azure SQL Database failover group with zone-redundant primary
+      and secondary databases.
+  answer: D
+  explanations:
+    A: The checkpoint specifically records that premature failback can cause a second outage or overwrite the most
+      current data path. For this case, that condition belongs to Rehearse failover decision and failback and does
+      not by itself invalidate Azure SQL Database failover group with zone-redundant primary and secondary databases.
+    B: The scenario makes clear that a regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning. For this case, the negative assertion must be evaluated now,
+      independent of a later business change.
+    C: The architecture evidence must show that the partner region, database membership, endpoint policy, grace
+      period, residency, and capacity assumptions match the approved design. For this case, a passing result at
+      Validate failover-group topology gives no causal evidence for the failure at Baseline database tier and availability
+      settings.
+    D: The relevant observation is that unsupported tier or region combinations can invalidate the selected continuity
+      pattern. For this case, it is the checkpoint's causal failure model and should be isolated before retrying
+      Baseline database tier and availability settings.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q05
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'A review of ''Baseline database tier and availability settings'' begins with input from customer support
+    manager. The run encountered this modeled failure: Unsupported tier or region combinations can invalidate the
+    selected continuity pattern. Which proposal supplies the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Delete only the local configuration export; the source database remains unchanged;
+      in a separate step, base approval on the claim that the failed operation and its returned identifiers do not
+      need reconciliation.'
+    B: Evaluate the nearest qualifying tier, recalculate cost, and rerun the capability assertions. In addition,
+      preserve the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'Unsupported tier or region combinations can invalidate
+      the selected continuity pattern'. As another control, use the premise that the first state record and returned
+      identifiers can be discarded.
+    D: Change Validate failover-group topology instead; as a separate check, consider it sufficient that success
+      at Validate failover-group topology will repair the failed state at Baseline database tier and availability
+      settings.
+  answer: B
+  explanations:
+    A: 'The review is governed by this fact: delete only the local configuration export; the source database remains
+      unchanged. For this case, cleanup before reconciliation can erase evidence or strand a partially created dependency.'
+    B: The applicable design condition is that evaluate the nearest qualifying tier, recalculate cost, and rerun
+      the capability assertions. For this case, it corrects the narrow cause while retaining the same recovery trail
+      and decision scope.
+    C: The retained result must be reconciled with the fact that unsupported tier or region combinations can invalidate
+      the selected continuity pattern. For this case, discarding the original run identity breaks ownership reconciliation
+      and can duplicate a partial operation.
+    D: The decision tension comes from the fact that the partner region, database membership, endpoint policy, grace
+      period, residency, and capacity assumptions match the approved design. For this case, altering an already
+      separate checkpoint does not repair the modeled failure at Baseline database tier and availability settings.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q06
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: '''Baseline database tier and availability settings'' awaits approval from commerce product owner. Without
+    making a new change, the team must inspect the risk ''Unsupported tier or region combinations can invalidate
+    the selected continuity pattern'' using the Azure CLI lane. Which option best represents the read-only, lane-correct
+    inspection?'
+  options:
+    A: Rerun the Baseline database tier and availability settings implementation command and infer the expected
+      state. Separately, rely on the claim that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Baseline database tier and availability settings. Before sign-off,
+      retain this evidence: store the normalized database configuration and the requirement-to-capability comparison.'
+    C: 'Run only this negative inspection for Baseline database tier and availability settings: A regional design
+      based on a tier that cannot satisfy the local availability requirement must fail before failover planning;
+      for this decision, rely on the belief that an empty negative result reports every required positive property.'
+    D: Run the positive inspection for Prove connection and dependency readiness and apply it to Baseline database
+      tier and availability settings. Before sign-off, proceed on the belief that any command from the same lane
+      proves the current checkpoint.
+  answer: B
+  explanations:
+    A: The traceable checkpoint outcome is that the implementation command. For this case, it can mutate state and
+      shell success does not independently assert the expected properties.
+    B: The safe operating boundary says that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. For this case, the read-only inspection
+      directly tests the properties required at Baseline database tier and availability settings.
+    C: The failure model establishes that the negative inspection. For this case, absence of the prohibited condition
+      is necessary but does not establish the positive architecture state.
+    D: The recovery guidance assumes that the positive inspection for Prove connection and dependency readiness.
+      For this case, it is lane-correct but proves Prove connection and dependency readiness, not Baseline database
+      tier and availability settings.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q07
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: '''Baseline database tier and availability settings'' is reopened at the request of database engineering
+    lead. A passing positive check does not by itself prove this negative assertion: A regional design based on
+    a tier that cannot satisfy the local availability requirement must fail before failover planning. Which course
+    of action provides the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Baseline database tier and availability settings and report full compliance;
+      then take it as conclusive that every prohibited parallel state must therefore be absent.
+    B: Prove only that a regional design based on a tier that cannot satisfy the local availability requirement
+      must fail before failover planning and report the intended configuration as present. Independently, treat
+      it as established that absence is equivalent to positive-state evidence.
+    C: Verify the positive properties for Baseline database tier and availability settings; afterward, independently
+      verify that a regional design based on a tier that cannot satisfy the local availability requirement must
+      fail before failover planning.
+    D: Use Measure replication health against RPO's negative assertion for Baseline database tier and availability
+      settings. Next, use as justification the claim that negative assertions are interchangeable between checkpoints.
+  answer: C
+  explanations:
+    A: The command-level assertion is anchored in the fact that the baseline identifies service tier, zone redundancy,
+      backup redundancy, maintenance constraints, dependencies, and observed workload demand. For this case, the
+      positive result alone does not test the explicit anti-condition 'A regional design based on a tier that cannot
+      satisfy the local availability requirement must fail before failover planning'.
+    B: a regional design based on a tier that cannot satisfy the local availability requirement must fail before
+      failover planning. That evidence means absence evidence cannot demonstrate the required positive state 'The
+      baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies,
+      and observed workload demand'.
+    C: The WAF consequence identifies that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand; A regional design based on a tier that
+      cannot satisfy the local availability requirement must fail before failover planning. For this case, two independent
+      observations prevent a passing positive check from concealing an unsafe parallel state.
+    D: The controlling fact is that missing samples, averaged-away spikes, or infrastructure-only lag with no transaction
+      watermark must fail. That evidence means the second assertion is valid for Measure replication health against
+      RPO but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q08
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'A design review of ''Baseline database tier and availability settings'' includes payment compliance officer.
+    The board wants the Well-Architected consequence of mitigating this risk: Unsupported tier or region combinations
+    can invalidate the selected continuity pattern. Which finding constitutes the consequence attributable to this
+    checkpoint?'
+  options:
+    A: Use the Rehearse failover decision and failback consequence as the result for Baseline database tier and
+      availability settings; as a separate check, treat as decisive the assertion that a pillar statement remains
+      valid when moved away from Rehearse failover decision and failback.
+    B: Remove the control responsible for the Baseline database tier and availability settings outcome. Afterward,
+      base approval on the claim that a low cost classification outweighs the mandatory architecture state.
+    C: 'Record this consequence: Reliability: local zone resilience prevents a datacenter event from becoming an
+      unnecessary regional failover, and then tie it to LAB16-REQ-01.'
+    D: 'Treat ''Reliability: local zone resilience prevents a datacenter event from becoming an unnecessary regional
+      failover'' as proof that all five pillars pass; next, use the premise that the checkpoint ''Baseline database
+      tier and availability settings'' no longer needs its separate negative check.'
+  answer: C
+  explanations:
+    A: 'The relevant observation is that cost Optimization: the model validates regional readiness without running
+      a duplicate application tier for the lab. That evidence means that tradeoff belongs to Rehearse failover decision
+      and failback and does not explain this checkpoint''s decision.'
+    B: The checkpoint specifically records that the required outcome at Baseline database tier and availability
+      settings. That evidence means cost Optimization cannot remove the acceptance condition 'The baseline identifies
+      service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies, and observed workload
+      demand'.
+    C: 'The authored acceptance boundary states that reliability: local zone resilience prevents a datacenter event
+      from becoming an unnecessary regional failover. That evidence means it states the authored pillar consequence
+      of the control evaluated at Baseline database tier and availability settings.'
+    D: The scenario makes clear that a regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning. That evidence means one positive command cannot establish
+      every pillar, especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q09
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'The team asks site reliability engineering lead to assess ''Baseline database tier and availability settings''.
+    A material change now applies: A new flash-sale contract doubles peak write volume and requires the reservation
+    API to recover within fifteen minutes rather than one hour. Which recommendation delivers the correct revision
+    to the decision record?'
+  options:
+    A: Retain Azure SQL Database failover group with zone-redundant primary and secondary databases at Baseline
+      database tier and availability settings without recalculating criteria or eligibility. Before sign-off, accept
+      without proof that the original weighted result is permanent.
+    B: Select Active geo-replication with application-managed endpoints and failover for Baseline database tier
+      and availability settings without rechecking its mandatory constraints; as an independent condition, rely
+      on the claim that being different from the current design is an architecture criterion.
+    C: Keep SQL Server on Azure Virtual Machines with an Always On availability group eligible at Baseline database
+      tier and availability settings by downgrading LAB16-REQ-01; independently, rely on the belief that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+    D: Re-score Azure SQL Database failover group with zone-redundant primary and secondary databases and both alternatives
+      for Baseline database tier and availability settings; as a separate check, supersede the ADR using the changed
+      evidence for LAB16-REQ-01.
+  answer: D
+  explanations:
+    A: The applicable design condition is that azure SQL Database failover group with zone-redundant primary and
+      secondary databases. That evidence means the original ADR remains historical evidence, but its score cannot
+      answer a changed mandatory condition.
+    B: 'The review is governed by this fact: active geo-replication with application-managed endpoints and failover.
+      That evidence means being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Baseline database tier and availability settings.'
+    C: The retained result must be reconciled with the fact that lAB16-REQ-01. That evidence means an architect
+      cannot silently downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+    D: The architecture evidence must show that azure SQL Database failover group with zone-redundant primary and
+      secondary databases at Baseline database tier and availability settings. That evidence means the material
+      change 'A new flash-sale contract doubles peak write volume and requires the reservation API to recover within
+      fifteen minutes rather than one hour.' requires fresh eligibility, weighted analysis, and a superseding decision.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q10
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP01
+  stem: 'A recommendation on ''Baseline database tier and availability settings'' is requested by customer support
+    manager. After a partial run, cleanup must follow this dependency: Delete only the local configuration export;
+    the source database remains unchanged. Which response meets the need for the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Prove connection and dependency readiness before reconciling the current dependency.
+      Next, consider it sufficient that removing a parent needed to identify Baseline database tier and availability
+      settings is harmless.
+    B: Delete candidates by display name before comparing the Baseline database tier and availability settings ownership
+      tags, and then take it as conclusive that the dependency rule 'Delete only the local configuration export;
+      the source database remains unchanged' is optional.
+    C: Destroy recoverable copies before retaining the Baseline database tier and availability settings negative
+      assertion 'A regional design based on a tier that cannot satisfy the local availability requirement must fail
+      before failover planning'. Also, treat it as established that remaining command logs are sufficient recovery
+      evidence.
+    D: 'Verify exact run-state IDs and ownership tags for Baseline database tier and availability settings; before
+      approval, follow this dependency rule without purge: Delete only the local configuration export; the source
+      database remains unchanged.'
+  answer: D
+  explanations:
+    A: The safe operating boundary says that remove sanitized test outputs and synthetic transactions; never commit
+      connection secrets. That evidence means a cleanup rule for Prove connection and dependency readiness cannot
+      override the dependency declared for Baseline database tier and availability settings.
+    B: The traceable checkpoint outcome is that store the normalized database configuration and the requirement-to-capability
+      comparison. That evidence means names are not ownership proof; deletion requires the exact recorded identifier
+      and every required tag.
+    C: The failure model establishes that a regional design based on a tier that cannot satisfy the local availability
+      requirement must fail before failover planning. That evidence means irreversible purge is outside the lab
+      contract and destroys evidence needed for residual-state validation.
+    D: The decision tension comes from the fact that delete only the local configuration export; the source database
+      remains unchanged. That evidence means exact identity, complete ownership tags, and the authored dependency
+      order constrain cleanup and preserve recovery.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q11
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: '''Validate failover-group topology'' is assigned to database engineering lead. Approval requires a positive
+    result plus this independent negative assertion: Missing database membership or an automatic policy that accepts
+    unapproved data loss must fail. Choose the acceptance rule that makes LAB16-REQ-02 testable.'
+  options:
+    A: Select Active geo-replication with application-managed endpoints and failover before checking Validate failover-group
+      topology. Then, use the premise that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Baseline database tier and availability settings to approve Validate failover-group
+      topology; afterward, consider it sufficient that one control establishes an unrelated acceptance boundary.
+    C: Require the documented positive state for Validate failover-group topology; during the same review, verify
+      that missing database membership or an automatic policy that accepts unapproved data loss must fail.
+    D: Choose SQL Server on Azure Virtual Machines with an Always On availability group and skip the Validate failover-group
+      topology negative assertion; then take it as conclusive that the candidate has the lowest implementation effort.
+  answer: C
+  explanations:
+    A: The WAF consequence identifies that missing database membership or an automatic policy that accepts unapproved
+      data loss must fail. That evidence means a deployment result cannot prove LAB16-REQ-02, and Active geo-replication
+      with application-managed endpoints and failover still has to meet the mandatory boundary.
+    B: The command-level assertion is anchored in the fact that the baseline identifies service tier, zone redundancy,
+      backup redundancy, maintenance constraints, dependencies, and observed workload demand. That evidence means
+      that outcome belongs to Baseline database tier and availability settings and leaves Validate failover-group
+      topology unverified.
+    C: The recovery guidance assumes that the partner region, database membership, endpoint policy, grace period,
+      residency, and capacity assumptions match the approved design. That evidence means the positive state and
+      an independent negative assertion jointly make LAB16-REQ-02 testable.
+    D: preserve ticket sales and prevent overselling during zone or region disruption while meeting the five-minute
+      RPO. The resulting architectural conclusion is that implementation effort cannot justify skipping the negative
+      assertion or displace LAB16-REQ-02.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q12
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: An assurance review of 'Validate failover-group topology' includes payment compliance officer. The selected
+    architecture is Azure SQL Database failover group with zone-redundant primary and secondary databases; object
+    existence alone is not success. Which answer describes the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Missing database membership or an automatic policy that accepts unapproved
+      data loss must fail' as the success result; in a separate step, rely on the belief that absence proves every
+      required positive property.
+    B: Record the partner region, database membership, endpoint policy, grace period, residency, and capacity assumptions
+      match the approved design. Independently, classify it as success for LAB16-REQ-02.
+    C: Use the successful finding from Prove connection and dependency readiness as the result for Validate failover-group
+      topology. As another control, proceed on the belief that a property from the current checkpoint does not need
+      to be inspected.
+    D: Record the failure condition 'An incomplete group can redirect the application while leaving a required database
+      behind' as a successful state; as a separate check, treat as decisive the assertion that the command returned
+      an object.
+  answer: B
+  explanations:
+    A: The authored acceptance boundary states that missing database membership or an automatic policy that accepts
+      unapproved data loss must fail. The resulting architectural conclusion is that this is the independent prohibited-state
+      assertion, not a successful finding.
+    B: The controlling fact is that the partner region, database membership, endpoint policy, grace period, residency,
+      and capacity assumptions match the approved design. The resulting architectural conclusion is that this is
+      the authored target state for Validate failover-group topology and directly supports LAB16-REQ-02.
+    C: The relevant observation is that applications use the read-write listener, retry transient failures, preserve
+      idempotency, and can reach every regional dependency after redirection. The resulting architectural conclusion
+      is that evidence for Prove connection and dependency readiness cannot substitute for the properties required
+      at Validate failover-group topology.
+    D: The checkpoint specifically records that an incomplete group can redirect the application while leaving a
+      required database behind. The resulting architectural conclusion is that resource existence or command output
+      does not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q13
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: 'Approval of ''Validate failover-group topology'' is questioned by site reliability engineering lead. Evidence
+    must address this risk without retaining credentials: An incomplete group can redirect the application while
+    leaving a required database behind. What should be recorded as sufficient, properly scoped evidence?'
+  options:
+    A: Retain preserve the failover-group projection and a diagram of primary, secondary, and listener endpoint
+      behavior; in a separate step, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Measure replication health against RPO for Validate failover-group topology.
+      Separately, treat it as established that a related checkpoint proves the current expected state.
+    C: Store unredacted Validate failover-group topology output with operator, tenant, token, and request context;
+      for this decision, use as justification the claim that reproduction requires every captured field.
+    D: Record only the Validate failover-group topology positive inspection's exit status. Before sign-off, accept
+      without proof that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The scenario makes clear that preserve the failover-group projection and a diagram of primary, secondary,
+      and listener endpoint behavior. The resulting architectural conclusion is that it captures the checkpoint's
+      observable properties while keeping the evidence boundary narrow.
+    B: The architecture evidence must show that archive metric samples, transaction watermarks, timestamps, and
+      the calculated worst-case data-loss interval. The resulting architectural conclusion is that that evidence
+      supports Measure replication health against RPO, so it cannot demonstrate The partner region, database membership,
+      endpoint policy, grace period, residency, and capacity assumptions match the approved design.
+    C: The applicable design condition is that unredacted implementation output. The resulting architectural conclusion
+      is that identity, tenant, or token material exceeds the non-secret evidence contract.
+    D: 'The review is governed by this fact: the positive inspection''s exit status. The resulting architectural
+      conclusion is that an exit code alone does not show whether the partner region, database membership, endpoint
+      policy, grace period, residency, and capacity assumptions match the approved design.'
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q14
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: The implementation review has reached 'Validate failover-group topology'. The target is The partner region,
+    database membership, endpoint policy, grace period, residency, and capacity assumptions match the approved design,
+    but the latest evidence does not show it. Which proposal supplies the most likely cause?
+  options:
+    A: Treat 'Premature failback can cause a second outage or overwrite the most current data path' as grounds to
+      reject Validate failover-group topology; then base approval on the claim that rehearse failover decision and
+      failback's failure model applies unchanged here.
+    B: Investigate an incomplete group can redirect the application while leaving a required database behind; next,
+      isolate that cause before changing Azure SQL Database failover group with zone-redundant primary and secondary
+      databases.
+    C: Ignore the negative assertion 'Missing database membership or an automatic policy that accepts unapproved
+      data loss must fail'. Independently, use the premise that a later material change will make it unnecessary.
+    D: Investigate Baseline database tier and availability settings instead of diagnosing Validate failover-group
+      topology. Next, consider it sufficient that a passing result at Baseline database tier and availability settings
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The decision tension comes from the fact that premature failback can cause a second outage or overwrite the
+      most current data path. The resulting architectural conclusion is that that condition belongs to Rehearse
+      failover decision and failback and does not by itself invalidate Azure SQL Database failover group with zone-redundant
+      primary and secondary databases.
+    B: The retained result must be reconciled with the fact that an incomplete group can redirect the application
+      while leaving a required database behind. The resulting architectural conclusion is that it is the checkpoint's
+      causal failure model and should be isolated before retrying Validate failover-group topology.
+    C: The safe operating boundary says that missing database membership or an automatic policy that accepts unapproved
+      data loss must fail. The resulting architectural conclusion is that the negative assertion must be evaluated
+      now, independent of a later business change.
+    D: The traceable checkpoint outcome is that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. The resulting architectural conclusion
+      is that a passing result at Baseline database tier and availability settings gives no causal evidence for
+      the failure at Validate failover-group topology.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q15
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: 'The approach to ''Validate failover-group topology'' is challenged by commerce product owner. The run encountered
+    this modeled failure: An incomplete group can redirect the application while leaving a required database behind.
+    Which option best represents the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Remove local projections only; do not add databases or alter failover policy
+      during assessment; as a separate check, rely on the claim that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'An incomplete group can redirect the application while
+      leaving a required database behind'. Afterward, rely on the belief that the first state record and returned
+      identifiers can be discarded.
+    C: Change Baseline database tier and availability settings instead; next, proceed on the belief that success
+      at Baseline database tier and availability settings will repair the failed state at Validate failover-group
+      topology.
+    D: Correct the proposed membership or policy in the design fixture and repeat the read-only comparison; for
+      this decision, preserve the current run identity and evidence.
+  answer: D
+  explanations:
+    A: The recovery guidance assumes that remove local projections only; do not add databases or alter failover
+      policy during assessment. The resulting architectural conclusion is that cleanup before reconciliation can
+      erase evidence or strand a partially created dependency.
+    B: The WAF consequence identifies that an incomplete group can redirect the application while leaving a required
+      database behind. The resulting architectural conclusion is that discarding the original run identity breaks
+      ownership reconciliation and can duplicate a partial operation.
+    C: The command-level assertion is anchored in the fact that the baseline identifies service tier, zone redundancy,
+      backup redundancy, maintenance constraints, dependencies, and observed workload demand. The resulting architectural
+      conclusion is that altering an already separate checkpoint does not repair the modeled failure at Validate
+      failover-group topology.
+    D: The failure model establishes that correct the proposed membership or policy in the design fixture and repeat
+      the read-only comparison. The resulting architectural conclusion is that it corrects the narrow cause while
+      retaining the same recovery trail and decision scope.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q16
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: A decision test for 'Validate failover-group topology' includes database engineering lead. Without making
+    a new change, the team must inspect the risk 'An incomplete group can redirect the application while leaving
+    a required database behind' using the Azure CLI lane. Which course of action provides the read-only, lane-correct
+    inspection?
+  options:
+    A: 'Inspect the documented properties for Validate failover-group topology. Then, retain this evidence: preserve
+      the failover-group projection and a diagram of primary, secondary, and listener endpoint behavior.'
+    B: Rerun the Validate failover-group topology implementation command and infer the expected state. Before sign-off,
+      take it as conclusive that absence of a shell error proves every property.
+    C: 'Run only this negative inspection for Validate failover-group topology: Missing database membership or an
+      automatic policy that accepts unapproved data loss must fail; as an independent condition, treat it as established
+      that an empty negative result reports every required positive property.'
+    D: Run the positive inspection for Prove connection and dependency readiness and apply it to Validate failover-group
+      topology; before approval, use as justification the claim that any command from the same lane proves the current
+      checkpoint.
+  answer: A
+  explanations:
+    A: the partner region, database membership, endpoint policy, grace period, residency, and capacity assumptions
+      match the approved design. Under the stated constraint, the read-only inspection directly tests the properties
+      required at Validate failover-group topology.
+    B: The controlling fact is that the implementation command. Under the stated constraint, it can mutate state
+      and shell success does not independently assert the expected properties.
+    C: The authored acceptance boundary states that the negative inspection. Under the stated constraint, absence
+      of the prohibited condition is necessary but does not establish the positive architecture state.
+    D: The relevant observation is that the positive inspection for Prove connection and dependency readiness. Under
+      the stated constraint, it is lane-correct but proves Prove connection and dependency readiness, not Validate
+      failover-group topology.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q17
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: 'The architecture board reconsiders ''Validate failover-group topology'' with payment compliance officer.
+    A passing positive check does not by itself prove this negative assertion: Missing database membership or an
+    automatic policy that accepts unapproved data loss must fail. Which finding constitutes the assertion pair that
+    proves both conditions independently?'
+  options:
+    A: Verify the positive properties for Validate failover-group topology. Next, independently verify that missing
+      database membership or an automatic policy that accepts unapproved data loss must fail.
+    B: Verify only the positive result for Validate failover-group topology and report full compliance. Next, treat
+      as decisive the assertion that every prohibited parallel state must therefore be absent.
+    C: Prove only that missing database membership or an automatic policy that accepts unapproved data loss must
+      fail and report the intended configuration as present, and then base approval on the claim that absence is
+      equivalent to positive-state evidence.
+    D: Use Measure replication health against RPO's negative assertion for Validate failover-group topology. Also,
+      use the premise that negative assertions are interchangeable between checkpoints.
+  answer: A
+  explanations:
+    A: The checkpoint specifically records that the partner region, database membership, endpoint policy, grace
+      period, residency, and capacity assumptions match the approved design; Missing database membership or an automatic
+      policy that accepts unapproved data loss must fail. Under the stated constraint, two independent observations
+      prevent a passing positive check from concealing an unsafe parallel state.
+    B: The scenario makes clear that the partner region, database membership, endpoint policy, grace period, residency,
+      and capacity assumptions match the approved design. Under the stated constraint, the positive result alone
+      does not test the explicit anti-condition 'Missing database membership or an automatic policy that accepts
+      unapproved data loss must fail'.
+    C: The architecture evidence must show that missing database membership or an automatic policy that accepts
+      unapproved data loss must fail. Under the stated constraint, absence evidence cannot demonstrate the required
+      positive state 'The partner region, database membership, endpoint policy, grace period, residency, and capacity
+      assumptions match the approved design'.
+    D: The applicable design condition is that missing samples, averaged-away spikes, or infrastructure-only lag
+      with no transaction watermark must fail. Under the stated constraint, the second assertion is valid for Measure
+      replication health against RPO but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q18
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: 'A review of ''Validate failover-group topology'' begins with input from site reliability engineering lead.
+    The board wants the Well-Architected consequence of mitigating this risk: An incomplete group can redirect the
+    application while leaving a required database behind. Which recommendation delivers the consequence attributable
+    to this checkpoint?'
+  options:
+    A: 'Record this consequence: Security: region and membership validation keeps replicated payment data inside
+      approved boundaries. As another control, tie it to LAB16-REQ-02.'
+    B: Use the Rehearse failover decision and failback consequence as the result for Validate failover-group topology;
+      next, accept without proof that a pillar statement remains valid when moved away from Rehearse failover decision
+      and failback.
+    C: Remove the control responsible for the Validate failover-group topology outcome. In addition, rely on the
+      claim that a low cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Security: region and membership validation keeps replicated payment data inside approved boundaries''
+      as proof that all five pillars pass; before approval, rely on the belief that the checkpoint ''Validate failover-group
+      topology'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The review is governed by this fact: security: region and membership validation keeps replicated payment
+      data inside approved boundaries. Under the stated constraint, it states the authored pillar consequence of
+      the control evaluated at Validate failover-group topology.'
+    B: 'The retained result must be reconciled with the fact that cost Optimization: the model validates regional
+      readiness without running a duplicate application tier for the lab. Under the stated constraint, that tradeoff
+      belongs to Rehearse failover decision and failback and does not explain this checkpoint''s decision.'
+    C: The decision tension comes from the fact that the required outcome at Validate failover-group topology. Under
+      the stated constraint, cost Optimization cannot remove the acceptance condition 'The partner region, database
+      membership, endpoint policy, grace period, residency, and capacity assumptions match the approved design'.
+    D: The safe operating boundary says that missing database membership or an automatic policy that accepts unapproved
+      data loss must fail. Under the stated constraint, one positive command cannot establish every pillar, especially
+      while the negative state remains unchecked.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q19
+  difficulty: advanced
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: '''Validate failover-group topology'' awaits approval from customer support manager. A material change now
+    applies: A new flash-sale contract doubles peak write volume and requires the reservation API to recover within
+    fifteen minutes rather than one hour. Which response meets the need for the correct revision to the decision
+    record?'
+  options:
+    A: Retain Azure SQL Database failover group with zone-redundant primary and secondary databases at Validate
+      failover-group topology without recalculating criteria or eligibility; as a second control, consider it sufficient
+      that the original weighted result is permanent.
+    B: Select Active geo-replication with application-managed endpoints and failover for Validate failover-group
+      topology without rechecking its mandatory constraints. Then, take it as conclusive that being different from
+      the current design is an architecture criterion.
+    C: Re-score Azure SQL Database failover group with zone-redundant primary and secondary databases and both alternatives
+      for Validate failover-group topology. In addition, supersede the ADR using the changed evidence for LAB16-REQ-02.
+    D: Keep SQL Server on Azure Virtual Machines with an Always On availability group eligible at Validate failover-group
+      topology by downgrading LAB16-REQ-02; afterward, treat it as established that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: The failure model establishes that azure SQL Database failover group with zone-redundant primary and secondary
+      databases. Under the stated constraint, the original ADR remains historical evidence, but its score cannot
+      answer a changed mandatory condition.
+    B: The recovery guidance assumes that active geo-replication with application-managed endpoints and failover.
+      Under the stated constraint, being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Validate failover-group topology.
+    C: The traceable checkpoint outcome is that azure SQL Database failover group with zone-redundant primary and
+      secondary databases at Validate failover-group topology. Under the stated constraint, the material change
+      'A new flash-sale contract doubles peak write volume and requires the reservation API to recover within fifteen
+      minutes rather than one hour.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    D: The WAF consequence identifies that lAB16-REQ-02. Under the stated constraint, an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q20
+  difficulty: advanced
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP02
+  stem: '''Validate failover-group topology'' is reopened at the request of commerce product owner. After a partial
+    run, cleanup must follow this dependency: Remove local projections only; do not add databases or alter failover
+    policy during assessment. Which choice should be approved as the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Prove connection and dependency readiness before reconciling the current dependency.
+      Also, proceed on the belief that removing a parent needed to identify Validate failover-group topology is
+      harmless.
+    B: Delete candidates by display name before comparing the Validate failover-group topology ownership tags; in
+      a separate step, treat as decisive the assertion that the dependency rule 'Remove local projections only;
+      do not add databases or alter failover policy during assessment' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Validate failover-group topology. Before sign-off, follow
+      this dependency rule without purge: Remove local projections only; do not add databases or alter failover
+      policy during assessment.'
+    D: Destroy recoverable copies before retaining the Validate failover-group topology negative assertion 'Missing
+      database membership or an automatic policy that accepts unapproved data loss must fail'. As another control,
+      base approval on the claim that remaining command logs are sufficient recovery evidence.
+  answer: C
+  explanations:
+    A: remove sanitized test outputs and synthetic transactions; never commit connection secrets. This matters because
+      a cleanup rule for Prove connection and dependency readiness cannot override the dependency declared for Validate
+      failover-group topology.
+    B: The controlling fact is that preserve the failover-group projection and a diagram of primary, secondary,
+      and listener endpoint behavior. This matters because names are not ownership proof; deletion requires the
+      exact recorded identifier and every required tag.
+    C: The command-level assertion is anchored in the fact that remove local projections only; do not add databases
+      or alter failover policy during assessment. Under the stated constraint, exact identity, complete ownership
+      tags, and the authored dependency order constrain cleanup and preserve recovery.
+    D: The authored acceptance boundary states that missing database membership or an automatic policy that accepts
+      unapproved data loss must fail. This matters because irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q21
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'A design review of ''Prove connection and dependency readiness'' includes payment compliance officer. Approval
+    requires a positive result plus this independent negative assertion: A hard-coded regional server name, non-idempotent
+    retry, or missing secret in the secondary path must fail. Which answer describes the acceptance rule that makes
+    LAB16-REQ-03 testable?'
+  options:
+    A: Require the documented positive state for Prove connection and dependency readiness; then verify that a hard-coded
+      regional server name, non-idempotent retry, or missing secret in the secondary path must fail.
+    B: Select Active geo-replication with application-managed endpoints and failover before checking Prove connection
+      and dependency readiness; then rely on the belief that a successful deployment will later prove the architecture
+      constraint.
+    C: Use the passing result from Baseline database tier and availability settings to approve Prove connection
+      and dependency readiness. Independently, proceed on the belief that one control establishes an unrelated acceptance
+      boundary.
+    D: Choose SQL Server on Azure Virtual Machines with an Always On availability group and skip the Prove connection
+      and dependency readiness negative assertion. Next, treat as decisive the assertion that the candidate has
+      the lowest implementation effort.
+  answer: A
+  explanations:
+    A: The relevant observation is that applications use the read-write listener, retry transient failures, preserve
+      idempotency, and can reach every regional dependency after redirection. This matters because the positive
+      state and an independent negative assertion jointly make LAB16-REQ-03 testable.
+    B: The checkpoint specifically records that a hard-coded regional server name, non-idempotent retry, or missing
+      secret in the secondary path must fail. This matters because a deployment result cannot prove LAB16-REQ-03,
+      and Active geo-replication with application-managed endpoints and failover still has to meet the mandatory
+      boundary.
+    C: The scenario makes clear that the baseline identifies service tier, zone redundancy, backup redundancy, maintenance
+      constraints, dependencies, and observed workload demand. This matters because that outcome belongs to Baseline
+      database tier and availability settings and leaves Prove connection and dependency readiness unverified.
+    D: The architecture evidence must show that preserve ticket sales and prevent overselling during zone or region
+      disruption while meeting the five-minute RPO. This matters because implementation effort cannot justify skipping
+      the negative assertion or displace LAB16-REQ-03.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q22
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: The team asks site reliability engineering lead to assess 'Prove connection and dependency readiness'. The
+    selected architecture is Azure SQL Database failover group with zone-redundant primary and secondary databases;
+    object existence alone is not success. What should be recorded as the intended successful finding?
+  options:
+    A: Use only the negative assertion 'A hard-coded regional server name, non-idempotent retry, or missing secret
+      in the secondary path must fail' as the success result; as a separate check, treat it as established that
+      absence proves every required positive property.
+    B: Use the successful finding from Validate failover-group topology as the result for Prove connection and dependency
+      readiness. Afterward, use as justification the claim that a property from the current checkpoint does not
+      need to be inspected.
+    C: Record applications use the read-write listener, retry transient failures, preserve idempotency, and can
+      reach every regional dependency after redirection. Also, classify it as success for LAB16-REQ-03.
+    D: Record the failure condition 'Database failover can succeed while the application remains pinned to the unavailable
+      primary endpoint' as a successful state; next, accept without proof that the command returned an object.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: a hard-coded regional server name, non-idempotent retry, or missing
+      secret in the secondary path must fail. This matters because this is the independent prohibited-state assertion,
+      not a successful finding.'
+    B: The retained result must be reconciled with the fact that the partner region, database membership, endpoint
+      policy, grace period, residency, and capacity assumptions match the approved design. This matters because
+      evidence for Validate failover-group topology cannot substitute for the properties required at Prove connection
+      and dependency readiness.
+    C: The applicable design condition is that applications use the read-write listener, retry transient failures,
+      preserve idempotency, and can reach every regional dependency after redirection. This matters because this
+      is the authored target state for Prove connection and dependency readiness and directly supports LAB16-REQ-03.
+    D: The decision tension comes from the fact that database failover can succeed while the application remains
+      pinned to the unavailable primary endpoint. This matters because resource existence or command output does
+      not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q23
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'A recommendation on ''Prove connection and dependency readiness'' is requested by customer support manager.
+    Evidence must address this risk without retaining credentials: Database failover can succeed while the application
+    remains pinned to the unavailable primary endpoint. Which proposal supplies sufficient, properly scoped evidence?'
+  options:
+    A: Retain save sanitized connection settings, dependency checks, retry-policy tests, and transaction correlation
+      IDs. Afterward, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Measure replication health against RPO for Prove connection and dependency readiness.
+      Before sign-off, base approval on the claim that a related checkpoint proves the current expected state.
+    C: Store unredacted Prove connection and dependency readiness output with operator, tenant, token, and request
+      context; as an independent condition, use the premise that reproduction requires every captured field.
+    D: Record only the Prove connection and dependency readiness positive inspection's exit status; as a second
+      control, consider it sufficient that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The safe operating boundary says that save sanitized connection settings, dependency checks, retry-policy
+      tests, and transaction correlation IDs. This matters because it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+    B: The traceable checkpoint outcome is that archive metric samples, transaction watermarks, timestamps, and
+      the calculated worst-case data-loss interval. This matters because that evidence supports Measure replication
+      health against RPO, so it cannot demonstrate Applications use the read-write listener, retry transient failures,
+      preserve idempotency, and can reach every regional dependency after redirection.
+    C: The failure model establishes that unredacted implementation output. This matters because identity, tenant,
+      or token material exceeds the non-secret evidence contract.
+    D: The recovery guidance assumes that the positive inspection's exit status. This matters because an exit code
+      alone does not show whether applications use the read-write listener, retry transient failures, preserve idempotency,
+      and can reach every regional dependency after redirection.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q24
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: '''Prove connection and dependency readiness'' is assigned to commerce product owner. The target is Applications
+    use the read-write listener, retry transient failures, preserve idempotency, and can reach every regional dependency
+    after redirection, but the latest evidence does not show it. Which option best represents the most likely cause?'
+  options:
+    A: Treat 'Premature failback can cause a second outage or overwrite the most current data path' as grounds to
+      reject Prove connection and dependency readiness. Next, rely on the claim that rehearse failover decision
+      and failback's failure model applies unchanged here.
+    B: Ignore the negative assertion 'A hard-coded regional server name, non-idempotent retry, or missing secret
+      in the secondary path must fail', and then rely on the belief that a later material change will make it unnecessary.
+    C: Investigate Baseline database tier and availability settings instead of diagnosing Prove connection and dependency
+      readiness. Also, proceed on the belief that a passing result at Baseline database tier and availability settings
+      identifies the current cause.
+    D: Investigate database failover can succeed while the application remains pinned to the unavailable primary
+      endpoint. Separately, isolate that cause before changing Azure SQL Database failover group with zone-redundant
+      primary and secondary databases.
+  answer: D
+  explanations:
+    A: The command-level assertion is anchored in the fact that premature failback can cause a second outage or
+      overwrite the most current data path. This matters because that condition belongs to Rehearse failover decision
+      and failback and does not by itself invalidate Azure SQL Database failover group with zone-redundant primary
+      and secondary databases.
+    B: a hard-coded regional server name, non-idempotent retry, or missing secret in the secondary path must fail.
+      The checkpoint therefore requires that the negative assertion must be evaluated now, independent of a later
+      business change.
+    C: The controlling fact is that the baseline identifies service tier, zone redundancy, backup redundancy, maintenance
+      constraints, dependencies, and observed workload demand. The checkpoint therefore requires that a passing
+      result at Baseline database tier and availability settings gives no causal evidence for the failure at Prove
+      connection and dependency readiness.
+    D: The WAF consequence identifies that database failover can succeed while the application remains pinned to
+      the unavailable primary endpoint. This matters because it is the checkpoint's causal failure model and should
+      be isolated before retrying Prove connection and dependency readiness.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q25
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'An assurance review of ''Prove connection and dependency readiness'' includes database engineering lead.
+    The run encountered this modeled failure: Database failover can succeed while the application remains pinned
+    to the unavailable primary endpoint. Which course of action provides the safest recovery action?'
+  options:
+    A: Correct the local configuration fixture and replay connection and idempotency tests; without relying on inference,
+      preserve the current run identity and evidence.
+    B: 'Perform cleanup immediately: Remove sanitized test outputs and synthetic transactions; never commit connection
+      secrets; next, take it as conclusive that the failed operation and its returned identifiers do not need reconciliation.'
+    C: Create a different run identity before diagnosing 'Database failover can succeed while the application remains
+      pinned to the unavailable primary endpoint'. In addition, treat it as established that the first state record
+      and returned identifiers can be discarded.
+    D: Change Baseline database tier and availability settings instead; before approval, use as justification the
+      claim that success at Baseline database tier and availability settings will repair the failed state at Prove
+      connection and dependency readiness.
+  answer: A
+  explanations:
+    A: The authored acceptance boundary states that correct the local configuration fixture and replay connection
+      and idempotency tests. The checkpoint therefore requires that it corrects the narrow cause while retaining
+      the same recovery trail and decision scope.
+    B: The relevant observation is that remove sanitized test outputs and synthetic transactions; never commit connection
+      secrets. The checkpoint therefore requires that cleanup before reconciliation can erase evidence or strand
+      a partially created dependency.
+    C: The checkpoint specifically records that database failover can succeed while the application remains pinned
+      to the unavailable primary endpoint. The checkpoint therefore requires that discarding the original run identity
+      breaks ownership reconciliation and can duplicate a partial operation.
+    D: The scenario makes clear that the baseline identifies service tier, zone redundancy, backup redundancy, maintenance
+      constraints, dependencies, and observed workload demand. The checkpoint therefore requires that altering an
+      already separate checkpoint does not repair the modeled failure at Prove connection and dependency readiness.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q26
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: Approval of 'Prove connection and dependency readiness' is questioned by payment compliance officer. Without
+    making a new change, the team must inspect the risk 'Database failover can succeed while the application remains
+    pinned to the unavailable primary endpoint' using the Azure CLI lane. Which finding constitutes the read-only,
+    lane-correct inspection?
+  options:
+    A: 'Inspect the documented properties for Prove connection and dependency readiness. Independently, retain this
+      evidence: save sanitized connection settings, dependency checks, retry-policy tests, and transaction correlation
+      IDs.'
+    B: Rerun the Prove connection and dependency readiness implementation command and infer the expected state;
+      during the same review, treat as decisive the assertion that absence of a shell error proves every property.
+    C: 'Run only this negative inspection for Prove connection and dependency readiness: A hard-coded regional server
+      name, non-idempotent retry, or missing secret in the secondary path must fail. Then, base approval on the
+      claim that an empty negative result reports every required positive property.'
+    D: Run the positive inspection for Validate failover-group topology and apply it to Prove connection and dependency
+      readiness; afterward, use the premise that any command from the same lane proves the current checkpoint.
+  answer: A
+  explanations:
+    A: The architecture evidence must show that applications use the read-write listener, retry transient failures,
+      preserve idempotency, and can reach every regional dependency after redirection. The checkpoint therefore
+      requires that the read-only inspection directly tests the properties required at Prove connection and dependency
+      readiness.
+    B: The applicable design condition is that the implementation command. The checkpoint therefore requires that
+      it can mutate state and shell success does not independently assert the expected properties.
+    C: 'The review is governed by this fact: the negative inspection. The checkpoint therefore requires that absence
+      of the prohibited condition is necessary but does not establish the positive architecture state.'
+    D: The retained result must be reconciled with the fact that the positive inspection for Validate failover-group
+      topology. The checkpoint therefore requires that it is lane-correct but proves Validate failover-group topology,
+      not Prove connection and dependency readiness.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q27
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'The implementation review has reached ''Prove connection and dependency readiness''. A passing positive
+    check does not by itself prove this negative assertion: A hard-coded regional server name, non-idempotent retry,
+    or missing secret in the secondary path must fail. Which recommendation delivers the assertion pair that proves
+    both conditions independently?'
+  options:
+    A: Verify only the positive result for Prove connection and dependency readiness and report full compliance.
+      Also, accept without proof that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Prove connection and dependency readiness; in a separate step, independently
+      verify that a hard-coded regional server name, non-idempotent retry, or missing secret in the secondary path
+      must fail.
+    C: Prove only that a hard-coded regional server name, non-idempotent retry, or missing secret in the secondary
+      path must fail and report the intended configuration as present; in a separate step, rely on the claim that
+      absence is equivalent to positive-state evidence.
+    D: Use Measure replication health against RPO's negative assertion for Prove connection and dependency readiness.
+      As another control, rely on the belief that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that applications use the read-write listener, retry transient failures,
+      preserve idempotency, and can reach every regional dependency after redirection. The checkpoint therefore
+      requires that the positive result alone does not test the explicit anti-condition 'A hard-coded regional server
+      name, non-idempotent retry, or missing secret in the secondary path must fail'.
+    B: The decision tension comes from the fact that applications use the read-write listener, retry transient failures,
+      preserve idempotency, and can reach every regional dependency after redirection; A hard-coded regional server
+      name, non-idempotent retry, or missing secret in the secondary path must fail. The checkpoint therefore requires
+      that two independent observations prevent a passing positive check from concealing an unsafe parallel state.
+    C: The traceable checkpoint outcome is that a hard-coded regional server name, non-idempotent retry, or missing
+      secret in the secondary path must fail. The checkpoint therefore requires that absence evidence cannot demonstrate
+      the required positive state 'Applications use the read-write listener, retry transient failures, preserve
+      idempotency, and can reach every regional dependency after redirection'.
+    D: The failure model establishes that missing samples, averaged-away spikes, or infrastructure-only lag with
+      no transaction watermark must fail. The checkpoint therefore requires that the second assertion is valid for
+      Measure replication health against RPO but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q28
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'The approach to ''Prove connection and dependency readiness'' is challenged by customer support manager.
+    The board wants the Well-Architected consequence of mitigating this risk: Database failover can succeed while
+    the application remains pinned to the unavailable primary endpoint. Which response meets the need for the consequence
+    attributable to this checkpoint?'
+  options:
+    A: Use the Rehearse failover decision and failback consequence as the result for Prove connection and dependency
+      readiness; before approval, consider it sufficient that a pillar statement remains valid when moved away from
+      Rehearse failover decision and failback.
+    B: Remove the control responsible for the Prove connection and dependency readiness outcome. Separately, take
+      it as conclusive that a low cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Operational Excellence: listener-based configuration and tested retry behavior make failover operable''
+      as proof that all five pillars pass; for this decision, treat it as established that the checkpoint ''Prove
+      connection and dependency readiness'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Operational Excellence: listener-based configuration and tested retry behavior
+      make failover operable; next, tie it to LAB16-REQ-03.'
+  answer: D
+  explanations:
+    A: 'The WAF consequence identifies that cost Optimization: the model validates regional readiness without running
+      a duplicate application tier for the lab. The checkpoint therefore requires that that tradeoff belongs to
+      Rehearse failover decision and failback and does not explain this checkpoint''s decision.'
+    B: The command-level assertion is anchored in the fact that the required outcome at Prove connection and dependency
+      readiness. The checkpoint therefore requires that cost Optimization cannot remove the acceptance condition
+      'Applications use the read-write listener, retry transient failures, preserve idempotency, and can reach every
+      regional dependency after redirection'.
+    C: a hard-coded regional server name, non-idempotent retry, or missing secret in the secondary path must fail.
+      In the decision record, one positive command cannot establish every pillar, especially while the negative
+      state remains unchecked.
+    D: 'The recovery guidance assumes that operational Excellence: listener-based configuration and tested retry
+      behavior make failover operable. The checkpoint therefore requires that it states the authored pillar consequence
+      of the control evaluated at Prove connection and dependency readiness.'
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q29
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'A decision test for ''Prove connection and dependency readiness'' includes commerce product owner. A material
+    change now applies: A new flash-sale contract doubles peak write volume and requires the reservation API to
+    recover within fifteen minutes rather than one hour. Which choice should be approved as the correct revision
+    to the decision record?'
+  options:
+    A: Retain Azure SQL Database failover group with zone-redundant primary and secondary databases at Prove connection
+      and dependency readiness without recalculating criteria or eligibility; afterward, proceed on the belief that
+      the original weighted result is permanent.
+    B: Select Active geo-replication with application-managed endpoints and failover for Prove connection and dependency
+      readiness without rechecking its mandatory constraints; then treat as decisive the assertion that being different
+      from the current design is an architecture criterion.
+    C: Keep SQL Server on Azure Virtual Machines with an Always On availability group eligible at Prove connection
+      and dependency readiness by downgrading LAB16-REQ-03. Independently, base approval on the claim that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+    D: Re-score Azure SQL Database failover group with zone-redundant primary and secondary databases and both alternatives
+      for Prove connection and dependency readiness; for this decision, supersede the ADR using the changed evidence
+      for LAB16-REQ-03.
+  answer: D
+  explanations:
+    A: The authored acceptance boundary states that azure SQL Database failover group with zone-redundant primary
+      and secondary databases. In the decision record, the original ADR remains historical evidence, but its score
+      cannot answer a changed mandatory condition.
+    B: The relevant observation is that active geo-replication with application-managed endpoints and failover.
+      In the decision record, being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Prove connection and dependency readiness.
+    C: The checkpoint specifically records that lAB16-REQ-03. In the decision record, an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+    D: The controlling fact is that azure SQL Database failover group with zone-redundant primary and secondary
+      databases at Prove connection and dependency readiness. In the decision record, the material change 'A new
+      flash-sale contract doubles peak write volume and requires the reservation API to recover within fifteen minutes
+      rather than one hour.' requires fresh eligibility, weighted analysis, and a superseding decision.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q30
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP03
+  stem: 'The architecture board reconsiders ''Prove connection and dependency readiness'' with database engineering
+    lead. After a partial run, cleanup must follow this dependency: Remove sanitized test outputs and synthetic
+    transactions; never commit connection secrets. What should the team use as the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Validate failover-group topology before reconciling the current dependency. As
+      another control, use as justification the claim that removing a parent needed to identify Prove connection
+      and dependency readiness is harmless.
+    B: 'Verify exact run-state IDs and ownership tags for Prove connection and dependency readiness. Then, follow
+      this dependency rule without purge: Remove sanitized test outputs and synthetic transactions; never commit
+      connection secrets.'
+    C: Delete candidates by display name before comparing the Prove connection and dependency readiness ownership
+      tags; as a separate check, accept without proof that the dependency rule 'Remove sanitized test outputs and
+      synthetic transactions; never commit connection secrets' is optional.
+    D: Destroy recoverable copies before retaining the Prove connection and dependency readiness negative assertion
+      'A hard-coded regional server name, non-idempotent retry, or missing secret in the secondary path must fail'.
+      Afterward, rely on the claim that remaining command logs are sufficient recovery evidence.
+  answer: B
+  explanations:
+    A: The architecture evidence must show that remove local projections only; do not add databases or alter failover
+      policy during assessment. In the decision record, a cleanup rule for Validate failover-group topology cannot
+      override the dependency declared for Prove connection and dependency readiness.
+    B: The scenario makes clear that remove sanitized test outputs and synthetic transactions; never commit connection
+      secrets. In the decision record, exact identity, complete ownership tags, and the authored dependency order
+      constrain cleanup and preserve recovery.
+    C: The applicable design condition is that save sanitized connection settings, dependency checks, retry-policy
+      tests, and transaction correlation IDs. In the decision record, names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.
+    D: 'The review is governed by this fact: a hard-coded regional server name, non-idempotent retry, or missing
+      secret in the secondary path must fail. In the decision record, irreversible purge is outside the lab contract
+      and destroys evidence needed for residual-state validation.'
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q31
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: 'A review of ''Measure replication health against RPO'' begins with input from site reliability engineering
+    lead. Approval requires a positive result plus this independent negative assertion: Missing samples, averaged-away
+    spikes, or infrastructure-only lag with no transaction watermark must fail. What should be recorded as the acceptance
+    rule that makes LAB16-REQ-04 testable?'
+  options:
+    A: Select Active geo-replication with application-managed endpoints and failover before checking Measure replication
+      health against RPO. Next, treat it as established that a successful deployment will later prove the architecture
+      constraint.
+    B: Use the passing result from Baseline database tier and availability settings to approve Measure replication
+      health against RPO, and then use as justification the claim that one control establishes an unrelated acceptance
+      boundary.
+    C: Choose SQL Server on Azure Virtual Machines with an Always On availability group and skip the Measure replication
+      health against RPO negative assertion. Also, accept without proof that the candidate has the lowest implementation
+      effort.
+    D: Require the documented positive state for Measure replication health against RPO, and then verify that missing
+      samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark must fail.
+  answer: D
+  explanations:
+    A: The decision tension comes from the fact that missing samples, averaged-away spikes, or infrastructure-only
+      lag with no transaction watermark must fail. In the decision record, a deployment result cannot prove LAB16-REQ-04,
+      and Active geo-replication with application-managed endpoints and failover still has to meet the mandatory
+      boundary.
+    B: The safe operating boundary says that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. In the decision record, that outcome
+      belongs to Baseline database tier and availability settings and leaves Measure replication health against
+      RPO unverified.
+    C: The traceable checkpoint outcome is that preserve ticket sales and prevent overselling during zone or region
+      disruption while meeting the five-minute RPO. In the decision record, implementation effort cannot justify
+      skipping the negative assertion or displace LAB16-REQ-04.
+    D: The retained result must be reconciled with the fact that replication lag and business transaction markers
+      are measured independently and remain within the five-minute RPO under the modeled load. In the decision record,
+      the positive state and an independent negative assertion jointly make LAB16-REQ-04 testable.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q32
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: '''Measure replication health against RPO'' awaits approval from customer support manager. The selected
+    architecture is Azure SQL Database failover group with zone-redundant primary and secondary databases; object
+    existence alone is not success. Which proposal supplies the intended successful finding?'
+  options:
+    A: Use only the negative assertion 'Missing samples, averaged-away spikes, or infrastructure-only lag with no
+      transaction watermark must fail' as the success result; next, base approval on the claim that absence proves
+      every required positive property.
+    B: Use the successful finding from Validate failover-group topology as the result for Measure replication health
+      against RPO. In addition, use the premise that a property from the current checkpoint does not need to be
+      inspected.
+    C: Record the failure condition 'Aggregate metrics can hide short lag spikes that violate the business RPO'
+      as a successful state; before approval, consider it sufficient that the command returned an object.
+    D: Record replication lag and business transaction markers are measured independently and remain within the
+      five-minute RPO under the modeled load; as a separate check, classify it as success for LAB16-REQ-04.
+  answer: D
+  explanations:
+    A: The recovery guidance assumes that missing samples, averaged-away spikes, or infrastructure-only lag with
+      no transaction watermark must fail. In the decision record, this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: The WAF consequence identifies that the partner region, database membership, endpoint policy, grace period,
+      residency, and capacity assumptions match the approved design. In the decision record, evidence for Validate
+      failover-group topology cannot substitute for the properties required at Measure replication health against
+      RPO.
+    C: The command-level assertion is anchored in the fact that aggregate metrics can hide short lag spikes that
+      violate the business RPO. In the decision record, resource existence or command output does not convert the
+      documented failure condition into success.
+    D: The failure model establishes that replication lag and business transaction markers are measured independently
+      and remain within the five-minute RPO under the modeled load. In the decision record, this is the authored
+      target state for Measure replication health against RPO and directly supports LAB16-REQ-04.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q33
+  difficulty: foundational
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: '''Measure replication health against RPO'' is reopened at the request of commerce product owner. Evidence
+    must address this risk without retaining credentials: Aggregate metrics can hide short lag spikes that violate
+    the business RPO. Which option best represents sufficient, properly scoped evidence?'
+  options:
+    A: Retain archive metric samples, transaction watermarks, timestamps, and the calculated worst-case data-loss
+      interval; before approval, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Prove connection and dependency readiness for Measure replication health against
+      RPO; for the recorded decision, rely on the claim that a related checkpoint proves the current expected state.
+    C: Store unredacted Measure replication health against RPO output with operator, tenant, token, and request
+      context. Then, rely on the belief that reproduction requires every captured field.
+    D: Record only the Measure replication health against RPO positive inspection's exit status; afterward, proceed
+      on the belief that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: archive metric samples, transaction watermarks, timestamps, and the calculated worst-case data-loss interval.
+      The independent assertion shows why it captures the checkpoint's observable properties while keeping the evidence
+      boundary narrow.
+    B: The controlling fact is that save sanitized connection settings, dependency checks, retry-policy tests, and
+      transaction correlation IDs. The independent assertion shows why that evidence supports Prove connection and
+      dependency readiness, so it cannot demonstrate Replication lag and business transaction markers are measured
+      independently and remain within the five-minute RPO under the modeled load.
+    C: The authored acceptance boundary states that unredacted implementation output. The independent assertion
+      shows why identity, tenant, or token material exceeds the non-secret evidence contract.
+    D: The relevant observation is that the positive inspection's exit status. The independent assertion shows why
+      an exit code alone does not show whether replication lag and business transaction markers are measured independently
+      and remain within the five-minute RPO under the modeled load.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q34
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: A design review of 'Measure replication health against RPO' includes database engineering lead. The target
+    is Replication lag and business transaction markers are measured independently and remain within the five-minute
+    RPO under the modeled load, but the latest evidence does not show it. Which course of action provides the most
+    likely cause?
+  options:
+    A: Treat 'Premature failback can cause a second outage or overwrite the most current data path' as grounds to
+      reject Measure replication health against RPO. Also, take it as conclusive that rehearse failover decision
+      and failback's failure model applies unchanged here.
+    B: Ignore the negative assertion 'Missing samples, averaged-away spikes, or infrastructure-only lag with no
+      transaction watermark must fail'; in a separate step, treat it as established that a later material change
+      will make it unnecessary.
+    C: Investigate aggregate metrics can hide short lag spikes that violate the business RPO; as an independent
+      condition, isolate that cause before changing Azure SQL Database failover group with zone-redundant primary
+      and secondary databases.
+    D: Investigate Baseline database tier and availability settings instead of diagnosing Measure replication health
+      against RPO. As another control, use as justification the claim that a passing result at Baseline database
+      tier and availability settings identifies the current cause.
+  answer: C
+  explanations:
+    A: The scenario makes clear that premature failback can cause a second outage or overwrite the most current
+      data path. The independent assertion shows why that condition belongs to Rehearse failover decision and failback
+      and does not by itself invalidate Azure SQL Database failover group with zone-redundant primary and secondary
+      databases.
+    B: The architecture evidence must show that missing samples, averaged-away spikes, or infrastructure-only lag
+      with no transaction watermark must fail. The independent assertion shows why the negative assertion must be
+      evaluated now, independent of a later business change.
+    C: The checkpoint specifically records that aggregate metrics can hide short lag spikes that violate the business
+      RPO. The independent assertion shows why it is the checkpoint's causal failure model and should be isolated
+      before retrying Measure replication health against RPO.
+    D: The applicable design condition is that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. The independent assertion shows why a
+      passing result at Baseline database tier and availability settings gives no causal evidence for the failure
+      at Measure replication health against RPO.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q35
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: 'The team asks payment compliance officer to assess ''Measure replication health against RPO''. The run
+    encountered this modeled failure: Aggregate metrics can hide short lag spikes that violate the business RPO.
+    Which finding constitutes the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Delete synthetic business records according to the test-data policy; retain
+      sanitized metric evidence; before approval, treat as decisive the assertion that the failed operation and
+      its returned identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'Aggregate metrics can hide short lag spikes that violate
+      the business RPO'. Separately, base approval on the claim that the first state record and returned identifiers
+      can be discarded.
+    C: Change Baseline database tier and availability settings instead; for this decision, use the premise that
+      success at Baseline database tier and availability settings will repair the failed state at Measure replication
+      health against RPO.
+    D: Query maximum granularity for the affected window and rerun the synthetic transaction comparison; then preserve
+      the current run identity and evidence.
+  answer: D
+  explanations:
+    A: The retained result must be reconciled with the fact that delete synthetic business records according to
+      the test-data policy; retain sanitized metric evidence. The independent assertion shows why cleanup before
+      reconciliation can erase evidence or strand a partially created dependency.
+    B: The decision tension comes from the fact that aggregate metrics can hide short lag spikes that violate the
+      business RPO. The independent assertion shows why discarding the original run identity breaks ownership reconciliation
+      and can duplicate a partial operation.
+    C: The safe operating boundary says that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. The independent assertion shows why altering
+      an already separate checkpoint does not repair the modeled failure at Measure replication health against RPO.
+    D: 'The review is governed by this fact: query maximum granularity for the affected window and rerun the synthetic
+      transaction comparison. The independent assertion shows why it corrects the narrow cause while retaining the
+      same recovery trail and decision scope.'
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q36
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: A recommendation on 'Measure replication health against RPO' is requested by site reliability engineering
+    lead. Without making a new change, the team must inspect the risk 'Aggregate metrics can hide short lag spikes
+    that violate the business RPO' using the Azure CLI lane. Which recommendation delivers the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Measure replication health against RPO implementation command and infer the expected state; afterward,
+      accept without proof that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Measure replication health against RPO. Also, retain this evidence:
+      archive metric samples, transaction watermarks, timestamps, and the calculated worst-case data-loss interval.'
+    C: 'Run only this negative inspection for Measure replication health against RPO: Missing samples, averaged-away
+      spikes, or infrastructure-only lag with no transaction watermark must fail; then rely on the claim that an
+      empty negative result reports every required positive property.'
+    D: Run the positive inspection for Validate failover-group topology and apply it to Measure replication health
+      against RPO. Independently, rely on the belief that any command from the same lane proves the current checkpoint.
+  answer: B
+  explanations:
+    A: The failure model establishes that the implementation command. The independent assertion shows why it can
+      mutate state and shell success does not independently assert the expected properties.
+    B: The traceable checkpoint outcome is that replication lag and business transaction markers are measured independently
+      and remain within the five-minute RPO under the modeled load. The independent assertion shows why the read-only
+      inspection directly tests the properties required at Measure replication health against RPO.
+    C: The recovery guidance assumes that the negative inspection. The independent assertion shows why absence of
+      the prohibited condition is necessary but does not establish the positive architecture state.
+    D: The WAF consequence identifies that the positive inspection for Validate failover-group topology. The independent
+      assertion shows why it is lane-correct but proves Validate failover-group topology, not Measure replication
+      health against RPO.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q37
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: '''Measure replication health against RPO'' is assigned to customer support manager. A passing positive
+    check does not by itself prove this negative assertion: Missing samples, averaged-away spikes, or infrastructure-only
+    lag with no transaction watermark must fail. Which response meets the need for the assertion pair that proves
+    both conditions independently?'
+  options:
+    A: Verify only the positive result for Measure replication health against RPO and report full compliance. As
+      another control, consider it sufficient that every prohibited parallel state must therefore be absent.
+    B: Prove only that missing samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark
+      must fail and report the intended configuration as present; as a separate check, take it as conclusive that
+      absence is equivalent to positive-state evidence.
+    C: Use Prove connection and dependency readiness's negative assertion for Measure replication health against
+      RPO. Afterward, treat it as established that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Measure replication health against RPO. Afterward, independently verify
+      that missing samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark must
+      fail.
+  answer: D
+  explanations:
+    A: replication lag and business transaction markers are measured independently and remain within the five-minute
+      RPO under the modeled load. Operationally, the positive result alone does not test the explicit anti-condition
+      'Missing samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark must fail'.
+    B: The controlling fact is that missing samples, averaged-away spikes, or infrastructure-only lag with no transaction
+      watermark must fail. Operationally, absence evidence cannot demonstrate the required positive state 'Replication
+      lag and business transaction markers are measured independently and remain within the five-minute RPO under
+      the modeled load'.
+    C: The authored acceptance boundary states that a hard-coded regional server name, non-idempotent retry, or
+      missing secret in the secondary path must fail. Operationally, the second assertion is valid for Prove connection
+      and dependency readiness but leaves this checkpoint's prohibited state untested.
+    D: The command-level assertion is anchored in the fact that replication lag and business transaction markers
+      are measured independently and remain within the five-minute RPO under the modeled load; Missing samples,
+      averaged-away spikes, or infrastructure-only lag with no transaction watermark must fail. The independent
+      assertion shows why two independent observations prevent a passing positive check from concealing an unsafe
+      parallel state.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q38
+  difficulty: applied
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: 'An assurance review of ''Measure replication health against RPO'' includes commerce product owner. The
+    board wants the Well-Architected consequence of mitigating this risk: Aggregate metrics can hide short lag spikes
+    that violate the business RPO. Which choice should be approved as the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Rehearse failover decision and failback consequence as the result for Measure replication health
+      against RPO; for this decision, proceed on the belief that a pillar statement remains valid when moved away
+      from Rehearse failover decision and failback.
+    B: 'Record this consequence: Performance Efficiency: lag measurement shows whether secondary capacity can sustain
+      the write and replication rate. Separately, tie it to LAB16-REQ-04.'
+    C: Remove the control responsible for the Measure replication health against RPO outcome. Before sign-off, treat
+      as decisive the assertion that a low cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Performance Efficiency: lag measurement shows whether secondary capacity can sustain the write and
+      replication rate'' as proof that all five pillars pass; as an independent condition, base approval on the
+      claim that the checkpoint ''Measure replication health against RPO'' no longer needs its separate negative
+      check.'
+  answer: B
+  explanations:
+    A: 'The checkpoint specifically records that cost Optimization: the model validates regional readiness without
+      running a duplicate application tier for the lab. Operationally, that tradeoff belongs to Rehearse failover
+      decision and failback and does not explain this checkpoint''s decision.'
+    B: 'The relevant observation is that performance Efficiency: lag measurement shows whether secondary capacity
+      can sustain the write and replication rate. Operationally, it states the authored pillar consequence of the
+      control evaluated at Measure replication health against RPO.'
+    C: The scenario makes clear that the required outcome at Measure replication health against RPO. Operationally,
+      cost Optimization cannot remove the acceptance condition 'Replication lag and business transaction markers
+      are measured independently and remain within the five-minute RPO under the modeled load'.
+    D: The architecture evidence must show that missing samples, averaged-away spikes, or infrastructure-only lag
+      with no transaction watermark must fail. Operationally, one positive command cannot establish every pillar,
+      especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q39
+  difficulty: advanced
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: 'Approval of ''Measure replication health against RPO'' is questioned by database engineering lead. A material
+    change now applies: A new flash-sale contract doubles peak write volume and requires the reservation API to
+    recover within fifteen minutes rather than one hour. What should the team use as the correct revision to the
+    decision record?'
+  options:
+    A: Retain Azure SQL Database failover group with zone-redundant primary and secondary databases at Measure replication
+      health against RPO without recalculating criteria or eligibility. Independently, use as justification the
+      claim that the original weighted result is permanent.
+    B: Select Active geo-replication with application-managed endpoints and failover for Measure replication health
+      against RPO without rechecking its mandatory constraints. Next, accept without proof that being different
+      from the current design is an architecture criterion.
+    C: Re-score Azure SQL Database failover group with zone-redundant primary and secondary databases and both alternatives
+      for Measure replication health against RPO; separately, supersede the ADR using the changed evidence for LAB16-REQ-04.
+    D: Keep SQL Server on Azure Virtual Machines with an Always On availability group eligible at Measure replication
+      health against RPO by downgrading LAB16-REQ-04, and then rely on the claim that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: azure SQL Database failover group with zone-redundant primary and secondary
+      databases. Operationally, the original ADR remains historical evidence, but its score cannot answer a changed
+      mandatory condition.'
+    B: The retained result must be reconciled with the fact that active geo-replication with application-managed
+      endpoints and failover. Operationally, being different is not a criterion, and the candidate still must avoid
+      the prohibited state at Measure replication health against RPO.
+    C: The applicable design condition is that azure SQL Database failover group with zone-redundant primary and
+      secondary databases at Measure replication health against RPO. Operationally, the material change 'A new flash-sale
+      contract doubles peak write volume and requires the reservation API to recover within fifteen minutes rather
+      than one hour.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    D: The decision tension comes from the fact that lAB16-REQ-04. Operationally, an architect cannot silently downgrade
+      a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q40
+  difficulty: advanced
+  objectiveId: BC-HA-02
+  checkpointId: LAB16-CP04
+  stem: 'The implementation review has reached ''Measure replication health against RPO''. After a partial run,
+    cleanup must follow this dependency: Delete synthetic business records according to the test-data policy; retain
+    sanitized metric evidence. Which option best establishes the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Validate failover-group topology before reconciling the current dependency. Afterward,
+      use the premise that removing a parent needed to identify Measure replication health against RPO is harmless.
+    B: Delete candidates by display name before comparing the Measure replication health against RPO ownership tags;
+      next, consider it sufficient that the dependency rule 'Delete synthetic business records according to the
+      test-data policy; retain sanitized metric evidence' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Measure replication health against RPO. Independently,
+      follow this dependency rule without purge: Delete synthetic business records according to the test-data policy;
+      retain sanitized metric evidence.'
+    D: Destroy recoverable copies before retaining the Measure replication health against RPO negative assertion
+      'Missing samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark must fail'.
+      In addition, take it as conclusive that remaining command logs are sufficient recovery evidence.
+  answer: C
+  explanations:
+    A: The traceable checkpoint outcome is that remove local projections only; do not add databases or alter failover
+      policy during assessment. Operationally, a cleanup rule for Validate failover-group topology cannot override
+      the dependency declared for Measure replication health against RPO.
+    B: The failure model establishes that archive metric samples, transaction watermarks, timestamps, and the calculated
+      worst-case data-loss interval. Operationally, names are not ownership proof; deletion requires the exact recorded
+      identifier and every required tag.
+    C: The safe operating boundary says that delete synthetic business records according to the test-data policy;
+      retain sanitized metric evidence. Operationally, exact identity, complete ownership tags, and the authored
+      dependency order constrain cleanup and preserve recovery.
+    D: The recovery guidance assumes that missing samples, averaged-away spikes, or infrastructure-only lag with
+      no transaction watermark must fail. Operationally, irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q41
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: 'The approach to ''Rehearse failover decision and failback'' is challenged by customer support manager.
+    Approval requires a positive result plus this independent negative assertion: Automatic failback, an unmeasured
+    forced failover, or success without reservation and payment assertions must fail. Which proposal supplies the
+    acceptance rule that makes LAB16-REQ-05 testable?'
+  options:
+    A: Select Active geo-replication with application-managed endpoints and failover before checking Rehearse failover
+      decision and failback. Also, base approval on the claim that a successful deployment will later prove the
+      architecture constraint.
+    B: Require the documented positive state for Rehearse failover decision and failback. As another control, verify
+      that automatic failback, an unmeasured forced failover, or success without reservation and payment assertions
+      must fail.
+    C: Use the passing result from Baseline database tier and availability settings to approve Rehearse failover
+      decision and failback; in a separate step, use the premise that one control establishes an unrelated acceptance
+      boundary.
+    D: Choose SQL Server on Azure Virtual Machines with an Always On availability group and skip the Rehearse failover
+      decision and failback negative assertion. As another control, consider it sufficient that the candidate has
+      the lowest implementation effort.
+  answer: B
+  explanations:
+    A: The command-level assertion is anchored in the fact that automatic failback, an unmeasured forced failover,
+      or success without reservation and payment assertions must fail. Operationally, a deployment result cannot
+      prove LAB16-REQ-05, and Active geo-replication with application-managed endpoints and failover still has to
+      meet the mandatory boundary.
+    B: The WAF consequence identifies that the exercise defines detection, business authorization, forced-versus-planned
+      choice, validation, stabilization, and data-safe failback gates. Operationally, the positive state and an
+      independent negative assertion jointly make LAB16-REQ-05 testable.
+    C: the baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies,
+      and observed workload demand. The requirement-to-evidence link establishes that that outcome belongs to Baseline
+      database tier and availability settings and leaves Rehearse failover decision and failback unverified.
+    D: The controlling fact is that preserve ticket sales and prevent overselling during zone or region disruption
+      while meeting the five-minute RPO. The requirement-to-evidence link establishes that implementation effort
+      cannot justify skipping the negative assertion or displace LAB16-REQ-05.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q42
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: A decision test for 'Rehearse failover decision and failback' includes commerce product owner. The selected
+    architecture is Azure SQL Database failover group with zone-redundant primary and secondary databases; object
+    existence alone is not success. Which option best represents the intended successful finding?
+  options:
+    A: Record the exercise defines detection, business authorization, forced-versus-planned choice, validation,
+      stabilization, and data-safe failback gates. In addition, classify it as success for LAB16-REQ-05.
+    B: Use only the negative assertion 'Automatic failback, an unmeasured forced failover, or success without reservation
+      and payment assertions must fail' as the success result; before approval, rely on the claim that absence proves
+      every required positive property.
+    C: Use the successful finding from Validate failover-group topology as the result for Rehearse failover decision
+      and failback. Separately, rely on the belief that a property from the current checkpoint does not need to
+      be inspected.
+    D: Record the failure condition 'Premature failback can cause a second outage or overwrite the most current
+      data path' as a successful state; for this decision, proceed on the belief that the command returned an object.
+  answer: A
+  explanations:
+    A: The authored acceptance boundary states that the exercise defines detection, business authorization, forced-versus-planned
+      choice, validation, stabilization, and data-safe failback gates. The requirement-to-evidence link establishes
+      that this is the authored target state for Rehearse failover decision and failback and directly supports LAB16-REQ-05.
+    B: The relevant observation is that automatic failback, an unmeasured forced failover, or success without reservation
+      and payment assertions must fail. The requirement-to-evidence link establishes that this is the independent
+      prohibited-state assertion, not a successful finding.
+    C: The checkpoint specifically records that the partner region, database membership, endpoint policy, grace
+      period, residency, and capacity assumptions match the approved design. The requirement-to-evidence link establishes
+      that evidence for Validate failover-group topology cannot substitute for the properties required at Rehearse
+      failover decision and failback.
+    D: The scenario makes clear that premature failback can cause a second outage or overwrite the most current
+      data path. The requirement-to-evidence link establishes that resource existence or command output does not
+      convert the documented failure condition into success.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q43
+  difficulty: foundational
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: 'The architecture board reconsiders ''Rehearse failover decision and failback'' with database engineering
+    lead. Evidence must address this risk without retaining credentials: Premature failback can cause a second outage
+    or overwrite the most current data path. Which course of action provides sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Prove connection and dependency readiness for Rehearse failover decision and
+      failback; afterward, take it as conclusive that a related checkpoint proves the current expected state.
+    B: Store unredacted Rehearse failover decision and failback output with operator, tenant, token, and request
+      context; then treat it as established that reproduction requires every captured field.
+    C: Retain preserve the tabletop decision log, predicted data-loss window, application assertions, and failback
+      checklist. Before sign-off, exclude credentials and unrelated response fields.
+    D: Record only the Rehearse failover decision and failback positive inspection's exit status. Independently,
+      use as justification the claim that projected properties and assertion results can be reconstructed later.
+  answer: C
+  explanations:
+    A: The applicable design condition is that save sanitized connection settings, dependency checks, retry-policy
+      tests, and transaction correlation IDs. The requirement-to-evidence link establishes that that evidence supports
+      Prove connection and dependency readiness, so it cannot demonstrate The exercise defines detection, business
+      authorization, forced-versus-planned choice, validation, stabilization, and data-safe failback gates.
+    B: 'The review is governed by this fact: unredacted implementation output. The requirement-to-evidence link
+      establishes that identity, tenant, or token material exceeds the non-secret evidence contract.'
+    C: The architecture evidence must show that preserve the tabletop decision log, predicted data-loss window,
+      application assertions, and failback checklist. The requirement-to-evidence link establishes that it captures
+      the checkpoint's observable properties while keeping the evidence boundary narrow.
+    D: The retained result must be reconciled with the fact that the positive inspection's exit status. The requirement-to-evidence
+      link establishes that an exit code alone does not show whether the exercise defines detection, business authorization,
+      forced-versus-planned choice, validation, stabilization, and data-safe failback gates.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q44
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: A review of 'Rehearse failover decision and failback' begins with input from payment compliance officer.
+    The target is The exercise defines detection, business authorization, forced-versus-planned choice, validation,
+    stabilization, and data-safe failback gates, but the latest evidence does not show it. Which finding constitutes
+    the most likely cause?
+  options:
+    A: Treat 'Aggregate metrics can hide short lag spikes that violate the business RPO' as grounds to reject Rehearse
+      failover decision and failback. As another control, treat as decisive the assertion that measure replication
+      health against RPO's failure model applies unchanged here.
+    B: Investigate premature failback can cause a second outage or overwrite the most current data path; afterward,
+      isolate that cause before changing Azure SQL Database failover group with zone-redundant primary and secondary
+      databases.
+    C: Ignore the negative assertion 'Automatic failback, an unmeasured forced failover, or success without reservation
+      and payment assertions must fail'; as a separate check, base approval on the claim that a later material change
+      will make it unnecessary.
+    D: Investigate Baseline database tier and availability settings instead of diagnosing Rehearse failover decision
+      and failback. Afterward, use the premise that a passing result at Baseline database tier and availability
+      settings identifies the current cause.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that aggregate metrics can hide short lag spikes that violate the business
+      RPO. The requirement-to-evidence link establishes that that condition belongs to Measure replication health
+      against RPO and does not by itself invalidate Azure SQL Database failover group with zone-redundant primary
+      and secondary databases.
+    B: The decision tension comes from the fact that premature failback can cause a second outage or overwrite the
+      most current data path. The requirement-to-evidence link establishes that it is the checkpoint's causal failure
+      model and should be isolated before retrying Rehearse failover decision and failback.
+    C: The traceable checkpoint outcome is that automatic failback, an unmeasured forced failover, or success without
+      reservation and payment assertions must fail. The requirement-to-evidence link establishes that the negative
+      assertion must be evaluated now, independent of a later business change.
+    D: The failure model establishes that the baseline identifies service tier, zone redundancy, backup redundancy,
+      maintenance constraints, dependencies, and observed workload demand. The requirement-to-evidence link establishes
+      that a passing result at Baseline database tier and availability settings gives no causal evidence for the
+      failure at Rehearse failover decision and failback.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q45
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: '''Rehearse failover decision and failback'' awaits approval from site reliability engineering lead. The
+    run encountered this modeled failure: Premature failback can cause a second outage or overwrite the most current
+    data path. Which recommendation delivers the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Delete local exercise artifacts; never issue a failover command as part of
+      this safe analogue; for this decision, accept without proof that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Reconcile the authoritative data copy and repeat the decision exercise from the failed gate, and then preserve
+      the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'Premature failback can cause a second outage or overwrite
+      the most current data path'. Before sign-off, rely on the claim that the first state record and returned identifiers
+      can be discarded.
+    D: Change Baseline database tier and availability settings instead; as an independent condition, rely on the
+      belief that success at Baseline database tier and availability settings will repair the failed state at Rehearse
+      failover decision and failback.
+  answer: B
+  explanations:
+    A: The WAF consequence identifies that delete local exercise artifacts; never issue a failover command as part
+      of this safe analogue. The requirement-to-evidence link establishes that cleanup before reconciliation can
+      erase evidence or strand a partially created dependency.
+    B: The recovery guidance assumes that reconcile the authoritative data copy and repeat the decision exercise
+      from the failed gate. The requirement-to-evidence link establishes that it corrects the narrow cause while
+      retaining the same recovery trail and decision scope.
+    C: The command-level assertion is anchored in the fact that premature failback can cause a second outage or
+      overwrite the most current data path. The requirement-to-evidence link establishes that discarding the original
+      run identity breaks ownership reconciliation and can duplicate a partial operation.
+    D: the baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies,
+      and observed workload demand. Consequently, altering an already separate checkpoint does not repair the modeled
+      failure at Rehearse failover decision and failback.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q46
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: '''Rehearse failover decision and failback'' is reopened at the request of customer support manager. Without
+    making a new change, the team must inspect the risk ''Premature failback can cause a second outage or overwrite
+    the most current data path'' using the Azure CLI lane. Which response meets the need for the read-only, lane-correct
+    inspection?'
+  options:
+    A: Rerun the Rehearse failover decision and failback implementation command and infer the expected state. Independently,
+      consider it sufficient that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Rehearse failover decision and failback: Automatic failback, an unmeasured
+      forced failover, or success without reservation and payment assertions must fail. Next, take it as conclusive
+      that an empty negative result reports every required positive property.'
+    C: 'Inspect the documented properties for Rehearse failover decision and failback; as a separate check, retain
+      this evidence: preserve the tabletop decision log, predicted data-loss window, application assertions, and
+      failback checklist.'
+    D: Run the positive inspection for Validate failover-group topology and apply it to Rehearse failover decision
+      and failback, and then treat it as established that any command from the same lane proves the current checkpoint.
+  answer: C
+  explanations:
+    A: The authored acceptance boundary states that the implementation command. Consequently, it can mutate state
+      and shell success does not independently assert the expected properties.
+    B: The relevant observation is that the negative inspection. Consequently, absence of the prohibited condition
+      is necessary but does not establish the positive architecture state.
+    C: The controlling fact is that the exercise defines detection, business authorization, forced-versus-planned
+      choice, validation, stabilization, and data-safe failback gates. Consequently, the read-only inspection directly
+      tests the properties required at Rehearse failover decision and failback.
+    D: The checkpoint specifically records that the positive inspection for Validate failover-group topology. Consequently,
+      it is lane-correct but proves Validate failover-group topology, not Rehearse failover decision and failback.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q47
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: 'A design review of ''Rehearse failover decision and failback'' includes commerce product owner. A passing
+    positive check does not by itself prove this negative assertion: Automatic failback, an unmeasured forced failover,
+    or success without reservation and payment assertions must fail. Which choice should be approved as the assertion
+    pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Rehearse failover decision and failback and report full compliance. Afterward,
+      proceed on the belief that every prohibited parallel state must therefore be absent.
+    B: Prove only that automatic failback, an unmeasured forced failover, or success without reservation and payment
+      assertions must fail and report the intended configuration as present; next, treat as decisive the assertion
+      that absence is equivalent to positive-state evidence.
+    C: Verify the positive properties for Rehearse failover decision and failback; before approval, independently
+      verify that automatic failback, an unmeasured forced failover, or success without reservation and payment
+      assertions must fail.
+    D: Use Prove connection and dependency readiness's negative assertion for Rehearse failover decision and failback.
+      In addition, base approval on the claim that negative assertions are interchangeable between checkpoints.
+  answer: C
+  explanations:
+    A: The architecture evidence must show that the exercise defines detection, business authorization, forced-versus-planned
+      choice, validation, stabilization, and data-safe failback gates. Consequently, the positive result alone does
+      not test the explicit anti-condition 'Automatic failback, an unmeasured forced failover, or success without
+      reservation and payment assertions must fail'.
+    B: The applicable design condition is that automatic failback, an unmeasured forced failover, or success without
+      reservation and payment assertions must fail. Consequently, absence evidence cannot demonstrate the required
+      positive state 'The exercise defines detection, business authorization, forced-versus-planned choice, validation,
+      stabilization, and data-safe failback gates'.
+    C: The scenario makes clear that the exercise defines detection, business authorization, forced-versus-planned
+      choice, validation, stabilization, and data-safe failback gates; Automatic failback, an unmeasured forced
+      failover, or success without reservation and payment assertions must fail. Consequently, two independent observations
+      prevent a passing positive check from concealing an unsafe parallel state.
+    D: 'The review is governed by this fact: a hard-coded regional server name, non-idempotent retry, or missing
+      secret in the secondary path must fail. Consequently, the second assertion is valid for Prove connection and
+      dependency readiness but leaves this checkpoint''s prohibited state untested.'
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q48
+  difficulty: applied
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: 'The team asks database engineering lead to assess ''Rehearse failover decision and failback''. The board
+    wants the Well-Architected consequence of mitigating this risk: Premature failback can cause a second outage
+    or overwrite the most current data path. What should the team use as the consequence attributable to this checkpoint?'
+  options:
+    A: 'Record this consequence: Cost Optimization: the model validates regional readiness without running a duplicate
+      application tier for the lab; as an independent condition, tie it to LAB16-REQ-05.'
+    B: Use the Measure replication health against RPO consequence as the result for Rehearse failover decision and
+      failback; as an independent condition, use as justification the claim that a pillar statement remains valid
+      when moved away from Measure replication health against RPO.
+    C: Remove the control responsible for the Rehearse failover decision and failback outcome; for the final assessment,
+      accept without proof that a low cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Cost Optimization: the model validates regional readiness without running a duplicate application
+      tier for the lab'' as proof that all five pillars pass. Then, rely on the claim that the checkpoint ''Rehearse
+      failover decision and failback'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The retained result must be reconciled with the fact that cost Optimization: the model validates regional
+      readiness without running a duplicate application tier for the lab. Consequently, it states the authored pillar
+      consequence of the control evaluated at Rehearse failover decision and failback.'
+    B: 'The decision tension comes from the fact that performance Efficiency: lag measurement shows whether secondary
+      capacity can sustain the write and replication rate. Consequently, that tradeoff belongs to Measure replication
+      health against RPO and does not explain this checkpoint''s decision.'
+    C: The safe operating boundary says that the required outcome at Rehearse failover decision and failback. Consequently,
+      cost Optimization cannot remove the acceptance condition 'The exercise defines detection, business authorization,
+      forced-versus-planned choice, validation, stabilization, and data-safe failback gates'.
+    D: The traceable checkpoint outcome is that automatic failback, an unmeasured forced failover, or success without
+      reservation and payment assertions must fail. Consequently, one positive command cannot establish every pillar,
+      especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q49
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: 'A recommendation on ''Rehearse failover decision and failback'' is requested by payment compliance officer.
+    A material change now applies: A new flash-sale contract doubles peak write volume and requires the reservation
+    API to recover within fifteen minutes rather than one hour. Which option best establishes the correct revision
+    to the decision record?'
+  options:
+    A: Re-score Azure SQL Database failover group with zone-redundant primary and secondary databases and both alternatives
+      for Rehearse failover decision and failback; then supersede the ADR using the changed evidence for LAB16-REQ-05.
+    B: Retain Azure SQL Database failover group with zone-redundant primary and secondary databases at Rehearse
+      failover decision and failback without recalculating criteria or eligibility, and then use the premise that
+      the original weighted result is permanent.
+    C: Select Active geo-replication with application-managed endpoints and failover for Rehearse failover decision
+      and failback without rechecking its mandatory constraints. Also, consider it sufficient that being different
+      from the current design is an architecture criterion.
+    D: Keep SQL Server on Azure Virtual Machines with an Always On availability group eligible at Rehearse failover
+      decision and failback by downgrading LAB16-REQ-05; in a separate step, take it as conclusive that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+  answer: A
+  explanations:
+    A: The failure model establishes that azure SQL Database failover group with zone-redundant primary and secondary
+      databases at Rehearse failover decision and failback. Consequently, the material change 'A new flash-sale
+      contract doubles peak write volume and requires the reservation API to recover within fifteen minutes rather
+      than one hour.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    B: The recovery guidance assumes that azure SQL Database failover group with zone-redundant primary and secondary
+      databases. Consequently, the original ADR remains historical evidence, but its score cannot answer a changed
+      mandatory condition.
+    C: The WAF consequence identifies that active geo-replication with application-managed endpoints and failover.
+      Consequently, being different is not a criterion, and the candidate still must avoid the prohibited state
+      at Rehearse failover decision and failback.
+    D: The command-level assertion is anchored in the fact that lAB16-REQ-05. Consequently, an architect cannot
+      silently downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+- id: LAB16-Q50
+  difficulty: advanced
+  objectiveId: BC-DR-03
+  checkpointId: LAB16-CP05
+  stem: '''Rehearse failover decision and failback'' is assigned to site reliability engineering lead. After a partial
+    run, cleanup must follow this dependency: Delete local exercise artifacts; never issue a failover command as
+    part of this safe analogue. Which answer identifies the dependency-safe cleanup plan?'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Rehearse failover decision and failback. Also, follow
+      this dependency rule without purge: Delete local exercise artifacts; never issue a failover command as part
+      of this safe analogue.'
+    B: Apply the cleanup rule for Validate failover-group topology before reconciling the current dependency. In
+      addition, rely on the belief that removing a parent needed to identify Rehearse failover decision and failback
+      is harmless.
+    C: Delete candidates by display name before comparing the Rehearse failover decision and failback ownership
+      tags; before approval, proceed on the belief that the dependency rule 'Delete local exercise artifacts; never
+      issue a failover command as part of this safe analogue' is optional.
+    D: Destroy recoverable copies before retaining the Rehearse failover decision and failback negative assertion
+      'Automatic failback, an unmeasured forced failover, or success without reservation and payment assertions
+      must fail'. Separately, treat as decisive the assertion that remaining command logs are sufficient recovery
+      evidence.
+  answer: A
+  explanations:
+    A: delete local exercise artifacts; never issue a failover command as part of this safe analogue. For this case,
+      exact identity, complete ownership tags, and the authored dependency order constrain cleanup and preserve
+      recovery.
+    B: The controlling fact is that remove local projections only; do not add databases or alter failover policy
+      during assessment. For this case, a cleanup rule for Validate failover-group topology cannot override the
+      dependency declared for Rehearse failover decision and failback.
+    C: The authored acceptance boundary states that preserve the tabletop decision log, predicted data-loss window,
+      application assertions, and failback checklist. For this case, names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.
+    D: The relevant observation is that automatic failback, an unmeasured forced failover, or success without reservation
+      and payment assertions must fail. For this case, irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+  verifiedOn: '2026-09-02'
+# END GENERATED AZ305 V1

@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Preserve ticket sales and prevent overselling during zone or region disruption while meeting the five-minute RPO."]
+    R --> C1["Baseline database tier and availability settings"]
+    C1 --> C2["Validate failover-group topology"]
+    C2 --> C3["Prove connection and dependency readiness"]
+    C3 --> C4["Measure replication health against RPO"]
+    C4 --> C5["Rehearse failover decision and failback"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

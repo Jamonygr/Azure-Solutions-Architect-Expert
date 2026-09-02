@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-15
+number: 15
+slug: 15-compute-backup-ha
+title: Compute Backup, Recovery, and High Availability
+domain: business-continuity
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Compute continuity architect
+outcome: Design a zone-resilient VM architecture and an auditable backup, isolated-restore, and failover process
+  that meets clinical recovery targets.
+duration: 150 minutes
+difficulty: advanced
+costClass: low
+permissions: Virtual machine, SKU, and backup read roles support assessment; protection, immutability, restore,
+  failover, or compute changes require separate authorization.
+licensing: Azure Backup protected instances and storage, Site Recovery protected instances, restored disks, and
+  temporary isolated compute are separately billed.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/reliability/reliability-virtual-machines
+objectives:
+  primary:
+  - BC-DR-02
+  - BC-HA-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- RecoveryPlanName
+- ResourceGroupName
+- VaultId
+- VmSku
+- WebTierVmName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB15-CP01
+  title: Establish compute failure-domain evidence
+  requirementIds:
+  - LAB15-REQ-01
+  objectiveIds:
+  - BC-DR-02
+- id: LAB15-CP02
+  title: Verify backup coverage and policy intent
+  requirementIds:
+  - LAB15-REQ-02
+  objectiveIds:
+  - BC-HA-01
+- id: LAB15-CP03
+  title: Evaluate zone-resilient capacity
+  requirementIds:
+  - LAB15-REQ-03
+  objectiveIds:
+  - BC-DR-02
+- id: LAB15-CP04
+  title: Design isolated restore and recovery validation
+  requirementIds:
+  - LAB15-REQ-04
+  objectiveIds:
+  - BC-HA-01
+- id: LAB15-CP05
+  title: Exercise failover ordering and rollback
+  requirementIds:
+  - LAB15-REQ-05
+  objectiveIds:
+  - BC-DR-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

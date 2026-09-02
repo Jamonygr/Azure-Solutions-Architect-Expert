@@ -1,0 +1,86 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-15
+businessOutcome: Maintain appointment coordination through a datacenter failure and recover compromised virtual
+  machines from trusted points without unsafe reconnection.
+stakeholders:
+- Clinical operations owner
+- Infrastructure engineering lead
+- Security incident commander
+- Backup service owner
+- Finance partner
+functionalRequirements:
+- id: LAB15-REQ-01
+  statement: Every VM is mapped to an application tier, availability target, zone or fault-domain placement, and
+    recovery order.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-02
+- id: LAB15-REQ-02
+  statement: The coverage matrix maps operating system and data disks to policy frequency, retention, vault redundancy,
+    immutability, and soft-delete requirements.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-01
+- id: LAB15-REQ-03
+  statement: The target design documents supported zones, surge capacity, quota, health probes, disk constraints,
+    and degraded-mode capacity.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-02
+nonfunctionalRequirements:
+- id: LAB15-REQ-04
+  statement: The restore plan uses a quarantined network, malware inspection, identity isolation, application checks,
+    data-consistency checks, and explicit release approval.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-01
+- id: LAB15-REQ-05
+  statement: The safe analogue sequences identity, data, application, and ingress tiers, measures the RTO, and defines
+    rollback and failback gates.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-02
+constraints:
+- Clinical coordination must survive a datacenter failure and restore compromised VMs without reconnecting unsafe
+  systems.
+- A known-clean point must be restorable within two hours even when the latest three recovery points are suspect.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Application tiers can run across supported availability zones and have documented startup dependencies.
+- Security can classify a recovery point and approve release from a quarantined restore network.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: VM inventory includes zones, disks, backup policy, recovery points, dependencies, health, and isolation
+    evidence.
+  scale: Windows and Linux tiers span several machines; exact disk size, change rate, and restore throughput remain
+    measured inputs.
+  latency: Clinical transaction checks and restore transfer time are measured separately from infrastructure boot
+    time.
+  availability: Zone distribution covers a datacenter fault while trusted restore handles destructive or compromised
+    state.
+  rto: Cyber recovery must deliver a known-clean restore within two hours after excluding the latest three points.
+  rpo: The acceptable older recovery point depends on backup frequency and forensic confidence and requires clinical
+    owner approval.
+  budget: A safe analogue avoids permanent second-region compute while retaining zone capacity and temporary isolated
+    restore cost.
+acceptanceCriteria:
+- LAB15-REQ-01 passes its independent positive and negative assertions.
+- LAB15-REQ-02 passes its independent positive and negative assertions.
+- LAB15-REQ-03 passes its independent positive and negative assertions.
+- LAB15-REQ-04 passes its independent positive and negative assertions.
+- LAB15-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB15-CR-01
+  trigger: Security now requires a known-clean restore to be available within two hours even when the latest three
+    recovery points are considered suspect.
+  materialChange: Security now requires a known-clean restore to be available within two hours even when the latest
+    three recovery points are considered suspect.
+  mandatoryRequirementId: LAB15-REQ-04
+  expectedRevision: Increase protected-point depth and preplan isolated restore capacity so the fourth-newest trusted
+    point can pass within two hours.
+# END GENERATED AZ305 V1

@@ -1,0 +1,84 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-17
+number: 17
+slug: 17-nonrelational-data-resilience
+title: Semi-Structured and Unstructured Data Resilience
+domain: business-continuity
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Nonrelational data resilience architect
+outcome: Design and assess coordinated resilience for Cosmos DB documents and Blob assets, including region placement,
+  consistency, backup, failover, and restore validation.
+duration: 165 minutes
+difficulty: advanced
+costClass: low
+permissions: Cosmos DB and Storage read access supports topology review; region, failover, consistency, container,
+  or replication changes require separately approved data roles.
+licensing: Multi-region Cosmos DB throughput, multi-write regions, zone redundancy, storage replication, egress,
+  and backups all affect recurring cost.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/reliability/reliability-cosmos-db
+objectives:
+  primary:
+  - BC-DR-04
+  - BC-HA-03
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApprovedBlobRegions
+- ApprovedCosmosRegions
+- ConflictResolutionProcedureApproved
+- CosmosAccountName
+- RequiredRetentionDays
+- ResourceGroupName
+- StorageAccountName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB17-CP01
+  title: Inventory nonrelational region placement
+  requirementIds:
+  - LAB17-REQ-01
+  objectiveIds:
+  - BC-DR-04
+- id: LAB17-CP02
+  title: Validate document consistency and conflict behavior
+  requirementIds:
+  - LAB17-REQ-02
+  objectiveIds:
+  - BC-HA-03
+- id: LAB17-CP03
+  title: Assess Blob durability and failover readiness
+  requirementIds:
+  - LAB17-REQ-03
+  objectiveIds:
+  - BC-DR-04
+- id: LAB17-CP04
+  title: Prove backup and restore integrity
+  requirementIds:
+  - LAB17-REQ-04
+  objectiveIds:
+  - BC-HA-03
+- id: LAB17-CP05
+  title: Rehearse coordinated regional recovery
+  requirementIds:
+  - LAB17-REQ-05
+  objectiveIds:
+  - BC-DR-04
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

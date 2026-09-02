@@ -1,0 +1,78 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-14
+number: 14
+slug: 14-recovery-strategy-hybrid
+title: Recovery Strategy for Azure and Hybrid Workloads
+domain: business-continuity
+track: azure-cli
+implementationMode: design-simulation
+status: offline-validated
+role: Enterprise resilience architect
+outcome: Produce a tiered Azure and hybrid recovery strategy with dependency-aware recovery waves, measurable objectives,
+  and an evidence-based exercise plan.
+duration: 150 minutes
+difficulty: advanced
+costClass: none
+permissions: No Azure role is needed for the simulation; production inventory evidence would require read-only access
+  to backup, replication, monitoring, and dependency metadata.
+licensing: Azure Backup, Site Recovery, replicated data, standby compute, and monitoring costs must be estimated
+  per service tier before approval.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics
+objectives:
+  primary:
+  - BC-DR-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- RecoveryEvidenceResourceId
+- ResourceGroupName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB14-CP01
+  title: Classify services and recovery objectives
+  requirementIds:
+  - LAB14-REQ-01
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-CP02
+  title: Map hybrid dependencies and failure domains
+  requirementIds:
+  - LAB14-REQ-02
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-CP03
+  title: Select recovery patterns by tier
+  requirementIds:
+  - LAB14-REQ-03
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-CP04
+  title: Design recovery orchestration and communications
+  requirementIds:
+  - LAB14-REQ-04
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-CP05
+  title: Validate objectives with an exercise scorecard
+  requirementIds:
+  - LAB14-REQ-05
+  objectiveIds:
+  - BC-DR-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

@@ -1,0 +1,87 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-17
+businessOutcome: Keep the media platform usable through regional disruption without violating content residency
+  or silently losing accepted editorial changes.
+stakeholders:
+- Digital media product owner
+- Data platform lead
+- Content rights counsel
+- Site reliability engineering lead
+- Editorial operations manager
+functionalRequirements:
+- id: LAB17-REQ-01
+  statement: Region order, write mode, zone redundancy, consistency, automatic failover, and residency are explicit
+    for the document workload.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-04
+- id: LAB17-REQ-02
+  statement: The selected consistency level, session-token handling, idempotency key, and conflict-resolution ownership
+    preserve accepted edits.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-03
+- id: LAB17-REQ-03
+  statement: Replication SKU, paired geography, read access, object replication boundaries, failover effects, and
+    endpoint behavior are documented.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-04
+nonfunctionalRequirements:
+- id: LAB17-REQ-04
+  statement: Cosmos DB backup mode and retention plus Blob versioning, soft delete, point-in-time restore, and integrity
+    hashing meet recovery requirements.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-03
+- id: LAB17-REQ-05
+  statement: The tabletop coordinates Cosmos DB write-region behavior, Blob write freeze and failover, endpoint
+    changes, cache invalidation, validation, and rollback.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-04
+constraints:
+- Accepted editorial changes cannot be silently lost during a regional disruption.
+- Rights-controlled documents cannot replicate outside one country, while public media must remain globally retrievable
+  within two seconds.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Editorial applications implement conflict resolution and expose committed-version evidence.
+- Content classification reliably separates restricted documents from public media before storage.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Editorial documents, conflict metadata, restricted rights files, and public media require different consistency
+    and replication boundaries.
+  scale: Global consumers heavily read public media while editorial writes are smaller; measured RU and object volume
+    remain owner inputs.
+  latency: Public media retrieval has a two-second target; editorial consistency and conflict handling use a separate
+    latency contract.
+  availability: Public media needs multi-region delivery, while restricted documents remain available only within
+    their approved country boundary.
+  rto: Regional editorial recovery is defined by tested failover; the rights agreement may accept longer restricted-document
+    outage than unlawful replication.
+  rpo: Accepted editorial changes require explicit consistency and conflict rules rather than an assumed zero-loss
+    promise.
+  budget: Global replication is funded for public media and editorial metadata, not automatically for every rights-controlled
+    object.
+acceptanceCriteria:
+- LAB17-REQ-01 passes its independent positive and negative assertions.
+- LAB17-REQ-02 passes its independent positive and negative assertions.
+- LAB17-REQ-03 passes its independent positive and negative assertions.
+- LAB17-REQ-04 passes its independent positive and negative assertions.
+- LAB17-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB17-CR-01
+  trigger: A new rights agreement forbids document replication outside one country, but global consumers must still
+    retrieve public media within two seconds.
+  materialChange: A new rights agreement forbids document replication outside one country, but global consumers
+    must still retrieve public media within two seconds.
+  mandatoryRequirementId: LAB17-REQ-03
+  expectedRevision: Split restricted documents into a country-bound stack while retaining global distribution for
+    public media and permitted metadata.
+# END GENERATED AZ305 V1

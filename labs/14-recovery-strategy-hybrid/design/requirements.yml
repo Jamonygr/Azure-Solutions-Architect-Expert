@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-14
+businessOutcome: Restore safety-critical planning and factory services in the required order while controlling recovery
+  cost and meeting residency obligations.
+stakeholders:
+- Chief risk officer
+- Factory operations director
+- Application owners
+- Security and compliance lead
+- Disaster recovery coordinator
+functionalRequirements:
+- id: LAB14-REQ-01
+  statement: Every business service has an owner, impact tier, RTO, RPO, maximum tolerable outage, and data-residency
+    boundary.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-REQ-02
+  statement: The dependency map covers identity, DNS, connectivity, secrets, monitoring, data stores, and factory
+    prerequisites across failure domains.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-REQ-03
+  statement: Each tier receives the least costly pattern that meets its targets, with backup, replication, and rehydration
+    responsibilities separated.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-01
+nonfunctionalRequirements:
+- id: LAB14-REQ-04
+  statement: The runbook assigns decision authority, recovery-wave gates, technical actions, stakeholder notifications,
+    and rollback criteria.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-01
+- id: LAB14-REQ-05
+  statement: The exercise independently measures detection, decision, restore, dependency validation, data-loss
+    window, and business acceptance against targets.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-01
+constraints:
+- Recovery order must follow service dependencies and residency boundaries rather than treating every workload uniformly.
+- Tier 1 RTO falls from four hours to forty-five minutes without adding cross-border data replication.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Business owners validate tier, maximum outage, data-loss tolerance, and degraded-mode capacity.
+- A synthetic dependency inventory accurately represents the recovery ordering problem for offline analysis.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Workload inventory includes dependency, region, residency, backup, replication, owner, RTO, and RPO attributes.
+  scale: Multiple service tiers share identity, network, data, and notification dependencies; exact application
+    count remains an inventory input.
+  latency: Recovery sequencing includes detection, authority, infrastructure, data, application, and business-validation
+    elapsed time.
+  availability: Tier 1 must tolerate the declared failure domain with warm in-boundary capacity; lower tiers may
+    use slower rehydration.
+  rto: Tier 1 changes from four hours to forty-five minutes; other tier targets remain owner-approved inputs.
+  rpo: Data-loss objectives remain service-specific and cross-border replication is forbidden for the affected data.
+  budget: Warm capacity is funded only for Tier 1, with lower tiers retaining backup or staged recovery where their
+    objectives permit.
+acceptanceCriteria:
+- LAB14-REQ-01 passes its independent positive and negative assertions.
+- LAB14-REQ-02 passes its independent positive and negative assertions.
+- LAB14-REQ-03 passes its independent positive and negative assertions.
+- LAB14-REQ-04 passes its independent positive and negative assertions.
+- LAB14-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB14-CR-01
+  trigger: The board reduces the Tier 1 RTO from four hours to forty-five minutes while prohibiting any additional
+    cross-border data replication.
+  materialChange: The board reduces the Tier 1 RTO from four hours to forty-five minutes while prohibiting any additional
+    cross-border data replication.
+  mandatoryRequirementId: LAB14-REQ-05
+  expectedRevision: Replace Tier 1 rehydration with in-boundary warm capacity and compress decision and dependency
+    gates to forty-five minutes.
+# END GENERATED AZ305 V1

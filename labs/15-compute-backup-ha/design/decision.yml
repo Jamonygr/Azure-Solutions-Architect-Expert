@@ -1,0 +1,146 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-15
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 4
+    C5: 3
+  weightedTotal: 93.0
+  rationale: Zone-spread compute covers datacenter loss and Azure Backup supplies protected recovery points for
+    a controlled quarantined restore.
+- id: CAND-B
+  name: Availability sets with locally redundant vault protection
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 4
+    C4: 3
+    C5: 4
+  weightedTotal: 61.0
+  rationale: Availability sets distribute host faults but do not establish a zone boundary and local vault redundancy
+    enlarges regional-loss exposure.
+- id: CAND-C
+  name: Azure Site Recovery warm replicas in a secondary region for every virtual machine
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 5
+    C3: 4
+    C4: 3
+    C5: 1
+  weightedTotal: 76.0
+  rationale: Warm replicas improve regional recovery but cost more and may replicate compromised state without trusted-point
+    selection.
+- id: CAND-D
+  name: In-place production restore over the suspected virtual machines
+  eligible: false
+  disqualifiers:
+  - LAB15-REQ-04 requires quarantine, malware inspection, application validation, and release approval before reconnection.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 1
+    C4: 2
+    C5: 4
+  weightedTotal: 34.0
+  rationale: An in-place restore uses fewer resources but destroys rollback evidence and can reconnect compromise
+    to production.
+selectedCandidate: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+rejectedAlternatives:
+- candidate: Availability sets with locally redundant vault protection
+  reason: It does not meet the datacenter-failure requirement as directly as zone-spread placement.
+- candidate: Azure Site Recovery warm replicas in a secondary region for every virtual machine
+  reason: Uniform replication exceeds the lab budget and does not replace immutable clean recovery points.
+- candidate: In-place production restore over the suspected virtual machines
+  reason: It is disqualified because a trusted isolated-restore boundary is mandatory.
+risks:
+- risk: Excluding three recovery points may leave no point inside the two-hour transfer and validation window.
+  mitigation: Increase protected-point frequency or pre-stage isolated restore capacity after measuring older-point
+    restore duration.
+- risk: A zone-spread VM set can still depend on a single-zone database or ingress component.
+  mitigation: Map and assert every upstream dependency's failure domain before accepting the compute availability
+    result.
+waf:
+  reliability: Zone placement, backup coverage, clean-point selection, and dependency-aware startup address distinct
+    failure modes.
+  security: Immutable recovery points and quarantined validation prevent compromised machines from rejoining automatically.
+  costOptimization: Permanent capacity covers zonal availability while secondary-region and restore resources remain
+    risk-based.
+  operationalExcellence: Timed restore, forensic approval, transaction checks, and rollback form one rehearsable
+    recovery record.
+  performanceEfficiency: SKU and degraded-capacity evidence ensure surviving zones and restore hosts can process
+    the clinical load.
+safeAnalogue: Model recovery-point rejection, isolated-network validation, startup waves, and cleanup with synthetic
+  VM and backup fixtures only.
+traceability:
+- objectiveId: BC-DR-02
+  requirementId: LAB15-REQ-01
+  checkpointId: LAB15-CP01
+- objectiveId: BC-HA-01
+  requirementId: LAB15-REQ-02
+  checkpointId: LAB15-CP02
+- objectiveId: BC-DR-02
+  requirementId: LAB15-REQ-03
+  checkpointId: LAB15-CP03
+- objectiveId: BC-HA-01
+  requirementId: LAB15-REQ-04
+  checkpointId: LAB15-CP04
+- objectiveId: BC-DR-02
+  requirementId: LAB15-REQ-05
+  checkpointId: LAB15-CP05
+adr:
+  id: ADR-LAB15-001
+  status: accepted
+  context: Fabrikam Health runs appointment and imaging coordination on Windows and Linux virtual machines distributed
+    across one Azure region. Backups exist, but recent restore testing found inconsistent policies, unprotected
+    data disks, and a single application tier confined to one datacenter boundary. The clinical service must survive
+    a zone outage, recover from destructive change, retain immutable recovery points, and prove that restored machines
+    are isolated before reconnecting to production. A full second-region estate is too expensive for the learning
+    environment, so the architecture team will evaluate the production design through read-only discovery, policy
+    evidence, and a safe analogue that models failover ordering without creating standby compute.
+  decision: 'Select Zone-spread virtual machine scale sets with Azure Backup and isolated restore: Zone-spread compute
+    covers datacenter loss and Azure Backup supplies protected recovery points for a controlled quarantined restore.'
+  consequences:
+  - Backup policy must retain enough points that rejecting the newest three still leaves a recoverable candidate.
+  - Security approval becomes part of the measured clinical recovery path, not a post-restore note.
+revisedDecision:
+  changeRequestId: LAB15-CR-01
+  selectedCandidate: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+  reason: LAB15-REQ-04 makes isolated trusted recovery mandatory, so the selected design adds enough immutable points
+    and prevalidated quarantine capacity to reject three suspect copies and finish within two hours.
+  mandatoryRequirementId: LAB15-REQ-04
+  waf:
+    reliability: A deeper point set and measured restore throughput protect the two-hour target.
+    security: Forensic rejection and quarantine remain gates before any production reconnection.
+    costOptimization: Temporary restore capacity is funded instead of a full permanent secondary estate.
+    operationalExcellence: Exercises record selection, transfer, validation, approval, and rollback timestamps.
+    performanceEfficiency: Prevalidated restore sizing avoids discovering disk-throughput limits during a cyber
+      event.
+# END GENERATED AZ305 V1

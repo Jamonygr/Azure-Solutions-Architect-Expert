@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-16
+businessOutcome: Preserve ticket sales and prevent overselling during zone or region disruption while meeting the
+  five-minute RPO.
+stakeholders:
+- Commerce product owner
+- Database engineering lead
+- Payment compliance officer
+- Site reliability engineering lead
+- Customer support manager
+functionalRequirements:
+- id: LAB16-REQ-01
+  statement: The baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints,
+    dependencies, and observed workload demand.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-03
+- id: LAB16-REQ-02
+  statement: The partner region, database membership, endpoint policy, grace period, residency, and capacity assumptions
+    match the approved design.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-02
+- id: LAB16-REQ-03
+  statement: Applications use the read-write listener, retry transient failures, preserve idempotency, and can reach
+    every regional dependency after redirection.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-03
+nonfunctionalRequirements:
+- id: LAB16-REQ-04
+  statement: Replication lag and business transaction markers are measured independently and remain within the five-minute
+    RPO under the modeled load.
+  mandatory: true
+  objectiveIds:
+  - BC-HA-02
+- id: LAB16-REQ-05
+  statement: The exercise defines detection, business authorization, forced-versus-planned choice, validation, stabilization,
+    and data-safe failback gates.
+  mandatory: true
+  objectiveIds:
+  - BC-DR-03
+constraints:
+- Committed reservations must remain inside a five-minute data-loss window through regional disruption.
+- Peak writes double and the reservation API recovery target drops from one hour to fifteen minutes.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Applications use a failover-group listener and retry transient connection changes safely.
+- Dependent identity, network, and secret services have compatible regional recovery behavior.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Reservation, seat inventory, and payment-state transactions require consistency plus measurable replication
+    and failover evidence.
+  scale: A flash sale doubles peak write volume; baseline transactions, database size, and log rate remain measured
+    inputs.
+  latency: Write latency and replication delay must stay compatible with the five-minute RPO during doubled demand.
+  availability: Zone-redundant primary and secondary databases plus controlled regional failover cover separate
+    fault domains.
+  rto: The end-to-end reservation API recovery target changes from one hour to fifteen minutes.
+  rpo: Accepted reservations may lose no more than five minutes, including replication backlog at peak write rate.
+  budget: Continuous secondary compute is accepted for regional continuity, but duplicate application capacity can
+    use a bounded warm strategy.
+acceptanceCriteria:
+- LAB16-REQ-01 passes its independent positive and negative assertions.
+- LAB16-REQ-02 passes its independent positive and negative assertions.
+- LAB16-REQ-03 passes its independent positive and negative assertions.
+- LAB16-REQ-04 passes its independent positive and negative assertions.
+- LAB16-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB16-CR-01
+  trigger: A new flash-sale contract doubles peak write volume and requires the reservation API to recover within
+    fifteen minutes rather than one hour.
+  materialChange: A new flash-sale contract doubles peak write volume and requires the reservation API to recover
+    within fifteen minutes rather than one hour.
+  mandatoryRequirementId: LAB16-REQ-05
+  expectedRevision: Resize both sides and automate the listener-based recovery sequence to demonstrate fifteen-minute
+    API restoration at doubled writes.
+# END GENERATED AZ305 V1
