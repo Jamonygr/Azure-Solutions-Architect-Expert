@@ -1,0 +1,26 @@
+{
+  "indexingMode": "consistent",
+  "automatic": true,
+  "includedPaths": [
+    {
+      "path": "/*"
+    }
+  ],
+  "excludedPaths": [
+    {
+      "path": "/largePayload/?"
+    }
+  ],
+  "compositeIndexes": [
+    [
+      {
+        "path": "/tenantId",
+        "order": "ascending"
+      },
+      {
+        "path": "/eventTime",
+        "order": "descending"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-09
+number: 9
+slug: 09-relational-scale-protection
+title: Relational Scalability and Data Protection
+domain: data
+track: azure-powershell
+implementationMode: reference-deployable
+status: offline-validated
+role: Relational scalability and protection architect
+outcome: A scalable Azure SQL design with auditable encryption and retention controls, clearly separated from continuity
+  promises.
+duration: 165 minutes
+difficulty: advanced
+costClass: elevated
+permissions: SQL resource read access and database metadata visibility support assessment; replica, audit, key,
+  or scaling changes require separate authorized roles.
+licensing: Hyperscale replicas, elastic pools, Managed Instance Business Critical replicas, audit storage, and customer-managed
+  keys have different billing implications.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+objectives:
+  primary:
+  - DATA-REL-03
+  - DATA-REL-04
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApprovedReplicaCount
+- ApprovedShortTermRetentionDays
+- ApprovedVCoreCeiling
+- DatabaseName
+- SqlServerName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB09-CP01
+  title: Choose the scale unit and capacity ceiling
+  requirementIds:
+  - LAB09-REQ-01
+  objectiveIds:
+  - DATA-REL-03
+- id: LAB09-CP02
+  title: Design read workload isolation
+  requirementIds:
+  - LAB09-REQ-02
+  objectiveIds:
+  - DATA-REL-04
+- id: LAB09-CP03
+  title: Verify transparent data encryption and key custody
+  requirementIds:
+  - LAB09-REQ-03
+  objectiveIds:
+  - DATA-REL-03
+- id: LAB09-CP04
+  title: Configure tamper-resistant auditing
+  requirementIds:
+  - LAB09-REQ-04
+  objectiveIds:
+  - DATA-REL-04
+- id: LAB09-CP05
+  title: Bound backup retention without claiming recovery
+  requirementIds:
+  - LAB09-REQ-05
+  objectiveIds:
+  - DATA-REL-03
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

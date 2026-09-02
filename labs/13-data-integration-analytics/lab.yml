@@ -1,0 +1,84 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-13
+number: 13
+slug: 13-data-integration-analytics
+title: Data Integration and Analytics Architecture
+domain: data
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Data integration and analytics architect
+outcome: A governed integration and analytics architecture with explicit hybrid connectivity, orchestration, serving,
+  and evidence boundaries.
+duration: 175 minutes
+difficulty: advanced
+costClass: elevated
+permissions: Data Factory, storage, Synapse, and Fabric read roles support inventory; pipeline, connection, capacity,
+  or identity changes require separate platform authorization.
+licensing: Data Factory activities, self-hosted integration runtime, Synapse serverless scans, Fabric capacity,
+  and streaming workloads use distinct meters.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+objectives:
+  primary:
+  - DATA-INT-01
+  - DATA-INT-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- DataFactoryName
+- IntegrationRuntimeName
+- LinkedServiceName
+- PipelineRunId
+- RunStartedAfter
+- RunStartedBefore
+- SynapseWorkspaceName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB13-CP01
+  title: Select integration patterns and runtimes
+  requirementIds:
+  - LAB13-REQ-01
+  objectiveIds:
+  - DATA-INT-01
+- id: LAB13-CP02
+  title: Use managed identity for linked services
+  requirementIds:
+  - LAB13-REQ-02
+  objectiveIds:
+  - DATA-INT-02
+- id: LAB13-CP03
+  title: Orchestrate idempotent ingestion
+  requirementIds:
+  - LAB13-REQ-03
+  objectiveIds:
+  - DATA-INT-01
+- id: LAB13-CP04
+  title: Serve governed analytical queries
+  requirementIds:
+  - LAB13-REQ-04
+  objectiveIds:
+  - DATA-INT-02
+- id: LAB13-CP05
+  title: Validate lineage operations and spend
+  requirementIds:
+  - LAB13-REQ-05
+  objectiveIds:
+  - DATA-INT-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

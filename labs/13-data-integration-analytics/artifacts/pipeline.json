@@ -1,0 +1,29 @@
+{
+  "name": "pl_synthetic_incremental_ingestion",
+  "properties": {
+    "parameters": {
+      "windowStart": {
+        "type": "String"
+      },
+      "windowEnd": {
+        "type": "String"
+      }
+    },
+    "activities": [
+      {
+        "name": "CopyBoundedWindow",
+        "type": "Copy",
+        "policy": {
+          "timeout": "0.01:00:00",
+          "retry": 2
+        },
+        "inputs": [],
+        "outputs": []
+      }
+    ],
+    "annotations": [
+      "synthetic",
+      "offline-authored"
+    ]
+  }
+}

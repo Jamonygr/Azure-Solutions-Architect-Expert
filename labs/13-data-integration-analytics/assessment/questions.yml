@@ -1,0 +1,1806 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-13
+questions:
+- id: LAB13-Q01
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: '''Select integration patterns and runtimes'' is reopened at the request of data engineering. Approval requires
+    a positive result plus this independent negative assertion: An undocumented shared self-hosted runtime is not
+    accepted as a universal connectivity solution. Which recommendation delivers the acceptance rule that makes
+    LAB13-REQ-01 testable?'
+  options:
+    A: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse before checking Select integration
+      patterns and runtimes. Also, treat as decisive the assertion that a successful deployment will later prove
+      the architecture constraint.
+    B: Use the passing result from Use managed identity for linked services to approve Select integration patterns
+      and runtimes; in a separate step, base approval on the claim that one control establishes an unrelated acceptance
+      boundary.
+    C: Choose Azure Databricks with Azure Data Factory orchestration and Delta Lake and skip the Select integration
+      patterns and runtimes negative assertion. As another control, use the premise that the candidate has the lowest
+      implementation effort.
+    D: Require the documented positive state for Select integration patterns and runtimes. As another control, verify
+      that an undocumented shared self-hosted runtime is not accepted as a universal connectivity solution.
+  answer: D
+  explanations:
+    A: The checkpoint specifically records that an undocumented shared self-hosted runtime is not accepted as a
+      universal connectivity solution. Operationally, a deployment result cannot prove LAB13-REQ-01, and Microsoft
+      Fabric Data Factory with OneLake and Fabric Warehouse still has to meet the mandatory boundary.
+    B: The scenario makes clear that supported sources and sinks use the data-factory managed identity or a Key
+      Vault reference with least privilege. Operationally, that outcome belongs to Use managed identity for linked
+      services and leaves Select integration patterns and runtimes unverified.
+    C: The architecture evidence must show that deliver traceable analytics datasets from cloud and private sources
+      without creating unmanaged credentials or always-on analytics cost. Operationally, implementation effort cannot
+      justify skipping the negative assertion or displace LAB13-REQ-01.
+    D: The relevant observation is that batch, CDC, event, and private-source needs map to appropriate Azure or
+      self-hosted integration runtime boundaries. Operationally, the positive state and an independent negative
+      assertion jointly make LAB13-REQ-01 testable.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q02
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: A design review of 'Select integration patterns and runtimes' includes analytics consumers. The selected
+    architecture is Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL; object existence alone is
+    not success. Which response meets the need for the intended successful finding?
+  options:
+    A: Record batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration runtime
+      boundaries. In addition, classify it as success for LAB13-REQ-01.
+    B: Use only the negative assertion 'An undocumented shared self-hosted runtime is not accepted as a universal
+      connectivity solution' as the success result; before approval, accept without proof that absence proves every
+      required positive property.
+    C: Use the successful finding from Orchestrate idempotent ingestion as the result for Select integration patterns
+      and runtimes. Separately, rely on the claim that a property from the current checkpoint does not need to be
+      inspected.
+    D: Record the failure condition 'A source protocol, firewall, or driver is unsupported by the selected runtime'
+      as a successful state; for this decision, rely on the belief that the command returned an object.
+  answer: A
+  explanations:
+    A: The applicable design condition is that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. Operationally, this is the authored target state for Select
+      integration patterns and runtimes and directly supports LAB13-REQ-01.
+    B: 'The review is governed by this fact: an undocumented shared self-hosted runtime is not accepted as a universal
+      connectivity solution. Operationally, this is the independent prohibited-state assertion, not a successful
+      finding.'
+    C: The retained result must be reconciled with the fact that the pipeline uses watermarks, deterministic paths,
+      retry policy, and quarantine handling to make reruns safe. Operationally, evidence for Orchestrate idempotent
+      ingestion cannot substitute for the properties required at Select integration patterns and runtimes.
+    D: The decision tension comes from the fact that a source protocol, firewall, or driver is unsupported by the
+      selected runtime. Operationally, resource existence or command output does not convert the documented failure
+      condition into success.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q03
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: 'The team asks operational system owners to assess ''Select integration patterns and runtimes''. Evidence
+    must address this risk without retaining credentials: A source protocol, firewall, or driver is unsupported
+    by the selected runtime. Which choice should be approved as sufficient, properly scoped evidence?'
+  options:
+    A: Retain source class, integration pattern, runtime type, network boundary, owner, and latency expectation.
+      Before sign-off, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Serve governed analytical queries for Select integration patterns and runtimes;
+      afterward, consider it sufficient that a related checkpoint proves the current expected state.
+    C: Store unredacted Select integration patterns and runtimes output with operator, tenant, token, and request
+      context; then take it as conclusive that reproduction requires every captured field.
+    D: Record only the Select integration patterns and runtimes positive inspection's exit status. Independently,
+      treat it as established that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The safe operating boundary says that source class, integration pattern, runtime type, network boundary,
+      owner, and latency expectation. Operationally, it captures the checkpoint's observable properties while keeping
+      the evidence boundary narrow.
+    B: The traceable checkpoint outcome is that workspace label, serving mode, curated-zone path, semantic owner,
+      authorization groups, and query-cost controls. Operationally, that evidence supports Serve governed analytical
+      queries, so it cannot demonstrate Batch, CDC, event, and private-source needs map to appropriate Azure or
+      self-hosted integration runtime boundaries.
+    C: The failure model establishes that unredacted implementation output. Operationally, identity, tenant, or
+      token material exceeds the non-secret evidence contract.
+    D: The recovery guidance assumes that the positive inspection's exit status. Operationally, an exit code alone
+      does not show whether batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted
+      integration runtime boundaries.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q04
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: A recommendation on 'Select integration patterns and runtimes' is requested by data governance council.
+    The target is Batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration
+    runtime boundaries, but the latest evidence does not show it. What should the team use as the most likely cause?
+  options:
+    A: Treat 'Monitoring records show success while downstream reconciliation detects missing or duplicate rows'
+      as grounds to reject Select integration patterns and runtimes. As another control, proceed on the belief that
+      validate lineage operations and spend's failure model applies unchanged here.
+    B: Investigate a source protocol, firewall, or driver is unsupported by the selected runtime; afterward, isolate
+      that cause before changing Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL.
+    C: Ignore the negative assertion 'An undocumented shared self-hosted runtime is not accepted as a universal
+      connectivity solution'; as a separate check, treat as decisive the assertion that a later material change
+      will make it unnecessary.
+    D: Investigate Use managed identity for linked services instead of diagnosing Select integration patterns and
+      runtimes. Afterward, base approval on the claim that a passing result at Use managed identity for linked services
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The command-level assertion is anchored in the fact that monitoring records show success while downstream
+      reconciliation detects missing or duplicate rows. Operationally, that condition belongs to Validate lineage
+      operations and spend and does not by itself invalidate Azure Data Factory with ADLS Gen2 and Azure Synapse
+      serverless SQL.
+    B: The WAF consequence identifies that a source protocol, firewall, or driver is unsupported by the selected
+      runtime. Operationally, it is the checkpoint's causal failure model and should be isolated before retrying
+      Select integration patterns and runtimes.
+    C: an undocumented shared self-hosted runtime is not accepted as a universal connectivity solution. The requirement-to-evidence
+      link establishes that the negative assertion must be evaluated now, independent of a later business change.
+    D: The controlling fact is that supported sources and sinks use the data-factory managed identity or a Key Vault
+      reference with least privilege. The requirement-to-evidence link establishes that a passing result at Use
+      managed identity for linked services gives no causal evidence for the failure at Select integration patterns
+      and runtimes.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q05
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: '''Select integration patterns and runtimes'' is assigned to data engineering. The run encountered this
+    modeled failure: A source protocol, firewall, or driver is unsupported by the selected runtime. Which option
+    best establishes the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Stop and remove only a run-owned synthetic runtime after linked-service dependencies
+      are removed; for this decision, use as justification the claim that the failed operation and its returned
+      identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'A source protocol, firewall, or driver is unsupported
+      by the selected runtime'. Before sign-off, accept without proof that the first state record and returned identifiers
+      can be discarded.
+    C: Validate connector and network prerequisites with synthetic endpoints before changing the platform decision,
+      and then preserve the current run identity and evidence.
+    D: Change Use managed identity for linked services instead; as an independent condition, rely on the claim that
+      success at Use managed identity for linked services will repair the failed state at Select integration patterns
+      and runtimes.
+  answer: C
+  explanations:
+    A: The relevant observation is that stop and remove only a run-owned synthetic runtime after linked-service
+      dependencies are removed. The requirement-to-evidence link establishes that cleanup before reconciliation
+      can erase evidence or strand a partially created dependency.
+    B: The checkpoint specifically records that a source protocol, firewall, or driver is unsupported by the selected
+      runtime. The requirement-to-evidence link establishes that discarding the original run identity breaks ownership
+      reconciliation and can duplicate a partial operation.
+    C: The authored acceptance boundary states that validate connector and network prerequisites with synthetic
+      endpoints before changing the platform decision. The requirement-to-evidence link establishes that it corrects
+      the narrow cause while retaining the same recovery trail and decision scope.
+    D: The scenario makes clear that supported sources and sinks use the data-factory managed identity or a Key
+      Vault reference with least privilege. The requirement-to-evidence link establishes that altering an already
+      separate checkpoint does not repair the modeled failure at Select integration patterns and runtimes.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q06
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: An assurance review of 'Select integration patterns and runtimes' includes analytics consumers. Without
+    making a new change, the team must inspect the risk 'A source protocol, firewall, or driver is unsupported by
+    the selected runtime' using the Azure PowerShell lane. Which answer identifies the read-only, lane-correct inspection?
+  options:
+    A: Rerun the Select integration patterns and runtimes implementation command and infer the expected state. Independently,
+      use the premise that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Select integration patterns and runtimes: An undocumented shared self-hosted
+      runtime is not accepted as a universal connectivity solution. Next, consider it sufficient that an empty negative
+      result reports every required positive property.'
+    C: 'Inspect the documented properties for Select integration patterns and runtimes; as a separate check, retain
+      this evidence: source class, integration pattern, runtime type, network boundary, owner, and latency expectation.'
+    D: Run the positive inspection for Orchestrate idempotent ingestion and apply it to Select integration patterns
+      and runtimes, and then take it as conclusive that any command from the same lane proves the current checkpoint.
+  answer: C
+  explanations:
+    A: The applicable design condition is that the implementation command. The requirement-to-evidence link establishes
+      that it can mutate state and shell success does not independently assert the expected properties.
+    B: 'The review is governed by this fact: the negative inspection. The requirement-to-evidence link establishes
+      that absence of the prohibited condition is necessary but does not establish the positive architecture state.'
+    C: The architecture evidence must show that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. The requirement-to-evidence link establishes that the read-only
+      inspection directly tests the properties required at Select integration patterns and runtimes.
+    D: The retained result must be reconciled with the fact that the positive inspection for Orchestrate idempotent
+      ingestion. The requirement-to-evidence link establishes that it is lane-correct but proves Orchestrate idempotent
+      ingestion, not Select integration patterns and runtimes.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q07
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: 'Approval of ''Select integration patterns and runtimes'' is questioned by operational system owners. A
+    passing positive check does not by itself prove this negative assertion: An undocumented shared self-hosted
+    runtime is not accepted as a universal connectivity solution. What recommendation gives the reviewers the assertion
+    pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Select integration patterns and runtimes and report full compliance.
+      Afterward, rely on the belief that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Select integration patterns and runtimes; before approval, independently
+      verify that an undocumented shared self-hosted runtime is not accepted as a universal connectivity solution.
+    C: Prove only that an undocumented shared self-hosted runtime is not accepted as a universal connectivity solution
+      and report the intended configuration as present; next, proceed on the belief that absence is equivalent to
+      positive-state evidence.
+    D: Use Serve governed analytical queries's negative assertion for Select integration patterns and runtimes.
+      In addition, treat as decisive the assertion that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. The requirement-to-evidence link establishes that the positive
+      result alone does not test the explicit anti-condition 'An undocumented shared self-hosted runtime is not
+      accepted as a universal connectivity solution'.
+    B: The decision tension comes from the fact that batch, CDC, event, and private-source needs map to appropriate
+      Azure or self-hosted integration runtime boundaries; An undocumented shared self-hosted runtime is not accepted
+      as a universal connectivity solution. The requirement-to-evidence link establishes that two independent observations
+      prevent a passing positive check from concealing an unsafe parallel state.
+    C: The traceable checkpoint outcome is that an undocumented shared self-hosted runtime is not accepted as a
+      universal connectivity solution. The requirement-to-evidence link establishes that absence evidence cannot
+      demonstrate the required positive state 'Batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries'.
+    D: The failure model establishes that an always-on dedicated SQL pool without a cost owner is not introduced
+      by default. The requirement-to-evidence link establishes that the second assertion is valid for Serve governed
+      analytical queries but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q08
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: 'The implementation review has reached ''Select integration patterns and runtimes''. The board wants the
+    Well-Architected consequence of mitigating this risk: A source protocol, firewall, or driver is unsupported
+    by the selected runtime. Which action produces the consequence attributable to this checkpoint?'
+  options:
+    A: 'Record this consequence: Reliability: explicit runtime ownership and network prerequisites make hybrid data
+      movement recoverable; as an independent condition, tie it to LAB13-REQ-01.'
+    B: Use the Validate lineage operations and spend consequence as the result for Select integration patterns and
+      runtimes; as an independent condition, treat it as established that a pillar statement remains valid when
+      moved away from Validate lineage operations and spend.
+    C: Remove the control responsible for the Select integration patterns and runtimes outcome; for the final assessment,
+      use as justification the claim that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Reliability: explicit runtime ownership and network prerequisites make hybrid data movement recoverable''
+      as proof that all five pillars pass. Then, accept without proof that the checkpoint ''Select integration patterns
+      and runtimes'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The recovery guidance assumes that reliability: explicit runtime ownership and network prerequisites make
+      hybrid data movement recoverable. The requirement-to-evidence link establishes that it states the authored
+      pillar consequence of the control evaluated at Select integration patterns and runtimes.'
+    B: 'The WAF consequence identifies that cost Optimization: correlated run, activity, volume, and duration evidence
+      attributes consumption to an owned pipeline. The requirement-to-evidence link establishes that that tradeoff
+      belongs to Validate lineage operations and spend and does not explain this checkpoint''s decision.'
+    C: The command-level assertion is anchored in the fact that the required outcome at Select integration patterns
+      and runtimes. The requirement-to-evidence link establishes that cost Optimization cannot remove the acceptance
+      condition 'Batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration
+      runtime boundaries'.
+    D: an undocumented shared self-hosted runtime is not accepted as a universal connectivity solution. Consequently,
+      one positive command cannot establish every pillar, especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q09
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: 'The approach to ''Select integration patterns and runtimes'' is challenged by data engineering. A material
+    change now applies: Executives mandate near-real-time operational dashboards for one telemetry stream while
+    partner files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary
+    without forcing every flow into streaming. What best demonstrates the correct revision to the decision record?'
+  options:
+    A: Re-score Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL and both alternatives for Select
+      integration patterns and runtimes; then supersede the ADR using the changed evidence for LAB13-REQ-01.
+    B: Retain Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Select integration patterns
+      and runtimes without recalculating criteria or eligibility, and then base approval on the claim that the original
+      weighted result is permanent.
+    C: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse for Select integration patterns and
+      runtimes without rechecking its mandatory constraints. Also, use the premise that being different from the
+      current design is an architecture criterion.
+    D: Keep Azure Databricks with Azure Data Factory orchestration and Delta Lake eligible at Select integration
+      patterns and runtimes by downgrading LAB13-REQ-01; in a separate step, consider it sufficient that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+  answer: A
+  explanations:
+    A: The controlling fact is that azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Select
+      integration patterns and runtimes. Consequently, the material change 'Executives mandate near-real-time operational
+      dashboards for one telemetry stream while partner files remain hourly and analysts prefer a unified Microsoft
+      Fabric experience; revise the platform boundary without forcing every flow into streaming.' requires fresh
+      eligibility, weighted analysis, and a superseding decision.
+    B: The authored acceptance boundary states that azure Data Factory with ADLS Gen2 and Azure Synapse serverless
+      SQL. Consequently, the original ADR remains historical evidence, but its score cannot answer a changed mandatory
+      condition.
+    C: The relevant observation is that microsoft Fabric Data Factory with OneLake and Fabric Warehouse. Consequently,
+      being different is not a criterion, and the candidate still must avoid the prohibited state at Select integration
+      patterns and runtimes.
+    D: The checkpoint specifically records that lAB13-REQ-01. Consequently, an architect cannot silently downgrade
+      a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q10
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP01
+  stem: 'A decision test for ''Select integration patterns and runtimes'' includes analytics consumers. After a
+    partial run, cleanup must follow this dependency: Stop and remove only a run-owned synthetic runtime after linked-service
+    dependencies are removed. Which option is the dependency-safe cleanup plan?'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Select integration patterns and runtimes. Also, follow
+      this dependency rule without purge: Stop and remove only a run-owned synthetic runtime after linked-service
+      dependencies are removed.'
+    B: Apply the cleanup rule for Orchestrate idempotent ingestion before reconciling the current dependency. In
+      addition, rely on the claim that removing a parent needed to identify Select integration patterns and runtimes
+      is harmless.
+    C: Delete candidates by display name before comparing the Select integration patterns and runtimes ownership
+      tags; before approval, rely on the belief that the dependency rule 'Stop and remove only a run-owned synthetic
+      runtime after linked-service dependencies are removed' is optional.
+    D: Destroy recoverable copies before retaining the Select integration patterns and runtimes negative assertion
+      'An undocumented shared self-hosted runtime is not accepted as a universal connectivity solution'. Separately,
+      proceed on the belief that remaining command logs are sufficient recovery evidence.
+  answer: A
+  explanations:
+    A: The scenario makes clear that stop and remove only a run-owned synthetic runtime after linked-service dependencies
+      are removed. Consequently, exact identity, complete ownership tags, and the authored dependency order constrain
+      cleanup and preserve recovery.
+    B: The architecture evidence must show that stop triggers and delete dependent datasets before deleting a run-owned
+      pipeline. Consequently, a cleanup rule for Orchestrate idempotent ingestion cannot override the dependency
+      declared for Select integration patterns and runtimes.
+    C: The applicable design condition is that source class, integration pattern, runtime type, network boundary,
+      owner, and latency expectation. Consequently, names are not ownership proof; deletion requires the exact recorded
+      identifier and every required tag.
+    D: 'The review is governed by this fact: an undocumented shared self-hosted runtime is not accepted as a universal
+      connectivity solution. Consequently, irreversible purge is outside the lab contract and destroys evidence
+      needed for residual-state validation.'
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q11
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: 'The architecture board reconsiders ''Use managed identity for linked services'' with analytics consumers.
+    Approval requires a positive result plus this independent negative assertion: Inline connection strings, account
+    keys, and embedded credentials are absent from pipeline definitions and evidence. Which response meets the need
+    for the acceptance rule that makes LAB13-REQ-02 testable?'
+  options:
+    A: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse before checking Use managed identity
+      for linked services. As another control, accept without proof that a successful deployment will later prove
+      the architecture constraint.
+    B: Require the documented positive state for Use managed identity for linked services; next, verify that inline
+      connection strings, account keys, and embedded credentials are absent from pipeline definitions and evidence.
+    C: Use the passing result from Select integration patterns and runtimes to approve Use managed identity for
+      linked services; as a separate check, rely on the claim that one control establishes an unrelated acceptance
+      boundary.
+    D: Choose Azure Databricks with Azure Data Factory orchestration and Delta Lake and skip the Use managed identity
+      for linked services negative assertion. Afterward, rely on the belief that the candidate has the lowest implementation
+      effort.
+  answer: B
+  explanations:
+    A: The decision tension comes from the fact that inline connection strings, account keys, and embedded credentials
+      are absent from pipeline definitions and evidence. Consequently, a deployment result cannot prove LAB13-REQ-02,
+      and Microsoft Fabric Data Factory with OneLake and Fabric Warehouse still has to meet the mandatory boundary.
+    B: The retained result must be reconciled with the fact that supported sources and sinks use the data-factory
+      managed identity or a Key Vault reference with least privilege. Consequently, the positive state and an independent
+      negative assertion jointly make LAB13-REQ-02 testable.
+    C: The safe operating boundary says that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. Consequently, that outcome belongs to Select integration patterns
+      and runtimes and leaves Use managed identity for linked services unverified.
+    D: The traceable checkpoint outcome is that deliver traceable analytics datasets from cloud and private sources
+      without creating unmanaged credentials or always-on analytics cost. Consequently, implementation effort cannot
+      justify skipping the negative assertion or displace LAB13-REQ-02.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q12
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: A review of 'Use managed identity for linked services' begins with input from operational system owners.
+    The selected architecture is Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL; object existence
+    alone is not success. Which choice should be approved as the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Inline connection strings, account keys, and embedded credentials are absent
+      from pipeline definitions and evidence' as the success result; for this decision, consider it sufficient that
+      absence proves every required positive property.
+    B: Use the successful finding from Orchestrate idempotent ingestion as the result for Use managed identity for
+      linked services. Before sign-off, take it as conclusive that a property from the current checkpoint does not
+      need to be inspected.
+    C: Record supported sources and sinks use the data-factory managed identity or a Key Vault reference with least
+      privilege; for this decision, classify it as success for LAB13-REQ-02.
+    D: Record the failure condition 'The connector lacks managed-identity support or the identity cannot traverse
+      a private network boundary' as a successful state; as an independent condition, treat it as established that
+      the command returned an object.
+  answer: C
+  explanations:
+    A: The recovery guidance assumes that inline connection strings, account keys, and embedded credentials are
+      absent from pipeline definitions and evidence. Consequently, this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: The WAF consequence identifies that the pipeline uses watermarks, deterministic paths, retry policy, and
+      quarantine handling to make reruns safe. Consequently, evidence for Orchestrate idempotent ingestion cannot
+      substitute for the properties required at Use managed identity for linked services.
+    C: The failure model establishes that supported sources and sinks use the data-factory managed identity or a
+      Key Vault reference with least privilege. Consequently, this is the authored target state for Use managed
+      identity for linked services and directly supports LAB13-REQ-02.
+    D: The command-level assertion is anchored in the fact that the connector lacks managed-identity support or
+      the identity cannot traverse a private network boundary. Consequently, resource existence or command output
+      does not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q13
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: '''Use managed identity for linked services'' awaits approval from data governance council. Evidence must
+    address this risk without retaining credentials: The connector lacks managed-identity support or the identity
+    cannot traverse a private network boundary. What should the team use as sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Serve governed analytical queries for Use managed identity for linked services.
+      Independently, proceed on the belief that a related checkpoint proves the current expected state.
+    B: Retain linked-service name, connector type, authentication class, Key Vault reference label, and target scope.
+      Then, exclude credentials and unrelated response fields.
+    C: Store unredacted Use managed identity for linked services output with operator, tenant, token, and request
+      context. Next, treat as decisive the assertion that reproduction requires every captured field.
+    D: Record only the Use managed identity for linked services positive inspection's exit status, and then base
+      approval on the claim that projected properties and assertion results can be reconstructed later.
+  answer: B
+  explanations:
+    A: The controlling fact is that workspace label, serving mode, curated-zone path, semantic owner, authorization
+      groups, and query-cost controls. For this case, that evidence supports Serve governed analytical queries,
+      so it cannot demonstrate Supported sources and sinks use the data-factory managed identity or a Key Vault
+      reference with least privilege.
+    B: linked-service name, connector type, authentication class, Key Vault reference label, and target scope. For
+      this case, it captures the checkpoint's observable properties while keeping the evidence boundary narrow.
+    C: The authored acceptance boundary states that unredacted implementation output. For this case, identity, tenant,
+      or token material exceeds the non-secret evidence contract.
+    D: The relevant observation is that the positive inspection's exit status. For this case, an exit code alone
+      does not show whether supported sources and sinks use the data-factory managed identity or a Key Vault reference
+      with least privilege.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q14
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: '''Use managed identity for linked services'' is reopened at the request of data engineering. The target
+    is Supported sources and sinks use the data-factory managed identity or a Key Vault reference with least privilege,
+    but the latest evidence does not show it. Which option best establishes the most likely cause?'
+  options:
+    A: Investigate the connector lacks managed-identity support or the identity cannot traverse a private network
+      boundary. Next, isolate that cause before changing Azure Data Factory with ADLS Gen2 and Azure Synapse serverless
+      SQL.
+    B: Treat 'Monitoring records show success while downstream reconciliation detects missing or duplicate rows'
+      as grounds to reject Use managed identity for linked services. Afterward, use as justification the claim that
+      validate lineage operations and spend's failure model applies unchanged here.
+    C: Ignore the negative assertion 'Inline connection strings, account keys, and embedded credentials are absent
+      from pipeline definitions and evidence'; next, accept without proof that a later material change will make
+      it unnecessary.
+    D: Investigate Select integration patterns and runtimes instead of diagnosing Use managed identity for linked
+      services. In addition, rely on the claim that a passing result at Select integration patterns and runtimes
+      identifies the current cause.
+  answer: A
+  explanations:
+    A: The checkpoint specifically records that the connector lacks managed-identity support or the identity cannot
+      traverse a private network boundary. For this case, it is the checkpoint's causal failure model and should
+      be isolated before retrying Use managed identity for linked services.
+    B: The scenario makes clear that monitoring records show success while downstream reconciliation detects missing
+      or duplicate rows. For this case, that condition belongs to Validate lineage operations and spend and does
+      not by itself invalidate Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL.
+    C: The architecture evidence must show that inline connection strings, account keys, and embedded credentials
+      are absent from pipeline definitions and evidence. For this case, the negative assertion must be evaluated
+      now, independent of a later business change.
+    D: The applicable design condition is that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. For this case, a passing result at Select integration patterns
+      and runtimes gives no causal evidence for the failure at Use managed identity for linked services.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q15
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: 'A design review of ''Use managed identity for linked services'' includes analytics consumers. The run encountered
+    this modeled failure: The connector lacks managed-identity support or the identity cannot traverse a private
+    network boundary. Which answer identifies the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Delete dependent datasets and pipelines before a run-owned linked service;
+      never export secret properties; as an independent condition, use the premise that the failed operation and
+      its returned identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'The connector lacks managed-identity support or the identity
+      cannot traverse a private network boundary'; separately, consider it sufficient that the first state record
+      and returned identifiers can be discarded.
+    C: Change Select integration patterns and runtimes instead. Then, take it as conclusive that success at Select
+      integration patterns and runtimes will repair the failed state at Use managed identity for linked services.
+    D: Use a Key Vault-referenced short-lived credential only where required and document rotation and runtime access.
+      As another control, preserve the current run identity and evidence.
+  answer: D
+  explanations:
+    A: The retained result must be reconciled with the fact that delete dependent datasets and pipelines before
+      a run-owned linked service; never export secret properties. For this case, cleanup before reconciliation can
+      erase evidence or strand a partially created dependency.
+    B: The decision tension comes from the fact that the connector lacks managed-identity support or the identity
+      cannot traverse a private network boundary. For this case, discarding the original run identity breaks ownership
+      reconciliation and can duplicate a partial operation.
+    C: The safe operating boundary says that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. For this case, altering an already separate checkpoint does
+      not repair the modeled failure at Use managed identity for linked services.
+    D: 'The review is governed by this fact: use a Key Vault-referenced short-lived credential only where required
+      and document rotation and runtime access. For this case, it corrects the narrow cause while retaining the
+      same recovery trail and decision scope.'
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q16
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: The team asks operational system owners to assess 'Use managed identity for linked services'. Without making
+    a new change, the team must inspect the risk 'The connector lacks managed-identity support or the identity cannot
+    traverse a private network boundary' using the Azure PowerShell lane. What recommendation gives the reviewers
+    the read-only, lane-correct inspection?
+  options:
+    A: Rerun the Use managed identity for linked services implementation command and infer the expected state, and
+      then rely on the belief that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Use managed identity for linked services: Inline connection strings,
+      account keys, and embedded credentials are absent from pipeline definitions and evidence. Also, proceed on
+      the belief that an empty negative result reports every required positive property.'
+    C: Run the positive inspection for Orchestrate idempotent ingestion and apply it to Use managed identity for
+      linked services; in a separate step, treat as decisive the assertion that any command from the same lane proves
+      the current checkpoint.
+    D: 'Inspect the documented properties for Use managed identity for linked services. In addition, retain this
+      evidence: linked-service name, connector type, authentication class, Key Vault reference label, and target
+      scope.'
+  answer: D
+  explanations:
+    A: The failure model establishes that the implementation command. For this case, it can mutate state and shell
+      success does not independently assert the expected properties.
+    B: The recovery guidance assumes that the negative inspection. For this case, absence of the prohibited condition
+      is necessary but does not establish the positive architecture state.
+    C: The WAF consequence identifies that the positive inspection for Orchestrate idempotent ingestion. For this
+      case, it is lane-correct but proves Orchestrate idempotent ingestion, not Use managed identity for linked
+      services.
+    D: The traceable checkpoint outcome is that supported sources and sinks use the data-factory managed identity
+      or a Key Vault reference with least privilege. For this case, the read-only inspection directly tests the
+      properties required at Use managed identity for linked services.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q17
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: 'A recommendation on ''Use managed identity for linked services'' is requested by data governance council.
+    A passing positive check does not by itself prove this negative assertion: Inline connection strings, account
+    keys, and embedded credentials are absent from pipeline definitions and evidence. Which action produces the
+    assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Use managed identity for linked services and report full compliance.
+      In addition, treat it as established that every prohibited parallel state must therefore be absent.
+    B: Prove only that inline connection strings, account keys, and embedded credentials are absent from pipeline
+      definitions and evidence and report the intended configuration as present; before approval, use as justification
+      the claim that absence is equivalent to positive-state evidence.
+    C: Use Serve governed analytical queries's negative assertion for Use managed identity for linked services.
+      Separately, accept without proof that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Use managed identity for linked services. Before sign-off, independently
+      verify that inline connection strings, account keys, and embedded credentials are absent from pipeline definitions
+      and evidence.
+  answer: D
+  explanations:
+    A: supported sources and sinks use the data-factory managed identity or a Key Vault reference with least privilege.
+      That evidence means the positive result alone does not test the explicit anti-condition 'Inline connection
+      strings, account keys, and embedded credentials are absent from pipeline definitions and evidence'.
+    B: The controlling fact is that inline connection strings, account keys, and embedded credentials are absent
+      from pipeline definitions and evidence. That evidence means absence evidence cannot demonstrate the required
+      positive state 'Supported sources and sinks use the data-factory managed identity or a Key Vault reference
+      with least privilege'.
+    C: The authored acceptance boundary states that an always-on dedicated SQL pool without a cost owner is not
+      introduced by default. That evidence means the second assertion is valid for Serve governed analytical queries
+      but leaves this checkpoint's prohibited state untested.
+    D: The command-level assertion is anchored in the fact that supported sources and sinks use the data-factory
+      managed identity or a Key Vault reference with least privilege; Inline connection strings, account keys, and
+      embedded credentials are absent from pipeline definitions and evidence. For this case, two independent observations
+      prevent a passing positive check from concealing an unsafe parallel state.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q18
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: '''Use managed identity for linked services'' is assigned to data engineering. The board wants the Well-Architected
+    consequence of mitigating this risk: The connector lacks managed-identity support or the identity cannot traverse
+    a private network boundary. What best demonstrates the consequence attributable to this checkpoint?'
+  options:
+    A: 'Record this consequence: Security: managed identity and Key Vault references keep credentials out of pipeline
+      definitions and evidence; afterward, tie it to LAB13-REQ-02.'
+    B: Use the Validate lineage operations and spend consequence as the result for Use managed identity for linked
+      services. Then, base approval on the claim that a pillar statement remains valid when moved away from Validate
+      lineage operations and spend.
+    C: Remove the control responsible for the Use managed identity for linked services outcome; afterward, use the
+      premise that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Security: managed identity and Key Vault references keep credentials out of pipeline definitions
+      and evidence'' as proof that all five pillars pass; then consider it sufficient that the checkpoint ''Use
+      managed identity for linked services'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The relevant observation is that security: managed identity and Key Vault references keep credentials out
+      of pipeline definitions and evidence. That evidence means it states the authored pillar consequence of the
+      control evaluated at Use managed identity for linked services.'
+    B: 'The checkpoint specifically records that cost Optimization: correlated run, activity, volume, and duration
+      evidence attributes consumption to an owned pipeline. That evidence means that tradeoff belongs to Validate
+      lineage operations and spend and does not explain this checkpoint''s decision.'
+    C: The scenario makes clear that the required outcome at Use managed identity for linked services. That evidence
+      means cost Optimization cannot remove the acceptance condition 'Supported sources and sinks use the data-factory
+      managed identity or a Key Vault reference with least privilege'.
+    D: The architecture evidence must show that inline connection strings, account keys, and embedded credentials
+      are absent from pipeline definitions and evidence. That evidence means one positive command cannot establish
+      every pillar, especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q19
+  difficulty: advanced
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: 'An assurance review of ''Use managed identity for linked services'' includes analytics consumers. A material
+    change now applies: Executives mandate near-real-time operational dashboards for one telemetry stream while
+    partner files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary
+    without forcing every flow into streaming. Which option is the correct revision to the decision record?'
+  options:
+    A: Retain Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Use managed identity for linked
+      services without recalculating criteria or eligibility; in a separate step, rely on the claim that the original
+      weighted result is permanent.
+    B: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse for Use managed identity for linked
+      services without rechecking its mandatory constraints. As another control, rely on the belief that being different
+      from the current design is an architecture criterion.
+    C: Re-score Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL and both alternatives for Use
+      managed identity for linked services, and then supersede the ADR using the changed evidence for LAB13-REQ-02.
+    D: Keep Azure Databricks with Azure Data Factory orchestration and Delta Lake eligible at Use managed identity
+      for linked services by downgrading LAB13-REQ-02; as a separate check, proceed on the belief that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL.
+      That evidence means the original ADR remains historical evidence, but its score cannot answer a changed mandatory
+      condition.'
+    B: The retained result must be reconciled with the fact that microsoft Fabric Data Factory with OneLake and
+      Fabric Warehouse. That evidence means being different is not a criterion, and the candidate still must avoid
+      the prohibited state at Use managed identity for linked services.
+    C: The applicable design condition is that azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+      at Use managed identity for linked services. That evidence means the material change 'Executives mandate near-real-time
+      operational dashboards for one telemetry stream while partner files remain hourly and analysts prefer a unified
+      Microsoft Fabric experience; revise the platform boundary without forcing every flow into streaming.' requires
+      fresh eligibility, weighted analysis, and a superseding decision.
+    D: The decision tension comes from the fact that lAB13-REQ-02. That evidence means an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q20
+  difficulty: advanced
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP02
+  stem: 'Approval of ''Use managed identity for linked services'' is questioned by operational system owners. After
+    a partial run, cleanup must follow this dependency: Delete dependent datasets and pipelines before a run-owned
+    linked service; never export secret properties. What should the architect select as the dependency-safe cleanup
+    plan?'
+  options:
+    A: Apply the cleanup rule for Orchestrate idempotent ingestion before reconciling the current dependency. Separately,
+      take it as conclusive that removing a parent needed to identify Use managed identity for linked services is
+      harmless.
+    B: Delete candidates by display name before comparing the Use managed identity for linked services ownership
+      tags; for this decision, treat it as established that the dependency rule 'Delete dependent datasets and pipelines
+      before a run-owned linked service; never export secret properties' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Use managed identity for linked services; as a separate
+      check, follow this dependency rule without purge: Delete dependent datasets and pipelines before a run-owned
+      linked service; never export secret properties.'
+    D: Destroy recoverable copies before retaining the Use managed identity for linked services negative assertion
+      'Inline connection strings, account keys, and embedded credentials are absent from pipeline definitions and
+      evidence'. Before sign-off, use as justification the claim that remaining command logs are sufficient recovery
+      evidence.
+  answer: C
+  explanations:
+    A: The traceable checkpoint outcome is that stop triggers and delete dependent datasets before deleting a run-owned
+      pipeline. That evidence means a cleanup rule for Orchestrate idempotent ingestion cannot override the dependency
+      declared for Use managed identity for linked services.
+    B: The failure model establishes that linked-service name, connector type, authentication class, Key Vault reference
+      label, and target scope. That evidence means names are not ownership proof; deletion requires the exact recorded
+      identifier and every required tag.
+    C: The safe operating boundary says that delete dependent datasets and pipelines before a run-owned linked service;
+      never export secret properties. That evidence means exact identity, complete ownership tags, and the authored
+      dependency order constrain cleanup and preserve recovery.
+    D: The recovery guidance assumes that inline connection strings, account keys, and embedded credentials are
+      absent from pipeline definitions and evidence. That evidence means irreversible purge is outside the lab contract
+      and destroys evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q21
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'The implementation review has reached ''Orchestrate idempotent ingestion''. Approval requires a positive
+    result plus this independent negative assertion: Empty pipelines and blind append operations without duplicate
+    handling do not satisfy ingestion. Which choice should be approved as the acceptance rule that makes LAB13-REQ-03
+    testable?'
+  options:
+    A: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse before checking Orchestrate idempotent
+      ingestion. Afterward, consider it sufficient that a successful deployment will later prove the architecture
+      constraint.
+    B: Use the passing result from Select integration patterns and runtimes to approve Orchestrate idempotent ingestion;
+      next, take it as conclusive that one control establishes an unrelated acceptance boundary.
+    C: Choose Azure Databricks with Azure Data Factory orchestration and Delta Lake and skip the Orchestrate idempotent
+      ingestion negative assertion. In addition, treat it as established that the candidate has the lowest implementation
+      effort.
+    D: Require the documented positive state for Orchestrate idempotent ingestion. Separately, verify that empty
+      pipelines and blind append operations without duplicate handling do not satisfy ingestion.
+  answer: D
+  explanations:
+    A: The command-level assertion is anchored in the fact that empty pipelines and blind append operations without
+      duplicate handling do not satisfy ingestion. That evidence means a deployment result cannot prove LAB13-REQ-03,
+      and Microsoft Fabric Data Factory with OneLake and Fabric Warehouse still has to meet the mandatory boundary.
+    B: batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration runtime boundaries.
+      The resulting architectural conclusion is that that outcome belongs to Select integration patterns and runtimes
+      and leaves Orchestrate idempotent ingestion unverified.
+    C: The controlling fact is that deliver traceable analytics datasets from cloud and private sources without
+      creating unmanaged credentials or always-on analytics cost. The resulting architectural conclusion is that
+      implementation effort cannot justify skipping the negative assertion or displace LAB13-REQ-03.
+    D: The WAF consequence identifies that the pipeline uses watermarks, deterministic paths, retry policy, and
+      quarantine handling to make reruns safe. That evidence means the positive state and an independent negative
+      assertion jointly make LAB13-REQ-03 testable.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q22
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: The approach to 'Orchestrate idempotent ingestion' is challenged by data governance council. The selected
+    architecture is Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL; object existence alone is
+    not success. What should the team use as the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion' as the success result; as an independent condition, proceed on the belief that absence
+      proves every required positive property.
+    B: Record the pipeline uses watermarks, deterministic paths, retry policy, and quarantine handling to make reruns
+      safe; during the same review, classify it as success for LAB13-REQ-03.
+    C: Use the successful finding from Use managed identity for linked services as the result for Orchestrate idempotent
+      ingestion; independently, treat as decisive the assertion that a property from the current checkpoint does
+      not need to be inspected.
+    D: Record the failure condition 'A partial copy advances the watermark or rerun duplicates already committed
+      data' as a successful state. Then, base approval on the claim that the command returned an object.
+  answer: B
+  explanations:
+    A: The relevant observation is that empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion. The resulting architectural conclusion is that this is the independent prohibited-state
+      assertion, not a successful finding.
+    B: The authored acceptance boundary states that the pipeline uses watermarks, deterministic paths, retry policy,
+      and quarantine handling to make reruns safe. The resulting architectural conclusion is that this is the authored
+      target state for Orchestrate idempotent ingestion and directly supports LAB13-REQ-03.
+    C: The checkpoint specifically records that supported sources and sinks use the data-factory managed identity
+      or a Key Vault reference with least privilege. The resulting architectural conclusion is that evidence for
+      Use managed identity for linked services cannot substitute for the properties required at Orchestrate idempotent
+      ingestion.
+    D: The scenario makes clear that a partial copy advances the watermark or rerun duplicates already committed
+      data. The resulting architectural conclusion is that resource existence or command output does not convert
+      the documented failure condition into success.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q23
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'A decision test for ''Orchestrate idempotent ingestion'' includes data engineering. Evidence must address
+    this risk without retaining credentials: A partial copy advances the watermark or rerun duplicates already committed
+    data. Which option best establishes sufficient, properly scoped evidence?'
+  options:
+    A: Retain definition hash, activity graph, retry policy, watermark owner, quarantine path, and synthetic run
+      result. Independently, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Serve governed analytical queries for Orchestrate idempotent ingestion, and
+      then use as justification the claim that a related checkpoint proves the current expected state.
+    C: Store unredacted Orchestrate idempotent ingestion output with operator, tenant, token, and request context.
+      Also, accept without proof that reproduction requires every captured field.
+    D: Record only the Orchestrate idempotent ingestion positive inspection's exit status; in a separate step, rely
+      on the claim that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The architecture evidence must show that definition hash, activity graph, retry policy, watermark owner,
+      quarantine path, and synthetic run result. The resulting architectural conclusion is that it captures the
+      checkpoint's observable properties while keeping the evidence boundary narrow.
+    B: The applicable design condition is that workspace label, serving mode, curated-zone path, semantic owner,
+      authorization groups, and query-cost controls. The resulting architectural conclusion is that that evidence
+      supports Serve governed analytical queries, so it cannot demonstrate The pipeline uses watermarks, deterministic
+      paths, retry policy, and quarantine handling to make reruns safe.
+    C: 'The review is governed by this fact: unredacted implementation output. The resulting architectural conclusion
+      is that identity, tenant, or token material exceeds the non-secret evidence contract.'
+    D: The retained result must be reconciled with the fact that the positive inspection's exit status. The resulting
+      architectural conclusion is that an exit code alone does not show whether the pipeline uses watermarks, deterministic
+      paths, retry policy, and quarantine handling to make reruns safe.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q24
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: The architecture board reconsiders 'Orchestrate idempotent ingestion' with analytics consumers. The target
+    is The pipeline uses watermarks, deterministic paths, retry policy, and quarantine handling to make reruns safe,
+    but the latest evidence does not show it. Which answer identifies the most likely cause?
+  options:
+    A: Treat 'Monitoring records show success while downstream reconciliation detects missing or duplicate rows'
+      as grounds to reject Orchestrate idempotent ingestion. In addition, use the premise that validate lineage
+      operations and spend's failure model applies unchanged here.
+    B: Ignore the negative assertion 'Empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion'; before approval, consider it sufficient that a later material change will make it
+      unnecessary.
+    C: Investigate a partial copy advances the watermark or rerun duplicates already committed data; in a separate
+      step, isolate that cause before changing Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL.
+    D: Investigate Select integration patterns and runtimes instead of diagnosing Orchestrate idempotent ingestion.
+      Separately, take it as conclusive that a passing result at Select integration patterns and runtimes identifies
+      the current cause.
+  answer: C
+  explanations:
+    A: The safe operating boundary says that monitoring records show success while downstream reconciliation detects
+      missing or duplicate rows. The resulting architectural conclusion is that that condition belongs to Validate
+      lineage operations and spend and does not by itself invalidate Azure Data Factory with ADLS Gen2 and Azure
+      Synapse serverless SQL.
+    B: The traceable checkpoint outcome is that empty pipelines and blind append operations without duplicate handling
+      do not satisfy ingestion. The resulting architectural conclusion is that the negative assertion must be evaluated
+      now, independent of a later business change.
+    C: The decision tension comes from the fact that a partial copy advances the watermark or rerun duplicates already
+      committed data. The resulting architectural conclusion is that it is the checkpoint's causal failure model
+      and should be isolated before retrying Orchestrate idempotent ingestion.
+    D: The failure model establishes that batch, CDC, event, and private-source needs map to appropriate Azure or
+      self-hosted integration runtime boundaries. The resulting architectural conclusion is that a passing result
+      at Select integration patterns and runtimes gives no causal evidence for the failure at Orchestrate idempotent
+      ingestion.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q25
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'A review of ''Orchestrate idempotent ingestion'' begins with input from operational system owners. The
+    run encountered this modeled failure: A partial copy advances the watermark or rerun duplicates already committed
+    data. What recommendation gives the reviewers the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Stop triggers and delete dependent datasets before deleting a run-owned pipeline.
+      Then, rely on the belief that the failed operation and its returned identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'A partial copy advances the watermark or rerun duplicates
+      already committed data'; afterward, proceed on the belief that the first state record and returned identifiers
+      can be discarded.
+    C: Reconcile the checkpoint table and target partition, then rerun only the idempotent failed slice; next, preserve
+      the current run identity and evidence.
+    D: Change Select integration patterns and runtimes instead; then treat as decisive the assertion that success
+      at Select integration patterns and runtimes will repair the failed state at Orchestrate idempotent ingestion.
+  answer: C
+  explanations:
+    A: The WAF consequence identifies that stop triggers and delete dependent datasets before deleting a run-owned
+      pipeline. The resulting architectural conclusion is that cleanup before reconciliation can erase evidence
+      or strand a partially created dependency.
+    B: The command-level assertion is anchored in the fact that a partial copy advances the watermark or rerun duplicates
+      already committed data. The resulting architectural conclusion is that discarding the original run identity
+      breaks ownership reconciliation and can duplicate a partial operation.
+    C: The recovery guidance assumes that reconcile the checkpoint table and target partition, then rerun only the
+      idempotent failed slice. The resulting architectural conclusion is that it corrects the narrow cause while
+      retaining the same recovery trail and decision scope.
+    D: batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration runtime boundaries.
+      Under the stated constraint, altering an already separate checkpoint does not repair the modeled failure at
+      Orchestrate idempotent ingestion.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q26
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: '''Orchestrate idempotent ingestion'' awaits approval from data governance council. Without making a new
+    change, the team must inspect the risk ''A partial copy advances the watermark or rerun duplicates already committed
+    data'' using the Azure PowerShell lane. Which action produces the read-only, lane-correct inspection?'
+  options:
+    A: Rerun the Orchestrate idempotent ingestion implementation command and infer the expected state; in a separate
+      step, treat it as established that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Orchestrate idempotent ingestion; for this decision, retain this evidence:
+      definition hash, activity graph, retry policy, watermark owner, quarantine path, and synthetic run result.'
+    C: 'Run only this negative inspection for Orchestrate idempotent ingestion: Empty pipelines and blind append
+      operations without duplicate handling do not satisfy ingestion. As another control, use as justification the
+      claim that an empty negative result reports every required positive property.'
+    D: Run the positive inspection for Use managed identity for linked services and apply it to Orchestrate idempotent
+      ingestion; as a separate check, accept without proof that any command from the same lane proves the current
+      checkpoint.
+  answer: B
+  explanations:
+    A: The authored acceptance boundary states that the implementation command. Under the stated constraint, it
+      can mutate state and shell success does not independently assert the expected properties.
+    B: The controlling fact is that the pipeline uses watermarks, deterministic paths, retry policy, and quarantine
+      handling to make reruns safe. Under the stated constraint, the read-only inspection directly tests the properties
+      required at Orchestrate idempotent ingestion.
+    C: The relevant observation is that the negative inspection. Under the stated constraint, absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    D: The checkpoint specifically records that the positive inspection for Use managed identity for linked services.
+      Under the stated constraint, it is lane-correct but proves Use managed identity for linked services, not Orchestrate
+      idempotent ingestion.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q27
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: '''Orchestrate idempotent ingestion'' is reopened at the request of data engineering. A passing positive
+    check does not by itself prove this negative assertion: Empty pipelines and blind append operations without
+    duplicate handling do not satisfy ingestion. What best demonstrates the assertion pair that proves both conditions
+    independently?'
+  options:
+    A: Verify only the positive result for Orchestrate idempotent ingestion and report full compliance. Separately,
+      base approval on the claim that every prohibited parallel state must therefore be absent.
+    B: Prove only that empty pipelines and blind append operations without duplicate handling do not satisfy ingestion
+      and report the intended configuration as present; for this decision, use the premise that absence is equivalent
+      to positive-state evidence.
+    C: Use Serve governed analytical queries's negative assertion for Orchestrate idempotent ingestion. Before sign-off,
+      consider it sufficient that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Orchestrate idempotent ingestion. Then, independently verify that empty
+      pipelines and blind append operations without duplicate handling do not satisfy ingestion.
+  answer: D
+  explanations:
+    A: The architecture evidence must show that the pipeline uses watermarks, deterministic paths, retry policy,
+      and quarantine handling to make reruns safe. Under the stated constraint, the positive result alone does not
+      test the explicit anti-condition 'Empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion'.
+    B: The applicable design condition is that empty pipelines and blind append operations without duplicate handling
+      do not satisfy ingestion. Under the stated constraint, absence evidence cannot demonstrate the required positive
+      state 'The pipeline uses watermarks, deterministic paths, retry policy, and quarantine handling to make reruns
+      safe'.
+    C: 'The review is governed by this fact: an always-on dedicated SQL pool without a cost owner is not introduced
+      by default. Under the stated constraint, the second assertion is valid for Serve governed analytical queries
+      but leaves this checkpoint''s prohibited state untested.'
+    D: The scenario makes clear that the pipeline uses watermarks, deterministic paths, retry policy, and quarantine
+      handling to make reruns safe; Empty pipelines and blind append operations without duplicate handling do not
+      satisfy ingestion. Under the stated constraint, two independent observations prevent a passing positive check
+      from concealing an unsafe parallel state.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q28
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'A design review of ''Orchestrate idempotent ingestion'' includes analytics consumers. The board wants the
+    Well-Architected consequence of mitigating this risk: A partial copy advances the watermark or rerun duplicates
+    already committed data. Which option is the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Validate lineage operations and spend consequence as the result for Orchestrate idempotent ingestion;
+      then rely on the claim that a pillar statement remains valid when moved away from Validate lineage operations
+      and spend.
+    B: 'Record this consequence: Operational Excellence: watermarks, quarantine, and idempotent replay make partial
+      pipeline failure supportable. Next, tie it to LAB13-REQ-03.'
+    C: Remove the control responsible for the Orchestrate idempotent ingestion outcome. Independently, rely on the
+      belief that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Operational Excellence: watermarks, quarantine, and idempotent replay make partial pipeline failure
+      supportable'' as proof that all five pillars pass. Next, proceed on the belief that the checkpoint ''Orchestrate
+      idempotent ingestion'' no longer needs its separate negative check.'
+  answer: B
+  explanations:
+    A: 'The decision tension comes from the fact that cost Optimization: correlated run, activity, volume, and duration
+      evidence attributes consumption to an owned pipeline. Under the stated constraint, that tradeoff belongs to
+      Validate lineage operations and spend and does not explain this checkpoint''s decision.'
+    B: 'The retained result must be reconciled with the fact that operational Excellence: watermarks, quarantine,
+      and idempotent replay make partial pipeline failure supportable. Under the stated constraint, it states the
+      authored pillar consequence of the control evaluated at Orchestrate idempotent ingestion.'
+    C: The safe operating boundary says that the required outcome at Orchestrate idempotent ingestion. Under the
+      stated constraint, cost Optimization cannot remove the acceptance condition 'The pipeline uses watermarks,
+      deterministic paths, retry policy, and quarantine handling to make reruns safe'.
+    D: The traceable checkpoint outcome is that empty pipelines and blind append operations without duplicate handling
+      do not satisfy ingestion. Under the stated constraint, one positive command cannot establish every pillar,
+      especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q29
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'The team asks operational system owners to assess ''Orchestrate idempotent ingestion''. A material change
+    now applies: Executives mandate near-real-time operational dashboards for one telemetry stream while partner
+    files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary
+    without forcing every flow into streaming. What should the architect select as the correct revision to the decision
+    record?'
+  options:
+    A: Re-score Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL and both alternatives for Orchestrate
+      idempotent ingestion. As another control, supersede the ADR using the changed evidence for LAB13-REQ-03.
+    B: Retain Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Orchestrate idempotent ingestion
+      without recalculating criteria or eligibility; as a separate check, take it as conclusive that the original
+      weighted result is permanent.
+    C: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse for Orchestrate idempotent ingestion
+      without rechecking its mandatory constraints. Afterward, treat it as established that being different from
+      the current design is an architecture criterion.
+    D: Keep Azure Databricks with Azure Data Factory orchestration and Delta Lake eligible at Orchestrate idempotent
+      ingestion by downgrading LAB13-REQ-03; next, use as justification the claim that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: A
+  explanations:
+    A: The failure model establishes that azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at
+      Orchestrate idempotent ingestion. Under the stated constraint, the material change 'Executives mandate near-real-time
+      operational dashboards for one telemetry stream while partner files remain hourly and analysts prefer a unified
+      Microsoft Fabric experience; revise the platform boundary without forcing every flow into streaming.' requires
+      fresh eligibility, weighted analysis, and a superseding decision.
+    B: The recovery guidance assumes that azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL. Under
+      the stated constraint, the original ADR remains historical evidence, but its score cannot answer a changed
+      mandatory condition.
+    C: The WAF consequence identifies that microsoft Fabric Data Factory with OneLake and Fabric Warehouse. Under
+      the stated constraint, being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Orchestrate idempotent ingestion.
+    D: The command-level assertion is anchored in the fact that lAB13-REQ-03. Under the stated constraint, an architect
+      cannot silently downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q30
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP03
+  stem: 'A recommendation on ''Orchestrate idempotent ingestion'' is requested by data governance council. After
+    a partial run, cleanup must follow this dependency: Stop triggers and delete dependent datasets before deleting
+    a run-owned pipeline. Select the dependency-safe cleanup plan.'
+  options:
+    A: Apply the cleanup rule for Use managed identity for linked services before reconciling the current dependency.
+      Before sign-off, treat as decisive the assertion that removing a parent needed to identify Orchestrate idempotent
+      ingestion is harmless.
+    B: Delete candidates by display name before comparing the Orchestrate idempotent ingestion ownership tags; as
+      an independent condition, base approval on the claim that the dependency rule 'Stop triggers and delete dependent
+      datasets before deleting a run-owned pipeline' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Orchestrate idempotent ingestion. In addition, follow
+      this dependency rule without purge: Stop triggers and delete dependent datasets before deleting a run-owned
+      pipeline.'
+    D: Destroy recoverable copies before retaining the Orchestrate idempotent ingestion negative assertion 'Empty
+      pipelines and blind append operations without duplicate handling do not satisfy ingestion'; during the same
+      review, use the premise that remaining command logs are sufficient recovery evidence.
+  answer: C
+  explanations:
+    A: The controlling fact is that delete dependent datasets and pipelines before a run-owned linked service; never
+      export secret properties. This matters because a cleanup rule for Use managed identity for linked services
+      cannot override the dependency declared for Orchestrate idempotent ingestion.
+    B: The authored acceptance boundary states that definition hash, activity graph, retry policy, watermark owner,
+      quarantine path, and synthetic run result. This matters because names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.
+    C: stop triggers and delete dependent datasets before deleting a run-owned pipeline. This matters because exact
+      identity, complete ownership tags, and the authored dependency order constrain cleanup and preserve recovery.
+    D: The relevant observation is that empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion. This matters because irreversible purge is outside the lab contract and destroys evidence
+      needed for residual-state validation.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q31
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: '''Serve governed analytical queries'' is assigned to data governance council. Approval requires a positive
+    result plus this independent negative assertion: An always-on dedicated SQL pool without a cost owner is not
+    introduced by default. What should the team use as the acceptance rule that makes LAB13-REQ-04 testable?'
+  options:
+    A: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse before checking Serve governed analytical
+      queries. In addition, proceed on the belief that a successful deployment will later prove the architecture
+      constraint.
+    B: Use the passing result from Select integration patterns and runtimes to approve Serve governed analytical
+      queries; before approval, treat as decisive the assertion that one control establishes an unrelated acceptance
+      boundary.
+    C: Choose Azure Databricks with Azure Data Factory orchestration and Delta Lake and skip the Serve governed
+      analytical queries negative assertion. Separately, base approval on the claim that the candidate has the lowest
+      implementation effort.
+    D: Require the documented positive state for Serve governed analytical queries; as an independent condition,
+      verify that an always-on dedicated SQL pool without a cost owner is not introduced by default.
+  answer: D
+  explanations:
+    A: The scenario makes clear that an always-on dedicated SQL pool without a cost owner is not introduced by default.
+      This matters because a deployment result cannot prove LAB13-REQ-04, and Microsoft Fabric Data Factory with
+      OneLake and Fabric Warehouse still has to meet the mandatory boundary.
+    B: The architecture evidence must show that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. This matters because that outcome belongs to Select integration
+      patterns and runtimes and leaves Serve governed analytical queries unverified.
+    C: The applicable design condition is that deliver traceable analytics datasets from cloud and private sources
+      without creating unmanaged credentials or always-on analytics cost. This matters because implementation effort
+      cannot justify skipping the negative assertion or displace LAB13-REQ-04.
+    D: The checkpoint specifically records that curated lake data is exposed through governed serverless SQL views,
+      with a dedicated pool considered only for measured isolation or performance needs. This matters because the
+      positive state and an independent negative assertion jointly make LAB13-REQ-04 testable.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q32
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: An assurance review of 'Serve governed analytical queries' includes data engineering. The selected architecture
+    is Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL; object existence alone is not success.
+    Which option best establishes the intended successful finding?
+  options:
+    A: Record curated lake data is exposed through governed serverless SQL views, with a dedicated pool considered
+      only for measured isolation or performance needs; then classify it as success for LAB13-REQ-04.
+    B: Use only the negative assertion 'An always-on dedicated SQL pool without a cost owner is not introduced by
+      default' as the success result. Then, use as justification the claim that absence proves every required positive
+      property.
+    C: Use the successful finding from Use managed identity for linked services as the result for Serve governed
+      analytical queries; afterward, accept without proof that a property from the current checkpoint does not need
+      to be inspected.
+    D: Record the failure condition 'File layout, schema drift, or small-file volume makes serverless queries unstable
+      or expensive' as a successful state; then rely on the claim that the command returned an object.
+  answer: A
+  explanations:
+    A: 'The review is governed by this fact: curated lake data is exposed through governed serverless SQL views,
+      with a dedicated pool considered only for measured isolation or performance needs. This matters because this
+      is the authored target state for Serve governed analytical queries and directly supports LAB13-REQ-04.'
+    B: The retained result must be reconciled with the fact that an always-on dedicated SQL pool without a cost
+      owner is not introduced by default. This matters because this is the independent prohibited-state assertion,
+      not a successful finding.
+    C: The decision tension comes from the fact that supported sources and sinks use the data-factory managed identity
+      or a Key Vault reference with least privilege. This matters because evidence for Use managed identity for
+      linked services cannot substitute for the properties required at Serve governed analytical queries.
+    D: The safe operating boundary says that file layout, schema drift, or small-file volume makes serverless queries
+      unstable or expensive. This matters because resource existence or command output does not convert the documented
+      failure condition into success.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q33
+  difficulty: foundational
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: 'Approval of ''Serve governed analytical queries'' is questioned by analytics consumers. Evidence must address
+    this risk without retaining credentials: File layout, schema drift, or small-file volume makes serverless queries
+    unstable or expensive. Which answer identifies sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Orchestrate idempotent ingestion for Serve governed analytical queries; in a
+      separate step, use the premise that a related checkpoint proves the current expected state.
+    B: Store unredacted Serve governed analytical queries output with operator, tenant, token, and request context.
+      As another control, consider it sufficient that reproduction requires every captured field.
+    C: Record only the Serve governed analytical queries positive inspection's exit status; as a separate check,
+      take it as conclusive that projected properties and assertion results can be reconstructed later.
+    D: Retain workspace label, serving mode, curated-zone path, semantic owner, authorization groups, and query-cost
+      controls. Also, exclude credentials and unrelated response fields.
+  answer: D
+  explanations:
+    A: The failure model establishes that definition hash, activity graph, retry policy, watermark owner, quarantine
+      path, and synthetic run result. This matters because that evidence supports Orchestrate idempotent ingestion,
+      so it cannot demonstrate Curated lake data is exposed through governed serverless SQL views, with a dedicated
+      pool considered only for measured isolation or performance needs.
+    B: The recovery guidance assumes that unredacted implementation output. This matters because identity, tenant,
+      or token material exceeds the non-secret evidence contract.
+    C: The WAF consequence identifies that the positive inspection's exit status. This matters because an exit code
+      alone does not show whether curated lake data is exposed through governed serverless SQL views, with a dedicated
+      pool considered only for measured isolation or performance needs.
+    D: The traceable checkpoint outcome is that workspace label, serving mode, curated-zone path, semantic owner,
+      authorization groups, and query-cost controls. This matters because it captures the checkpoint's observable
+      properties while keeping the evidence boundary narrow.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q34
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: The implementation review has reached 'Serve governed analytical queries'. The target is Curated lake data
+    is exposed through governed serverless SQL views, with a dedicated pool considered only for measured isolation
+    or performance needs, but the latest evidence does not show it. What recommendation gives the reviewers the
+    most likely cause?
+  options:
+    A: Treat 'Monitoring records show success while downstream reconciliation detects missing or duplicate rows'
+      as grounds to reject Serve governed analytical queries. Separately, rely on the belief that validate lineage
+      operations and spend's failure model applies unchanged here.
+    B: Investigate file layout, schema drift, or small-file volume makes serverless queries unstable or expensive.
+      Afterward, isolate that cause before changing Azure Data Factory with ADLS Gen2 and Azure Synapse serverless
+      SQL.
+    C: Ignore the negative assertion 'An always-on dedicated SQL pool without a cost owner is not introduced by
+      default'; for this decision, proceed on the belief that a later material change will make it unnecessary.
+    D: Investigate Select integration patterns and runtimes instead of diagnosing Serve governed analytical queries.
+      Before sign-off, treat as decisive the assertion that a passing result at Select integration patterns and
+      runtimes identifies the current cause.
+  answer: B
+  explanations:
+    A: monitoring records show success while downstream reconciliation detects missing or duplicate rows. The checkpoint
+      therefore requires that that condition belongs to Validate lineage operations and spend and does not by itself
+      invalidate Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL.
+    B: The command-level assertion is anchored in the fact that file layout, schema drift, or small-file volume
+      makes serverless queries unstable or expensive. This matters because it is the checkpoint's causal failure
+      model and should be isolated before retrying Serve governed analytical queries.
+    C: The controlling fact is that an always-on dedicated SQL pool without a cost owner is not introduced by default.
+      The checkpoint therefore requires that the negative assertion must be evaluated now, independent of a later
+      business change.
+    D: The authored acceptance boundary states that batch, CDC, event, and private-source needs map to appropriate
+      Azure or self-hosted integration runtime boundaries. The checkpoint therefore requires that a passing result
+      at Select integration patterns and runtimes gives no causal evidence for the failure at Serve governed analytical
+      queries.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q35
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: 'The approach to ''Serve governed analytical queries'' is challenged by data governance council. The run
+    encountered this modeled failure: File layout, schema drift, or small-file volume makes serverless queries unstable
+    or expensive. Which action produces the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Remove run-owned SQL artifacts before workspace deletion; retain no source
+      data in evidence; then treat it as established that the failed operation and its returned identifiers do not
+      need reconciliation.'
+    B: Compact and curate files, enforce schema contracts, and measure scanned bytes before provisioning dedicated
+      capacity. Separately, preserve the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'File layout, schema drift, or small-file volume makes
+      serverless queries unstable or expensive'. Independently, use as justification the claim that the first state
+      record and returned identifiers can be discarded.
+    D: Change Select integration patterns and runtimes instead. Next, accept without proof that success at Select
+      integration patterns and runtimes will repair the failed state at Serve governed analytical queries.
+  answer: B
+  explanations:
+    A: The checkpoint specifically records that remove run-owned SQL artifacts before workspace deletion; retain
+      no source data in evidence. The checkpoint therefore requires that cleanup before reconciliation can erase
+      evidence or strand a partially created dependency.
+    B: The relevant observation is that compact and curate files, enforce schema contracts, and measure scanned
+      bytes before provisioning dedicated capacity. The checkpoint therefore requires that it corrects the narrow
+      cause while retaining the same recovery trail and decision scope.
+    C: The scenario makes clear that file layout, schema drift, or small-file volume makes serverless queries unstable
+      or expensive. The checkpoint therefore requires that discarding the original run identity breaks ownership
+      reconciliation and can duplicate a partial operation.
+    D: The architecture evidence must show that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. The checkpoint therefore requires that altering an already
+      separate checkpoint does not repair the modeled failure at Serve governed analytical queries.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q36
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: A decision test for 'Serve governed analytical queries' includes data engineering. Without making a new
+    change, the team must inspect the risk 'File layout, schema drift, or small-file volume makes serverless queries
+    unstable or expensive' using the Azure PowerShell lane. What best demonstrates the read-only, lane-correct inspection?
+  options:
+    A: Rerun the Serve governed analytical queries implementation command and infer the expected state; as a separate
+      check, base approval on the claim that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Serve governed analytical queries: An always-on dedicated SQL pool
+      without a cost owner is not introduced by default. Afterward, use the premise that an empty negative result
+      reports every required positive property.'
+    C: Run the positive inspection for Use managed identity for linked services and apply it to Serve governed analytical
+      queries; next, consider it sufficient that any command from the same lane proves the current checkpoint.
+    D: 'Inspect the documented properties for Serve governed analytical queries; without relying on inference, retain
+      this evidence: workspace label, serving mode, curated-zone path, semantic owner, authorization groups, and
+      query-cost controls.'
+  answer: D
+  explanations:
+    A: 'The review is governed by this fact: the implementation command. The checkpoint therefore requires that
+      it can mutate state and shell success does not independently assert the expected properties.'
+    B: The retained result must be reconciled with the fact that the negative inspection. The checkpoint therefore
+      requires that absence of the prohibited condition is necessary but does not establish the positive architecture
+      state.
+    C: The decision tension comes from the fact that the positive inspection for Use managed identity for linked
+      services. The checkpoint therefore requires that it is lane-correct but proves Use managed identity for linked
+      services, not Serve governed analytical queries.
+    D: The applicable design condition is that curated lake data is exposed through governed serverless SQL views,
+      with a dedicated pool considered only for measured isolation or performance needs. The checkpoint therefore
+      requires that the read-only inspection directly tests the properties required at Serve governed analytical
+      queries.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q37
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: 'The architecture board reconsiders ''Serve governed analytical queries'' with analytics consumers. A passing
+    positive check does not by itself prove this negative assertion: An always-on dedicated SQL pool without a cost
+    owner is not introduced by default. Which option is the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Serve governed analytical queries and report full compliance. Before
+      sign-off, rely on the claim that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Serve governed analytical queries. Independently, independently verify
+      that an always-on dedicated SQL pool without a cost owner is not introduced by default.
+    C: Prove only that an always-on dedicated SQL pool without a cost owner is not introduced by default and report
+      the intended configuration as present; as an independent condition, rely on the belief that absence is equivalent
+      to positive-state evidence.
+    D: Use Orchestrate idempotent ingestion's negative assertion for Serve governed analytical queries; for the
+      recorded decision, proceed on the belief that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The traceable checkpoint outcome is that curated lake data is exposed through governed serverless SQL views,
+      with a dedicated pool considered only for measured isolation or performance needs. The checkpoint therefore
+      requires that the positive result alone does not test the explicit anti-condition 'An always-on dedicated
+      SQL pool without a cost owner is not introduced by default'.
+    B: The safe operating boundary says that curated lake data is exposed through governed serverless SQL views,
+      with a dedicated pool considered only for measured isolation or performance needs; An always-on dedicated
+      SQL pool without a cost owner is not introduced by default. The checkpoint therefore requires that two independent
+      observations prevent a passing positive check from concealing an unsafe parallel state.
+    C: The failure model establishes that an always-on dedicated SQL pool without a cost owner is not introduced
+      by default. The checkpoint therefore requires that absence evidence cannot demonstrate the required positive
+      state 'Curated lake data is exposed through governed serverless SQL views, with a dedicated pool considered
+      only for measured isolation or performance needs'.
+    D: The recovery guidance assumes that empty pipelines and blind append operations without duplicate handling
+      do not satisfy ingestion. The checkpoint therefore requires that the second assertion is valid for Orchestrate
+      idempotent ingestion but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q38
+  difficulty: applied
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: 'A review of ''Serve governed analytical queries'' begins with input from operational system owners. The
+    board wants the Well-Architected consequence of mitigating this risk: File layout, schema drift, or small-file
+    volume makes serverless queries unstable or expensive. What should the architect select as the consequence attributable
+    to this checkpoint?'
+  options:
+    A: Use the Validate lineage operations and spend consequence as the result for Serve governed analytical queries.
+      Next, take it as conclusive that a pillar statement remains valid when moved away from Validate lineage operations
+      and spend.
+    B: 'Record this consequence: Performance Efficiency: curated file layout and serverless views reduce scan amplification
+      for analytical queries; in a separate step, tie it to LAB13-REQ-04.'
+    C: Remove the control responsible for the Serve governed analytical queries outcome, and then treat it as established
+      that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Performance Efficiency: curated file layout and serverless views reduce scan amplification for analytical
+      queries'' as proof that all five pillars pass. Also, use as justification the claim that the checkpoint ''Serve
+      governed analytical queries'' no longer needs its separate negative check.'
+  answer: B
+  explanations:
+    A: 'The command-level assertion is anchored in the fact that cost Optimization: correlated run, activity, volume,
+      and duration evidence attributes consumption to an owned pipeline. The checkpoint therefore requires that
+      that tradeoff belongs to Validate lineage operations and spend and does not explain this checkpoint''s decision.'
+    B: 'The WAF consequence identifies that performance Efficiency: curated file layout and serverless views reduce
+      scan amplification for analytical queries. The checkpoint therefore requires that it states the authored pillar
+      consequence of the control evaluated at Serve governed analytical queries.'
+    C: the required outcome at Serve governed analytical queries. In the decision record, cost Optimization cannot
+      remove the acceptance condition 'Curated lake data is exposed through governed serverless SQL views, with
+      a dedicated pool considered only for measured isolation or performance needs'.
+    D: The controlling fact is that an always-on dedicated SQL pool without a cost owner is not introduced by default.
+      In the decision record, one positive command cannot establish every pillar, especially while the negative
+      state remains unchecked.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q39
+  difficulty: advanced
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: '''Serve governed analytical queries'' awaits approval from data governance council. A material change now
+    applies: Executives mandate near-real-time operational dashboards for one telemetry stream while partner files
+    remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary without
+    forcing every flow into streaming. Select the correct revision to the decision record.'
+  options:
+    A: Retain Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Serve governed analytical queries
+      without recalculating criteria or eligibility; next, treat as decisive the assertion that the original weighted
+      result is permanent.
+    B: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse for Serve governed analytical queries
+      without rechecking its mandatory constraints. In addition, base approval on the claim that being different
+      from the current design is an architecture criterion.
+    C: Re-score Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL and both alternatives for Serve
+      governed analytical queries; next, supersede the ADR using the changed evidence for LAB13-REQ-04.
+    D: Keep Azure Databricks with Azure Data Factory orchestration and Delta Lake eligible at Serve governed analytical
+      queries by downgrading LAB13-REQ-04; before approval, use the premise that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: The relevant observation is that azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL. In the
+      decision record, the original ADR remains historical evidence, but its score cannot answer a changed mandatory
+      condition.
+    B: The checkpoint specifically records that microsoft Fabric Data Factory with OneLake and Fabric Warehouse.
+      In the decision record, being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Serve governed analytical queries.
+    C: The authored acceptance boundary states that azure Data Factory with ADLS Gen2 and Azure Synapse serverless
+      SQL at Serve governed analytical queries. In the decision record, the material change 'Executives mandate
+      near-real-time operational dashboards for one telemetry stream while partner files remain hourly and analysts
+      prefer a unified Microsoft Fabric experience; revise the platform boundary without forcing every flow into
+      streaming.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    D: The scenario makes clear that lAB13-REQ-04. In the decision record, an architect cannot silently downgrade
+      a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q40
+  difficulty: advanced
+  objectiveId: DATA-INT-02
+  checkpointId: LAB13-CP04
+  stem: '''Serve governed analytical queries'' is reopened at the request of data engineering. After a partial run,
+    cleanup must follow this dependency: Remove run-owned SQL artifacts before workspace deletion; retain no source
+    data in evidence. Which response provides the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Use managed identity for linked services before reconciling the current dependency;
+      as another gate, accept without proof that removing a parent needed to identify Serve governed analytical
+      queries is harmless.
+    B: Delete candidates by display name before comparing the Serve governed analytical queries ownership tags.
+      Then, rely on the claim that the dependency rule 'Remove run-owned SQL artifacts before workspace deletion;
+      retain no source data in evidence' is optional.
+    C: Destroy recoverable copies before retaining the Serve governed analytical queries negative assertion 'An
+      always-on dedicated SQL pool without a cost owner is not introduced by default'; afterward, rely on the belief
+      that remaining command logs are sufficient recovery evidence.
+    D: 'Verify exact run-state IDs and ownership tags for Serve governed analytical queries; for this decision,
+      follow this dependency rule without purge: Remove run-owned SQL artifacts before workspace deletion; retain
+      no source data in evidence.'
+  answer: D
+  explanations:
+    A: The applicable design condition is that delete dependent datasets and pipelines before a run-owned linked
+      service; never export secret properties. In the decision record, a cleanup rule for Use managed identity for
+      linked services cannot override the dependency declared for Serve governed analytical queries.
+    B: 'The review is governed by this fact: workspace label, serving mode, curated-zone path, semantic owner, authorization
+      groups, and query-cost controls. In the decision record, names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.'
+    C: The retained result must be reconciled with the fact that an always-on dedicated SQL pool without a cost
+      owner is not introduced by default. In the decision record, irreversible purge is outside the lab contract
+      and destroys evidence needed for residual-state validation.
+    D: The architecture evidence must show that remove run-owned SQL artifacts before workspace deletion; retain
+      no source data in evidence. In the decision record, exact identity, complete ownership tags, and the authored
+      dependency order constrain cleanup and preserve recovery.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q41
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'A design review of ''Validate lineage operations and spend'' includes data engineering. Approval requires
+    a positive result plus this independent negative assertion: Stalled runs, sensitive input or output payloads,
+    and unowned spend are not treated as successful evidence. Which option best establishes the acceptance rule
+    that makes LAB13-REQ-05 testable?'
+  options:
+    A: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse before checking Validate lineage operations
+      and spend. Separately, use as justification the claim that a successful deployment will later prove the architecture
+      constraint.
+    B: Require the documented positive state for Validate lineage operations and spend; afterward, verify that stalled
+      runs, sensitive input or output payloads, and unowned spend are not treated as successful evidence.
+    C: Use the passing result from Select integration patterns and runtimes to approve Validate lineage operations
+      and spend; for this decision, accept without proof that one control establishes an unrelated acceptance boundary.
+    D: Choose Azure Databricks with Azure Data Factory orchestration and Delta Lake and skip the Validate lineage
+      operations and spend negative assertion. Before sign-off, rely on the claim that the candidate has the lowest
+      implementation effort.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that stalled runs, sensitive input or output payloads, and unowned spend
+      are not treated as successful evidence. In the decision record, a deployment result cannot prove LAB13-REQ-05,
+      and Microsoft Fabric Data Factory with OneLake and Fabric Warehouse still has to meet the mandatory boundary.
+    B: The decision tension comes from the fact that a synthetic run links source slice, pipeline and activity IDs,
+      curated output, status, duration, owner, and estimated service cost. In the decision record, the positive
+      state and an independent negative assertion jointly make LAB13-REQ-05 testable.
+    C: The traceable checkpoint outcome is that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. In the decision record, that outcome belongs to Select integration
+      patterns and runtimes and leaves Validate lineage operations and spend unverified.
+    D: The failure model establishes that deliver traceable analytics datasets from cloud and private sources without
+      creating unmanaged credentials or always-on analytics cost. In the decision record, implementation effort
+      cannot justify skipping the negative assertion or displace LAB13-REQ-05.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q42
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: The team asks analytics consumers to assess 'Validate lineage operations and spend'. The selected architecture
+    is Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL; object existence alone is not success.
+    Which answer identifies the intended successful finding?
+  options:
+    A: Record a synthetic run links source slice, pipeline and activity IDs, curated output, status, duration, owner,
+      and estimated service cost, and then classify it as success for LAB13-REQ-05.
+    B: Use only the negative assertion 'Stalled runs, sensitive input or output payloads, and unowned spend are
+      not treated as successful evidence' as the success result; then use the premise that absence proves every
+      required positive property.
+    C: Use the successful finding from Use managed identity for linked services as the result for Validate lineage
+      operations and spend. Independently, consider it sufficient that a property from the current checkpoint does
+      not need to be inspected.
+    D: Record the failure condition 'Monitoring records show success while downstream reconciliation detects missing
+      or duplicate rows' as a successful state. Next, take it as conclusive that the command returned an object.
+  answer: A
+  explanations:
+    A: The recovery guidance assumes that a synthetic run links source slice, pipeline and activity IDs, curated
+      output, status, duration, owner, and estimated service cost. In the decision record, this is the authored
+      target state for Validate lineage operations and spend and directly supports LAB13-REQ-05.
+    B: The WAF consequence identifies that stalled runs, sensitive input or output payloads, and unowned spend are
+      not treated as successful evidence. In the decision record, this is the independent prohibited-state assertion,
+      not a successful finding.
+    C: The command-level assertion is anchored in the fact that supported sources and sinks use the data-factory
+      managed identity or a Key Vault reference with least privilege. In the decision record, evidence for Use managed
+      identity for linked services cannot substitute for the properties required at Validate lineage operations
+      and spend.
+    D: monitoring records show success while downstream reconciliation detects missing or duplicate rows. The independent
+      assertion shows why resource existence or command output does not convert the documented failure condition
+      into success.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q43
+  difficulty: foundational
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'A recommendation on ''Validate lineage operations and spend'' is requested by operational system owners.
+    Evidence must address this risk without retaining credentials: Monitoring records show success while downstream
+    reconciliation detects missing or duplicate rows. What recommendation gives the reviewers sufficient, properly
+    scoped evidence?'
+  options:
+    A: Substitute the evidence from Orchestrate idempotent ingestion for Validate lineage operations and spend;
+      as a separate check, rely on the belief that a related checkpoint proves the current expected state.
+    B: Store unredacted Validate lineage operations and spend output with operator, tenant, token, and request context.
+      Afterward, proceed on the belief that reproduction requires every captured field.
+    C: Retain sanitized run and activity IDs, statuses, durations, row counts, lineage references, and cost estimate;
+      as a separate check, exclude credentials and unrelated response fields.
+    D: Record only the Validate lineage operations and spend positive inspection's exit status; next, treat as decisive
+      the assertion that projected properties and assertion results can be reconstructed later.
+  answer: C
+  explanations:
+    A: The authored acceptance boundary states that definition hash, activity graph, retry policy, watermark owner,
+      quarantine path, and synthetic run result. The independent assertion shows why that evidence supports Orchestrate
+      idempotent ingestion, so it cannot demonstrate A synthetic run links source slice, pipeline and activity IDs,
+      curated output, status, duration, owner, and estimated service cost.
+    B: The relevant observation is that unredacted implementation output. The independent assertion shows why identity,
+      tenant, or token material exceeds the non-secret evidence contract.
+    C: The controlling fact is that sanitized run and activity IDs, statuses, durations, row counts, lineage references,
+      and cost estimate. The independent assertion shows why it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+    D: The checkpoint specifically records that the positive inspection's exit status. The independent assertion
+      shows why an exit code alone does not show whether a synthetic run links source slice, pipeline and activity
+      IDs, curated output, status, duration, owner, and estimated service cost.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q44
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: '''Validate lineage operations and spend'' is assigned to data governance council. The target is A synthetic
+    run links source slice, pipeline and activity IDs, curated output, status, duration, owner, and estimated service
+    cost, but the latest evidence does not show it. Which action produces the most likely cause?'
+  options:
+    A: Treat 'File layout, schema drift, or small-file volume makes serverless queries unstable or expensive' as
+      grounds to reject Validate lineage operations and spend. Before sign-off, treat it as established that serve
+      governed analytical queries's failure model applies unchanged here.
+    B: Investigate monitoring records show success while downstream reconciliation detects missing or duplicate
+      rows; before approval, isolate that cause before changing Azure Data Factory with ADLS Gen2 and Azure Synapse
+      serverless SQL.
+    C: Ignore the negative assertion 'Stalled runs, sensitive input or output payloads, and unowned spend are not
+      treated as successful evidence'; as an independent condition, use as justification the claim that a later
+      material change will make it unnecessary.
+    D: Investigate Select integration patterns and runtimes instead of diagnosing Validate lineage operations and
+      spend; as another gate, accept without proof that a passing result at Select integration patterns and runtimes
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The architecture evidence must show that file layout, schema drift, or small-file volume makes serverless
+      queries unstable or expensive. The independent assertion shows why that condition belongs to Serve governed
+      analytical queries and does not by itself invalidate Azure Data Factory with ADLS Gen2 and Azure Synapse serverless
+      SQL.
+    B: The scenario makes clear that monitoring records show success while downstream reconciliation detects missing
+      or duplicate rows. The independent assertion shows why it is the checkpoint's causal failure model and should
+      be isolated before retrying Validate lineage operations and spend.
+    C: The applicable design condition is that stalled runs, sensitive input or output payloads, and unowned spend
+      are not treated as successful evidence. The independent assertion shows why the negative assertion must be
+      evaluated now, independent of a later business change.
+    D: 'The review is governed by this fact: batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. The independent assertion shows why a passing result at Select
+      integration patterns and runtimes gives no causal evidence for the failure at Validate lineage operations
+      and spend.'
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q45
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'An assurance review of ''Validate lineage operations and spend'' includes data engineering. The run encountered
+    this modeled failure: Monitoring records show success while downstream reconciliation detects missing or duplicate
+    rows. What best demonstrates the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Cancel run-owned triggers and remove synthetic outputs in dependency order;
+      preserve sanitized validation only. Next, base approval on the claim that the failed operation and its returned
+      identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'Monitoring records show success while downstream reconciliation
+      detects missing or duplicate rows', and then use the premise that the first state record and returned identifiers
+      can be discarded.
+    C: Fail the validation, quarantine the slice, and reconcile business counts before republishing; as an independent
+      condition, preserve the current run identity and evidence.
+    D: Change Select integration patterns and runtimes instead. Also, consider it sufficient that success at Select
+      integration patterns and runtimes will repair the failed state at Validate lineage operations and spend.
+  answer: C
+  explanations:
+    A: The decision tension comes from the fact that cancel run-owned triggers and remove synthetic outputs in dependency
+      order; preserve sanitized validation only. The independent assertion shows why cleanup before reconciliation
+      can erase evidence or strand a partially created dependency.
+    B: The safe operating boundary says that monitoring records show success while downstream reconciliation detects
+      missing or duplicate rows. The independent assertion shows why discarding the original run identity breaks
+      ownership reconciliation and can duplicate a partial operation.
+    C: The retained result must be reconciled with the fact that fail the validation, quarantine the slice, and
+      reconcile business counts before republishing. The independent assertion shows why it corrects the narrow
+      cause while retaining the same recovery trail and decision scope.
+    D: The traceable checkpoint outcome is that batch, CDC, event, and private-source needs map to appropriate Azure
+      or self-hosted integration runtime boundaries. The independent assertion shows why altering an already separate
+      checkpoint does not repair the modeled failure at Validate lineage operations and spend.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q46
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: Approval of 'Validate lineage operations and spend' is questioned by analytics consumers. Without making
+    a new change, the team must inspect the risk 'Monitoring records show success while downstream reconciliation
+    detects missing or duplicate rows' using the Azure PowerShell lane. Which option is the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Validate lineage operations and spend implementation command and infer the expected state; next,
+      rely on the claim that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Validate lineage operations and spend: Stalled runs, sensitive input
+      or output payloads, and unowned spend are not treated as successful evidence. In addition, rely on the belief
+      that an empty negative result reports every required positive property.'
+    C: Run the positive inspection for Use managed identity for linked services and apply it to Validate lineage
+      operations and spend; before approval, proceed on the belief that any command from the same lane proves the
+      current checkpoint.
+    D: 'Inspect the documented properties for Validate lineage operations and spend; then retain this evidence:
+      sanitized run and activity IDs, statuses, durations, row counts, lineage references, and cost estimate.'
+  answer: D
+  explanations:
+    A: The recovery guidance assumes that the implementation command. The independent assertion shows why it can
+      mutate state and shell success does not independently assert the expected properties.
+    B: The WAF consequence identifies that the negative inspection. The independent assertion shows why absence
+      of the prohibited condition is necessary but does not establish the positive architecture state.
+    C: The command-level assertion is anchored in the fact that the positive inspection for Use managed identity
+      for linked services. The independent assertion shows why it is lane-correct but proves Use managed identity
+      for linked services, not Validate lineage operations and spend.
+    D: The failure model establishes that a synthetic run links source slice, pipeline and activity IDs, curated
+      output, status, duration, owner, and estimated service cost. The independent assertion shows why the read-only
+      inspection directly tests the properties required at Validate lineage operations and spend.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q47
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'The implementation review has reached ''Validate lineage operations and spend''. A passing positive check
+    does not by itself prove this negative assertion: Stalled runs, sensitive input or output payloads, and unowned
+    spend are not treated as successful evidence. What should the architect select as the assertion pair that proves
+    both conditions independently?'
+  options:
+    A: Verify the positive properties for Validate lineage operations and spend. Also, independently verify that
+      stalled runs, sensitive input or output payloads, and unowned spend are not treated as successful evidence.
+    B: Verify only the positive result for Validate lineage operations and spend and report full compliance; without
+      relying on inference, take it as conclusive that every prohibited parallel state must therefore be absent.
+    C: Prove only that stalled runs, sensitive input or output payloads, and unowned spend are not treated as successful
+      evidence and report the intended configuration as present. Then, treat it as established that absence is equivalent
+      to positive-state evidence.
+    D: Use Orchestrate idempotent ingestion's negative assertion for Validate lineage operations and spend; afterward,
+      use as justification the claim that negative assertions are interchangeable between checkpoints.
+  answer: A
+  explanations:
+    A: a synthetic run links source slice, pipeline and activity IDs, curated output, status, duration, owner, and
+      estimated service cost; Stalled runs, sensitive input or output payloads, and unowned spend are not treated
+      as successful evidence. Operationally, two independent observations prevent a passing positive check from
+      concealing an unsafe parallel state.
+    B: The controlling fact is that a synthetic run links source slice, pipeline and activity IDs, curated output,
+      status, duration, owner, and estimated service cost. Operationally, the positive result alone does not test
+      the explicit anti-condition 'Stalled runs, sensitive input or output payloads, and unowned spend are not treated
+      as successful evidence'.
+    C: The authored acceptance boundary states that stalled runs, sensitive input or output payloads, and unowned
+      spend are not treated as successful evidence. Operationally, absence evidence cannot demonstrate the required
+      positive state 'A synthetic run links source slice, pipeline and activity IDs, curated output, status, duration,
+      owner, and estimated service cost'.
+    D: The relevant observation is that empty pipelines and blind append operations without duplicate handling do
+      not satisfy ingestion. Operationally, the second assertion is valid for Orchestrate idempotent ingestion but
+      leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q48
+  difficulty: applied
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'The approach to ''Validate lineage operations and spend'' is challenged by data governance council. The
+    board wants the Well-Architected consequence of mitigating this risk: Monitoring records show success while
+    downstream reconciliation detects missing or duplicate rows. Select the consequence attributable to this checkpoint.'
+  options:
+    A: Use the Serve governed analytical queries consequence as the result for Validate lineage operations and spend.
+      Also, treat as decisive the assertion that a pillar statement remains valid when moved away from Serve governed
+      analytical queries.
+    B: Remove the control responsible for the Validate lineage operations and spend outcome; in a separate step,
+      base approval on the claim that a elevated cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Cost Optimization: correlated run, activity, volume, and duration evidence attributes consumption
+      to an owned pipeline'' as proof that all five pillars pass. As another control, use the premise that the checkpoint
+      ''Validate lineage operations and spend'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Cost Optimization: correlated run, activity, volume, and duration evidence attributes
+      consumption to an owned pipeline. Afterward, tie it to LAB13-REQ-05.'
+  answer: D
+  explanations:
+    A: 'The scenario makes clear that performance Efficiency: curated file layout and serverless views reduce scan
+      amplification for analytical queries. Operationally, that tradeoff belongs to Serve governed analytical queries
+      and does not explain this checkpoint''s decision.'
+    B: The architecture evidence must show that the required outcome at Validate lineage operations and spend. Operationally,
+      cost Optimization cannot remove the acceptance condition 'A synthetic run links source slice, pipeline and
+      activity IDs, curated output, status, duration, owner, and estimated service cost'.
+    C: The applicable design condition is that stalled runs, sensitive input or output payloads, and unowned spend
+      are not treated as successful evidence. Operationally, one positive command cannot establish every pillar,
+      especially while the negative state remains unchecked.
+    D: 'The checkpoint specifically records that cost Optimization: correlated run, activity, volume, and duration
+      evidence attributes consumption to an owned pipeline. Operationally, it states the authored pillar consequence
+      of the control evaluated at Validate lineage operations and spend.'
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q49
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'A decision test for ''Validate lineage operations and spend'' includes data engineering. A material change
+    now applies: Executives mandate near-real-time operational dashboards for one telemetry stream while partner
+    files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary
+    without forcing every flow into streaming. Which response provides the correct revision to the decision record?'
+  options:
+    A: Retain Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL at Validate lineage operations
+      and spend without recalculating criteria or eligibility; before approval, accept without proof that the original
+      weighted result is permanent.
+    B: Select Microsoft Fabric Data Factory with OneLake and Fabric Warehouse for Validate lineage operations and
+      spend without rechecking its mandatory constraints. Separately, rely on the claim that being different from
+      the current design is an architecture criterion.
+    C: Re-score Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL and both alternatives for Validate
+      lineage operations and spend. Separately, supersede the ADR using the changed evidence for LAB13-REQ-05.
+    D: Keep Azure Databricks with Azure Data Factory orchestration and Delta Lake eligible at Validate lineage operations
+      and spend by downgrading LAB13-REQ-05; for this decision, rely on the belief that stakeholder approval is
+      unnecessary when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: The retained result must be reconciled with the fact that azure Data Factory with ADLS Gen2 and Azure Synapse
+      serverless SQL. Operationally, the original ADR remains historical evidence, but its score cannot answer a
+      changed mandatory condition.
+    B: The decision tension comes from the fact that microsoft Fabric Data Factory with OneLake and Fabric Warehouse.
+      Operationally, being different is not a criterion, and the candidate still must avoid the prohibited state
+      at Validate lineage operations and spend.
+    C: 'The review is governed by this fact: azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+      at Validate lineage operations and spend. Operationally, the material change ''Executives mandate near-real-time
+      operational dashboards for one telemetry stream while partner files remain hourly and analysts prefer a unified
+      Microsoft Fabric experience; revise the platform boundary without forcing every flow into streaming.'' requires
+      fresh eligibility, weighted analysis, and a superseding decision.'
+    D: The safe operating boundary says that lAB13-REQ-05. Operationally, an architect cannot silently downgrade
+      a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+- id: LAB13-Q50
+  difficulty: advanced
+  objectiveId: DATA-INT-01
+  checkpointId: LAB13-CP05
+  stem: 'The architecture board reconsiders ''Validate lineage operations and spend'' with analytics consumers.
+    After a partial run, cleanup must follow this dependency: Cancel run-owned triggers and remove synthetic outputs
+    in dependency order; preserve sanitized validation only. Which choice gives the team the dependency-safe cleanup
+    plan?'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Validate lineage operations and spend; separately, follow
+      this dependency rule without purge: Cancel run-owned triggers and remove synthetic outputs in dependency order;
+      preserve sanitized validation only.'
+    B: Apply the cleanup rule for Use managed identity for linked services before reconciling the current dependency;
+      afterward, consider it sufficient that removing a parent needed to identify Validate lineage operations and
+      spend is harmless.
+    C: Delete candidates by display name before comparing the Validate lineage operations and spend ownership tags;
+      then take it as conclusive that the dependency rule 'Cancel run-owned triggers and remove synthetic outputs
+      in dependency order; preserve sanitized validation only' is optional.
+    D: Destroy recoverable copies before retaining the Validate lineage operations and spend negative assertion
+      'Stalled runs, sensitive input or output payloads, and unowned spend are not treated as successful evidence'.
+      Independently, treat it as established that remaining command logs are sufficient recovery evidence.
+  answer: A
+  explanations:
+    A: The traceable checkpoint outcome is that cancel run-owned triggers and remove synthetic outputs in dependency
+      order; preserve sanitized validation only. Operationally, exact identity, complete ownership tags, and the
+      authored dependency order constrain cleanup and preserve recovery.
+    B: The failure model establishes that delete dependent datasets and pipelines before a run-owned linked service;
+      never export secret properties. Operationally, a cleanup rule for Use managed identity for linked services
+      cannot override the dependency declared for Validate lineage operations and spend.
+    C: The recovery guidance assumes that sanitized run and activity IDs, statuses, durations, row counts, lineage
+      references, and cost estimate. Operationally, names are not ownership proof; deletion requires the exact recorded
+      identifier and every required tag.
+    D: The WAF consequence identifies that stalled runs, sensitive input or output payloads, and unowned spend are
+      not treated as successful evidence. Operationally, irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+  verifiedOn: '2026-09-02'
+# END GENERATED AZ305 V1

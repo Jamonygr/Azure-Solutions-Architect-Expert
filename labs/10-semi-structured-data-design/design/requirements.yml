@@ -1,0 +1,80 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-10
+businessOutcome: Serve a variable global catalog workload with predictable latency and controlled throughput cost.
+stakeholders:
+- Digital commerce engineering
+- Product data owners
+- Security architecture
+- FinOps
+functionalRequirements:
+- id: LAB10-REQ-01
+  statement: The NoSQL API and Session consistency support session read-your-writes with documented cross-session
+    behavior.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-REQ-02
+  statement: The tenant-aware key distributes writes, supports dominant reads, and has a mitigation for exceptionally
+    large tenants.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-REQ-03
+  statement: Indexed paths serve known filters and ordering while large descriptive payloads are explicitly excluded.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-01
+nonfunctionalRequirements:
+- id: LAB10-REQ-04
+  statement: Autoscale absorbs seasonal bursts up to an approved maximum RU/s with alerts for sustained saturation.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-REQ-05
+  statement: Application access resolves through an approved private endpoint and the intended private DNS zone.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-01
+constraints:
+- The global catalog needs predictable latency under variable semi-structured demand.
+- One enterprise tenant reaches forty percent of traffic and requires both cost attribution and data isolation.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Catalog requests include stable tenant and item hierarchy fields suitable for a partition strategy.
+- The application can route an exceptional tenant to a dedicated container without changing public identifiers.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Semi-structured catalog documents vary by product class and carry tenant, category, item, and lifecycle
+    attributes.
+  scale: One tenant generates forty percent of traffic; item count and request-unit measurements remain workload-supplied
+    sizing inputs.
+  latency: Customer catalog reads need predictable global response, while cross-partition administrative queries
+    may tolerate higher latency.
+  availability: Regional reads and writes require an explicit consistency and failover choice rather than assuming
+    distribution alone guarantees continuity.
+  rto: Regional service recovery follows the selected replication topology; the scenario does not specify a numerical
+    RTO.
+  rpo: Consistency and multi-region write choices determine accepted-write loss behavior and require business approval.
+  budget: Shared autoscale capacity is economical until the dominant tenant's hot partitions and chargeback justify
+    a dedicated boundary.
+acceptanceCriteria:
+- LAB10-REQ-01 passes its independent positive and negative assertions.
+- LAB10-REQ-02 passes its independent positive and negative assertions.
+- LAB10-REQ-03 passes its independent positive and negative assertions.
+- LAB10-REQ-04 passes its independent positive and negative assertions.
+- LAB10-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB10-CR-01
+  trigger: One enterprise tenant grows to forty percent of all traffic and requires per-tenant cost attribution
+    and data isolation; revise partition and container strategy without breaking other tenants.
+  materialChange: One enterprise tenant grows to forty percent of all traffic and requires per-tenant cost attribution
+    and data isolation; revise partition and container strategy without breaking other tenants.
+  mandatoryRequirementId: LAB10-REQ-02
+  expectedRevision: Move the dominant tenant behind a dedicated container boundary while keeping hierarchical partitioning
+    for the shared catalog.
+# END GENERATED AZ305 V1

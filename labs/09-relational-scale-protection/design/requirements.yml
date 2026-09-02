@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-09
+businessOutcome: Sustain ledger growth and read demand while meeting data-protection controls without overpromising
+  disaster recovery.
+stakeholders:
+- SaaS product engineering
+- Database reliability engineering
+- Audit and risk
+- FinOps
+functionalRequirements:
+- id: LAB09-REQ-01
+  statement: The database uses Hyperscale with an approved initial vCore count and documented vertical and horizontal
+    scale triggers.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-03
+- id: LAB09-REQ-02
+  statement: Read-intent routing and replica count isolate reporting demand within an approved capacity envelope.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-04
+- id: LAB09-REQ-03
+  statement: TDE is enabled and the Microsoft-managed or customer-managed key decision names custody, rotation,
+    and availability dependencies.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-03
+nonfunctionalRequirements:
+- id: LAB09-REQ-04
+  statement: Database audit events route to the approved protected storage target for the mandated ninety days.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-04
+- id: LAB09-REQ-05
+  statement: Short- and long-term retention satisfy legal and operational protection requirements with an identified
+    cost owner.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-03
+constraints:
+- Ledger growth and read demand must scale without weakening encryption, auditing, or recovery evidence.
+- One low-write tenant has unpredictable read bursts and requires strict cost attribution.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Tenant identity is available in query and telemetry dimensions without exposing ledger content.
+- Read-only workloads can be routed separately from transactional writes and tolerate documented replica lag.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: An append-heavy relational ledger requires encrypted storage, immutable audit evidence, backups, and tenant-attributed
+    query telemetry.
+  scale: Storage and read concurrency grow independently; one tenant creates bursty reads while contributing little
+    write volume.
+  latency: Transaction writes need predictable primary latency and reporting reads have a separately measured replica-lag
+    tolerance.
+  availability: Read replicas must not be presented as disaster recovery unless failover, data-loss, and connection
+    behavior are validated.
+  rto: Regional recovery remains an owner-approved continuity requirement; the exercise does not assign an unsupported
+    numerical RTO.
+  rpo: Ledger protection requires an explicit recovery window and backup validation even when read replicas are
+    healthy.
+  budget: Dedicated burst capacity is charged to the tenant only when telemetry can separate its replica and query
+    consumption.
+acceptanceCriteria:
+- LAB09-REQ-01 passes its independent positive and negative assertions.
+- LAB09-REQ-02 passes its independent positive and negative assertions.
+- LAB09-REQ-03 passes its independent positive and negative assertions.
+- LAB09-REQ-04 passes its independent positive and negative assertions.
+- LAB09-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB09-CR-01
+  trigger: A new tenant produces unpredictable read bursts but contributes little write load and requires strict
+    cost attribution; revise replica and tenancy decisions without weakening encryption or audit controls.
+  materialChange: A new tenant produces unpredictable read bursts but contributes little write load and requires
+    strict cost attribution; revise replica and tenancy decisions without weakening encryption or audit controls.
+  mandatoryRequirementId: LAB09-REQ-02
+  expectedRevision: Isolate the bursty tenant's read workload on named capacity and make its consumption visible
+    without changing ledger protection.
+# END GENERATED AZ305 V1

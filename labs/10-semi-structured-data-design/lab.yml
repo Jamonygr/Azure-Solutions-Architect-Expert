@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-10
+number: 10
+slug: 10-semi-structured-data-design
+title: Semi-Structured Data Platform Selection
+domain: data
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Semi-structured data architect
+outcome: A partition-aware Azure Cosmos DB design whose consistency, indexing, throughput, and security decisions
+  match access patterns.
+duration: 160 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Cosmos DB Account Reader and data-plane read permissions support inspection; account, container, throughput,
+  role, or partition changes require separate authorization.
+licensing: Request-unit throughput, autoscale ceilings, storage, multi-region distribution, backups, and analytical
+  features are independently billed.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/cosmos-db/partitioning-overview
+objectives:
+  primary:
+  - DATA-NONREL-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ContainerName
+- CosmosAccountName
+- CosmosAccountResourceId
+- CosmosDatabaseName
+- PrivateConnectionName
+- PrivateEndpointName
+- SubnetId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB10-CP01
+  title: Choose API and consistency deliberately
+  requirementIds:
+  - LAB10-REQ-01
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-CP02
+  title: Design a high-cardinality partition key
+  requirementIds:
+  - LAB10-REQ-02
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-CP03
+  title: Minimize indexing write amplification
+  requirementIds:
+  - LAB10-REQ-03
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-CP04
+  title: Bound autoscale throughput
+  requirementIds:
+  - LAB10-REQ-04
+  objectiveIds:
+  - DATA-NONREL-01
+- id: LAB10-CP05
+  title: Restrict the account network boundary
+  requirementIds:
+  - LAB10-REQ-05
+  objectiveIds:
+  - DATA-NONREL-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

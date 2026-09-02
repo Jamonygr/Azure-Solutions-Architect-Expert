@@ -1,0 +1,19 @@
+{
+  "_generatedBegin": "BEGIN GENERATED AZ305 V1",
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-09",
+  "runId": "synthetic-090001",
+  "track": "azure-powershell",
+  "implementationMode": "reference-deployable",
+  "status": "deployed",
+  "createdAt": "2026-09-02T00:00:00Z",
+  "execute": true,
+  "parameters": {
+    "location": "westeurope",
+    "secondaryLocation": "northeurope",
+    "resourceGroup": "rg-az305-synthetic-090001"
+  },
+  "managedObjects": [],
+  "originalSettings": []
+  ,"_generatedEnd": "END GENERATED AZ305 V1"
+}

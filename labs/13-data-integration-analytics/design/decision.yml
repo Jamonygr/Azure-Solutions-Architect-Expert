@@ -1,0 +1,147 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-13
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 4
+  weightedTotal: 86.0
+  rationale: Data Factory handles governed batch and private connectivity while ADLS and serverless SQL minimize
+    idle analytics capacity.
+- id: CAND-B
+  name: Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 4
+    C4: 5
+    C5: 2
+  weightedTotal: 79.0
+  rationale: Fabric provides a unified analytics and dashboard experience, though continuously sized capacity and
+    private-source fit require validation.
+- id: CAND-C
+  name: Azure Databricks with Azure Data Factory orchestration and Delta Lake
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 4
+    C4: 3
+    C5: 2
+  weightedTotal: 73.0
+  rationale: Databricks offers powerful stream and lake processing but adds a second engineering and cluster operating
+    model.
+- id: CAND-D
+  name: Self-hosted scripts with embedded source passwords and no checkpoints
+  eligible: false
+  disqualifiers:
+  - LAB13-REQ-02 requires managed identity or protected connections plus replayable lineage evidence.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 2
+    C5: 4
+  weightedTotal: 29.0
+  rationale: Handwritten transfers may appear inexpensive but expose credentials and cannot prove restart or reconciliation
+    behavior.
+selectedCandidate: Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+rejectedAlternatives:
+- candidate: Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+  reason: The initial periodic workload does not yet justify moving every flow onto a Fabric capacity commitment.
+- candidate: Azure Databricks with Azure Data Factory orchestration and Delta Lake
+  reason: Its flexibility exceeds the transformation need and carries more platform ownership for this team.
+- candidate: Self-hosted scripts with embedded source passwords and no checkpoints
+  reason: It is ineligible because secretless access and recoverable lineage are mandatory.
+risks:
+- risk: Forcing hourly partner files through a streaming design can increase cost and duplicate late-arrival handling.
+  mitigation: Keep a batch contract for files and integrate its curated output into the shared semantic layer.
+- risk: A Fabric preference can create capacity lock-in before private connectivity and throughput are proven.
+  mitigation: Benchmark the telemetry slice, record capacity utilization, and retain a reversible batch boundary
+    for remaining flows.
+waf:
+  reliability: Watermarks, checkpoints, replay rules, and reconciliation distinguish recoverable batch and streaming
+    failures.
+  security: Managed identities and hardened private runtimes keep credentials out of pipeline definitions.
+  costOptimization: Batch serverless processing and targeted Fabric capacity align spend with each flow's freshness
+    requirement.
+  operationalExcellence: Lineage, schema, watermark, and reconciliation evidence give operators a common failure
+    model.
+  performanceEfficiency: Near-real-time resources serve only the telemetry stream while hourly files retain efficient
+    batch movement.
+safeAnalogue: Run local batch and event fixtures through watermark, checkpoint, and reconciliation logic without
+  creating a pipeline or Fabric capacity.
+traceability:
+- objectiveId: DATA-INT-01
+  requirementId: LAB13-REQ-01
+  checkpointId: LAB13-CP01
+- objectiveId: DATA-INT-02
+  requirementId: LAB13-REQ-02
+  checkpointId: LAB13-CP02
+- objectiveId: DATA-INT-01
+  requirementId: LAB13-REQ-03
+  checkpointId: LAB13-CP03
+- objectiveId: DATA-INT-02
+  requirementId: LAB13-REQ-04
+  checkpointId: LAB13-CP04
+- objectiveId: DATA-INT-01
+  requirementId: LAB13-REQ-05
+  checkpointId: LAB13-CP05
+adr:
+  id: ADR-LAB13-001
+  status: accepted
+  context: Contoso Energy receives hourly files from field partners, change data from operational databases, and
+    telemetry from regional systems. Analysts need governed SQL exploration and curated datasets, while some sources
+    remain on private networks and business owners require lineage from ingestion to published data. The architecture
+    board is comparing Microsoft Fabric, Azure Data Factory with Azure Synapse serverless SQL, and Azure Databricks
+    with orchestration. As the integration and analytics architect, select the platform combination, integration
+    runtime, identity, pipeline, transformation, serving, monitoring, and cost boundaries. The lab uses a safe analogue
+    and must not claim that offline pipeline definitions prove source connectivity, data correctness, or production
+    performance.
+  decision: 'Select Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL: Data Factory handles governed
+    batch and private connectivity while ADLS and serverless SQL minimize idle analytics capacity.'
+  consequences:
+  - The analytics platform accepts a hybrid ingestion boundary instead of forcing one cadence onto every source.
+  - Fabric capacity must be justified and monitored specifically for the executive telemetry experience.
+revisedDecision:
+  changeRequestId: LAB13-CR-01
+  selectedCandidate: Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+  reason: LAB13-REQ-01 requires integration patterns to follow cadence and source boundaries, so Fabric serves the
+    near-real-time telemetry experience while partner files remain hourly batch.
+  mandatoryRequirementId: LAB13-REQ-01
+  waf:
+    reliability: Stream checkpoints and batch watermarks retain independent replay behavior.
+    security: Private-source credentials remain protected even as curated output enters OneLake.
+    costOptimization: Capacity is sized for the dashboard stream instead of converting every file flow to continuous
+      processing.
+    operationalExcellence: Shared lineage joins both cadences without erasing their distinct failure states.
+    performanceEfficiency: Telemetry receives low-latency processing and partner files keep throughput-efficient
+      hourly loads.
+# END GENERATED AZ305 V1

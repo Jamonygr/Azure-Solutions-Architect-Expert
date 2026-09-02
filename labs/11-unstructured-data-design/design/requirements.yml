@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-11
+businessOutcome: Consolidate unstructured content for governed analytics while preserving scalable access and clear
+  ownership.
+stakeholders:
+- Data platform engineering
+- Supplier integration team
+- Analytics consumers
+- Information security
+functionalRequirements:
+- id: LAB11-REQ-01
+  statement: Object scale, analytics engines, directory operations, and access patterns justify StorageV2 with hierarchical
+    namespace.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-REQ-02
+  statement: The account has hierarchical namespace, blocked public blob access, current TLS minimum, and run ownership
+    tags.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-REQ-03
+  statement: Filesystems represent durable data-product boundaries and directories have group-owned default and
+    access ACLs.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-02
+nonfunctionalRequirements:
+- id: LAB11-REQ-04
+  statement: Service encryption is enabled and any customer-managed-key choice includes managed identity, vault,
+    rotation, and availability ownership.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-REQ-05
+  statement: The dfs private endpoint is approved, private DNS resolves correctly, and the default network action
+    is deny.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-02
+constraints:
+- Analytics content must remain object-native with hierarchical namespace and governed ownership.
+- Legal collaboration requires native SMB locking and Windows ACL behavior without converting the analytics lake
+  into a file share.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Data producers can classify objects and collaborative documents before ingestion.
+- Private DNS and network paths can reach both storage service endpoints from authorized clients.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Analytics objects and collaborative legal documents have different protocols, namespace semantics, ACLs,
+    and lifecycle owners.
+  scale: Object ingestion grows independently from legal share usage; exact terabytes, file counts, and operation
+    rates remain measured inputs.
+  latency: Analytics favors throughput and parallel scans, while interactive SMB users require responsive metadata
+    and locking operations.
+  availability: Redundancy and recovery are selected separately for lake data and legal shares based on their business
+    impact.
+  rto: Service restoration targets are owner decisions per boundary; a single combined storage RTO would hide differing
+    needs.
+  rpo: Lake ingestion replay and file-share snapshots provide distinct recovery points and must be validated independently.
+  budget: Object storage tiers optimize analytical retention while Azure Files cost is limited to content that needs
+    SMB semantics.
+acceptanceCriteria:
+- LAB11-REQ-01 passes its independent positive and negative assertions.
+- LAB11-REQ-02 passes its independent positive and negative assertions.
+- LAB11-REQ-03 passes its independent positive and negative assertions.
+- LAB11-REQ-04 passes its independent positive and negative assertions.
+- LAB11-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB11-CR-01
+  trigger: The legal department introduces collaborative document shares that require native SMB locking and Windows
+    ACL behavior, but analytics ingestion must remain object-native; revise the service boundaries.
+  materialChange: The legal department introduces collaborative document shares that require native SMB locking
+    and Windows ACL behavior, but analytics ingestion must remain object-native; revise the service boundaries.
+  mandatoryRequirementId: LAB11-REQ-01
+  expectedRevision: Retain ADLS Gen2 for analytics and add an independently governed Azure Files boundary for collaborative
+    legal documents.
+# END GENERATED AZ305 V1

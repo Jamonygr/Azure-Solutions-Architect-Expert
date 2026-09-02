@@ -1,0 +1,84 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-08
+number: 8
+slug: 08-relational-platform-tier-selection
+title: Relational Data Platform and Service-Tier Selection
+domain: data
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Relational data platform architect
+outcome: A justified relational service and tier selection with a secure, elastic reference configuration.
+duration: 155 minutes
+difficulty: advanced
+costClass: moderate
+permissions: SQL resource read access supports discovery; server, database, networking, or migration changes require
+  a separately approved SQL control-plane role and database permissions.
+licensing: Azure SQL Database serverless and Azure SQL Managed Instance use different compute, storage, backup,
+  and license-benefit models.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-stores-getting-started
+objectives:
+  primary:
+  - DATA-REL-01
+  - DATA-REL-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- AdminGroupName
+- AdminGroupObjectId
+- DatabaseName
+- PrivateConnectionName
+- PrivateEndpointName
+- SqlServerName
+- SqlServerResourceId
+- SubnetId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB08-CP01
+  title: Convert workload facts into platform criteria
+  requirementIds:
+  - LAB08-REQ-01
+  objectiveIds:
+  - DATA-REL-01
+- id: LAB08-CP02
+  title: Establish a logical server boundary
+  requirementIds:
+  - LAB08-REQ-02
+  objectiveIds:
+  - DATA-REL-02
+- id: LAB08-CP03
+  title: Configure an elastic serverless database
+  requirementIds:
+  - LAB08-REQ-03
+  objectiveIds:
+  - DATA-REL-01
+- id: LAB08-CP04
+  title: Require private application connectivity
+  requirementIds:
+  - LAB08-REQ-04
+  objectiveIds:
+  - DATA-REL-02
+- id: LAB08-CP05
+  title: Validate the service-tier decision
+  requirementIds:
+  - LAB08-REQ-05
+  objectiveIds:
+  - DATA-REL-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

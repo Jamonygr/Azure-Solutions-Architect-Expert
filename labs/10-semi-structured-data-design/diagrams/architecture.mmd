@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Serve a variable global catalog workload with predictable latency and controlled throughput cost."]
+    R --> C1["Choose API and consistency deliberately"]
+    C1 --> C2["Design a high-cardinality partition key"]
+    C2 --> C3["Minimize indexing write amplification"]
+    C3 --> C4["Bound autoscale throughput"]
+    C4 --> C5["Restrict the account network boundary"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

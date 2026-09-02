@@ -1,0 +1,81 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-12
+number: 12
+slug: 12-storage-economics-durability
+title: Storage Economics, Protection, and Durability
+domain: data
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Storage economics and durability architect
+outcome: A cost-aware StorageV2 design with justified redundancy, lifecycle automation, versioning, retention, and
+  immutability.
+duration: 160 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Storage account, blob, lifecycle, and immutability read access supports assessment; changing accounts,
+  policies, locks, or redundancy requires explicit authorization.
+licensing: Redundancy, access tiers, early-deletion minimums, rehydration, versioning, immutability, and operations
+  each affect StorageV2 billing.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy
+objectives:
+  primary:
+  - DATA-NONREL-03
+  - DATA-NONREL-04
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ContainerName
+- EvidenceContainerName
+- StorageAccountName
+- StorageAccountResourceId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB12-CP01
+  title: Classify access and cost drivers
+  requirementIds:
+  - LAB12-REQ-01
+  objectiveIds:
+  - DATA-NONREL-03
+- id: LAB12-CP02
+  title: Select regional durability
+  requirementIds:
+  - LAB12-REQ-02
+  objectiveIds:
+  - DATA-NONREL-04
+- id: LAB12-CP03
+  title: Automate lifecycle transitions
+  requirementIds:
+  - LAB12-REQ-03
+  objectiveIds:
+  - DATA-NONREL-03
+- id: LAB12-CP04
+  title: Layer versioning and delete protection
+  requirementIds:
+  - LAB12-REQ-04
+  objectiveIds:
+  - DATA-NONREL-04
+- id: LAB12-CP05
+  title: Validate immutable evidence boundaries
+  requirementIds:
+  - LAB12-REQ-05
+  objectiveIds:
+  - DATA-NONREL-03
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

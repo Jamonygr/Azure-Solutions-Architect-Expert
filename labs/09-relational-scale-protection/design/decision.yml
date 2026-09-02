@@ -1,0 +1,145 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-09
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure SQL Database Hyperscale with named read-scale replicas
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 4
+    C4: 4
+    C5: 3
+  weightedTotal: 89.0
+  rationale: Hyperscale decouples storage growth from named read replicas and supports intentional routing of tenant
+    reporting load.
+- id: CAND-B
+  name: Azure SQL Database elastic pool partitioned by tenant
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 3
+    C3: 4
+    C4: 3
+    C5: 4
+  weightedTotal: 72.0
+  rationale: Tenant databases in an elastic pool improve chargeback and isolation but add partition routing and
+    cross-tenant reporting work.
+- id: CAND-C
+  name: Azure SQL Managed Instance Business Critical
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 5
+    C3: 4
+    C4: 3
+    C5: 2
+  weightedTotal: 72.0
+  rationale: Business Critical offers strong local availability and readable secondaries, but its fixed instance
+    footprint is costly for variable reads.
+- id: CAND-D
+  name: One vertically scaled database with no read routing or tenant telemetry
+  eligible: false
+  disqualifiers:
+  - LAB09-REQ-02 requires independent read workload isolation inside an approved and attributable capacity envelope.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 2
+    C4: 3
+    C5: 2
+  weightedTotal: 42.0
+  rationale: Vertical scaling is simple but couples writes, all tenant reads, and cost into one opaque capacity
+    ceiling.
+selectedCandidate: Azure SQL Database Hyperscale with named read-scale replicas
+rejectedAlternatives:
+- candidate: Azure SQL Database elastic pool partitioned by tenant
+  reason: Pool partitioning does not match the shared ledger model as cleanly and increases operational fragmentation.
+- candidate: Azure SQL Managed Instance Business Critical
+  reason: The design pays for broad instance capability that the ledger does not require and weakens tenant-specific
+    attribution.
+- candidate: One vertically scaled database with no read routing or tenant telemetry
+  reason: It is ineligible because it cannot isolate the burst or prove tenant cost attribution.
+risks:
+- risk: A named replica can lag and return stale ledger projections during a burst.
+  mitigation: Route only approved read workloads, measure replica delay, and fall back to the primary when freshness
+    exceeds the contract.
+- risk: Tenant labels in telemetry may be inconsistent and produce disputed chargeback.
+  mitigation: Validate the tenant dimension at ingress and reconcile replica/query usage against the authoritative
+    tenant registry.
+waf:
+  reliability: Primary writes, read routing, backup recovery, and regional continuity are validated as distinct
+    mechanisms.
+  security: Encryption, auditing, and tenant-aware access remain mandatory across primary and replica endpoints.
+  costOptimization: Named burst capacity and query telemetry make the exceptional tenant's demand attributable.
+  operationalExcellence: Replica lag, routing, protection, and audit evidence share one tenant-labeled operating
+    view.
+  performanceEfficiency: Read replicas absorb unpredictable reporting load without scaling the transactional primary
+    for every burst.
+safeAnalogue: null
+traceability:
+- objectiveId: DATA-REL-03
+  requirementId: LAB09-REQ-01
+  checkpointId: LAB09-CP01
+- objectiveId: DATA-REL-04
+  requirementId: LAB09-REQ-02
+  checkpointId: LAB09-CP02
+- objectiveId: DATA-REL-03
+  requirementId: LAB09-REQ-03
+  checkpointId: LAB09-CP03
+- objectiveId: DATA-REL-04
+  requirementId: LAB09-REQ-04
+  checkpointId: LAB09-CP04
+- objectiveId: DATA-REL-03
+  requirementId: LAB09-REQ-05
+  checkpointId: LAB09-CP05
+adr:
+  id: ADR-LAB09-001
+  status: accepted
+  context: Proseware operates a rapidly growing software-as-a-service ledger whose largest tenant is outgrowing
+    a conventional Azure SQL Database service objective. Reads dominate during business hours, write volume climbs
+    predictably, and auditors require encryption, database auditing, and bounded backup retention. The continuity
+    program will define failover and recovery objectives later in Lab 16, so this architecture must focus on scale
+    mechanics and protection controls rather than claim an untested recovery outcome. As the relational scalability
+    architect, compare Hyperscale, elastic pools, and Managed Instance Business Critical, then validate capacity,
+    read scale, transparent data encryption, auditing, and retention using Azure PowerShell.
+  decision: 'Select Azure SQL Database Hyperscale with named read-scale replicas: Hyperscale decouples storage growth
+    from named read replicas and supports intentional routing of tenant reporting load.'
+  consequences:
+  - Applications must classify read paths by freshness and support intentional replica routing.
+  - Finance needs durable tenant dimensions in performance and cost evidence before chargeback is enforceable.
+revisedDecision:
+  changeRequestId: LAB09-CR-01
+  selectedCandidate: Azure SQL Database Hyperscale with named read-scale replicas
+  reason: LAB09-REQ-02 makes read-workload isolation mandatory, so Hyperscale is retained with a named replica and
+    routing policy dedicated to the bursty tenant's attributable reads.
+  mandatoryRequirementId: LAB09-REQ-02
+  waf:
+    reliability: Freshness checks keep stale replica results from silently entering ledger workflows.
+    security: The tenant replica preserves encryption, audit, and authorization controls from the primary design.
+    costOptimization: Dedicated replica hours and queries can be assigned to the tenant that creates them.
+    operationalExcellence: Tenant-tagged lag and routing telemetry expose when fallback to the primary occurs.
+    performanceEfficiency: Bursty reads scale independently while write capacity remains sized for actual ledger
+      traffic.
+# END GENERATED AZ305 V1

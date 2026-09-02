@@ -1,0 +1,142 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-10
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 5
+  weightedTotal: 88.0
+  rationale: Hierarchical partition keys distribute tenant and catalog access while preserving native document evolution
+    and global service capabilities.
+- id: CAND-B
+  name: Azure Table Storage with denormalized entities and account-level scale
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 3
+    C4: 3
+    C5: 5
+  weightedTotal: 64.0
+  rationale: Table Storage offers inexpensive key-value access but provides fewer global consistency and tenant-level
+    throughput controls.
+- id: CAND-C
+  name: Azure SQL Database with JSON columns and relational indexes
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 2
+  weightedTotal: 70.0
+  rationale: SQL JSON supports relational governance, although schema variability and global document scaling require
+    more application and index management.
+- id: CAND-D
+  name: One fixed partition containing the entire catalog
+  eligible: false
+  disqualifiers:
+  - LAB10-REQ-02 requires a partition design that distributes load and isolates the dominant tenant.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 2
+    C4: 3
+    C5: 2
+  weightedTotal: 37.0
+  rationale: A single partition simplifies queries but imposes one throughput and storage bottleneck for every tenant.
+selectedCandidate: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+rejectedAlternatives:
+- candidate: Azure Table Storage with denormalized entities and account-level scale
+  reason: Lower unit cost does not offset weaker global behavior and limited isolation for the dominant tenant.
+- candidate: Azure SQL Database with JSON columns and relational indexes
+  reason: It couples variable catalog structure to relational capacity and provides a less direct global partition
+    model.
+- candidate: One fixed partition containing the entire catalog
+  reason: The proposal is disqualified because it cannot satisfy scale or tenant-isolation acceptance criteria.
+risks:
+- risk: A hierarchical key can still concentrate traffic if the leading tenant segment dominates requests.
+  mitigation: Measure normalized RU consumption and move the exceptional tenant to a dedicated container when the
+    threshold is crossed.
+- risk: Splitting a tenant can create inconsistent indexing or consistency policies across containers.
+  mitigation: Version a common container baseline and compare policy hashes before routing production traffic.
+waf:
+  reliability: Explicit region, consistency, and failover behavior protects accepted catalog changes beyond simple
+    data distribution.
+  security: Tenant-aware data roles and an optional dedicated container provide enforceable isolation boundaries.
+  costOptimization: RU attribution and selective tenant separation avoid overprovisioning every catalog partition.
+  operationalExcellence: Hot-partition, throttling, policy, and tenant-routing evidence supports repeatable scale
+    decisions.
+  performanceEfficiency: Hierarchical partitioning aligns common reads with physical distribution and isolates exceptional
+    demand.
+safeAnalogue: null
+traceability:
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB10-REQ-01
+  checkpointId: LAB10-CP01
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB10-REQ-02
+  checkpointId: LAB10-CP02
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB10-REQ-03
+  checkpointId: LAB10-CP03
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB10-REQ-04
+  checkpointId: LAB10-CP04
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB10-REQ-05
+  checkpointId: LAB10-CP05
+adr:
+  id: ADR-LAB10-001
+  status: accepted
+  context: Alpine Ski House is designing a global product-catalog API whose items have optional attributes, localized
+    descriptions, and tenant-specific extensions. Reads arrive by tenant and product category, seasonal traffic
+    is highly variable, and the application needs predictable low-latency access without relational joins. The team
+    is considering Azure Cosmos DB for NoSQL, Azure Table Storage, and storing JSON in Azure SQL Database. As the
+    semi-structured data architect, select a model, partition key, consistency level, indexing policy, throughput
+    mode, and network boundary. Commands must expose the architectural choices and avoid treating global distribution
+    or unlimited scale as automatic consequences of selecting a NoSQL service.
+  decision: 'Select Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning: Hierarchical partition
+    keys distribute tenant and catalog access while preserving native document evolution and global service capabilities.'
+  consequences:
+  - Application routing and telemetry must preserve the tenant partition dimension on every catalog request.
+  - A dedicated enterprise container becomes a governed exception with independently tracked throughput and policy.
+revisedDecision:
+  changeRequestId: LAB10-CR-01
+  selectedCandidate: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+  reason: LAB10-REQ-02 requires a partition strategy that mitigates an exceptionally large tenant, so Cosmos DB
+    adds a dedicated container with independently attributable throughput.
+  mandatoryRequirementId: LAB10-REQ-02
+  waf:
+    reliability: Tenant separation contains throttling and partition pressure to the exceptional workload.
+    security: A dedicated data-plane role and container scope strengthen enterprise-tenant isolation.
+    costOptimization: Its provisioned or autoscale RU consumption is measured and charged independently.
+    operationalExcellence: Versioned routing and policy checks prevent shared and dedicated containers from drifting.
+    performanceEfficiency: The shared hierarchy stays balanced while the dominant tenant scales on its own ceiling.
+# END GENERATED AZ305 V1

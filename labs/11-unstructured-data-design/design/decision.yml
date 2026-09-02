@@ -1,0 +1,142 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-11
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 4
+    C5: 5
+  weightedTotal: 92.0
+  rationale: ADLS Gen2 provides object-scale analytics, directory-aware ACLs, and integration with the governed
+    data pipeline.
+- id: CAND-B
+  name: Flat Azure Blob Storage containers with prefix conventions
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 3
+    C4: 3
+    C5: 5
+  weightedTotal: 69.0
+  rationale: Flat blobs are economical for objects, but prefix conventions do not provide the same directory operations
+    and ACL model.
+- id: CAND-C
+  name: Azure Files shares mounted by analytics and document clients
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 4
+    C4: 3
+    C5: 2
+  weightedTotal: 67.0
+  rationale: Azure Files supplies SMB behavior for legal users, yet mounting all analytics through file semantics
+    limits object-native processing.
+- id: CAND-D
+  name: One unmanaged file server for lake ingestion and legal collaboration
+  eligible: false
+  disqualifiers:
+  - LAB11-REQ-01 requires storage service semantics to match object-native analytics engines and access patterns.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 2
+    C4: 2
+    C5: 3
+  weightedTotal: 36.0
+  rationale: A conventional server supports SMB but creates a capacity ceiling and no native object analytics boundary.
+selectedCandidate: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+rejectedAlternatives:
+- candidate: Flat Azure Blob Storage containers with prefix conventions
+  reason: It weakens analytics namespace governance without solving the legal SMB requirement.
+- candidate: Azure Files shares mounted by analytics and document clients
+  reason: A universal share imposes the wrong access pattern and cost model on the analytics estate.
+- candidate: One unmanaged file server for lake ingestion and legal collaboration
+  reason: It is ineligible because the analytics access and scale requirements cannot be met.
+risks:
+- risk: Users can copy regulated legal documents into the analytics lake and bypass share controls.
+  mitigation: Classify ingress, deny unapproved paths, and reconcile file manifests across the two ownership boundaries.
+- risk: Private endpoint or DNS configuration can work for Blob while failing for File.
+  mitigation: Validate each service subresource and protocol independently from every authorized network zone.
+waf:
+  reliability: Independent redundancy, snapshots, and replay paths match the failure behavior of lake objects and
+    collaborative files.
+  security: ACLs, service-specific private endpoints, and classified ingress keep legal and analytics data in distinct
+    trust boundaries.
+  costOptimization: SMB-priced capacity is reserved for collaboration and lower-cost object tiers serve analytics
+    retention.
+  operationalExcellence: Separate owners, inventories, lifecycle rules, and restore assertions prevent protocol
+    ambiguity.
+  performanceEfficiency: Object-native parallelism serves analytics while Azure Files supplies locking and metadata
+    behavior for users.
+safeAnalogue: null
+traceability:
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB11-REQ-01
+  checkpointId: LAB11-CP01
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB11-REQ-02
+  checkpointId: LAB11-CP02
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB11-REQ-03
+  checkpointId: LAB11-CP03
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB11-REQ-04
+  checkpointId: LAB11-CP04
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB11-REQ-05
+  checkpointId: LAB11-CP05
+adr:
+  id: ADR-LAB11-001
+  status: accepted
+  context: Wide World Importers is consolidating product images, supplier documents, analytics landing files, and
+    a small set of shared departmental documents. The data varies from kilobytes to multi-gigabyte objects, analytics
+    jobs need directory-like organization and fine-grained access, and no requirement calls for SMB semantics on
+    the primary corpus. Teams disagree between flat Blob Storage, Azure Data Lake Storage Gen2, and Azure Files.
+    As the unstructured-data architect, select the service, namespace, authorization, encryption, and private connectivity
+    model. Keep lifecycle economics and detailed durability choices in Lab 12, and do not treat a hierarchical namespace
+    as a substitute for sound partitioning or ownership boundaries.
+  decision: 'Select ADLS Gen2 on a hierarchical-namespace StorageV2 account: ADLS Gen2 provides object-scale analytics,
+    directory-aware ACLs, and integration with the governed data pipeline.'
+  consequences:
+  - Legal collaboration becomes a separate Azure Files service boundary instead of a directory inside the data lake.
+  - Pipelines need an approved transfer process when legal content is intentionally published for analytics.
+revisedDecision:
+  changeRequestId: LAB11-CR-01
+  selectedCandidate: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+  reason: LAB11-REQ-01 requires service semantics to match access patterns, so ADLS remains the object-analytics
+    decision and Azure Files is added only for native SMB legal collaboration.
+  mandatoryRequirementId: LAB11-REQ-01
+  waf:
+    reliability: Each service uses recovery controls suited to its protocol and business owner.
+    security: Transfers between legal shares and the lake become explicit classified operations.
+    costOptimization: File-service charges apply only to documents that need SMB semantics.
+    operationalExcellence: Separate inventories and restore tests remove ambiguity about ownership and recovery.
+    performanceEfficiency: Analytics avoids SMB overhead and legal users retain native locking behavior.
+# END GENERATED AZ305 V1

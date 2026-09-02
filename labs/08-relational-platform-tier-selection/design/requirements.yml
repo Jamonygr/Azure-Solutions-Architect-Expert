@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-08
+businessOutcome: Modernize the database with less operational toil and cost while retaining transactional correctness
+  and month-end capacity.
+stakeholders:
+- Application engineering
+- Database administration
+- Information security
+- FinOps
+functionalRequirements:
+- id: LAB08-REQ-01
+  statement: Compatibility, transaction, scale, latency, maintenance, and cost facts map to supported current service
+    tiers.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-01
+- id: LAB08-REQ-02
+  statement: The logical server has a group-owned Microsoft Entra administrator and no SQL authentication dependency.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-02
+- id: LAB08-REQ-03
+  statement: General Purpose serverless supplies bounded autoscaling and one-hour autopause for the intermittent
+    workload.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-01
+nonfunctionalRequirements:
+- id: LAB08-REQ-04
+  statement: The application reaches the logical server through an approved private endpoint and private DNS path.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-02
+- id: LAB08-REQ-05
+  statement: Provisioned configuration matches the selected candidate and all mandatory compatibility and capacity
+    requirements.
+  mandatory: true
+  objectiveIds:
+  - DATA-REL-01
+constraints:
+- Transactional correctness and month-end processing must be preserved while reducing database administration.
+- SQL Agent, cross-database transactions, and instance-level collation are mandatory after discovery of the acquired
+  application.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Compatibility assessment evidence is available before a target platform is provisioned.
+- The application owner can schedule migration testing without changing the source database during this lab.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: The source uses relational transactions plus instance-scoped behaviors discovered through compatibility
+    assessment.
+  scale: Ordinary utilization is intermittent but month-end capacity is materially higher; measured vCore and storage
+    values remain source evidence.
+  latency: Transaction response and month-end batch deadlines require benchmarks; the scenario does not invent a
+    millisecond target.
+  availability: Managed service high availability must cover platform faults without confusing backups with service
+    continuity.
+  rto: Cutover rollback and database restoration need owner-approved targets before production migration.
+  rpo: Transaction-loss tolerance is an application requirement to be measured; no numerical value is supplied here.
+  budget: Serverless can reduce idle cost, whereas Managed Instance commits baseline capacity to satisfy instance
+    compatibility.
+acceptanceCriteria:
+- LAB08-REQ-01 passes its independent positive and negative assertions.
+- LAB08-REQ-02 passes its independent positive and negative assertions.
+- LAB08-REQ-03 passes its independent positive and negative assertions.
+- LAB08-REQ-04 passes its independent positive and negative assertions.
+- LAB08-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB08-CR-01
+  trigger: The acquired application reveals a hard dependency on SQL Agent, cross-database transactions, and instance-level
+    collation; revise the platform choice without treating a larger SQL Database tier as compatibility.
+  materialChange: The acquired application reveals a hard dependency on SQL Agent, cross-database transactions,
+    and instance-level collation; revise the platform choice without treating a larger SQL Database tier as compatibility.
+  mandatoryRequirementId: LAB08-REQ-05
+  expectedRevision: Re-score compatibility as mandatory and select Managed Instance rather than increasing the SQL
+    Database tier.
+# END GENERATED AZ305 V1

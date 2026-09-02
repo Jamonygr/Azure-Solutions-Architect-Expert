@@ -1,0 +1,1789 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-09
+questions:
+- id: LAB09-Q01
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: 'The approach to ''Choose the scale unit and capacity ceiling'' is challenged by saaS product engineering.
+    Approval requires a positive result plus this independent negative assertion: Capacity does not exceed the FinOps
+    ceiling and no incompatible edition remains selected. What should the team use as the acceptance rule that makes
+    LAB09-REQ-01 testable?'
+  options:
+    A: Require the documented positive state for Choose the scale unit and capacity ceiling, and then verify that
+      capacity does not exceed the FinOps ceiling and no incompatible edition remains selected.
+    B: Select Azure SQL Database elastic pool partitioned by tenant before checking Choose the scale unit and capacity
+      ceiling. Next, consider it sufficient that a successful deployment will later prove the architecture constraint.
+    C: Use the passing result from Design read workload isolation to approve Choose the scale unit and capacity
+      ceiling, and then take it as conclusive that one control establishes an unrelated acceptance boundary.
+    D: Choose Azure SQL Managed Instance Business Critical and skip the Choose the scale unit and capacity ceiling
+      negative assertion. Also, treat it as established that the candidate has the lowest implementation effort.
+  answer: A
+  explanations:
+    A: The authored acceptance boundary states that the database uses Hyperscale with an approved initial vCore
+      count and documented vertical and horizontal scale triggers. The checkpoint therefore requires that the positive
+      state and an independent negative assertion jointly make LAB09-REQ-01 testable.
+    B: The relevant observation is that capacity does not exceed the FinOps ceiling and no incompatible edition
+      remains selected. The checkpoint therefore requires that a deployment result cannot prove LAB09-REQ-01, and
+      Azure SQL Database elastic pool partitioned by tenant still has to meet the mandatory boundary.
+    C: The checkpoint specifically records that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. The checkpoint therefore requires that that outcome belongs to Design read
+      workload isolation and leaves Choose the scale unit and capacity ceiling unverified.
+    D: The scenario makes clear that sustain ledger growth and read demand while meeting data-protection controls
+      without overpromising disaster recovery. The checkpoint therefore requires that implementation effort cannot
+      justify skipping the negative assertion or displace LAB09-REQ-01.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q02
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: A decision test for 'Choose the scale unit and capacity ceiling' includes database reliability engineering.
+    The selected architecture is Azure SQL Database Hyperscale with named read-scale replicas; object existence
+    alone is not success. Which option best establishes the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Capacity does not exceed the FinOps ceiling and no incompatible edition
+      remains selected' as the success result; next, proceed on the belief that absence proves every required positive
+      property.
+    B: Use the successful finding from Verify transparent data encryption and key custody as the result for Choose
+      the scale unit and capacity ceiling. In addition, treat as decisive the assertion that a property from the
+      current checkpoint does not need to be inspected.
+    C: Record the database uses Hyperscale with an approved initial vCore count and documented vertical and horizontal
+      scale triggers; as a separate check, classify it as success for LAB09-REQ-01.
+    D: Record the failure condition 'Migration blockers or regional hardware availability prevent the chosen compute
+      generation' as a successful state; before approval, base approval on the claim that the command returned an
+      object.
+  answer: C
+  explanations:
+    A: The applicable design condition is that capacity does not exceed the FinOps ceiling and no incompatible edition
+      remains selected. The checkpoint therefore requires that this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: 'The review is governed by this fact: tDE is enabled and the Microsoft-managed or customer-managed key decision
+      names custody, rotation, and availability dependencies. The checkpoint therefore requires that evidence for
+      Verify transparent data encryption and key custody cannot substitute for the properties required at Choose
+      the scale unit and capacity ceiling.'
+    C: The architecture evidence must show that the database uses Hyperscale with an approved initial vCore count
+      and documented vertical and horizontal scale triggers. The checkpoint therefore requires that this is the
+      authored target state for Choose the scale unit and capacity ceiling and directly supports LAB09-REQ-01.
+    D: The retained result must be reconciled with the fact that migration blockers or regional hardware availability
+      prevent the chosen compute generation. The checkpoint therefore requires that resource existence or command
+      output does not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q03
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: 'The architecture board reconsiders ''Choose the scale unit and capacity ceiling'' with audit and risk.
+    Evidence must address this risk without retaining credentials: Migration blockers or regional hardware availability
+    prevent the chosen compute generation. Which answer identifies sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Configure tamper-resistant auditing for Choose the scale unit and capacity ceiling;
+      for the recorded decision, use as justification the claim that a related checkpoint proves the current expected
+      state.
+    B: Retain edition, compute generation, vCores, storage limit, scale trigger, and approval owner; before approval,
+      exclude credentials and unrelated response fields.
+    C: Store unredacted Choose the scale unit and capacity ceiling output with operator, tenant, token, and request
+      context. Then, accept without proof that reproduction requires every captured field.
+    D: Record only the Choose the scale unit and capacity ceiling positive inspection's exit status; afterward,
+      rely on the claim that projected properties and assertion results can be reconstructed later.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that audit state, sanitized storage resource ID, retention days, event categories,
+      and control owner. The checkpoint therefore requires that that evidence supports Configure tamper-resistant
+      auditing, so it cannot demonstrate The database uses Hyperscale with an approved initial vCore count and documented
+      vertical and horizontal scale triggers.
+    B: The decision tension comes from the fact that edition, compute generation, vCores, storage limit, scale trigger,
+      and approval owner. The checkpoint therefore requires that it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+    C: The traceable checkpoint outcome is that unredacted implementation output. The checkpoint therefore requires
+      that identity, tenant, or token material exceeds the non-secret evidence contract.
+    D: The failure model establishes that the positive inspection's exit status. The checkpoint therefore requires
+      that an exit code alone does not show whether the database uses Hyperscale with an approved initial vCore
+      count and documented vertical and horizontal scale triggers.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q04
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: A review of 'Choose the scale unit and capacity ceiling' begins with input from finOps. The target is The
+    database uses Hyperscale with an approved initial vCore count and documented vertical and horizontal scale triggers,
+    but the latest evidence does not show it. What recommendation gives the reviewers the most likely cause?
+  options:
+    A: Treat 'Legal-hold needs conflict with the database-native retention limit or cost envelope' as grounds to
+      reject Choose the scale unit and capacity ceiling. Also, use the premise that bound backup retention without
+      claiming recovery's failure model applies unchanged here.
+    B: Ignore the negative assertion 'Capacity does not exceed the FinOps ceiling and no incompatible edition remains
+      selected'; in a separate step, consider it sufficient that a later material change will make it unnecessary.
+    C: Investigate Design read workload isolation instead of diagnosing Choose the scale unit and capacity ceiling.
+      As another control, take it as conclusive that a passing result at Design read workload isolation identifies
+      the current cause.
+    D: Investigate migration blockers or regional hardware availability prevent the chosen compute generation; as
+      an independent condition, isolate that cause before changing Azure SQL Database Hyperscale with named read-scale
+      replicas.
+  answer: D
+  explanations:
+    A: The WAF consequence identifies that legal-hold needs conflict with the database-native retention limit or
+      cost envelope. The checkpoint therefore requires that that condition belongs to Bound backup retention without
+      claiming recovery and does not by itself invalidate Azure SQL Database Hyperscale with named read-scale replicas.
+    B: The command-level assertion is anchored in the fact that capacity does not exceed the FinOps ceiling and
+      no incompatible edition remains selected. The checkpoint therefore requires that the negative assertion must
+      be evaluated now, independent of a later business change.
+    C: read-intent routing and replica count isolate reporting demand within an approved capacity envelope. In the
+      decision record, a passing result at Design read workload isolation gives no causal evidence for the failure
+      at Choose the scale unit and capacity ceiling.
+    D: The recovery guidance assumes that migration blockers or regional hardware availability prevent the chosen
+      compute generation. The checkpoint therefore requires that it is the checkpoint's causal failure model and
+      should be isolated before retrying Choose the scale unit and capacity ceiling.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q05
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: '''Choose the scale unit and capacity ceiling'' awaits approval from saaS product engineering. The run encountered
+    this modeled failure: Migration blockers or regional hardware availability prevent the chosen compute generation.
+    Which action produces the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Return a resized run-owned database to its recorded original objective before
+      deletion or handoff; before approval, rely on the belief that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Validate compatibility and regional capacity, then select another supported Hyperscale hardware family; then
+      preserve the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'Migration blockers or regional hardware availability prevent
+      the chosen compute generation'. Separately, proceed on the belief that the first state record and returned
+      identifiers can be discarded.
+    D: Change Design read workload isolation instead; for this decision, treat as decisive the assertion that success
+      at Design read workload isolation will repair the failed state at Choose the scale unit and capacity ceiling.
+  answer: B
+  explanations:
+    A: The authored acceptance boundary states that return a resized run-owned database to its recorded original
+      objective before deletion or handoff. In the decision record, cleanup before reconciliation can erase evidence
+      or strand a partially created dependency.
+    B: The controlling fact is that validate compatibility and regional capacity, then select another supported
+      Hyperscale hardware family. In the decision record, it corrects the narrow cause while retaining the same
+      recovery trail and decision scope.
+    C: The relevant observation is that migration blockers or regional hardware availability prevent the chosen
+      compute generation. In the decision record, discarding the original run identity breaks ownership reconciliation
+      and can duplicate a partial operation.
+    D: The checkpoint specifically records that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. In the decision record, altering an already separate checkpoint does not repair
+      the modeled failure at Choose the scale unit and capacity ceiling.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q06
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: '''Choose the scale unit and capacity ceiling'' is reopened at the request of database reliability engineering.
+    Without making a new change, the team must inspect the risk ''Migration blockers or regional hardware availability
+    prevent the chosen compute generation'' using the Azure PowerShell lane. What best demonstrates the read-only,
+    lane-correct inspection?'
+  options:
+    A: Rerun the Choose the scale unit and capacity ceiling implementation command and infer the expected state;
+      afterward, treat it as established that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Choose the scale unit and capacity ceiling: Capacity does not exceed
+      the FinOps ceiling and no incompatible edition remains selected; then use as justification the claim that
+      an empty negative result reports every required positive property.'
+    C: Run the positive inspection for Verify transparent data encryption and key custody and apply it to Choose
+      the scale unit and capacity ceiling. Independently, accept without proof that any command from the same lane
+      proves the current checkpoint.
+    D: 'Inspect the documented properties for Choose the scale unit and capacity ceiling. Also, retain this evidence:
+      edition, compute generation, vCores, storage limit, scale trigger, and approval owner.'
+  answer: D
+  explanations:
+    A: The architecture evidence must show that the implementation command. In the decision record, it can mutate
+      state and shell success does not independently assert the expected properties.
+    B: The applicable design condition is that the negative inspection. In the decision record, absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    C: 'The review is governed by this fact: the positive inspection for Verify transparent data encryption and
+      key custody. In the decision record, it is lane-correct but proves Verify transparent data encryption and
+      key custody, not Choose the scale unit and capacity ceiling.'
+    D: The scenario makes clear that the database uses Hyperscale with an approved initial vCore count and documented
+      vertical and horizontal scale triggers. In the decision record, the read-only inspection directly tests the
+      properties required at Choose the scale unit and capacity ceiling.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q07
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: 'A design review of ''Choose the scale unit and capacity ceiling'' includes audit and risk. A passing positive
+    check does not by itself prove this negative assertion: Capacity does not exceed the FinOps ceiling and no incompatible
+    edition remains selected. Which option is the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Choose the scale unit and capacity ceiling and report full compliance.
+      As another control, base approval on the claim that every prohibited parallel state must therefore be absent.
+    B: Prove only that capacity does not exceed the FinOps ceiling and no incompatible edition remains selected
+      and report the intended configuration as present; as a separate check, use the premise that absence is equivalent
+      to positive-state evidence.
+    C: Verify the positive properties for Choose the scale unit and capacity ceiling. Afterward, independently verify
+      that capacity does not exceed the FinOps ceiling and no incompatible edition remains selected.
+    D: Use Configure tamper-resistant auditing's negative assertion for Choose the scale unit and capacity ceiling.
+      Afterward, consider it sufficient that negative assertions are interchangeable between checkpoints.
+  answer: C
+  explanations:
+    A: The decision tension comes from the fact that the database uses Hyperscale with an approved initial vCore
+      count and documented vertical and horizontal scale triggers. In the decision record, the positive result alone
+      does not test the explicit anti-condition 'Capacity does not exceed the FinOps ceiling and no incompatible
+      edition remains selected'.
+    B: The safe operating boundary says that capacity does not exceed the FinOps ceiling and no incompatible edition
+      remains selected. In the decision record, absence evidence cannot demonstrate the required positive state
+      'The database uses Hyperscale with an approved initial vCore count and documented vertical and horizontal
+      scale triggers'.
+    C: The retained result must be reconciled with the fact that the database uses Hyperscale with an approved initial
+      vCore count and documented vertical and horizontal scale triggers; Capacity does not exceed the FinOps ceiling
+      and no incompatible edition remains selected. In the decision record, two independent observations prevent
+      a passing positive check from concealing an unsafe parallel state.
+    D: The traceable checkpoint outcome is that auditing is not disabled and retention is not shorter than the control
+      requirement. In the decision record, the second assertion is valid for Configure tamper-resistant auditing
+      but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q08
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: 'The team asks finOps to assess ''Choose the scale unit and capacity ceiling''. The board wants the Well-Architected
+    consequence of mitigating this risk: Migration blockers or regional hardware availability prevent the chosen
+    compute generation. What should the architect select as the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Bound backup retention without claiming recovery consequence as the result for Choose the scale unit
+      and capacity ceiling; for this decision, rely on the claim that a pillar statement remains valid when moved
+      away from Bound backup retention without claiming recovery.
+    B: Remove the control responsible for the Choose the scale unit and capacity ceiling outcome. Before sign-off,
+      rely on the belief that a elevated cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Cost Optimization: an approved initial size and vCore ceiling constrain Hyperscale spend'' as proof
+      that all five pillars pass; as an independent condition, proceed on the belief that the checkpoint ''Choose
+      the scale unit and capacity ceiling'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Cost Optimization: an approved initial size and vCore ceiling constrain Hyperscale
+      spend. Separately, tie it to LAB09-REQ-01.'
+  answer: D
+  explanations:
+    A: 'The recovery guidance assumes that operational Excellence: explicit retention evidence separates configured
+      protection from recovery claims owned by Lab 16. In the decision record, that tradeoff belongs to Bound backup
+      retention without claiming recovery and does not explain this checkpoint''s decision.'
+    B: The WAF consequence identifies that the required outcome at Choose the scale unit and capacity ceiling. In
+      the decision record, cost Optimization cannot remove the acceptance condition 'The database uses Hyperscale
+      with an approved initial vCore count and documented vertical and horizontal scale triggers'.
+    C: The command-level assertion is anchored in the fact that capacity does not exceed the FinOps ceiling and
+      no incompatible edition remains selected. In the decision record, one positive command cannot establish every
+      pillar, especially while the negative state remains unchecked.
+    D: 'The failure model establishes that cost Optimization: an approved initial size and vCore ceiling constrain
+      Hyperscale spend. In the decision record, it states the authored pillar consequence of the control evaluated
+      at Choose the scale unit and capacity ceiling.'
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q09
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: 'A recommendation on ''Choose the scale unit and capacity ceiling'' is requested by saaS product engineering.
+    A material change now applies: A new tenant produces unpredictable read bursts but contributes little write
+    load and requires strict cost attribution; revise replica and tenancy decisions without weakening encryption
+    or audit controls. Select the correct revision to the decision record.'
+  options:
+    A: Retain Azure SQL Database Hyperscale with named read-scale replicas at Choose the scale unit and capacity
+      ceiling without recalculating criteria or eligibility. Independently, take it as conclusive that the original
+      weighted result is permanent.
+    B: Select Azure SQL Database elastic pool partitioned by tenant for Choose the scale unit and capacity ceiling
+      without rechecking its mandatory constraints. Next, treat it as established that being different from the
+      current design is an architecture criterion.
+    C: Re-score Azure SQL Database Hyperscale with named read-scale replicas and both alternatives for Choose the
+      scale unit and capacity ceiling; before closing the checkpoint, supersede the ADR using the changed evidence
+      for LAB09-REQ-01.
+    D: Keep Azure SQL Managed Instance Business Critical eligible at Choose the scale unit and capacity ceiling
+      by downgrading LAB09-REQ-01, and then use as justification the claim that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: The controlling fact is that azure SQL Database Hyperscale with named read-scale replicas. The independent
+      assertion shows why the original ADR remains historical evidence, but its score cannot answer a changed mandatory
+      condition.
+    B: The authored acceptance boundary states that azure SQL Database elastic pool partitioned by tenant. The independent
+      assertion shows why being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Choose the scale unit and capacity ceiling.
+    C: azure SQL Database Hyperscale with named read-scale replicas at Choose the scale unit and capacity ceiling.
+      The independent assertion shows why the material change 'A new tenant produces unpredictable read bursts but
+      contributes little write load and requires strict cost attribution; revise replica and tenancy decisions without
+      weakening encryption or audit controls.' requires fresh eligibility, weighted analysis, and a superseding
+      decision.
+    D: The relevant observation is that lAB09-REQ-01. The independent assertion shows why an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q10
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP01
+  stem: '''Choose the scale unit and capacity ceiling'' is assigned to database reliability engineering. After a
+    partial run, cleanup must follow this dependency: Return a resized run-owned database to its recorded original
+    objective before deletion or handoff. Which response provides the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Verify transparent data encryption and key custody before reconciling the current
+      dependency. Afterward, treat as decisive the assertion that removing a parent needed to identify Choose the
+      scale unit and capacity ceiling is harmless.
+    B: 'Verify exact run-state IDs and ownership tags for Choose the scale unit and capacity ceiling. Independently,
+      follow this dependency rule without purge: Return a resized run-owned database to its recorded original objective
+      before deletion or handoff.'
+    C: Delete candidates by display name before comparing the Choose the scale unit and capacity ceiling ownership
+      tags; next, base approval on the claim that the dependency rule 'Return a resized run-owned database to its
+      recorded original objective before deletion or handoff' is optional.
+    D: Destroy recoverable copies before retaining the Choose the scale unit and capacity ceiling negative assertion
+      'Capacity does not exceed the FinOps ceiling and no incompatible edition remains selected'. In addition, use
+      the premise that remaining command logs are sufficient recovery evidence.
+  answer: B
+  explanations:
+    A: The scenario makes clear that restore the original protector before removing a run-owned key association;
+      never purge keys. The independent assertion shows why a cleanup rule for Verify transparent data encryption
+      and key custody cannot override the dependency declared for Choose the scale unit and capacity ceiling.
+    B: The checkpoint specifically records that return a resized run-owned database to its recorded original objective
+      before deletion or handoff. The independent assertion shows why exact identity, complete ownership tags, and
+      the authored dependency order constrain cleanup and preserve recovery.
+    C: The architecture evidence must show that edition, compute generation, vCores, storage limit, scale trigger,
+      and approval owner. The independent assertion shows why names are not ownership proof; deletion requires the
+      exact recorded identifier and every required tag.
+    D: The applicable design condition is that capacity does not exceed the FinOps ceiling and no incompatible edition
+      remains selected. The independent assertion shows why irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q11
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: 'An assurance review of ''Design read workload isolation'' includes database reliability engineering. Approval
+    requires a positive result plus this independent negative assertion: Replica count does not grow without a measured
+    read-throughput requirement and cost approval. Which option best establishes the acceptance rule that makes
+    LAB09-REQ-02 testable?'
+  options:
+    A: Select Azure SQL Database elastic pool partitioned by tenant before checking Design read workload isolation.
+      Also, proceed on the belief that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Choose the scale unit and capacity ceiling to approve Design read workload isolation;
+      in a separate step, treat as decisive the assertion that one control establishes an unrelated acceptance boundary.
+    C: Choose Azure SQL Managed Instance Business Critical and skip the Design read workload isolation negative
+      assertion. As another control, base approval on the claim that the candidate has the lowest implementation
+      effort.
+    D: Require the documented positive state for Design read workload isolation. As another control, verify that
+      replica count does not grow without a measured read-throughput requirement and cost approval.
+  answer: D
+  explanations:
+    A: The retained result must be reconciled with the fact that replica count does not grow without a measured
+      read-throughput requirement and cost approval. The independent assertion shows why a deployment result cannot
+      prove LAB09-REQ-02, and Azure SQL Database elastic pool partitioned by tenant still has to meet the mandatory
+      boundary.
+    B: The decision tension comes from the fact that the database uses Hyperscale with an approved initial vCore
+      count and documented vertical and horizontal scale triggers. The independent assertion shows why that outcome
+      belongs to Choose the scale unit and capacity ceiling and leaves Design read workload isolation unverified.
+    C: The safe operating boundary says that sustain ledger growth and read demand while meeting data-protection
+      controls without overpromising disaster recovery. The independent assertion shows why implementation effort
+      cannot justify skipping the negative assertion or displace LAB09-REQ-02.
+    D: 'The review is governed by this fact: read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. The independent assertion shows why the positive state and an independent negative
+      assertion jointly make LAB09-REQ-02 testable.'
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q12
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: Approval of 'Design read workload isolation' is questioned by audit and risk. The selected architecture
+    is Azure SQL Database Hyperscale with named read-scale replicas; object existence alone is not success. Which
+    answer identifies the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Replica count does not grow without a measured read-throughput requirement
+      and cost approval' as the success result; before approval, use as justification the claim that absence proves
+      every required positive property.
+    B: Record read-intent routing and replica count isolate reporting demand within an approved capacity envelope.
+      In addition, classify it as success for LAB09-REQ-02.
+    C: Use the successful finding from Verify transparent data encryption and key custody as the result for Design
+      read workload isolation. Separately, accept without proof that a property from the current checkpoint does
+      not need to be inspected.
+    D: Record the failure condition 'The application connection string does not request read intent or requires
+      read-after-write consistency' as a successful state; for this decision, rely on the claim that the command
+      returned an object.
+  answer: B
+  explanations:
+    A: The failure model establishes that replica count does not grow without a measured read-throughput requirement
+      and cost approval. The independent assertion shows why this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: The traceable checkpoint outcome is that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. The independent assertion shows why this is the authored target state for Design
+      read workload isolation and directly supports LAB09-REQ-02.
+    C: The recovery guidance assumes that tDE is enabled and the Microsoft-managed or customer-managed key decision
+      names custody, rotation, and availability dependencies. The independent assertion shows why evidence for Verify
+      transparent data encryption and key custody cannot substitute for the properties required at Design read workload
+      isolation.
+    D: The WAF consequence identifies that the application connection string does not request read intent or requires
+      read-after-write consistency. The independent assertion shows why resource existence or command output does
+      not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q13
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: 'The implementation review has reached ''Design read workload isolation''. Evidence must address this risk
+    without retaining credentials: The application connection string does not request read intent or requires read-after-write
+    consistency. What recommendation gives the reviewers sufficient, properly scoped evidence?'
+  options:
+    A: Retain readScale state, replica count, read-intent connection design, workload split, and capacity owner.
+      Before sign-off, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Configure tamper-resistant auditing for Design read workload isolation; afterward,
+      use the premise that a related checkpoint proves the current expected state.
+    C: Store unredacted Design read workload isolation output with operator, tenant, token, and request context;
+      then consider it sufficient that reproduction requires every captured field.
+    D: Record only the Design read workload isolation positive inspection's exit status. Independently, take it
+      as conclusive that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The command-level assertion is anchored in the fact that readScale state, replica count, read-intent connection
+      design, workload split, and capacity owner. The independent assertion shows why it captures the checkpoint's
+      observable properties while keeping the evidence boundary narrow.
+    B: audit state, sanitized storage resource ID, retention days, event categories, and control owner. Operationally,
+      that evidence supports Configure tamper-resistant auditing, so it cannot demonstrate Read-intent routing and
+      replica count isolate reporting demand within an approved capacity envelope.
+    C: The controlling fact is that unredacted implementation output. Operationally, identity, tenant, or token
+      material exceeds the non-secret evidence contract.
+    D: The authored acceptance boundary states that the positive inspection's exit status. Operationally, an exit
+      code alone does not show whether read-intent routing and replica count isolate reporting demand within an
+      approved capacity envelope.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q14
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: The approach to 'Design read workload isolation' is challenged by saaS product engineering. The target is
+    Read-intent routing and replica count isolate reporting demand within an approved capacity envelope, but the
+    latest evidence does not show it. Which action produces the most likely cause?
+  options:
+    A: Treat 'Legal-hold needs conflict with the database-native retention limit or cost envelope' as grounds to
+      reject Design read workload isolation. As another control, rely on the belief that bound backup retention
+      without claiming recovery's failure model applies unchanged here.
+    B: Investigate the application connection string does not request read intent or requires read-after-write consistency;
+      afterward, isolate that cause before changing Azure SQL Database Hyperscale with named read-scale replicas.
+    C: Ignore the negative assertion 'Replica count does not grow without a measured read-throughput requirement
+      and cost approval'; as a separate check, proceed on the belief that a later material change will make it unnecessary.
+    D: Investigate Choose the scale unit and capacity ceiling instead of diagnosing Design read workload isolation.
+      Afterward, treat as decisive the assertion that a passing result at Choose the scale unit and capacity ceiling
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The checkpoint specifically records that legal-hold needs conflict with the database-native retention limit
+      or cost envelope. Operationally, that condition belongs to Bound backup retention without claiming recovery
+      and does not by itself invalidate Azure SQL Database Hyperscale with named read-scale replicas.
+    B: The relevant observation is that the application connection string does not request read intent or requires
+      read-after-write consistency. Operationally, it is the checkpoint's causal failure model and should be isolated
+      before retrying Design read workload isolation.
+    C: The scenario makes clear that replica count does not grow without a measured read-throughput requirement
+      and cost approval. Operationally, the negative assertion must be evaluated now, independent of a later business
+      change.
+    D: The architecture evidence must show that the database uses Hyperscale with an approved initial vCore count
+      and documented vertical and horizontal scale triggers. Operationally, a passing result at Choose the scale
+      unit and capacity ceiling gives no causal evidence for the failure at Design read workload isolation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q15
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: 'A decision test for ''Design read workload isolation'' includes database reliability engineering. The run
+    encountered this modeled failure: The application connection string does not request read intent or requires
+    read-after-write consistency. What best demonstrates the safest recovery action?'
+  options:
+    A: Classify query consistency needs and route only tolerant read workloads to replicas, and then preserve the
+      current run identity and evidence.
+    B: 'Perform cleanup immediately: Restore recorded read-scale and replica settings before disposing of the run-owned
+      database; for this decision, treat it as established that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    C: Create a different run identity before diagnosing 'The application connection string does not request read
+      intent or requires read-after-write consistency'. Before sign-off, use as justification the claim that the
+      first state record and returned identifiers can be discarded.
+    D: Change Choose the scale unit and capacity ceiling instead; as an independent condition, accept without proof
+      that success at Choose the scale unit and capacity ceiling will repair the failed state at Design read workload
+      isolation.
+  answer: A
+  explanations:
+    A: The applicable design condition is that classify query consistency needs and route only tolerant read workloads
+      to replicas. Operationally, it corrects the narrow cause while retaining the same recovery trail and decision
+      scope.
+    B: 'The review is governed by this fact: restore recorded read-scale and replica settings before disposing of
+      the run-owned database. Operationally, cleanup before reconciliation can erase evidence or strand a partially
+      created dependency.'
+    C: The retained result must be reconciled with the fact that the application connection string does not request
+      read intent or requires read-after-write consistency. Operationally, discarding the original run identity
+      breaks ownership reconciliation and can duplicate a partial operation.
+    D: The decision tension comes from the fact that the database uses Hyperscale with an approved initial vCore
+      count and documented vertical and horizontal scale triggers. Operationally, altering an already separate checkpoint
+      does not repair the modeled failure at Design read workload isolation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q16
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: The architecture board reconsiders 'Design read workload isolation' with audit and risk. Without making
+    a new change, the team must inspect the risk 'The application connection string does not request read intent
+    or requires read-after-write consistency' using the Azure PowerShell lane. Which option is the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Design read workload isolation implementation command and infer the expected state. Independently,
+      base approval on the claim that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Design read workload isolation: Replica count does not grow without
+      a measured read-throughput requirement and cost approval. Next, use the premise that an empty negative result
+      reports every required positive property.'
+    C: 'Inspect the documented properties for Design read workload isolation; as a separate check, retain this evidence:
+      readScale state, replica count, read-intent connection design, workload split, and capacity owner.'
+    D: Run the positive inspection for Verify transparent data encryption and key custody and apply it to Design
+      read workload isolation, and then consider it sufficient that any command from the same lane proves the current
+      checkpoint.
+  answer: C
+  explanations:
+    A: The traceable checkpoint outcome is that the implementation command. Operationally, it can mutate state and
+      shell success does not independently assert the expected properties.
+    B: The failure model establishes that the negative inspection. Operationally, absence of the prohibited condition
+      is necessary but does not establish the positive architecture state.
+    C: The safe operating boundary says that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. Operationally, the read-only inspection directly tests the properties required
+      at Design read workload isolation.
+    D: The recovery guidance assumes that the positive inspection for Verify transparent data encryption and key
+      custody. Operationally, it is lane-correct but proves Verify transparent data encryption and key custody,
+      not Design read workload isolation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q17
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: 'A review of ''Design read workload isolation'' begins with input from finOps. A passing positive check
+    does not by itself prove this negative assertion: Replica count does not grow without a measured read-throughput
+    requirement and cost approval. What should the architect select as the assertion pair that proves both conditions
+    independently?'
+  options:
+    A: Verify only the positive result for Design read workload isolation and report full compliance. Afterward,
+      rely on the claim that every prohibited parallel state must therefore be absent.
+    B: Prove only that replica count does not grow without a measured read-throughput requirement and cost approval
+      and report the intended configuration as present; next, rely on the belief that absence is equivalent to positive-state
+      evidence.
+    C: Use Configure tamper-resistant auditing's negative assertion for Design read workload isolation. In addition,
+      proceed on the belief that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Design read workload isolation; before approval, independently verify
+      that replica count does not grow without a measured read-throughput requirement and cost approval.
+  answer: D
+  explanations:
+    A: The command-level assertion is anchored in the fact that read-intent routing and replica count isolate reporting
+      demand within an approved capacity envelope. Operationally, the positive result alone does not test the explicit
+      anti-condition 'Replica count does not grow without a measured read-throughput requirement and cost approval'.
+    B: replica count does not grow without a measured read-throughput requirement and cost approval. The requirement-to-evidence
+      link establishes that absence evidence cannot demonstrate the required positive state 'Read-intent routing
+      and replica count isolate reporting demand within an approved capacity envelope'.
+    C: The controlling fact is that auditing is not disabled and retention is not shorter than the control requirement.
+      The requirement-to-evidence link establishes that the second assertion is valid for Configure tamper-resistant
+      auditing but leaves this checkpoint's prohibited state untested.
+    D: The WAF consequence identifies that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope; Replica count does not grow without a measured read-throughput requirement
+      and cost approval. Operationally, two independent observations prevent a passing positive check from concealing
+      an unsafe parallel state.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q18
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: '''Design read workload isolation'' awaits approval from saaS product engineering. The board wants the Well-Architected
+    consequence of mitigating this risk: The application connection string does not request read intent or requires
+    read-after-write consistency. Select the consequence attributable to this checkpoint.'
+  options:
+    A: Use the Bound backup retention without claiming recovery consequence as the result for Design read workload
+      isolation; as an independent condition, take it as conclusive that a pillar statement remains valid when moved
+      away from Bound backup retention without claiming recovery.
+    B: Remove the control responsible for the Design read workload isolation outcome; for the final assessment,
+      treat it as established that a elevated cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Performance Efficiency: read-intent routing isolates suitable queries and protects primary write
+      capacity'' as proof that all five pillars pass. Then, use as justification the claim that the checkpoint ''Design
+      read workload isolation'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Performance Efficiency: read-intent routing isolates suitable queries and protects
+      primary write capacity; as an independent condition, tie it to LAB09-REQ-02.'
+  answer: D
+  explanations:
+    A: 'The relevant observation is that operational Excellence: explicit retention evidence separates configured
+      protection from recovery claims owned by Lab 16. The requirement-to-evidence link establishes that that tradeoff
+      belongs to Bound backup retention without claiming recovery and does not explain this checkpoint''s decision.'
+    B: The checkpoint specifically records that the required outcome at Design read workload isolation. The requirement-to-evidence
+      link establishes that cost Optimization cannot remove the acceptance condition 'Read-intent routing and replica
+      count isolate reporting demand within an approved capacity envelope'.
+    C: The scenario makes clear that replica count does not grow without a measured read-throughput requirement
+      and cost approval. The requirement-to-evidence link establishes that one positive command cannot establish
+      every pillar, especially while the negative state remains unchecked.
+    D: 'The authored acceptance boundary states that performance Efficiency: read-intent routing isolates suitable
+      queries and protects primary write capacity. The requirement-to-evidence link establishes that it states the
+      authored pillar consequence of the control evaluated at Design read workload isolation.'
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q19
+  difficulty: advanced
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: '''Design read workload isolation'' is reopened at the request of database reliability engineering. A material
+    change now applies: A new tenant produces unpredictable read bursts but contributes little write load and requires
+    strict cost attribution; revise replica and tenancy decisions without weakening encryption or audit controls.
+    Which response provides the correct revision to the decision record?'
+  options:
+    A: Re-score Azure SQL Database Hyperscale with named read-scale replicas and both alternatives for Design read
+      workload isolation; then supersede the ADR using the changed evidence for LAB09-REQ-02.
+    B: Retain Azure SQL Database Hyperscale with named read-scale replicas at Design read workload isolation without
+      recalculating criteria or eligibility, and then treat as decisive the assertion that the original weighted
+      result is permanent.
+    C: Select Azure SQL Database elastic pool partitioned by tenant for Design read workload isolation without rechecking
+      its mandatory constraints. Also, base approval on the claim that being different from the current design is
+      an architecture criterion.
+    D: Keep Azure SQL Managed Instance Business Critical eligible at Design read workload isolation by downgrading
+      LAB09-REQ-02; in a separate step, use the premise that stakeholder approval is unnecessary when that requirement
+      blocks the candidate.
+  answer: A
+  explanations:
+    A: The architecture evidence must show that azure SQL Database Hyperscale with named read-scale replicas at
+      Design read workload isolation. The requirement-to-evidence link establishes that the material change 'A new
+      tenant produces unpredictable read bursts but contributes little write load and requires strict cost attribution;
+      revise replica and tenancy decisions without weakening encryption or audit controls.' requires fresh eligibility,
+      weighted analysis, and a superseding decision.
+    B: The applicable design condition is that azure SQL Database Hyperscale with named read-scale replicas. The
+      requirement-to-evidence link establishes that the original ADR remains historical evidence, but its score
+      cannot answer a changed mandatory condition.
+    C: 'The review is governed by this fact: azure SQL Database elastic pool partitioned by tenant. The requirement-to-evidence
+      link establishes that being different is not a criterion, and the candidate still must avoid the prohibited
+      state at Design read workload isolation.'
+    D: The retained result must be reconciled with the fact that lAB09-REQ-02. The requirement-to-evidence link
+      establishes that an architect cannot silently downgrade a stakeholder-owned mandatory requirement to protect
+      a candidate.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q20
+  difficulty: advanced
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP02
+  stem: 'A design review of ''Design read workload isolation'' includes audit and risk. After a partial run, cleanup
+    must follow this dependency: Restore recorded read-scale and replica settings before disposing of the run-owned
+    database. Which choice gives the team the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Verify transparent data encryption and key custody before reconciling the current
+      dependency. In addition, accept without proof that removing a parent needed to identify Design read workload
+      isolation is harmless.
+    B: Delete candidates by display name before comparing the Design read workload isolation ownership tags; before
+      approval, rely on the claim that the dependency rule 'Restore recorded read-scale and replica settings before
+      disposing of the run-owned database' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Design read workload isolation. Also, follow this dependency
+      rule without purge: Restore recorded read-scale and replica settings before disposing of the run-owned database.'
+    D: Destroy recoverable copies before retaining the Design read workload isolation negative assertion 'Replica
+      count does not grow without a measured read-throughput requirement and cost approval'. Separately, rely on
+      the belief that remaining command logs are sufficient recovery evidence.
+  answer: C
+  explanations:
+    A: The safe operating boundary says that restore the original protector before removing a run-owned key association;
+      never purge keys. The requirement-to-evidence link establishes that a cleanup rule for Verify transparent
+      data encryption and key custody cannot override the dependency declared for Design read workload isolation.
+    B: The traceable checkpoint outcome is that readScale state, replica count, read-intent connection design, workload
+      split, and capacity owner. The requirement-to-evidence link establishes that names are not ownership proof;
+      deletion requires the exact recorded identifier and every required tag.
+    C: The decision tension comes from the fact that restore recorded read-scale and replica settings before disposing
+      of the run-owned database. The requirement-to-evidence link establishes that exact identity, complete ownership
+      tags, and the authored dependency order constrain cleanup and preserve recovery.
+    D: The failure model establishes that replica count does not grow without a measured read-throughput requirement
+      and cost approval. The requirement-to-evidence link establishes that irreversible purge is outside the lab
+      contract and destroys evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q21
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'The team asks audit and risk to assess ''Verify transparent data encryption and key custody''. Approval
+    requires a positive result plus this independent negative assertion: No customer-managed key reference lacks
+    a resolvable vault key URI. Which answer identifies the acceptance rule that makes LAB09-REQ-03 testable?'
+  options:
+    A: Select Azure SQL Database elastic pool partitioned by tenant before checking Verify transparent data encryption
+      and key custody. As another control, use as justification the claim that a successful deployment will later
+      prove the architecture constraint.
+    B: Require the documented positive state for Verify transparent data encryption and key custody; next, verify
+      that no customer-managed key reference lacks a resolvable vault key URI.
+    C: Use the passing result from Choose the scale unit and capacity ceiling to approve Verify transparent data
+      encryption and key custody; as a separate check, accept without proof that one control establishes an unrelated
+      acceptance boundary.
+    D: Choose Azure SQL Managed Instance Business Critical and skip the Verify transparent data encryption and key
+      custody negative assertion. Afterward, rely on the claim that the candidate has the lowest implementation
+      effort.
+  answer: B
+  explanations:
+    A: The WAF consequence identifies that no customer-managed key reference lacks a resolvable vault key URI. The
+      requirement-to-evidence link establishes that a deployment result cannot prove LAB09-REQ-03, and Azure SQL
+      Database elastic pool partitioned by tenant still has to meet the mandatory boundary.
+    B: The recovery guidance assumes that tDE is enabled and the Microsoft-managed or customer-managed key decision
+      names custody, rotation, and availability dependencies. The requirement-to-evidence link establishes that
+      the positive state and an independent negative assertion jointly make LAB09-REQ-03 testable.
+    C: The command-level assertion is anchored in the fact that the database uses Hyperscale with an approved initial
+      vCore count and documented vertical and horizontal scale triggers. The requirement-to-evidence link establishes
+      that that outcome belongs to Choose the scale unit and capacity ceiling and leaves Verify transparent data
+      encryption and key custody unverified.
+    D: sustain ledger growth and read demand while meeting data-protection controls without overpromising disaster
+      recovery. Consequently, implementation effort cannot justify skipping the negative assertion or displace LAB09-REQ-03.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q22
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: A recommendation on 'Verify transparent data encryption and key custody' is requested by finOps. The selected
+    architecture is Azure SQL Database Hyperscale with named read-scale replicas; object existence alone is not
+    success. What recommendation gives the reviewers the intended successful finding?
+  options:
+    A: Use only the negative assertion 'No customer-managed key reference lacks a resolvable vault key URI' as the
+      success result; for this decision, use the premise that absence proves every required positive property.
+    B: Use the successful finding from Design read workload isolation as the result for Verify transparent data
+      encryption and key custody. Before sign-off, consider it sufficient that a property from the current checkpoint
+      does not need to be inspected.
+    C: Record the failure condition 'The server identity cannot unwrap a customer-managed key or the vault path
+      is unavailable' as a successful state; as an independent condition, take it as conclusive that the command
+      returned an object.
+    D: Record tDE is enabled and the Microsoft-managed or customer-managed key decision names custody, rotation,
+      and availability dependencies; for this decision, classify it as success for LAB09-REQ-03.
+  answer: D
+  explanations:
+    A: The authored acceptance boundary states that no customer-managed key reference lacks a resolvable vault key
+      URI. Consequently, this is the independent prohibited-state assertion, not a successful finding.
+    B: The relevant observation is that read-intent routing and replica count isolate reporting demand within an
+      approved capacity envelope. Consequently, evidence for Design read workload isolation cannot substitute for
+      the properties required at Verify transparent data encryption and key custody.
+    C: The checkpoint specifically records that the server identity cannot unwrap a customer-managed key or the
+      vault path is unavailable. Consequently, resource existence or command output does not convert the documented
+      failure condition into success.
+    D: The controlling fact is that tDE is enabled and the Microsoft-managed or customer-managed key decision names
+      custody, rotation, and availability dependencies. Consequently, this is the authored target state for Verify
+      transparent data encryption and key custody and directly supports LAB09-REQ-03.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q23
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: '''Verify transparent data encryption and key custody'' is assigned to saaS product engineering. Evidence
+    must address this risk without retaining credentials: The server identity cannot unwrap a customer-managed key
+    or the vault path is unavailable. Which action produces sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Configure tamper-resistant auditing for Verify transparent data encryption and
+      key custody. Independently, rely on the belief that a related checkpoint proves the current expected state.
+    B: Retain encryption state, protector class, non-secret key URI, rotation owner, and dependency rationale. Then,
+      exclude credentials and unrelated response fields.
+    C: Store unredacted Verify transparent data encryption and key custody output with operator, tenant, token,
+      and request context. Next, proceed on the belief that reproduction requires every captured field.
+    D: Record only the Verify transparent data encryption and key custody positive inspection's exit status, and
+      then treat as decisive the assertion that projected properties and assertion results can be reconstructed
+      later.
+  answer: B
+  explanations:
+    A: The architecture evidence must show that audit state, sanitized storage resource ID, retention days, event
+      categories, and control owner. Consequently, that evidence supports Configure tamper-resistant auditing, so
+      it cannot demonstrate TDE is enabled and the Microsoft-managed or customer-managed key decision names custody,
+      rotation, and availability dependencies.
+    B: The scenario makes clear that encryption state, protector class, non-secret key URI, rotation owner, and
+      dependency rationale. Consequently, it captures the checkpoint's observable properties while keeping the evidence
+      boundary narrow.
+    C: The applicable design condition is that unredacted implementation output. Consequently, identity, tenant,
+      or token material exceeds the non-secret evidence contract.
+    D: 'The review is governed by this fact: the positive inspection''s exit status. Consequently, an exit code
+      alone does not show whether tDE is enabled and the Microsoft-managed or customer-managed key decision names
+      custody, rotation, and availability dependencies.'
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q24
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: An assurance review of 'Verify transparent data encryption and key custody' includes database reliability
+    engineering. The target is TDE is enabled and the Microsoft-managed or customer-managed key decision names custody,
+    rotation, and availability dependencies, but the latest evidence does not show it. What best demonstrates the
+    most likely cause?
+  options:
+    A: Treat 'Legal-hold needs conflict with the database-native retention limit or cost envelope' as grounds to
+      reject Verify transparent data encryption and key custody. Afterward, treat it as established that bound backup
+      retention without claiming recovery's failure model applies unchanged here.
+    B: Investigate the server identity cannot unwrap a customer-managed key or the vault path is unavailable. Next,
+      isolate that cause before changing Azure SQL Database Hyperscale with named read-scale replicas.
+    C: Ignore the negative assertion 'No customer-managed key reference lacks a resolvable vault key URI'; next,
+      use as justification the claim that a later material change will make it unnecessary.
+    D: Investigate Choose the scale unit and capacity ceiling instead of diagnosing Verify transparent data encryption
+      and key custody. In addition, accept without proof that a passing result at Choose the scale unit and capacity
+      ceiling identifies the current cause.
+  answer: B
+  explanations:
+    A: The decision tension comes from the fact that legal-hold needs conflict with the database-native retention
+      limit or cost envelope. Consequently, that condition belongs to Bound backup retention without claiming recovery
+      and does not by itself invalidate Azure SQL Database Hyperscale with named read-scale replicas.
+    B: The retained result must be reconciled with the fact that the server identity cannot unwrap a customer-managed
+      key or the vault path is unavailable. Consequently, it is the checkpoint's causal failure model and should
+      be isolated before retrying Verify transparent data encryption and key custody.
+    C: The safe operating boundary says that no customer-managed key reference lacks a resolvable vault key URI.
+      Consequently, the negative assertion must be evaluated now, independent of a later business change.
+    D: The traceable checkpoint outcome is that the database uses Hyperscale with an approved initial vCore count
+      and documented vertical and horizontal scale triggers. Consequently, a passing result at Choose the scale
+      unit and capacity ceiling gives no causal evidence for the failure at Verify transparent data encryption and
+      key custody.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q25
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'Approval of ''Verify transparent data encryption and key custody'' is questioned by audit and risk. The
+    run encountered this modeled failure: The server identity cannot unwrap a customer-managed key or the vault
+    path is unavailable. Which option is the safest recovery action?'
+  options:
+    A: Validate managed identity, Key Vault RBAC, key state, and network access independently. As another control,
+      preserve the current run identity and evidence.
+    B: 'Perform cleanup immediately: Restore the original protector before removing a run-owned key association;
+      never purge keys; as an independent condition, base approval on the claim that the failed operation and its
+      returned identifiers do not need reconciliation.'
+    C: Create a different run identity before diagnosing 'The server identity cannot unwrap a customer-managed key
+      or the vault path is unavailable'; separately, use the premise that the first state record and returned identifiers
+      can be discarded.
+    D: Change Choose the scale unit and capacity ceiling instead. Then, consider it sufficient that success at Choose
+      the scale unit and capacity ceiling will repair the failed state at Verify transparent data encryption and
+      key custody.
+  answer: A
+  explanations:
+    A: The failure model establishes that validate managed identity, Key Vault RBAC, key state, and network access
+      independently. Consequently, it corrects the narrow cause while retaining the same recovery trail and decision
+      scope.
+    B: The recovery guidance assumes that restore the original protector before removing a run-owned key association;
+      never purge keys. Consequently, cleanup before reconciliation can erase evidence or strand a partially created
+      dependency.
+    C: The WAF consequence identifies that the server identity cannot unwrap a customer-managed key or the vault
+      path is unavailable. Consequently, discarding the original run identity breaks ownership reconciliation and
+      can duplicate a partial operation.
+    D: The command-level assertion is anchored in the fact that the database uses Hyperscale with an approved initial
+      vCore count and documented vertical and horizontal scale triggers. Consequently, altering an already separate
+      checkpoint does not repair the modeled failure at Verify transparent data encryption and key custody.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q26
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: The implementation review has reached 'Verify transparent data encryption and key custody'. Without making
+    a new change, the team must inspect the risk 'The server identity cannot unwrap a customer-managed key or the
+    vault path is unavailable' using the Azure PowerShell lane. What should the architect select as the read-only,
+    lane-correct inspection?
+  options:
+    A: 'Inspect the documented properties for Verify transparent data encryption and key custody. In addition, retain
+      this evidence: encryption state, protector class, non-secret key URI, rotation owner, and dependency rationale.'
+    B: Rerun the Verify transparent data encryption and key custody implementation command and infer the expected
+      state, and then rely on the claim that absence of a shell error proves every property.
+    C: 'Run only this negative inspection for Verify transparent data encryption and key custody: No customer-managed
+      key reference lacks a resolvable vault key URI. Also, rely on the belief that an empty negative result reports
+      every required positive property.'
+    D: Run the positive inspection for Design read workload isolation and apply it to Verify transparent data encryption
+      and key custody; in a separate step, proceed on the belief that any command from the same lane proves the
+      current checkpoint.
+  answer: A
+  explanations:
+    A: tDE is enabled and the Microsoft-managed or customer-managed key decision names custody, rotation, and availability
+      dependencies. For this case, the read-only inspection directly tests the properties required at Verify transparent
+      data encryption and key custody.
+    B: The controlling fact is that the implementation command. For this case, it can mutate state and shell success
+      does not independently assert the expected properties.
+    C: The authored acceptance boundary states that the negative inspection. For this case, absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    D: The relevant observation is that the positive inspection for Design read workload isolation. For this case,
+      it is lane-correct but proves Design read workload isolation, not Verify transparent data encryption and key
+      custody.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q27
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'The approach to ''Verify transparent data encryption and key custody'' is challenged by saaS product engineering.
+    A passing positive check does not by itself prove this negative assertion: No customer-managed key reference
+    lacks a resolvable vault key URI. Select the assertion pair that proves both conditions independently.'
+  options:
+    A: Verify only the positive result for Verify transparent data encryption and key custody and report full compliance.
+      In addition, take it as conclusive that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Verify transparent data encryption and key custody. Before sign-off, independently
+      verify that no customer-managed key reference lacks a resolvable vault key URI.
+    C: Prove only that no customer-managed key reference lacks a resolvable vault key URI and report the intended
+      configuration as present; before approval, treat it as established that absence is equivalent to positive-state
+      evidence.
+    D: Use Configure tamper-resistant auditing's negative assertion for Verify transparent data encryption and key
+      custody. Separately, use as justification the claim that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The scenario makes clear that tDE is enabled and the Microsoft-managed or customer-managed key decision names
+      custody, rotation, and availability dependencies. For this case, the positive result alone does not test the
+      explicit anti-condition 'No customer-managed key reference lacks a resolvable vault key URI'.
+    B: The checkpoint specifically records that tDE is enabled and the Microsoft-managed or customer-managed key
+      decision names custody, rotation, and availability dependencies; No customer-managed key reference lacks a
+      resolvable vault key URI. For this case, two independent observations prevent a passing positive check from
+      concealing an unsafe parallel state.
+    C: The architecture evidence must show that no customer-managed key reference lacks a resolvable vault key URI.
+      For this case, absence evidence cannot demonstrate the required positive state 'TDE is enabled and the Microsoft-managed
+      or customer-managed key decision names custody, rotation, and availability dependencies'.
+    D: The applicable design condition is that auditing is not disabled and retention is not shorter than the control
+      requirement. For this case, the second assertion is valid for Configure tamper-resistant auditing but leaves
+      this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q28
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'A decision test for ''Verify transparent data encryption and key custody'' includes database reliability
+    engineering. The board wants the Well-Architected consequence of mitigating this risk: The server identity cannot
+    unwrap a customer-managed key or the vault path is unavailable. Which response provides the consequence attributable
+    to this checkpoint?'
+  options:
+    A: 'Record this consequence: Reliability: key identity, vault reachability, and rotation ownership make the
+      external encryption dependency operable; afterward, tie it to LAB09-REQ-03.'
+    B: Use the Bound backup retention without claiming recovery consequence as the result for Verify transparent
+      data encryption and key custody. Then, treat as decisive the assertion that a pillar statement remains valid
+      when moved away from Bound backup retention without claiming recovery.
+    C: Remove the control responsible for the Verify transparent data encryption and key custody outcome; afterward,
+      base approval on the claim that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Reliability: key identity, vault reachability, and rotation ownership make the external encryption
+      dependency operable'' as proof that all five pillars pass; then use the premise that the checkpoint ''Verify
+      transparent data encryption and key custody'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The review is governed by this fact: reliability: key identity, vault reachability, and rotation ownership
+      make the external encryption dependency operable. For this case, it states the authored pillar consequence
+      of the control evaluated at Verify transparent data encryption and key custody.'
+    B: 'The retained result must be reconciled with the fact that operational Excellence: explicit retention evidence
+      separates configured protection from recovery claims owned by Lab 16. For this case, that tradeoff belongs
+      to Bound backup retention without claiming recovery and does not explain this checkpoint''s decision.'
+    C: The decision tension comes from the fact that the required outcome at Verify transparent data encryption
+      and key custody. For this case, cost Optimization cannot remove the acceptance condition 'TDE is enabled and
+      the Microsoft-managed or customer-managed key decision names custody, rotation, and availability dependencies'.
+    D: The safe operating boundary says that no customer-managed key reference lacks a resolvable vault key URI.
+      For this case, one positive command cannot establish every pillar, especially while the negative state remains
+      unchecked.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q29
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'The architecture board reconsiders ''Verify transparent data encryption and key custody'' with audit and
+    risk. A material change now applies: A new tenant produces unpredictable read bursts but contributes little
+    write load and requires strict cost attribution; revise replica and tenancy decisions without weakening encryption
+    or audit controls. Which choice gives the team the correct revision to the decision record?'
+  options:
+    A: Retain Azure SQL Database Hyperscale with named read-scale replicas at Verify transparent data encryption
+      and key custody without recalculating criteria or eligibility; in a separate step, accept without proof that
+      the original weighted result is permanent.
+    B: Select Azure SQL Database elastic pool partitioned by tenant for Verify transparent data encryption and key
+      custody without rechecking its mandatory constraints. As another control, rely on the claim that being different
+      from the current design is an architecture criterion.
+    C: Keep Azure SQL Managed Instance Business Critical eligible at Verify transparent data encryption and key
+      custody by downgrading LAB09-REQ-03; as a separate check, rely on the belief that stakeholder approval is
+      unnecessary when that requirement blocks the candidate.
+    D: Re-score Azure SQL Database Hyperscale with named read-scale replicas and both alternatives for Verify transparent
+      data encryption and key custody, and then supersede the ADR using the changed evidence for LAB09-REQ-03.
+  answer: D
+  explanations:
+    A: The failure model establishes that azure SQL Database Hyperscale with named read-scale replicas. For this
+      case, the original ADR remains historical evidence, but its score cannot answer a changed mandatory condition.
+    B: The recovery guidance assumes that azure SQL Database elastic pool partitioned by tenant. For this case,
+      being different is not a criterion, and the candidate still must avoid the prohibited state at Verify transparent
+      data encryption and key custody.
+    C: The WAF consequence identifies that lAB09-REQ-03. For this case, an architect cannot silently downgrade a
+      stakeholder-owned mandatory requirement to protect a candidate.
+    D: The traceable checkpoint outcome is that azure SQL Database Hyperscale with named read-scale replicas at
+      Verify transparent data encryption and key custody. For this case, the material change 'A new tenant produces
+      unpredictable read bursts but contributes little write load and requires strict cost attribution; revise replica
+      and tenancy decisions without weakening encryption or audit controls.' requires fresh eligibility, weighted
+      analysis, and a superseding decision.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q30
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP03
+  stem: 'A review of ''Verify transparent data encryption and key custody'' begins with input from finOps. After
+    a partial run, cleanup must follow this dependency: Restore the original protector before removing a run-owned
+    key association; never purge keys. What is the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Design read workload isolation before reconciling the current dependency. Separately,
+      consider it sufficient that removing a parent needed to identify Verify transparent data encryption and key
+      custody is harmless.
+    B: 'Verify exact run-state IDs and ownership tags for Verify transparent data encryption and key custody; as
+      a separate check, follow this dependency rule without purge: Restore the original protector before removing
+      a run-owned key association; never purge keys.'
+    C: Delete candidates by display name before comparing the Verify transparent data encryption and key custody
+      ownership tags; for this decision, take it as conclusive that the dependency rule 'Restore the original protector
+      before removing a run-owned key association; never purge keys' is optional.
+    D: Destroy recoverable copies before retaining the Verify transparent data encryption and key custody negative
+      assertion 'No customer-managed key reference lacks a resolvable vault key URI'. Before sign-off, treat it
+      as established that remaining command logs are sufficient recovery evidence.
+  answer: B
+  explanations:
+    A: restore recorded read-scale and replica settings before disposing of the run-owned database. That evidence
+      means a cleanup rule for Design read workload isolation cannot override the dependency declared for Verify
+      transparent data encryption and key custody.
+    B: The command-level assertion is anchored in the fact that restore the original protector before removing a
+      run-owned key association; never purge keys. For this case, exact identity, complete ownership tags, and the
+      authored dependency order constrain cleanup and preserve recovery.
+    C: The controlling fact is that encryption state, protector class, non-secret key URI, rotation owner, and dependency
+      rationale. That evidence means names are not ownership proof; deletion requires the exact recorded identifier
+      and every required tag.
+    D: The authored acceptance boundary states that no customer-managed key reference lacks a resolvable vault key
+      URI. That evidence means irreversible purge is outside the lab contract and destroys evidence needed for residual-state
+      validation.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q31
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: '''Configure tamper-resistant auditing'' awaits approval from finOps. Approval requires a positive result
+    plus this independent negative assertion: Auditing is not disabled and retention is not shorter than the control
+    requirement. What recommendation gives the reviewers the acceptance rule that makes LAB09-REQ-04 testable?'
+  options:
+    A: Require the documented positive state for Configure tamper-resistant auditing. Separately, verify that auditing
+      is not disabled and retention is not shorter than the control requirement.
+    B: Select Azure SQL Database elastic pool partitioned by tenant before checking Configure tamper-resistant auditing.
+      Afterward, use the premise that a successful deployment will later prove the architecture constraint.
+    C: Use the passing result from Choose the scale unit and capacity ceiling to approve Configure tamper-resistant
+      auditing; next, consider it sufficient that one control establishes an unrelated acceptance boundary.
+    D: Choose Azure SQL Managed Instance Business Critical and skip the Configure tamper-resistant auditing negative
+      assertion. In addition, take it as conclusive that the candidate has the lowest implementation effort.
+  answer: A
+  explanations:
+    A: The relevant observation is that database audit events route to the approved protected storage target for
+      the mandated ninety days. That evidence means the positive state and an independent negative assertion jointly
+      make LAB09-REQ-04 testable.
+    B: The checkpoint specifically records that auditing is not disabled and retention is not shorter than the control
+      requirement. That evidence means a deployment result cannot prove LAB09-REQ-04, and Azure SQL Database elastic
+      pool partitioned by tenant still has to meet the mandatory boundary.
+    C: The scenario makes clear that the database uses Hyperscale with an approved initial vCore count and documented
+      vertical and horizontal scale triggers. That evidence means that outcome belongs to Choose the scale unit
+      and capacity ceiling and leaves Configure tamper-resistant auditing unverified.
+    D: The architecture evidence must show that sustain ledger growth and read demand while meeting data-protection
+      controls without overpromising disaster recovery. That evidence means implementation effort cannot justify
+      skipping the negative assertion or displace LAB09-REQ-04.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q32
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: '''Configure tamper-resistant auditing'' is reopened at the request of saaS product engineering. The selected
+    architecture is Azure SQL Database Hyperscale with named read-scale replicas; object existence alone is not
+    success. Which action produces the intended successful finding?'
+  options:
+    A: Use only the negative assertion 'Auditing is not disabled and retention is not shorter than the control requirement'
+      as the success result; as an independent condition, rely on the belief that absence proves every required
+      positive property.
+    B: Use the successful finding from Design read workload isolation as the result for Configure tamper-resistant
+      auditing; independently, proceed on the belief that a property from the current checkpoint does not need to
+      be inspected.
+    C: Record database audit events route to the approved protected storage target for the mandated ninety days;
+      as a second control, classify it as success for LAB09-REQ-04.
+    D: Record the failure condition 'Storage authorization, firewall rules, or destination immutability prevents
+      audit delivery' as a successful state. Then, treat as decisive the assertion that the command returned an
+      object.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: auditing is not disabled and retention is not shorter than the control
+      requirement. That evidence means this is the independent prohibited-state assertion, not a successful finding.'
+    B: The retained result must be reconciled with the fact that read-intent routing and replica count isolate reporting
+      demand within an approved capacity envelope. That evidence means evidence for Design read workload isolation
+      cannot substitute for the properties required at Configure tamper-resistant auditing.
+    C: The applicable design condition is that database audit events route to the approved protected storage target
+      for the mandated ninety days. That evidence means this is the authored target state for Configure tamper-resistant
+      auditing and directly supports LAB09-REQ-04.
+    D: The decision tension comes from the fact that storage authorization, firewall rules, or destination immutability
+      prevents audit delivery. That evidence means resource existence or command output does not convert the documented
+      failure condition into success.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q33
+  difficulty: foundational
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'A design review of ''Configure tamper-resistant auditing'' includes database reliability engineering. Evidence
+    must address this risk without retaining credentials: Storage authorization, firewall rules, or destination
+    immutability prevents audit delivery. What best demonstrates sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Verify transparent data encryption and key custody for Configure tamper-resistant
+      auditing, and then treat it as established that a related checkpoint proves the current expected state.
+    B: Store unredacted Configure tamper-resistant auditing output with operator, tenant, token, and request context.
+      Also, use as justification the claim that reproduction requires every captured field.
+    C: Record only the Configure tamper-resistant auditing positive inspection's exit status; in a separate step,
+      accept without proof that projected properties and assertion results can be reconstructed later.
+    D: Retain audit state, sanitized storage resource ID, retention days, event categories, and control owner. Independently,
+      exclude credentials and unrelated response fields.
+  answer: D
+  explanations:
+    A: The traceable checkpoint outcome is that encryption state, protector class, non-secret key URI, rotation
+      owner, and dependency rationale. That evidence means that evidence supports Verify transparent data encryption
+      and key custody, so it cannot demonstrate Database audit events route to the approved protected storage target
+      for the mandated ninety days.
+    B: The failure model establishes that unredacted implementation output. That evidence means identity, tenant,
+      or token material exceeds the non-secret evidence contract.
+    C: The recovery guidance assumes that the positive inspection's exit status. That evidence means an exit code
+      alone does not show whether database audit events route to the approved protected storage target for the mandated
+      ninety days.
+    D: The safe operating boundary says that audit state, sanitized storage resource ID, retention days, event categories,
+      and control owner. That evidence means it captures the checkpoint's observable properties while keeping the
+      evidence boundary narrow.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q34
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: The team asks audit and risk to assess 'Configure tamper-resistant auditing'. The target is Database audit
+    events route to the approved protected storage target for the mandated ninety days, but the latest evidence
+    does not show it. Which option is the most likely cause?
+  options:
+    A: Treat 'Legal-hold needs conflict with the database-native retention limit or cost envelope' as grounds to
+      reject Configure tamper-resistant auditing. In addition, base approval on the claim that bound backup retention
+      without claiming recovery's failure model applies unchanged here.
+    B: Ignore the negative assertion 'Auditing is not disabled and retention is not shorter than the control requirement';
+      before approval, use the premise that a later material change will make it unnecessary.
+    C: Investigate Choose the scale unit and capacity ceiling instead of diagnosing Configure tamper-resistant auditing.
+      Separately, consider it sufficient that a passing result at Choose the scale unit and capacity ceiling identifies
+      the current cause.
+    D: Investigate storage authorization, firewall rules, or destination immutability prevents audit delivery; in
+      a separate step, isolate that cause before changing Azure SQL Database Hyperscale with named read-scale replicas.
+  answer: D
+  explanations:
+    A: The command-level assertion is anchored in the fact that legal-hold needs conflict with the database-native
+      retention limit or cost envelope. That evidence means that condition belongs to Bound backup retention without
+      claiming recovery and does not by itself invalidate Azure SQL Database Hyperscale with named read-scale replicas.
+    B: auditing is not disabled and retention is not shorter than the control requirement. The resulting architectural
+      conclusion is that the negative assertion must be evaluated now, independent of a later business change.
+    C: The controlling fact is that the database uses Hyperscale with an approved initial vCore count and documented
+      vertical and horizontal scale triggers. The resulting architectural conclusion is that a passing result at
+      Choose the scale unit and capacity ceiling gives no causal evidence for the failure at Configure tamper-resistant
+      auditing.
+    D: The WAF consequence identifies that storage authorization, firewall rules, or destination immutability prevents
+      audit delivery. That evidence means it is the checkpoint's causal failure model and should be isolated before
+      retrying Configure tamper-resistant auditing.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q35
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'A recommendation on ''Configure tamper-resistant auditing'' is requested by finOps. The run encountered
+    this modeled failure: Storage authorization, firewall rules, or destination immutability prevents audit delivery.
+    What should the architect select as the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Restore recorded audit settings before removing a run-owned destination; retain
+      required evidence lawfully. Then, rely on the claim that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'Storage authorization, firewall rules, or destination
+      immutability prevents audit delivery'; afterward, rely on the belief that the first state record and returned
+      identifiers can be discarded.
+    C: Validate identity, network, and storage protection separately before changing the audit control; next, preserve
+      the current run identity and evidence.
+    D: Change Choose the scale unit and capacity ceiling instead; then proceed on the belief that success at Choose
+      the scale unit and capacity ceiling will repair the failed state at Configure tamper-resistant auditing.
+  answer: C
+  explanations:
+    A: The relevant observation is that restore recorded audit settings before removing a run-owned destination;
+      retain required evidence lawfully. The resulting architectural conclusion is that cleanup before reconciliation
+      can erase evidence or strand a partially created dependency.
+    B: The checkpoint specifically records that storage authorization, firewall rules, or destination immutability
+      prevents audit delivery. The resulting architectural conclusion is that discarding the original run identity
+      breaks ownership reconciliation and can duplicate a partial operation.
+    C: The authored acceptance boundary states that validate identity, network, and storage protection separately
+      before changing the audit control. The resulting architectural conclusion is that it corrects the narrow cause
+      while retaining the same recovery trail and decision scope.
+    D: The scenario makes clear that the database uses Hyperscale with an approved initial vCore count and documented
+      vertical and horizontal scale triggers. The resulting architectural conclusion is that altering an already
+      separate checkpoint does not repair the modeled failure at Configure tamper-resistant auditing.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q36
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: '''Configure tamper-resistant auditing'' is assigned to saaS product engineering. Without making a new change,
+    the team must inspect the risk ''Storage authorization, firewall rules, or destination immutability prevents
+    audit delivery'' using the Azure PowerShell lane. Select the read-only, lane-correct inspection.'
+  options:
+    A: Rerun the Configure tamper-resistant auditing implementation command and infer the expected state; in a separate
+      step, take it as conclusive that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Configure tamper-resistant auditing: Auditing is not disabled and
+      retention is not shorter than the control requirement. As another control, treat it as established that an
+      empty negative result reports every required positive property.'
+    C: 'Inspect the documented properties for Configure tamper-resistant auditing; for this decision, retain this
+      evidence: audit state, sanitized storage resource ID, retention days, event categories, and control owner.'
+    D: Run the positive inspection for Design read workload isolation and apply it to Configure tamper-resistant
+      auditing; as a separate check, use as justification the claim that any command from the same lane proves the
+      current checkpoint.
+  answer: C
+  explanations:
+    A: The applicable design condition is that the implementation command. The resulting architectural conclusion
+      is that it can mutate state and shell success does not independently assert the expected properties.
+    B: 'The review is governed by this fact: the negative inspection. The resulting architectural conclusion is
+      that absence of the prohibited condition is necessary but does not establish the positive architecture state.'
+    C: The architecture evidence must show that database audit events route to the approved protected storage target
+      for the mandated ninety days. The resulting architectural conclusion is that the read-only inspection directly
+      tests the properties required at Configure tamper-resistant auditing.
+    D: The retained result must be reconciled with the fact that the positive inspection for Design read workload
+      isolation. The resulting architectural conclusion is that it is lane-correct but proves Design read workload
+      isolation, not Configure tamper-resistant auditing.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q37
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'An assurance review of ''Configure tamper-resistant auditing'' includes database reliability engineering.
+    A passing positive check does not by itself prove this negative assertion: Auditing is not disabled and retention
+    is not shorter than the control requirement. Which response provides the assertion pair that proves both conditions
+    independently?'
+  options:
+    A: Verify only the positive result for Configure tamper-resistant auditing and report full compliance. Separately,
+      treat as decisive the assertion that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Configure tamper-resistant auditing. Then, independently verify that auditing
+      is not disabled and retention is not shorter than the control requirement.
+    C: Prove only that auditing is not disabled and retention is not shorter than the control requirement and report
+      the intended configuration as present; for this decision, base approval on the claim that absence is equivalent
+      to positive-state evidence.
+    D: Use Verify transparent data encryption and key custody's negative assertion for Configure tamper-resistant
+      auditing. Before sign-off, use the premise that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that database audit events route to the approved protected storage target
+      for the mandated ninety days. The resulting architectural conclusion is that the positive result alone does
+      not test the explicit anti-condition 'Auditing is not disabled and retention is not shorter than the control
+      requirement'.
+    B: The decision tension comes from the fact that database audit events route to the approved protected storage
+      target for the mandated ninety days; Auditing is not disabled and retention is not shorter than the control
+      requirement. The resulting architectural conclusion is that two independent observations prevent a passing
+      positive check from concealing an unsafe parallel state.
+    C: The traceable checkpoint outcome is that auditing is not disabled and retention is not shorter than the control
+      requirement. The resulting architectural conclusion is that absence evidence cannot demonstrate the required
+      positive state 'Database audit events route to the approved protected storage target for the mandated ninety
+      days'.
+    D: The failure model establishes that no customer-managed key reference lacks a resolvable vault key URI. The
+      resulting architectural conclusion is that the second assertion is valid for Verify transparent data encryption
+      and key custody but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q38
+  difficulty: applied
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'Approval of ''Configure tamper-resistant auditing'' is questioned by audit and risk. The board wants the
+    Well-Architected consequence of mitigating this risk: Storage authorization, firewall rules, or destination
+    immutability prevents audit delivery. Which choice gives the team the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Bound backup retention without claiming recovery consequence as the result for Configure tamper-resistant
+      auditing; then accept without proof that a pillar statement remains valid when moved away from Bound backup
+      retention without claiming recovery.
+    B: Remove the control responsible for the Configure tamper-resistant auditing outcome. Independently, rely on
+      the claim that a elevated cost classification outweighs the mandatory architecture state.
+    C: 'Record this consequence: Security: protected auditing creates accountable evidence of material database
+      activity. Next, tie it to LAB09-REQ-04.'
+    D: 'Treat ''Security: protected auditing creates accountable evidence of material database activity'' as proof
+      that all five pillars pass. Next, rely on the belief that the checkpoint ''Configure tamper-resistant auditing''
+      no longer needs its separate negative check.'
+  answer: C
+  explanations:
+    A: 'The WAF consequence identifies that operational Excellence: explicit retention evidence separates configured
+      protection from recovery claims owned by Lab 16. The resulting architectural conclusion is that that tradeoff
+      belongs to Bound backup retention without claiming recovery and does not explain this checkpoint''s decision.'
+    B: The command-level assertion is anchored in the fact that the required outcome at Configure tamper-resistant
+      auditing. The resulting architectural conclusion is that cost Optimization cannot remove the acceptance condition
+      'Database audit events route to the approved protected storage target for the mandated ninety days'.
+    C: 'The recovery guidance assumes that security: protected auditing creates accountable evidence of material
+      database activity. The resulting architectural conclusion is that it states the authored pillar consequence
+      of the control evaluated at Configure tamper-resistant auditing.'
+    D: auditing is not disabled and retention is not shorter than the control requirement. Under the stated constraint,
+      one positive command cannot establish every pillar, especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q39
+  difficulty: advanced
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'The implementation review has reached ''Configure tamper-resistant auditing''. A material change now applies:
+    A new tenant produces unpredictable read bursts but contributes little write load and requires strict cost attribution;
+    revise replica and tenancy decisions without weakening encryption or audit controls. What is the correct revision
+    to the decision record?'
+  options:
+    A: Retain Azure SQL Database Hyperscale with named read-scale replicas at Configure tamper-resistant auditing
+      without recalculating criteria or eligibility; as a separate check, consider it sufficient that the original
+      weighted result is permanent.
+    B: Select Azure SQL Database elastic pool partitioned by tenant for Configure tamper-resistant auditing without
+      rechecking its mandatory constraints. Afterward, take it as conclusive that being different from the current
+      design is an architecture criterion.
+    C: Keep Azure SQL Managed Instance Business Critical eligible at Configure tamper-resistant auditing by downgrading
+      LAB09-REQ-04; next, treat it as established that stakeholder approval is unnecessary when that requirement
+      blocks the candidate.
+    D: Re-score Azure SQL Database Hyperscale with named read-scale replicas and both alternatives for Configure
+      tamper-resistant auditing. As another control, supersede the ADR using the changed evidence for LAB09-REQ-04.
+  answer: D
+  explanations:
+    A: The authored acceptance boundary states that azure SQL Database Hyperscale with named read-scale replicas.
+      Under the stated constraint, the original ADR remains historical evidence, but its score cannot answer a changed
+      mandatory condition.
+    B: The relevant observation is that azure SQL Database elastic pool partitioned by tenant. Under the stated
+      constraint, being different is not a criterion, and the candidate still must avoid the prohibited state at
+      Configure tamper-resistant auditing.
+    C: The checkpoint specifically records that lAB09-REQ-04. Under the stated constraint, an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+    D: The controlling fact is that azure SQL Database Hyperscale with named read-scale replicas at Configure tamper-resistant
+      auditing. Under the stated constraint, the material change 'A new tenant produces unpredictable read bursts
+      but contributes little write load and requires strict cost attribution; revise replica and tenancy decisions
+      without weakening encryption or audit controls.' requires fresh eligibility, weighted analysis, and a superseding
+      decision.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q40
+  difficulty: advanced
+  objectiveId: DATA-REL-04
+  checkpointId: LAB09-CP04
+  stem: 'The approach to ''Configure tamper-resistant auditing'' is challenged by saaS product engineering. After
+    a partial run, cleanup must follow this dependency: Restore recorded audit settings before removing a run-owned
+    destination; retain required evidence lawfully. Which recommendation supplies the dependency-safe cleanup plan?'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Configure tamper-resistant auditing. In addition, follow
+      this dependency rule without purge: Restore recorded audit settings before removing a run-owned destination;
+      retain required evidence lawfully.'
+    B: Apply the cleanup rule for Design read workload isolation before reconciling the current dependency. Before
+      sign-off, proceed on the belief that removing a parent needed to identify Configure tamper-resistant auditing
+      is harmless.
+    C: Delete candidates by display name before comparing the Configure tamper-resistant auditing ownership tags;
+      as an independent condition, treat as decisive the assertion that the dependency rule 'Restore recorded audit
+      settings before removing a run-owned destination; retain required evidence lawfully' is optional.
+    D: Destroy recoverable copies before retaining the Configure tamper-resistant auditing negative assertion 'Auditing
+      is not disabled and retention is not shorter than the control requirement'; during the same review, base approval
+      on the claim that remaining command logs are sufficient recovery evidence.
+  answer: A
+  explanations:
+    A: The scenario makes clear that restore recorded audit settings before removing a run-owned destination; retain
+      required evidence lawfully. Under the stated constraint, exact identity, complete ownership tags, and the
+      authored dependency order constrain cleanup and preserve recovery.
+    B: The architecture evidence must show that restore recorded read-scale and replica settings before disposing
+      of the run-owned database. Under the stated constraint, a cleanup rule for Design read workload isolation
+      cannot override the dependency declared for Configure tamper-resistant auditing.
+    C: The applicable design condition is that audit state, sanitized storage resource ID, retention days, event
+      categories, and control owner. Under the stated constraint, names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.
+    D: 'The review is governed by this fact: auditing is not disabled and retention is not shorter than the control
+      requirement. Under the stated constraint, irreversible purge is outside the lab contract and destroys evidence
+      needed for residual-state validation.'
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q41
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: 'A decision test for ''Bound backup retention without claiming recovery'' includes saaS product engineering.
+    Approval requires a positive result plus this independent negative assertion: Retention is not extended beyond
+    approval and is not presented as proof of tested RPO or restore time. Which action produces the acceptance rule
+    that makes LAB09-REQ-05 testable?'
+  options:
+    A: Require the documented positive state for Bound backup retention without claiming recovery; as an independent
+      condition, verify that retention is not extended beyond approval and is not presented as proof of tested RPO
+      or restore time.
+    B: Select Azure SQL Database elastic pool partitioned by tenant before checking Bound backup retention without
+      claiming recovery. In addition, rely on the belief that a successful deployment will later prove the architecture
+      constraint.
+    C: Use the passing result from Choose the scale unit and capacity ceiling to approve Bound backup retention
+      without claiming recovery; before approval, proceed on the belief that one control establishes an unrelated
+      acceptance boundary.
+    D: Choose Azure SQL Managed Instance Business Critical and skip the Bound backup retention without claiming
+      recovery negative assertion. Separately, treat as decisive the assertion that the candidate has the lowest
+      implementation effort.
+  answer: A
+  explanations:
+    A: The retained result must be reconciled with the fact that short- and long-term retention satisfy legal and
+      operational protection requirements with an identified cost owner. Under the stated constraint, the positive
+      state and an independent negative assertion jointly make LAB09-REQ-05 testable.
+    B: The decision tension comes from the fact that retention is not extended beyond approval and is not presented
+      as proof of tested RPO or restore time. Under the stated constraint, a deployment result cannot prove LAB09-REQ-05,
+      and Azure SQL Database elastic pool partitioned by tenant still has to meet the mandatory boundary.
+    C: The safe operating boundary says that the database uses Hyperscale with an approved initial vCore count and
+      documented vertical and horizontal scale triggers. Under the stated constraint, that outcome belongs to Choose
+      the scale unit and capacity ceiling and leaves Bound backup retention without claiming recovery unverified.
+    D: The traceable checkpoint outcome is that sustain ledger growth and read demand while meeting data-protection
+      controls without overpromising disaster recovery. Under the stated constraint, implementation effort cannot
+      justify skipping the negative assertion or displace LAB09-REQ-05.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q42
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: The architecture board reconsiders 'Bound backup retention without claiming recovery' with database reliability
+    engineering. The selected architecture is Azure SQL Database Hyperscale with named read-scale replicas; object
+    existence alone is not success. What best demonstrates the intended successful finding?
+  options:
+    A: Use only the negative assertion 'Retention is not extended beyond approval and is not presented as proof
+      of tested RPO or restore time' as the success result. Then, treat it as established that absence proves every
+      required positive property.
+    B: Use the successful finding from Design read workload isolation as the result for Bound backup retention without
+      claiming recovery; afterward, use as justification the claim that a property from the current checkpoint does
+      not need to be inspected.
+    C: Record short- and long-term retention satisfy legal and operational protection requirements with an identified
+      cost owner; then classify it as success for LAB09-REQ-05.
+    D: Record the failure condition 'Legal-hold needs conflict with the database-native retention limit or cost
+      envelope' as a successful state; then accept without proof that the command returned an object.
+  answer: C
+  explanations:
+    A: The recovery guidance assumes that retention is not extended beyond approval and is not presented as proof
+      of tested RPO or restore time. Under the stated constraint, this is the independent prohibited-state assertion,
+      not a successful finding.
+    B: The WAF consequence identifies that read-intent routing and replica count isolate reporting demand within
+      an approved capacity envelope. Under the stated constraint, evidence for Design read workload isolation cannot
+      substitute for the properties required at Bound backup retention without claiming recovery.
+    C: The failure model establishes that short- and long-term retention satisfy legal and operational protection
+      requirements with an identified cost owner. Under the stated constraint, this is the authored target state
+      for Bound backup retention without claiming recovery and directly supports LAB09-REQ-05.
+    D: The command-level assertion is anchored in the fact that legal-hold needs conflict with the database-native
+      retention limit or cost envelope. Under the stated constraint, resource existence or command output does not
+      convert the documented failure condition into success.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q43
+  difficulty: foundational
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: 'A review of ''Bound backup retention without claiming recovery'' begins with input from audit and risk.
+    Evidence must address this risk without retaining credentials: Legal-hold needs conflict with the database-native
+    retention limit or cost envelope. Which option is sufficient, properly scoped evidence?'
+  options:
+    A: Retain retention values, backup storage redundancy choice, legal rationale, cost owner, and Lab 16 dependency.
+      Also, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Verify transparent data encryption and key custody for Bound backup retention
+      without claiming recovery; in a separate step, base approval on the claim that a related checkpoint proves
+      the current expected state.
+    C: Store unredacted Bound backup retention without claiming recovery output with operator, tenant, token, and
+      request context. As another control, use the premise that reproduction requires every captured field.
+    D: Record only the Bound backup retention without claiming recovery positive inspection's exit status; as a
+      separate check, consider it sufficient that projected properties and assertion results can be reconstructed
+      later.
+  answer: A
+  explanations:
+    A: retention values, backup storage redundancy choice, legal rationale, cost owner, and Lab 16 dependency. This
+      matters because it captures the checkpoint's observable properties while keeping the evidence boundary narrow.
+    B: The controlling fact is that encryption state, protector class, non-secret key URI, rotation owner, and dependency
+      rationale. This matters because that evidence supports Verify transparent data encryption and key custody,
+      so it cannot demonstrate Short- and long-term retention satisfy legal and operational protection requirements
+      with an identified cost owner.
+    C: The authored acceptance boundary states that unredacted implementation output. This matters because identity,
+      tenant, or token material exceeds the non-secret evidence contract.
+    D: The relevant observation is that the positive inspection's exit status. This matters because an exit code
+      alone does not show whether short- and long-term retention satisfy legal and operational protection requirements
+      with an identified cost owner.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q44
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: '''Bound backup retention without claiming recovery'' awaits approval from finOps. The target is Short-
+    and long-term retention satisfy legal and operational protection requirements with an identified cost owner,
+    but the latest evidence does not show it. What should the architect select as the most likely cause?'
+  options:
+    A: Treat 'Storage authorization, firewall rules, or destination immutability prevents audit delivery' as grounds
+      to reject Bound backup retention without claiming recovery. Separately, rely on the claim that configure tamper-resistant
+      auditing's failure model applies unchanged here.
+    B: Ignore the negative assertion 'Retention is not extended beyond approval and is not presented as proof of
+      tested RPO or restore time'; for this decision, rely on the belief that a later material change will make
+      it unnecessary.
+    C: Investigate legal-hold needs conflict with the database-native retention limit or cost envelope. Afterward,
+      isolate that cause before changing Azure SQL Database Hyperscale with named read-scale replicas.
+    D: Investigate Choose the scale unit and capacity ceiling instead of diagnosing Bound backup retention without
+      claiming recovery. Before sign-off, proceed on the belief that a passing result at Choose the scale unit and
+      capacity ceiling identifies the current cause.
+  answer: C
+  explanations:
+    A: The scenario makes clear that storage authorization, firewall rules, or destination immutability prevents
+      audit delivery. This matters because that condition belongs to Configure tamper-resistant auditing and does
+      not by itself invalidate Azure SQL Database Hyperscale with named read-scale replicas.
+    B: The architecture evidence must show that retention is not extended beyond approval and is not presented as
+      proof of tested RPO or restore time. This matters because the negative assertion must be evaluated now, independent
+      of a later business change.
+    C: The checkpoint specifically records that legal-hold needs conflict with the database-native retention limit
+      or cost envelope. This matters because it is the checkpoint's causal failure model and should be isolated
+      before retrying Bound backup retention without claiming recovery.
+    D: The applicable design condition is that the database uses Hyperscale with an approved initial vCore count
+      and documented vertical and horizontal scale triggers. This matters because a passing result at Choose the
+      scale unit and capacity ceiling gives no causal evidence for the failure at Bound backup retention without
+      claiming recovery.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q45
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: '''Bound backup retention without claiming recovery'' is reopened at the request of saaS product engineering.
+    The run encountered this modeled failure: Legal-hold needs conflict with the database-native retention limit
+    or cost envelope. Select the safest recovery action.'
+  options:
+    A: 'Perform cleanup immediately: Never purge service-managed backups; remove only run-owned configuration through
+      supported retention behavior; then take it as conclusive that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Evaluate immutable archive evidence and revise the protection design without inventing a recovery claim.
+      Separately, preserve the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'Legal-hold needs conflict with the database-native retention
+      limit or cost envelope'. Independently, treat it as established that the first state record and returned identifiers
+      can be discarded.
+    D: Change Choose the scale unit and capacity ceiling instead. Next, use as justification the claim that success
+      at Choose the scale unit and capacity ceiling will repair the failed state at Bound backup retention without
+      claiming recovery.
+  answer: B
+  explanations:
+    A: The retained result must be reconciled with the fact that never purge service-managed backups; remove only
+      run-owned configuration through supported retention behavior. This matters because cleanup before reconciliation
+      can erase evidence or strand a partially created dependency.
+    B: 'The review is governed by this fact: evaluate immutable archive evidence and revise the protection design
+      without inventing a recovery claim. This matters because it corrects the narrow cause while retaining the
+      same recovery trail and decision scope.'
+    C: The decision tension comes from the fact that legal-hold needs conflict with the database-native retention
+      limit or cost envelope. This matters because discarding the original run identity breaks ownership reconciliation
+      and can duplicate a partial operation.
+    D: The safe operating boundary says that the database uses Hyperscale with an approved initial vCore count and
+      documented vertical and horizontal scale triggers. This matters because altering an already separate checkpoint
+      does not repair the modeled failure at Bound backup retention without claiming recovery.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q46
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: A design review of 'Bound backup retention without claiming recovery' includes database reliability engineering.
+    Without making a new change, the team must inspect the risk 'Legal-hold needs conflict with the database-native
+    retention limit or cost envelope' using the Azure PowerShell lane. Which response provides the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Bound backup retention without claiming recovery implementation command and infer the expected
+      state; as a separate check, treat as decisive the assertion that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Bound backup retention without claiming recovery; as another gate,
+      retain this evidence: retention values, backup storage redundancy choice, legal rationale, cost owner, and
+      Lab 16 dependency.'
+    C: 'Run only this negative inspection for Bound backup retention without claiming recovery: Retention is not
+      extended beyond approval and is not presented as proof of tested RPO or restore time. Afterward, base approval
+      on the claim that an empty negative result reports every required positive property.'
+    D: Run the positive inspection for Design read workload isolation and apply it to Bound backup retention without
+      claiming recovery; next, use the premise that any command from the same lane proves the current checkpoint.
+  answer: B
+  explanations:
+    A: The failure model establishes that the implementation command. This matters because it can mutate state and
+      shell success does not independently assert the expected properties.
+    B: The traceable checkpoint outcome is that short- and long-term retention satisfy legal and operational protection
+      requirements with an identified cost owner. This matters because the read-only inspection directly tests the
+      properties required at Bound backup retention without claiming recovery.
+    C: The recovery guidance assumes that the negative inspection. This matters because absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    D: The WAF consequence identifies that the positive inspection for Design read workload isolation. This matters
+      because it is lane-correct but proves Design read workload isolation, not Bound backup retention without claiming
+      recovery.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q47
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: 'The team asks audit and risk to assess ''Bound backup retention without claiming recovery''. A passing
+    positive check does not by itself prove this negative assertion: Retention is not extended beyond approval and
+    is not presented as proof of tested RPO or restore time. Which choice gives the team the assertion pair that
+    proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Bound backup retention without claiming recovery and report full compliance.
+      Before sign-off, accept without proof that every prohibited parallel state must therefore be absent.
+    B: Prove only that retention is not extended beyond approval and is not presented as proof of tested RPO or
+      restore time and report the intended configuration as present; as an independent condition, rely on the claim
+      that absence is equivalent to positive-state evidence.
+    C: Use Verify transparent data encryption and key custody's negative assertion for Bound backup retention without
+      claiming recovery; for the recorded decision, rely on the belief that negative assertions are interchangeable
+      between checkpoints.
+    D: Verify the positive properties for Bound backup retention without claiming recovery. Independently, independently
+      verify that retention is not extended beyond approval and is not presented as proof of tested RPO or restore
+      time.
+  answer: D
+  explanations:
+    A: short- and long-term retention satisfy legal and operational protection requirements with an identified cost
+      owner. The checkpoint therefore requires that the positive result alone does not test the explicit anti-condition
+      'Retention is not extended beyond approval and is not presented as proof of tested RPO or restore time'.
+    B: The controlling fact is that retention is not extended beyond approval and is not presented as proof of tested
+      RPO or restore time. The checkpoint therefore requires that absence evidence cannot demonstrate the required
+      positive state 'Short- and long-term retention satisfy legal and operational protection requirements with
+      an identified cost owner'.
+    C: The authored acceptance boundary states that no customer-managed key reference lacks a resolvable vault key
+      URI. The checkpoint therefore requires that the second assertion is valid for Verify transparent data encryption
+      and key custody but leaves this checkpoint's prohibited state untested.
+    D: The command-level assertion is anchored in the fact that short- and long-term retention satisfy legal and
+      operational protection requirements with an identified cost owner; Retention is not extended beyond approval
+      and is not presented as proof of tested RPO or restore time. This matters because two independent observations
+      prevent a passing positive check from concealing an unsafe parallel state.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q48
+  difficulty: applied
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: 'A recommendation on ''Bound backup retention without claiming recovery'' is requested by finOps. The board
+    wants the Well-Architected consequence of mitigating this risk: Legal-hold needs conflict with the database-native
+    retention limit or cost envelope. What is the consequence attributable to this checkpoint?'
+  options:
+    A: 'Record this consequence: Operational Excellence: explicit retention evidence separates configured protection
+      from recovery claims owned by Lab 16; in a separate step, tie it to LAB09-REQ-05.'
+    B: Use the Configure tamper-resistant auditing consequence as the result for Bound backup retention without
+      claiming recovery. Next, consider it sufficient that a pillar statement remains valid when moved away from
+      Configure tamper-resistant auditing.
+    C: Remove the control responsible for the Bound backup retention without claiming recovery outcome, and then
+      take it as conclusive that a elevated cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Operational Excellence: explicit retention evidence separates configured protection from recovery
+      claims owned by Lab 16'' as proof that all five pillars pass. Also, treat it as established that the checkpoint
+      ''Bound backup retention without claiming recovery'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The relevant observation is that operational Excellence: explicit retention evidence separates configured
+      protection from recovery claims owned by Lab 16. The checkpoint therefore requires that it states the authored
+      pillar consequence of the control evaluated at Bound backup retention without claiming recovery.'
+    B: 'The checkpoint specifically records that security: protected auditing creates accountable evidence of material
+      database activity. The checkpoint therefore requires that that tradeoff belongs to Configure tamper-resistant
+      auditing and does not explain this checkpoint''s decision.'
+    C: The scenario makes clear that the required outcome at Bound backup retention without claiming recovery. The
+      checkpoint therefore requires that cost Optimization cannot remove the acceptance condition 'Short- and long-term
+      retention satisfy legal and operational protection requirements with an identified cost owner'.
+    D: The architecture evidence must show that retention is not extended beyond approval and is not presented as
+      proof of tested RPO or restore time. The checkpoint therefore requires that one positive command cannot establish
+      every pillar, especially while the negative state remains unchecked.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q49
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: '''Bound backup retention without claiming recovery'' is assigned to saaS product engineering. A material
+    change now applies: A new tenant produces unpredictable read bursts but contributes little write load and requires
+    strict cost attribution; revise replica and tenancy decisions without weakening encryption or audit controls.
+    Which recommendation supplies the correct revision to the decision record?'
+  options:
+    A: Retain Azure SQL Database Hyperscale with named read-scale replicas at Bound backup retention without claiming
+      recovery without recalculating criteria or eligibility; next, proceed on the belief that the original weighted
+      result is permanent.
+    B: Select Azure SQL Database elastic pool partitioned by tenant for Bound backup retention without claiming
+      recovery without rechecking its mandatory constraints. In addition, treat as decisive the assertion that being
+      different from the current design is an architecture criterion.
+    C: Re-score Azure SQL Database Hyperscale with named read-scale replicas and both alternatives for Bound backup
+      retention without claiming recovery; next, supersede the ADR using the changed evidence for LAB09-REQ-05.
+    D: Keep Azure SQL Managed Instance Business Critical eligible at Bound backup retention without claiming recovery
+      by downgrading LAB09-REQ-05; before approval, base approval on the claim that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: azure SQL Database Hyperscale with named read-scale replicas. The checkpoint
+      therefore requires that the original ADR remains historical evidence, but its score cannot answer a changed
+      mandatory condition.'
+    B: The retained result must be reconciled with the fact that azure SQL Database elastic pool partitioned by
+      tenant. The checkpoint therefore requires that being different is not a criterion, and the candidate still
+      must avoid the prohibited state at Bound backup retention without claiming recovery.
+    C: The applicable design condition is that azure SQL Database Hyperscale with named read-scale replicas at Bound
+      backup retention without claiming recovery. The checkpoint therefore requires that the material change 'A
+      new tenant produces unpredictable read bursts but contributes little write load and requires strict cost attribution;
+      revise replica and tenancy decisions without weakening encryption or audit controls.' requires fresh eligibility,
+      weighted analysis, and a superseding decision.
+    D: The decision tension comes from the fact that lAB09-REQ-05. The checkpoint therefore requires that an architect
+      cannot silently downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+- id: LAB09-Q50
+  difficulty: advanced
+  objectiveId: DATA-REL-03
+  checkpointId: LAB09-CP05
+  stem: 'An assurance review of ''Bound backup retention without claiming recovery'' includes database reliability
+    engineering. After a partial run, cleanup must follow this dependency: Never purge service-managed backups;
+    remove only run-owned configuration through supported retention behavior. Choose the dependency-safe cleanup
+    plan.'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Bound backup retention without claiming recovery; for
+      this decision, follow this dependency rule without purge: Never purge service-managed backups; remove only
+      run-owned configuration through supported retention behavior.'
+    B: Apply the cleanup rule for Design read workload isolation before reconciling the current dependency; as another
+      gate, use as justification the claim that removing a parent needed to identify Bound backup retention without
+      claiming recovery is harmless.
+    C: Delete candidates by display name before comparing the Bound backup retention without claiming recovery ownership
+      tags. Then, accept without proof that the dependency rule 'Never purge service-managed backups; remove only
+      run-owned configuration through supported retention behavior' is optional.
+    D: Destroy recoverable copies before retaining the Bound backup retention without claiming recovery negative
+      assertion 'Retention is not extended beyond approval and is not presented as proof of tested RPO or restore
+      time'; afterward, rely on the claim that remaining command logs are sufficient recovery evidence.
+  answer: A
+  explanations:
+    A: The safe operating boundary says that never purge service-managed backups; remove only run-owned configuration
+      through supported retention behavior. The checkpoint therefore requires that exact identity, complete ownership
+      tags, and the authored dependency order constrain cleanup and preserve recovery.
+    B: The traceable checkpoint outcome is that restore recorded read-scale and replica settings before disposing
+      of the run-owned database. The checkpoint therefore requires that a cleanup rule for Design read workload
+      isolation cannot override the dependency declared for Bound backup retention without claiming recovery.
+    C: The failure model establishes that retention values, backup storage redundancy choice, legal rationale, cost
+      owner, and Lab 16 dependency. The checkpoint therefore requires that names are not ownership proof; deletion
+      requires the exact recorded identifier and every required tag.
+    D: The recovery guidance assumes that retention is not extended beyond approval and is not presented as proof
+      of tested RPO or restore time. The checkpoint therefore requires that irreversible purge is outside the lab
+      contract and destroys evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+  verifiedOn: '2026-09-02'
+# END GENERATED AZ305 V1

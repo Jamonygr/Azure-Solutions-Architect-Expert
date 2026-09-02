@@ -1,0 +1,79 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-11
+number: 11
+slug: 11-unstructured-data-design
+title: Unstructured Data Platform Selection
+domain: data
+track: azure-powershell
+implementationMode: reference-deployable
+status: offline-validated
+role: Unstructured data platform architect
+outcome: A secure ADLS Gen2 landing-zone design with deliberate namespace, access, encryption, and network boundaries.
+duration: 155 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Storage account and data-plane read roles support discovery; account, filesystem, share, ACL, network,
+  or lifecycle changes need separately approved rights.
+licensing: ADLS Gen2 transactions, Azure Files provisioned or used capacity, redundancy, snapshots, and private
+  connectivity use different meters.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+objectives:
+  primary:
+  - DATA-NONREL-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- DirectoryPath
+- FileSystemName
+- StorageAccountName
+- StorageAccountResourceId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB11-CP01
+  title: Match service semantics to access patterns
+  requirementIds:
+  - LAB11-REQ-01
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-CP02
+  title: Create a hierarchical namespace boundary
+  requirementIds:
+  - LAB11-REQ-02
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-CP03
+  title: Design filesystem and directory ownership
+  requirementIds:
+  - LAB11-REQ-03
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-CP04
+  title: Define encryption and key dependency
+  requirementIds:
+  - LAB11-REQ-04
+  objectiveIds:
+  - DATA-NONREL-02
+- id: LAB11-CP05
+  title: Validate private endpoint access
+  requirementIds:
+  - LAB11-REQ-05
+  objectiveIds:
+  - DATA-NONREL-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

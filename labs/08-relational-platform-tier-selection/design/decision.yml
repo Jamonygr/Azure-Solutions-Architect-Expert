@@ -1,0 +1,149 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-08
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure SQL Database General Purpose serverless
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 5
+    C5: 5
+  weightedTotal: 91.0
+  rationale: Before the acquired dependency is known, serverless SQL Database best matches intermittent load and
+    minimizes platform administration.
+- id: CAND-B
+  name: Azure SQL Managed Instance General Purpose
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 2
+  weightedTotal: 76.0
+  rationale: Managed Instance provides broader instance compatibility and managed operations, with a higher continuously
+    allocated cost floor.
+- id: CAND-C
+  name: Azure Database for PostgreSQL Flexible Server General Purpose
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 4
+    C3: 4
+    C4: 3
+    C5: 3
+  weightedTotal: 63.0
+  rationale: PostgreSQL is a capable managed relational target, but engine conversion expands schema, code, testing,
+    and cutover work.
+- id: CAND-D
+  name: Larger Azure SQL Database tier without compatibility remediation
+  eligible: false
+  disqualifiers:
+  - LAB08-REQ-01 requires mandatory engine and instance compatibility to be established before selecting a service
+    tier.
+  scores:
+    C1: 1
+    C2: 4
+    C3: 4
+    C4: 3
+    C5: 2
+  weightedTotal: 55.0
+  rationale: More database compute changes capacity but does not add missing instance-scoped compatibility features.
+selectedCandidate: Azure SQL Database General Purpose serverless
+rejectedAlternatives:
+- candidate: Azure SQL Managed Instance General Purpose
+  reason: Its initial cost is not justified until SQL Agent and instance-level dependencies become mandatory.
+- candidate: Azure Database for PostgreSQL Flexible Server General Purpose
+  reason: Engine migration risk is unnecessary for an application whose discovered dependencies remain SQL Server
+    specific.
+- candidate: Larger Azure SQL Database tier without compatibility remediation
+  reason: The candidate is disqualified because scaling cannot repair a platform compatibility gap.
+risks:
+- risk: Compatibility tooling can miss runtime jobs or infrequently used cross-database paths.
+  mitigation: Reconcile assessment output with SQL Agent history, dependency telemetry, and an owner-signed feature
+    inventory.
+- risk: Managed Instance baseline cost may exceed the modernization budget during idle periods.
+  mitigation: Size from measured month-end and ordinary load, apply license benefits where eligible, and expose
+    the fixed-cost delta.
+waf:
+  reliability: Managed database high availability and tested rollback protect transactions during platform and migration
+    failure.
+  security: Private access, managed identity where supported, encryption, and least-privilege database roles remain
+    target requirements.
+  costOptimization: Compute model follows measured utilization while compatibility prevents false savings that reappear
+    as remediation work.
+  operationalExcellence: Compatibility findings, cutover gates, and post-migration assertions make the target decision
+    auditable.
+  performanceEfficiency: Month-end benchmarks and workload-specific sizing replace an assumption that a larger tier
+    fixes incompatibility.
+safeAnalogue: null
+traceability:
+- objectiveId: DATA-REL-01
+  requirementId: LAB08-REQ-01
+  checkpointId: LAB08-CP01
+- objectiveId: DATA-REL-02
+  requirementId: LAB08-REQ-02
+  checkpointId: LAB08-CP02
+- objectiveId: DATA-REL-01
+  requirementId: LAB08-REQ-03
+  checkpointId: LAB08-CP03
+- objectiveId: DATA-REL-02
+  requirementId: LAB08-REQ-04
+  checkpointId: LAB08-CP04
+- objectiveId: DATA-REL-01
+  requirementId: LAB08-REQ-05
+  checkpointId: LAB08-CP05
+adr:
+  id: ADR-LAB08-001
+  status: accepted
+  context: Woodgrove Bank is replacing a small line-of-business database hosted on aging virtual machines. The application
+    uses ordinary SQL transactions and predictable daytime demand, can change connection handling, and has no instance-scoped
+    SQL Server dependency. Demand falls close to zero overnight, yet month-end processing needs temporary compute
+    growth. Architects must compare Azure SQL Database, Azure SQL Managed Instance, and Azure Database for PostgreSQL
+    rather than defaulting to the familiar engine. As the data architect, select the relational platform and service
+    tier, define identity and network boundaries, and provide command evidence that the chosen compute model matches
+    compatibility, operations, elasticity, latency, and cost constraints.
+  decision: 'Select Azure SQL Database General Purpose serverless: Before the acquired dependency is known, serverless
+    SQL Database best matches intermittent load and minimizes platform administration.'
+  consequences:
+  - The initial serverless recommendation is superseded for the acquired workload after compatibility evidence changes.
+  - Managed Instance capacity and networking require a longer provisioning and cost-planning lead time.
+revisedDecision:
+  changeRequestId: LAB08-CR-01
+  selectedCandidate: Azure SQL Managed Instance General Purpose
+  reason: LAB08-REQ-05 makes SQL Agent, cross-database transactions, and instance collation mandatory, so compatibility
+    overrides the initial serverless score and selects Managed Instance.
+  mandatoryRequirementId: LAB08-REQ-05
+  waf:
+    reliability: Managed Instance retains managed high availability while avoiding unsupported job and transaction
+      workarounds.
+    security: The target still requires private networking and least-privilege database administration.
+    costOptimization: Higher baseline compute is accepted and must be offset with measured sizing and eligible license
+      benefits.
+    operationalExcellence: Existing Agent jobs and instance behaviors move into a supported managed operating model.
+    performanceEfficiency: Capacity is benchmarked for both ordinary and month-end demand after compatibility is
+      established.
+# END GENERATED AZ305 V1

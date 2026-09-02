@@ -1,0 +1,81 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-12
+businessOutcome: Lower long-term storage cost while preserving the durability and evidentiary controls each data
+  class requires.
+stakeholders:
+- Data owners
+- Records management
+- FinOps
+- Business continuity
+functionalRequirements:
+- id: LAB12-REQ-01
+  statement: Data classes map age, access frequency, minimum retention, retrieval tolerance, object size, and transaction
+    patterns to cost drivers.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-03
+- id: LAB12-REQ-02
+  statement: GZRS provides zonal durability in the primary region and asynchronous geo-replication to the paired
+    secondary region.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-04
+- id: LAB12-REQ-03
+  statement: Prefix- and tag-scoped rules move objects to cooler tiers and delete only after approved retention.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-03
+nonfunctionalRequirements:
+- id: LAB12-REQ-04
+  statement: Versioning plus blob and container soft delete protect against routine overwrite and deletion for fourteen
+    days.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-04
+- id: LAB12-REQ-05
+  statement: The evidence container has a documented time-based immutability mode, retention period, and authorized
+    lock procedure.
+  mandatory: true
+  objectiveIds:
+  - DATA-NONREL-03
+constraints:
+- Durability and evidence controls differ across active media, recoverable working data, and audit packages.
+- Audit packages require seven-year immutable retention while media can be deleted after eighteen months.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Producers attach a validated data-class value before lifecycle evaluation.
+- Legal owners approve retention and immutability scope before a locked production policy is applied.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Media, operational objects, and audit packages have distinct retention, mutability, retrieval, and legal-evidence
+    requirements.
+  scale: Capacity accumulates over years, but per-class growth and retrieval rates remain measured rather than fabricated.
+  latency: Active media needs immediate retrieval; archived audit evidence accepts documented rehydration delay
+    unless legal sets a faster target.
+  availability: GZRS protects against zone and regional failure, while immutability protects evidence from change
+    rather than improving service uptime.
+  rto: Restore or rehydration time is defined per data class; no single numerical RTO applies to the entire account.
+  rpo: GZRS replication and versioning objectives differ from the zero-alteration requirement of locked audit evidence.
+  budget: Lifecycle tiers and deletion at eighteen months limit media cost, while seven-year immutable evidence
+    is isolated for transparent pricing.
+acceptanceCriteria:
+- LAB12-REQ-01 passes its independent positive and negative assertions.
+- LAB12-REQ-02 passes its independent positive and negative assertions.
+- LAB12-REQ-03 passes its independent positive and negative assertions.
+- LAB12-REQ-04 passes its independent positive and negative assertions.
+- LAB12-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB12-CR-01
+  trigger: Audit packages become subject to a seven-year immutable retention mandate while media can be deleted
+    after eighteen months; revise account, container, lifecycle, and cost boundaries.
+  materialChange: Audit packages become subject to a seven-year immutable retention mandate while media can be deleted
+    after eighteen months; revise account, container, lifecycle, and cost boundaries.
+  mandatoryRequirementId: LAB12-REQ-05
+  expectedRevision: Separate audit and media policy boundaries, lock audit packages for seven years, and delete
+    eligible media after eighteen months.
+# END GENERATED AZ305 V1

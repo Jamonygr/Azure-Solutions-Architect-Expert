@@ -1,0 +1,44 @@
+<!-- BEGIN GENERATED AZ305 V1 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="870" viewBox="0 0 760 870" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">LAB-13 Data Integration and Analytics Architecture</title>
+  <desc id="diagram-desc">Architecture flow from business requirements through five checkpoints to independent evidence.</desc>
+  <metadata>source-sha256:25eeb45a6252c3d416d291a451175c3487eef6de478c72cc853e77baf981eb39</metadata>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7 Z" fill="#005a9e"/></marker></defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="80" y="70" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="89" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Deliver traceable analytics datasets from cloud and private sources without</tspan>
+    <tspan x="380" dy="20">creating unmanaged credentials or always-on analytics cost.</tspan>
+  </text>
+  <line x1="380" y1="146" x2="380" y2="180" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="180" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Select integration patterns and runtimes</tspan>
+  </text>
+  <line x1="380" y1="256" x2="380" y2="290" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="290" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="317" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Use managed identity for linked services</tspan>
+  </text>
+  <line x1="380" y1="366" x2="380" y2="400" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="400" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Orchestrate idempotent ingestion</tspan>
+  </text>
+  <line x1="380" y1="476" x2="380" y2="510" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="510" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="537" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Serve governed analytical queries</tspan>
+  </text>
+  <line x1="380" y1="586" x2="380" y2="620" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="620" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="647" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Validate lineage operations and spend</tspan>
+  </text>
+  <line x1="380" y1="696" x2="380" y2="730" stroke="#005a9e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="80" y="730" width="600" height="76" rx="10" fill="#eef5ff" stroke="#005a9e" stroke-width="2"/>
+  <text x="380" y="757" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#111111">
+    <tspan x="380" dy="0">Independent positive and negative evidence</tspan>
+  </text>
+</svg>
+<!-- END GENERATED AZ305 V1 -->

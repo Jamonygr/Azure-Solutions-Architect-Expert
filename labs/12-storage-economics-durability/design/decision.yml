@@ -1,0 +1,144 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-12
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: StorageV2 with GZRS and class-specific lifecycle policies
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 3
+    C5: 3
+  weightedTotal: 90.0
+  rationale: StorageV2 combines regional durability with data-class lifecycle rules and supports a dedicated immutable
+    evidence boundary.
+- id: CAND-B
+  name: StorageV2 with LRS and application-managed secondary copies
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 4
+    C4: 2
+    C5: 4
+  weightedTotal: 58.0
+  rationale: Application copies may lower account pricing but transfer replication ordering, integrity, and failover
+    proof to custom code.
+- id: CAND-C
+  name: Premium block blob accounts with uniform online retention
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 1
+  weightedTotal: 68.0
+  rationale: Premium online storage provides consistent low latency but overpays for cold long-lived packages and
+    does not express class retention alone.
+- id: CAND-D
+  name: One mutable hot-tier container with manual seven-year deletion reminders
+  eligible: false
+  disqualifiers:
+  - LAB12-REQ-05 requires an enforceable immutable evidence boundary with approved retention and lock procedure.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 1
+    C4: 2
+    C5: 2
+  weightedTotal: 35.0
+  rationale: Manual reminders and a mutable container cannot prevent premature alteration or deletion of regulated
+    evidence.
+selectedCandidate: StorageV2 with GZRS and class-specific lifecycle policies
+rejectedAlternatives:
+- candidate: StorageV2 with LRS and application-managed secondary copies
+  reason: The custom secondary lacks the managed regional durability and auditable behavior required by evidence
+    classes.
+- candidate: Premium block blob accounts with uniform online retention
+  reason: Uniform premium retention ignores different retrieval and deletion requirements and produces the weakest
+    cost fit.
+- candidate: One mutable hot-tier container with manual seven-year deletion reminders
+  reason: The candidate is disqualified because procedural intent is not an immutable storage control.
+risks:
+- risk: An incorrect data-class tag can archive active media or leave audit evidence mutable.
+  mitigation: Validate classification at ingestion and run policy simulations against representative objects before
+    activation.
+- risk: Locked immutability can preserve erroneous or sensitive content for seven years.
+  mitigation: Establish legal approval, narrow the immutable container, and test content validation before final
+    locking.
+waf:
+  reliability: GZRS and per-class recovery tests protect durability without confusing immutability with availability.
+  security: Locked audit containers, least-privilege data roles, and private access preserve evidence integrity.
+  costOptimization: Lifecycle timing follows actual retention and retrieval behavior for media and audit classes.
+  operationalExcellence: Classification, policy simulation, lock approval, and exception evidence form a controlled
+    lifecycle process.
+  performanceEfficiency: Hot access remains available for active media while cold evidence uses capacity-efficient
+    tiers.
+safeAnalogue: null
+traceability:
+- objectiveId: DATA-NONREL-03
+  requirementId: LAB12-REQ-01
+  checkpointId: LAB12-CP01
+- objectiveId: DATA-NONREL-04
+  requirementId: LAB12-REQ-02
+  checkpointId: LAB12-CP02
+- objectiveId: DATA-NONREL-03
+  requirementId: LAB12-REQ-03
+  checkpointId: LAB12-CP03
+- objectiveId: DATA-NONREL-04
+  requirementId: LAB12-REQ-04
+  checkpointId: LAB12-CP04
+- objectiveId: DATA-NONREL-03
+  requirementId: LAB12-REQ-05
+  checkpointId: LAB12-CP05
+adr:
+  id: ADR-LAB12-001
+  status: accepted
+  context: Fourth Coffee retains media, transaction exports, and audit packages in a general-purpose storage estate.
+    All objects remain in the Hot tier, replication choices differ by project, deletes are difficult to investigate,
+    and monthly cost grows faster than usable data. The business needs an architecture that balances access frequency,
+    retrieval delay, capacity and transaction charges, regional durability, versioning, soft delete, and immutable
+    evidence. Explicit recovery objectives and failover exercises belong to Lab 17; this lab must recommend protection
+    and durability characteristics without claiming recovery readiness. As the storage economics architect, encode
+    lifecycle and protection decisions with Azure CLI and preserve a cost owner for every retention choice.
+  decision: 'Select StorageV2 with GZRS and class-specific lifecycle policies: StorageV2 combines regional durability
+    with data-class lifecycle rules and supports a dedicated immutable evidence boundary.'
+  consequences:
+  - Audit evidence moves to a separately approved immutable container or account with restricted administration.
+  - Data producers become accountable for correct classification before lifecycle policy can act.
+revisedDecision:
+  changeRequestId: LAB12-CR-01
+  selectedCandidate: StorageV2 with GZRS and class-specific lifecycle policies
+  reason: LAB12-REQ-05 requires enforceable seven-year immutability and eighteen-month media deletion, so class-specific
+    GZRS boundaries are retained with a separately locked audit container.
+  mandatoryRequirementId: LAB12-REQ-05
+  waf:
+    reliability: Regional redundancy remains independent from the immutable evidence control.
+    security: Audit objects cannot be altered or deleted by ordinary storage administrators.
+    costOptimization: Media exits storage at eighteen months while long-lived evidence uses an intentional tier.
+    operationalExcellence: Lock approval and lifecycle simulation become required release evidence.
+    performanceEfficiency: Active media avoids archive delay and rarely read audit packages avoid premium capacity.
+# END GENERATED AZ305 V1

@@ -1,0 +1,87 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-13
+businessOutcome: Deliver traceable analytics datasets from cloud and private sources without creating unmanaged
+  credentials or always-on analytics cost.
+stakeholders:
+- Data engineering
+- Analytics consumers
+- Operational system owners
+- Data governance council
+functionalRequirements:
+- id: LAB13-REQ-01
+  statement: Batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration runtime
+    boundaries.
+  mandatory: true
+  objectiveIds:
+  - DATA-INT-01
+- id: LAB13-REQ-02
+  statement: Supported sources and sinks use the data-factory managed identity or a Key Vault reference with least
+    privilege.
+  mandatory: true
+  objectiveIds:
+  - DATA-INT-02
+- id: LAB13-REQ-03
+  statement: The pipeline uses watermarks, deterministic paths, retry policy, and quarantine handling to make reruns
+    safe.
+  mandatory: true
+  objectiveIds:
+  - DATA-INT-01
+nonfunctionalRequirements:
+- id: LAB13-REQ-04
+  statement: Curated lake data is exposed through governed serverless SQL views, with a dedicated pool considered
+    only for measured isolation or performance needs.
+  mandatory: true
+  objectiveIds:
+  - DATA-INT-02
+- id: LAB13-REQ-05
+  statement: A synthetic run links source slice, pipeline and activity IDs, curated output, status, duration, owner,
+    and estimated service cost.
+  mandatory: true
+  objectiveIds:
+  - DATA-INT-01
+constraints:
+- Cloud and private sources must move without embedded credentials and retain lineage and reconciliation evidence.
+- One telemetry stream becomes near-real-time while partner files remain hourly and executives prefer a unified
+  Fabric experience.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Private sources can reach a hardened self-hosted integration runtime without inbound exposure.
+- Source owners provide watermark, schema, and reconciliation rules for batch and stream paths.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Partner files, private operational sources, and telemetry events have different arrival, schema, lineage,
+    and replay semantics.
+  scale: Hourly batch volume and continuous telemetry throughput are measured per source; no unsupported row-rate
+    estimate is introduced.
+  latency: Executive telemetry dashboards require near-real-time updates, while partner-file freshness remains an
+    hourly objective.
+  availability: Failed batch slices must resume from watermarks and streaming checkpoints must recover without duplicating
+    accepted events.
+  rto: Pipeline restoration is set per flow; the scenario gives no single numerical recovery target.
+  rpo: Batch reconciliation and stream checkpoint retention define different tolerated replay windows and require
+    owner approval.
+  budget: Serverless query and scheduled orchestration avoid always-on analytics cost until Fabric capacity is justified
+    by unified use.
+acceptanceCriteria:
+- LAB13-REQ-01 passes its independent positive and negative assertions.
+- LAB13-REQ-02 passes its independent positive and negative assertions.
+- LAB13-REQ-03 passes its independent positive and negative assertions.
+- LAB13-REQ-04 passes its independent positive and negative assertions.
+- LAB13-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB13-CR-01
+  trigger: Executives mandate near-real-time operational dashboards for one telemetry stream while partner files
+    remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary without
+    forcing every flow into streaming.
+  materialChange: Executives mandate near-real-time operational dashboards for one telemetry stream while partner
+    files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary
+    without forcing every flow into streaming.
+  mandatoryRequirementId: LAB13-REQ-01
+  expectedRevision: Add a Fabric near-real-time path for telemetry while preserving hourly governed batch contracts
+    for partner files.
+# END GENERATED AZ305 V1

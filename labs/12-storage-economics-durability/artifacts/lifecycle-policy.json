@@ -1,0 +1,32 @@
+{
+  "rules": [
+    {
+      "enabled": true,
+      "name": "tier-then-expire",
+      "type": "Lifecycle",
+      "definition": {
+        "filters": {
+          "blobTypes": [
+            "blockBlob"
+          ],
+          "prefixMatch": [
+            "evidence/"
+          ]
+        },
+        "actions": {
+          "baseBlob": {
+            "tierToCool": {
+              "daysAfterModificationGreaterThan": 30
+            },
+            "tierToArchive": {
+              "daysAfterModificationGreaterThan": 180
+            },
+            "delete": {
+              "daysAfterModificationGreaterThan": 2555
+            }
+          }
+        }
+      }
+    }
+  ]
+}
