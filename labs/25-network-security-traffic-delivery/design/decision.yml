@@ -1,0 +1,152 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-25
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer, and NAT
+    Gateway
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 5
+    C5: 2
+  weightedTotal: 94.0
+  rationale: Layered global, regional, east-west, and explicit outbound services provide native WAF, TLS inspection,
+    FQDN policy, and failure-domain controls.
+- id: CAND-B
+  name: Traffic Manager, regional WAF gateways, NSG-only inspection, Standard Load Balancer, and NAT Gateway
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 2
+    C4: 4
+    C5: 4
+  weightedTotal: 66.0
+  rationale: DNS steering and NSGs lower cost but cannot provide centralized FQDN filtering or TLS inspection for
+    outbound content.
+- id: CAND-C
+  name: Front Door Standard, third-party NVAs behind Gateway Load Balancer, and centralized proxy egress
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 5
+    C4: 2
+    C5: 2
+  weightedTotal: 74.0
+  rationale: NVAs can deliver advanced inspection and vendor features, though appliance scaling, patching, routes,
+    and support become customer responsibilities.
+- id: CAND-D
+  name: Basic Load Balancer implicit outbound with unrestricted internet egress
+  eligible: false
+  disqualifiers:
+  - LAB25-REQ-04 requires Standard Load Balancer with explicit outbound connectivity and governed destination policy.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 2
+    C5: 4
+  weightedTotal: 29.0
+  rationale: Implicit outbound and unrestricted egress avoid policy configuration but provide neither the supported
+    availability baseline nor destination control.
+selectedCandidate: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer,
+  and NAT Gateway
+rejectedAlternatives:
+- candidate: Traffic Manager, regional WAF gateways, NSG-only inspection, Standard Load Balancer, and NAT Gateway
+  reason: The model cannot meet the new outbound inspection requirement without adding another control plane.
+- candidate: Front Door Standard, third-party NVAs behind Gateway Load Balancer, and centralized proxy egress
+  reason: Equivalent controls carry greater lifecycle and routing complexity than the managed-service design.
+- candidate: Basic Load Balancer implicit outbound with unrestricted internet egress
+  reason: It is ineligible because current-service and mandatory outbound requirements are unmet.
+risks:
+- risk: A broad TLS bypass for the pinned vendor can become an unmonitored exfiltration route.
+  mitigation: Scope bypass to exact FQDN and flow identity, retain SNI and connection logs, and review vendor certificate
+    changes.
+- risk: Centralized inspection can exhaust SNAT ports or throughput during a regional event.
+  mitigation: Calculate peak concurrent flows, distribute NAT capacity, and load-test the surviving zone and regional
+    path.
+waf:
+  reliability: Layered health probes, zonal capacity, regional routing, and explicit outbound remove implicit traffic
+    dependencies.
+  security: Premium WAF, firewall FQDN policy, TLS inspection, and a narrow pinned-certificate exception enforce
+    flow intent.
+  costOptimization: Premium controls apply to classified clinical paths and capacity follows measured throughput
+    and connection demand.
+  operationalExcellence: Effective routes, rule hits, certificates, probes, NAT ports, and exception ownership form
+    the network evidence set.
+  performanceEfficiency: Each hop and inspection stage is measured so security does not silently consume the clinical
+    latency budget.
+safeAnalogue: Evaluate synthetic flows, routes, rules, health, NAT-port, and pinned-certificate fixtures; make no
+  network or policy change.
+traceability:
+- objectiveId: INF-NET-04
+  requirementId: LAB25-REQ-01
+  checkpointId: LAB25-CP01
+- objectiveId: INF-NET-05
+  requirementId: LAB25-REQ-02
+  checkpointId: LAB25-CP02
+- objectiveId: INF-NET-04
+  requirementId: LAB25-REQ-03
+  checkpointId: LAB25-CP03
+- objectiveId: INF-NET-05
+  requirementId: LAB25-REQ-04
+  checkpointId: LAB25-CP04
+- objectiveId: INF-NET-04
+  requirementId: LAB25-REQ-05
+  checkpointId: LAB25-CP05
+adr:
+  id: ADR-LAB25-001
+  status: accepted
+  context: 'Fourth Coffee Health exposes appointment services globally and connects them to private clinical APIs
+    in a hub-and-spoke Azure network. Security requires segmented environments, centralized inspection, application-layer
+    protection, controlled east-west flows, and explicit outbound connectivity. Operations also need the correct
+    load-balancing service at each layer: global HTTP entry, regional web routing, private TCP distribution, and
+    deterministic egress. Earlier diagrams used a Basic Load Balancer and assumed default outbound access, creating
+    retirement and reliability risk. Learners will inspect a safe PowerShell analogue built around Front Door Premium,
+    Azure Firewall Premium, Application Gateway WAF v2, Standard Load Balancer, and NAT Gateway without altering
+    production policy.'
+  decision: 'Select Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer,
+    and NAT Gateway: Layered global, regional, east-west, and explicit outbound services provide native WAF, TLS
+    inspection, FQDN policy, and failure-domain controls.'
+  consequences:
+  - The certificate-pinned vendor receives a narrowly governed TLS-inspection exception with an owner and review
+    date.
+  - Standard Load Balancer never supplies accidental outbound access; NAT and firewall routing are deliberate dependencies.
+revisedDecision:
+  changeRequestId: LAB25-CR-01
+  selectedCandidate: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer,
+    and NAT Gateway
+  reason: LAB25-REQ-02 requires owned FQDN and TLS inspection policy, so the selected design adds an exact pinned-vendor
+    bypass with independent logging and expiry review.
+  mandatoryRequirementId: LAB25-REQ-02
+  waf:
+    reliability: The vendor exception remains reachable through explicit redundant outbound paths.
+    security: All other update traffic is inspected and the bypass is constrained to the exact destination.
+    costOptimization: Premium inspection spend remains tied to clinical flows instead of a blanket enterprise rollout.
+    operationalExcellence: Rule hits, certificates, owner, and review date make the exceptional path auditable.
+    performanceEfficiency: Inspection and bypass latency are tested independently against clinical response needs.
+# END GENERATED AZ305 V1

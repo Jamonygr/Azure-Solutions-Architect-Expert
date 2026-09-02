@@ -1,0 +1,87 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-20
+number: 20
+slug: 20-messaging-events-api
+title: Messaging, Event-Driven, and API Integration Architecture
+domain: infrastructure
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Integration solutions architect
+outcome: Design and validate a composed integration platform using service-specific delivery semantics, governed
+  APIs, and observable failure handling.
+duration: 180 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Service Bus, Event Grid, Event Hubs, API Management, identity, and monitoring read roles support discovery;
+  namespace, route, policy, or API changes require separate authorization.
+licensing: Messaging tiers, throughput or processing units, brokered connections, API Management capacity, retention,
+  capture, and networking affect cost.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/service-bus-messaging/compare-messaging-services
+objectives:
+  primary:
+  - INF-APP-01
+  - INF-APP-02
+  - INF-APP-03
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApiManagementName
+- CommandQueueName
+- EventHubNamespace
+- EventTopicResourceId
+- PartnerApiId
+- ResourceGroupName
+- ServiceBusNamespace
+- ServiceBusNamespaceResourceId
+- TelemetryHubName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB20-CP01
+  title: Classify every interaction contract
+  requirementIds:
+  - LAB20-REQ-01
+  objectiveIds:
+  - INF-APP-01
+- id: LAB20-CP02
+  title: Validate durable command processing
+  requirementIds:
+  - LAB20-REQ-02
+  objectiveIds:
+  - INF-APP-02
+- id: LAB20-CP03
+  title: Prove event fan-out and telemetry separation
+  requirementIds:
+  - LAB20-REQ-03
+  objectiveIds:
+  - INF-APP-03
+- id: LAB20-CP04
+  title: Govern partner APIs
+  requirementIds:
+  - LAB20-REQ-04
+  objectiveIds:
+  - INF-APP-01
+- id: LAB20-CP05
+  title: Validate end-to-end failure handling
+  requirementIds:
+  - LAB20-REQ-05
+  objectiveIds:
+  - INF-APP-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

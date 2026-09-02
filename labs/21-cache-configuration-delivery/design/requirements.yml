@@ -1,0 +1,87 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-21
+businessOutcome: Accelerate storefront reads and release features consistently across regions without embedding
+  secrets or relying on manual configuration drift.
+stakeholders:
+- Digital commerce product owner
+- Application platform lead
+- Release engineering manager
+- Security architect
+- FinOps analyst
+functionalRequirements:
+- id: LAB21-REQ-01
+  statement: The design states cache-aside behavior, key ownership, TTL, eviction, invalidation, stampede control,
+    regional scope, and source-of-truth fallback.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-04
+- id: LAB21-REQ-02
+  statement: Non-secret settings and feature flags live in App Configuration, secrets remain Key Vault references,
+    and labels encode environment rather than tenant secrets.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-05
+- id: LAB21-REQ-03
+  statement: The Bicep template compiles, pins GA resource APIs, includes the required Managed Redis database child,
+    disables public access on both service parents, defines secret-free outputs, and states that private endpoints
+    and DNS remain a required design step outside this what-if-only analogue.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-06
+nonfunctionalRequirements:
+- id: LAB21-REQ-04
+  statement: Template validation and reviewed what-if describe only the bounded analogue, with explicit ownership,
+    expiry, identity, network, and capacity settings and no mutation.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-04
+- id: LAB21-REQ-05
+  statement: Synthetic clients refresh non-secret settings, feature exposure advances by a deterministic ring, cache
+    fallback works, and a failed ring stops and rolls back.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-05
+constraints:
+- Storefront reads and releases must work across regions without embedded secrets or imperative configuration drift.
+- Last-known-safe catalog data must be served for thirty minutes during configuration-store or source-database unavailability.
+- Use only the Azure PowerShell + Bicep command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Catalog entries carry version and freshness metadata and are safe to serve within an approved staleness window.
+- Application revisions can bundle a tested configuration snapshot reference without exposing secret values.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Catalog cache entries, feature and configuration values, deployment manifests, versions, and secret references
+    have separate owners.
+  scale: Read-heavy storefront traffic spans regions; measured working set, operations per second, and miss rate
+    determine cache size.
+  latency: Cache serves the interactive read target and stale-mode activation must occur before dependency timeout
+    cascades.
+  availability: Regional application stamps retain a last-known-safe cache path when App Configuration or the source
+    database is unavailable.
+  rto: Dependency restoration may take thirty minutes without stopping reads; write-path recovery remains a separate
+    owner objective.
+  rpo: The degraded read path intentionally accepts up to the approved catalog staleness boundary rather than inventing
+    current source data.
+  budget: Managed cache and configuration replicas are justified against database load, latency, and the value of
+    thirty-minute read continuity.
+acceptanceCriteria:
+- LAB21-REQ-01 passes its independent positive and negative assertions.
+- LAB21-REQ-02 passes its independent positive and negative assertions.
+- LAB21-REQ-03 passes its independent positive and negative assertions.
+- LAB21-REQ-04 passes its independent positive and negative assertions.
+- LAB21-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB21-CR-01
+  trigger: A regulatory review requires the storefront to keep serving last-known-safe catalog data for thirty minutes
+    during configuration-store or source-database unavailability.
+  materialChange: A regulatory review requires the storefront to keep serving last-known-safe catalog data for thirty
+    minutes during configuration-store or source-database unavailability.
+  mandatoryRequirementId: LAB21-REQ-01
+  expectedRevision: Add a thirty-minute last-known-safe snapshot and emergency invalidation path without treating
+    stale mode as source recovery.
+# END GENERATED AZ305 V1

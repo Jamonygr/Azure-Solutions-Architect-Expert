@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Accelerate storefront reads and release features consistently across regions without embedding secrets or relying on manual configuration drift."]
+    R --> C1["Define cache semantics and failure behavior"]
+    C1 --> C2["Separate configuration, features, and secrets"]
+    C2 --> C3["Compile the delivery contract"]
+    C3 --> C4["Preview a bounded deployment"]
+    C4 --> C5["Validate progressive configuration delivery"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

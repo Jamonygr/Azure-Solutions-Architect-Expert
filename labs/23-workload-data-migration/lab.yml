@@ -1,0 +1,89 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-23
+number: 23
+slug: 23-workload-data-migration
+title: IaaS, PaaS, Database, and Unstructured Data Migration
+domain: infrastructure
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Workload and data migration architect
+outcome: Produce an executable migration runbook for an approved wave covering IaaS, PaaS, relational database,
+  and unstructured data with validation and rollback gates.
+duration: 180 minutes
+difficulty: advanced
+costClass: low
+permissions: Azure Migrate, Database Migration Service, storage, network, and target read access supports planning;
+  replication, transfer, migration, or cutover requires separate authorization.
+licensing: Migration tooling may be free for assessment periods, while replication storage, DMS SKUs, AzCopy transfer,
+  target compute, and egress can incur charges.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview
+objectives:
+  primary:
+  - INF-MIG-03
+  - INF-MIG-04
+  - INF-MIG-05
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApprovedWave
+- DestinationDataUrl
+- MigrateProjectName
+- MigrationResourceGroupName
+- SourceDataUrl
+- TargetApplicationResourceId
+- TargetContainerName
+- TargetDatabaseName
+- TargetResourceGroupName
+- TargetSqlServerName
+- TargetStorageAccountName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB23-CP01
+  title: Confirm approved wave and target prerequisites
+  requirementIds:
+  - LAB23-REQ-01
+  objectiveIds:
+  - INF-MIG-03
+- id: LAB23-CP02
+  title: Design server replication and test migration
+  requirementIds:
+  - LAB23-REQ-02
+  objectiveIds:
+  - INF-MIG-04
+- id: LAB23-CP03
+  title: Plan online relational database migration
+  requirementIds:
+  - LAB23-REQ-03
+  objectiveIds:
+  - INF-MIG-05
+- id: LAB23-CP04
+  title: Stage and verify unstructured data transfer
+  requirementIds:
+  - LAB23-REQ-04
+  objectiveIds:
+  - INF-MIG-03
+- id: LAB23-CP05
+  title: Rehearse cutover, validation, and rollback
+  requirementIds:
+  - LAB23-REQ-05
+  objectiveIds:
+  - INF-MIG-04
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

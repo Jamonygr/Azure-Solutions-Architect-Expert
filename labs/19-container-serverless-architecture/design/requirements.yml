@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-19
+businessOutcome: Absorb catastrophe-driven claim spikes without permanent cluster overhead or credential-bearing
+  application images.
+stakeholders:
+- Claims product owner
+- Application engineering lead
+- Platform operations lead
+- Security architect
+- FinOps analyst
+functionalRequirements:
+- id: LAB19-REQ-01
+  statement: Each component records trigger, latency, duration, state, concurrency, scaling, networking, portability,
+    and operations requirements.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-03
+- id: LAB19-REQ-02
+  statement: The design defines environment boundary, internal and external ingress, revision mode, Dapr need, workload
+    profile, probes, and scale-to-zero behavior.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-04
+- id: LAB19-REQ-03
+  statement: Trigger semantics, concurrency, timeout, cold-start tolerance, poison-message handling, idempotency,
+    and hosting-plan constraints are explicit.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-03
+nonfunctionalRequirements:
+- id: LAB19-REQ-04
+  statement: Every workload uses least-privilege managed identity, retrieves secrets at runtime, and has only the
+    required ingress and egress paths.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-04
+- id: LAB19-REQ-05
+  statement: The load model proves scale thresholds, downstream back-pressure, degraded-mode behavior, observability,
+    and recovery from a failed revision.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-03
+constraints:
+- Claim intake must absorb catastrophe spikes without permanent cluster overhead or credentials in application images.
+- GPU scoring is needed for two hours after an event while the intake API must still scale to zero overnight.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- API, event, and scoring components can be packaged independently and communicate through durable messaging.
+- GPU quota and regional availability are verified before any production design is approved.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Claim requests, documents, events, model artifacts, scoring outputs, and audit records have distinct retention
+    and access needs.
+  scale: Catastrophe traffic is burst-driven and GPU demand lasts two hours; measured request rate and model throughput
+    remain sizing inputs.
+  latency: Intake response and asynchronous risk-score completion have separate service objectives and scaling triggers.
+  availability: Durable messaging decouples API availability from temporary scorer or event-handler capacity loss.
+  rto: Worker recovery must preserve queued claims; the scenario does not assign a numerical platform RTO.
+  rpo: Accepted intake events require durable storage before acknowledgment so scale-to-zero does not lose work.
+  budget: Serverless idle behavior is preserved for intake, while scarce GPU capacity is activated only for the
+    catastrophe window.
+acceptanceCriteria:
+- LAB19-REQ-01 passes its independent positive and negative assertions.
+- LAB19-REQ-02 passes its independent positive and negative assertions.
+- LAB19-REQ-03 passes its independent positive and negative assertions.
+- LAB19-REQ-04 passes its independent positive and negative assertions.
+- LAB19-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB19-CR-01
+  trigger: The risk-scoring worker now needs GPU acceleration for two hours after a catastrophe, but the intake
+    API must still scale to zero overnight.
+  materialChange: The risk-scoring worker now needs GPU acceleration for two hours after a catastrophe, but the
+    intake API must still scale to zero overnight.
+  mandatoryRequirementId: LAB19-REQ-05
+  expectedRevision: Add a time-bounded GPU worker profile while retaining scale-to-zero intake and durable claim
+    buffering.
+# END GENERATED AZ305 V1

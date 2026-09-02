@@ -1,0 +1,5 @@
+applicationId,owner,businessCriticality,environment,hosting,operatingSystem,dataClassification,monthlyCost,disposition,wave,supportStatus,exceptionId
+APP-001,finance-platform,tier-1,production,vm,linux,confidential,4200,replatform,2,supported,
+APP-002,commerce-platform,tier-1,production,physical,windows,restricted,6900,refactor,3,supported,
+APP-003,workplace,tier-3,development,vm,linux,internal,350,retire,1,unsupported,EXC-SYNTHETIC-01
+APP-004,data-platform,tier-2,production,vm,windows,confidential,2400,rehost,2,supported,

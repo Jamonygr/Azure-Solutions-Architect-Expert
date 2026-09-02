@@ -1,0 +1,81 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-18
+number: 18
+slug: 18-compute-vm-batch-architecture
+title: Compute Requirements, Virtual Machines, and Batch Architecture
+domain: infrastructure
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Compute platform architect
+outcome: Build and assess a Bicep-defined architecture that matches compute requirements to zonal virtual machines
+  and an autoscaled Azure Batch worker pool.
+duration: 180 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Compute, Batch, network, and deployment read access supports assessment; resource-group or template
+  deployment requires an approved contributor role and cost acknowledgement.
+licensing: Azure Batch service orchestration has no separate license, but pool nodes, disks, networking, storage,
+  and control VMs incur usage charges.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree
+objectives:
+  primary:
+  - INF-COMP-01
+  - INF-COMP-02
+  - INF-COMP-05
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ControlVmSku
+- ResourceGroupName
+- WorkerVmSku
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB18-CP01
+  title: Translate workload demand into compute requirements
+  requirementIds:
+  - LAB18-REQ-01
+  objectiveIds:
+  - INF-COMP-01
+- id: LAB18-CP02
+  title: Compile and lint the compute Bicep design
+  requirementIds:
+  - LAB18-REQ-02
+  objectiveIds:
+  - INF-COMP-02
+- id: LAB18-CP03
+  title: Preview the tagged reference deployment
+  requirementIds:
+  - LAB18-REQ-03
+  objectiveIds:
+  - INF-COMP-05
+- id: LAB18-CP04
+  title: Deploy and verify the compute reference
+  requirementIds:
+  - LAB18-REQ-04
+  objectiveIds:
+  - INF-COMP-01
+- id: LAB18-CP05
+  title: Validate Batch behavior and graceful degradation
+  requirementIds:
+  - LAB18-REQ-05
+  objectiveIds:
+  - INF-COMP-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Complete simulation batches inside the overnight window while keeping orchestration available and paying for burst capacity only when jobs require it."]
+    R --> C1["Translate workload demand into compute requirements"]
+    C1 --> C2["Compile and lint the compute Bicep design"]
+    C2 --> C3["Preview the tagged reference deployment"]
+    C3 --> C4["Deploy and verify the compute reference"]
+    C4 --> C5["Validate Batch behavior and graceful degradation"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

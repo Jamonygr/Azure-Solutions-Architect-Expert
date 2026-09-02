@@ -1,0 +1,77 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-22
+number: 22
+slug: 22-migration-strategy-assessment
+title: Migration Strategy and Portfolio Assessment
+domain: infrastructure
+track: azure-powershell
+implementationMode: design-simulation
+status: offline-validated
+role: Cloud adoption and migration strategy architect
+outcome: Create an outcome-led migration strategy, assessed portfolio, rationalization record, business case, and
+  dependency-aware wave plan ready for detailed execution design.
+duration: 165 minutes
+difficulty: advanced
+costClass: none
+permissions: No Azure role is required for the portfolio simulation; production discovery would use read-only inventory,
+  cost, dependency, and security evidence.
+licensing: Assessment tooling, migration services, hybrid management, target platforms, and extended datacenter
+  operation require workload-specific estimates.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/migrate/plan-migration
+objectives:
+  primary:
+  - INF-MIG-01
+  - INF-MIG-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB22-CP01
+  title: Define strategy, outcomes, and constraints
+  requirementIds:
+  - LAB22-REQ-01
+  objectiveIds:
+  - INF-MIG-01
+- id: LAB22-CP02
+  title: Build and quality-check the portfolio inventory
+  requirementIds:
+  - LAB22-REQ-02
+  objectiveIds:
+  - INF-MIG-02
+- id: LAB22-CP03
+  title: Assess dependencies and readiness
+  requirementIds:
+  - LAB22-REQ-03
+  objectiveIds:
+  - INF-MIG-01
+- id: LAB22-CP04
+  title: Rationalize applications and form waves
+  requirementIds:
+  - LAB22-REQ-04
+  objectiveIds:
+  - INF-MIG-02
+- id: LAB22-CP05
+  title: Validate the business case and landing-zone entry criteria
+  requirementIds:
+  - LAB22-REQ-05
+  objectiveIds:
+  - INF-MIG-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

@@ -1,0 +1,79 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-19
+number: 19
+slug: 19-container-serverless-architecture
+title: Container and Serverless Compute Architecture
+domain: infrastructure
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Cloud-native compute architect
+outcome: Select a container and serverless architecture with explicit workload boundaries, scaling rules, identity,
+  network controls, and operational tradeoffs.
+duration: 150 minutes
+difficulty: advanced
+costClass: low
+permissions: Container Apps, Functions, container registry, identity, logging, and quota read roles support assessment;
+  environment or workload deployment requires separate contributor rights.
+licensing: Container Apps workload profiles, executions, Functions plans, GPU capacity, registry, logging, and networking
+  have separate cost behavior.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/architecture/guide/choose-azure-container-service
+objectives:
+  primary:
+  - INF-COMP-03
+  - INF-COMP-04
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ContainerAppResourceId
+- ResourceGroupName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB19-CP01
+  title: Partition workloads by execution characteristics
+  requirementIds:
+  - LAB19-REQ-01
+  objectiveIds:
+  - INF-COMP-03
+- id: LAB19-CP02
+  title: Assess Container Apps environment and revisions
+  requirementIds:
+  - LAB19-REQ-02
+  objectiveIds:
+  - INF-COMP-04
+- id: LAB19-CP03
+  title: Validate Functions triggers and scale constraints
+  requirementIds:
+  - LAB19-REQ-03
+  objectiveIds:
+  - INF-COMP-03
+- id: LAB19-CP04
+  title: Prove identity, secrets, and network posture
+  requirementIds:
+  - LAB19-REQ-04
+  objectiveIds:
+  - INF-COMP-04
+- id: LAB19-CP05
+  title: Model surge behavior and graceful degradation
+  requirementIds:
+  - LAB19-REQ-05
+  objectiveIds:
+  - INF-COMP-03
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

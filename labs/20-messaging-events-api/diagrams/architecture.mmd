@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Decouple depot and partner changes while ensuring accepted shipments are processed once effectively and status events reach authorized consumers."]
+    R --> C1["Classify every interaction contract"]
+    C1 --> C2["Validate durable command processing"]
+    C2 --> C3["Prove event fan-out and telemetry separation"]
+    C3 --> C4["Govern partner APIs"]
+    C4 --> C5["Validate end-to-end failure handling"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

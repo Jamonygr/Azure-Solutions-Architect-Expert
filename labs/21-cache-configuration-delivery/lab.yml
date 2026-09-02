@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-21
+number: 21
+slug: 21-cache-configuration-delivery
+title: Application Caching, Configuration, and Automated Delivery
+domain: infrastructure
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Application platform and delivery architect
+outcome: Deliver a Bicep-defined caching, configuration, and deployment architecture with safe rollout, managed
+  identity, observability, and recoverable state.
+duration: 180 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Managed Redis, App Configuration, deployment, identity, and monitoring read access supports review;
+  resource or key-value mutation requires separate contributor and data roles.
+licensing: Azure Managed Redis tiers, App Configuration replicas and request quotas, deployment-stack resources,
+  private networking, and monitoring affect price.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/redis/
+objectives:
+  primary:
+  - INF-APP-04
+  - INF-APP-05
+  - INF-APP-06
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- AppConfigurationName
+- ManagedRedisResourceId
+- RequirePrivateAccess
+- ResourceGroupName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB21-CP01
+  title: Define cache semantics and failure behavior
+  requirementIds:
+  - LAB21-REQ-01
+  objectiveIds:
+  - INF-APP-04
+- id: LAB21-CP02
+  title: Separate configuration, features, and secrets
+  requirementIds:
+  - LAB21-REQ-02
+  objectiveIds:
+  - INF-APP-05
+- id: LAB21-CP03
+  title: Compile the delivery contract
+  requirementIds:
+  - LAB21-REQ-03
+  objectiveIds:
+  - INF-APP-06
+- id: LAB21-CP04
+  title: Preview a bounded deployment
+  requirementIds:
+  - LAB21-REQ-04
+  objectiveIds:
+  - INF-APP-04
+- id: LAB21-CP05
+  title: Validate progressive configuration delivery
+  requirementIds:
+  - LAB21-REQ-05
+  objectiveIds:
+  - INF-APP-05
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

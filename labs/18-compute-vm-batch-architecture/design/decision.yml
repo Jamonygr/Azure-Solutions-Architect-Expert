@@ -1,0 +1,144 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-18
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Zonal control virtual machines with an autoscaled Azure Batch pool
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 5
+    C5: 3
+  weightedTotal: 87.0
+  rationale: Batch supplies queue, pool, task, and retry primitives while zonal control VMs protect orchestration
+    and autoscale bounds worker spend.
+- id: CAND-B
+  name: Flexible Virtual Machine Scale Sets running custom queue workers
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 4
+    C4: 2
+    C5: 3
+  weightedTotal: 72.0
+  rationale: Scale sets provide flexible compute and zone placement but require the team to own scheduling, retries,
+    task state, and result coordination.
+- id: CAND-C
+  name: Dedicated zonal virtual machines scheduled for the nightly processing window
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 4
+    C4: 3
+    C5: 2
+  weightedTotal: 67.0
+  rationale: Scheduled VMs are straightforward but scale in coarse units and retain more manual task-distribution
+    responsibility.
+- id: CAND-D
+  name: Analyst desktops running jobs with local result files
+  eligible: false
+  disqualifiers:
+  - LAB18-REQ-01 requires governed compute, image, capacity, data-gravity, and availability characteristics.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 1
+    C5: 4
+  weightedTotal: 26.0
+  rationale: Desktop execution avoids platform setup but cannot prove access boundaries, availability, scale, or
+    durable result ownership.
+selectedCandidate: Zonal control virtual machines with an autoscaled Azure Batch pool
+rejectedAlternatives:
+- candidate: Flexible Virtual Machine Scale Sets running custom queue workers
+  reason: Custom batch orchestration adds operating risk without a workload feature that requires it.
+- candidate: Dedicated zonal virtual machines scheduled for the nightly processing window
+  reason: Fixed nightly hosts respond less efficiently to queue variation and require more orchestration work.
+- candidate: Analyst desktops running jobs with local result files
+  reason: It is ineligible because local unmanaged execution violates the workload control boundary.
+risks:
+- risk: Dedicated node allocation may not ramp quickly enough to meet the shorter window.
+  mitigation: Measure allocation lead time, maintain approved quota headroom, and begin pool scale before the job
+    release gate.
+- risk: Export-controlled packages can leak through general-purpose storage or logs.
+  mitigation: Use run-owned private storage, minimal sanitized telemetry, approved images, and an explicit data-placement
+    assertion.
+waf:
+  reliability: Zonal orchestration, durable task state, retry, and worker replacement keep the batch recoverable.
+  security: Dedicated approved nodes, private data paths, and classified package handling enforce export controls.
+  costOptimization: Autoscale removes dedicated workers after the five-hour batch while preserving justified control
+    capacity.
+  operationalExcellence: Queue depth, allocation, task failure, result integrity, and cleanup evidence provide one
+    run ledger.
+  performanceEfficiency: Measured task throughput and parallelism size dedicated capacity for the shortened completion
+    window.
+safeAnalogue: null
+traceability:
+- objectiveId: INF-COMP-01
+  requirementId: LAB18-REQ-01
+  checkpointId: LAB18-CP01
+- objectiveId: INF-COMP-02
+  requirementId: LAB18-REQ-02
+  checkpointId: LAB18-CP02
+- objectiveId: INF-COMP-05
+  requirementId: LAB18-REQ-03
+  checkpointId: LAB18-CP03
+- objectiveId: INF-COMP-01
+  requirementId: LAB18-REQ-04
+  checkpointId: LAB18-CP04
+- objectiveId: INF-COMP-02
+  requirementId: LAB18-REQ-05
+  checkpointId: LAB18-CP05
+adr:
+  id: ADR-LAB18-001
+  status: accepted
+  context: Tailspin Aerospace processes aerodynamic simulations in nightly bursts while a smaller licensing and
+    orchestration tier must remain available during business hours. Jobs range from short CPU-bound calculations
+    to memory-intensive batches that need ephemeral scratch disks, a controlled image, and deterministic retry behavior.
+    Demand is seasonal, permanent peak capacity would be wasteful, and some simulations cannot run on shared infrastructure.
+    The platform team needs a deployable Bicep reference that separates the highly available control plane from
+    elastic workers and records quota, image, and Batch task-recovery assumptions. The lab may create a tightly
+    tagged, time-limited, zero-capacity reference footprint, but it does not submit work or launch production-scale
+    pools.
+  decision: 'Select Zonal control virtual machines with an autoscaled Azure Batch pool: Batch supplies queue, pool,
+    task, and retry primitives while zonal control VMs protect orchestration and autoscale bounds worker spend.'
+  consequences:
+  - Quota and approved dedicated-node capacity become release prerequisites for export-controlled runs.
+  - Batch state and result integrity, rather than individual VM uptime, define successful completion.
+revisedDecision:
+  changeRequestId: LAB18-CR-01
+  selectedCandidate: Zonal control virtual machines with an autoscaled Azure Batch pool
+  reason: LAB18-REQ-05 requires a five-hour export-controlled completion window, so Batch remains selected with
+    dedicated-only nodes, quota headroom, and earlier scale-out.
+  mandatoryRequirementId: LAB18-REQ-05
+  waf:
+    reliability: Dedicated quota and pre-scaling reduce allocation uncertainty inside the batch window.
+    security: No export-controlled task can land on low-priority or unapproved worker capacity.
+    costOptimization: Dedicated nodes still scale to zero after results and ownership-checked cleanup complete.
+    operationalExcellence: Allocation and queue timing become explicit go/no-go evidence before job submission.
+    performanceEfficiency: Pool size derives from observed task throughput needed to compress eight hours into five.
+# END GENERATED AZ305 V1

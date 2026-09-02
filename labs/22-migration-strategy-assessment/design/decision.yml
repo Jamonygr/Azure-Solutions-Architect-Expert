@@ -1,0 +1,145 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-22
+implementationMode: design-simulation
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 5
+    C5: 4
+  weightedTotal: 93.0
+  rationale: Outcome-led assessment joins readiness, value, dependency, governance, and measurable success before
+    workloads enter waves.
+- id: CAND-B
+  name: Datacenter-by-datacenter rehost schedule based only on server age
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 2
+    C3: 2
+    C4: 4
+    C5: 3
+  weightedTotal: 48.0
+  rationale: Facility ordering supports lease planning but can split applications from dependencies and carry unresolved
+    risk into Azure.
+- id: CAND-C
+  name: Application-team modernization projects without a shared portfolio assessment
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 3
+    C4: 2
+    C5: 2
+  weightedTotal: 55.0
+  rationale: Team autonomy can accelerate local redesign, though shared dependencies, landing-zone readiness, and
+    value reporting become fragmented.
+- id: CAND-D
+  name: Move classified applications before encryption approval to preserve the lease schedule
+  eligible: false
+  disqualifiers:
+  - LAB22-REQ-04 requires mandatory compliance evidence before a classified workload can enter a migration wave.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 1
+    C4: 3
+    C5: 3
+  weightedTotal: 40.0
+  rationale: Advancing classified systems may simplify facility closure but knowingly crosses a regulatory release
+    gate.
+selectedCandidate: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+rejectedAlternatives:
+- candidate: Datacenter-by-datacenter rehost schedule based only on server age
+  reason: Server age is not a sufficient readiness or value measure and produces unsafe dependency cuts.
+- candidate: Application-team modernization projects without a shared portfolio assessment
+  reason: Uncoordinated projects cannot reliably satisfy the fixed lease exit or portfolio risk controls.
+- candidate: Move classified applications before encryption approval to preserve the lease schedule
+  reason: It is disqualified because lease pressure cannot override mandatory encryption approval.
+risks:
+- risk: The accelerated facility wave can strand an application whose dependency is blocked by classification review.
+  mitigation: Model temporary coexistence, dependency proxies, or an approved alternate hosting location before
+    wave approval.
+- risk: Outcome measures may be replaced by completion counts once schedule pressure rises.
+  mitigation: Keep value, reliability, cost, and risk measures in the wave exit gate alongside migrated-server count.
+waf:
+  reliability: Dependency-based waves, coexistence, and rollback protect service during portfolio transition.
+  security: Classification and encryption evidence are hard gates rather than schedule-adjustable preferences.
+  costOptimization: Lease avoidance, dual running, remediation, and target run cost are evaluated in one wave business
+    case.
+  operationalExcellence: Owners, decisions, readiness evidence, and outcome measures make wave approval reviewable.
+  performanceEfficiency: Migration-factory capacity is allocated to ready waves instead of blocked or low-value
+    server batches.
+safeAnalogue: Score the supplied synthetic portfolio and dependency graph, inject the lease and compliance changes,
+  and produce revised waves offline.
+traceability:
+- objectiveId: INF-MIG-01
+  requirementId: LAB22-REQ-01
+  checkpointId: LAB22-CP01
+- objectiveId: INF-MIG-02
+  requirementId: LAB22-REQ-02
+  checkpointId: LAB22-CP02
+- objectiveId: INF-MIG-01
+  requirementId: LAB22-REQ-03
+  checkpointId: LAB22-CP03
+- objectiveId: INF-MIG-02
+  requirementId: LAB22-REQ-04
+  checkpointId: LAB22-CP04
+- objectiveId: INF-MIG-01
+  requirementId: LAB22-REQ-05
+  checkpointId: LAB22-CP05
+adr:
+  id: ADR-LAB22-001
+  status: accepted
+  context: Proseware Energy must leave two leased datacenters within thirty months while improving security and
+    reducing operational toil. Its portfolio contains commercial packages, custom web systems, tightly coupled databases,
+    unsupported operating systems, engineering file shares, and applications whose owners or dependencies are uncertain.
+    Executives initially asked for a simple server-count migration schedule, but that would hide business outcomes,
+    compliance constraints, application affinity, readiness gaps, and landing-zone dependencies. The architecture
+    team needs an offline assessment that follows the Cloud Adoption Framework, creates defensible rationalization
+    decisions, and produces prioritized migration waves. This lab ends with approved scope and wave sequencing;
+    it does not execute workload or data migration.
+  decision: 'Select Cloud Adoption Framework outcome-led assessment and dependency-based waves: Outcome-led assessment
+    joins readiness, value, dependency, governance, and measurable success before workloads enter waves.'
+  consequences:
+  - The first facility wave accelerates only workloads whose dependencies and landing-zone controls are ready.
+  - Classified applications receive a documented coexistence path and cannot move on a schedule exception.
+revisedDecision:
+  changeRequestId: LAB22-CR-01
+  selectedCandidate: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+  reason: LAB22-REQ-04 requires dependency-safe waves and explicit readiness gates, so ready workloads advance for
+    the lease exit while classified systems remain behind encryption approval.
+  mandatoryRequirementId: LAB22-REQ-04
+  waf:
+    reliability: Coexistence prevents an accelerated wave from severing blocked dependencies.
+    security: Classified applications remain behind the encryption-evidence gate.
+    costOptimization: Six months of facility cost is compared transparently with temporary hosting and acceleration
+      expense.
+    operationalExcellence: Revised wave decisions record owner, blocker, exit evidence, and outcome measure.
+    performanceEfficiency: Migration teams focus on ready dependency groups instead of spending capacity on compliance-blocked
+      systems.
+# END GENERATED AZ305 V1

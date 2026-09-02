@@ -1,0 +1,86 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-22
+businessOutcome: Exit the datacenters on schedule while prioritizing measurable value and preventing unsupported
+  or highly coupled workloads from entering unsafe migration waves.
+stakeholders:
+- Chief information officer
+- Datacenter exit program lead
+- Business application owners
+- Security and compliance lead
+- Finance and procurement lead
+functionalRequirements:
+- id: LAB22-REQ-01
+  statement: The strategy connects datacenter exit, resilience, security, sustainability, and cost outcomes to owners,
+    measures, constraints, and decision dates.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-01
+- id: LAB22-REQ-02
+  statement: The inventory covers applications, servers, databases, file data, owners, lifecycle, support, classification,
+    performance, cost, and business criticality.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-02
+- id: LAB22-REQ-03
+  statement: The assessment maps runtime, identity, DNS, network, database, batch, licensing, operational, and business-process
+    dependencies with confidence levels.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-01
+nonfunctionalRequirements:
+- id: LAB22-REQ-04
+  statement: Every application has a justified disposition, target concept, remediation, wave, exit criterion, rollback
+    option, and owner; waves respect dependencies and team capacity.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-02
+- id: LAB22-REQ-05
+  statement: The business case includes migration and parallel-run costs, licenses, people, risk contingency, benefits,
+    assumptions, and landing-zone readiness gates.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-01
+constraints:
+- Migration waves must prioritize measurable outcomes and dependency safety rather than server age alone.
+- One lease ends six months earlier while two classified applications cannot move until encryption evidence is approved.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Application owners validate dependencies, disposition, business value, and blackout periods in the portfolio register.
+- Classified workloads can remain temporarily in an approved source or coexistence location after the first lease
+  exit.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Portfolio records contain dependency, classification, owner, cost, readiness, disposition, risk, and outcome
+    measures.
+  scale: Multiple datacenters and coupled applications form migration waves; exact server count is intentionally
+    inventory-derived.
+  latency: Migration program latency is measured as assessment-to-wave lead time and cutover outage, not end-user
+    request latency.
+  availability: Coexistence and rollback preserve service while dependencies move; unsupported wave splits are explicitly
+    blocked.
+  rto: Each workload retains its business continuity target during migration; the portfolio has no single meaningful
+    RTO.
+  rpo: Data synchronization and rollback points are chosen per workload and cannot be inferred from the wave schedule.
+  budget: The earlier lease exit raises temporary coexistence and acceleration cost, which is balanced against six
+    months of avoided facility expense.
+acceptanceCriteria:
+- LAB22-REQ-01 passes its independent positive and negative assertions.
+- LAB22-REQ-02 passes its independent positive and negative assertions.
+- LAB22-REQ-03 passes its independent positive and negative assertions.
+- LAB22-REQ-04 passes its independent positive and negative assertions.
+- LAB22-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB22-CR-01
+  trigger: The first datacenter lease now ends six months earlier, but the regulator prohibits moving two classified
+    applications until encryption evidence is approved.
+  materialChange: The first datacenter lease now ends six months earlier, but the regulator prohibits moving two
+    classified applications until encryption evidence is approved.
+  mandatoryRequirementId: LAB22-REQ-04
+  expectedRevision: Reorder the first waves around the earlier lease while holding classified applications behind
+    encryption approval.
+# END GENERATED AZ305 V1

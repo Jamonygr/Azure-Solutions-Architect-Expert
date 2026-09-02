@@ -1,0 +1,88 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-24
+number: 24
+slug: 24-internet-hybrid-connectivity
+title: Internet and Hybrid Connectivity with Network Performance
+domain: infrastructure
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Hybrid connectivity architect
+outcome: Design a resilient internet and hybrid connectivity architecture with explicit routing, DNS, failover,
+  performance, and operational evidence.
+duration: 165 minutes
+difficulty: advanced
+costClass: low
+permissions: Front Door, ExpressRoute, VPN, Virtual WAN, routing, and network monitoring read roles support inspection;
+  profile, circuit, gateway, route, or encryption changes require separate authorization.
+licensing: Front Door Premium, ExpressRoute circuits and gateways, Virtual WAN hubs, VPN gateways, bandwidth, and
+  monitoring each have recurring charges.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/networking/design-guide/overview
+objectives:
+  primary:
+  - INF-NET-01
+  - INF-NET-02
+  - INF-NET-03
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApprovedBitsPerSecond
+- DisallowedPublicEndpoint
+- ExpressRouteCircuitName
+- ExpressRouteCircuitResourceId
+- FrontDoorProfileName
+- HubRouteTableName
+- PrivateServiceFqdn
+- ResourceGroupName
+- SourceVmId
+- VirtualHubName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB24-CP01
+  title: Design global internet entry and DNS
+  requirementIds:
+  - LAB24-REQ-01
+  objectiveIds:
+  - INF-NET-01
+- id: LAB24-CP02
+  title: Validate private circuit and VPN failover design
+  requirementIds:
+  - LAB24-REQ-02
+  objectiveIds:
+  - INF-NET-02
+- id: LAB24-CP03
+  title: Prove transit routing and route ownership
+  requirementIds:
+  - LAB24-REQ-03
+  objectiveIds:
+  - INF-NET-03
+- id: LAB24-CP04
+  title: Test reachability and name resolution
+  requirementIds:
+  - LAB24-REQ-04
+  objectiveIds:
+  - INF-NET-01
+- id: LAB24-CP05
+  title: Establish capacity and performance baselines
+  requirementIds:
+  - LAB24-REQ-05
+  objectiveIds:
+  - INF-NET-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

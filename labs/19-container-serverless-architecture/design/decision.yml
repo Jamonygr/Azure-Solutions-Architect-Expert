@@ -1,0 +1,148 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-19
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 3
+  weightedTotal: 84.0
+  rationale: Container Apps and Functions provide event-driven independent scaling, managed identity, revision controls,
+    and low idle consumption.
+- id: CAND-B
+  name: Azure Kubernetes Service for every application component
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 5
+    C3: 4
+    C4: 2
+    C5: 2
+  weightedTotal: 75.0
+  rationale: AKS handles specialized GPU node pools and complex scheduling but imposes cluster capacity and operations
+    on every component.
+- id: CAND-C
+  name: Azure App Service containers with WebJobs for all background processing
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 4
+    C4: 4
+    C5: 3
+  weightedTotal: 72.0
+  rationale: App Service is familiar for APIs and background jobs, but GPU specialization and independent event
+    scaling are a weaker fit.
+- id: CAND-D
+  name: Public webhook functions with embedded registry and queue credentials
+  eligible: false
+  disqualifiers:
+  - LAB19-REQ-04 requires managed identity, runtime secret retrieval, and only approved network paths.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 1
+    C4: 2
+    C5: 4
+  weightedTotal: 34.0
+  rationale: Direct public functions can start quickly but expose secret rotation and couple acceptance to downstream
+    availability.
+selectedCandidate: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+rejectedAlternatives:
+- candidate: Azure Kubernetes Service for every application component
+  reason: Universal AKS keeps an operational and cost baseline that conflicts with simple overnight scale-to-zero
+    goals.
+- candidate: Azure App Service containers with WebJobs for all background processing
+  reason: Coupled plan capacity makes the short GPU burst and zero-idle API less efficient.
+- candidate: Public webhook functions with embedded registry and queue credentials
+  reason: It is ineligible because secretless durable intake is mandatory.
+risks:
+- risk: GPU capacity may be unavailable when a catastrophe causes the burst.
+  mitigation: Validate quota and regions, define a CPU degraded mode, and queue work without rejecting accepted
+    claims.
+- risk: Independent scaling can overwhelm a downstream claims database.
+  mitigation: Limit concurrency from observed database capacity and monitor queue age rather than scaling only on
+    item count.
+waf:
+  reliability: Durable queues and independent component revisions keep intake available while scorers recover or
+    scale.
+  security: Managed identities, private registry access, and secret-free images reduce credential exposure.
+  costOptimization: Intake and handlers scale to zero while GPU capacity exists only for the bounded risk-scoring
+    interval.
+  operationalExcellence: Revision, queue-age, retry, model, and dead-letter evidence separate deployment from workload
+    failure.
+  performanceEfficiency: Each component scales on its own demand signal and specialized GPU workers do not dictate
+    API capacity.
+safeAnalogue: Replay synthetic claims through local queue and scaling fixtures, including GPU-unavailable and downstream-throttle
+  cases, without deploying compute.
+traceability:
+- objectiveId: INF-COMP-03
+  requirementId: LAB19-REQ-01
+  checkpointId: LAB19-CP01
+- objectiveId: INF-COMP-04
+  requirementId: LAB19-REQ-02
+  checkpointId: LAB19-CP02
+- objectiveId: INF-COMP-03
+  requirementId: LAB19-REQ-03
+  checkpointId: LAB19-CP03
+- objectiveId: INF-COMP-04
+  requirementId: LAB19-REQ-04
+  checkpointId: LAB19-CP04
+- objectiveId: INF-COMP-03
+  requirementId: LAB19-REQ-05
+  checkpointId: LAB19-CP05
+adr:
+  id: ADR-LAB19-001
+  status: accepted
+  context: Lucerne Insurance is decomposing a claims application into an HTTP intake API, event-triggered document
+    processors, and long-running risk-scoring workers. Traffic is quiet most of the day but spikes after severe
+    weather, some jobs require custom containers, and no component should hold a cloud credential. The team is debating
+    Kubernetes, managed container hosting, and functions without first separating latency, execution duration, scaling,
+    networking, and operational-control requirements. The lab budget rules out a production-grade cluster, so learners
+    will use Azure PowerShell to inspect a small analogue and produce a decision that assigns each workload to the
+    simplest service that satisfies its constraints.
+  decision: 'Select Azure Container Apps for APIs and workers with Azure Functions for event handlers: Container
+    Apps and Functions provide event-driven independent scaling, managed identity, revision controls, and low idle
+    consumption.'
+  consequences:
+  - The scoring worker needs a separately validated GPU-capable workload profile or bounded specialized execution
+    path.
+  - Intake acknowledges only durable messages and remains independent from model execution completion.
+revisedDecision:
+  changeRequestId: LAB19-CR-01
+  selectedCandidate: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+  reason: LAB19-REQ-05 requires both two-hour GPU scoring and overnight zero scale, so the selected design adds
+    an approved GPU workload profile only for the scorer while intake remains event-driven.
+  mandatoryRequirementId: LAB19-REQ-05
+  waf:
+    reliability: Claims remain queued if GPU quota or model execution is temporarily unavailable.
+    security: The GPU worker uses managed identity and the same private artifact boundary.
+    costOptimization: Expensive accelerators are active only for the measured catastrophe backlog.
+    operationalExcellence: GPU availability and CPU degraded mode are explicit runbook decisions.
+    performanceEfficiency: Queue age and model throughput independently control the specialized worker profile.
+# END GENERATED AZ305 V1

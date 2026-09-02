@@ -1,0 +1,88 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-24
+businessOutcome: Provide low-latency customer entry and predictable private access to risk systems while sustaining
+  connectivity through a circuit or tunnel failure.
+stakeholders:
+- Digital banking product owner
+- Enterprise network lead
+- Datacenter operations manager
+- Security architect
+- Site reliability engineering lead
+functionalRequirements:
+- id: LAB24-REQ-01
+  statement: The design covers authoritative DNS, Front Door Standard or Premium, TLS, origin naming, health probes,
+    caching boundary, IPv4 and IPv6, and regional-origin failure.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-01
+- id: LAB24-REQ-02
+  statement: Dual private paths, diverse provider locations, BGP, gateway scale, FastPath decision, VPN encryption,
+    and deterministic preference and failback are documented.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-02
+- id: LAB24-REQ-03
+  statement: Advertised and learned prefixes, propagation labels, next hops, default-route intent, DNS forwarders,
+    and ownership are explicit for every path.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-03
+nonfunctionalRequirements:
+- id: LAB24-REQ-04
+  statement: Independent tests prove approved branch, datacenter, spoke, private endpoint, DNS, and internet paths
+    while disallowed public paths remain unreachable.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-01
+- id: LAB24-REQ-05
+  statement: Latency percentiles, jitter, loss, throughput, connection scale, gateway and circuit headroom, and
+    failover convergence meet documented targets.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-02
+constraints:
+- Customer entry must remain globally available while risk-system access follows predictable private paths through
+  circuit or tunnel failure.
+- Private transaction traffic must be encrypted over ExpressRoute and the backup VPN must carry four hours of full
+  peak load.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Colocation and network providers support the selected ExpressRoute encryption option or application-layer encryption.
+- Branch and hub address spaces permit deterministic routing without overlapping prefixes.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Customer HTTPS traffic and private transaction flows cross distinct edge, WAN, routing, inspection, and
+    encryption boundaries.
+  scale: Backup VPN is sized for one hundred percent of measured peak transaction traffic for four hours; circuit
+    throughput remains measured evidence.
+  latency: Front Door optimizes customer entry and ExpressRoute serves private latency, with encrypted VPN failover
+    tested against the workload target.
+  availability: Dual circuits, independent paths, VPN fallback, and hub routing cover provider, gateway, and connection
+    failures separately.
+  rto: Path convergence must occur within the risk-system recovery objective; no unsupported numerical target is
+    assigned.
+  rpo: Connectivity carries transactions but does not define their data RPO; in-flight retry and idempotency remain
+    application requirements.
+  budget: Full-size VPN standby and encrypted circuit paths are explicit regulatory continuity costs rather than
+    assumed free redundancy.
+acceptanceCriteria:
+- LAB24-REQ-01 passes its independent positive and negative assertions.
+- LAB24-REQ-02 passes its independent positive and negative assertions.
+- LAB24-REQ-03 passes its independent positive and negative assertions.
+- LAB24-REQ-04 passes its independent positive and negative assertions.
+- LAB24-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB24-CR-01
+  trigger: The payment regulator requires all private transaction traffic to remain encrypted in transit even over
+    ExpressRoute, and the backup VPN must carry the full peak load for four hours.
+  materialChange: The payment regulator requires all private transaction traffic to remain encrypted in transit
+    even over ExpressRoute, and the backup VPN must carry the full peak load for four hours.
+  mandatoryRequirementId: LAB24-REQ-02
+  expectedRevision: Add approved encryption to the ExpressRoute path and size the VPN gateway from measured encrypted
+    peak throughput for four hours.
+# END GENERATED AZ305 V1

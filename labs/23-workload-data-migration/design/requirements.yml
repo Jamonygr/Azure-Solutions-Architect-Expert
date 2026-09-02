@@ -1,0 +1,86 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-23
+businessOutcome: Move the approved manufacturing workload inside the outage window with provable data integrity
+  and a controlled return path.
+stakeholders:
+- Plant application owner
+- Infrastructure migration lead
+- Database administrator
+- Information protection officer
+- Change manager
+functionalRequirements:
+- id: LAB23-REQ-01
+  statement: Scope, quotas, policy, DNS, identity, connectivity, encryption, monitoring, ownership, and rollback
+    capacity satisfy the wave entry criteria.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-03
+- id: LAB23-REQ-02
+  statement: Appliance placement, discovery boundary, replication cadence, rightsizing, disk handling, test network,
+    agent impact, and rollback are explicit for each server.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-04
+- id: LAB23-REQ-03
+  statement: Compatibility, target tier, schema, continuous synchronization, encryption, logins, jobs, cutover lag,
+    application freeze, and rollback are covered.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-05
+nonfunctionalRequirements:
+- id: LAB23-REQ-04
+  statement: Baseline and delta transfers preserve hierarchy, metadata, access tier, hashes, timestamps where required,
+    encryption, and an auditable manifest.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-03
+- id: LAB23-REQ-05
+  statement: The runbook freezes writes, performs final deltas, redirects by an approved mechanism, validates infrastructure,
+    data, security, performance, and business transactions, then gates rollback.
+  mandatory: true
+  objectiveIds:
+  - INF-MIG-04
+constraints:
+- Manufacturing compute, databases, and engineering files need integrity evidence and a controlled return path.
+- The outage window drops from four hours to ninety minutes and file writes continue until fifteen minutes before
+  redirection.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Network throughput and source change rates can be measured before the migration event.
+- Application owners can freeze database and file changes at separately defined cutover gates.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Virtual machines, relational data, and large engineering files use distinct replication, integrity, and
+    cutover mechanisms.
+  scale: Bulk files are preseeded and only the final fifteen-minute delta enters the outage path; measured bytes
+    and change rate determine feasibility.
+  latency: The critical path includes final synchronization, validation, redirection, and business acceptance inside
+    ninety minutes.
+  availability: Source systems remain the rollback authority until target integrity and manufacturing transactions
+    pass.
+  rto: The migration outage ceiling is ninety minutes from the approved freeze to service redirection.
+  rpo: Engineering-file writes continue until fifteen minutes before redirection, defining the maximum planned file
+    delta window.
+  budget: Staged replication and temporary dual running are funded to reduce outage risk and avoid emergency transfer
+    capacity.
+acceptanceCriteria:
+- LAB23-REQ-01 passes its independent positive and negative assertions.
+- LAB23-REQ-02 passes its independent positive and negative assertions.
+- LAB23-REQ-03 passes its independent positive and negative assertions.
+- LAB23-REQ-04 passes its independent positive and negative assertions.
+- LAB23-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB23-CR-01
+  trigger: Plant leadership reduces the outage window from four hours to ninety minutes and requires engineering-file
+    writes to continue until fifteen minutes before redirection.
+  materialChange: Plant leadership reduces the outage window from four hours to ninety minutes and requires engineering-file
+    writes to continue until fifteen minutes before redirection.
+  mandatoryRequirementId: LAB23-REQ-05
+  expectedRevision: Prestage all bulk data, journal the final file delta, and compress the ordered cutover gates
+    into ninety minutes.
+# END GENERATED AZ305 V1

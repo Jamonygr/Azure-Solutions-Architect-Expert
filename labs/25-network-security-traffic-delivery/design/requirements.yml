@@ -1,0 +1,86 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-25
+businessOutcome: Protect clinical services and maintain predictable inbound, east-west, and outbound traffic through
+  zonal or regional component failure.
+stakeholders:
+- Clinical digital product owner
+- Network security lead
+- Platform networking team
+- Privacy officer
+- Site reliability engineering lead
+functionalRequirements:
+- id: LAB25-REQ-01
+  statement: Environment, tier, management, private endpoint, firewall, and gateway boundaries have nonoverlapping
+    prefixes, owned route intent, and minimum required flows.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-04
+- id: LAB25-REQ-02
+  statement: Hierarchical policy, DNS proxy, TLS inspection decision, IDPS, threat intelligence, rule ownership,
+    logging, and exception expiry are explicit.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-05
+- id: LAB25-REQ-03
+  statement: Front Door Premium provides global WAF and private origin access; Application Gateway WAF v2 provides
+    regional routing, probes, TLS policy, and backend isolation.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-04
+nonfunctionalRequirements:
+- id: LAB25-REQ-04
+  statement: Standard Load Balancer distributes private TCP traffic with HA Ports only where justified, while NAT
+    Gateway or inspected firewall egress provides stable outbound addresses and scale.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-05
+- id: LAB25-REQ-05
+  statement: Required flows traverse the intended WAF, firewall, or load-balancer path; prohibited flows are denied;
+    zone and origin failure route only to healthy targets.
+  mandatory: true
+  objectiveIds:
+  - INF-NET-04
+constraints:
+- Clinical ingress, east-west, and outbound traffic must remain controlled through zonal or regional component failure.
+- Outbound updates require FQDN allowlisting and TLS inspection except one certificate-pinned vendor that cannot
+  be intercepted.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Clinical flows have named owners, source, destination, protocol, inspection need, and failure behavior.
+- The pinned vendor endpoint can be narrowly identified and monitored without granting a broad inspection bypass.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Flow inventory covers patient-facing HTTPS, internal service paths, health probes, update destinations,
+    logs, and certificate exceptions.
+  scale: Gateway, firewall, and NAT capacity follow measured concurrent connections, throughput, and source-port
+    demand.
+  latency: TLS inspection and multiple traffic hops must preserve the clinical response target, which remains an
+    owner-supplied value.
+  availability: Global edge, zonal gateways, firewall scaling, explicit Standard Load Balancer outbound design,
+    and NAT cover separate failures.
+  rto: Regional ingress and egress restoration must meet the clinical service objective; no fabricated numerical
+    RTO is introduced.
+  rpo: Network controls do not set clinical-data RPO; connection retry must avoid duplicating state-changing requests.
+  budget: Premium inspection and redundant components are limited to flows whose security and continuity classification
+    requires them.
+acceptanceCriteria:
+- LAB25-REQ-01 passes its independent positive and negative assertions.
+- LAB25-REQ-02 passes its independent positive and negative assertions.
+- LAB25-REQ-03 passes its independent positive and negative assertions.
+- LAB25-REQ-04 passes its independent positive and negative assertions.
+- LAB25-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB25-CR-01
+  trigger: Clinical security now requires outbound allowlisting by FQDN and TLS inspection for update traffic, but
+    one vendor uses certificate pinning and cannot tolerate interception.
+  materialChange: Clinical security now requires outbound allowlisting by FQDN and TLS inspection for update traffic,
+    but one vendor uses certificate pinning and cannot tolerate interception.
+  mandatoryRequirementId: LAB25-REQ-02
+  expectedRevision: Add FQDN-filtered TLS inspection and a single monitored nonintercept exception for the pinned
+    vendor.
+# END GENERATED AZ305 V1

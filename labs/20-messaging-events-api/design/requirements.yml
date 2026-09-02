@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-20
+businessOutcome: Decouple depot and partner changes while ensuring accepted shipments are processed once effectively
+  and status events reach authorized consumers.
+stakeholders:
+- Logistics product owner
+- Integration platform lead
+- Partner engineering manager
+- Security architect
+- Site reliability engineering lead
+functionalRequirements:
+- id: LAB20-REQ-01
+  statement: Every interaction records producer, consumer, temporal coupling, ordering, throughput, replay, fan-out,
+    latency, and delivery requirements.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-01
+- id: LAB20-REQ-02
+  statement: Commands use sessions where ordering is required, bounded delivery attempts, duplicate detection, idempotent
+    handlers, and a governed dead-letter workflow.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-02
+- id: LAB20-REQ-03
+  statement: State events use filtered fan-out, telemetry uses partitioned streams and separate consumer groups,
+    and replay ownership is documented.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-03
+nonfunctionalRequirements:
+- id: LAB20-REQ-04
+  statement: The API contract defines authentication, authorization, quota, rate limit, schema validation, versioning,
+    transformation, correlation, and safe backend retry.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-01
+- id: LAB20-REQ-05
+  statement: A correlated synthetic shipment crosses the API, command, state-event, and telemetry paths with bounded
+    retries and observable business completion.
+  mandatory: true
+  objectiveIds:
+  - INF-APP-02
+constraints:
+- Accepted shipments must be processed once effectively and status events reach only authorized consumers.
+- Commands for each shipment must remain ordered while peak-season telemetry grows tenfold.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Shipment identifiers are stable session keys and consumers implement idempotent state transitions.
+- Telemetry is analytically consumed and does not require per-message transactional command settlement.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Shipment commands, state-change events, high-volume telemetry, partner requests, and dead letters require
+    distinct delivery semantics.
+  scale: Telemetry increases tenfold at peak while command volume follows shipments; measured events per second
+    remain a capacity input.
+  latency: Partner command acknowledgement and status-event delivery have service objectives separate from telemetry
+    ingestion delay.
+  availability: Durable commands survive processor interruption and subscriptions isolate a failed status consumer
+    from other recipients.
+  rto: Integration recovery depends on backlog age and consumer capacity; no numerical platform RTO is supplied.
+  rpo: Accepted commands require durable settlement and idempotency so broker or consumer retry does not lose or
+    double-apply shipment state.
+  budget: Each message class uses the least expensive service that supplies its required ordering, routing, replay,
+    and partner controls.
+acceptanceCriteria:
+- LAB20-REQ-01 passes its independent positive and negative assertions.
+- LAB20-REQ-02 passes its independent positive and negative assertions.
+- LAB20-REQ-03 passes its independent positive and negative assertions.
+- LAB20-REQ-04 passes its independent positive and negative assertions.
+- LAB20-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB20-CR-01
+  trigger: A carrier contract now requires commands for each shipment to remain ordered while also sustaining ten
+    times the telemetry volume during peak season.
+  materialChange: A carrier contract now requires commands for each shipment to remain ordered while also sustaining
+    ten times the telemetry volume during peak season.
+  mandatoryRequirementId: LAB20-REQ-05
+  expectedRevision: Enable shipment-keyed Service Bus sessions and scale Event Hubs independently for the tenfold
+    telemetry peak.
+# END GENERATED AZ305 V1

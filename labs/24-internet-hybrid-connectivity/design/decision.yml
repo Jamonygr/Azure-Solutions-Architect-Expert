@@ -1,0 +1,142 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-24
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 4
+    C5: 2
+  weightedTotal: 91.0
+  rationale: Premium edge security, redundant private circuits, scaled VPN fallback, and managed transit form explicit
+    customer and private failure paths.
+- id: CAND-B
+  name: Regional Application Gateway with internet VPN tunnels and manual branch routing
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 4
+    C4: 2
+    C5: 4
+  weightedTotal: 63.0
+  rationale: Regional ingress and VPN can reduce cost, but global entry, route convergence, and manual branch failover
+    are weaker.
+- id: CAND-C
+  name: Front Door Standard with provider-managed SD-WAN and direct spoke connections
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 3
+    C4: 3
+    C5: 3
+  weightedTotal: 71.0
+  rationale: Provider SD-WAN may simplify branch operations, but direct spokes fragment route and security ownership
+    and Standard lacks Premium private-origin capabilities.
+- id: CAND-D
+  name: One ExpressRoute circuit with unencrypted private traffic and undersized VPN
+  eligible: false
+  disqualifiers:
+  - LAB24-REQ-02 requires encrypted private paths and a VPN failover design sized to the approved traffic load.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 3
+    C5: 4
+  weightedTotal: 32.0
+  rationale: Minimal redundant capacity lowers cost but leaves a circuit failure and unencrypted path outside the
+    regulatory contract.
+selectedCandidate: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+rejectedAlternatives:
+- candidate: Regional Application Gateway with internet VPN tunnels and manual branch routing
+  reason: It lacks the selected design's global edge and predictable automated transit behavior.
+- candidate: Front Door Standard with provider-managed SD-WAN and direct spoke connections
+  reason: Split provider and spoke controls make end-to-end private path evidence harder to establish.
+- candidate: One ExpressRoute circuit with unencrypted private traffic and undersized VPN
+  reason: It is ineligible because both encryption and backup-capacity requirements are mandatory.
+risks:
+- risk: Encryption overhead can reduce effective throughput below the four-hour peak requirement.
+  mitigation: Load-test encrypted circuit and VPN paths with production packet sizes and reserve measured headroom.
+- risk: Advertised routes can prefer an unintended path and bypass inspection during failover.
+  mitigation: Capture effective routes and next hops for normal, circuit-loss, and recovery states before approval.
+waf:
+  reliability: Independent edge, dual-circuit, VPN, gateway, and route tests expose each connectivity failure domain.
+  security: Premium edge controls and encrypted private transport protect both public entry and regulated transactions.
+  costOptimization: Redundant circuits and full VPN capacity are tied to regulatory continuity instead of duplicated
+    indiscriminately.
+  operationalExcellence: Route, encryption, health, failover, and restoration evidence provide a deterministic network
+    runbook.
+  performanceEfficiency: Measured encrypted throughput sizes gateways and tunnels for the full four-hour peak.
+safeAnalogue: Inspect synthetic topology, routes, cipher requirements, and capacity calculations; use the offline
+  Front Door REST fixture and issue no network change.
+traceability:
+- objectiveId: INF-NET-01
+  requirementId: LAB24-REQ-01
+  checkpointId: LAB24-CP01
+- objectiveId: INF-NET-02
+  requirementId: LAB24-REQ-02
+  checkpointId: LAB24-CP02
+- objectiveId: INF-NET-03
+  requirementId: LAB24-REQ-03
+  checkpointId: LAB24-CP03
+- objectiveId: INF-NET-01
+  requirementId: LAB24-REQ-04
+  checkpointId: LAB24-CP04
+- objectiveId: INF-NET-02
+  requirementId: LAB24-REQ-05
+  checkpointId: LAB24-CP05
+adr:
+  id: ADR-LAB24-001
+  status: accepted
+  context: Coho Bank serves customers through public web and API endpoints while core risk systems remain in two
+    private datacenters. Internet users need globally accelerated TLS entry, branches need reliable access to Azure
+    services, and high-volume transaction flows require predictable private connectivity with encrypted backup when
+    a circuit fails. Teams currently discuss ExpressRoute, VPN, Virtual WAN, Front Door, and DNS as isolated products,
+    leaving route propagation, asymmetric paths, name resolution, latency, bandwidth, and failover behavior unowned.
+    The lab uses Azure CLI to inspect a safe network analogue, measure reachability, and compare designs without
+    provisioning a circuit or production-scale gateway.
+  decision: 'Select Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit:
+    Premium edge security, redundant private circuits, scaled VPN fallback, and managed transit form explicit customer
+    and private failure paths.'
+  consequences:
+  - Network owners must operate and exercise both circuit and VPN encryption paths at production-equivalent load.
+  - Effective-route evidence becomes a release artifact because nominal connection health cannot prove path choice.
+revisedDecision:
+  changeRequestId: LAB24-CR-01
+  selectedCandidate: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+  reason: LAB24-REQ-02 requires explicit private-circuit and VPN failover design, so the selected path adds ExpressRoute
+    encryption and a load-tested full-peak VPN capacity floor.
+  mandatoryRequirementId: LAB24-REQ-02
+  waf:
+    reliability: Full-capacity VPN prevents regulatory traffic from becoming a partial service during circuit loss.
+    security: Transaction traffic remains encrypted on primary and fallback private paths.
+    costOptimization: Higher gateway and encryption cost is attributed to the four-hour compliance objective.
+    operationalExcellence: Normal, failure, and restoration route captures prove the intended path.
+    performanceEfficiency: Gateway selection follows encrypted throughput measurements rather than nominal SKU bandwidth.
+# END GENERATED AZ305 V1

@@ -1,0 +1,19 @@
+{
+  "_generatedBegin": "BEGIN GENERATED AZ305 V1",
+  "schemaVersion": "1.0.0",
+  "labId": "LAB-23",
+  "runId": "synthetic-230001",
+  "track": "azure-cli",
+  "implementationMode": "safe-analogue",
+  "status": "deployed",
+  "createdAt": "2026-09-02T00:00:00Z",
+  "execute": true,
+  "parameters": {
+    "location": "westeurope",
+    "secondaryLocation": "northeurope",
+    "resourceGroup": "rg-az305-synthetic-230001"
+  },
+  "managedObjects": [],
+  "originalSettings": []
+  ,"_generatedEnd": "END GENERATED AZ305 V1"
+}

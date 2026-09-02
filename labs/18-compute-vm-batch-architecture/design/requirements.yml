@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-18
+businessOutcome: Complete simulation batches inside the overnight window while keeping orchestration available and
+  paying for burst capacity only when jobs require it.
+stakeholders:
+- Aerospace simulation lead
+- Compute platform owner
+- Security engineering lead
+- FinOps analyst
+- Operations manager
+functionalRequirements:
+- id: LAB18-REQ-01
+  statement: The requirement matrix captures instruction set, vCPU, memory, scratch space, network, image, job duration,
+    concurrency, availability, quota, and data-gravity needs.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-01
+- id: LAB18-REQ-02
+  statement: Compilation succeeds and the template contains a tagged, parameterized, three-zone-capable VMSS at
+    zero capacity plus a private, zero-node Batch pool, networking, identity, and no embedded secret.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-02
+- id: LAB18-REQ-03
+  statement: What-if contains only new run-owned resources, zero control and worker capacity, no public IP allocation,
+    and the required ownership and expiry tags.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-05
+nonfunctionalRequirements:
+- id: LAB18-REQ-04
+  statement: The bounded reference footprint deploys only after execution and cost acknowledgements, and returned
+    IDs are persisted immediately in run state.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-01
+- id: LAB18-REQ-05
+  statement: The exact pool emitted by the deployment remains at zero nodes, uses no public node IPs, and records
+    the image, VM size, subnet, and later scale prerequisites without running a job.
+  mandatory: true
+  objectiveIds:
+  - INF-COMP-02
+constraints:
+- Simulation batches must complete inside the overnight processing window while orchestration remains available.
+- Export-controlled jobs cannot use low-priority capacity and the processing window contracts from eight hours to
+  five.
+- Use only the Azure CLI + Bicep command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- The simulation executable can run unattended on an approved Batch node image.
+- Historical job duration and node-utilization evidence are available for capacity calculation.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Job packages, input sets, result objects, queue state, node images, and execution logs carry export-control
+    classification.
+  scale: Capacity must process the existing eight-hour workload in five hours using measured task parallelism and
+    node throughput.
+  latency: Queue wait, pool scale-out, task execution, and result upload all consume the five-hour completion window.
+  availability: Zonal control VMs preserve orchestration while Batch task retry and pool replacement handle worker
+    loss.
+  rto: Control-plane recovery must not prevent the five-hour batch deadline; an independent numerical control RTO
+    is owner-defined.
+  rpo: Completed results and accepted task state must survive worker replacement so only incomplete units are rerun.
+  budget: Dedicated export-approved nodes cost more than low-priority capacity and should scale down immediately
+    after the bounded batch.
+acceptanceCriteria:
+- LAB18-REQ-01 passes its independent positive and negative assertions.
+- LAB18-REQ-02 passes its independent positive and negative assertions.
+- LAB18-REQ-03 passes its independent positive and negative assertions.
+- LAB18-REQ-04 passes its independent positive and negative assertions.
+- LAB18-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB18-CR-01
+  trigger: Export-controlled simulations can no longer use low-priority capacity, and the processing window is shortened
+    from eight hours to five.
+  materialChange: Export-controlled simulations can no longer use low-priority capacity, and the processing window
+    is shortened from eight hours to five.
+  mandatoryRequirementId: LAB18-REQ-05
+  expectedRevision: Remove low-priority nodes and raise the bounded dedicated-pool ceiling using measured throughput
+    for the five-hour deadline.
+# END GENERATED AZ305 V1

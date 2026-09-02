@@ -1,0 +1,4 @@
+sourceApplicationId,targetApplicationId,protocol,criticality
+APP-001,APP-004,TDS,required
+APP-002,APP-001,HTTPS,required
+APP-003,APP-002,SFTP,optional

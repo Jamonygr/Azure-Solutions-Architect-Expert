@@ -1,0 +1,91 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-25
+number: 25
+slug: 25-network-security-traffic-delivery
+title: Network Security, Load Balancing, and Traffic Routing
+domain: infrastructure
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Network security and traffic-delivery architect
+outcome: Design and validate segmented, inspected traffic paths with current load-balancing services, explicit outbound
+  connectivity, and independent allow and deny evidence.
+duration: 180 minutes
+difficulty: advanced
+costClass: low
+permissions: Front Door, Application Gateway, Firewall, Load Balancer, NAT Gateway, NSG, route, and Network Watcher
+  read roles support review; rule or resource changes require separate authorization.
+licensing: Premium WAF and Firewall tiers, inspection data, gateway capacity, NAT processing and addresses, logs,
+  and Front Door requests contribute recurring cost.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview
+objectives:
+  primary:
+  - INF-NET-04
+  - INF-NET-05
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ApplicationSubnetName
+- ApprovedDestinationIp
+- ApprovedFirewallEgressRoute
+- DestinationIp
+- DisallowedDestinationIp
+- FirewallName
+- FirewallPolicyName
+- FrontDoorProfileName
+- InternalLoadBalancerName
+- NetworkWatcherName
+- ResourceGroupName
+- SourceIp
+- SourceVmId
+- SpokeVnetName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB25-CP01
+  title: Establish segmentation and least-access flows
+  requirementIds:
+  - LAB25-REQ-01
+  objectiveIds:
+  - INF-NET-04
+- id: LAB25-CP02
+  title: Validate centralized inspection and policy hierarchy
+  requirementIds:
+  - LAB25-REQ-02
+  objectiveIds:
+  - INF-NET-05
+- id: LAB25-CP03
+  title: Prove global and regional HTTP protection
+  requirementIds:
+  - LAB25-REQ-03
+  objectiveIds:
+  - INF-NET-04
+- id: LAB25-CP04
+  title: Validate private load balancing and explicit egress
+  requirementIds:
+  - LAB25-REQ-04
+  objectiveIds:
+  - INF-NET-05
+- id: LAB25-CP05
+  title: Verify end-to-end routes and failure behavior
+  requirementIds:
+  - LAB25-REQ-05
+  objectiveIds:
+  - INF-NET-04
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

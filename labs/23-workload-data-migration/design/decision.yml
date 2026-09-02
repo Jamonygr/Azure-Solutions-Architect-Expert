@@ -1,0 +1,145 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-23
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 4
+    C4: 4
+    C5: 4
+  weightedTotal: 91.0
+  rationale: Specialized migration paths preseed each workload type, preserve assessment and integrity evidence,
+    and constrain final deltas.
+- id: CAND-B
+  name: Manual virtual machine rebuild plus database backup restore and one-time file copy
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 3
+    C4: 2
+    C5: 4
+  weightedTotal: 54.0
+  rationale: Manual rebuild and restore are familiar but put full transfer, configuration, and troubleshooting into
+    the outage window.
+- id: CAND-C
+  name: Partner replication appliance for all servers, databases, and files as one opaque unit
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 3
+    C4: 2
+    C5: 2
+  weightedTotal: 66.0
+  rationale: An appliance can simplify bulk movement but obscures workload-specific consistency, integrity, and
+    rollback evidence.
+- id: CAND-D
+  name: Unstaged live copy with no source rollback point
+  eligible: false
+  disqualifiers:
+  - LAB23-REQ-05 requires a timed cutover with integrity proof and an executable rollback decision.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 2
+    C4: 1
+    C5: 4
+  weightedTotal: 30.0
+  rationale: Copying once during outage avoids temporary storage but makes duration unpredictable and destroys a
+    safe decision point.
+selectedCandidate: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+rejectedAlternatives:
+- candidate: Manual virtual machine rebuild plus database backup restore and one-time file copy
+  reason: The shortened window cannot absorb full database and engineering-file copies plus manual validation.
+- candidate: Partner replication appliance for all servers, databases, and files as one opaque unit
+  reason: Opaque replication weakens independent database, file, and VM acceptance even if transfer completes.
+- candidate: Unstaged live copy with no source rollback point
+  reason: It is ineligible because neither the ninety-minute window nor reversibility can be proven.
+risks:
+- risk: Engineering-file churn in the final fifteen minutes can exceed available transfer throughput.
+  mitigation: Measure change rate, journal final deltas, set a go/no-go threshold, and preserve source write logs
+    for reconciliation.
+- risk: A successful infrastructure cutover can hide database or file inconsistency.
+  mitigation: Run workload-specific row, checksum, and manufacturing transaction assertions before redirecting users.
+waf:
+  reliability: Preseeding, independent consistency checks, and preserved source rollback reduce cutover failure
+    impact.
+  security: Managed identities, private transfer paths, sanitized evidence, and least-privilege migration roles
+    protect source data.
+  costOptimization: Temporary replication and dual running are bounded to the period that buys a shorter controlled
+    outage.
+  operationalExcellence: Timed gates, owners, integrity results, redirection, and rollback criteria create an executable
+    cutover record.
+  performanceEfficiency: Only measured final deltas and validation remain inside the ninety-minute critical path.
+safeAnalogue: Replay synthetic VM, database, and file manifests through preseed, delta, checksum, cutover, and rollback
+  gates without starting a migration.
+traceability:
+- objectiveId: INF-MIG-03
+  requirementId: LAB23-REQ-01
+  checkpointId: LAB23-CP01
+- objectiveId: INF-MIG-04
+  requirementId: LAB23-REQ-02
+  checkpointId: LAB23-CP02
+- objectiveId: INF-MIG-05
+  requirementId: LAB23-REQ-03
+  checkpointId: LAB23-CP03
+- objectiveId: INF-MIG-03
+  requirementId: LAB23-REQ-04
+  checkpointId: LAB23-CP04
+- objectiveId: INF-MIG-04
+  requirementId: LAB23-REQ-05
+  checkpointId: LAB23-CP05
+adr:
+  id: ADR-LAB23-001
+  status: accepted
+  context: Contoso Manufacturing has approved a migration wave containing a three-tier line-of-business application,
+    two VMware servers, a SQL Server database, and twelve terabytes of engineering files. The target landing zone
+    and wave sequence are already approved; the remaining work is to choose concrete migration paths, rehearse cutover,
+    validate data, and define rollback. Production downtime is limited to four hours, the file set changes continuously,
+    and the database contains regulated records. The learning environment cannot replicate the full estate, so learners
+    use Azure CLI, AzCopy dry-run output, synthetic manifests, and read-only service evidence to model Azure Migrate,
+    Azure Database Migration Service, and staged Blob transfer safely.
+  decision: 'Select Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer: Specialized
+    migration paths preseed each workload type, preserve assessment and integrity evidence, and constrain final
+    deltas.'
+  consequences:
+  - Source systems remain authoritative until every workload-specific acceptance check passes.
+  - File change rate and network throughput become explicit go/no-go evidence fifteen minutes before redirection.
+revisedDecision:
+  changeRequestId: LAB23-CR-01
+  selectedCandidate: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+  reason: LAB23-REQ-05 requires a ninety-minute outage with writes continuing to minute fifteen, so staged services
+    remain selected and only recorded deltas plus acceptance enter the critical path.
+  mandatoryRequirementId: LAB23-REQ-05
+  waf:
+    reliability: A preserved source and explicit abort threshold keep the shortened event reversible.
+    security: Final deltas travel through the same approved protected transfer boundary.
+    costOptimization: Temporary staging cost avoids emergency bandwidth and extended factory downtime.
+    operationalExcellence: Minute-by-minute gates expose when to continue, abort, or roll back.
+    performanceEfficiency: Preseeded bulk data leaves a measured fifteen-minute write delta for final transfer.
+# END GENERATED AZ305 V1
