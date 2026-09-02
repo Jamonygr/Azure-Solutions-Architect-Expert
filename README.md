@@ -2,7 +2,7 @@
 
 ![AZ-305 Complete Learning Environment cover showing connected identity, data, continuity, and infrastructure architecture](docs/site-assets/visuals/home-hero.png)
 
-A visual, architecture-first learning environment for the Microsoft AZ-305 blueprint effective April 17, 2026.
+A visual, architecture-first learning environment for the Microsoft AZ-305 blueprint.
 
 This repository provides a guided path from architecture requirements to defensible Azure design decisions. It contains 28 portable labs, maps all 49 measured skills to one primary lab, and includes 1,250 original questions across Labs 01–25.
 
