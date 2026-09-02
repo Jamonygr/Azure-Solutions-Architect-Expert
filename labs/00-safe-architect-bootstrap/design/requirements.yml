@@ -1,0 +1,81 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-00
+businessOutcome: Reduce accidental cloud changes and make architecture experiments reproducible and independently
+  auditable.
+stakeholders:
+- Platform engineering
+- Security operations
+- FinOps
+- Architecture review board
+functionalRequirements:
+- id: LAB00-REQ-01
+  statement: Required command families and pinned versions are reported without contacting Azure or Microsoft Graph.
+  mandatory: true
+  objectiveIds:
+  - FD-TOOLS-01
+- id: LAB00-REQ-02
+  statement: Synthetic intended identifiers are recorded in run state before any execution path is considered.
+  mandatory: true
+  objectiveIds:
+  - FD-CONTEXT-01
+- id: LAB00-REQ-03
+  statement: Preview records which acknowledgements a later lab would require and performs no billable action.
+  mandatory: true
+  objectiveIds:
+  - FD-COST-01
+nonfunctionalRequirements:
+- id: LAB00-REQ-04
+  statement: The recovery record exists, validates, and predates the first possible mutation boundary.
+  mandatory: true
+  objectiveIds:
+  - FD-SAFETY-01
+- id: LAB00-REQ-05
+  statement: Previewed dependency order and exact ownership checks produce a post-cleanup record with no active
+    managed object.
+  mandatory: true
+  objectiveIds:
+  - FD-CLEANUP-01
+constraints:
+- The bootstrap must write run state before any command that could mutate an external system.
+- Design-simulation mode must refuse every Azure or Microsoft Graph request, even when Execute is supplied.
+- Use only the Dual bootstrap command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- The learner runs the copied lab inside the frozen dev container with no cached Azure context.
+- Synthetic run identifiers are sufficient to exercise validation, recovery, and cleanup behavior.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Inputs and outputs are synthetic JSON documents; secrets, tokens, tenant identifiers, and live evidence
+    are prohibited.
+  scale: The contract supports one isolated state directory per RunId and all twenty-eight fixed lab identifiers.
+  latency: No service-response target applies; state persistence must complete synchronously before a mutation adapter
+    can be called.
+  availability: Bootstrap availability depends only on the copied lab files and frozen container, not on Azure or
+    network reachability.
+  rto: Recovery from an interrupted preview is immediate after reopening the persisted run document; no cloud recovery
+    objective applies.
+  rpo: The recoverability target is zero lost recorded mutations because every returned identifier must be persisted
+    immediately.
+  budget: Cloud spend is zero and the design does not expose a cost-acknowledgement path that can provision a resource.
+acceptanceCriteria:
+- LAB00-REQ-01 passes its independent positive and negative assertions.
+- LAB00-REQ-02 passes its independent positive and negative assertions.
+- LAB00-REQ-03 passes its independent positive and negative assertions.
+- LAB00-REQ-04 passes its independent positive and negative assertions.
+- LAB00-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB00-CR-01
+  trigger: Security now requires all labs to run from an isolated build worker. Revise the decision toward the shared
+    bootstrap contract because its offline registries, state-first sequence, and explicit gates can be reproduced
+    without tenant access.
+  materialChange: Security now requires all labs to run from an isolated build worker. Revise the decision toward
+    the shared bootstrap contract because its offline registries, state-first sequence, and explicit gates can be
+    reproduced without tenant access.
+  mandatoryRequirementId: LAB00-REQ-01
+  expectedRevision: Prove that the chosen bootstrap remains self-contained on an isolated worker and remove any
+    dependency on tenant discovery.
+# END GENERATED AZ305 V1

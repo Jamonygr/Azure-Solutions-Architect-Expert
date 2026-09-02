@@ -1,0 +1,78 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-00
+number: 0
+slug: 00-safe-architect-bootstrap
+title: Safe Bootstrap and Dual-Command Lab Contract
+domain: foundation
+track: dual-bootstrap
+implementationMode: design-simulation
+status: offline-validated
+role: Lead cloud solutions architect
+outcome: A reusable safety contract that makes every later architecture exercise observable, recoverable, and deny-by-default.
+duration: 90 minutes
+difficulty: foundational
+costClass: none
+permissions: No Azure role is needed; the exercise reads local registries and creates state only beneath the copied
+  lab.
+licensing: No Azure service license is used because every checkpoint is an offline bootstrap-contract exercise.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/well-architected/
+objectives:
+  primary:
+  - FD-TOOLS-01
+  - FD-CONTEXT-01
+  - FD-COST-01
+  - FD-SAFETY-01
+  - FD-CLEANUP-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB00-CP01
+  title: Verify the offline tool contract
+  requirementIds:
+  - LAB00-REQ-01
+  objectiveIds:
+  - FD-TOOLS-01
+- id: LAB00-CP02
+  title: Declare intended context without authentication
+  requirementIds:
+  - LAB00-REQ-02
+  objectiveIds:
+  - FD-CONTEXT-01
+- id: LAB00-CP03
+  title: Evaluate cost and tenant-change gates
+  requirementIds:
+  - LAB00-REQ-03
+  objectiveIds:
+  - FD-COST-01
+- id: LAB00-CP04
+  title: Prove state-before-mutation ordering
+  requirementIds:
+  - LAB00-REQ-04
+  objectiveIds:
+  - FD-SAFETY-01
+- id: LAB00-CP05
+  title: Exercise ownership-aware cleanup
+  requirementIds:
+  - LAB00-REQ-05
+  objectiveIds:
+  - FD-CLEANUP-01
+assessment:
+  enabled: false
+  questionCount: 0
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

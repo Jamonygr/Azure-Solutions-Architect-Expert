@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Reduce accidental cloud changes and make architecture experiments reproducible and independently auditable."]
+    R --> C1["Verify the offline tool contract"]
+    C1 --> C2["Declare intended context without authentication"]
+    C2 --> C3["Evaluate cost and tenant-change gates"]
+    C3 --> C4["Prove state-before-mutation ordering"]
+    C4 --> C5["Exercise ownership-aware cleanup"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

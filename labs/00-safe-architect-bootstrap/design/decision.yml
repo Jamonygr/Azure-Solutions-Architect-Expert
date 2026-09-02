@@ -1,0 +1,146 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-00
+implementationMode: design-simulation
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Shared bootstrap contract with immutable run state and explicit execution gates
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 4
+    C5: 4
+  weightedTotal: 95.0
+  rationale: A state-first contract gives every copied lab the same recoverable boundary while explicit execution
+    and acknowledgement gates remain locally testable.
+- id: CAND-B
+  name: Manual operator checklist without persisted state
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 3
+    C4: 2
+    C5: 5
+  weightedTotal: 56.0
+  rationale: A checklist is inexpensive and readable but cannot prove mutation ordering or recover after a partially
+    completed command.
+- id: CAND-C
+  name: Central automation account that executes every lab on behalf of learners
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 2
+    C4: 4
+    C5: 2
+  weightedTotal: 62.0
+  rationale: Central execution can standardize runs, but it introduces a privileged shared identity and a runtime
+    dependency on external automation.
+- id: CAND-D
+  name: Untracked shell snippets with implicit cached credentials
+  eligible: false
+  disqualifiers:
+  - LAB00-REQ-01 requires explicit validated inputs and durable state before any potential mutation.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 2
+    C5: 5
+  weightedTotal: 31.0
+  rationale: Ad hoc snippets may be quick to type but neither establish ownership nor bind activity to the requested
+    tenant, subscription, and run.
+selectedCandidate: Shared bootstrap contract with immutable run state and explicit execution gates
+rejectedAlternatives:
+- candidate: Manual operator checklist without persisted state
+  reason: Its low recovery and operating scores leave no machine-verifiable record of returned identifiers.
+- candidate: Central automation account that executes every lab on behalf of learners
+  reason: The shared privilege boundary conflicts with isolated self-paced operation and adds an unnecessary control
+    plane.
+- candidate: Untracked shell snippets with implicit cached credentials
+  reason: The candidate is ineligible because it violates the state-first mandatory boundary.
+risks:
+- risk: A malformed or reused RunId could merge evidence from unrelated exercises.
+  mitigation: Validate the RunId pattern and isolate every artifact beneath the exact run directory before command
+    evaluation.
+- risk: A future author could add a cloud command to a simulation checkpoint.
+  mitigation: Parse command surfaces in CI and force design-simulation lifecycle scripts to exit before context
+    discovery.
+waf:
+  reliability: Atomic state replacement and resumable status values preserve an intelligible recovery point after
+    interruption.
+  security: Explicit tenant and subscription inputs eliminate reliance on cached identity context and sensitive
+    fields are recursively rejected.
+  costOptimization: An offline simulation produces the required evidence without standing cloud resources or idle
+    automation accounts.
+  operationalExcellence: One lifecycle contract, fixed exit codes, and schema-validated artifacts make faults reproducible
+    across copied labs.
+  performanceEfficiency: Local registry lookups and bounded JSON files avoid network latency and scale work only
+    with the current run.
+safeAnalogue: Exercise state creation, injected failure, validation, and idempotent cleanup entirely against synthetic
+  fixtures in the copied lab.
+traceability:
+- objectiveId: FD-TOOLS-01
+  requirementId: LAB00-REQ-01
+  checkpointId: LAB00-CP01
+- objectiveId: FD-CONTEXT-01
+  requirementId: LAB00-REQ-02
+  checkpointId: LAB00-CP02
+- objectiveId: FD-COST-01
+  requirementId: LAB00-REQ-03
+  checkpointId: LAB00-CP03
+- objectiveId: FD-SAFETY-01
+  requirementId: LAB00-REQ-04
+  checkpointId: LAB00-CP04
+- objectiveId: FD-CLEANUP-01
+  requirementId: LAB00-REQ-05
+  checkpointId: LAB00-CP05
+adr:
+  id: ADR-LAB00-001
+  status: accepted
+  context: An architecture team needs a repeatable safety envelope before evaluating any Azure solution. Build an
+    offline-first operating contract that validates tools, captures intended context without signing in, previews
+    cost and permission gates, writes recovery state before a potential change, and proves cleanup ownership. The
+    result must work with both Azure CLI and Azure PowerShell while keeping every live operation behind explicit
+    switches.
+  decision: 'Select Shared bootstrap contract with immutable run state and explicit execution gates: A state-first
+    contract gives every copied lab the same recoverable boundary while explicit execution and acknowledgement gates
+    remain locally testable.'
+  consequences:
+  - Every lab carries duplicated lifecycle helpers so portability is favored over reducing repository line count.
+  - Authors must evolve schemas and generators together whenever the public run contract changes.
+revisedDecision:
+  changeRequestId: LAB00-CR-01
+  selectedCandidate: Shared bootstrap contract with immutable run state and explicit execution gates
+  reason: LAB00-REQ-01 now requires isolated-worker reproducibility, which the local registries, persisted state,
+    and pre-context simulation gate satisfy without tenant access.
+  mandatoryRequirementId: LAB00-REQ-01
+  waf:
+    reliability: The isolated worker can resume from the same run artifact after process loss.
+    security: Removing cached-context discovery narrows the trust boundary to explicit inputs and local files.
+    costOptimization: No central worker service or cloud resource must remain allocated between exercises.
+    operationalExcellence: The frozen container becomes the single repeatable execution surface for release validation.
+    performanceEfficiency: Dependency checks execute locally and avoid remote discovery round trips.
+# END GENERATED AZ305 V1
