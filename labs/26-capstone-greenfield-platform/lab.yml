@@ -1,0 +1,168 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-26
+number: 26
+slug: 26-capstone-greenfield-platform
+title: Greenfield Multi-Region Digital Platform
+domain: capstone
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Lead Azure solutions architect
+outcome: Produce and validate a traceable greenfield multi-region platform design and Bicep reference that balances
+  all five Well-Architected Framework pillars.
+duration: 240 minutes
+difficulty: expert
+costClass: low
+permissions: Architecture review uses read-only identity, policy, network, application, data, and monitoring evidence;
+  the safe analogue needs only a bounded resource-group deployment role when explicitly authorized.
+licensing: Front Door Premium, regional PaaS, managed data replicas, private networking, monitoring, governance,
+  and security tiers all require current regional estimates.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/well-architected/mission-critical/mission-critical-design-methodology
+objectives:
+  primary: []
+  reinforced:
+  - IGM-LOG-01
+  - IGM-LOG-02
+  - IGM-MON-01
+  - IGM-AUTH-01
+  - IGM-AUTH-02
+  - IGM-AUTHZ-01
+  - IGM-AUTHZ-02
+  - IGM-KEY-01
+  - IGM-GOV-01
+  - IGM-GOV-02
+  - IGM-GOV-03
+  - DATA-REL-01
+  - DATA-REL-02
+  - DATA-REL-03
+  - DATA-REL-04
+  - DATA-NONREL-01
+  - DATA-NONREL-02
+  - DATA-NONREL-03
+  - DATA-NONREL-04
+  - DATA-INT-01
+  - DATA-INT-02
+  - BC-DR-01
+  - BC-DR-02
+  - BC-DR-03
+  - BC-DR-04
+  - BC-HA-01
+  - BC-HA-02
+  - BC-HA-03
+  - INF-COMP-01
+  - INF-COMP-02
+  - INF-COMP-03
+  - INF-COMP-04
+  - INF-COMP-05
+  - INF-APP-01
+  - INF-APP-02
+  - INF-APP-03
+  - INF-APP-04
+  - INF-APP-05
+  - INF-APP-06
+  - INF-MIG-01
+  - INF-MIG-02
+  - INF-MIG-03
+  - INF-MIG-04
+  - INF-MIG-05
+  - INF-NET-01
+  - INF-NET-02
+  - INF-NET-03
+  - INF-NET-04
+  - INF-NET-05
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB26-CP01
+  title: Reconcile requirements and architecture decisions
+  requirementIds:
+  - LAB26-REQ-01
+  objectiveIds:
+  - IGM-LOG-01
+  - IGM-AUTHZ-01
+  - IGM-GOV-03
+  - DATA-NONREL-01
+  - DATA-INT-02
+  - BC-HA-01
+  - INF-COMP-03
+  - INF-APP-03
+  - INF-MIG-02
+  - INF-NET-02
+- id: LAB26-CP02
+  title: Compile the multi-region Bicep reference
+  requirementIds:
+  - LAB26-REQ-02
+  objectiveIds:
+  - IGM-LOG-02
+  - IGM-AUTHZ-02
+  - DATA-REL-01
+  - DATA-NONREL-02
+  - BC-DR-01
+  - BC-HA-02
+  - INF-COMP-04
+  - INF-APP-04
+  - INF-MIG-03
+  - INF-NET-03
+- id: LAB26-CP03
+  title: Verify foundation observability and data guardrails
+  requirementIds:
+  - LAB26-REQ-03
+  objectiveIds:
+  - IGM-MON-01
+  - IGM-KEY-01
+  - DATA-REL-02
+  - DATA-NONREL-03
+  - BC-DR-02
+  - BC-HA-03
+  - INF-COMP-05
+  - INF-APP-05
+  - INF-MIG-04
+  - INF-NET-04
+- id: LAB26-CP04
+  title: Preview cost and policy impact
+  requirementIds:
+  - LAB26-REQ-04
+  objectiveIds:
+  - IGM-AUTH-01
+  - IGM-GOV-01
+  - DATA-REL-03
+  - DATA-NONREL-04
+  - BC-DR-03
+  - INF-COMP-01
+  - INF-APP-01
+  - INF-APP-06
+  - INF-MIG-05
+  - INF-NET-05
+- id: LAB26-CP05
+  title: Run the integrated regional-failure simulation
+  requirementIds:
+  - LAB26-REQ-05
+  objectiveIds:
+  - IGM-AUTH-02
+  - IGM-GOV-02
+  - DATA-REL-04
+  - DATA-INT-01
+  - BC-DR-04
+  - INF-COMP-02
+  - INF-APP-02
+  - INF-MIG-01
+  - INF-NET-01
+assessment:
+  enabled: false
+  questionCount: 0
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

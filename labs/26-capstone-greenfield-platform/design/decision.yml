@@ -1,0 +1,282 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-26
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 5
+    C5: 3
+  weightedTotal: 96.0
+  rationale: PaaS stamps and Premium edge controls support independent regional release and routing while data services
+    can be split by residency class.
+- id: CAND-B
+  name: Active-passive AKS clusters with database failover and a warm secondary region
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 5
+    C3: 4
+    C4: 2
+    C5: 2
+  weightedTotal: 75.0
+  rationale: AKS offers application portability and warm recovery but adds cluster, upgrade, policy, and capacity
+    operations to launch readiness.
+- id: CAND-C
+  name: Single-region modular PaaS platform with cross-region backups and rebuild automation
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 5
+    C4: 4
+    C5: 5
+  weightedTotal: 70.0
+  rationale: A single region lowers steady cost and keeps modules clear, but backup rebuild cannot sustain catalog
+    traffic through a full regional outage.
+- id: CAND-D
+  name: One global customer-profile store replicated to every launch region
+  eligible: false
+  disqualifiers:
+  - LAB26-REQ-01 requires mandatory residency constraints to be reconciled with the selected architecture.
+  scores:
+    C1: 1
+    C2: 5
+    C3: 1
+    C4: 4
+    C5: 3
+  weightedTotal: 53.0
+  rationale: Universal profile replication simplifies failover but ignores the mandatory geography boundary.
+selectedCandidate: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+rejectedAlternatives:
+- candidate: Active-passive AKS clusters with database failover and a warm secondary region
+  reason: The platform does not need Kubernetes-specific control enough to justify its operational burden and slower
+    passive activation.
+- candidate: Single-region modular PaaS platform with cross-region backups and rebuild automation
+  reason: Its recovery behavior misses the anonymous-catalog continuity outcome despite attractive economics.
+- candidate: One global customer-profile store replicated to every launch region
+  reason: It is ineligible because profile availability cannot override residency.
+risks:
+- risk: Anonymous responses can accidentally include profile-derived fields and enter the global cache or logs.
+  mitigation: Enforce separate contracts, classify fields, and assert that global responses and telemetry contain
+    no profile attributes.
+- risk: Active-active stamps can drift in policy, secret references, or feature configuration.
+  mitigation: Promote immutable Bicep and configuration versions and block release when regional evidence hashes
+    differ.
+waf:
+  reliability: Independent stamps and global routing keep catalog service available through regional loss while
+    honoring profile boundaries.
+  security: Premium edge controls, private origins, managed identities, policy, and geography-scoped data reduce
+    exposure.
+  costOptimization: Shared global catalog capacity and market-specific profile stacks make continuity and residency
+    spend attributable.
+  operationalExcellence: Declarative releases, regional assertions, failover exercises, governance evidence, and
+    rollback support fast controlled delivery.
+  performanceEfficiency: Edge caching and regional PaaS autoscale serve anonymous demand while profile calls remain
+    geography-local.
+safeAnalogue: Use the self-contained Bicep template only as a bounded tagged topology analogue; validate data-boundary
+  and failover decisions primarily with offline fixtures.
+traceability:
+- objectiveId: IGM-LOG-01
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: IGM-AUTHZ-01
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: IGM-GOV-03
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: DATA-INT-02
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: BC-HA-01
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: INF-COMP-03
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: INF-APP-03
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: INF-MIG-02
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: INF-NET-02
+  requirementId: LAB26-REQ-01
+  checkpointId: LAB26-CP01
+- objectiveId: IGM-LOG-02
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: IGM-AUTHZ-02
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: DATA-REL-01
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: BC-DR-01
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: BC-HA-02
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: INF-COMP-04
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: INF-APP-04
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: INF-MIG-03
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: INF-NET-03
+  requirementId: LAB26-REQ-02
+  checkpointId: LAB26-CP02
+- objectiveId: IGM-MON-01
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: IGM-KEY-01
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: DATA-REL-02
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: DATA-NONREL-03
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: BC-DR-02
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: BC-HA-03
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: INF-COMP-05
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: INF-APP-05
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: INF-MIG-04
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: INF-NET-04
+  requirementId: LAB26-REQ-03
+  checkpointId: LAB26-CP03
+- objectiveId: IGM-AUTH-01
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: IGM-GOV-01
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: DATA-REL-03
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: DATA-NONREL-04
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: BC-DR-03
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: INF-COMP-01
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: INF-APP-01
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: INF-APP-06
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: INF-MIG-05
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: INF-NET-05
+  requirementId: LAB26-REQ-04
+  checkpointId: LAB26-CP04
+- objectiveId: IGM-AUTH-02
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: IGM-GOV-02
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: DATA-REL-04
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: DATA-INT-01
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: BC-DR-04
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: INF-COMP-02
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: INF-APP-02
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: INF-MIG-01
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+- objectiveId: INF-NET-01
+  requirementId: LAB26-REQ-05
+  checkpointId: LAB26-CP05
+adr:
+  id: ADR-LAB26-001
+  status: accepted
+  context: 'Trey Research is launching a regulated consumer analytics platform in two Azure regions with no legacy
+    application constraint. Customers sign in through Microsoft Entra External ID, APIs and event processors scale
+    independently, operational data spans relational and document stores, global traffic must survive a regional
+    outage, and product teams need safe automated delivery. Executives want high availability but require an evidence-based
+    cost ceiling before funding production. Learners must integrate governance, identity, observability, data, continuity,
+    compute, messaging, caching, networking, and security decisions into one coherent architecture. The supplied
+    Bicep is deliberately only a non-production foundation slice for compile, lint, and subscription-level what-if:
+    it does not provision the full platform and the lifecycle scripts contain no deployment command.'
+  decision: 'Select Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data
+    services: PaaS stamps and Premium edge controls support independent regional release and routing while data
+    services can be split by residency class.'
+  consequences:
+  - APIs and data contracts permanently separate anonymous catalog content from geography-bound customer profiles.
+  - Regional releases must prove parity without copying regulated profile data across the boundary.
+revisedDecision:
+  changeRequestId: LAB26-CR-01
+  selectedCandidate: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data
+    services
+  reason: LAB26-REQ-01 requires mandatory constraints to drive the architecture decision, so active-active stamps
+    split into geography-specific profile planes and a separate global anonymous catalog plane.
+  mandatoryRequirementId: LAB26-REQ-01
+  waf:
+    reliability: Anonymous catalog survives a regional loss without failing over restricted profile data unlawfully.
+    security: Profile routes, stores, caches, and logs are constrained to the assigned geography.
+    costOptimization: Global replication is purchased for catalog data, while profile capacity is funded per regulated
+      market.
+    operationalExcellence: Contract and routing assertions detect profile leakage before regional release.
+    performanceEfficiency: Catalog requests use edge and nearest healthy stamp; profile calls remain within geography.
+# END GENERATED AZ305 V1

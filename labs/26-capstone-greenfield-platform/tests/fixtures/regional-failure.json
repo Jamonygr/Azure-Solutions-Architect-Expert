@@ -1,0 +1,76 @@
+{
+  "fixtureType": "offline-regional-failure-simulation",
+  "synthetic": true,
+  "assertions": [
+    {
+      "id": "REG-01",
+      "domain": "identity",
+      "polarity": "positive",
+      "expected": "managed-identity-authorized",
+      "simulatedActual": "managed-identity-authorized"
+    },
+    {
+      "id": "REG-02",
+      "domain": "global-routing",
+      "polarity": "positive",
+      "expected": "healthy-region-selected",
+      "simulatedActual": "healthy-region-selected"
+    },
+    {
+      "id": "REG-03",
+      "domain": "regional-ingress",
+      "polarity": "negative",
+      "expected": "failed-region-not-routed",
+      "simulatedActual": "failed-region-not-routed"
+    },
+    {
+      "id": "REG-04",
+      "domain": "messaging",
+      "polarity": "positive",
+      "expected": "buffer-preserved",
+      "simulatedActual": "buffer-preserved"
+    },
+    {
+      "id": "REG-05",
+      "domain": "cache",
+      "polarity": "negative",
+      "expected": "source-of-truth-remains-available",
+      "simulatedActual": "source-of-truth-remains-available"
+    },
+    {
+      "id": "REG-06",
+      "domain": "data",
+      "polarity": "positive",
+      "expected": "bounded-consistency-preserved",
+      "simulatedActual": "bounded-consistency-preserved"
+    },
+    {
+      "id": "REG-07",
+      "domain": "capacity",
+      "polarity": "positive",
+      "expected": "degraded-capacity-within-slo",
+      "simulatedActual": "degraded-capacity-within-slo"
+    },
+    {
+      "id": "REG-08",
+      "domain": "monitoring",
+      "polarity": "positive",
+      "expected": "incident-signal-raised",
+      "simulatedActual": "incident-signal-raised"
+    },
+    {
+      "id": "REG-09",
+      "domain": "business",
+      "polarity": "positive",
+      "expected": "checkout-path-available",
+      "simulatedActual": "checkout-path-available"
+    },
+    {
+      "id": "REG-10",
+      "domain": "rollback",
+      "polarity": "negative",
+      "expected": "no-automatic-purge",
+      "simulatedActual": "no-automatic-purge"
+    }
+  ]
+}

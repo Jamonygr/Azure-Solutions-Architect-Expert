@@ -1,0 +1,133 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-27
+businessOutcome: Reduce datacenter dependency through controlled modernization while maintaining branch service,
+  regulatory evidence, reversibility, and transparent residual risk.
+stakeholders:
+- Chief information officer
+- Hybrid operations director
+- Business transformation lead
+- Data protection officer
+- Enterprise architecture board
+- FinOps lead
+functionalRequirements:
+- id: LAB27-REQ-01
+  statement: Every fixture is present, hash-verified, schema-valid, sanitized, time-bounded, and linked to a source,
+    assumption, requirement, and scenario inject.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-01
+  - IGM-AUTHZ-01
+  - IGM-GOV-03
+  - DATA-NONREL-01
+  - DATA-INT-02
+  - BC-HA-01
+  - INF-COMP-03
+  - INF-APP-03
+  - INF-MIG-02
+  - INF-NET-02
+- id: LAB27-REQ-02
+  statement: Each workload has a justified disposition, dependency-safe wave, target concept, coexistence bridge,
+    readiness remediation, rollback, decommission gate, and owner.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-02
+  - IGM-AUTHZ-02
+  - DATA-REL-01
+  - DATA-NONREL-02
+  - BC-DR-01
+  - BC-HA-02
+  - INF-COMP-04
+  - INF-APP-04
+  - INF-MIG-03
+  - INF-NET-03
+- id: LAB27-REQ-03
+  statement: Bicep compiles offline and illustrates tagged resource-group, network, private-DNS, identity, workspace,
+    and empty-DCR declarations plus a DoNotEnforce policy assignment; outputs explicitly separate the untaggable
+    policy assignment, and no DCRA, diagnostic setting, deployment, or live behavior is claimed.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+  - IGM-KEY-01
+  - DATA-REL-02
+  - DATA-NONREL-03
+  - BC-DR-02
+  - BC-HA-03
+  - INF-COMP-05
+  - INF-APP-05
+  - INF-MIG-04
+  - INF-NET-04
+nonfunctionalRequirements:
+- id: LAB27-REQ-04
+  statement: Deterministic injects cover discovery loss, circuit failure, replication lag, corrupt recovery points,
+    policy denial, identity outage, cutover overrun, data mismatch, and rollback.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-01
+  - IGM-GOV-01
+  - DATA-REL-03
+  - DATA-NONREL-04
+  - BC-DR-03
+  - INF-COMP-01
+  - INF-APP-01
+  - INF-APP-06
+  - INF-MIG-05
+  - INF-NET-05
+- id: LAB27-REQ-05
+  statement: The package passes schema, Bicep, traceability, source, decision, scenario, security, cost, recovery,
+    portability, and cleanup-plan checks and reports only offline validation.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-02
+  - IGM-GOV-02
+  - DATA-REL-04
+  - DATA-INT-01
+  - BC-DR-04
+  - INF-COMP-02
+  - INF-APP-02
+  - INF-MIG-01
+  - INF-NET-01
+constraints:
+- Modernization must preserve branch service, regulatory evidence, reversibility, and transparent residual risk.
+- A merger adds a second tenant and regulated geography, and branch order capture must work for eight hours without
+  WAN connectivity.
+- Use only the Azure PowerShell + Bicep command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Branch applications can persist orders locally with stable identifiers and synchronize through an idempotent contract.
+- Tenant and geography ownership can be assigned before a workload enters a modernization wave.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Orders, product reference data, identities, dependency records, Arc inventory, migration evidence, and regulatory
+    classifications cross distinct boundaries.
+  scale: Branch count, order rate, eight-hour offline volume, application dependencies, and tenant split are measured
+    in the supplied portfolio.
+  latency: Local order capture remains responsive without WAN; synchronization latency is measured after connectivity
+    returns.
+  availability: Branch edge operation covers an eight-hour WAN loss while Azure regions, tenants, and datacenters
+    remain separate failure domains.
+  rto: Branch capture has effectively immediate local continuity; centralized reconciliation recovery follows an
+    owner-approved target.
+  rpo: Accepted offline orders require zero local loss before synchronization, with conflict resolution for updates
+    from both sides.
+  budget: Edge capacity and dual-tenant governance are funded where they reduce outage and regulatory risk; indefinite
+    datacenter retention is not free.
+acceptanceCriteria:
+- LAB27-REQ-01 passes its independent positive and negative assertions.
+- LAB27-REQ-02 passes its independent positive and negative assertions.
+- LAB27-REQ-03 passes its independent positive and negative assertions.
+- LAB27-REQ-04 passes its independent positive and negative assertions.
+- LAB27-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB27-CR-01
+  trigger: A merger adds a second tenant, a separately regulated geography, and a hard requirement to keep branch
+    order capture working for eight hours without WAN connectivity.
+  materialChange: A merger adds a second tenant, a separately regulated geography, and a hard requirement to keep
+    branch order capture working for eight hours without WAN connectivity.
+  mandatoryRequirementId: LAB27-REQ-04
+  expectedRevision: Add a second regulated landing-zone boundary and place offline-capable branch order capture
+    ahead of WAN-dependent modernization waves.
+# END GENERATED AZ305 V1

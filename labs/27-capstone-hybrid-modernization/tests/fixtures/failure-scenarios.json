@@ -1,0 +1,110 @@
+[
+  {
+    "id": "INJECT-01",
+    "wave": 2,
+    "inject": "discovery-collector-unavailable",
+    "expectedDecision": "continue-from-signed-inventory",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 13,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-02",
+    "wave": 3,
+    "inject": "private-circuit-loss",
+    "expectedDecision": "use-tested-vpn-failover",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 14,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-03",
+    "wave": 4,
+    "inject": "replication-lag-exceeds-rpo",
+    "expectedDecision": "pause-cutover",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 15,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-04",
+    "wave": 1,
+    "inject": "latest-recovery-point-corrupt",
+    "expectedDecision": "select-last-verified-point",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 16,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-05",
+    "wave": 2,
+    "inject": "policy-denies-target",
+    "expectedDecision": "remediate-before-retry",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 17,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-06",
+    "wave": 3,
+    "inject": "identity-provider-unavailable",
+    "expectedDecision": "hold-privileged-cutover",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 18,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-07",
+    "wave": 4,
+    "inject": "cutover-window-exceeded",
+    "expectedDecision": "invoke-owned-rollback",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 19,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-08",
+    "wave": 1,
+    "inject": "reconciliation-mismatch",
+    "expectedDecision": "restore-source-authority",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 20,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  },
+  {
+    "id": "INJECT-09",
+    "wave": 2,
+    "inject": "decommission-request-early",
+    "expectedDecision": "deny-until-observation-gate",
+    "maximumDecisionMinutes": 30,
+    "simulatedDecisionMinutes": 21,
+    "businessAssertion": "pass",
+    "prohibitedOutcomeObserved": false,
+    "containsAutomaticPurge": false,
+    "rollbackAuthority": "migration-command"
+  }
+]

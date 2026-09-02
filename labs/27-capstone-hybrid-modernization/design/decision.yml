@@ -1,0 +1,285 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-27
+implementationMode: design-simulation
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets, and staged
+    coexistence
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 4
+    C5: 4
+  weightedTotal: 95.0
+  rationale: Dependency waves preserve rollback and evidence while Arc inventory, migration patterns, and PaaS targets
+    support deliberate modernization by workload.
+- id: CAND-B
+  name: Parallel cloud rebuild followed by one enterprise-wide big-bang cutover
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 2
+    C3: 3
+    C4: 2
+    C5: 2
+  weightedTotal: 50.0
+  rationale: A parallel rebuild can produce a clean target but concentrates dependency, tenant, data, and branch
+    risk in one irreversible event.
+- id: CAND-C
+  name: Indefinite hybrid retention with lifecycle-only virtual machine rehosting
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 3
+    C4: 3
+    C5: 2
+  weightedTotal: 63.0
+  rationale: Long-lived hybrid and rehosting reduce near-term change but preserve datacenter dependency, duplicated
+    governance, and technical debt.
+- id: CAND-D
+  name: Single-tenant big-bang migration with WAN-dependent branch order entry
+  eligible: false
+  disqualifiers:
+  - LAB27-REQ-04 requires two-tenant geography separation and eight hours of offline branch order capture.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 2
+    C5: 3
+  weightedTotal: 27.0
+  rationale: Ignoring the merger and edge requirement simplifies a diagram but fails the two newest mandatory business
+    boundaries.
+selectedCandidate: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets,
+  and staged coexistence
+rejectedAlternatives:
+- candidate: Parallel cloud rebuild followed by one enterprise-wide big-bang cutover
+  reason: The combined cutover cannot expose or contain failures by wave and leaves little credible rollback time.
+- candidate: Indefinite hybrid retention with lifecycle-only virtual machine rehosting
+  reason: It does not deliver the modernization outcome or transparent retirement economics.
+- candidate: Single-tenant big-bang migration with WAN-dependent branch order entry
+  reason: It is ineligible because it cannot preserve regulated separation or branch continuity.
+risks:
+- risk: Offline branches can generate conflicting order updates when centralized service continues processing.
+  mitigation: Use globally unique order identifiers, versioned commands, deterministic conflict policy, and an exception
+    queue with business ownership.
+- risk: Cross-tenant administration can create hidden shared identities or copy regulated evidence between geographies.
+  mitigation: Maintain separate identity and logging boundaries, broker only approved business messages, and test
+    prohibited cross-tenant paths.
+waf:
+  reliability: Edge persistence, staged coexistence, dependency waves, and rollback contain WAN, workload, and migration
+    failure.
+  security: Tenant and geography boundaries, Arc governance, classified message contracts, and least privilege preserve
+    regulatory separation.
+  costOptimization: Wave business cases include coexistence and edge cost alongside eliminated facilities and managed-service
+    value.
+  operationalExcellence: Portfolio, dependency, sync, conflict, evidence, cutover, and residual-risk records make
+    modernization governable.
+  performanceEfficiency: Local branch writes avoid WAN latency and managed targets scale independently after each
+    approved wave.
+safeAnalogue: Run the complete portfolio, branch-outage, conflict, tenant-boundary, wave, and rollback simulation
+  locally; Lab 27 never queries or deploys Azure.
+traceability:
+- objectiveId: IGM-LOG-01
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: IGM-AUTHZ-01
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: IGM-GOV-03
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: DATA-NONREL-01
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: DATA-INT-02
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: BC-HA-01
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: INF-COMP-03
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: INF-APP-03
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: INF-MIG-02
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: INF-NET-02
+  requirementId: LAB27-REQ-01
+  checkpointId: LAB27-CP01
+- objectiveId: IGM-LOG-02
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: IGM-AUTHZ-02
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: DATA-REL-01
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: DATA-NONREL-02
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: BC-DR-01
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: BC-HA-02
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: INF-COMP-04
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: INF-APP-04
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: INF-MIG-03
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: INF-NET-03
+  requirementId: LAB27-REQ-02
+  checkpointId: LAB27-CP02
+- objectiveId: IGM-MON-01
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: IGM-KEY-01
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: DATA-REL-02
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: DATA-NONREL-03
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: BC-DR-02
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: BC-HA-03
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: INF-COMP-05
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: INF-APP-05
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: INF-MIG-04
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: INF-NET-04
+  requirementId: LAB27-REQ-03
+  checkpointId: LAB27-CP03
+- objectiveId: IGM-AUTH-01
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: IGM-GOV-01
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: DATA-REL-03
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: DATA-NONREL-04
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: BC-DR-03
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: INF-COMP-01
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: INF-APP-01
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: INF-APP-06
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: INF-MIG-05
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: INF-NET-05
+  requirementId: LAB27-REQ-04
+  checkpointId: LAB27-CP04
+- objectiveId: IGM-AUTH-02
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: IGM-GOV-02
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: DATA-REL-04
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: DATA-INT-01
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: BC-DR-04
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: INF-COMP-02
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: INF-APP-02
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: INF-MIG-01
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+- objectiveId: INF-NET-01
+  requirementId: LAB27-REQ-05
+  checkpointId: LAB27-CP05
+adr:
+  id: ADR-LAB27-001
+  status: accepted
+  context: Wide World Importers is modernizing a hybrid estate that includes on-premises VMware, branch services
+    with intermittent links, SQL Server databases, legacy web applications, file archives, and a growing Azure footprint.
+    The board wants rapid datacenter reduction, but operations require staged coexistence, business owners need
+    reversible waves, and regulators require evidence before classified data moves. Learners receive a sanitized
+    portfolio, dependency graph, simulated performance captures, policy results, and failure injects. They must
+    design a hybrid target and migration factory, express shared Azure foundations in Bicep, and rehearse cutover
+    and recovery entirely offline. No Azure sign-in, query, deployment, failover, or external setting change is
+    permitted in this capstone.
+  decision: 'Select Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets,
+    and staged coexistence: Dependency waves preserve rollback and evidence while Arc inventory, migration patterns,
+    and PaaS targets support deliberate modernization by workload.'
+  consequences:
+  - Branch software gains an offline queue and reconciliation responsibility that must be tested at the full eight-hour
+    volume.
+  - Two tenant and geography governance planes remain distinct even when business workflows exchange approved messages.
+revisedDecision:
+  changeRequestId: LAB27-CR-01
+  selectedCandidate: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets,
+    and staged coexistence
+  reason: LAB27-REQ-04 requires deterministic continuity and security injects, so dependency waves add an eight-hour
+    branch outbox plus distinct tenant and geography landing-zone boundaries.
+  mandatoryRequirementId: LAB27-REQ-04
+  waf:
+    reliability: Branch orders remain durable for eight hours and synchronize after WAN recovery.
+    security: Tenant and geography planes exchange only classified, authorized business messages.
+    costOptimization: Edge and dual-governance costs are visible against avoided branch outage and datacenter expense.
+    operationalExcellence: Conflict queues, wave gates, rollback, and residual risk have named owners.
+    performanceEfficiency: Local capture avoids WAN delay and post-recovery synchronization is paced to central
+      capacity.
+# END GENERATED AZ305 V1

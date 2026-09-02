@@ -1,0 +1,71 @@
+:root {
+  --az305-blue: #0067b8;
+  --az305-cyan: #32b0d0;
+  --az305-border: color-mix(in srgb, currentColor 18%, transparent);
+  --az305-soft: color-mix(in srgb, var(--az305-blue) 8%, transparent);
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.az305-lede {
+  font-size: 1.12rem;
+  max-width: 48rem;
+}
+
+.az305-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.az305-card {
+  border: 1px solid var(--az305-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background: var(--az305-soft);
+}
+
+.az305-card > :first-child,
+.az305-card > :last-child {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.az305-table-scroll {
+  overflow-x: auto;
+}
+
+.az305-filter {
+  width: min(100%, 32rem);
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--az305-border);
+  border-radius: 0.35rem;
+  color: inherit;
+  background: var(--md-default-bg-color);
+}
+
+.az305-muted {
+  opacity: 0.78;
+}
+
+.az305-status {
+  display: inline-block;
+  border: 1px solid var(--az305-border);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+@media print {
+  .az305-no-print,
+  .md-header,
+  .md-sidebar {
+    display: none !important;
+  }
+}
+

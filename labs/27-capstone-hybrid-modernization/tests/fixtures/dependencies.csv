@@ -1,0 +1,4 @@
+sourceApplicationId,targetApplicationId,criticality,coexistenceBridge
+HYB-001,HYB-002,hard,private-dns-bridge
+HYB-003,HYB-001,hard,api-facade
+HYB-004,HYB-001,soft,read-only-gateway

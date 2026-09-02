@@ -1,0 +1,5 @@
+applicationId,owner,disposition,wave,targetConcept,coexistenceBridge,rollback,decommissionGate
+HYB-001,finance,replatform,2,managed-relational,private-dns-bridge,restore-original-endpoint,business-reconciliation
+HYB-002,operations,rehost,1,zone-aware-vm,vpn-route-bridge,restart-source-vm,thirty-day-observation
+HYB-003,digital,refactor,3,container-platform,api-facade,revert-routing-weight,error-budget-approval
+HYB-004,records,retain,4,hybrid-archive,read-only-gateway,no-cutover,retention-signoff

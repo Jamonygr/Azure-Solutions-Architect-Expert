@@ -1,0 +1,136 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-26
+businessOutcome: Launch a secure global platform with controlled regional-failure behavior, fast product delivery,
+  auditable governance, and a defensible production cost envelope.
+stakeholders:
+- Chief technology officer
+- Consumer product director
+- Data protection officer
+- Platform engineering lead
+- Site reliability engineering lead
+- FinOps lead
+functionalRequirements:
+- id: LAB26-REQ-01
+  statement: Requirements, assumptions, mandatory constraints, objective traceability, candidates, scores, risks,
+    architecture decisions, and all five WAF pillars agree.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-01
+  - IGM-AUTHZ-01
+  - IGM-GOV-03
+  - DATA-NONREL-01
+  - DATA-INT-02
+  - BC-HA-01
+  - INF-COMP-03
+  - INF-APP-03
+  - INF-MIG-02
+  - INF-NET-02
+- id: LAB26-REQ-02
+  statement: Subscription-scope Bicep compiles a bounded foundation slice with three tagged resource groups, two
+    regional identity/network/empty-monitoring/storage/serverless-document/messaging scaffolds, and a disabled Front
+    Door Standard endpoint; its output explicitly lists every omitted production capability.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-02
+  - IGM-AUTHZ-02
+  - DATA-REL-01
+  - DATA-NONREL-02
+  - BC-DR-01
+  - BC-HA-02
+  - INF-COMP-04
+  - INF-APP-04
+  - INF-MIG-03
+  - INF-NET-03
+- id: LAB26-REQ-03
+  statement: The foundation slice contains an empty DCR wired to a workspace and locked-down regional data scaffolds;
+    DCRA, data sources and flows, diagnostics, alerts, backups, replication, compute, cache, private endpoints,
+    and live recovery behavior are explicitly deferred to the production design.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+  - IGM-KEY-01
+  - DATA-REL-02
+  - DATA-NONREL-03
+  - BC-DR-02
+  - BC-HA-03
+  - INF-COMP-05
+  - INF-APP-05
+  - INF-MIG-04
+  - INF-NET-04
+nonfunctionalRequirements:
+- id: LAB26-REQ-04
+  statement: The reviewed what-if describes only the tagged foundation slice, reports no deletion or unrelated modification,
+    exposes all three resource-group IDs for dependency-safe review, and is never followed by a deployment command.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-01
+  - IGM-GOV-01
+  - DATA-REL-03
+  - DATA-NONREL-04
+  - BC-DR-03
+  - INF-COMP-01
+  - INF-APP-01
+  - INF-APP-06
+  - INF-MIG-05
+  - INF-NET-05
+- id: LAB26-REQ-05
+  statement: The simulation covers identity, global routing, regional ingress, messaging, cache loss, data consistency,
+    degraded capacity, alerting, business validation, recovery, and rollback.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-02
+  - IGM-GOV-02
+  - DATA-REL-04
+  - DATA-INT-01
+  - BC-DR-04
+  - INF-COMP-02
+  - INF-APP-02
+  - INF-MIG-01
+  - INF-NET-01
+constraints:
+- The launch platform needs secure global delivery, controlled regional failure, auditable governance, and a defensible
+  production budget.
+- Customer profiles must remain in one geography while anonymous catalog traffic survives a complete regional outage
+  globally.
+- Use only the Azure CLI + Bicep command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- The application separates profile identity and personalization from anonymous catalog content at API and data
+  layers.
+- Target regions support the selected PaaS, availability-zone, private endpoint, and monitoring capabilities.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Customer profiles are geography-bound; anonymous catalog, configuration, events, audit, and operational
+    telemetry have separate distribution rules.
+  scale: Global launch demand varies by market; request rate, profile volume, catalog size, and regional concurrency
+    are measured sizing inputs.
+  latency: Anonymous catalog uses global edge and regional stamps, while profile operations route only to their
+    authorized geography.
+  availability: Two regional PaaS stamps and global routing preserve catalog service; profile continuity remains
+    inside its legal geography.
+  rto: Catalog regional failover follows an owner-tested target; profile recovery cannot violate residency to improve
+    restoration time.
+  rpo: Profile replication stays within geography and catalog rebuild or replication has an independently approved
+    freshness tolerance.
+  budget: Active regional catalog capacity is justified by launch continuity, while profile stacks and premium features
+    are scoped by market.
+acceptanceCriteria:
+- LAB26-REQ-01 passes its independent positive and negative assertions.
+- LAB26-REQ-02 passes its independent positive and negative assertions.
+- LAB26-REQ-03 passes its independent positive and negative assertions.
+- LAB26-REQ-04 passes its independent positive and negative assertions.
+- LAB26-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB26-CR-01
+  trigger: A launch-market regulator now requires all customer profiles to remain in one geography, while anonymous
+    catalog traffic must continue globally through a complete regional outage.
+  materialChange: A launch-market regulator now requires all customer profiles to remain in one geography, while
+    anonymous catalog traffic must continue globally through a complete regional outage.
+  mandatoryRequirementId: LAB26-REQ-01
+  expectedRevision: Partition profile storage and routing by geography while leaving catalog content eligible for
+    global active-active delivery.
+# END GENERATED AZ305 V1

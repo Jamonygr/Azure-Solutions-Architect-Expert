@@ -1,0 +1,96 @@
+.az305-progress {
+  border: 1px solid var(--az305-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.az305-progress__toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.az305-progress button,
+.az305-progress input[type="number"] {
+  border: 1px solid var(--az305-border);
+  border-radius: 0.3rem;
+  color: inherit;
+  background: var(--md-default-bg-color);
+  padding: 0.45rem 0.65rem;
+}
+
+.az305-progress button {
+  cursor: pointer;
+}
+
+.az305-progress button:hover,
+.az305-progress button:focus-visible {
+  border-color: var(--az305-blue);
+}
+
+.az305-progress__summary {
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.az305-progress__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.az305-progress__table th,
+.az305-progress__table td {
+  border-bottom: 1px solid var(--az305-border);
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.az305-progress__checks {
+  display: flex;
+  gap: 0.45rem;
+  min-width: 9.5rem;
+}
+
+.az305-progress__checks label {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.15rem;
+}
+
+.az305-progress__notice {
+  border-left: 0.25rem solid var(--az305-cyan);
+  padding-left: 0.75rem;
+}
+
+.az305-progress__error {
+  color: #b42318;
+  font-weight: 600;
+}
+
+@media (max-width: 44rem) {
+  .az305-progress__table thead {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .az305-progress__table tr {
+    border-bottom: 1px solid var(--az305-border);
+    display: grid;
+    gap: 0.4rem;
+    padding: 0.75rem 0;
+  }
+
+  .az305-progress__table td {
+    border: 0;
+    padding: 0;
+  }
+}

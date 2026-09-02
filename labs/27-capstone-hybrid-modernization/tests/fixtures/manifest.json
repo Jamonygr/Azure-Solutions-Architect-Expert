@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "files": [
+    {
+      "path": "tests/fixtures/dependencies.csv",
+      "sha256": "e702a7f58bb7c4707eb1bc3542ea325afb499c86d61f2fd5c091cf39e9f1b73a"
+    },
+    {
+      "path": "tests/fixtures/failure-scenarios.json",
+      "sha256": "366aba9d8edad25601d1502ec06ab055b2ef3fa28f9e807f7baae2012e758ffd"
+    },
+    {
+      "path": "tests/fixtures/portfolio.csv",
+      "sha256": "e24bb9256561a765caa9837fa01be2ebecc38fe041c0ea177e737b244b8f9f7e"
+    },
+    {
+      "path": "tests/fixtures/release-report.json",
+      "sha256": "b3af093d4619dbc0c2552ca0063367cb895ed7da3fb57bd0ad1b2009ae09962c"
+    }
+  ]
+}

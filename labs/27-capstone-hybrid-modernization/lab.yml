@@ -1,0 +1,168 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-27
+number: 27
+slug: 27-capstone-hybrid-modernization
+title: Hybrid Modernization and Migration
+domain: capstone
+track: azure-powershell
+implementationMode: design-simulation
+status: offline-validated
+role: Principal hybrid modernization architect
+outcome: Deliver an offline-validated modernization architecture, Bicep foundation, migration waves, coexistence
+  model, cutover evidence, and decommission criteria spanning all AZ-305 domains.
+duration: 270 minutes
+difficulty: expert
+costClass: none
+permissions: No Azure or Graph role is needed for the capstone simulation; real discovery would use separately approved
+  read-only inventory across both tenants and hybrid resources.
+licensing: Azure Arc, migration tooling, managed PaaS, connectivity, edge databases, governance, and dual-tenant
+  operations require workload-specific estimates.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/modernize/prepare-organization-cloud-modernization
+objectives:
+  primary: []
+  reinforced:
+  - IGM-LOG-01
+  - IGM-LOG-02
+  - IGM-MON-01
+  - IGM-AUTH-01
+  - IGM-AUTH-02
+  - IGM-AUTHZ-01
+  - IGM-AUTHZ-02
+  - IGM-KEY-01
+  - IGM-GOV-01
+  - IGM-GOV-02
+  - IGM-GOV-03
+  - DATA-REL-01
+  - DATA-REL-02
+  - DATA-REL-03
+  - DATA-REL-04
+  - DATA-NONREL-01
+  - DATA-NONREL-02
+  - DATA-NONREL-03
+  - DATA-NONREL-04
+  - DATA-INT-01
+  - DATA-INT-02
+  - BC-DR-01
+  - BC-DR-02
+  - BC-DR-03
+  - BC-DR-04
+  - BC-HA-01
+  - BC-HA-02
+  - BC-HA-03
+  - INF-COMP-01
+  - INF-COMP-02
+  - INF-COMP-03
+  - INF-COMP-04
+  - INF-COMP-05
+  - INF-APP-01
+  - INF-APP-02
+  - INF-APP-03
+  - INF-APP-04
+  - INF-APP-05
+  - INF-APP-06
+  - INF-MIG-01
+  - INF-MIG-02
+  - INF-MIG-03
+  - INF-MIG-04
+  - INF-MIG-05
+  - INF-NET-01
+  - INF-NET-02
+  - INF-NET-03
+  - INF-NET-04
+  - INF-NET-05
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB27-CP01
+  title: Validate the offline evidence pack and constraints
+  requirementIds:
+  - LAB27-REQ-01
+  objectiveIds:
+  - IGM-LOG-01
+  - IGM-AUTHZ-01
+  - IGM-GOV-03
+  - DATA-NONREL-01
+  - DATA-INT-02
+  - BC-HA-01
+  - INF-COMP-03
+  - INF-APP-03
+  - INF-MIG-02
+  - INF-NET-02
+- id: LAB27-CP02
+  title: Rationalize the portfolio and hybrid coexistence model
+  requirementIds:
+  - LAB27-REQ-02
+  objectiveIds:
+  - IGM-LOG-02
+  - IGM-AUTHZ-02
+  - DATA-REL-01
+  - DATA-NONREL-02
+  - BC-DR-01
+  - BC-HA-02
+  - INF-COMP-04
+  - INF-APP-04
+  - INF-MIG-03
+  - INF-NET-03
+- id: LAB27-CP03
+  title: Compile and inspect the hybrid foundation
+  requirementIds:
+  - LAB27-REQ-03
+  objectiveIds:
+  - IGM-MON-01
+  - IGM-KEY-01
+  - DATA-REL-02
+  - DATA-NONREL-03
+  - BC-DR-02
+  - BC-HA-03
+  - INF-COMP-05
+  - INF-APP-05
+  - INF-MIG-04
+  - INF-NET-04
+- id: LAB27-CP04
+  title: Simulate migration, continuity, and security injects
+  requirementIds:
+  - LAB27-REQ-04
+  objectiveIds:
+  - IGM-AUTH-01
+  - IGM-GOV-01
+  - DATA-REL-03
+  - DATA-NONREL-04
+  - BC-DR-03
+  - INF-COMP-01
+  - INF-APP-01
+  - INF-APP-06
+  - INF-MIG-05
+  - INF-NET-05
+- id: LAB27-CP05
+  title: Run the offline release and decommission review
+  requirementIds:
+  - LAB27-REQ-05
+  objectiveIds:
+  - IGM-AUTH-02
+  - IGM-GOV-02
+  - DATA-REL-04
+  - DATA-INT-01
+  - BC-DR-04
+  - INF-COMP-02
+  - INF-APP-02
+  - INF-MIG-01
+  - INF-NET-01
+assessment:
+  enabled: false
+  questionCount: 0
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

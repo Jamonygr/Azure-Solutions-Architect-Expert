@@ -1,0 +1,39 @@
+{
+  "status": "offline-validated",
+  "lastLiveVerified": null,
+  "assertions": [
+    {
+      "id": "schema",
+      "result": "pass"
+    },
+    {
+      "id": "traceability",
+      "result": "pass"
+    },
+    {
+      "id": "bicep",
+      "result": "pass"
+    },
+    {
+      "id": "fixtures",
+      "result": "pass"
+    },
+    {
+      "id": "security",
+      "result": "pass"
+    },
+    {
+      "id": "portability",
+      "result": "pass"
+    },
+    {
+      "id": "cleanup-plan",
+      "result": "pass"
+    }
+  ],
+  "claims": [
+    "Offline fixtures validated",
+    "No cloud request performed",
+    "Live verification remains unset"
+  ]
+}
