@@ -1,0 +1,16 @@
+title = "AZ-305 learning repository secret scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Reserved synthetic UUIDs and invalid-domain fixture identities"
+regexes = [
+  '''00000000-0000-0000-0000-00000000030[56]''',
+  '''00000000-0000-4000-8000-000000000000''',
+  '''[A-Za-z0-9.-]+\.invalid'''
+]
+paths = [
+  '''labs/.*/tests/fixtures/.*''',
+  '''curriculum/content/.*'''
+]

@@ -1,0 +1,92 @@
+schemaVersion: "1.0.0"
+labs:
+  - number: "00"
+    scenario: >-
+      An architecture team needs a repeatable safety envelope before evaluating any Azure solution. Build an offline-first
+      operating contract that validates tools, captures intended context without signing in, previews cost and permission
+      gates, writes recovery state before a potential change, and proves cleanup ownership. The result must work with both
+      Azure CLI and Azure PowerShell while keeping every live operation behind explicit switches.
+    role: Lead cloud solutions architect
+    outcome: A reusable safety contract that makes every later architecture exercise observable, recoverable, and deny-by-default.
+    duration: 90 minutes
+    difficulty: foundational
+    costClass: none
+    businessOutcome: Reduce accidental cloud changes and make architecture experiments reproducible and independently auditable.
+    stakeholders: [Platform engineering, Security operations, FinOps, Architecture review board]
+    primarySource:
+      title: Azure Well-Architected Framework
+      url: https://learn.microsoft.com/en-us/azure/well-architected/
+    candidates:
+      - Manual operator checklist without persisted state
+      - Shared bootstrap contract with immutable run state and explicit execution gates
+      - Central automation account that executes every lab on behalf of learners
+    selected: Shared bootstrap contract with immutable run state and explicit execution gates
+    checkpoints:
+      - title: Verify the offline tool contract
+        requirement: LAB00-REQ-01
+        command: pwsh ./scripts/dual-bootstrap/Preflight.ps1 -RunId demo-000001
+        positiveCommand: pwsh -NoProfile -Command "$PSVersionTable.PSVersion.ToString()"
+        negativeCommand: pwsh -NoProfile -Command "if (Get-Module -ListAvailable Microsoft.Graph.Beta*) { exit 1 }"
+        expected: Required command families and pinned versions are reported without contacting Azure or Microsoft Graph.
+        negative: No beta Graph module or unregistered executable is accepted.
+        evidence: Local version output and registry validation results.
+        failure: A required executable is absent or differs from the frozen compatible version.
+        retry: Rebuild the pinned development container and repeat the local check.
+        cleanup: No cloud object exists; remove only the run-specific local state after review.
+        waf: Operational Excellence creates a reproducible operator baseline and Security excludes unsupported modules.
+      - title: Declare intended context without authentication
+        requirement: LAB00-REQ-02
+        command: pwsh ./scripts/dual-bootstrap/Setup.ps1 -SubscriptionId 00000000-0000-0000-0000-000000000305 -TenantId 00000000-0000-0000-0000-000000000306 -RunId demo-000001
+        positiveCommand: pwsh -NoProfile -Command "Test-Path .state/demo-000001/run.json"
+        negativeCommand: pwsh -NoProfile -Command "if (Test-Path .state/demo-000001/token.json) { exit 1 }"
+        expected: Synthetic intended identifiers are recorded in run state before any execution path is considered.
+        negative: No token, credential, account lookup, or implicit sign-in occurs.
+        evidence: Schema-valid run.json with execute false and no sensitive fields.
+        failure: Input identifiers are malformed or the state directory cannot be written.
+        retry: Correct the synthetic input and rerun Setup with the same RunId.
+        cleanup: Retain the state through validation, then remove it only after the exercise is reviewed.
+        waf: Security separates intent from authenticated context and Reliability preserves recovery metadata.
+      - title: Evaluate cost and tenant-change gates
+        requirement: LAB00-REQ-03
+        command: pwsh ./scripts/dual-bootstrap/Validate.ps1 -RunId demo-000001 -Mode Deployment
+        positiveCommand: pwsh -NoProfile -Command "(Get-Content .state/demo-000001/run.json -Raw | ConvertFrom-Json).execute -eq $false"
+        negativeCommand: pwsh -NoProfile -Command "if ($env:AZ305_ACKNOWLEDGE_COST -eq 'true') { exit 1 }"
+        expected: Preview records which acknowledgements a later lab would require and performs no billable action.
+        negative: Environment fallbacks do not silently convert a preview into execution.
+        evidence: Independent positive and negative assertions in validation.json.
+        failure: An acknowledgement is required but absent for an explicitly requested execution.
+        retry: Review the cost and tenant scope, then supply acknowledgements only in an authorized environment.
+        cleanup: No billable resource is created by this checkpoint.
+        waf: Cost Optimization makes spend consent explicit and Security makes tenant changes independently explicit.
+      - title: Prove state-before-mutation ordering
+        requirement: LAB00-REQ-04
+        command: pwsh -NoProfile -Command "Get-Content .state/demo-000001/run.json -Raw | ConvertFrom-Json | Select-Object status,createdAt"
+        positiveCommand: pwsh -NoProfile -Command "(Get-Item .state/demo-000001/run.json).Length -gt 0"
+        negativeCommand: pwsh -NoProfile -Command "if (Test-Path .state/demo-000001/cloud-call.started) { exit 1 }"
+        expected: The recovery record exists, validates, and predates the first possible mutation boundary.
+        negative: A failed or partial run can never lack the identifiers required for recovery.
+        evidence: File timestamp, schema result, and ordered operation log.
+        failure: State serialization fails before the guarded execution branch.
+        retry: Repair local filesystem permissions; do not cross the execution boundary.
+        cleanup: Preserve failed state until recovery decisions are complete.
+        waf: Reliability supports partial-failure recovery and Operational Excellence makes ordering testable.
+      - title: Exercise ownership-aware cleanup
+        requirement: LAB00-REQ-05
+        command: pwsh ./scripts/dual-bootstrap/Cleanup.ps1 -RunId demo-000001
+        positiveCommand: pwsh ./scripts/dual-bootstrap/Validate.ps1 -RunId demo-000001 -Mode PostCleanup
+        negativeCommand: pwsh -NoProfile -Command "if ((Get-Content .state/demo-000001/cleanup.json -Raw | ConvertFrom-Json).activeManagedObjects -ne 0) { exit 1 }"
+        expected: Previewed dependency order and exact ownership checks produce a post-cleanup record with no active managed object.
+        negative: Cleanup refuses any object whose ID or required ownership tag is absent or mismatched.
+        evidence: Schema-valid cleanup.json and PostCleanup validation.json.
+        failure: Ownership cannot be proven or a dependency cannot be safely removed.
+        retry: Reconcile state against authoritative IDs; never broaden discovery or automate purge.
+        cleanup: Delete only proven objects in reverse dependency order; local state remains as the audit record.
+        waf: Security prevents collateral deletion and Reliability makes cleanup idempotent.
+    changeRequest: >-
+      Security now requires all labs to run from an isolated build worker. Revise the decision toward the shared bootstrap
+      contract because its offline registries, state-first sequence, and explicit gates can be reproduced without tenant access.
+    challenge: Explain which evidence proves preview mode is safe when a learner has active credentials in the host environment.
+    troubleshooting:
+      - Verify that the RunId contains only lowercase letters, digits, and hyphens.
+      - Confirm state files are created beneath the copied lab rather than a shared repository location.
+      - Use the pinned container when a host tool version does not match the frozen registry.

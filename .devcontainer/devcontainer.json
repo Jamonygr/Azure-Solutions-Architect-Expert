@@ -1,0 +1,42 @@
+{
+  "name": "AZ-305 Complete Learning Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "AZURE_CORE_COLLECT_TELEMETRY": "no",
+    "AZURE_CORE_ONLY_SHOW_ERRORS": "true",
+    "AZURE_EXTENSION_USE_DYNAMIC_INSTALL": "no",
+    "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+    "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+    "POWERSHELL_TELEMETRY_OPTOUT": "1"
+  },
+  "postCreateCommand": "pwsh -NoLogo -NoProfile -File tools/Test-ContainerToolchain.ps1 -Strict",
+  "waitFor": "postCreateCommand",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "davidanson.vscode-markdownlint",
+        "ms-azuretools.vscode-bicep",
+        "ms-vscode.azure-account",
+        "ms-vscode.azurecli",
+        "ms-vscode.powershell",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/python/3.12.14/bin/python",
+        "terminal.integrated.defaultProfile.linux": "pwsh"
+      }
+    }
+  },
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "16gb"
+  }
+}
+

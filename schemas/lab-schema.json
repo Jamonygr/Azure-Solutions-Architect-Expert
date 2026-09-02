@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:az305:schema:lab:1.0.0",
+  "title": "AZ-305 lab metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "number", "slug", "title", "domain", "track", "implementationMode", "status", "role", "outcome", "duration", "difficulty", "costClass", "permissions", "licensing", "safeAnalogue", "sourceUrls", "objectives", "inputs", "checkpoints", "assessment", "lastOfflineValidated", "lastLiveVerified"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"}, "id": {"pattern": "^LAB-[0-2][0-9]$"}, "number": {"type": "integer", "minimum": 0, "maximum": 27},
+    "slug": {"pattern": "^[a-z0-9-]+$"}, "title": {"type": "string", "minLength": 5}, "domain": {"enum": ["foundation", "identity-governance-monitoring", "data", "business-continuity", "infrastructure", "capstone"]},
+    "track": {"enum": ["dual-bootstrap", "azure-cli", "azure-powershell"]}, "implementationMode": {"enum": ["design-simulation", "reference-deployable", "safe-analogue"]},
+    "status": {"enum": ["planned", "offline-validated", "live-verified", "partial", "blocked"]},
+    "role": {"type": "string", "minLength": 3}, "outcome": {"type": "string", "minLength": 15},
+    "duration": {"type": "string", "minLength": 3}, "difficulty": {"enum": ["foundational", "intermediate", "advanced", "expert"]},
+    "costClass": {"enum": ["none", "low", "moderate", "elevated"]}, "permissions": {"type": "string", "minLength": 15},
+    "licensing": {"type": "string", "minLength": 15}, "safeAnalogue": {"type": "boolean"},
+    "sourceUrls": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "format": "uri"}},
+    "objectives": {"type": "object", "additionalProperties": false, "required": ["primary", "reinforced"], "properties": {"primary": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}, "reinforced": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}}},
+    "inputs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "checkpoints": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "object", "additionalProperties": false, "required": ["id", "title", "requirementIds", "objectiveIds"], "properties": {"id": {"pattern": "^LAB[0-2][0-9]-CP0[1-5]$"}, "title": {"type": "string"}, "requirementIds": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "objectiveIds": {"type": "array", "minItems": 1, "items": {"type": "string"}}}}},
+    "assessment": {"type": "object", "additionalProperties": false, "required": ["enabled", "questionCount"], "properties": {"enabled": {"type": "boolean"}, "questionCount": {"type": "integer", "minimum": 0, "maximum": 50}}},
+    "lastOfflineValidated": {"type": "string", "format": "date"}, "lastLiveVerified": {"type": ["string", "null"], "format": "date-time"}
+  }
+}

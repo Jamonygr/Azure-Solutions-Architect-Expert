@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "$id": "urn:az305:schema:cleanup:1.0.0", "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "labId", "runId", "result", "completedAt", "ownershipVerified", "activeManagedObjects", "actions"],
+  "properties": {"_generatedBegin": {"const": "BEGIN GENERATED AZ305 V1"}, "_generatedEnd": {"const": "END GENERATED AZ305 V1"}, "schemaVersion": {"const": "1.0.0"}, "labId": {"pattern": "^LAB-[0-2][0-9]$"}, "runId": {"type": "string"}, "result": {"enum": ["pass", "partial", "fail"]}, "completedAt": {"type": "string", "format": "date-time"}, "ownershipVerified": {"type": "boolean"}, "activeManagedObjects": {"type": "integer", "minimum": 0}, "actions": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "result"], "properties": {"id": {"type": "string"}, "result": {"enum": ["planned", "removed", "absent", "refused", "failed"]}}}}}
+}

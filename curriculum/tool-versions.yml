@@ -1,0 +1,25 @@
+schemaVersion: "1.0.0"
+verifiedOn: "2026-09-02"
+containerBase:
+  image: mcr.microsoft.com/devcontainers/base:ubuntu-24.04
+  digest: sha256:d94c97dd9cacf183d0a6fd12a8e87b526e9e928307674ae9c94139139c0c6eae
+tools:
+  powershell: "7.6.5"
+  azureCli: "2.90.0"
+  azModule: "16.3.0"
+  bicep: "0.46.1"
+  azcopy: "10.32.8"
+  python: "3.12.14"
+  node: "22.23.2"
+  pester: "5.7.1"
+  psScriptAnalyzer: "1.25.0"
+  microsoftGraph: "2.39.0"
+graphModules:
+  - Microsoft.Graph.Authentication
+  - Microsoft.Graph.Users
+  - Microsoft.Graph.Groups
+  - Microsoft.Graph.Applications
+  - Microsoft.Graph.Identity.DirectoryManagement
+  - Microsoft.Graph.Identity.SignIns
+  - Microsoft.Graph.Identity.Governance
+  - Microsoft.Graph.Reports

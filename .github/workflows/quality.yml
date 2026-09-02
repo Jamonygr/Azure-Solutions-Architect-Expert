@@ -1,0 +1,43 @@
+name: Offline quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-release-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.0.2
+
+      - name: Build digest-pinned learning image
+        run: docker build --file .devcontainer/Dockerfile --tag az305-learning:ci .
+
+      - name: Verify frozen toolchain and dependency lock
+        run: |
+          docker run --rm --network none \
+            --volume "$PWD:/workspace" \
+            --workdir /workspace \
+            az305-learning:ci \
+            pwsh -NoLogo -NoProfile -File tools/Test-ContainerToolchain.ps1 -Strict
+          docker run --rm --network none \
+            --volume "$PWD:/workspace" \
+            --workdir /workspace \
+            az305-learning:ci \
+            python tools/validate_container_lock.py
+
+      - name: Run complete offline release gate
+        run: |
+          docker run --rm --network none \
+            --volume "$PWD:/workspace" \
+            --workdir /workspace \
+            az305-learning:ci \
+            pwsh -NoLogo -NoProfile -File tools/Invoke-OfflineReleaseGate.ps1

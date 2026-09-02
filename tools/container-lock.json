@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "1.0.0",
+  "verifiedOn": "2026-09-02",
+  "platform": "linux-amd64",
+  "dockerfileFrontend": {
+    "reference": "docker/dockerfile:1.7",
+    "digest": "sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e"
+  },
+  "baseImage": {
+    "reference": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "digest": "sha256:d94c97dd9cacf183d0a6fd12a8e87b526e9e928307674ae9c94139139c0c6eae"
+  },
+  "apt": {
+    "snapshot": "https://snapshot.ubuntu.com/ubuntu/20260902T000000Z",
+    "checkValidUntil": false,
+    "packages": {
+      "build-essential": "12.10ubuntu1",
+      "ca-certificates": "20260601~24.04.1",
+      "curl": "8.5.0-2ubuntu10.13",
+      "git": "1:2.43.0-1ubuntu7.3",
+      "jq": "1.7.1-3ubuntu0.24.04.2",
+      "libbz2-dev": "1.0.8-5.1ubuntu0.1",
+      "libdb5.3-dev": "5.3.28+dfsg2-7",
+      "libexpat1-dev": "2.6.1-2ubuntu0.4",
+      "libffi-dev": "3.4.6-1build1",
+      "libgdbm-dev": "1.23-5.1build1",
+      "libgssapi-krb5-2": "1.20.1-6ubuntu2.8",
+      "libicu74": "74.2-1ubuntu3.1",
+      "liblzma-dev": "5.6.1+really5.4.5-1ubuntu0.3",
+      "libncurses-dev": "6.4+20240113-1ubuntu2.2",
+      "libreadline-dev": "8.2-4build1",
+      "libsqlite3-dev": "3.45.1-1ubuntu2.7",
+      "libssl-dev": "3.0.13-0ubuntu3.15",
+      "libunwind8": "1.6.2-3build1.1",
+      "libuuid1": "2.39.3-9ubuntu6.6",
+      "pkg-config": "1.8.1-2build1",
+      "tk-dev": "8.6.14build1",
+      "unzip": "6.0-28ubuntu4.1",
+      "uuid-dev": "2.39.3-9ubuntu6.6",
+      "xz-utils": "5.6.1+really5.4.5-1ubuntu0.3",
+      "zlib1g-dev": "1:1.3.dfsg-3.1ubuntu2.2"
+    }
+  },
+  "artifacts": {
+    "powershell": {
+      "version": "7.6.5",
+      "uri": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.5/powershell-7.6.5-linux-x64.tar.gz",
+      "sha256": "b34ab3b19acac1d3d4d0d3cfdb02acf62f457b0b6a962ff008132033f7566844"
+    },
+    "azureCli": {
+      "version": "2.90.0",
+      "packageVersion": "2.90.0-1~noble",
+      "uri": "https://packages.microsoft.com/repos/azure-cli/pool/main/a/azure-cli/azure-cli_2.90.0-1~noble_amd64.deb",
+      "sha256": "ac305806dda839e0857c35f26c05ac7eeecbfdf3ca1c2cc562e1d5124cd044ab"
+    },
+    "bicep": {
+      "version": "0.46.1",
+      "uri": "https://github.com/Azure/bicep/releases/download/v0.46.1/bicep-linux-x64",
+      "sha256": "3e011d629ea4311b7a7dd8f0040ab2b1a072ea4ff5d02cb75e0e55a9a6703fb9"
+    },
+    "azcopy": {
+      "version": "10.32.8",
+      "uri": "https://github.com/Azure/azure-storage-azcopy/releases/download/v10.32.8/azcopy_linux_amd64_10.32.8.tar.gz",
+      "sha256": "a95277dbc265912cefdddbaf251aa99ec648cb18ba657e8788066357a9022dc3"
+    },
+    "python": {
+      "version": "3.12.14",
+      "uri": "https://www.python.org/ftp/python/3.12.14/Python-3.12.14.tgz",
+      "sha256": "6c6df908d2c3fd24e6d76869e92542abd0f33aec9dfc18df8875f89660286d43"
+    },
+    "node": {
+      "version": "22.23.2",
+      "uri": "https://nodejs.org/dist/v22.23.2/node-v22.23.2-linux-x64.tar.xz",
+      "sha256": "d60acfe00a2932254bb0ad20e01b0d74397a0875595de719654b214f4b03f307"
+    }
+  },
+  "powershellModules": {
+    "Az": {
+      "version": "16.3.0",
+      "packageSha256": "585fb0c477eed53d3358bd51245efd51986289afb4a15a8a03f6ea79e82cf64d"
+    },
+    "Pester": {
+      "version": "5.7.1",
+      "packageSha256": "4a27904c6814a5fbe4758f8e49861f6a1994aee77b71165a5c43c0371ba6c580"
+    },
+    "PSScriptAnalyzer": {
+      "version": "1.25.0",
+      "packageSha256": "14e634c828eb98efb9f40b2918ba90f139ed5eccdf663a2a747736d996995d60"
+    },
+    "Microsoft.Graph.Authentication": {
+      "version": "2.39.0",
+      "packageSha256": "2b91eed8dbb28875f0e7884ebf4e087d44fb49722fd730f7ed1fc1d873b90d62"
+    },
+    "Microsoft.Graph.Users": {
+      "version": "2.39.0",
+      "packageSha256": "a5975db5f42f2e74169c25b9ce73d89f778a0de2d09e393ac6df20f765017360"
+    },
+    "Microsoft.Graph.Groups": {
+      "version": "2.39.0",
+      "packageSha256": "526c558609925658a691e4c8b216f5de2fc39685eaea897cfe15908a82ac0615"
+    },
+    "Microsoft.Graph.Applications": {
+      "version": "2.39.0",
+      "packageSha256": "8d705873171e61e017cb5f525804c4ac2c15828fd8aad8374cc155732562a37f"
+    },
+    "Microsoft.Graph.Identity.DirectoryManagement": {
+      "version": "2.39.0",
+      "packageSha256": "8ae9736272662510fd4ba303c6d9c9aca031395e6cd86e296ffc84f0b4fb800d"
+    },
+    "Microsoft.Graph.Identity.SignIns": {
+      "version": "2.39.0",
+      "packageSha256": "355d7ef5ec851600724b8b69fda77a788bca74de7925aa456b7e45e5ddbd0dff"
+    },
+    "Microsoft.Graph.Identity.Governance": {
+      "version": "2.39.0",
+      "packageSha256": "9bea64f0f40c405ee208f83c80fa130cd1b0083ec9dba0fb313c500cdc7d7903"
+    },
+    "Microsoft.Graph.Reports": {
+      "version": "2.39.0",
+      "packageSha256": "a2247226394de80f6615678dd9864e9cf7923b1e0dea12551952a4e71d2a8b69"
+    }
+  }
+}

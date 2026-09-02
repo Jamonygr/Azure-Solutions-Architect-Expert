@@ -1,0 +1,571 @@
+schemaVersion: "1.0.0"
+blueprintEffectiveDate: "2026-04-17"
+expectedLabCount: 28
+instructionalLabCount: 25
+expectedQuestionCount: 1250
+navigation:
+  catalogPath: "labs/README.md"
+  firstLabId: "LAB-00"
+  lastLabId: "LAB-27"
+  sequence:
+    - "LAB-00"
+    - "LAB-01"
+    - "LAB-02"
+    - "LAB-03"
+    - "LAB-04"
+    - "LAB-05"
+    - "LAB-06"
+    - "LAB-07"
+    - "LAB-08"
+    - "LAB-09"
+    - "LAB-10"
+    - "LAB-11"
+    - "LAB-12"
+    - "LAB-13"
+    - "LAB-14"
+    - "LAB-15"
+    - "LAB-16"
+    - "LAB-17"
+    - "LAB-18"
+    - "LAB-19"
+    - "LAB-20"
+    - "LAB-21"
+    - "LAB-22"
+    - "LAB-23"
+    - "LAB-24"
+    - "LAB-25"
+    - "LAB-26"
+    - "LAB-27"
+
+labs:
+  - id: "LAB-00"
+    number: "00"
+    folder: "00-safe-architect-bootstrap"
+    title: "Safe Bootstrap and Dual-Command Lab Contract"
+    domainId: "FOUNDATION"
+    track: "dual-bootstrap"
+    laneLabel: "Dual bootstrap"
+    implementationMode: "design-simulation"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 0
+    primaryObjectiveIds: ["FD-TOOLS-01", "FD-CONTEXT-01", "FD-COST-01", "FD-SAFETY-01", "FD-CLEANUP-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/00-safe-architect-bootstrap/README.md"
+    previousLabId: null
+    nextLabId: "LAB-01"
+
+  - id: "LAB-01"
+    number: "01"
+    folder: "01-centralized-logging-routing"
+    title: "Centralized Logging and Diagnostic Routing"
+    domainId: "IGM"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-LOG-01", "IGM-LOG-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/01-centralized-logging-routing/README.md"
+    previousLabId: "LAB-00"
+    nextLabId: "LAB-02"
+
+  - id: "LAB-02"
+    number: "02"
+    folder: "02-monitoring-alerts-visibility"
+    title: "Monitoring, Alerting, and Operational Visibility"
+    domainId: "IGM"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-MON-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/02-monitoring-alerts-visibility/README.md"
+    previousLabId: "LAB-01"
+    nextLabId: "LAB-03"
+
+  - id: "LAB-03"
+    number: "03"
+    folder: "03-authentication-identity-design"
+    title: "Authentication and Identity Management Architecture"
+    domainId: "IGM"
+    track: "azure-powershell"
+    laneLabel: "PowerShell/Graph"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: true
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-AUTH-01", "IGM-AUTH-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/03-authentication-identity-design/README.md"
+    previousLabId: "LAB-02"
+    nextLabId: "LAB-04"
+
+  - id: "LAB-04"
+    number: "04"
+    folder: "04-azure-hybrid-authorization"
+    title: "Azure and Hybrid Authorization Architecture"
+    domainId: "IGM"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-AUTHZ-01", "IGM-AUTHZ-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/04-azure-hybrid-authorization/README.md"
+    previousLabId: "LAB-03"
+    nextLabId: "LAB-05"
+
+  - id: "LAB-05"
+    number: "05"
+    folder: "05-secrets-certificates-keys"
+    title: "Secrets, Certificates, and Key Management"
+    domainId: "IGM"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-KEY-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/05-secrets-certificates-keys/README.md"
+    previousLabId: "LAB-04"
+    nextLabId: "LAB-06"
+
+  - id: "LAB-06"
+    number: "06"
+    folder: "06-resource-hierarchy-tag-governance"
+    title: "Azure Resource Hierarchy and Tag Governance"
+    domainId: "IGM"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-GOV-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/06-resource-hierarchy-tag-governance/README.md"
+    previousLabId: "LAB-05"
+    nextLabId: "LAB-07"
+
+  - id: "LAB-07"
+    number: "07"
+    folder: "07-compliance-identity-governance"
+    title: "Compliance and Identity Governance"
+    domainId: "IGM"
+    track: "azure-powershell"
+    laneLabel: "PowerShell/Graph"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: true
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["IGM-GOV-02", "IGM-GOV-03"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/07-compliance-identity-governance/README.md"
+    previousLabId: "LAB-06"
+    nextLabId: "LAB-08"
+
+  - id: "LAB-08"
+    number: "08"
+    folder: "08-relational-platform-tier-selection"
+    title: "Relational Data Platform and Service-Tier Selection"
+    domainId: "DATA"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-REL-01", "DATA-REL-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/08-relational-platform-tier-selection/README.md"
+    previousLabId: "LAB-07"
+    nextLabId: "LAB-09"
+
+  - id: "LAB-09"
+    number: "09"
+    folder: "09-relational-scale-protection"
+    title: "Relational Scalability and Data Protection"
+    domainId: "DATA"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-REL-03", "DATA-REL-04"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/09-relational-scale-protection/README.md"
+    previousLabId: "LAB-08"
+    nextLabId: "LAB-10"
+
+  - id: "LAB-10"
+    number: "10"
+    folder: "10-semi-structured-data-design"
+    title: "Semi-Structured Data Platform Selection"
+    domainId: "DATA"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-NONREL-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/10-semi-structured-data-design/README.md"
+    previousLabId: "LAB-09"
+    nextLabId: "LAB-11"
+
+  - id: "LAB-11"
+    number: "11"
+    folder: "11-unstructured-data-design"
+    title: "Unstructured Data Platform Selection"
+    domainId: "DATA"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-NONREL-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/11-unstructured-data-design/README.md"
+    previousLabId: "LAB-10"
+    nextLabId: "LAB-12"
+
+  - id: "LAB-12"
+    number: "12"
+    folder: "12-storage-economics-durability"
+    title: "Storage Economics, Protection, and Durability"
+    domainId: "DATA"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-NONREL-03", "DATA-NONREL-04"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/12-storage-economics-durability/README.md"
+    previousLabId: "LAB-11"
+    nextLabId: "LAB-13"
+
+  - id: "LAB-13"
+    number: "13"
+    folder: "13-data-integration-analytics"
+    title: "Data Integration and Analytics Architecture"
+    domainId: "DATA"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["DATA-INT-01", "DATA-INT-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/13-data-integration-analytics/README.md"
+    previousLabId: "LAB-12"
+    nextLabId: "LAB-14"
+
+  - id: "LAB-14"
+    number: "14"
+    folder: "14-recovery-strategy-hybrid"
+    title: "Recovery Strategy for Azure and Hybrid Workloads"
+    domainId: "BC"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "design-simulation"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["BC-DR-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/14-recovery-strategy-hybrid/README.md"
+    previousLabId: "LAB-13"
+    nextLabId: "LAB-15"
+
+  - id: "LAB-15"
+    number: "15"
+    folder: "15-compute-backup-ha"
+    title: "Compute Backup, Recovery, and High Availability"
+    domainId: "BC"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["BC-DR-02", "BC-HA-01"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/15-compute-backup-ha/README.md"
+    previousLabId: "LAB-14"
+    nextLabId: "LAB-16"
+
+  - id: "LAB-16"
+    number: "16"
+    folder: "16-relational-database-continuity"
+    title: "Relational Database Business Continuity"
+    domainId: "BC"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["BC-DR-03", "BC-HA-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/16-relational-database-continuity/README.md"
+    previousLabId: "LAB-15"
+    nextLabId: "LAB-17"
+
+  - id: "LAB-17"
+    number: "17"
+    folder: "17-nonrelational-data-resilience"
+    title: "Semi-Structured and Unstructured Data Resilience"
+    domainId: "BC"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["BC-DR-04", "BC-HA-03"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/17-nonrelational-data-resilience/README.md"
+    previousLabId: "LAB-16"
+    nextLabId: "LAB-18"
+
+  - id: "LAB-18"
+    number: "18"
+    folder: "18-compute-vm-batch-architecture"
+    title: "Compute Requirements, Virtual Machines, and Batch Architecture"
+    domainId: "INF"
+    track: "azure-cli"
+    laneLabel: "Azure CLI + Bicep"
+    implementationMode: "reference-deployable"
+    supplementalBicep: true
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-COMP-01", "INF-COMP-02", "INF-COMP-05"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/18-compute-vm-batch-architecture/README.md"
+    previousLabId: "LAB-17"
+    nextLabId: "LAB-19"
+
+  - id: "LAB-19"
+    number: "19"
+    folder: "19-container-serverless-architecture"
+    title: "Container and Serverless Compute Architecture"
+    domainId: "INF"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-COMP-03", "INF-COMP-04"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/19-container-serverless-architecture/README.md"
+    previousLabId: "LAB-18"
+    nextLabId: "LAB-20"
+
+  - id: "LAB-20"
+    number: "20"
+    folder: "20-messaging-events-api"
+    title: "Messaging, Event-Driven, and API Integration Architecture"
+    domainId: "INF"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "reference-deployable"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-APP-01", "INF-APP-02", "INF-APP-03"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/20-messaging-events-api/README.md"
+    previousLabId: "LAB-19"
+    nextLabId: "LAB-21"
+
+  - id: "LAB-21"
+    number: "21"
+    folder: "21-cache-configuration-delivery"
+    title: "Application Caching, Configuration, and Automated Delivery"
+    domainId: "INF"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell + Bicep"
+    implementationMode: "safe-analogue"
+    supplementalBicep: true
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-APP-04", "INF-APP-05", "INF-APP-06"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/21-cache-configuration-delivery/README.md"
+    previousLabId: "LAB-20"
+    nextLabId: "LAB-22"
+
+  - id: "LAB-22"
+    number: "22"
+    folder: "22-migration-strategy-assessment"
+    title: "Migration Strategy and Portfolio Assessment"
+    domainId: "INF"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "design-simulation"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-MIG-01", "INF-MIG-02"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/22-migration-strategy-assessment/README.md"
+    previousLabId: "LAB-21"
+    nextLabId: "LAB-23"
+
+  - id: "LAB-23"
+    number: "23"
+    folder: "23-workload-data-migration"
+    title: "IaaS, PaaS, Database, and Unstructured Data Migration"
+    domainId: "INF"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-MIG-03", "INF-MIG-04", "INF-MIG-05"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/23-workload-data-migration/README.md"
+    previousLabId: "LAB-22"
+    nextLabId: "LAB-24"
+
+  - id: "LAB-24"
+    number: "24"
+    folder: "24-internet-hybrid-connectivity"
+    title: "Internet and Hybrid Connectivity with Network Performance"
+    domainId: "INF"
+    track: "azure-cli"
+    laneLabel: "Azure CLI"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-NET-01", "INF-NET-02", "INF-NET-03"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/24-internet-hybrid-connectivity/README.md"
+    previousLabId: "LAB-23"
+    nextLabId: "LAB-25"
+
+  - id: "LAB-25"
+    number: "25"
+    folder: "25-network-security-traffic-delivery"
+    title: "Network Security, Load Balancing, and Traffic Routing"
+    domainId: "INF"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell"
+    implementationMode: "safe-analogue"
+    supplementalBicep: false
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 50
+    primaryObjectiveIds: ["INF-NET-04", "INF-NET-05"]
+    reinforcesAllOfficialObjectives: false
+    path: "labs/25-network-security-traffic-delivery/README.md"
+    previousLabId: "LAB-24"
+    nextLabId: "LAB-26"
+
+  - id: "LAB-26"
+    number: "26"
+    folder: "26-capstone-greenfield-platform"
+    title: "Greenfield Multi-Region Digital Platform"
+    domainId: "CAPSTONE"
+    track: "azure-cli"
+    laneLabel: "Azure CLI + Bicep"
+    implementationMode: "safe-analogue"
+    supplementalBicep: true
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 0
+    primaryObjectiveIds: []
+    reinforcesAllOfficialObjectives: true
+    path: "labs/26-capstone-greenfield-platform/README.md"
+    previousLabId: "LAB-25"
+    nextLabId: "LAB-27"
+
+  - id: "LAB-27"
+    number: "27"
+    folder: "27-capstone-hybrid-modernization"
+    title: "Hybrid Modernization and Migration"
+    domainId: "CAPSTONE"
+    track: "azure-powershell"
+    laneLabel: "Azure PowerShell + Bicep"
+    implementationMode: "design-simulation"
+    supplementalBicep: true
+    graphPowerShell: false
+    status: "offline-validated"
+    lastLiveVerified: null
+    questionCount: 0
+    primaryObjectiveIds: []
+    reinforcesAllOfficialObjectives: true
+    path: "labs/27-capstone-hybrid-modernization/README.md"
+    previousLabId: "LAB-26"
+    nextLabId: null

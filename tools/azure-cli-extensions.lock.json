@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "1.0.0",
+  "verifiedOn": "2026-09-02",
+  "platform": "linux-amd64",
+  "azureCliVersion": "2.90.0",
+  "sourceIndex": "https://aka.ms/azure-cli-extension-index-v1",
+  "extensions": [
+    {
+      "name": "monitor-control-service",
+      "version": "1.2.0",
+      "filename": "monitor_control_service-1.2.0-py3-none-any.whl",
+      "uri": "https://azcliprod.blob.core.windows.net/cli-extensions/monitor_control_service-1.2.0-py3-none-any.whl",
+      "sha256": "3151a341845d053a4be45d9b7c04e1e15b88503ab6b110163a12b9aee6fd3cd9",
+      "size": 254097,
+      "minCliCoreVersion": "2.61.0",
+      "preview": false,
+      "commandGroups": [
+        "az monitor data-collection rule",
+        "az monitor data-collection rule association"
+      ]
+    },
+    {
+      "name": "virtual-wan",
+      "version": "1.0.1",
+      "filename": "virtual_wan-1.0.1-py2.py3-none-any.whl",
+      "uri": "https://azcliprod.blob.core.windows.net/cli-extensions/virtual_wan-1.0.1-py2.py3-none-any.whl",
+      "sha256": "2db6c253d43862d06a4525073d67b61f1d34b7c8832162bd3b0bfffd24b9ada6",
+      "size": 3934626,
+      "minCliCoreVersion": "2.55.0",
+      "preview": false,
+      "commandGroups": [
+        "az network vhub",
+        "az network vhub route-table route"
+      ]
+    }
+  ],
+  "coreCommandGroups": [
+    "az cosmosdb private-endpoint-connection",
+    "az rest"
+  ],
+  "excludedPreviewExtensions": [
+    {
+      "name": "cdn",
+      "reason": "The official index offers only preview 1.0.0b releases. Front Door Standard/Premium inspection uses the core az rest command instead."
+    }
+  ]
+}

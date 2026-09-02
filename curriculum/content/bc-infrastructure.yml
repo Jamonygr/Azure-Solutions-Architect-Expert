@@ -1,0 +1,1487 @@
+schemaVersion: '1.0.0'
+labs:
+  - number: '14'
+    scenario: >-
+      Contoso Industrial operates production-planning services in Azure and two factories that still host latency-sensitive control applications on VMware. A recent regional network incident exposed that recovery plans were organized by technology rather than by business service. The executive resilience committee now requires a single strategy that classifies workloads, maps dependencies, assigns measurable recovery time and recovery point objectives, and distinguishes backup, high availability, disaster recovery, and cyber-recovery controls. Data residency limits cross-border replication, factory connectivity is intermittent, and the annual resilience budget cannot support active-active deployment for every workload. The architecture must be testable without failing over production systems or provisioning the expensive target estate.
+    role: Enterprise resilience architect
+    outcome: Produce a tiered Azure and hybrid recovery strategy with dependency-aware recovery waves, measurable objectives, and an evidence-based exercise plan.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: none
+    businessOutcome: Restore safety-critical planning and factory services in the required order while controlling recovery cost and meeting residency obligations.
+    stakeholders:
+      - Chief risk officer
+      - Factory operations director
+      - Application owners
+      - Security and compliance lead
+      - Disaster recovery coordinator
+    primarySource:
+      title: Azure Well-Architected Framework - Recommendations for defining reliability targets
+      url: https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics
+    candidates:
+      - Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+      - Uniform paired-region warm standby for every business service
+      - Active-active deployment across two Azure regions with independent factory edges
+    selected: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+    checkpoints:
+      - title: Classify services and recovery objectives
+        requirement: LAB14-REQ-01
+        command: >-
+          $resources = az resource list --subscription $SubscriptionId --output json --only-show-errors | ConvertFrom-Json; $resources | Select-Object name, type, location, @{Name='criticality';Expression={$_.tags.criticality}}
+        positiveCommand: >-
+          $classified = az resource list --subscription $SubscriptionId --query "[?tags.criticality]" --output json --only-show-errors | ConvertFrom-Json; if ($classified.Count -lt 1) { throw 'No resource has a criticality classification.' }
+        negativeCommand: >-
+          $unclassified = az resource list --subscription $SubscriptionId --query "[?!tags.criticality]" --output json --only-show-errors | ConvertFrom-Json; if ($unclassified.Count -gt 0) { throw 'At least one scoped resource lacks a criticality classification.' }
+        expected: Every business service has an owner, impact tier, RTO, RPO, maximum tolerable outage, and data-residency boundary.
+        negative: A resource-only inventory with no business owner or recovery objective must fail the checkpoint.
+        evidence: Export the classified service register and the signed mapping from business tier to RTO and RPO.
+        failure: Conflicting objectives or missing dependencies make recovery sequencing unverifiable.
+        retry: Reconcile conflicts with the service owner, then rerun the classification queries against the same scope.
+        cleanup: Remove only the locally exported inventory; this design checkpoint creates no Azure resource.
+        waf: 'Reliability: explicit targets prevent both under-engineering and unbounded recovery promises.'
+      - title: Map hybrid dependencies and failure domains
+        requirement: LAB14-REQ-02
+        command: >-
+          $inventory = az resource list --subscription $SubscriptionId --query "[].{id:id,type:type,location:location,dependsOn:tags.dependsOn}" --output json --only-show-errors | ConvertFrom-Json; $inventory | Sort-Object location, type
+        positiveCommand: >-
+          $mapped = az resource list --subscription $SubscriptionId --query "[?tags.dependsOn]" --output json --only-show-errors | ConvertFrom-Json; if ($mapped.Count -lt 1) { throw 'No dependency metadata was found.' }
+        negativeCommand: >-
+          $globalWithoutOwner = az resource list --subscription $SubscriptionId --query '[?location==''global'' && !tags.owner]' --output json --only-show-errors | ConvertFrom-Json; if ($globalWithoutOwner.Count -gt 0) { throw 'A global dependency has no accountable owner.' }
+        expected: The dependency map covers identity, DNS, connectivity, secrets, monitoring, data stores, and factory prerequisites across failure domains.
+        negative: A recovery wave that starts an application before identity, name resolution, or its data dependency must be rejected.
+        evidence: Save the dependency graph, failure-domain annotations, and the ordered list of recovery waves.
+        failure: An undiscovered shared dependency can invalidate otherwise achievable workload recovery targets.
+        retry: Add the missing dependency and rerun the inventory projection before resequencing recovery waves.
+        cleanup: Delete generated local graph files after assessment if they contain confidential topology details.
+        waf: 'Security: the map identifies privileged recovery dependencies and limits emergency-access sprawl.'
+      - title: Select recovery patterns by tier
+        requirement: LAB14-REQ-03
+        command: >-
+          az backup vault list --subscription $SubscriptionId --query "[].{name:name,location:location,redundancy:properties.redundancySettings.standardTierStorageRedundancy}" --output table --only-show-errors
+        positiveCommand: >-
+          $vaults = az backup vault list --subscription $SubscriptionId --output json --only-show-errors | ConvertFrom-Json; if ($vaults.Count -lt 1) { throw 'No backup-vault evidence is available for protected tiers.' }
+        negativeCommand: >-
+          $localOnly = az backup vault list --subscription $SubscriptionId --query "[?properties.redundancySettings.standardTierStorageRedundancy=='LocallyRedundant']" --output json --only-show-errors | ConvertFrom-Json; if ($localOnly.Count -gt 0) { throw 'Locally redundant vaults require an explicit tier exception.' }
+        expected: Each tier receives the least costly pattern that meets its targets, with backup, replication, and rehydration responsibilities separated.
+        negative: Treating backup retention as proof of failover readiness, or assuming a region pair removes all correlated risk, must fail review.
+        evidence: Record the scored pattern decision, exclusions, residency checks, and cost assumptions for each service tier.
+        failure: A pattern can satisfy nominal RPO while missing dependency, capacity, or cyber-recovery requirements.
+        retry: Rescore the affected tier with the constraint marked mandatory and document any selection override.
+        cleanup: Retain only sanitized decision evidence; no vault or protected item is changed by this checkpoint.
+        waf: 'Cost Optimization: tiering reserves warm or active capacity for workloads that can justify it.'
+      - title: Design recovery orchestration and communications
+        requirement: LAB14-REQ-04
+        command: >-
+          az monitor action-group list --subscription $SubscriptionId --query "[].{name:name,enabled:enabled,emailReceivers:length(emailReceivers),smsReceivers:length(smsReceivers)}" --output table --only-show-errors
+        positiveCommand: >-
+          $enabled = az monitor action-group list --subscription $SubscriptionId --query '[?enabled==`true`]' --output json --only-show-errors | ConvertFrom-Json; if ($enabled.Count -lt 1) { throw 'No enabled recovery communication path was found.' }
+        negativeCommand: >-
+          $empty = az monitor action-group list --subscription $SubscriptionId --query '[?length(emailReceivers)==`0` && length(smsReceivers)==`0` && length(webhookReceivers)==`0`]' --output json --only-show-errors | ConvertFrom-Json; if ($empty.Count -gt 0) { throw 'An action group has no usable receiver.' }
+        expected: The runbook assigns decision authority, recovery-wave gates, technical actions, stakeholder notifications, and rollback criteria.
+        negative: A runbook that relies on one unavailable identity, an unnamed approver, or an untested manual handoff must fail.
+        evidence: Preserve the tabletop timeline, RACI, escalation matrix, and approval record for every wave transition.
+        failure: Ambiguous authority can extend downtime even when technical recovery succeeds.
+        retry: Assign deputies and alternate communication paths, then replay the affected tabletop inject.
+        cleanup: Remove test contact data from local evidence and leave production action groups unchanged.
+        waf: 'Operational Excellence: explicit gates and communications make recovery repeatable under pressure.'
+      - title: Validate objectives with an exercise scorecard
+        requirement: LAB14-REQ-05
+        command: >-
+          az monitor metrics list-definitions --resource $RecoveryEvidenceResourceId --query "value[].{name:name.value,unit:unit}" --output table --only-show-errors
+        positiveCommand: >-
+          $definitions = az monitor metrics list-definitions --resource $RecoveryEvidenceResourceId --output json --only-show-errors | ConvertFrom-Json; if ($definitions.value.Count -lt 1) { throw 'No measurable recovery evidence source was found.' }
+        negativeCommand: >-
+          $alerts = az monitor metrics alert list --resource-group $ResourceGroupName --query '[?enabled==`false`]' --output json --only-show-errors | ConvertFrom-Json; if ($alerts.Count -gt 0) { throw 'Disabled evidence alerts need a documented exception before the exercise.' }
+        expected: The exercise independently measures detection, decision, restore, dependency validation, data-loss window, and business acceptance against targets.
+        negative: Declaring success solely because infrastructure reports healthy must fail without application and business assertions.
+        evidence: Archive timestamped scorecards, failed assertions, improvement owners, and the next exercise date.
+        failure: Missing timestamps or business acceptance prevents an auditable comparison with RTO and RPO.
+        retry: Correct instrumentation and repeat only the failed recovery wave while preserving the original result.
+        cleanup: Delete synthetic exercise records according to evidence policy; do not purge protected production data.
+        waf: 'Performance Efficiency: measured rehydration and validation times expose recovery-capacity bottlenecks.'
+    changeRequest: The board reduces the Tier 1 RTO from four hours to forty-five minutes while prohibiting any additional cross-border data replication.
+    challenge: Revise the tiering decision and exercise plan so the new RTO is met through in-boundary warm capacity and faster orchestration, with the cost increase and residual regional risk made explicit.
+    troubleshooting:
+      - If Azure CLI queries return an empty array, verify the subscription scope and distinguish a genuinely empty inventory from missing Reader permissions.
+      - If dependency tags contain inconsistent names, normalize them in the local register without changing production tags during the simulation.
+      - If RTO evidence omits approval delay, add business decision timestamps rather than reporting only technical restore duration.
+
+  - number: '15'
+    scenario: >-
+      Fabrikam Health runs appointment and imaging coordination on Windows and Linux virtual machines distributed across one Azure region. Backups exist, but recent restore testing found inconsistent policies, unprotected data disks, and a single application tier confined to one datacenter boundary. The clinical service must survive a zone outage, recover from destructive change, retain immutable recovery points, and prove that restored machines are isolated before reconnecting to production. A full second-region estate is too expensive for the learning environment, so the architecture team will evaluate the production design through read-only discovery, policy evidence, and a safe analogue that models failover ordering without creating standby compute.
+    role: Compute continuity architect
+    outcome: Design a zone-resilient VM architecture and an auditable backup, isolated-restore, and failover process that meets clinical recovery targets.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Maintain appointment coordination through a datacenter failure and recover compromised virtual machines from trusted points without unsafe reconnection.
+    stakeholders:
+      - Clinical operations owner
+      - Infrastructure engineering lead
+      - Security incident commander
+      - Backup service owner
+      - Finance partner
+    primarySource:
+      title: Reliability in Azure Virtual Machines
+      url: https://learn.microsoft.com/en-us/azure/reliability/reliability-virtual-machines
+    candidates:
+      - Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+      - Availability sets with locally redundant vault protection
+      - Azure Site Recovery warm replicas in a secondary region for every virtual machine
+    selected: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+    checkpoints:
+      - title: Establish compute failure-domain evidence
+        requirement: LAB15-REQ-01
+        command: >-
+          Get-AzVM -ResourceGroupName $ResourceGroupName -Status | Select-Object Name, Location, Zones, @{Name='PowerState';Expression={$_.Statuses[-1].DisplayStatus}}
+        positiveCommand: >-
+          $running = Get-AzVM -ResourceGroupName $ResourceGroupName -Status | Where-Object { $_.Statuses.DisplayStatus -contains 'VM running' }; if (-not $running) { throw 'No running VM was found in the assessed scope.' }
+        negativeCommand: >-
+          $withoutZone = Get-AzVM -ResourceGroupName $ResourceGroupName | Where-Object { -not $_.Zones -and -not $_.AvailabilitySetReference }; if ($withoutZone) { throw 'A VM lacks a zone or availability-set placement decision.' }
+        expected: Every VM is mapped to an application tier, availability target, zone or fault-domain placement, and recovery order.
+        negative: Counting multiple VMs as highly available when they share an unexamined failure domain must fail.
+        evidence: Export the VM placement matrix with tier, zone, disk, dependency, and owner fields.
+        failure: Missing placement metadata can conceal a single-zone application dependency.
+        retry: Confirm supported zones and SKU capacity, update the design matrix, and rerun both placement assertions.
+        cleanup: Remove the local inventory export after review; do not alter VM placement during discovery.
+        waf: 'Reliability: explicit zone distribution reduces correlated compute failure.'
+      - title: Verify backup coverage and policy intent
+        requirement: LAB15-REQ-02
+        command: >-
+          Get-AzRecoveryServicesVault -ResourceGroupName $ResourceGroupName | Select-Object Name, Location, Id
+        positiveCommand: >-
+          $vault = Get-AzRecoveryServicesVault -ResourceGroupName $ResourceGroupName | Select-Object -First 1; if (-not $vault) { throw 'No Recovery Services vault was found.' }
+        negativeCommand: >-
+          $vaults = Get-AzRecoveryServicesVault -ResourceGroupName $ResourceGroupName; if ($vaults | Where-Object { $_.Location -ne $Location }) { throw 'A vault location differs from the documented protection design.' }
+        expected: The coverage matrix maps operating system and data disks to policy frequency, retention, vault redundancy, immutability, and soft-delete requirements.
+        negative: A VM shown in inventory but absent from the protected-item register must fail even if another VM has a successful backup.
+        evidence: Preserve vault configuration, policy exports, protected-item coverage, and approved exceptions.
+        failure: Vault existence alone does not prove that every required disk is protected or retained correctly.
+        retry: Correct the policy-to-workload mapping in the design and repeat the coverage reconciliation.
+        cleanup: Remove sanitized exports only; never disable soft delete, immutability, or protection as cleanup.
+        waf: 'Security: immutable, access-controlled recovery points improve resistance to destructive attacks.'
+      - title: Evaluate zone-resilient capacity
+        requirement: LAB15-REQ-03
+        command: >-
+          Get-AzComputeResourceSku -Location $Location | Where-Object { $_.ResourceType -eq 'virtualMachines' -and $_.Name -eq $VmSku } | Select-Object Name, Locations, LocationInfo, Restrictions
+        positiveCommand: >-
+          $sku = Get-AzComputeResourceSku -Location $Location | Where-Object { $_.ResourceType -eq 'virtualMachines' -and $_.Name -eq $VmSku -and -not $_.Restrictions }; if (-not $sku) { throw 'The selected VM SKU is unavailable or restricted.' }
+        negativeCommand: >-
+          $zonal = Get-AzComputeResourceSku -Location $Location | Where-Object { $_.ResourceType -eq 'virtualMachines' -and $_.Name -eq $VmSku -and $_.LocationInfo.Zones.Count -lt 2 }; if ($zonal) { throw 'The selected SKU does not expose the required zone spread.' }
+        expected: The target design documents supported zones, surge capacity, quota, health probes, disk constraints, and degraded-mode capacity.
+        negative: A design that needs every zone at peak capacity, or assumes quota appears during an incident, must fail.
+        evidence: Save the SKU capability result, capacity calculation, and quota-request lead-time assumption.
+        failure: Region-specific SKU restrictions can make a syntactically valid availability design undeployable.
+        retry: Evaluate the approved fallback SKU and recalculate cost and performance before reselection.
+        cleanup: Delete local calculation output; this checkpoint requests no quota and provisions no compute.
+        waf: 'Performance Efficiency: right-sized degraded-mode capacity protects clinical latency without permanent overprovisioning.'
+      - title: Design isolated restore and recovery validation
+        requirement: LAB15-REQ-04
+        command: >-
+          Get-AzRecoveryServicesBackupJob -VaultId $VaultId -From (Get-Date).AddDays(-7) | Select-Object WorkloadName, Operation, Status, StartTime, EndTime
+        positiveCommand: >-
+          $completed = Get-AzRecoveryServicesBackupJob -VaultId $VaultId -From (Get-Date).AddDays(-7) | Where-Object { $_.Operation -match 'Backup|Restore' -and $_.Status -eq 'Completed' }; if (-not $completed) { throw 'No completed backup or restore evidence was found.' }
+        negativeCommand: >-
+          $failed = Get-AzRecoveryServicesBackupJob -VaultId $VaultId -From (Get-Date).AddDays(-7) | Where-Object { $_.Status -in @('Failed','PartiallySucceeded') }; if ($failed) { throw 'Failed backup or restore jobs require resolution.' }
+        expected: The restore plan uses a quarantined network, malware inspection, identity isolation, application checks, data-consistency checks, and explicit release approval.
+        negative: Restoring directly onto the original VM or reconnecting before security and application acceptance must fail.
+        evidence: Record the selected recovery point, job timing, isolation controls, assertion results, and approval outcome.
+        failure: A technically completed restore can reintroduce compromise or inconsistent application state.
+        retry: Select the next trusted recovery point, preserve the failed evidence, and repeat validation in isolation.
+        cleanup: Remove only disposable restored resources after exact ownership checks; retain protected recovery points.
+        waf: 'Operational Excellence: a rehearsed isolated-restore workflow produces repeatable and auditable recovery.'
+      - title: Exercise failover ordering and rollback
+        requirement: LAB15-REQ-05
+        command: >-
+          Get-AzRecoveryServicesAsrRecoveryPlan -Name $RecoveryPlanName | Select-Object Name, PrimaryFabricFriendlyName, RecoveryFabricFriendlyName, Groups
+        positiveCommand: >-
+          $plan = Get-AzRecoveryServicesAsrRecoveryPlan -Name $RecoveryPlanName; if (-not $plan -or $plan.Groups.Count -lt 2) { throw 'The recovery plan does not contain dependency-aware groups.' }
+        negativeCommand: >-
+          $plan = Get-AzRecoveryServicesAsrRecoveryPlan -Name $RecoveryPlanName; if ($plan.Groups[0].ProtectedItems.FriendlyName -contains $WebTierVmName) { throw 'The web tier starts before its data dependency.' }
+        expected: The safe analogue sequences identity, data, application, and ingress tiers, measures the RTO, and defines rollback and failback gates.
+        negative: Passing infrastructure health while a clinical transaction or rollback assertion fails must produce an overall failed result.
+        evidence: Save the simulated timeline, assertion-level outcomes, dependency delays, and remediation owners.
+        failure: Parallel recovery without dependency gates can create misleadingly fast but unusable service restoration.
+        retry: Correct the recovery group order and repeat the failed wave, not the entire exercise, unless state is uncertain.
+        cleanup: Remove only run-owned simulation artifacts; do not start a test failover or delete recovery plans.
+        waf: 'Cost Optimization: the safe analogue validates orchestration without maintaining a full secondary compute estate.'
+    changeRequest: Security now requires a known-clean restore to be available within two hours even when the latest three recovery points are considered suspect.
+    challenge: Revise retention, immutability, isolated-restore capacity, and recovery-point selection so the cyber-recovery target is credible without selecting the all-workload regional standby candidate.
+    troubleshooting:
+      - If vault cmdlets return no items, set the correct vault context and verify Reader access before concluding that protection is absent.
+      - If a VM SKU reports restrictions, inspect zone and subscription restrictions separately and document the approved fallback SKU.
+      - If backup job duration exceeds RTO, distinguish restore transfer time from application validation and approval delays.
+
+  - number: '16'
+    scenario: >-
+      Northwind Tickets uses Azure SQL Database for reservations, seat inventory, and payment-state coordination. The database is zone redundant in the primary region, but product leaders now require continuity through a complete regional outage and evidence that committed reservations remain within a five-minute data-loss window. Customer traffic can be redirected, yet DNS, connection-string behavior, database dependencies, and failback ownership are poorly documented. A continuously running duplicate application stack is outside the lab budget. The architecture exercise must therefore assess an existing topology with Azure CLI, model failover-group behavior, and validate application-aware recovery criteria without causing an actual failover or modifying production databases.
+    role: Relational data continuity architect
+    outcome: Select and validate a relational continuity pattern that covers zonal availability, regional failover, application connectivity, data loss, and controlled failback.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Preserve ticket sales and prevent overselling during zone or region disruption while meeting the five-minute RPO.
+    stakeholders:
+      - Commerce product owner
+      - Database engineering lead
+      - Payment compliance officer
+      - Site reliability engineering lead
+      - Customer support manager
+    primarySource:
+      title: Business continuity overview with Azure SQL Database
+      url: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+    candidates:
+      - Azure SQL Database failover group with zone-redundant primary and secondary databases
+      - Active geo-replication with application-managed endpoints and failover
+      - SQL Server on Azure Virtual Machines with an Always On availability group
+    selected: Azure SQL Database failover group with zone-redundant primary and secondary databases
+    checkpoints:
+      - title: Baseline database tier and availability settings
+        requirement: LAB16-REQ-01
+        command: >-
+          az sql db show --resource-group $ResourceGroupName --server $SqlServerName --name $DatabaseName --query "{id:id,sku:sku.name,tier:sku.tier,zoneRedundant:zoneRedundant,status:status}" --output json --only-show-errors
+        positiveCommand: >-
+          $db = az sql db show --resource-group $ResourceGroupName --server $SqlServerName --name $DatabaseName --output json --only-show-errors | ConvertFrom-Json; if ($db.status -ne 'Online') { throw 'The primary database is not online.' }
+        negativeCommand: >-
+          $db = az sql db show --resource-group $ResourceGroupName --server $SqlServerName --name $DatabaseName --output json --only-show-errors | ConvertFrom-Json; if (-not $db.zoneRedundant) { throw 'The selected primary tier is not zone redundant.' }
+        expected: The baseline identifies service tier, zone redundancy, backup redundancy, maintenance constraints, dependencies, and observed workload demand.
+        negative: A regional design based on a tier that cannot satisfy the local availability requirement must fail before failover planning.
+        evidence: Store the normalized database configuration and the requirement-to-capability comparison.
+        failure: Unsupported tier or region combinations can invalidate the selected continuity pattern.
+        retry: Evaluate the nearest qualifying tier, recalculate cost, and rerun the capability assertions.
+        cleanup: Delete only the local configuration export; the source database remains unchanged.
+        waf: 'Reliability: local zone resilience prevents a datacenter event from becoming an unnecessary regional failover.'
+      - title: Validate failover-group topology
+        requirement: LAB16-REQ-02
+        command: >-
+          az sql failover-group show --resource-group $ResourceGroupName --server $SqlServerName --name $FailoverGroupName --query "{partner:partnerServers[0].id,policy:readWriteEndpoint.failoverPolicy,grace:readWriteEndpoint.failoverWithDataLossGracePeriodMinutes,databases:databases}" --output json --only-show-errors
+        positiveCommand: >-
+          $fg = az sql failover-group show --resource-group $ResourceGroupName --server $SqlServerName --name $FailoverGroupName --output json --only-show-errors | ConvertFrom-Json; if ($fg.databases.Count -lt 1 -or $fg.partnerServers.Count -ne 1) { throw 'The failover group lacks a database or a single partner.' }
+        negativeCommand: >-
+          $fg = az sql failover-group show --resource-group $ResourceGroupName --server $SqlServerName --name $FailoverGroupName --output json --only-show-errors | ConvertFrom-Json; if ($fg.readWriteEndpoint.failoverPolicy -eq 'Automatic' -and $fg.readWriteEndpoint.failoverWithDataLossGracePeriodMinutes -lt 60) { throw 'Automatic failover grace is below the approved safety threshold.' }
+        expected: The partner region, database membership, endpoint policy, grace period, residency, and capacity assumptions match the approved design.
+        negative: Missing database membership or an automatic policy that accepts unapproved data loss must fail.
+        evidence: Preserve the failover-group projection and a diagram of primary, secondary, and listener endpoint behavior.
+        failure: An incomplete group can redirect the application while leaving a required database behind.
+        retry: Correct the proposed membership or policy in the design fixture and repeat the read-only comparison.
+        cleanup: Remove local projections only; do not add databases or alter failover policy during assessment.
+        waf: 'Security: region and membership validation keeps replicated payment data inside approved boundaries.'
+      - title: Prove connection and dependency readiness
+        requirement: LAB16-REQ-03
+        command: >-
+          az sql failover-group list --resource-group $ResourceGroupName --server $SqlServerName --query "[].{name:name,readWriteListener:readWriteEndpoint,readOnlyListener:readOnlyEndpoint}" --output json --only-show-errors
+        positiveCommand: >-
+          $groups = az sql failover-group list --resource-group $ResourceGroupName --server $SqlServerName --output json --only-show-errors | ConvertFrom-Json; if (-not ($groups | Where-Object { $_.name -eq $FailoverGroupName })) { throw 'The expected listener configuration was not found.' }
+        negativeCommand: >-
+          $server = az sql server show --resource-group $ResourceGroupName --name $SqlServerName --output json --only-show-errors | ConvertFrom-Json; if ($server.fullyQualifiedDomainName -eq $ApplicationSqlEndpoint) { throw 'The application is pinned to the regional server rather than the failover-group listener.' }
+        expected: Applications use the read-write listener, retry transient failures, preserve idempotency, and can reach every regional dependency after redirection.
+        negative: A hard-coded regional server name, non-idempotent retry, or missing secret in the secondary path must fail.
+        evidence: Save sanitized connection settings, dependency checks, retry-policy tests, and transaction correlation IDs.
+        failure: Database failover can succeed while the application remains pinned to the unavailable primary endpoint.
+        retry: Correct the local configuration fixture and replay connection and idempotency tests.
+        cleanup: Remove sanitized test outputs and synthetic transactions; never commit connection secrets.
+        waf: 'Operational Excellence: listener-based configuration and tested retry behavior make failover operable.'
+      - title: Measure replication health against RPO
+        requirement: LAB16-REQ-04
+        command: >-
+          az monitor metrics list --resource $DatabaseResourceId --metric replication_lag_seconds --interval PT1M --aggregation Maximum --output json --only-show-errors
+        positiveCommand: >-
+          $metric = az monitor metrics list --resource $DatabaseResourceId --metric replication_lag_seconds --interval PT1M --aggregation Maximum --output json --only-show-errors | ConvertFrom-Json; if ($metric.value.timeseries.data.maximum | Where-Object { $_ -gt 300 }) { throw 'Observed replication lag exceeds the five-minute RPO.' }
+        negativeCommand: >-
+          $metric = az monitor metrics list --resource $DatabaseResourceId --metric replication_lag_seconds --interval PT1M --aggregation Maximum --output json --only-show-errors | ConvertFrom-Json; if (-not $metric.value.timeseries.data) { throw 'Replication lag has no evidence samples.' }
+        expected: Replication lag and business transaction markers are measured independently and remain within the five-minute RPO under the modeled load.
+        negative: Missing samples, averaged-away spikes, or infrastructure-only lag with no transaction watermark must fail.
+        evidence: Archive metric samples, transaction watermarks, timestamps, and the calculated worst-case data-loss interval.
+        failure: Aggregate metrics can hide short lag spikes that violate the business RPO.
+        retry: Query maximum granularity for the affected window and rerun the synthetic transaction comparison.
+        cleanup: Delete synthetic business records according to the test-data policy; retain sanitized metric evidence.
+        waf: 'Performance Efficiency: lag measurement shows whether secondary capacity can sustain the write and replication rate.'
+      - title: Rehearse failover decision and failback
+        requirement: LAB16-REQ-05
+        command: >-
+          az sql failover-group show --resource-group $ResourceGroupName --server $SqlServerName --name $FailoverGroupName --query "{replicationRole:replicationRole,policy:readWriteEndpoint.failoverPolicy,partner:partnerServers[0].id}" --output table --only-show-errors
+        positiveCommand: >-
+          $fg = az sql failover-group show --resource-group $ResourceGroupName --server $SqlServerName --name $FailoverGroupName --output json --only-show-errors | ConvertFrom-Json; if ($fg.replicationRole -notin @('Primary','Secondary')) { throw 'The failover role cannot be established.' }
+        negativeCommand: >-
+          $alerts = az monitor metrics alert list --resource-group $ResourceGroupName --query '[?contains(name,''sql'') && enabled==`false`]' --output json --only-show-errors | ConvertFrom-Json; if ($alerts.Count -gt 0) { throw 'A required SQL continuity alert is disabled.' }
+        expected: The exercise defines detection, business authorization, forced-versus-planned choice, validation, stabilization, and data-safe failback gates.
+        negative: Automatic failback, an unmeasured forced failover, or success without reservation and payment assertions must fail.
+        evidence: Preserve the tabletop decision log, predicted data-loss window, application assertions, and failback checklist.
+        failure: Premature failback can cause a second outage or overwrite the most current data path.
+        retry: Reconcile the authoritative data copy and repeat the decision exercise from the failed gate.
+        cleanup: Delete local exercise artifacts; never issue a failover command as part of this safe analogue.
+        waf: 'Cost Optimization: the model validates regional readiness without running a duplicate application tier for the lab.'
+    changeRequest: A new flash-sale contract doubles peak write volume and requires the reservation API to recover within fifteen minutes rather than one hour.
+    challenge: Recalculate secondary capacity and failover timing, then justify whether the selected failover-group design still wins over active geo-replication with application-managed recovery.
+    troubleshooting:
+      - If a metric name is unavailable for the selected resource type, enumerate metric definitions and map the closest supported replication-health signal.
+      - If the listener test still resolves to the primary region, distinguish expected DNS behavior from an application connection string pinned to a server.
+      - If failover-group membership is incomplete, report the gap but do not modify production membership during the safe analogue.
+
+  - number: '17'
+    scenario: >-
+      Adventure Works Media stores personalization documents in Azure Cosmos DB and millions of production assets in Azure Blob Storage. The service has grown across continents, but the current design confuses durability with availability and has no consistent method to demonstrate RPO, restore integrity, or application behavior when a write region is unavailable. Legal policy requires assets for one market to remain within an approved geography, while editorial teams need rapid access to current metadata. Running duplicate high-scale accounts solely for a lab is unjustified. The team will use Azure PowerShell discovery and synthetic evidence to design a safe analogue for multi-region reads, controlled writes, backup recovery, and storage-account failover.
+    role: Nonrelational data resilience architect
+    outcome: Design and assess coordinated resilience for Cosmos DB documents and Blob assets, including region placement, consistency, backup, failover, and restore validation.
+    duration: 165 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Keep the media platform usable through regional disruption without violating content residency or silently losing accepted editorial changes.
+    stakeholders:
+      - Digital media product owner
+      - Data platform lead
+      - Content rights counsel
+      - Site reliability engineering lead
+      - Editorial operations manager
+    primarySource:
+      title: Reliability in Azure Cosmos DB for NoSQL
+      url: https://learn.microsoft.com/en-us/azure/reliability/reliability-cosmos-db
+    candidates:
+      - Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage
+      - Single write region with secondary reads plus RA-GRS Blob Storage and manual failover
+      - Independent regional data stacks synchronized by an application-owned event log
+    selected: Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage
+    checkpoints:
+      - title: Inventory nonrelational region placement
+        requirement: LAB17-REQ-01
+        command: >-
+          Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName | Select-Object Name, Location, EnableMultipleWriteLocations, EnableAutomaticFailover, ConsistencyPolicy
+        positiveCommand: >-
+          $account = Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName; if ($account.Locations.Count -lt 2) { throw 'The account has fewer than two configured regions.' }
+        negativeCommand: >-
+          $account = Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName; if ($account.Locations | Where-Object { $_.LocationName -notin $ApprovedCosmosRegions }) { throw 'A Cosmos DB region is outside the approved geography.' }
+        expected: Region order, write mode, zone redundancy, consistency, automatic failover, and residency are explicit for the document workload.
+        negative: Multiple regions without a documented write-conflict or consistency decision must fail.
+        evidence: Export a sanitized account projection and map each region to latency, residency, and failure-domain requirements.
+        failure: Region count alone can conceal an unsafe write topology or an unapproved data boundary.
+        retry: Correct the proposed region and consistency design, then rerun discovery and policy comparisons.
+        cleanup: Remove the local account projection; do not add, remove, or reprioritize regions.
+        waf: 'Reliability: deliberate region ordering and write behavior reduce ambiguous failover outcomes.'
+      - title: Validate document consistency and conflict behavior
+        requirement: LAB17-REQ-02
+        command: >-
+          Get-AzCosmosDBSqlDatabase -ResourceGroupName $ResourceGroupName -AccountName $CosmosAccountName | Select-Object Name, Resource, AutoscaleSettings
+        positiveCommand: >-
+          $account = Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName; if ($account.ConsistencyPolicy.DefaultConsistencyLevel -notin @('Session','BoundedStaleness')) { throw 'Consistency does not match the approved editorial model.' }
+        negativeCommand: >-
+          $account = Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName; if ($account.EnableMultipleWriteLocations -and -not $ConflictResolutionProcedureApproved) { throw 'Multi-write is enabled without an approved conflict-resolution procedure.' }
+        expected: The selected consistency level, session-token handling, idempotency key, and conflict-resolution ownership preserve accepted edits.
+        negative: Last-write-wins without a suitable ordering property, or retry without idempotency, must fail.
+        evidence: Save synthetic concurrent-write cases, expected winners, session-read results, and conflict-handling records.
+        failure: A healthy account can still return stale content or resolve concurrent edits contrary to business intent.
+        retry: Correct the conflict rule or application token handling and rerun the failed synthetic case.
+        cleanup: Delete only synthetic documents bearing the exact lab run identifier.
+        waf: 'Performance Efficiency: consistency is chosen from business semantics instead of paying unnecessary latency for stronger guarantees.'
+      - title: Assess Blob durability and failover readiness
+        requirement: LAB17-REQ-03
+        command: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName | Select-Object StorageAccountName, Location, Sku, PrimaryLocation, SecondaryLocation, StatusOfPrimary, StatusOfSecondary
+        positiveCommand: >-
+          $storage = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName; if ($storage.Sku.Name -notmatch 'GZRS|RAGZRS|GRS|RAGRS') { throw 'The storage account lacks approved geo-redundancy.' }
+        negativeCommand: >-
+          $storage = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName; if (-not $storage.SecondaryLocation -or $storage.SecondaryLocation -notin $ApprovedBlobRegions) { throw 'The secondary location is absent or outside the approved geography.' }
+        expected: Replication SKU, paired geography, read access, object replication boundaries, failover effects, and endpoint behavior are documented.
+        negative: Treating geo-replication as backup, or approving account failover without the last-sync exposure, must fail.
+        evidence: Preserve the storage projection, replication comparison, and worst-case unreplicated-write calculation.
+        failure: Account failover can convert an availability incident into permanent loss of not-yet-replicated writes.
+        retry: Reassess the write-freeze and business authorization gates with the latest sync evidence.
+        cleanup: Remove local evidence only; do not initiate account failover or change the redundancy SKU.
+        waf: 'Cost Optimization: GZRS protects zonal and regional failure without duplicating the entire media application.'
+      - title: Prove backup and restore integrity
+        requirement: LAB17-REQ-04
+        command: >-
+          Get-AzStorageBlobServiceProperty -ResourceGroupName $ResourceGroupName -StorageAccountName $StorageAccountName | Select-Object DeleteRetentionPolicy, ContainerDeleteRetentionPolicy, IsVersioningEnabled, RestorePolicy
+        positiveCommand: >-
+          $properties = Get-AzStorageBlobServiceProperty -ResourceGroupName $ResourceGroupName -StorageAccountName $StorageAccountName; if (-not $properties.IsVersioningEnabled -or -not $properties.DeleteRetentionPolicy.Enabled) { throw 'Blob versioning or soft delete is not enabled.' }
+        negativeCommand: >-
+          $properties = Get-AzStorageBlobServiceProperty -ResourceGroupName $ResourceGroupName -StorageAccountName $StorageAccountName; if ($properties.DeleteRetentionPolicy.Days -lt $RequiredRetentionDays) { throw 'Blob soft-delete retention is below the requirement.' }
+        expected: Cosmos DB backup mode and retention plus Blob versioning, soft delete, point-in-time restore, and integrity hashing meet recovery requirements.
+        negative: Successful API restoration without record counts, referential checks, and asset hashes must fail.
+        evidence: Store synthetic manifest counts, hashes, restore timestamps, and per-assertion pass or fail results.
+        failure: Retained data can be unusable when metadata and binary assets represent different recovery points.
+        retry: Choose a mutually consistent recovery timestamp and repeat document, manifest, and hash validation.
+        cleanup: Remove run-owned restored copies after ownership verification; never purge retained versions.
+        waf: 'Security: versioning, soft delete, and controlled restore reduce destructive-change risk.'
+      - title: Rehearse coordinated regional recovery
+        requirement: LAB17-REQ-05
+        command: >-
+          Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName | Select-Object -ExpandProperty Locations | Sort-Object FailoverPriority
+        positiveCommand: >-
+          $locations = (Get-AzCosmosDBAccount -ResourceGroupName $ResourceGroupName -Name $CosmosAccountName).Locations; if (($locations | Sort-Object FailoverPriority | Select-Object -First 1).ProvisioningState -ne 'Succeeded') { throw 'The preferred Cosmos DB region is not ready.' }
+        negativeCommand: >-
+          $storage = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName; if ($storage.StatusOfSecondary -and $storage.StatusOfSecondary -ne 'Available') { throw 'The Blob secondary is not available for the recovery scenario.' }
+        expected: The tabletop coordinates Cosmos DB write-region behavior, Blob write freeze and failover, endpoint changes, cache invalidation, validation, and rollback.
+        negative: Independent component success must not pass when document metadata points to an unavailable or mismatched asset version.
+        evidence: Archive the recovery timeline, cross-store consistency assertions, business acceptance, and residual data-loss statement.
+        failure: Uncoordinated recovery can expose mixed generations of documents and media files.
+        retry: Return to the last consistent synthetic manifest and replay only after both data services meet entry criteria.
+        cleanup: Delete local simulation records and run-owned synthetic data; perform no live regional failover.
+        waf: 'Operational Excellence: coordinated gates keep two independently resilient data services consistent at the application boundary.'
+    changeRequest: A new rights agreement forbids document replication outside one country, but global consumers must still retrieve public media within two seconds.
+    challenge: Separate regulated editorial metadata from public delivery assets, revise region and caching choices, and explain why the selected design still meets availability without replicating protected documents globally.
+    troubleshooting:
+      - If account properties use a different region-name format, normalize names before comparing them with the approved geography list.
+      - If metric or backup evidence is unavailable, record the permission gap as a failed assertion rather than assuming a healthy state.
+      - If cross-store hashes disagree, preserve both manifests and locate the last mutually consistent timestamp before retrying.
+
+  - number: '18'
+    scenario: >-
+      Tailspin Aerospace processes aerodynamic simulations in nightly bursts while a smaller licensing and orchestration tier must remain available during business hours. Jobs range from short CPU-bound calculations to memory-intensive batches that need ephemeral scratch disks, a controlled image, and deterministic retry behavior. Demand is seasonal, permanent peak capacity would be wasteful, and some simulations cannot run on shared infrastructure. The platform team needs a deployable Bicep reference that separates the highly available control plane from elastic workers and records quota, image, and Batch task-recovery assumptions. The lab may create a tightly tagged, time-limited, zero-capacity reference footprint, but it does not submit work or launch production-scale pools.
+    role: Compute platform architect
+    outcome: Build and assess a Bicep-defined architecture that matches compute requirements to zonal virtual machines and an autoscaled Azure Batch worker pool.
+    duration: 180 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Complete simulation batches inside the overnight window while keeping orchestration available and paying for burst capacity only when jobs require it.
+    stakeholders:
+      - Aerospace simulation lead
+      - Compute platform owner
+      - Security engineering lead
+      - FinOps analyst
+      - Operations manager
+    primarySource:
+      title: Choose an Azure compute service
+      url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree
+    candidates:
+      - Zonal control virtual machines with an autoscaled Azure Batch pool
+      - Flexible Virtual Machine Scale Sets running custom queue workers
+      - Dedicated zonal virtual machines scheduled for the nightly processing window
+    selected: Zonal control virtual machines with an autoscaled Azure Batch pool
+    checkpoints:
+      - title: Translate workload demand into compute requirements
+        requirement: LAB18-REQ-01
+        command: >-
+          az vm list-skus --location $Location --resource-type virtualMachines --query '[?capabilities[?name==''vCPUs'' && to_number(value)>=`4`]].{name:name,zones:locationInfo[0].zones,restrictions:restrictions}' --output table --only-show-errors
+        positiveCommand: >-
+          $skus = az vm list-skus --location $Location --size $ControlVmSku --all --output json --only-show-errors | ConvertFrom-Json; if (-not $skus -or $skus[0].restrictions.Count -gt 0) { throw 'The selected control VM SKU is unavailable or restricted.' }
+        negativeCommand: >-
+          $skus = az vm list-skus --location $Location --size $WorkerVmSku --all --output json --only-show-errors | ConvertFrom-Json; if (-not ($skus[0].locationInfo.zones)) { throw 'The worker SKU has no documented zone capability.' }
+        expected: The requirement matrix captures instruction set, vCPU, memory, scratch space, network, image, job duration, concurrency, availability, quota, and data-gravity needs.
+        negative: Selecting a familiar SKU before checking batch-window throughput, quota, or regional restrictions must fail.
+        evidence: Save the demand model, SKU capability output, benchmark assumption, and normal-versus-peak capacity calculation.
+        failure: A technically supported SKU can miss the batch window or be unavailable at the required quota.
+        retry: Substitute the approved fallback SKU, rerun the throughput model, and update the cost comparison.
+        cleanup: Remove local SKU exports; this checkpoint creates no compute or quota request.
+        waf: 'Performance Efficiency: requirements drive heterogeneous sizing instead of one oversized worker profile.'
+      - title: Compile and lint the compute Bicep design
+        requirement: LAB18-REQ-02
+        command: >-
+          az bicep build --file artifacts/main.bicep --stdout --only-show-errors | Out-Null
+        positiveCommand: >-
+          $template = az bicep build --file artifacts/main.bicep --stdout --only-show-errors | ConvertFrom-Json; $types = @($template.resources.type); $vmss = $template.resources | Where-Object type -eq 'Microsoft.Compute/virtualMachineScaleSets'; if ('Microsoft.Batch/batchAccounts' -notin $types -or 'Microsoft.Batch/batchAccounts/pools' -notin $types -or -not $vmss.properties.virtualMachineProfile) { throw 'The compiled template lacks the Batch pool or complete VMSS profile.' }
+        negativeCommand: >-
+          $template = az bicep build --file artifacts/main.bicep --stdout --only-show-errors | ConvertFrom-Json; if ($template.resources | Where-Object { $_.properties -and ($_.properties | ConvertTo-Json -Depth 20) -match 'password|accountKey' }) { throw 'The template appears to contain an inline secret.' }
+        expected: Compilation succeeds and the template contains a tagged, parameterized, three-zone-capable VMSS at zero capacity plus a private, zero-node Batch pool, networking, identity, and no embedded secret.
+        negative: An unpinned image, unrestricted management ingress, missing shutdown control, or plaintext credential must fail lint review.
+        evidence: Preserve the Bicep source hash, compiler output, parameter review, and architecture traceability record.
+        failure: A template can compile while violating security, ownership, or lifecycle requirements.
+        retry: Correct the smallest failing module and rerun compilation plus semantic assertions before deployment preview.
+        cleanup: Delete generated local JSON if retained; keep the authored Bicep source.
+        waf: 'Security: managed identity, restricted ingress, and secret-free templates reduce control-plane exposure.'
+      - title: Preview the tagged reference deployment
+        requirement: LAB18-REQ-03
+        command: >-
+          az deployment group what-if --resource-group $ResourceGroupName --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format FullResourcePayloads --output json --only-show-errors
+        positiveCommand: >-
+          $preview = az deployment group what-if --resource-group $ResourceGroupName --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format ResourceIdOnly --output json --only-show-errors | ConvertFrom-Json; if (-not ($preview.changes | Where-Object changeType -eq 'Create')) { throw 'What-if produced no owned resource creation.' }
+        negativeCommand: >-
+          $preview = az deployment group what-if --resource-group $ResourceGroupName --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format FullResourcePayloads --output json --only-show-errors | ConvertFrom-Json; if ($preview.changes | Where-Object changeType -ne 'Create') { throw 'What-if would modify, delete, or reuse a pre-existing resource.' }; if (($preview | ConvertTo-Json -Depth 50) -match '0\.0\.0\.0/0') { throw 'What-if exposes unrestricted network access.' }
+        expected: What-if contains only new run-owned resources, zero control and worker capacity, no public IP allocation, and the required ownership and expiry tags.
+        negative: Any destructive change, unbounded autoscale maximum, untagged resource, or unrelated scope must block execution.
+        evidence: Archive the complete what-if result, reviewer decision, estimated hourly ceiling, and template and parameter hashes.
+        failure: Parameter drift can expand cost or affect a pre-existing resource despite a valid template.
+        retry: Correct parameters, regenerate state before any mutation, and obtain a fresh reviewed what-if result.
+        cleanup: Remove preview output if it contains sensitive topology; what-if itself creates no resource.
+        waf: 'Cost Optimization: bounded autoscale and reviewed preview make the maximum spend visible before deployment.'
+      - title: Deploy and verify the compute reference
+        requirement: LAB18-REQ-04
+        command: >-
+          az deployment group create --resource-group $ResourceGroupName --name "lab18-$RunId" --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --output json --only-show-errors
+        positiveCommand: >-
+          $deployment = az deployment group show --resource-group $ResourceGroupName --name "lab18-$RunId" --output json --only-show-errors | ConvertFrom-Json; if ($deployment.properties.provisioningState -ne 'Succeeded') { throw 'The reference deployment did not succeed.' }
+        negativeCommand: >-
+          $foreign = az resource list --resource-group $ResourceGroupName --query "[?tags.runId!='$RunId' || tags.labId!='LAB-18' || tags.purpose!='az305-lab']" --output json --only-show-errors | ConvertFrom-Json; if ($foreign.Count -gt 0) { throw 'The resource group contains an ownership mismatch.' }
+        expected: The bounded reference footprint deploys only after execution and cost acknowledgements, and returned IDs are persisted immediately in run state.
+        negative: Missing pre-mutation state, a failed ownership assertion, or an unrecorded returned resource ID makes the deployment unsafe.
+        evidence: Preserve deployment operations, schema-valid run state, exact resource IDs, effective tags, and assertion outcomes.
+        failure: Partial deployment can leave chargeable workers or dependencies even when the top-level operation fails.
+        retry: Reconcile deployment operations with run state, correct the failure, and redeploy idempotently with the same RunId.
+        cleanup: Delete only exact run-state IDs whose purpose, labId, runId, and expiresOn tags all match; follow reverse dependency order.
+        waf: 'Operational Excellence: declarative deployment and immediate state capture make partial failure recoverable.'
+      - title: Validate Batch behavior and graceful degradation
+        requirement: LAB18-REQ-05
+        command: >-
+          $PoolResourceId = az deployment group show --resource-group $ResourceGroupName --name "lab18-$RunId" --query "properties.outputs.cleanupResourceIds.value[?contains(@, '/pools/')]|[0]" --output tsv --only-show-errors; az resource show --ids $PoolResourceId --api-version 2024-07-01 --query "{id:id,vmSize:properties.vmSize,fixedScale:properties.scaleSettings.fixedScale,publicIp:properties.networkConfiguration.publicIPAddressConfiguration.provision}" --output json --only-show-errors
+        positiveCommand: >-
+          $PoolResourceId = az deployment group show --resource-group $ResourceGroupName --name "lab18-$RunId" --query "properties.outputs.cleanupResourceIds.value[?contains(@, '/pools/')]|[0]" --output tsv --only-show-errors; $pool = az resource show --ids $PoolResourceId --api-version 2024-07-01 --output json --only-show-errors | ConvertFrom-Json; if (-not $pool -or $pool.properties.scaleSettings.fixedScale.targetDedicatedNodes -ne 0 -or $pool.properties.scaleSettings.fixedScale.targetLowPriorityNodes -ne 0) { throw 'The included Batch pool is absent or has nonzero target capacity.' }
+        negativeCommand: >-
+          $PoolResourceId = az deployment group show --resource-group $ResourceGroupName --name "lab18-$RunId" --query "properties.outputs.cleanupResourceIds.value[?contains(@, '/pools/')]|[0]" --output tsv --only-show-errors; $pool = az resource show --ids $PoolResourceId --api-version 2024-07-01 --output json --only-show-errors | ConvertFrom-Json; if ($pool.properties.networkConfiguration.publicIPAddressConfiguration.provision -ne 'NoPublicIPAddresses' -or $pool.properties.scaleSettings.autoScale) { throw 'The bounded pool permits public node IPs or unbounded autoscale.' }
+        expected: The exact pool emitted by the deployment remains at zero nodes, uses no public node IPs, and records the image, VM size, subnet, and later scale prerequisites without running a job.
+        negative: A nonzero node target, public node IP, autoscale formula, unsupported image pair, or implicit outbound dependency must fail the bounded reference review.
+        evidence: Store the exact pool ARM ID, zero-node scale settings, image and node-agent pair, subnet, public-IP mode, and documented outbound prerequisite.
+        failure: A syntactically valid pool can allocate billable or unreachable nodes when scale and outbound prerequisites are not checked together.
+        retry: Restore both node targets to zero, validate the current image/SKU pair, and document explicit NAT or inspected-firewall egress before any separately authorized scale test.
+        cleanup: Stop and delete the run-owned pool before other dependencies, then verify no active managed object remains.
+        waf: 'Reliability: idempotent tasks and resilient orchestration tolerate individual worker and zone failures.'
+    changeRequest: Export-controlled simulations can no longer use low-priority capacity, and the processing window is shortened from eight hours to five.
+    challenge: Recalculate dedicated-node capacity, quota, zone placement, and cost; then compare the selected Azure Batch design with Flexible Virtual Machine Scale Sets without crossing the bounded lab footprint.
+    troubleshooting:
+      - If Bicep what-if shows replacements, identify the immutable property and confirm that no pre-existing resource is in scope before execution.
+      - If the Batch pool remains resizing, inspect quota and node allocation errors rather than increasing the maximum blindly.
+      - If task outputs are missing, compare the submitted input manifest with per-task exit codes and output hashes.
+
+  - number: '19'
+    scenario: >-
+      Lucerne Insurance is decomposing a claims application into an HTTP intake API, event-triggered document processors, and long-running risk-scoring workers. Traffic is quiet most of the day but spikes after severe weather, some jobs require custom containers, and no component should hold a cloud credential. The team is debating Kubernetes, managed container hosting, and functions without first separating latency, execution duration, scaling, networking, and operational-control requirements. The lab budget rules out a production-grade cluster, so learners will use Azure PowerShell to inspect a small analogue and produce a decision that assigns each workload to the simplest service that satisfies its constraints.
+    role: Cloud-native compute architect
+    outcome: Select a container and serverless architecture with explicit workload boundaries, scaling rules, identity, network controls, and operational tradeoffs.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Absorb catastrophe-driven claim spikes without permanent cluster overhead or credential-bearing application images.
+    stakeholders:
+      - Claims product owner
+      - Application engineering lead
+      - Platform operations lead
+      - Security architect
+      - FinOps analyst
+    primarySource:
+      title: Choose an Azure container service
+      url: https://learn.microsoft.com/en-us/azure/architecture/guide/choose-azure-container-service
+    candidates:
+      - Azure Container Apps for APIs and workers with Azure Functions for event handlers
+      - Azure Kubernetes Service for every application component
+      - Azure App Service containers with WebJobs for all background processing
+    selected: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+    checkpoints:
+      - title: Partition workloads by execution characteristics
+        requirement: LAB19-REQ-01
+        command: >-
+          Get-AzResource -ResourceGroupName $ResourceGroupName | Where-Object { $_.ResourceType -in @('Microsoft.App/containerApps','Microsoft.Web/sites') } | Select-Object Name, ResourceType, Location, Tags
+        positiveCommand: >-
+          $compute = Get-AzResource -ResourceGroupName $ResourceGroupName | Where-Object { $_.ResourceType -in @('Microsoft.App/containerApps','Microsoft.Web/sites') }; if (-not $compute) { throw 'No container or serverless compute evidence was found.' }
+        negativeCommand: >-
+          $unowned = Get-AzResource -ResourceGroupName $ResourceGroupName | Where-Object { $_.ResourceType -in @('Microsoft.App/containerApps','Microsoft.Web/sites') -and -not $_.Tags.owner }; if ($unowned) { throw 'A compute component has no owner tag.' }
+        expected: Each component records trigger, latency, duration, state, concurrency, scaling, networking, portability, and operations requirements.
+        negative: Selecting one service for every component without explaining mismatched execution constraints must fail.
+        evidence: Save the component matrix and requirement-to-service mapping with rejected alternatives.
+        failure: A hidden long-running or stateful task can exceed a serverless execution model or complicate scaling.
+        retry: Split the disputed component at a stable interface and rescore only affected candidates.
+        cleanup: Remove local matrices; discovery changes no cloud resource.
+        waf: 'Cost Optimization: workload partitioning avoids paying cluster overhead for bursty, event-driven tasks.'
+      - title: Assess Container Apps environment and revisions
+        requirement: LAB19-REQ-02
+        command: >-
+          Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.App/containerApps | Select-Object Name, Location, ResourceId, Tags
+        positiveCommand: >-
+          $apps = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.App/containerApps; if (-not $apps) { throw 'No Container Apps analogue was found.' }
+        negativeCommand: >-
+          $apps = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.App/containerApps; if ($apps | Where-Object { $_.Tags.expiresOn -lt (Get-Date).ToString('yyyy-MM-dd') }) { throw 'An expired Container App remains active.' }
+        expected: The design defines environment boundary, internal and external ingress, revision mode, Dapr need, workload profile, probes, and scale-to-zero behavior.
+        negative: Public ingress on an internal worker, missing health probes, or a minimum replica count that defeats cost assumptions must fail.
+        evidence: Preserve the environment diagram, sanitized resource projection, revision and ingress decisions, and scaling calculation.
+        failure: Incorrect environment or ingress boundaries can expose internal processors and prevent independent lifecycle control.
+        retry: Correct the topology fixture, validate the boundary again, and recalculate baseline replicas.
+        cleanup: Delete only run-owned analogue resources after exact tag and state checks; leave shared environments untouched.
+        waf: 'Security: explicit environment and ingress boundaries reduce unintended public exposure.'
+      - title: Validate Functions triggers and scale constraints
+        requirement: LAB19-REQ-03
+        command: >-
+          Get-AzFunctionApp -ResourceGroupName $ResourceGroupName | Select-Object Name, Location, Runtime, RuntimeVersion, PlanName, State
+        positiveCommand: >-
+          $functions = Get-AzFunctionApp -ResourceGroupName $ResourceGroupName; if (-not ($functions | Where-Object { $_.State -eq 'Running' })) { throw 'No running Function App was found.' }
+        negativeCommand: >-
+          $functions = Get-AzFunctionApp -ResourceGroupName $ResourceGroupName; if ($functions | Where-Object { $_.RuntimeVersion -match 'EOL|unsupported' }) { throw 'A Function App reports an unsupported runtime.' }
+        expected: Trigger semantics, concurrency, timeout, cold-start tolerance, poison-message handling, idempotency, and hosting-plan constraints are explicit.
+        negative: An unbounded retry, non-idempotent handler, or duration beyond the selected hosting limit must fail.
+        evidence: Save trigger contracts, retry and poison-message examples, duration distribution, and hosting-plan rationale.
+        failure: Automatic scaling can amplify duplicate side effects or downstream pressure when trigger semantics are ignored.
+        retry: Add idempotency and bounded concurrency, then replay the failed synthetic messages.
+        cleanup: Remove run-owned messages and local evidence; do not delete shared Function Apps or storage.
+        waf: 'Performance Efficiency: bounded concurrency protects downstream systems while scaling event handling with demand.'
+      - title: Prove identity, secrets, and network posture
+        requirement: LAB19-REQ-04
+        command: >-
+          Get-AzResource -ResourceGroupName $ResourceGroupName | Where-Object { $_.ResourceType -in @('Microsoft.App/containerApps','Microsoft.Web/sites') } | ForEach-Object { Get-AzResource -ResourceId $_.ResourceId -ExpandProperties }
+        positiveCommand: >-
+          $resources = Get-AzResource -ResourceGroupName $ResourceGroupName | Where-Object { $_.ResourceType -in @('Microsoft.App/containerApps','Microsoft.Web/sites') }; if ($resources | Where-Object { -not (Get-AzResource -ResourceId $_.ResourceId -ExpandProperties).Identity }) { throw 'A compute component lacks managed identity.' }
+        negativeCommand: >-
+          $expanded = Get-AzResource -ResourceGroupName $ResourceGroupName -ExpandProperties; if (($expanded.Properties | ConvertTo-Json -Depth 30) -match '(?i)password|connectionstring.{0,20}=') { throw 'A resource property appears to expose an inline credential.' }
+        expected: Every workload uses least-privilege managed identity, retrieves secrets at runtime, and has only the required ingress and egress paths.
+        negative: Embedded credentials, owner-level role assignment, unrestricted administrative ingress, or undocumented egress must fail.
+        evidence: Preserve identity IDs, role-scope matrix, network-flow assertions, and a redacted secret-reference review.
+        failure: A sound compute choice can still create material compromise paths through broad identity or network access.
+        retry: Narrow identity scope and network paths in the safe analogue, then repeat each independent assertion.
+        cleanup: Remove only run-owned role assignments and analogue resources; never print or store resolved secrets.
+        waf: 'Operational Excellence: identity and network contracts remain observable and consistent across independently deployed revisions.'
+      - title: Model surge behavior and graceful degradation
+        requirement: LAB19-REQ-05
+        command: >-
+          Get-AzMetricDefinition -ResourceId $ContainerAppResourceId | Select-Object Name, Unit, PrimaryAggregationType
+        positiveCommand: >-
+          $definitions = Get-AzMetricDefinition -ResourceId $ContainerAppResourceId; if (-not ($definitions | Where-Object { $_.Name.Value -match 'Request|Replica' })) { throw 'Required demand or replica metrics are unavailable.' }
+        negativeCommand: >-
+          $alerts = Get-AzMetricAlertRuleV2 -ResourceGroupName $ResourceGroupName; if ($alerts | Where-Object { -not $_.Enabled -and $_.Scopes -contains $ContainerAppResourceId }) { throw 'A compute scaling alert is disabled.' }
+        expected: The load model proves scale thresholds, downstream back-pressure, degraded-mode behavior, observability, and recovery from a failed revision.
+        negative: Meeting API latency while losing claims, overwhelming a dependency, or masking a failed revision must fail overall.
+        evidence: Archive request rate, queue depth, replica trajectory, rejected work, latency percentiles, and recovery timing.
+        failure: Scale-out lag or downstream saturation can violate the intake objective despite healthy compute metrics.
+        retry: Adjust bounded concurrency or queue thresholds and repeat the same synthetic demand profile.
+        cleanup: Delete synthetic claims and run-owned analogue resources after preserving sanitized results.
+        waf: 'Reliability: queues, health probes, and graceful degradation preserve accepted work during extreme demand.'
+    changeRequest: The risk-scoring worker now needs GPU acceleration for two hours after a catastrophe, but the intake API must still scale to zero overnight.
+    challenge: Repartition the architecture, compare GPU-capable options and their operational burden, and preserve the selected managed approach for components that do not require specialized compute.
+    troubleshooting:
+      - If Az cmdlets do not expose a newly added Container Apps property, use Get-AzResource with expanded properties and record the API shape used.
+      - If scale evidence looks healthy while queue age rises, correlate demand, concurrency, and downstream throttling rather than raising replicas alone.
+      - If managed identity validation fails, distinguish identity absence from insufficient permission to read identity metadata.
+
+  - number: '20'
+    scenario: >-
+      Alpine Logistics is replacing synchronous point-to-point calls between order intake, depot systems, route optimization, customer notifications, and external carriers. Orders require durable, ordered processing for each shipment; telemetry is a high-volume stream; status changes should fan out to unknown future subscribers; and partner APIs need authentication, quotas, versioning, and transformation. A previous proposal placed every interaction on one event service and ignored delivery semantics. The architecture team needs a deployable reference that assigns commands, events, streams, and API traffic to suitable Azure services, then validates duplicate handling, dead lettering, replay, filtering, and consumer isolation without confusing service availability with end-to-end business success.
+    role: Integration solutions architect
+    outcome: Design and validate a composed integration platform using service-specific delivery semantics, governed APIs, and observable failure handling.
+    duration: 180 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Decouple depot and partner changes while ensuring accepted shipments are processed once effectively and status events reach authorized consumers.
+    stakeholders:
+      - Logistics product owner
+      - Integration platform lead
+      - Partner engineering manager
+      - Security architect
+      - Site reliability engineering lead
+    primarySource:
+      title: Compare Azure messaging services
+      url: https://learn.microsoft.com/en-us/azure/service-bus-messaging/compare-messaging-services
+    candidates:
+      - Service Bus for commands, Event Grid for state events, Event Hubs for telemetry, and API Management for partners
+      - Event Hubs as the transport for all commands, events, telemetry, and partner requests
+      - Storage queues and direct partner webhooks with application-owned routing
+    selected: Service Bus for commands, Event Grid for state events, Event Hubs for telemetry, and API Management for partners
+    checkpoints:
+      - title: Classify every interaction contract
+        requirement: LAB20-REQ-01
+        command: >-
+          az resource list --resource-group $ResourceGroupName --query "[?type=='Microsoft.ServiceBus/namespaces' || type=='Microsoft.EventHub/namespaces' || type=='Microsoft.EventGrid/topics' || type=='Microsoft.ApiManagement/service'].{name:name,type:type,location:location}" --output table --only-show-errors
+        positiveCommand: >-
+          $services = az resource list --resource-group $ResourceGroupName --query "[?starts_with(type,'Microsoft.ServiceBus') || starts_with(type,'Microsoft.EventHub') || starts_with(type,'Microsoft.EventGrid') || starts_with(type,'Microsoft.ApiManagement')]" --output json --only-show-errors | ConvertFrom-Json; if ($services.Count -lt 3) { throw 'The composed integration platform is incomplete.' }
+        negativeCommand: >-
+          $untagged = az resource list --resource-group $ResourceGroupName --query "[?(starts_with(type,'Microsoft.ServiceBus') || starts_with(type,'Microsoft.EventHub') || starts_with(type,'Microsoft.EventGrid') || starts_with(type,'Microsoft.ApiManagement')) && !tags.owner]" --output json --only-show-errors | ConvertFrom-Json; if ($untagged.Count -gt 0) { throw 'An integration service has no owner.' }
+        expected: Every interaction records producer, consumer, temporal coupling, ordering, throughput, replay, fan-out, latency, and delivery requirements.
+        negative: Routing a command, event, stream, and synchronous API through one service without semantic justification must fail.
+        evidence: Save the interaction catalog, semantic classification, and service-selection matrix.
+        failure: Misclassified interactions create brittle retries, lost ordering, or unnecessary coupling.
+        retry: Reclassify the disputed contract with producer and consumer owners, then rescore the candidates.
+        cleanup: Remove local catalog exports; discovery changes no service.
+        waf: 'Operational Excellence: explicit contracts make ownership and incident diagnosis clear across service boundaries.'
+      - title: Validate durable command processing
+        requirement: LAB20-REQ-02
+        command: >-
+          az servicebus queue show --resource-group $ResourceGroupName --namespace-name $ServiceBusNamespace --name $CommandQueueName --query "{status:status,lockDuration:lockDuration,maxDeliveryCount:maxDeliveryCount,deadLetteringOnMessageExpiration:deadLetteringOnMessageExpiration,duplicateDetection:requiresDuplicateDetection}" --output json --only-show-errors
+        positiveCommand: >-
+          $queue = az servicebus queue show --resource-group $ResourceGroupName --namespace-name $ServiceBusNamespace --name $CommandQueueName --output json --only-show-errors | ConvertFrom-Json; if ($queue.status -ne 'Active' -or $queue.maxDeliveryCount -lt 3) { throw 'The command queue is not active or has insufficient retry allowance.' }
+        negativeCommand: >-
+          $queue = az servicebus queue show --resource-group $ResourceGroupName --namespace-name $ServiceBusNamespace --name $CommandQueueName --output json --only-show-errors | ConvertFrom-Json; if (-not $queue.requiresDuplicateDetection -or -not $queue.deadLetteringOnMessageExpiration) { throw 'Duplicate detection or dead lettering is disabled.' }
+        expected: Commands use sessions where ordering is required, bounded delivery attempts, duplicate detection, idempotent handlers, and a governed dead-letter workflow.
+        negative: Completing a duplicate shipment, abandoning poison messages indefinitely, or ordering globally when only per-shipment order is needed must fail.
+        evidence: Preserve sanitized message IDs, session ordering, retry counts, dead-letter reason, and handler outcome.
+        failure: At-least-once delivery can create duplicate business effects despite a healthy queue.
+        retry: Correct the idempotency record or session key and replay only the quarantined synthetic message.
+        cleanup: Purge only run-owned synthetic messages through the documented test receiver; never purge a shared entity.
+        waf: 'Reliability: sessions, dead lettering, and idempotency protect accepted commands through transient failure.'
+      - title: Prove event fan-out and telemetry separation
+        requirement: LAB20-REQ-03
+        command: >-
+          az eventgrid event-subscription list --source-resource-id $EventTopicResourceId --query "[].{name:name,endpointType:destination.endpointType,filter:filter,includedEventTypes:filter.includedEventTypes}" --output json --only-show-errors
+        positiveCommand: >-
+          $subscriptions = az eventgrid event-subscription list --source-resource-id $EventTopicResourceId --output json --only-show-errors | ConvertFrom-Json; if ($subscriptions.Count -lt 2) { throw 'The state-event topic does not demonstrate fan-out.' }
+        negativeCommand: >-
+          $telemetryGroups = az eventhubs eventhub consumer-group list --resource-group $ResourceGroupName --namespace-name $EventHubNamespace --eventhub-name $TelemetryHubName --output json --only-show-errors | ConvertFrom-Json; if (-not $telemetryGroups -or ($telemetryGroups.name | Group-Object | Where-Object Count -gt 1)) { throw 'Telemetry consumers are not independently isolated.' }
+        expected: State events use filtered fan-out, telemetry uses partitioned streams and separate consumer groups, and replay ownership is documented.
+        negative: Sending high-volume telemetry through the command queue or sharing offsets between unrelated consumers must fail.
+        evidence: Save subscription filters, event schemas, partition-key rationale, consumer groups, and replay tests.
+        failure: Poor filters or partition keys can overload subscribers or destroy the ordering consumers rely on.
+        retry: Refine the event contract and filter, then replay the same synthetic event set to isolated consumers.
+        cleanup: Remove only run-owned subscriptions, consumer groups, and synthetic events after ownership checks.
+        waf: 'Performance Efficiency: streams and partitioning handle telemetry throughput without burdening command processing.'
+      - title: Govern partner APIs
+        requirement: LAB20-REQ-04
+        command: >-
+          az apim api show --resource-group $ResourceGroupName --service-name $ApiManagementName --api-id $PartnerApiId --query "{name:name,path:path,protocols:protocols,subscriptionRequired:subscriptionRequired,apiVersion:apiVersion}" --output json --only-show-errors
+        positiveCommand: >-
+          $api = az apim api show --resource-group $ResourceGroupName --service-name $ApiManagementName --api-id $PartnerApiId --output json --only-show-errors | ConvertFrom-Json; if (-not $api.subscriptionRequired -or $api.protocols -notcontains 'https') { throw 'The partner API lacks subscription enforcement or HTTPS.' }
+        negativeCommand: >-
+          $revisions = az apim api revision list --resource-group $ResourceGroupName --service-name $ApiManagementName --api-id $PartnerApiId --output json --only-show-errors | ConvertFrom-Json; if (($revisions | Where-Object isCurrent).Count -ne 1) { throw 'The API does not have exactly one current revision.' }
+        expected: The API contract defines authentication, authorization, quota, rate limit, schema validation, versioning, transformation, correlation, and safe backend retry.
+        negative: An anonymous operation, unbounded partner traffic, breaking in-place change, or retry of a non-idempotent request must fail.
+        evidence: Preserve the redacted policy export, API specification hash, negative test results, and current revision mapping.
+        failure: A reachable API can still expose data, overload a backend, or duplicate business transactions.
+        retry: Correct the policy or revision in the controlled reference, then rerun positive and negative partner tests.
+        cleanup: Remove only run-owned API revisions and synthetic subscriptions; retain shared service and production APIs.
+        waf: 'Security: centralized authentication, validation, quotas, and redaction reduce partner-facing attack surface.'
+      - title: Validate end-to-end failure handling
+        requirement: LAB20-REQ-05
+        command: >-
+          az monitor metrics list --resource $ServiceBusNamespaceResourceId --metric IncomingMessages,SuccessfulRequests,ServerErrors,DeadletteredMessages --interval PT1M --aggregation Total --output json --only-show-errors
+        positiveCommand: >-
+          $metrics = az monitor metrics list --resource $ServiceBusNamespaceResourceId --metric IncomingMessages,SuccessfulRequests --interval PT1M --aggregation Total --output json --only-show-errors | ConvertFrom-Json; if (-not $metrics.value.timeseries.data) { throw 'No end-to-end messaging evidence was returned.' }
+        negativeCommand: >-
+          $errors = az monitor metrics list --resource $ServiceBusNamespaceResourceId --metric ServerErrors,DeadletteredMessages --interval PT1M --aggregation Total --output json --only-show-errors | ConvertFrom-Json; if ($errors.value.timeseries.data.total | Where-Object { $_ -gt 0 }) { throw 'Server errors or dead-lettered messages remain unresolved.' }
+        expected: A correlated synthetic shipment crosses the API, command, state-event, and telemetry paths with bounded retries and observable business completion.
+        negative: Infrastructure success with a missing notification, duplicate route, unresolved dead letter, or broken correlation must fail overall.
+        evidence: Archive correlation IDs, timestamps, entity metrics, consumer acknowledgements, dead-letter checks, and business outcome.
+        failure: Independent service dashboards can all appear healthy while the business transaction stops between boundaries.
+        retry: Resume from the failed idempotent boundary using the same correlation ID and preserve the original trace.
+        cleanup: Remove run-owned entities in dependency order only after proving that no synthetic message remains active.
+        waf: 'Cost Optimization: service-specific tiers and retention are sized from measured interaction demand rather than a uniform premium choice.'
+    changeRequest: A carrier contract now requires commands for each shipment to remain ordered while also sustaining ten times the telemetry volume during peak season.
+    challenge: Rework session keys, partitions, throughput units, retention, quotas, and cost while preserving semantic separation and avoiding a single-service design.
+    troubleshooting:
+      - If messages remain active, compare lock duration, handler duration, and renewal behavior before increasing delivery attempts.
+      - If an Event Grid subscriber receives unexpected events, test subject and advanced filters independently with a fixed synthetic set.
+      - If APIM tests return a generic error, correlate the gateway request ID with backend and messaging traces before retrying.
+
+  - number: '21'
+    scenario: >-
+      Woodgrove Commerce is standardizing deployment of a multi-region storefront. Product catalog reads need low-latency caching, operators require centrally managed feature flags and non-secret settings, secrets must remain in Key Vault, and all infrastructure changes need repeatable preview and rollback evidence. The existing proposal relies on an aging cache service, mutable scripts, and configuration files baked into application images. The team must adopt Azure Managed Redis for new cache architecture, Azure App Configuration for runtime settings, and Bicep for declarative delivery. A bounded deployment preview is allowed, but provisioning cache capacity and uncontrolled feature rollout are outside the lab scope.
+    role: Application platform and delivery architect
+    outcome: Deliver a Bicep-defined caching, configuration, and deployment architecture with safe rollout, managed identity, observability, and recoverable state.
+    duration: 180 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Accelerate storefront reads and release features consistently across regions without embedding secrets or relying on manual configuration drift.
+    stakeholders:
+      - Digital commerce product owner
+      - Application platform lead
+      - Release engineering manager
+      - Security architect
+      - FinOps analyst
+    primarySource:
+      title: Azure Managed Redis documentation
+      url: https://learn.microsoft.com/en-us/azure/redis/
+    candidates:
+      - Azure Managed Redis with Azure App Configuration and Bicep deployment stacks
+      - Per-instance memory caches with image-baked configuration and imperative scripts
+      - Cosmos DB integrated cache with Key Vault references and Terraform delivery
+    selected: Azure Managed Redis with Azure App Configuration and Bicep deployment stacks
+    checkpoints:
+      - title: Define cache semantics and failure behavior
+        requirement: LAB21-REQ-01
+        command: >-
+          Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.Cache/redisEnterprise | Select-Object Name, Location, ResourceId, Tags
+        positiveCommand: >-
+          $cache = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.Cache/redisEnterprise | Select-Object -First 1; if (-not $cache) { throw 'No Azure Managed Redis resource was found.' }
+        negativeCommand: >-
+          $legacy = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType Microsoft.Cache/Redis; if ($legacy) { throw 'A legacy Azure Cache for Redis resource remains in the new-design scope.' }
+        expected: The design states cache-aside behavior, key ownership, TTL, eviction, invalidation, stampede control, regional scope, and source-of-truth fallback.
+        negative: Treating cache contents as durable system of record, allowing unbounded keys, or failing closed on cache loss must fail.
+        evidence: Preserve access-pattern calculations, key and TTL examples, failure-mode tests, and service-selection rationale.
+        failure: Poor invalidation can serve stale prices while aggressive expiry overloads the database.
+        retry: Adjust TTL and single-flight behavior, then replay the same read and invalidation workload.
+        cleanup: Delete only run-owned synthetic cache keys; never flush a shared cache.
+        waf: 'Performance Efficiency: cache-aside with measured TTL reduces source latency and load while retaining a durable authority.'
+      - title: Separate configuration, features, and secrets
+        requirement: LAB21-REQ-02
+        command: >-
+          Get-AzAppConfigurationStore -ResourceGroupName $ResourceGroupName -Name $AppConfigurationName | Select-Object Name, Location, Endpoint, PublicNetworkAccess, DisableLocalAuth, SkuName
+        positiveCommand: >-
+          $store = Get-AzAppConfigurationStore -ResourceGroupName $ResourceGroupName -Name $AppConfigurationName; if ($store.DisableLocalAuth -ne $true) { throw 'App Configuration local authentication is not disabled.' }
+        negativeCommand: >-
+          $store = Get-AzAppConfigurationStore -ResourceGroupName $ResourceGroupName -Name $AppConfigurationName; if ($store.PublicNetworkAccess -eq 'Enabled' -and $RequirePrivateAccess) { throw 'Public network access violates the approved configuration boundary.' }
+        expected: Non-secret settings and feature flags live in App Configuration, secrets remain Key Vault references, and labels encode environment rather than tenant secrets.
+        negative: A resolved secret value, connection string, or environment-specific credential in Bicep parameters or application settings must fail.
+        evidence: Save redacted key naming, label and feature-filter conventions, identity access matrix, and network decision.
+        failure: Mixing secrets with ordinary configuration increases disclosure risk and complicates rotation.
+        retry: Replace the sensitive value with a Key Vault reference and rerun recursive sensitive-field checks.
+        cleanup: Remove only run-owned non-secret keys and flags; never export or delete resolved secrets.
+        waf: 'Security: managed identity, local-auth disablement, and Key Vault references keep secrets out of deployment artifacts.'
+      - title: Compile the delivery contract
+        requirement: LAB21-REQ-03
+        command: >-
+          bicep build artifacts/main.bicep --stdout | Out-Null
+        positiveCommand: >-
+          $template = bicep build artifacts/main.bicep --stdout | ConvertFrom-Json; $types = @($template.resources.type); if ('Microsoft.Cache/redisEnterprise' -notin $types -or 'Microsoft.Cache/redisEnterprise/databases' -notin $types -or 'Microsoft.AppConfiguration/configurationStores' -notin $types) { throw 'The template lacks Managed Redis, its required database child, or App Configuration.' }
+        negativeCommand: >-
+          $templateText = bicep build artifacts/main.bicep --stdout; if ($templateText -match '(?i)password|primaryKey|connectionString') { throw 'The compiled delivery contract appears to expose secret material.' }
+        expected: The Bicep template compiles, pins GA resource APIs, includes the required Managed Redis database child, disables public access on both service parents, defines secret-free outputs, and states that private endpoints and DNS remain a required design step outside this what-if-only analogue.
+        negative: Hard-coded region names, plaintext secrets, missing expiry tags, or an unbounded production-sized cache must fail.
+        evidence: Preserve source and parameter hashes, compiler output, resource inventory, and traceability to configuration requirements.
+        failure: Declarative syntax alone does not prevent insecure defaults, oversized capacity, or destructive replacement.
+        retry: Correct the failing declaration and repeat compile plus semantic assertions before preview.
+        cleanup: Remove generated local JSON if retained; keep Bicep and the example parameter file.
+        waf: 'Operational Excellence: a versioned declarative contract makes environment differences reviewable and repeatable.'
+      - title: Preview a bounded deployment
+        requirement: LAB21-REQ-04
+        command: >-
+          New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -Name "lab21-$RunId" -TemplateFile artifacts/main.bicep -TemplateParameterFile artifacts/parameters.example.json -runId $RunId -expiresOn $ExpiresOn -WhatIf
+        positiveCommand: >-
+          $validationErrors = Test-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile artifacts/main.bicep -TemplateParameterFile artifacts/parameters.example.json -runId $RunId -expiresOn $ExpiresOn; if ($validationErrors) { throw 'The bounded reference template failed deployment validation.' }
+        negativeCommand: >-
+          $deployment = Get-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -Name "lab21-$RunId" -ErrorAction SilentlyContinue; if ($deployment -and $deployment.ProvisioningState -eq 'Succeeded') { throw 'The safe analogue unexpectedly created a deployment.' }
+        expected: Template validation and reviewed what-if describe only the bounded analogue, with explicit ownership, expiry, identity, network, and capacity settings and no mutation.
+        negative: A destructive what-if, policy denial, production-scale cache, missing lifecycle tag, or persisted deployment from this safe analogue must fail.
+        evidence: Archive template validation, reviewed what-if, cost estimate, policy outcomes, and exact source and parameter hashes.
+        failure: An invalid scope or unsafe default can make a later authorized deployment costly or expose shared configuration.
+        retry: Correct the template or parameters and rerun validation and what-if using the same deterministic inputs.
+        cleanup: Delete local preview output only; the safe analogue must create no cloud object and never purge shared stores.
+        waf: 'Cost Optimization: bounded capacity, expiry tags, and gated execution constrain the deployable reference footprint.'
+      - title: Validate progressive configuration delivery
+        requirement: LAB21-REQ-05
+        command: >-
+          Get-AzMetricDefinition -ResourceId $ManagedRedisResourceId | Select-Object Name, Unit, PrimaryAggregationType
+        positiveCommand: >-
+          $definitions = Get-AzMetricDefinition -ResourceId $ManagedRedisResourceId; if (-not ($definitions | Where-Object { $_.Name.Value -match 'Hit|Miss|Latency|Connected' })) { throw 'Required cache rollout metrics are unavailable.' }
+        negativeCommand: >-
+          $alerts = Get-AzMetricAlertRuleV2 -ResourceGroupName $ResourceGroupName; if (-not ($alerts | Where-Object { $_.Scopes -contains $ManagedRedisResourceId -and $_.Enabled })) { throw 'No enabled cache-health alert protects progressive rollout.' }
+        expected: Synthetic clients refresh non-secret settings, feature exposure advances by a deterministic ring, cache fallback works, and a failed ring stops and rolls back.
+        negative: Global flag activation, stale secret material, cache-failure outage, or rollout continuation after a failed assertion must fail.
+        evidence: Save flag versions, ring membership, refresh timestamps, cache and source latency, assertion results, and rollback record.
+        failure: Configuration propagation can create inconsistent behavior even after infrastructure deployment succeeds.
+        retry: Restore the last approved flag state and replay only the failed ring after fixing the assertion.
+        cleanup: Disable and remove run-owned flags and synthetic keys before deleting run-owned infrastructure.
+        waf: 'Reliability: progressive exposure and tested fallback limit blast radius from configuration and cache faults.'
+    changeRequest: A regulatory review requires the storefront to keep serving last-known-safe catalog data for thirty minutes during configuration-store or source-database unavailability.
+    challenge: Revise TTL, refresh, stale-data labeling, circuit breaking, feature rollback, and monitoring while ensuring that prices beyond the allowed age are never presented as current.
+    troubleshooting:
+      - If Bicep compilation succeeds but semantic checks fail, inspect the compiled resource type and API version before changing assertions.
+      - If clients observe different feature states, compare label, snapshot, refresh interval, and ring identity rather than forcing a global refresh.
+      - If cleanup detects a tag mismatch, stop and reconcile run state; never broaden deletion scope to make cleanup pass.
+
+  - number: '22'
+    scenario: >-
+      Proseware Energy must leave two leased datacenters within thirty months while improving security and reducing operational toil. Its portfolio contains commercial packages, custom web systems, tightly coupled databases, unsupported operating systems, engineering file shares, and applications whose owners or dependencies are uncertain. Executives initially asked for a simple server-count migration schedule, but that would hide business outcomes, compliance constraints, application affinity, readiness gaps, and landing-zone dependencies. The architecture team needs an offline assessment that follows the Cloud Adoption Framework, creates defensible rationalization decisions, and produces prioritized migration waves. This lab ends with approved scope and wave sequencing; it does not execute workload or data migration.
+    role: Cloud adoption and migration strategy architect
+    outcome: Create an outcome-led migration strategy, assessed portfolio, rationalization record, business case, and dependency-aware wave plan ready for detailed execution design.
+    duration: 165 minutes
+    difficulty: advanced
+    costClass: none
+    businessOutcome: Exit the datacenters on schedule while prioritizing measurable value and preventing unsupported or highly coupled workloads from entering unsafe migration waves.
+    stakeholders:
+      - Chief information officer
+      - Datacenter exit program lead
+      - Business application owners
+      - Security and compliance lead
+      - Finance and procurement lead
+    primarySource:
+      title: Plan your migration with the Cloud Adoption Framework
+      url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/migrate/plan-migration
+    candidates:
+      - Cloud Adoption Framework outcome-led assessment and dependency-based waves
+      - Datacenter-by-datacenter rehost schedule based only on server age
+      - Application-team modernization projects without a shared portfolio assessment
+    selected: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+    checkpoints:
+      - title: Define strategy, outcomes, and constraints
+        requirement: LAB22-REQ-01
+        command: >-
+          Get-AzSubscription -SubscriptionId $SubscriptionId | Select-Object Id, Name, State, TenantId
+        positiveCommand: >-
+          $subscription = Get-AzSubscription -SubscriptionId $SubscriptionId; if ($subscription.State -ne 'Enabled') { throw 'The proposed Azure subscription is not enabled.' }
+        negativeCommand: >-
+          $context = Get-AzContext; if ($context.Subscription.Id -ne $SubscriptionId -or $context.Tenant.Id -ne $TenantId) { throw 'The current context does not match the assessed landing-zone scope.' }
+        expected: The strategy connects datacenter exit, resilience, security, sustainability, and cost outcomes to owners, measures, constraints, and decision dates.
+        negative: A migration target stated only as a server count or deadline, with no measurable business outcome, must fail.
+        evidence: Save the strategy brief, outcome measures, mandatory constraints, accountable owners, and approval record.
+        failure: Undefined value and guardrails lead teams to optimize speed while creating risk or unnecessary cost.
+        retry: Reconcile outcomes with executive and workload owners, then repeat the constraint completeness review.
+        cleanup: Remove local subscription metadata from the assessment package if it is not required; no Azure state changes.
+        waf: 'Operational Excellence: explicit outcomes and ownership create durable governance for migration decisions.'
+      - title: Build and quality-check the portfolio inventory
+        requirement: LAB22-REQ-02
+        command: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $portfolio | Group-Object businessCriticality, environment | Select-Object Name, Count
+        positiveCommand: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $required = @('applicationId','owner','businessCriticality','hosting','operatingSystem','dataClassification','monthlyCost'); foreach ($column in $required) { if ($column -notin $portfolio[0].PSObject.Properties.Name) { throw "Missing portfolio column: $column" } }
+        negativeCommand: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $invalid = $portfolio | Where-Object { [string]::IsNullOrWhiteSpace($_.applicationId) -or [string]::IsNullOrWhiteSpace($_.owner) -or $_.businessCriticality -notin @('tier-1','tier-2','tier-3') }; if ($invalid) { throw 'The portfolio contains incomplete or invalid records.' }
+        expected: The inventory covers applications, servers, databases, file data, owners, lifecycle, support, classification, performance, cost, and business criticality.
+        negative: Duplicate IDs, absent owners, unknown licensing, or performance estimates presented as measurements must fail quality review.
+        evidence: Preserve the normalized portfolio, provenance per field, data-quality score, and explicit unknowns register.
+        failure: False precision in incomplete inventory produces unreliable cost and wave estimates.
+        retry: Resolve the highest-impact unknowns with owners and rerun deterministic completeness and uniqueness checks.
+        cleanup: Delete raw exports containing sensitive hostnames after producing the approved sanitized portfolio.
+        waf: 'Security: classification and support-state evidence prevents regulated or vulnerable systems from entering an unsuitable path.'
+      - title: Assess dependencies and readiness
+        requirement: LAB22-REQ-03
+        command: >-
+          $dependencies = Import-Csv artifacts/dependencies.csv; $dependencies | Sort-Object sourceApplicationId, targetApplicationId | Format-Table sourceApplicationId, targetApplicationId, protocol, criticality
+        positiveCommand: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $dependencies = Import-Csv artifacts/dependencies.csv; $ids = @($portfolio.applicationId); if ($dependencies | Where-Object { $_.sourceApplicationId -notin $ids -or $_.targetApplicationId -notin $ids }) { throw 'A dependency references an unknown application.' }
+        negativeCommand: >-
+          $dependencies = Import-Csv artifacts/dependencies.csv; if ($dependencies | Where-Object { $_.criticality -eq 'required' -and [string]::IsNullOrWhiteSpace($_.protocol) }) { throw 'A required dependency has no protocol or interface evidence.' }
+        expected: The assessment maps runtime, identity, DNS, network, database, batch, licensing, operational, and business-process dependencies with confidence levels.
+        negative: A wave that splits a hard dependency or treats low-confidence discovery as complete must fail.
+        evidence: Save the dependency graph, confidence ratings, readiness blockers, remediation owners, and discovery limitations.
+        failure: Hidden coupling can extend an outage, force emergency rollback, or preserve expensive hybrid dependencies.
+        retry: Run targeted owner interviews or discovery against the disputed cluster and regenerate its connected component.
+        cleanup: Remove raw network-flow and hostname exports according to classification policy; retain the sanitized graph.
+        waf: 'Reliability: dependency-aware waves keep recoverable business services together during transition.'
+      - title: Rationalize applications and form waves
+        requirement: LAB22-REQ-04
+        command: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $portfolio | Group-Object disposition | Sort-Object Name | Select-Object Name, Count
+        positiveCommand: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; $allowed = @('rehost','replatform','refactor','repurchase','retain','retire'); if ($portfolio | Where-Object { $_.disposition -notin $allowed -or [string]::IsNullOrWhiteSpace($_.wave) }) { throw 'A portfolio record lacks a valid disposition or wave.' }
+        negativeCommand: >-
+          $portfolio = Import-Csv artifacts/portfolio.csv; if ($portfolio | Where-Object { $_.supportStatus -eq 'unsupported' -and $_.disposition -eq 'rehost' -and [string]::IsNullOrWhiteSpace($_.exceptionId) }) { throw 'An unsupported system is slated for rehost without an exception.' }
+        expected: Every application has a justified disposition, target concept, remediation, wave, exit criterion, rollback option, and owner; waves respect dependencies and team capacity.
+        negative: Defaulting all systems to rehost, placing unresolved blockers in Wave 1, or separating a hard dependency must fail.
+        evidence: Preserve the rationalization matrix, scored priorities, wave map, exception approvals, and rejected sequencing alternatives.
+        failure: A migration factory cannot compensate for poor disposition choices or an overloaded wave.
+        retry: Resolve mandatory blockers, regroup dependency clusters, and recompute capacity and value scores.
+        cleanup: Remove superseded local wave drafts while retaining the approved decision history.
+        waf: 'Cost Optimization: rationalization avoids migrating systems that should be retired or repurchased and exposes retained hybrid cost.'
+      - title: Validate the business case and landing-zone entry criteria
+        requirement: LAB22-REQ-05
+        command: >-
+          Get-AzPolicyAssignment -Scope "/subscriptions/$SubscriptionId" | Select-Object Name, DisplayName, EnforcementMode, Scope
+        positiveCommand: >-
+          $assignments = Get-AzPolicyAssignment -Scope "/subscriptions/$SubscriptionId"; if (-not $assignments) { throw 'No policy-assignment evidence supports landing-zone readiness.' }
+        negativeCommand: >-
+          $groups = Get-AzResourceGroup; if ($groups | Where-Object { $_.Tags.purpose -eq 'migration-target' -and (-not $_.Tags.owner -or -not $_.Tags.costCenter) }) { throw 'A migration target resource group lacks ownership or cost attribution.' }
+        expected: The business case includes migration and parallel-run costs, licenses, people, risk contingency, benefits, assumptions, and landing-zone readiness gates.
+        negative: Savings that omit dual running, remediation, support, connectivity, or decommission cost must fail.
+        evidence: Archive scenario cash flows, assumptions, sensitivity ranges, required policy evidence, decision gates, and finance approval.
+        failure: An incomplete business case can make an infeasible schedule appear economically attractive.
+        retry: Correct the missing cost or readiness assumption and rerun base, downside, and delay scenarios.
+        cleanup: Remove detailed billing exports from the learning package and retain only normalized synthetic figures.
+        waf: 'Performance Efficiency: landing-zone capacity and service limits are validated before workload teams commit to a wave.'
+    changeRequest: The first datacenter lease now ends six months earlier, but the regulator prohibits moving two classified applications until encryption evidence is approved.
+    challenge: Rebalance the waves to accelerate independent workloads, retain the classified dependency cluster temporarily, quantify dual-running cost, and preserve a credible exit milestone without disguising the exception.
+    troubleshooting:
+      - If portfolio totals differ between worksheets, establish one application identifier and reconcile duplicates before scoring.
+      - If dependency discovery conflicts with owner interviews, retain both sources and lower confidence until a targeted test resolves the difference.
+      - If the business case changes dramatically with one assumption, report sensitivity rather than presenting a single deterministic savings number.
+
+  - number: '23'
+    scenario: >-
+      Contoso Manufacturing has approved a migration wave containing a three-tier line-of-business application, two VMware servers, a SQL Server database, and twelve terabytes of engineering files. The target landing zone and wave sequence are already approved; the remaining work is to choose concrete migration paths, rehearse cutover, validate data, and define rollback. Production downtime is limited to four hours, the file set changes continuously, and the database contains regulated records. The learning environment cannot replicate the full estate, so learners use Azure CLI, AzCopy dry-run output, synthetic manifests, and read-only service evidence to model Azure Migrate, Azure Database Migration Service, and staged Blob transfer safely.
+    role: Workload and data migration architect
+    outcome: Produce an executable migration runbook for an approved wave covering IaaS, PaaS, relational database, and unstructured data with validation and rollback gates.
+    duration: 180 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Move the approved manufacturing workload inside the outage window with provable data integrity and a controlled return path.
+    stakeholders:
+      - Plant application owner
+      - Infrastructure migration lead
+      - Database administrator
+      - Information protection officer
+      - Change manager
+    primarySource:
+      title: Azure Migrate service overview
+      url: https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview
+    candidates:
+      - Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+      - Manual virtual machine rebuild plus database backup restore and one-time file copy
+      - Partner replication appliance for all servers, databases, and files as one opaque unit
+    selected: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+    checkpoints:
+      - title: Confirm approved wave and target prerequisites
+        requirement: LAB23-REQ-01
+        command: >-
+          az group show --name $TargetResourceGroupName --query "{id:id,location:location,tags:tags,provisioningState:properties.provisioningState}" --output json --only-show-errors
+        positiveCommand: >-
+          $group = az group show --name $TargetResourceGroupName --output json --only-show-errors | ConvertFrom-Json; if ($group.properties.provisioningState -ne 'Succeeded' -or $group.tags.wave -ne $ApprovedWave) { throw 'The target scope is not ready for the approved wave.' }
+        negativeCommand: >-
+          $locks = az lock list --resource-group $TargetResourceGroupName --output json --only-show-errors | ConvertFrom-Json; if ($locks | Where-Object { $_.level -eq 'ReadOnly' }) { throw 'A read-only lock blocks migration deployment.' }
+        expected: Scope, quotas, policy, DNS, identity, connectivity, encryption, monitoring, ownership, and rollback capacity satisfy the wave entry criteria.
+        negative: An unapproved resource group, unresolved policy denial, missing private resolution, or absent rollback capacity must block migration.
+        evidence: Save the entry checklist, resource-group projection, approvals, exceptions, and pre-cutover decision record.
+        failure: Starting replication before target readiness can waste the outage window and create stranded resources.
+        retry: Resolve the specific entry gate and repeat all prerequisite assertions before rescheduling cutover.
+        cleanup: Delete local prerequisite exports; do not remove landing-zone policy, locks, or shared networking.
+        waf: 'Security: entry gates verify identity, encryption, and private connectivity before regulated data moves.'
+      - title: Design server replication and test migration
+        requirement: LAB23-REQ-02
+        command: >-
+          az resource show --resource-group $MigrationResourceGroupName --resource-type Microsoft.Migrate/migrateProjects --name $MigrateProjectName --api-version 2020-05-01 --output json --only-show-errors
+        positiveCommand: >-
+          $project = az resource show --resource-group $MigrationResourceGroupName --resource-type Microsoft.Migrate/migrateProjects --name $MigrateProjectName --api-version 2020-05-01 --output json --only-show-errors | ConvertFrom-Json; if ($project.properties.provisioningState -ne 'Succeeded') { throw 'The Azure Migrate project is not ready.' }
+        negativeCommand: >-
+          $targets = az vm list --resource-group $TargetResourceGroupName --query "[?tags.wave=='$ApprovedWave' && tags.runId!='$RunId']" --output json --only-show-errors | ConvertFrom-Json; if ($targets.Count -gt 0) { throw 'The target contains a wave VM owned by another run.' }
+        expected: Appliance placement, discovery boundary, replication cadence, rightsizing, disk handling, test network, agent impact, and rollback are explicit for each server.
+        negative: A test migration connected to production, an unsupported disk, missing dependency, or overwrite of an existing target VM must fail.
+        evidence: Preserve assessment recommendations, replication-health samples, test-migration assertions, target sizing, and exact migration IDs.
+        failure: A successful boot does not prove application reachability, performance, or dependency readiness.
+        retry: Correct mapping or sizing and repeat an isolated test migration while preserving the failed evidence.
+        cleanup: Remove only run-owned test VMs, NICs, disks, and snapshots in dependency order; keep replication configuration.
+        waf: 'Reliability: isolated test migration and rollback evidence reduce cutover uncertainty without touching the source.'
+      - title: Plan online relational database migration
+        requirement: LAB23-REQ-03
+        command: >-
+          az resource list --resource-group $MigrationResourceGroupName --resource-type Microsoft.DataMigration/services --query "[].{id:id,name:name,location:location,sku:sku.name,provisioningState:properties.provisioningState}" --output json --only-show-errors
+        positiveCommand: >-
+          $services = az resource list --resource-group $MigrationResourceGroupName --resource-type Microsoft.DataMigration/services --output json --only-show-errors | ConvertFrom-Json; if (-not ($services | Where-Object { $_.properties.provisioningState -eq 'Succeeded' })) { throw 'No ready database migration service was found.' }
+        negativeCommand: >-
+          $targets = az sql db list --resource-group $TargetResourceGroupName --server $TargetSqlServerName --output json --only-show-errors | ConvertFrom-Json; if ($targets | Where-Object { $_.name -eq $TargetDatabaseName -and $_.status -ne 'Online' }) { throw 'The target database exists but is not online.' }
+        expected: Compatibility, target tier, schema, continuous synchronization, encryption, logins, jobs, cutover lag, application freeze, and rollback are covered.
+        negative: Unresolved blocking compatibility findings, missing principals, excessive replication lag, or a writable source after the cutover gate must fail.
+        evidence: Save compatibility results, schema hash, row and checksum samples, synchronization lag, identity mapping, and cutover authorization.
+        failure: Data copy can complete while server-level objects or application connection behavior remain incomplete.
+        retry: Resolve the failed object class, resynchronize, and rerun independent schema, data, login, and application checks.
+        cleanup: Remove only run-owned migration activities and empty test databases; never drop a source or purge backups.
+        waf: 'Performance Efficiency: representative workload evidence validates target tier sizing before irreversible cutover.'
+      - title: Stage and verify unstructured data transfer
+        requirement: LAB23-REQ-04
+        command: >-
+          azcopy copy $SourceDataUrl $DestinationDataUrl --recursive --dry-run
+        positiveCommand: >-
+          $blobs = az storage blob list --account-name $TargetStorageAccountName --container-name $TargetContainerName --auth-mode login --query "[?metadata.runId=='$RunId'].{name:name,size:properties.contentLength,md5:properties.contentSettings.contentMd5}" --output json --only-show-errors | ConvertFrom-Json; if ($blobs.Count -lt 1) { throw 'No run-owned target blobs were found.' }
+        negativeCommand: >-
+          $unexpected = az storage blob list --account-name $TargetStorageAccountName --container-name $TargetContainerName --auth-mode login --query "[?metadata.wave!='$ApprovedWave']" --output json --only-show-errors | ConvertFrom-Json; if ($unexpected.Count -gt 0) { throw 'The target container contains data outside the approved wave.' }
+        expected: Baseline and delta transfers preserve hierarchy, metadata, access tier, hashes, timestamps where required, encryption, and an auditable manifest.
+        negative: A copy count without byte totals and hashes, a source URL with embedded credentials, or data outside the approved prefix must fail.
+        evidence: Preserve dry-run scope, sanitized transfer logs, source and target manifests, failed-object list, hash samples, and delta timing.
+        failure: A nominally successful bulk copy can omit inaccessible files, metadata, or late source changes.
+        retry: Correct only failed objects, run a final delta after write freeze, and regenerate both manifests.
+        cleanup: Delete only run-owned target prefixes after manifest and ownership verification; never purge the source.
+        waf: 'Cost Optimization: staged transfer, lifecycle tiering, and delta cutover reduce network and parallel-storage cost.'
+      - title: Rehearse cutover, validation, and rollback
+        requirement: LAB23-REQ-05
+        command: >-
+          az monitor metrics list --resource $TargetApplicationResourceId --metric Availability,Requests,ResponseTime --interval PT1M --aggregation Average --output json --only-show-errors
+        positiveCommand: >-
+          $metrics = az monitor metrics list --resource $TargetApplicationResourceId --metric Availability,Requests --interval PT1M --aggregation Average --output json --only-show-errors | ConvertFrom-Json; if (-not $metrics.value.timeseries.data) { throw 'No target application validation metrics were returned.' }
+        negativeCommand: >-
+          $failed = az monitor activity-log list --resource-group $TargetResourceGroupName --status Failed --offset 2h --output json --only-show-errors | ConvertFrom-Json; if ($failed.Count -gt 0) { throw 'Failed target operations remain unresolved before cutover.' }
+        expected: The runbook freezes writes, performs final deltas, redirects by an approved mechanism, validates infrastructure, data, security, performance, and business transactions, then gates rollback.
+        negative: Proceeding after outage budget, unresolved checksum difference, failed business transaction, or uncertain authoritative write location must fail.
+        evidence: Archive a timestamped cutover timeline, assertion-level results, data delta, decision log, communications, and rollback disposition.
+        failure: Teams can cross the point of no return while individual technical checks still appear green.
+        retry: Invoke the documented rollback while the source remains authoritative, resolve the failed gate, and schedule a new window.
+        cleanup: Remove run-owned test targets only after rollback or acceptance is complete; decommission sources in a separately approved process.
+        waf: 'Operational Excellence: explicit stop/go and rollback gates keep a multi-technology cutover controlled.'
+    changeRequest: Plant leadership reduces the outage window from four hours to ninety minutes and requires engineering-file writes to continue until fifteen minutes before redirection.
+    challenge: Revise continuous database synchronization, file deltas, write-freeze sequencing, validation sampling, and rollback deadlines while preserving integrity evidence.
+    troubleshooting:
+      - If test-migrated servers boot but the application fails, validate DNS, identity, certificates, and dependency reachability separately.
+      - If database lag will not converge, inspect source transaction rate and target capacity before extending the outage assumption.
+      - If AzCopy manifests differ, separate skipped, changed-during-copy, metadata-only, and hash mismatches before retrying.
+
+  - number: '24'
+    scenario: >-
+      Coho Bank serves customers through public web and API endpoints while core risk systems remain in two private datacenters. Internet users need globally accelerated TLS entry, branches need reliable access to Azure services, and high-volume transaction flows require predictable private connectivity with encrypted backup when a circuit fails. Teams currently discuss ExpressRoute, VPN, Virtual WAN, Front Door, and DNS as isolated products, leaving route propagation, asymmetric paths, name resolution, latency, bandwidth, and failover behavior unowned. The lab uses Azure CLI to inspect a safe network analogue, measure reachability, and compare designs without provisioning a circuit or production-scale gateway.
+    role: Hybrid connectivity architect
+    outcome: Design a resilient internet and hybrid connectivity architecture with explicit routing, DNS, failover, performance, and operational evidence.
+    duration: 165 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Provide low-latency customer entry and predictable private access to risk systems while sustaining connectivity through a circuit or tunnel failure.
+    stakeholders:
+      - Digital banking product owner
+      - Enterprise network lead
+      - Datacenter operations manager
+      - Security architect
+      - Site reliability engineering lead
+    primarySource:
+      title: Azure networking plan and design overview
+      url: https://learn.microsoft.com/en-us/azure/networking/design-guide/overview
+    candidates:
+      - Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+      - Regional Application Gateway with internet VPN tunnels and manual branch routing
+      - Front Door Standard with provider-managed SD-WAN and direct spoke connections
+    selected: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+    checkpoints:
+      - title: Design global internet entry and DNS
+        requirement: LAB24-REQ-01
+        command: >-
+          az rest --method get --url "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Cdn/profiles/$FrontDoorProfileName?api-version=2024-09-01" --query "{id:id,sku:sku.name,provisioningState:properties.provisioningState,frontDoorId:properties.frontDoorId}" --output json --only-show-errors
+        positiveCommand: >-
+          $frontDoorProfile = az rest --method get --url "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Cdn/profiles/$FrontDoorProfileName?api-version=2024-09-01" --output json --only-show-errors | ConvertFrom-Json; if ($frontDoorProfile.properties.provisioningState -ne 'Succeeded' -or $frontDoorProfile.sku.name -notin @('Standard_AzureFrontDoor','Premium_AzureFrontDoor')) { throw 'The Front Door profile is not a supported ready tier.' }
+        negativeCommand: >-
+          $response = az rest --method get --url "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Cdn/profiles/$FrontDoorProfileName/afdEndpoints?api-version=2024-09-01" --output json --only-show-errors | ConvertFrom-Json; if ($response.value | Where-Object { $_.properties.enabledState -ne 'Enabled' }) { throw 'A required Front Door endpoint is disabled.' }
+        expected: The design covers authoritative DNS, Front Door Standard or Premium, TLS, origin naming, health probes, caching boundary, IPv4 and IPv6, and regional-origin failure.
+        negative: A single regional public IP, circular DNS dependency, disabled health probe, or origin reachable outside the intended entry path must fail.
+        evidence: Preserve the DNS chain, profile and endpoint projection, probe design, origin matrix, and failure-routing expectations.
+        failure: Global service availability can still be lost through a mis-scoped DNS zone or unhealthy common origin dependency.
+        retry: Correct the DNS or origin model and repeat resolution plus endpoint-health assertions from each test vantage point.
+        cleanup: Remove local DNS captures; do not modify public records or Front Door configuration in the safe analogue.
+        waf: 'Performance Efficiency: anycast entry and edge acceleration reduce global connection latency while health-based routing avoids failed origins.'
+      - title: Validate private circuit and VPN failover design
+        requirement: LAB24-REQ-02
+        command: >-
+          az network express-route show --resource-group $ResourceGroupName --name $ExpressRouteCircuitName --query "{serviceProvider:serviceProviderProperties.serviceProviderName,bandwidth:serviceProviderProperties.bandwidthInMbps,state:serviceProviderProvisioningState,circuitStatus:circuitProvisioningState,peerings:peerings[].peeringType}" --output json --only-show-errors
+        positiveCommand: >-
+          $circuit = az network express-route show --resource-group $ResourceGroupName --name $ExpressRouteCircuitName --output json --only-show-errors | ConvertFrom-Json; if ($circuit.serviceProviderProvisioningState -ne 'Provisioned' -or $circuit.circuitProvisioningState -ne 'Enabled') { throw 'The ExpressRoute circuit is not ready.' }
+        negativeCommand: >-
+          $gateways = az network vnet-gateway list --resource-group $ResourceGroupName --output json --only-show-errors | ConvertFrom-Json; if (-not ($gateways | Where-Object { $_.gatewayType -eq 'Vpn' -and $_.provisioningState -eq 'Succeeded' })) { throw 'No ready VPN failover gateway was found.' }
+        expected: Dual private paths, diverse provider locations, BGP, gateway scale, FastPath decision, VPN encryption, and deterministic preference and failback are documented.
+        negative: Two links sharing one provider edge, overlapping prefixes, static routes that defeat failover, or untested VPN capacity must fail.
+        evidence: Save circuit and gateway projections, provider diversity statement, prefix table, BGP preference, and failover timing target.
+        failure: Nominal redundancy can share a physical or routing failure domain and provide no effective continuity.
+        retry: Correct path diversity or route preference in the model and replay circuit-withdrawal scenarios.
+        cleanup: Delete local projections; never disconnect a circuit or tunnel during assessment.
+        waf: 'Reliability: physically and logically diverse private and encrypted backup paths remove single connectivity dependencies.'
+      - title: Prove transit routing and route ownership
+        requirement: LAB24-REQ-03
+        command: >-
+          az network vhub show --resource-group $ResourceGroupName --name $VirtualHubName --query "{id:id,addressPrefix:addressPrefix,routingState:routingState,virtualRouterAsn:virtualRouterAsn,provisioningState:provisioningState}" --output json --only-show-errors
+        positiveCommand: >-
+          $hub = az network vhub show --resource-group $ResourceGroupName --name $VirtualHubName --output json --only-show-errors | ConvertFrom-Json; if ($hub.provisioningState -ne 'Succeeded' -or $hub.routingState -notin @('Provisioned','Provisioning')) { throw 'The virtual hub is not ready for transit.' }
+        negativeCommand: >-
+          $routes = az network vhub route-table route list --resource-group $ResourceGroupName --vhub-name $VirtualHubName --route-table-name $HubRouteTableName --output json --only-show-errors | ConvertFrom-Json; if ($routes | Where-Object { $_.destinations -contains '0.0.0.0/0' -and $_.nextHopType -eq 'ResourceId' -and -not $_.nextHops }) { throw 'A default route has no valid next hop.' }
+        expected: Advertised and learned prefixes, propagation labels, next hops, default-route intent, DNS forwarders, and ownership are explicit for every path.
+        negative: Overlap, an orphaned next hop, asymmetric stateful path, unintended branch transit, or DNS forwarding loop must fail.
+        evidence: Preserve effective route projections, prefix ownership, path diagrams, DNS query flow, and asymmetric-path tests.
+        failure: Control-plane connectivity can report provisioned while data follows an unintended or asymmetric route.
+        retry: Correct propagation association or prefix ownership and rerun source-to-destination path evaluation.
+        cleanup: Remove local route exports; do not update hub route tables during the safe analogue.
+        waf: 'Security: explicit route ownership prevents accidental bypass of approved inspection and private paths.'
+      - title: Test reachability and name resolution
+        requirement: LAB24-REQ-04
+        command: >-
+          az network watcher test-connectivity --resource-group $ResourceGroupName --source-resource $SourceVmId --dest-address $PrivateServiceFqdn --dest-port 443 --protocol Tcp --output json --only-show-errors
+        positiveCommand: >-
+          $test = az network watcher test-connectivity --resource-group $ResourceGroupName --source-resource $SourceVmId --dest-address $PrivateServiceFqdn --dest-port 443 --protocol Tcp --output json --only-show-errors | ConvertFrom-Json; if ($test.connectionStatus -ne 'Reachable') { throw 'The approved private endpoint is not reachable.' }
+        negativeCommand: >-
+          $publicTest = az network watcher test-connectivity --resource-group $ResourceGroupName --source-resource $SourceVmId --dest-address $DisallowedPublicEndpoint --dest-port 443 --protocol Tcp --output json --only-show-errors | ConvertFrom-Json; if ($publicTest.connectionStatus -eq 'Reachable') { throw 'A disallowed public endpoint is reachable.' }
+        expected: Independent tests prove approved branch, datacenter, spoke, private endpoint, DNS, and internet paths while disallowed public paths remain unreachable.
+        negative: A successful ping alone, name resolution to a public address, or reachability that bypasses the required path must fail.
+        evidence: Save source, destination, resolved addresses, hops, latency, expected path, and positive and negative assertion results.
+        failure: Network reachability without correct name resolution and path intent can bypass security or break applications.
+        retry: Diagnose DNS, effective routes, NSGs, and next-hop state separately before repeating the exact test.
+        cleanup: Delete diagnostic output containing topology details; test-connectivity creates no persistent resource.
+        waf: 'Operational Excellence: repeatable positive and negative probes turn connectivity intent into observable evidence.'
+      - title: Establish capacity and performance baselines
+        requirement: LAB24-REQ-05
+        command: >-
+          az monitor metrics list --resource $ExpressRouteCircuitResourceId --metric ArpAvailability,BgpAvailability,BitsInPerSecond,BitsOutPerSecond --interval PT5M --aggregation Average,Maximum --output json --only-show-errors
+        positiveCommand: >-
+          $metrics = az monitor metrics list --resource $ExpressRouteCircuitResourceId --metric ArpAvailability,BgpAvailability --interval PT5M --aggregation Average --output json --only-show-errors | ConvertFrom-Json; if ($metrics.value.timeseries.data.average | Where-Object { $_ -lt 100 }) { throw 'Circuit availability evidence is below target.' }
+        negativeCommand: >-
+          $throughput = az monitor metrics list --resource $ExpressRouteCircuitResourceId --metric BitsInPerSecond,BitsOutPerSecond --interval PT5M --aggregation Maximum --output json --only-show-errors | ConvertFrom-Json; if ($throughput.value.timeseries.data.maximum | Where-Object { $_ -gt $ApprovedBitsPerSecond }) { throw 'Observed throughput exceeds approved headroom.' }
+        expected: Latency percentiles, jitter, loss, throughput, connection scale, gateway and circuit headroom, and failover convergence meet documented targets.
+        negative: Relying on averages that hide saturation, measuring only Azure-side latency, or omitting backup-path capacity must fail.
+        evidence: Archive timestamped metric samples, endpoint timings, utilization percentiles, failover convergence, and capacity forecast.
+        failure: A path can remain reachable while congestion or failover capacity violates application objectives.
+        retry: Isolate the constrained segment, correct sizing or routing in the design, and repeat the same load profile.
+        cleanup: Remove synthetic performance data and sanitized captures according to evidence policy.
+        waf: 'Cost Optimization: measured headroom supports the least expensive circuit and gateway capacity that still meets degraded-mode demand.'
+    changeRequest: The payment regulator requires all private transaction traffic to remain encrypted in transit even over ExpressRoute, and the backup VPN must carry the full peak load for four hours.
+    challenge: Add an encryption approach, recalculate gateway and tunnel scale, update route preference and failover tests, and quantify the performance and cost impact.
+    troubleshooting:
+      - If control-plane status is healthy but connectivity fails, inspect effective routes, BGP advertisements, DNS answers, and stateful return path separately.
+      - If Front Door reports an unhealthy origin, compare probe host header, certificate name, path, response code, and origin firewall rules.
+      - If metrics show no samples, verify resource ID, supported metric definitions, aggregation, and time window before concluding there is no traffic.
+
+  - number: '25'
+    scenario: >-
+      Fourth Coffee Health exposes appointment services globally and connects them to private clinical APIs in a hub-and-spoke Azure network. Security requires segmented environments, centralized inspection, application-layer protection, controlled east-west flows, and explicit outbound connectivity. Operations also need the correct load-balancing service at each layer: global HTTP entry, regional web routing, private TCP distribution, and deterministic egress. Earlier diagrams used a Basic Load Balancer and assumed default outbound access, creating retirement and reliability risk. Learners will inspect a safe PowerShell analogue built around Front Door Premium, Azure Firewall Premium, Application Gateway WAF v2, Standard Load Balancer, and NAT Gateway without altering production policy.
+    role: Network security and traffic-delivery architect
+    outcome: Design and validate segmented, inspected traffic paths with current load-balancing services, explicit outbound connectivity, and independent allow and deny evidence.
+    duration: 180 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Protect clinical services and maintain predictable inbound, east-west, and outbound traffic through zonal or regional component failure.
+    stakeholders:
+      - Clinical digital product owner
+      - Network security lead
+      - Platform networking team
+      - Privacy officer
+      - Site reliability engineering lead
+    primarySource:
+      title: Azure load-balancing options
+      url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview
+    candidates:
+      - Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer, and NAT Gateway
+      - Traffic Manager, regional WAF gateways, NSG-only inspection, Standard Load Balancer, and NAT Gateway
+      - Front Door Standard, third-party NVAs behind Gateway Load Balancer, and centralized proxy egress
+    selected: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer, and NAT Gateway
+    checkpoints:
+      - title: Establish segmentation and least-access flows
+        requirement: LAB25-REQ-01
+        command: >-
+          Get-AzVirtualNetwork -ResourceGroupName $ResourceGroupName | Select-Object Name, Location, AddressSpace, Subnets, VirtualNetworkPeerings
+        positiveCommand: >-
+          $vnet = Get-AzVirtualNetwork -ResourceGroupName $ResourceGroupName -Name $SpokeVnetName; if (-not ($vnet.Subnets | Where-Object Name -eq $ApplicationSubnetName)) { throw 'The application subnet is absent.' }
+        negativeCommand: >-
+          $nsgs = Get-AzNetworkSecurityGroup -ResourceGroupName $ResourceGroupName; if ($nsgs.SecurityRules | Where-Object { $_.Direction -eq 'Inbound' -and $_.Access -eq 'Allow' -and $_.SourceAddressPrefix -eq '*' -and $_.DestinationPortRange -eq '*' }) { throw 'An unrestricted inbound NSG rule exists.' }
+        expected: Environment, tier, management, private endpoint, firewall, and gateway boundaries have nonoverlapping prefixes, owned route intent, and minimum required flows.
+        negative: Flat address space, broad any-to-any rule, unmanaged peering transit, or a private endpoint sharing an application subnet must fail.
+        evidence: Preserve the segmentation diagram, subnet and NSG projections, flow matrix, ownership, and deny-by-default rationale.
+        failure: Nominal subnet separation provides little protection when routes or rules permit uncontrolled lateral movement.
+        retry: Narrow the disputed flow and rerun independent required-allow and prohibited-deny tests.
+        cleanup: Delete local topology exports; do not change NSGs, peerings, or subnets during assessment.
+        waf: 'Security: segmentation and least-access rules constrain lateral movement and data exposure.'
+      - title: Validate centralized inspection and policy hierarchy
+        requirement: LAB25-REQ-02
+        command: >-
+          Get-AzFirewall -ResourceGroupName $ResourceGroupName -Name $FirewallName | Select-Object Name, Location, Sku, ThreatIntelMode, FirewallPolicy, Zones, ProvisioningState
+        positiveCommand: >-
+          $firewall = Get-AzFirewall -ResourceGroupName $ResourceGroupName -Name $FirewallName; if ($firewall.ProvisioningState -ne 'Succeeded' -or $firewall.Sku.Tier -ne 'Premium') { throw 'Azure Firewall Premium is not ready.' }
+        negativeCommand: >-
+          $policy = Get-AzFirewallPolicy -ResourceGroupName $ResourceGroupName -Name $FirewallPolicyName; if ($policy.ThreatIntelMode -eq 'Off' -or -not $policy.DnsSetting) { throw 'Threat intelligence or governed DNS proxy configuration is absent.' }
+        expected: Hierarchical policy, DNS proxy, TLS inspection decision, IDPS, threat intelligence, rule ownership, logging, and exception expiry are explicit.
+        negative: An application rule bypassed by a broad network rule, permanent exception, missing diagnostics, or asymmetric route around inspection must fail.
+        evidence: Save redacted policy hierarchy, effective rule order, route projections, logging destinations, and approved exceptions.
+        failure: A configured firewall can be bypassed by routing or an overly broad higher-priority rule.
+        retry: Correct route or priority in the design fixture and repeat both permitted and prohibited flow evaluation.
+        cleanup: Remove sanitized policy exports according to classification; never delete shared firewall policy.
+        waf: 'Operational Excellence: centralized policy, ownership, diagnostics, and expiry make inspection changes reviewable.'
+      - title: Prove global and regional HTTP protection
+        requirement: LAB25-REQ-03
+        command: >-
+          Get-AzFrontDoorCdnProfile -ResourceGroupName $ResourceGroupName -Name $FrontDoorProfileName | Select-Object Name, Location, SkuName, ProvisioningState
+        positiveCommand: >-
+          $frontDoorProfile = Get-AzFrontDoorCdnProfile -ResourceGroupName $ResourceGroupName -Name $FrontDoorProfileName; if ($frontDoorProfile.SkuName -ne 'Premium_AzureFrontDoor' -or $frontDoorProfile.ProvisioningState -ne 'Succeeded') { throw 'Front Door Premium is not ready.' }
+        negativeCommand: >-
+          $gateways = Get-AzApplicationGateway -ResourceGroupName $ResourceGroupName; if ($gateways | Where-Object { $_.WebApplicationFirewallConfiguration.Enabled -eq $false }) { throw 'A regional application gateway has WAF disabled.' }
+        expected: Front Door Premium provides global WAF and private origin access; Application Gateway WAF v2 provides regional routing, probes, TLS policy, and backend isolation.
+        negative: Direct public origin reachability, WAF detection-only mode without approval, mismatched TLS name, or health probe that bypasses application readiness must fail.
+        evidence: Preserve profile and gateway projections, WAF policy mapping, origin restrictions, TLS settings, probe results, and negative-request evidence.
+        failure: Multiple healthy routing layers can still expose an origin directly or block legitimate clinical requests through inconsistent policy.
+        retry: Correct the narrow WAF, certificate, host-header, or origin issue and replay the same positive and negative requests.
+        cleanup: Remove only run-owned custom domains or test routes; never disable shared WAF protections.
+        waf: 'Reliability: layered health probes and zone-resilient regional routing prevent failed instances from receiving traffic.'
+      - title: Validate private load balancing and explicit egress
+        requirement: LAB25-REQ-04
+        command: >-
+          Get-AzLoadBalancer -ResourceGroupName $ResourceGroupName -Name $InternalLoadBalancerName | Select-Object Name, Sku, FrontendIpConfigurations, BackendAddressPools, LoadBalancingRules, Probes
+        positiveCommand: >-
+          $lb = Get-AzLoadBalancer -ResourceGroupName $ResourceGroupName -Name $InternalLoadBalancerName; if ($lb.Sku.Name -ne 'Standard' -or -not $lb.Probes) { throw 'The internal load balancer is not Standard or has no probe.' }
+        negativeCommand: >-
+          $subnet = (Get-AzVirtualNetwork -ResourceGroupName $ResourceGroupName -Name $SpokeVnetName).Subnets | Where-Object Name -eq $ApplicationSubnetName; if (-not $subnet.NatGateway -and -not $ApprovedFirewallEgressRoute) { throw 'The application subnet lacks explicit outbound connectivity.' }
+        expected: Standard Load Balancer distributes private TCP traffic with HA Ports only where justified, while NAT Gateway or inspected firewall egress provides stable outbound addresses and scale.
+        negative: Basic Load Balancer, implicit default outbound access, shared inbound rule for egress, exhausted SNAT ports, or probe mismatch must fail.
+        evidence: Save SKU, frontends, pools, rules, probes, outbound design, SNAT calculation, and degraded-mode capacity.
+        failure: Inbound distribution can remain healthy while outbound connections intermittently fail from SNAT exhaustion.
+        retry: Correct explicit egress or port allocation and replay the connection-scale scenario.
+        cleanup: Delete only run-owned analogue rules and IPs after exact ownership checks; retain shared NAT and firewall resources.
+        waf: 'Performance Efficiency: explicit egress sizing and appropriate layer-four distribution sustain connection volume predictably.'
+      - title: Verify end-to-end routes and failure behavior
+        requirement: LAB25-REQ-05
+        command: >-
+          $networkWatcher = Get-AzNetworkWatcher -ResourceGroupName $ResourceGroupName -Name $NetworkWatcherName; Test-AzNetworkWatcherIPFlow -NetworkWatcher $networkWatcher -TargetVirtualMachineId $SourceVmId -Direction Outbound -Protocol TCP -LocalIPAddress $SourceIp -LocalPort 50000 -RemoteIPAddress $DestinationIp -RemotePort 443
+        positiveCommand: >-
+          $networkWatcher = Get-AzNetworkWatcher -ResourceGroupName $ResourceGroupName -Name $NetworkWatcherName; $allow = Test-AzNetworkWatcherIPFlow -NetworkWatcher $networkWatcher -TargetVirtualMachineId $SourceVmId -Direction Outbound -Protocol TCP -LocalIPAddress $SourceIp -LocalPort 50000 -RemoteIPAddress $ApprovedDestinationIp -RemotePort 443; if ($allow.Access -ne 'Allow') { throw 'The required clinical flow is denied.' }
+        negativeCommand: >-
+          $networkWatcher = Get-AzNetworkWatcher -ResourceGroupName $ResourceGroupName -Name $NetworkWatcherName; $deny = Test-AzNetworkWatcherIPFlow -NetworkWatcher $networkWatcher -TargetVirtualMachineId $SourceVmId -Direction Outbound -Protocol TCP -LocalIPAddress $SourceIp -LocalPort 50000 -RemoteIPAddress $DisallowedDestinationIp -RemotePort 22; if ($deny.Access -ne 'Deny') { throw 'A prohibited administrative flow is allowed.' }
+        expected: Required flows traverse the intended WAF, firewall, or load-balancer path; prohibited flows are denied; zone and origin failure route only to healthy targets.
+        negative: A required allow with unintended bypass, a denied health probe, a permitted prohibited flow, or asymmetric return path must fail.
+        evidence: Archive effective route and IP-flow results, hop intent, probe health, failover timing, and identifying rule names.
+        failure: Passing reachability without verifying the enforcing rule and path can conceal accidental exposure.
+        retry: Isolate DNS, route, NSG, firewall, probe, and backend health one layer at a time, then repeat exact flows.
+        cleanup: Remove diagnostic exports and run-owned synthetic endpoints; network-watcher tests create no persistent resource.
+        waf: 'Cost Optimization: the selected managed controls consolidate policy while avoiding duplicate appliances at every spoke.'
+    changeRequest: Clinical security now requires outbound allowlisting by FQDN and TLS inspection for update traffic, but one vendor uses certificate pinning and cannot tolerate interception.
+    challenge: Revise firewall policy, routes, exception scope and expiry, logging, certificate governance, and negative tests while preventing a broad bypass for the pinned vendor.
+    troubleshooting:
+      - If IP flow verification differs from observed traffic, verify NIC, direction, source address, effective routes, and stateful return path.
+      - If Front Door and Application Gateway disagree on health, compare probe path, host header, certificate name, status code, and timeout independently.
+      - If outbound connections fail intermittently, measure SNAT usage and connection reuse before increasing frontend addresses.
+
+  - number: '26'
+    scenario: >-
+      Trey Research is launching a regulated consumer analytics platform in two Azure regions with no legacy application constraint. Customers sign in through Microsoft Entra External ID, APIs and event processors scale independently, operational data spans relational and document stores, global traffic must survive a regional outage, and product teams need safe automated delivery. Executives want high availability but require an evidence-based cost ceiling before funding production. Learners must integrate governance, identity, observability, data, continuity, compute, messaging, caching, networking, and security decisions into one coherent architecture. The supplied Bicep is deliberately only a non-production foundation slice for compile, lint, and subscription-level what-if: it does not provision the full platform and the lifecycle scripts contain no deployment command.
+    role: Lead Azure solutions architect
+    outcome: Produce and validate a traceable greenfield multi-region platform design and Bicep reference that balances all five Well-Architected Framework pillars.
+    duration: 240 minutes
+    difficulty: expert
+    costClass: low
+    businessOutcome: Launch a secure global platform with controlled regional-failure behavior, fast product delivery, auditable governance, and a defensible production cost envelope.
+    stakeholders:
+      - Chief technology officer
+      - Consumer product director
+      - Data protection officer
+      - Platform engineering lead
+      - Site reliability engineering lead
+      - FinOps lead
+    primarySource:
+      title: Mission-critical workload design methodology
+      url: https://learn.microsoft.com/en-us/azure/well-architected/mission-critical/mission-critical-design-methodology
+    candidates:
+      - Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+      - Active-passive AKS clusters with database failover and a warm secondary region
+      - Single-region modular PaaS platform with cross-region backups and rebuild automation
+    selected: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+    checkpoints:
+      - title: Reconcile requirements and architecture decisions
+        requirement: LAB26-REQ-01
+        command: >-
+          $requirements = Get-Content design/requirements.yml -Raw; $decisions = Get-Content design/decision.yml -Raw; if ([string]::IsNullOrWhiteSpace($requirements) -or [string]::IsNullOrWhiteSpace($decisions)) { throw 'Architecture inputs are empty.' }
+        positiveCommand: >-
+          $text = Get-Content design/decision.yml -Raw; $requiredPillars = @('Reliability','Security','Cost Optimization','Operational Excellence','Performance Efficiency'); foreach ($pillar in $requiredPillars) { if ($text -notmatch [regex]::Escape($pillar)) { throw "Missing WAF pillar: $pillar" } }
+        negativeCommand: >-
+          $text = Get-Content design/decision.yml -Raw; if ($text -match '(?i)Azure AD B2C|Azure Cache for Redis|Basic Load Balancer|Log Analytics agent') { throw 'The design contains a retired or superseded default.' }
+        expected: Requirements, assumptions, mandatory constraints, objective traceability, candidates, scores, risks, architecture decisions, and all five WAF pillars agree.
+        negative: A selected service with no requirement, an unmet mandatory constraint, inconsistent RTO or RPO, or unsupported legacy default must fail.
+        evidence: Preserve the requirement and decision hashes, traceability report, score recalculation, exception log, and architecture review approval.
+        failure: A polished diagram can conceal contradictory decisions and unowned requirements across domains.
+        retry: Resolve the smallest inconsistent decision with its stakeholder and rerun complete traceability and arithmetic checks.
+        cleanup: Remove generated comparison output only; authoritative design sources remain tracked.
+        waf: 'Operational Excellence: decision traceability turns a broad platform architecture into reviewable, owned contracts.'
+      - title: Compile the multi-region Bicep reference
+        requirement: LAB26-REQ-02
+        command: >-
+          az bicep build --file artifacts/main.bicep --stdout --only-show-errors | Out-Null
+        positiveCommand: >-
+          $main = az bicep build --file artifacts/main.bicep --stdout --only-show-errors | ConvertFrom-Json; $regional = az bicep build --file artifacts/modules/regional-stamp.bicep --stdout --only-show-errors | ConvertFrom-Json; $global = az bicep build --file artifacts/modules/global-entry.bicep --stdout --only-show-errors | ConvertFrom-Json; $types = @($main.resources.type) + @($regional.resources.type) + @($global.resources.type); foreach ($requiredType in @('Microsoft.Resources/resourceGroups','Microsoft.Cdn/profiles','Microsoft.ManagedIdentity/userAssignedIdentities')) { if ($requiredType -notin $types) { throw "Missing required resource type: $requiredType" } }; if ($main.outputs.referenceBoundary.value.productionReady -ne $false -or $main.outputs.referenceBoundary.value.omittedCapabilities.Count -lt 6) { throw 'The compiled foundation slice does not disclose its non-production boundary.' }
+        negativeCommand: >-
+          $templateText = az bicep build --file artifacts/main.bicep --stdout --only-show-errors; if ($templateText -match '(?i)password|clientSecret|accountKey|0\.0\.0\.0/0') { throw 'The compiled template contains a secret-like field or unrestricted network rule.' }
+        expected: Subscription-scope Bicep compiles a bounded foundation slice with three tagged resource groups, two regional identity/network/empty-monitoring/storage/serverless-document/messaging scaffolds, and a disabled Front Door Standard endpoint; its output explicitly lists every omitted production capability.
+        negative: Treating the slice as production-ready, hiding an omitted capability, embedded credentials, public data endpoints, or region literals outside parameters must fail.
+        evidence: Save compiler output, source and parameter hashes, resource-type manifest, module dependency graph, and current-service guardrail results.
+        failure: Individual modules can compile while cross-region outputs, scopes, identities, or dependencies remain inconsistent.
+        retry: Fix the failing interface or scope and compile the root plus every module before generating a new preview.
+        cleanup: Delete generated local JSON if retained; keep the Bicep source and example parameters.
+        waf: 'Security: private data paths, managed identities, External ID, and secret-free outputs establish secure defaults.'
+      - title: Verify foundation observability and data guardrails
+        requirement: LAB26-REQ-03
+        command: >-
+          $template = az bicep build --file artifacts/modules/regional-stamp.bicep --stdout --only-show-errors | ConvertFrom-Json; $template.resources | Where-Object { $_.type -match 'diagnosticSettings|dataCollectionRules|databaseAccounts|servers/databases|backupVaults' } | Select-Object type, name
+        positiveCommand: >-
+          $template = az bicep build --file artifacts/modules/regional-stamp.bicep --stdout --only-show-errors | ConvertFrom-Json; if (-not ($template.resources | Where-Object type -match 'Microsoft.Insights/dataCollectionRules') -or -not ($template.resources | Where-Object type -match 'Microsoft.DocumentDB/databaseAccounts')) { throw 'The empty DCR declaration or regional serverless document-store scaffold is missing.' }
+        negativeCommand: >-
+          $template = az bicep build --file artifacts/modules/regional-stamp.bicep --stdout --only-show-errors | ConvertFrom-Json; if ($template.resources | Where-Object { $_.type -match 'databaseAccounts|servers/databases|storageAccounts' -and $_.properties.publicNetworkAccess -eq 'Enabled' }) { throw 'A data service permits public network access.' }
+        expected: The foundation slice contains an empty DCR wired to a workspace and locked-down regional data scaffolds; DCRA, data sources and flows, diagnostics, alerts, backups, replication, compute, cache, private endpoints, and live recovery behavior are explicitly deferred to the production design.
+        negative: Claiming AMA collection, global data coordination, backup, recovery, or alert coverage from these scaffold resources must fail.
+        evidence: Preserve the resource manifest, explicit omission list, objective-to-future-signal mapping, recovery design, data-consistency assumptions, and cost boundaries without presenting them as deployed evidence.
+        failure: Component resilience can leave the platform unavailable or inconsistent when dependency order is ignored.
+        retry: Correct the missing diagnostic or continuity relationship and replay its independent positive and negative assertions.
+        cleanup: Remove local compiled templates and synthetic evidence; this checkpoint changes no service.
+        waf: 'Reliability: coordinated health, data, and recovery contracts protect the complete customer journey rather than isolated components.'
+      - title: Preview cost and policy impact
+        requirement: LAB26-REQ-04
+        command: >-
+          az deployment sub what-if --location $Location --name "lab26-$RunId" --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format FullResourcePayloads --only-show-errors
+        positiveCommand: >-
+          $preview = az deployment sub what-if --location $Location --name "lab26-$RunId" --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format ResourceIdOnly --output json --only-show-errors | ConvertFrom-Json; if (-not ($preview.changes | Where-Object changeType -in @('Create','Deploy','Modify','NoChange'))) { throw 'What-if produced no expected platform changes.' }
+        negativeCommand: >-
+          $preview = az deployment sub what-if --location $Location --name "lab26-$RunId" --template-file artifacts/main.bicep --parameters artifacts/parameters.example.json runId=$RunId expiresOn=$ExpiresOn --result-format FullResourcePayloads --output json --only-show-errors | ConvertFrom-Json; if ($preview.changes | Where-Object { $_.changeType -eq 'Delete' -or $_.resourceId -notmatch $RunId }) { throw 'Preview contains deletion or a resource outside run ownership.' }
+        expected: The reviewed what-if describes only the tagged foundation slice, reports no deletion or unrelated modification, exposes all three resource-group IDs for dependency-safe review, and is never followed by a deployment command.
+        negative: A destructive change, production-scale tier, missing tag, undisclosed omission, unrelated resource modification, or any attempt to treat what-if as deployment evidence must block completion.
+        evidence: Archive complete what-if output, policy results, cost estimate, reviewer disposition, and exact source and parameter hashes.
+        failure: Cross-scope module or parameter errors can unexpectedly affect shared subscription resources.
+        retry: Correct scope, tier, or policy compliance and generate a fresh preview; never waive an unexplained deletion.
+        cleanup: Remove local preview output after review if it contains topology data; what-if provisions nothing.
+        waf: 'Cost Optimization: the high-cost production architecture is evaluated with bounded parameters and an explicit funding envelope.'
+      - title: Run the integrated regional-failure simulation
+        requirement: LAB26-REQ-05
+        command: >-
+          $fixtures = Get-Content tests/fixtures/regional-failure.json -Raw | ConvertFrom-Json; $fixtures.assertions | Select-Object id, domain, expected, simulatedActual
+        positiveCommand: >-
+          $fixtures = Get-Content tests/fixtures/regional-failure.json -Raw | ConvertFrom-Json; if ($fixtures.assertions | Where-Object { $_.polarity -eq 'positive' -and $_.simulatedActual -ne $_.expected }) { throw 'A required platform behavior failed.' }
+        negativeCommand: >-
+          $fixtures = Get-Content tests/fixtures/regional-failure.json -Raw | ConvertFrom-Json; if ($fixtures.assertions | Where-Object { $_.polarity -eq 'negative' -and $_.simulatedActual -ne $_.expected }) { throw 'A prohibited platform behavior was observed.' }
+        expected: The simulation covers identity, global routing, regional ingress, messaging, cache loss, data consistency, degraded capacity, alerting, business validation, recovery, and rollback.
+        negative: Passing infrastructure assertions while authentication, purchase completion, data-loss, security, or cost-limit assertions fail must fail overall.
+        evidence: Preserve the immutable fixture hash, assertion-level output, recovery timeline, architectural consequence, remediation owner, and retest result.
+        failure: Cross-domain dependencies create emergent failures that isolated component tests do not reveal.
+        retry: Correct the responsible architecture contract and rerun the same deterministic fixture before introducing another scenario.
+        cleanup: Delete generated simulation output only; the capstone performs no deployment or live failover.
+        waf: 'Performance Efficiency: degraded-mode simulation proves that surviving regional capacity protects priority journeys within defined limits.'
+    changeRequest: A launch-market regulator now requires all customer profiles to remain in one geography, while anonymous catalog traffic must continue globally through a complete regional outage.
+    challenge: Split customer and public data boundaries, revise External ID, routing, cache, replication, recovery, monitoring, and cost decisions, and update Bicep what-if evidence without weakening global catalog availability.
+    troubleshooting:
+      - If subscription what-if reports scope errors, inspect module target scopes and resource-group dependencies before changing deployment scope.
+      - If a current-service assertion fails, distinguish an intentional compatibility resource from a new-design default and document any mandatory exception.
+      - If the integrated scenario has conflicting pass results, business and security assertions take precedence over aggregate infrastructure health.
+
+  - number: '27'
+    scenario: >-
+      Wide World Importers is modernizing a hybrid estate that includes on-premises VMware, branch services with intermittent links, SQL Server databases, legacy web applications, file archives, and a growing Azure footprint. The board wants rapid datacenter reduction, but operations require staged coexistence, business owners need reversible waves, and regulators require evidence before classified data moves. Learners receive a sanitized portfolio, dependency graph, simulated performance captures, policy results, and failure injects. They must design a hybrid target and migration factory, express shared Azure foundations in Bicep, and rehearse cutover and recovery entirely offline. No Azure sign-in, query, deployment, failover, or external setting change is permitted in this capstone.
+    role: Principal hybrid modernization architect
+    outcome: Deliver an offline-validated modernization architecture, Bicep foundation, migration waves, coexistence model, cutover evidence, and decommission criteria spanning all AZ-305 domains.
+    duration: 270 minutes
+    difficulty: expert
+    costClass: none
+    businessOutcome: Reduce datacenter dependency through controlled modernization while maintaining branch service, regulatory evidence, reversibility, and transparent residual risk.
+    stakeholders:
+      - Chief information officer
+      - Hybrid operations director
+      - Business transformation lead
+      - Data protection officer
+      - Enterprise architecture board
+      - FinOps lead
+    primarySource:
+      title: Prepare your organization for cloud modernization
+      url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/modernize/prepare-organization-cloud-modernization
+    candidates:
+      - Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets, and staged coexistence
+      - Parallel cloud rebuild followed by one enterprise-wide big-bang cutover
+      - Indefinite hybrid retention with lifecycle-only virtual machine rehosting
+    selected: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets, and staged coexistence
+    checkpoints:
+      - title: Validate the offline evidence pack and constraints
+        requirement: LAB27-REQ-01
+        command: >-
+          Get-ChildItem tests/fixtures -File | Sort-Object Name | Get-FileHash -Algorithm SHA256 | Select-Object Path, Hash
+        positiveCommand: >-
+          $manifest = Get-Content tests/fixtures/manifest.json -Raw | ConvertFrom-Json; foreach ($item in $manifest.files) { if (-not (Test-Path $item.path)) { throw "Missing fixture: $($item.path)" }; if ((Get-FileHash $item.path -Algorithm SHA256).Hash -ne $item.sha256) { throw "Fixture hash mismatch: $($item.path)" } }
+        negativeCommand: >-
+          $files = Get-ChildItem tests/fixtures -File -Recurse; if ($files | Select-String -Pattern '(?i)password|client_secret|account[_-]?key|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}' | Where-Object { $_.Line -notmatch '00000000-0000-4000-8000-000000000000' }) { throw 'The offline evidence pack may contain sensitive or non-synthetic identifiers.' }
+        expected: Every fixture is present, hash-verified, schema-valid, sanitized, time-bounded, and linked to a source, assumption, requirement, and scenario inject.
+        negative: Missing provenance, mutable baseline, real identifier, secret-like field, or unstated unknown must fail before architecture work starts.
+        evidence: Preserve the manifest verification output, schema report, sanitization report, assumptions, and accepted evidence limitations.
+        failure: Decisions based on incomplete or altered evidence cannot be reproduced or safely generalized to the real estate.
+        retry: Restore the canonical fixture or explicitly version the corrected evidence pack, then rerun all integrity checks.
+        cleanup: Delete only generated verification output; canonical fixtures remain unchanged.
+        waf: 'Security: sanitization and integrity controls make offline analysis safe without weakening evidence provenance.'
+      - title: Rationalize the portfolio and hybrid coexistence model
+        requirement: LAB27-REQ-02
+        command: >-
+          $portfolio = Import-Csv tests/fixtures/portfolio.csv; $portfolio | Group-Object wave, disposition | Sort-Object Name | Select-Object Name, Count
+        positiveCommand: >-
+          $portfolio = Import-Csv tests/fixtures/portfolio.csv; $allowed = @('rehost','replatform','refactor','repurchase','retain','retire'); if ($portfolio | Where-Object { $_.disposition -notin $allowed -or [string]::IsNullOrWhiteSpace($_.wave) -or [string]::IsNullOrWhiteSpace($_.owner) }) { throw 'A portfolio record lacks a valid disposition, wave, or owner.' }
+        negativeCommand: >-
+          $portfolio = Import-Csv tests/fixtures/portfolio.csv; $dependencies = Import-Csv tests/fixtures/dependencies.csv; $waveById = @{}; $portfolio | ForEach-Object { $waveById[$_.applicationId] = [int]$_.wave }; if ($dependencies | Where-Object { $_.criticality -eq 'hard' -and [math]::Abs($waveById[$_.sourceApplicationId] - $waveById[$_.targetApplicationId]) -gt 0 -and -not $_.coexistenceBridge }) { throw 'A hard dependency is split without a coexistence bridge.' }
+        expected: Each workload has a justified disposition, dependency-safe wave, target concept, coexistence bridge, readiness remediation, rollback, decommission gate, and owner.
+        negative: A big-bang sequence, unsupported rehost, classified move without evidence, or permanent hybrid bridge without retirement criteria must fail.
+        evidence: Save the scored portfolio, dependency clusters, wave capacity, rationalization ADRs, coexistence contracts, and residual hybrid cost.
+        failure: A technically sensible target can fail when dependency timing and operational coexistence are omitted.
+        retry: Regroup the smallest affected dependency cluster and recompute wave value, risk, capacity, and cost.
+        cleanup: Delete generated grouping output; retain the authoritative sanitized portfolio and decision history.
+        waf: 'Cost Optimization: explicit disposition and bridge retirement avoid migrating waste or funding hybrid connectivity indefinitely.'
+      - title: Compile and inspect the hybrid foundation
+        requirement: LAB27-REQ-03
+        command: >-
+          bicep build artifacts/main.bicep --stdout | Out-Null
+        positiveCommand: >-
+          $main = bicep build artifacts/main.bicep --stdout | ConvertFrom-Json; $foundation = bicep build artifacts/modules/hybrid-foundation.bicep --stdout | ConvertFrom-Json; $types = @($main.resources.type) + @($foundation.resources.type); $requiredTypes = @('Microsoft.Resources/resourceGroups','Microsoft.Network/virtualNetworks','Microsoft.OperationalInsights/workspaces','Microsoft.Insights/dataCollectionRules'); foreach ($type in $requiredTypes) { if ($type -notin $types) { throw "Missing hybrid-foundation resource type: $type" } }
+        negativeCommand: >-
+          $templateText = bicep build artifacts/main.bicep --stdout; if ($templateText -match '(?i)password|clientSecret|accountKey|Basic_LoadBalancer|OmsAgentForLinux|0\.0\.0\.0/0') { throw 'The offline template contains a secret, retired default, or unrestricted rule.' }
+        expected: Bicep compiles offline and illustrates tagged resource-group, network, private-DNS, identity, workspace, and empty-DCR declarations plus a DoNotEnforce policy assignment; outputs explicitly separate the untaggable policy assignment, and no DCRA, diagnostic setting, deployment, or live behavior is claimed.
+        negative: A secret, tenant-specific identifier, legacy monitoring agent, Basic Load Balancer, implicit outbound dependency, hidden untaggable resource, shared-resource deletion, or suggestion that the compile-only template was deployed must fail.
+        evidence: Preserve Bicep and parameter hashes, compiler output, resource manifest, module graph, rule results, and requirement traceability.
+        failure: A valid template can still encode unsafe migration assumptions or reference an unavailable shared platform output.
+        retry: Correct the module contract or safe default and rerun compilation plus all semantic assertions offline.
+        cleanup: Delete compiled JSON if retained; keep source and example parameters. No deployment is permitted.
+        waf: 'Operational Excellence: a repeatable foundation contract separates shared platform readiness from workload cutover.'
+      - title: Simulate migration, continuity, and security injects
+        requirement: LAB27-REQ-04
+        command: >-
+          $scenarios = Get-Content tests/fixtures/failure-scenarios.json -Raw | ConvertFrom-Json; $scenarios | Select-Object id, wave, inject, expectedDecision, maximumDecisionMinutes
+        positiveCommand: >-
+          $scenarios = Get-Content tests/fixtures/failure-scenarios.json -Raw | ConvertFrom-Json; if ($scenarios | Where-Object { -not $_.expectedDecision -or $_.simulatedDecisionMinutes -gt $_.maximumDecisionMinutes -or $_.businessAssertion -ne 'pass' }) { throw 'A required migration or continuity behavior failed.' }
+        negativeCommand: >-
+          $scenarios = Get-Content tests/fixtures/failure-scenarios.json -Raw | ConvertFrom-Json; if ($scenarios | Where-Object { $_.prohibitedOutcomeObserved -or $_.containsAutomaticPurge -or $_.rollbackAuthority -eq $null }) { throw 'A prohibited outcome, purge action, or unowned rollback was detected.' }
+        expected: Deterministic injects cover discovery loss, circuit failure, replication lag, corrupt recovery points, policy denial, identity outage, cutover overrun, data mismatch, and rollback.
+        negative: Continuing after a mandatory gate, claiming success on infrastructure health alone, automatic purge, or accepting an unowned rollback decision must fail.
+        evidence: Archive immutable scenario hashes, timestamped decisions, independent assertions, predicted RTO and RPO, rollback results, and remediation owners.
+        failure: Migration and continuity plans often diverge at the exact moment connectivity, identity, data, and decision authority interact.
+        retry: Correct the architecture or runbook contract and replay the identical fixture before varying any scenario input.
+        cleanup: Delete generated result files only; simulation performs no sign-in, query, migration, failover, or cloud mutation.
+        waf: 'Reliability: cross-domain injects prove reversible wave behavior under realistic correlated failures.'
+      - title: Run the offline release and decommission review
+        requirement: LAB27-REQ-05
+        command: >-
+          $commands = Get-Command -Module Az.Accounts,Az.Resources,Az.Network,Az.Monitor -ErrorAction Stop; $commands | Group-Object ModuleName | Select-Object Name, Count
+        positiveCommand: >-
+          $report = Get-Content tests/fixtures/release-report.json -Raw | ConvertFrom-Json; if ($report.status -ne 'offline-validated' -or $report.lastLiveVerified -ne $null -or ($report.assertions | Where-Object result -ne 'pass')) { throw 'The capstone is not fully offline validated.' }
+        negativeCommand: >-
+          $report = Get-Content tests/fixtures/release-report.json -Raw | ConvertFrom-Json; if ($report.claims | Where-Object { $_ -match '(?i)deployed|live verified|production tested' }) { throw 'The offline report overclaims live verification.' }
+        expected: The package passes schema, Bicep, traceability, source, decision, scenario, security, cost, recovery, portability, and cleanup-plan checks and reports only offline validation.
+        negative: Missing assertion evidence, a live-verification claim, vague decommission criteria, uncertain ownership, or irreversible purge instruction must fail release.
+        evidence: Preserve the release report, tool versions, source hashes, assertion summary, known gaps, residual risks, and architecture-board disposition.
+        failure: A complete-looking document set can overstate readiness or leave duplicated systems and costs with no exit gate.
+        retry: Correct the failing artifact, rerun the entire deterministic offline gate, and retain the previous failed report.
+        cleanup: Remove generated output and temporary copies only; never automate source-system purge or cloud-resource deletion.
+        waf: 'Performance Efficiency: explicit modernization and decommission gates retire constrained legacy capacity only after target behavior is evidenced.'
+    changeRequest: A merger adds a second tenant, a separately regulated geography, and a hard requirement to keep branch order capture working for eight hours without WAN connectivity.
+    challenge: Revise identity boundaries, management groups, data residency, edge synchronization, conflict resolution, migration waves, recovery targets, Bicep parameters, cost, and offline failure scenarios without inventing live evidence.
+    troubleshooting:
+      - If a fixture integrity check fails, restore or explicitly version the fixture; never update the manifest hash merely to silence the test.
+      - If Bicep inspection misses a nested resource, inspect compiled nested resources recursively before weakening the requirement.
+      - If an offline scenario cannot prove a live property, record it as a required future live-validation gate rather than fabricating a pass.

@@ -1,0 +1,14 @@
+.state/
+.site-docs/
+/site/
+.cache/
+.packages/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+*.log
+learner.config.yml
+.DS_Store
+Thumbs.db

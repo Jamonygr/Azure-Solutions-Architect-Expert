@@ -1,0 +1,16 @@
+{
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD033": { "allowed_elements": ["a", "br", "div", "input", "label", "p", "span", "strong", "table", "tbody", "td", "th", "thead", "tr"] },
+    "MD034": false,
+    "MD041": false,
+    "MD046": { "style": "fenced" }
+  },
+  "ignores": [
+    ".site-docs/**",
+    "site/**",
+    "node_modules/**"
+  ]
+}

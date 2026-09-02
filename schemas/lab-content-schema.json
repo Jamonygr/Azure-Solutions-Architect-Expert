@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:az305:schema:lab-content:1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "labs"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "labs": {"type": "array", "minItems": 28, "maxItems": 28, "items": {"$ref": "#/$defs/lab"}}
+  },
+  "$defs": {
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["title", "url"],
+      "properties": {"title": {"type": "string"}, "url": {"type": "string", "format": "uri", "pattern": "^https://learn\\.microsoft\\.com/"}}
+    },
+    "checkpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["title", "requirement", "command", "positiveCommand", "negativeCommand", "expected", "negative", "evidence", "failure", "retry", "cleanup", "waf"],
+      "properties": {
+        "title": {"type": "string"}, "requirement": {"pattern": "^LAB[0-2][0-9]-REQ-[0-9]{2}$"},
+        "command": {"type": "string"}, "positiveCommand": {"type": "string"}, "negativeCommand": {"type": "string"},
+        "expected": {"type": "string"}, "negative": {"type": "string"}, "evidence": {"type": "string"},
+        "failure": {"type": "string"}, "retry": {"type": "string"}, "cleanup": {"type": "string"}, "waf": {"type": "string"}
+      }
+    },
+    "waf": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reliability", "security", "costOptimization", "operationalExcellence", "performanceEfficiency"],
+      "properties": {
+        "reliability": {"type": "string", "minLength": 30},
+        "security": {"type": "string", "minLength": 30},
+        "costOptimization": {"type": "string", "minLength": 30},
+        "operationalExcellence": {"type": "string", "minLength": 30},
+        "performanceEfficiency": {"type": "string", "minLength": 30}
+      }
+    },
+    "facts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["data", "scale", "latency", "availability", "rto", "rpo", "budget"],
+      "properties": {
+        "data": {"type": "string", "minLength": 30},
+        "scale": {"type": "string", "minLength": 30},
+        "latency": {"type": "string", "minLength": 30},
+        "availability": {"type": "string", "minLength": 30},
+        "rto": {"type": "string", "minLength": 30},
+        "rpo": {"type": "string", "minLength": 30},
+        "budget": {"type": "string", "minLength": 30}
+      }
+    },
+    "analysisCandidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "eligible", "disqualifiers", "scores", "rationale", "rejectedReason"],
+      "properties": {
+        "name": {"type": "string", "minLength": 10},
+        "eligible": {"type": "boolean"},
+        "disqualifiers": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 20}},
+        "scores": {
+          "type": "object", "additionalProperties": false,
+          "required": ["C1", "C2", "C3", "C4", "C5"],
+          "properties": {
+            "C1": {"type": "integer", "minimum": 1, "maximum": 5},
+            "C2": {"type": "integer", "minimum": 1, "maximum": 5},
+            "C3": {"type": "integer", "minimum": 1, "maximum": 5},
+            "C4": {"type": "integer", "minimum": 1, "maximum": 5},
+            "C5": {"type": "integer", "minimum": 1, "maximum": 5}
+          }
+        },
+        "rationale": {"type": "string", "minLength": 40},
+        "rejectedReason": {"type": ["string", "null"], "minLength": 30}
+      }
+    },
+    "risk": {
+      "type": "object", "additionalProperties": false, "required": ["risk", "mitigation"],
+      "properties": {
+        "risk": {"type": "string", "minLength": 30},
+        "mitigation": {"type": "string", "minLength": 30}
+      }
+    },
+    "architectureAnalysis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["permissions", "licensing", "costNotes", "constraints", "assumptions", "facts", "candidateAnalyses", "risks", "waf", "safeAnalogue", "adrConsequences", "changeExpectedRevision", "revisedDecision"],
+      "properties": {
+        "permissions": {"type": "string", "minLength": 40},
+        "licensing": {"type": "string", "minLength": 40},
+        "costNotes": {"type": "string", "minLength": 40},
+        "constraints": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 30}},
+        "assumptions": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 30}},
+        "facts": {"$ref": "#/$defs/facts"},
+        "candidateAnalyses": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/analysisCandidate"}},
+        "risks": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"$ref": "#/$defs/risk"}},
+        "waf": {"$ref": "#/$defs/waf"},
+        "safeAnalogue": {"type": ["string", "null"], "minLength": 40},
+        "adrConsequences": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 30}},
+        "changeExpectedRevision": {"type": "string", "minLength": 40},
+        "revisedDecision": {
+          "type": "object", "additionalProperties": false,
+          "required": ["selectedCandidate", "mandatoryRequirementId", "reason", "waf"],
+          "properties": {
+            "selectedCandidate": {"type": "string", "minLength": 10},
+            "mandatoryRequirementId": {"pattern": "^LAB[0-2][0-9]-REQ-[0-9]{2}$"},
+            "reason": {"type": "string", "minLength": 50},
+            "waf": {"$ref": "#/$defs/waf"}
+          }
+        }
+      }
+    },
+    "lab": {
+      "type": "object", "additionalProperties": false,
+      "required": ["number", "scenario", "role", "outcome", "duration", "difficulty", "costClass", "businessOutcome", "stakeholders", "primarySource", "candidates", "selected", "checkpoints", "changeRequest", "challenge", "troubleshooting", "architectureAnalysis"],
+      "properties": {
+        "number": {"pattern": "^[0-2][0-9]$"}, "scenario": {"type": "string", "minLength": 80}, "role": {"type": "string"},
+        "outcome": {"type": "string", "minLength": 20}, "duration": {"type": "string"},
+        "difficulty": {"enum": ["foundational", "intermediate", "advanced", "expert"]},
+        "costClass": {"enum": ["none", "low", "moderate", "elevated", "medium"]},
+        "businessOutcome": {"type": "string", "minLength": 20},
+        "stakeholders": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+        "primarySource": {"$ref": "#/$defs/source"},
+        "candidates": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string"}},
+        "selected": {"type": "string"},
+        "checkpoints": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/checkpoint"}},
+        "changeRequest": {"type": "string", "minLength": 30}, "challenge": {"type": "string", "minLength": 20},
+        "troubleshooting": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+        "architectureAnalysis": {"$ref": "#/$defs/architectureAnalysis"}
+      }
+    }
+  }
+}

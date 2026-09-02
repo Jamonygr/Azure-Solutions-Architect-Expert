@@ -1,0 +1,19 @@
+{
+  "name": "az305-complete-learning-environment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline documentation quality dependencies for the AZ-305 learning environment.",
+  "engines": {
+    "node": "22.23.2"
+  },
+  "scripts": {
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#site/**\" \"#.site-docs/**\"",
+    "spellcheck": "cspell lint --no-progress --no-summary \"**/*.{md,yml,yaml,ps1,py,js,json,bicep}\" --exclude \".site-docs/**\" --exclude \"site/**\"",
+    "test": "node --test \"tools/tests/progress.test.cjs\" \"tools/tests/progress.test.mjs\"",
+    "release:offline": "pwsh -NoLogo -NoProfile -File ./tools/Invoke-OfflineReleaseGate.ps1"
+  },
+  "devDependencies": {
+    "cspell": "10.2.0",
+    "markdownlint-cli2": "0.23.2"
+  }
+}

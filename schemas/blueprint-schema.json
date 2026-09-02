@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema", "$id": "urn:az305:schema:blueprint:1.0.0", "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "exam", "foundationObjectives", "domains"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "exam": {"type": "object", "additionalProperties": false, "required": ["code", "title", "blueprintEffectiveDate", "researchedDate", "sourceLastUpdated", "officialObjectiveCount", "foundationObjectiveCount", "domainCount", "groupCount", "primarySourceId", "primarySourceUrl"], "properties": {"code": {"const": "AZ-305"}, "title": {"type": "string"}, "blueprintEffectiveDate": {"const": "2026-04-17"}, "researchedDate": {"type": "string", "format": "date"}, "sourceLastUpdated": {"type": "string", "format": "date"}, "officialObjectiveCount": {"const": 49}, "foundationObjectiveCount": {"const": 5}, "domainCount": {"const": 4}, "groupCount": {"const": 12}, "primarySourceId": {"const": "SRC-AZ305-STUDY-GUIDE"}, "primarySourceUrl": {"type": "string", "format": "uri"}}},
+    "foundationObjectives": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/foundation"}},
+    "domains": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/domain"}}
+  },
+  "$defs": {
+    "foundation": {"type": "object", "additionalProperties": false, "required": ["id", "title", "primaryLab", "examObjective"], "properties": {"id": {"pattern": "^FD-[A-Z]+-01$"}, "title": {"type": "string"}, "primaryLab": {"const": "LAB-00"}, "examObjective": {"const": false}}},
+    "objective": {"type": "object", "additionalProperties": false, "required": ["id", "title", "primaryLab", "reinforcementLabs"], "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "primaryLab": {"pattern": "^LAB-(0[1-9]|1[0-9]|2[0-5])$"}, "reinforcementLabs": {"type": "array", "contains": {"const": "LAB-26"}, "items": {"enum": ["LAB-26", "LAB-27"]}}}},
+    "group": {"type": "object", "additionalProperties": false, "required": ["id", "name", "objectiveCount", "objectives"], "properties": {"id": {"type": "string"}, "name": {"type": "string"}, "objectiveCount": {"type": "integer"}, "objectives": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/objective"}}}},
+    "domain": {"type": "object", "additionalProperties": false, "required": ["id", "name", "weight", "objectiveCount", "instructionalLabCount", "instructionalLabShare", "questionCount", "primaryLabs", "groups"], "properties": {"id": {"enum": ["IGM", "DATA", "BC", "INF"]}, "name": {"type": "string"}, "weight": {"pattern": "^[0-9]{2}-[0-9]{2}%$"}, "objectiveCount": {"type": "integer"}, "instructionalLabCount": {"type": "integer"}, "instructionalLabShare": {"pattern": "^[0-9]{2}%$"}, "questionCount": {"type": "integer"}, "primaryLabs": {"type": "array", "items": {"pattern": "^LAB-[0-2][0-9]$"}}, "groups": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/group"}}}}
+  }
+}

@@ -1,0 +1,322 @@
+schemaVersion: "1.0.0"
+exam:
+  code: "AZ-305"
+  title: "Designing Microsoft Azure Infrastructure Solutions"
+  blueprintEffectiveDate: "2026-04-17"
+  researchedDate: "2026-09-02"
+  sourceLastUpdated: "2026-03-19"
+  officialObjectiveCount: 49
+  foundationObjectiveCount: 5
+  domainCount: 4
+  groupCount: 12
+  primarySourceId: "SRC-AZ305-STUDY-GUIDE"
+  primarySourceUrl: "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305"
+
+# These five repository prerequisites are not Microsoft exam objectives and are
+# intentionally excluded from officialObjectiveCount.
+foundationObjectives:
+  - id: "FD-TOOLS-01"
+    title: "Verify the required Azure CLI and PowerShell toolchain"
+    primaryLab: "LAB-00"
+    examObjective: false
+  - id: "FD-CONTEXT-01"
+    title: "Confirm the intended Azure tenant and subscription context before changes"
+    primaryLab: "LAB-00"
+    examObjective: false
+  - id: "FD-COST-01"
+    title: "Review service, quota, region, and cost gates before deployment"
+    primaryLab: "LAB-00"
+    examObjective: false
+  - id: "FD-SAFETY-01"
+    title: "Use deterministic names, tags, run IDs, and state records"
+    primaryLab: "LAB-00"
+    examObjective: false
+  - id: "FD-CLEANUP-01"
+    title: "Preview, perform, and verify scoped and idempotent cleanup"
+    primaryLab: "LAB-00"
+    examObjective: false
+
+domains:
+  - id: "IGM"
+    name: "Design identity, governance, and monitoring solutions"
+    weight: "25-30%"
+    objectiveCount: 11
+    instructionalLabCount: 7
+    instructionalLabShare: "28%"
+    questionCount: 350
+    primaryLabs: ["LAB-01", "LAB-02", "LAB-03", "LAB-04", "LAB-05", "LAB-06", "LAB-07"]
+    groups:
+      - id: "IGM-LOGMON"
+        name: "Design solutions for logging and monitoring"
+        objectiveCount: 3
+        objectives:
+          - id: "IGM-LOG-01"
+            title: "Recommend a logging solution"
+            primaryLab: "LAB-01"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-LOG-02"
+            title: "Recommend a solution for routing logs"
+            primaryLab: "LAB-01"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-MON-01"
+            title: "Recommend a monitoring solution"
+            primaryLab: "LAB-02"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "IGM-AUTH"
+        name: "Design authentication and authorization solutions"
+        objectiveCount: 5
+        objectives:
+          - id: "IGM-AUTH-01"
+            title: "Recommend an authentication solution"
+            primaryLab: "LAB-03"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-AUTH-02"
+            title: "Recommend an identity management solution"
+            primaryLab: "LAB-03"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-AUTHZ-01"
+            title: "Recommend a solution for authorizing access to Azure resources"
+            primaryLab: "LAB-04"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-AUTHZ-02"
+            title: "Recommend a solution for authorizing access to on-premises resources"
+            primaryLab: "LAB-04"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-KEY-01"
+            title: "Recommend a solution to manage secrets, certificates, and keys"
+            primaryLab: "LAB-05"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "IGM-GOV"
+        name: "Design governance"
+        objectiveCount: 3
+        objectives:
+          - id: "IGM-GOV-01"
+            title: "Recommend a structure for management groups, subscriptions, and resource groups, and a strategy for resource tagging"
+            primaryLab: "LAB-06"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-GOV-02"
+            title: "Recommend a solution for managing compliance"
+            primaryLab: "LAB-07"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "IGM-GOV-03"
+            title: "Recommend a solution for identity governance"
+            primaryLab: "LAB-07"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+
+  - id: "DATA"
+    name: "Design data storage solutions"
+    weight: "20-25%"
+    objectiveCount: 10
+    instructionalLabCount: 6
+    instructionalLabShare: "24%"
+    questionCount: 300
+    primaryLabs: ["LAB-08", "LAB-09", "LAB-10", "LAB-11", "LAB-12", "LAB-13"]
+    groups:
+      - id: "DATA-REL"
+        name: "Design data storage solutions for relational data"
+        objectiveCount: 4
+        objectives:
+          - id: "DATA-REL-01"
+            title: "Recommend a solution for storing relational data"
+            primaryLab: "LAB-08"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-REL-02"
+            title: "Recommend a database service tier and compute tier"
+            primaryLab: "LAB-08"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-REL-03"
+            title: "Recommend a solution for database scalability"
+            primaryLab: "LAB-09"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-REL-04"
+            title: "Recommend a solution for data protection"
+            primaryLab: "LAB-09"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "DATA-NONREL"
+        name: "Design data storage solutions for semi-structured and unstructured data"
+        objectiveCount: 4
+        objectives:
+          - id: "DATA-NONREL-01"
+            title: "Recommend a solution for storing semi-structured data"
+            primaryLab: "LAB-10"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-NONREL-02"
+            title: "Recommend a solution for storing unstructured data"
+            primaryLab: "LAB-11"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-NONREL-03"
+            title: "Recommend a data storage solution to balance features, performance, and costs"
+            primaryLab: "LAB-12"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-NONREL-04"
+            title: "Recommend a data solution for protection and durability"
+            primaryLab: "LAB-12"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "DATA-INT"
+        name: "Design data integration"
+        objectiveCount: 2
+        objectives:
+          - id: "DATA-INT-01"
+            title: "Recommend a solution for data integration"
+            primaryLab: "LAB-13"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "DATA-INT-02"
+            title: "Recommend a solution for data analysis"
+            primaryLab: "LAB-13"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+
+  - id: "BC"
+    name: "Design business continuity solutions"
+    weight: "15-20%"
+    objectiveCount: 7
+    instructionalLabCount: 4
+    instructionalLabShare: "16%"
+    questionCount: 200
+    primaryLabs: ["LAB-14", "LAB-15", "LAB-16", "LAB-17"]
+    groups:
+      - id: "BC-DR"
+        name: "Design solutions for backup and disaster recovery"
+        objectiveCount: 4
+        objectives:
+          - id: "BC-DR-01"
+            title: "Recommend a recovery solution for Azure and hybrid workloads that meets recovery objectives"
+            primaryLab: "LAB-14"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "BC-DR-02"
+            title: "Recommend a backup and recovery solution for compute"
+            primaryLab: "LAB-15"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "BC-DR-03"
+            title: "Recommend a backup and recovery solution for databases"
+            primaryLab: "LAB-16"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "BC-DR-04"
+            title: "Recommend a backup and recovery solution for unstructured data"
+            primaryLab: "LAB-17"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "BC-HA"
+        name: "Design for high availability"
+        objectiveCount: 3
+        objectives:
+          - id: "BC-HA-01"
+            title: "Recommend a high availability solution for compute"
+            primaryLab: "LAB-15"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "BC-HA-02"
+            title: "Recommend a high availability solution for relational data"
+            primaryLab: "LAB-16"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "BC-HA-03"
+            title: "Recommend a high availability solution for semi-structured and unstructured data"
+            primaryLab: "LAB-17"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+
+  - id: "INF"
+    name: "Design infrastructure solutions"
+    weight: "30-35%"
+    objectiveCount: 21
+    instructionalLabCount: 8
+    instructionalLabShare: "32%"
+    questionCount: 400
+    primaryLabs: ["LAB-18", "LAB-19", "LAB-20", "LAB-21", "LAB-22", "LAB-23", "LAB-24", "LAB-25"]
+    groups:
+      - id: "INF-COMP"
+        name: "Design compute solutions"
+        objectiveCount: 5
+        objectives:
+          - id: "INF-COMP-01"
+            title: "Specify components of a compute solution based on workload requirements"
+            primaryLab: "LAB-18"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-COMP-02"
+            title: "Recommend a virtual machine-based solution"
+            primaryLab: "LAB-18"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-COMP-03"
+            title: "Recommend a container-based solution"
+            primaryLab: "LAB-19"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-COMP-04"
+            title: "Recommend a serverless-based solution"
+            primaryLab: "LAB-19"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-COMP-05"
+            title: "Recommend a compute solution for batch processing"
+            primaryLab: "LAB-18"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "INF-APP"
+        name: "Design an application architecture"
+        objectiveCount: 6
+        objectives:
+          - id: "INF-APP-01"
+            title: "Recommend a messaging architecture"
+            primaryLab: "LAB-20"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-APP-02"
+            title: "Recommend an event-driven architecture"
+            primaryLab: "LAB-20"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-APP-03"
+            title: "Recommend a solution for API integration"
+            primaryLab: "LAB-20"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-APP-04"
+            title: "Recommend a caching solution for applications"
+            primaryLab: "LAB-21"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-APP-05"
+            title: "Recommend an application configuration management solution"
+            primaryLab: "LAB-21"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-APP-06"
+            title: "Recommend an automated deployment solution for applications"
+            primaryLab: "LAB-21"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "INF-MIG"
+        name: "Design migrations"
+        objectiveCount: 5
+        objectives:
+          - id: "INF-MIG-01"
+            title: "Evaluate a migration solution that leverages the Microsoft Cloud Adoption Framework for Azure"
+            primaryLab: "LAB-22"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-MIG-02"
+            title: "Evaluate on-premises servers, data, and applications for migration"
+            primaryLab: "LAB-22"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-MIG-03"
+            title: "Recommend a solution for migrating workloads to infrastructure as a service (IaaS) and platform as a service (PaaS)"
+            primaryLab: "LAB-23"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-MIG-04"
+            title: "Recommend a solution for migrating databases"
+            primaryLab: "LAB-23"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-MIG-05"
+            title: "Recommend a solution for migrating unstructured data"
+            primaryLab: "LAB-23"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+      - id: "INF-NET"
+        name: "Design network solutions"
+        objectiveCount: 5
+        objectives:
+          - id: "INF-NET-01"
+            title: "Recommend a connectivity solution that connects Azure resources to the internet"
+            primaryLab: "LAB-24"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-NET-02"
+            title: "Recommend a connectivity solution that connects Azure resources to on-premises networks"
+            primaryLab: "LAB-24"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-NET-03"
+            title: "Recommend a solution to optimize network performance"
+            primaryLab: "LAB-24"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-NET-04"
+            title: "Recommend a solution to optimize network security"
+            primaryLab: "LAB-25"
+            reinforcementLabs: ["LAB-26", "LAB-27"]
+          - id: "INF-NET-05"
+            title: "Recommend a load-balancing and routing solution"
+            primaryLab: "LAB-25"
+            reinforcementLabs: ["LAB-26", "LAB-27"]

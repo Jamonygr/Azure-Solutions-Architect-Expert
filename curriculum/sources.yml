@@ -1,0 +1,314 @@
+schemaVersion: "1.0.0"
+verifiedOn: "2026-09-02"
+offlineRegistry: true
+sources:
+  - id: SRC-AZ305-STUDY-GUIDE
+    title: AZ-305 study guide
+    url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-305
+    publisher: Microsoft Learn
+    kind: exam-blueprint
+  - id: SRC-AZURE-SOLUTIONS-ARCHITECT-CERTIFICATION
+    title: Microsoft Certified Azure Solutions Architect Expert
+    url: https://learn.microsoft.com/en-us/credentials/certifications/azure-solutions-architect/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZ305-LEARNING-PREREQUISITES
+    title: AZ-305 Microsoft Azure Architect Design Prerequisites learning path
+    url: https://learn.microsoft.com/en-us/training/paths/microsoft-azure-architect-design-prerequisites/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZ305-LEARNING-IDENTITY
+    title: AZ-305 Design identity governance and monitor solutions learning path
+    url: https://learn.microsoft.com/en-us/training/paths/design-identity-governance-monitor-solutions/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZ305-LEARNING-DATA
+    title: AZ-305 Design data storage solutions learning path
+    url: https://learn.microsoft.com/en-us/training/paths/design-data-storage-solutions/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZ305-LEARNING-CONTINUITY
+    title: AZ-305 Design business continuity solutions learning path
+    url: https://learn.microsoft.com/en-us/training/paths/design-business-continuity-solutions/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZ305-LEARNING-INFRASTRUCTURE
+    title: AZ-305 Design infrastructure solutions learning path
+    url: https://learn.microsoft.com/en-us/training/paths/design-infranstructure-solutions/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-WAF
+    title: Azure Well-Architected Framework
+    url: https://learn.microsoft.com/en-us/azure/well-architected/
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-CAF
+    title: Cloud Adoption Framework
+    url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-ARCH-CENTER
+    title: Azure Architecture Center
+    url: https://learn.microsoft.com/en-us/azure/architecture/
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-CLOUD-DESIGN-PATTERNS
+    title: Cloud design patterns catalog
+    url: https://learn.microsoft.com/en-us/azure/architecture/patterns/
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-MONITOR
+    title: Azure Monitor overview
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-AMA
+    title: Azure Monitor Agent overview
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-DCR
+    title: Data collection rules in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/data-collection/data-collection-rule-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-ENTRA-EXTERNAL-ID
+    title: Microsoft Entra External ID overview
+    url: https://learn.microsoft.com/en-us/entra/external-id/external-identities-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-ENTRA-GOVERNANCE
+    title: Microsoft Entra ID Governance overview
+    url: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-AZURE-POLICY
+    title: Azure Policy overview
+    url: https://learn.microsoft.com/en-us/azure/governance/policy/overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-KEY-VAULT
+    title: Azure Key Vault overview
+    url: https://learn.microsoft.com/en-us/azure/key-vault/general/overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-SQL
+    title: Azure SQL documentation
+    url: https://learn.microsoft.com/en-us/azure/azure-sql/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-COSMOS
+    title: Azure Cosmos DB overview
+    url: https://learn.microsoft.com/en-us/azure/cosmos-db/introduction
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-STORAGE
+    title: Azure Storage introduction
+    url: https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-MANAGED-REDIS
+    title: Azure Managed Redis overview
+    url: https://learn.microsoft.com/en-us/azure/redis/overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-REDIS-RETIREMENT
+    title: Azure Cache for Redis retirement FAQ
+    url: https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/retirement-faq
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-BUSINESS-CONTINUITY
+    title: Azure reliability documentation
+    url: https://learn.microsoft.com/en-us/azure/reliability/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-MIGRATE
+    title: Azure Migrate documentation
+    url: https://learn.microsoft.com/en-us/azure/migrate/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-COMPUTE
+    title: Azure compute documentation
+    url: https://learn.microsoft.com/en-us/azure/?product=compute
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-NETWORK
+    title: Azure networking documentation
+    url: https://learn.microsoft.com/en-us/azure/networking/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-FRONT-DOOR
+    title: Azure Front Door documentation
+    url: https://learn.microsoft.com/en-us/azure/frontdoor/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-FRONT-DOOR-CLASSIC-RETIREMENT
+    title: Azure Front Door classic retirement FAQ
+    url: https://learn.microsoft.com/en-us/azure/frontdoor/classic-retirement-faq
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-FRONT-DOOR-PROFILE-REST
+    title: Get an Azure Front Door Standard or Premium profile
+    url: https://learn.microsoft.com/en-us/rest/api/cdn/profiles/get?view=rest-cdn-2025-04-15
+    publisher: Microsoft Learn
+    kind: command-reference
+  - id: SRC-LOAD-BALANCER
+    title: Azure Load Balancer documentation
+    url: https://learn.microsoft.com/en-us/azure/load-balancer/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LOAD-BALANCER-BEST-PRACTICES
+    title: Azure Load Balancer best practices
+    url: https://learn.microsoft.com/en-us/azure/load-balancer/load-balancer-best-practices
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-BICEP
+    title: Bicep documentation
+    url: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/
+    publisher: Microsoft Learn
+    kind: implementation-guidance
+  - id: SRC-AZURE-CLI
+    title: Azure CLI reference
+    url: https://learn.microsoft.com/en-us/cli/azure/
+    publisher: Microsoft Learn
+    kind: command-reference
+  - id: SRC-AZ-POWERSHELL
+    title: Azure PowerShell reference
+    url: https://learn.microsoft.com/en-us/powershell/azure/
+    publisher: Microsoft Learn
+    kind: command-reference
+  - id: SRC-GRAPH-POWERSHELL
+    title: Microsoft Graph PowerShell SDK overview
+    url: https://learn.microsoft.com/en-us/powershell/microsoftgraph/overview
+    publisher: Microsoft Learn
+    kind: command-reference
+  - id: SRC-LAB01-DIAGNOSTIC-SETTINGS
+    title: Diagnostic settings in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB02-ALERTS
+    title: Azure Monitor alert and automated-action best practices
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/best-practices-alerts
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB03-EXTERNAL-ID
+    title: Microsoft Entra External ID for customers
+    url: https://learn.microsoft.com/en-us/entra/external-id/customers/overview-customers-ciam
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB04-RBAC
+    title: Azure RBAC best practices
+    url: https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB05-KEY-VAULT
+    title: Azure Key Vault best practices
+    url: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB06-RESOURCE-ORGANIZATION
+    title: Landing zone resource organization
+    url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB08-DATA-STORES
+    title: Choose a data store in Azure
+    url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-stores-getting-started
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB09-HYPERSCALE
+    title: Azure SQL Hyperscale service tier
+    url: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB10-COSMOS-PARTITIONING
+    title: Partitioning and horizontal scaling in Azure Cosmos DB
+    url: https://learn.microsoft.com/en-us/azure/cosmos-db/partitioning-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB11-DATA-LAKE
+    title: Azure Data Lake Storage introduction
+    url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB12-STORAGE-REDUNDANCY
+    title: Azure Storage redundancy
+    url: https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB13-DATA-ARCHITECTURE
+    title: Azure Data Architecture Guide
+    url: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB14-RELIABILITY-TARGETS
+    title: Well-Architected reliability targets
+    url: https://learn.microsoft.com/en-us/azure/well-architected/reliability/metrics
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB15-VM-RELIABILITY
+    title: Reliability in Azure Virtual Machines
+    url: https://learn.microsoft.com/en-us/azure/reliability/reliability-virtual-machines
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB16-SQL-CONTINUITY
+    title: Azure SQL business continuity
+    url: https://learn.microsoft.com/en-us/azure/azure-sql/database/business-continuity-high-availability-disaster-recover-hadr-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB17-COSMOS-RELIABILITY
+    title: Reliability in Azure Cosmos DB for NoSQL
+    url: https://learn.microsoft.com/en-us/azure/reliability/reliability-cosmos-db
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB18-COMPUTE-CHOICE
+    title: Choose an Azure compute service
+    url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB19-CONTAINER-CHOICE
+    title: Choose an Azure container service
+    url: https://learn.microsoft.com/en-us/azure/architecture/guide/choose-azure-container-service
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB20-MESSAGING
+    title: Compare Azure messaging services
+    url: https://learn.microsoft.com/en-us/azure/service-bus-messaging/compare-messaging-services
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB21-MANAGED-REDIS
+    title: Azure Managed Redis documentation
+    url: https://learn.microsoft.com/en-us/azure/redis/
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB22-MIGRATION-PLAN
+    title: Plan migration with the Cloud Adoption Framework
+    url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/migrate/plan-migration
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB23-MIGRATE-SERVICES
+    title: Azure Migrate service overview
+    url: https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview
+    publisher: Microsoft Learn
+    kind: service-guidance
+  - id: SRC-LAB24-NETWORK-DESIGN
+    title: Azure networking plan and design overview
+    url: https://learn.microsoft.com/en-us/azure/networking/design-guide/overview
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB25-LOAD-BALANCING
+    title: Azure load-balancing options
+    url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/load-balancing-overview
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB26-MISSION-CRITICAL
+    title: Mission-critical workload design methodology
+    url: https://learn.microsoft.com/en-us/azure/well-architected/mission-critical/mission-critical-design-methodology
+    publisher: Microsoft Learn
+    kind: architecture-guidance
+  - id: SRC-LAB27-MODERNIZATION
+    title: Prepare an organization for cloud modernization
+    url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/modernize/prepare-organization-cloud-modernization
+    publisher: Microsoft Learn
+    kind: architecture-guidance

@@ -1,0 +1,87 @@
+schemaVersion: "1.0.0"
+offlineRegistry: true
+tracks:
+  dual-bootstrap:
+    executableFamilies: [az, pwsh]
+    allowedCommands:
+      - az version
+      - az account show
+      - Get-Module
+      - Get-Command
+      - Get-AzContext
+      - Test-Path
+      - Get-Content
+      - ConvertFrom-Json
+      - ConvertTo-Json
+  azure-cli:
+    executableFamilies: [az, azcopy, bicep]
+    allowedPrefixes:
+      - az account
+      - az afd
+      - az ad
+      - az acr
+      - az aks
+      - az apim
+      - az backup
+      - az batch
+      - az bicep
+      - az cosmosdb
+      - az deployment
+      - az disk
+      - az eventgrid
+      - az eventhubs
+      - az extension
+      - az front-door
+      - az functionapp
+      - az graph
+      - az group
+      - az identity
+      - az keyvault
+      - az lock
+      - az monitor
+      - az network
+      - az policy
+      - az postgres
+      - az redisenterprise
+      - az rest
+      - az resource
+      - az role
+      - az servicebus
+      - az sql
+      - az storage
+      - az tag
+      - az vm
+      - az webapp
+      - azcopy
+      - bicep build
+  azure-powershell:
+    executableFamilies: [pwsh, bicep]
+    allowedPrefixes:
+      - Connect-AzAccount
+      - Get-Az
+      - New-Az
+      - Set-Az
+      - Remove-Az
+      - Test-Az
+      - Invoke-Az
+      - Connect-MgGraph
+      - Get-Mg
+      - New-Mg
+      - Update-Mg
+      - Update-Az
+      - Remove-Mg
+      - Invoke-MgGraphRequest
+      - Disconnect-MgGraph
+      - Test-Path
+      - Get-Content
+      - ConvertFrom-Json
+      - ConvertTo-Json
+      - bicep build
+      - Import-Csv
+      - Get-FileHash
+rules:
+  graphApiVersion: v1.0
+  betaModulesAllowed: false
+  portalProceduresAllowed: false
+  previewRequiresCloudCall: false
+  liveExecutionRequiresExecuteSwitch: true

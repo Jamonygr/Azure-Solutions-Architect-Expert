@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "useGitignore": true,
+  "allowCompoundWords": true,
+  "ignorePaths": [".git/**", ".site-docs/**", "site/**", "node_modules/**", "package-lock.json"],
+  "words": [
+    "actionlint", "azcopy", "bicep", "businessCriticality", "checkpoints", "CIAM", "cmdlet", "cmdlets",
+    "Cosmos", "DCRA", "devcontainer", "disqualifiers", "Entra", "eventgrid", "eventhubs", "FinOps",
+    "gitleaks", "governance", "Hyperscale", "idempotence", "idempotent", "ingress", "KQL", "LogAnalytics",
+    "markdownlint", "MkDocs", "multiregion", "nonfunctional", "nonrelational", "Pester", "PowerShell",
+    "PSScriptAnalyzer", "rehost", "replatform", "redacted", "redisenterprise", "remediation", "reproducibility",
+    "residency", "resourceId", "resourceIds", "RPO", "RTO", "runbook", "runbooks", "SLO", "SKU", "SKUs",
+    "submodule", "submodules", "superseded", "tenantId", "toolchain", "traceability", "unstructured",
+    "westeurope", "northeurope", "what-if", "whatif", "workload", "workloads", "YAML",
+    "AAAABCD", "accountid", "ADLS", "applicationsqlen", "applicationsubne", "appcs", "APIM",
+    "approvedbitspers", "approvedblobregi", "approvedcosmosre", "approveddestinat", "approvedvcorecei",
+    "CAND", "conflictresoluti", "Contoso", "controlvmsku", "cosmosdatabasena", "Dapr", "dcrname",
+    "decamouflage", "decamouflaged", "destinationdatau", "destinationip", "dfsg", "exfiltration",
+    "Fabrikam", "FIPS", "firewallpolicyna", "GZRS", "HCIVM", "idtoken", "IDPS", "integrationrunti",
+    "isnot", "Jamon", "Kusto", "labelledby", "labid", "lede", "libbz", "libbz2", "libdb", "libgdbm",
+    "libgssapi", "libncurses", "libuuid", "Mbps", "mgcontext",
+    "migrateprojectna", "migrationresourc", "navi", "ngrams", "notin", "nsgs", "privateconnectio",
+    "privateendpointn", "privateservicefq", "pscustomobject", "RACI", "RAGRS", "RAGZRS",
+    "recertification", "rehosting", "reprioritize", "requiredmetricna", "requireprivateac",
+    "resequencing", "rwxrwxrwx", "scheduledqueryru", "SNAT", "sourceip", "spokevnetname",
+    "runid", "subscriptionid", "targetcontainern", "targetdatabasena", "targetresourcegr", "tspan",
+    "uefi", "ufffd", "undeployable", "unredacted", "unreplicated", "unscored", "unsanitized",
+    "untaggable", "vhub", "vmsku", "vmss", "vnet", "webtiervmname", "workbookdisplayn",
+    "workervmsku", "azcontext", "azext"
+  ]
+}

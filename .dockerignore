@@ -1,0 +1,14 @@
+.git
+.cache
+.packages
+.state
+.site-docs
+.venv
+site
+node_modules
+__pycache__
+.pytest_cache
+learner.config.yml
+*.pyc
+*.pyo
+*.log

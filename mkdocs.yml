@@ -1,0 +1,88 @@
+site_name: Azure Solutions Architect Expert — AZ-305
+site_description: Offline-first architecture decision practice for AZ-305
+site_author: Jamon
+copyright: Copyright © 2026 Jamon
+docs_dir: .site-docs
+site_dir: site
+use_directory_urls: false
+strict: true
+
+theme:
+  name: material
+  language: en
+  font: false
+  features:
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Use dark theme
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Use light theme
+
+plugins:
+  - search:
+      lang: en
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra_css:
+  - assets/styles.css
+  - assets/progress.css
+
+extra_javascript:
+  - assets/progress.js
+
+nav:
+  - Home: index.md
+  - Learning paths:
+      - Quick start: paths/quick-start.md
+      - Full exam: paths/full-exam.md
+      - Job ready: paths/job-ready.md
+  - Curriculum:
+      - Searchable lab catalog: catalog.md
+      - Objective map and status: objective-map.md
+      - Study plan: study-plan.md
+      - Assessment dashboard: assessment-dashboard.md
+  - Architecture practice:
+      - Decisions and ADRs: guidance/architecture-decisions.md
+      - Well-Architected review: guidance/well-architected.md
+      - Evidence discipline: guidance/evidence.md
+  - Field guides:
+      - Azure CLI: guides/azure-cli.md
+      - Azure PowerShell: guides/azure-powershell.md
+      - Permissions: guides/permissions.md
+      - Licensing: guides/licensing.md
+      - Cost control: guides/cost.md
+      - Migration: guides/migration.md
+      - Continuity: guides/continuity.md
+      - Troubleshooting: guides/troubleshooting.md
+  - Labs: labs/README.md
+

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:az305:schema:run:1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "labId", "runId", "track", "implementationMode", "status", "createdAt", "execute", "parameters", "managedObjects", "originalSettings"],
+  "properties": {
+    "_generatedBegin": {"const": "BEGIN GENERATED AZ305 V1"},
+    "_generatedEnd": {"const": "END GENERATED AZ305 V1"},
+    "schemaVersion": {"const": "1.0.0"},
+    "labId": {"pattern": "^LAB-[0-2][0-9]$"},
+    "runId": {"pattern": "^[a-z0-9-]{6,64}$"},
+    "track": {"enum": ["dual-bootstrap", "azure-cli", "azure-powershell"]},
+    "implementationMode": {"enum": ["design-simulation", "reference-deployable", "safe-analogue"]},
+    "status": {"enum": ["initialized", "planned", "deploying", "deployed", "failed", "cleaning", "cleaned"]},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "execute": {"type": "boolean"},
+    "parameters": {"type": "object"},
+    "managedObjects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "tags"],
+        "properties": {"id": {"type": "string"}, "type": {"type": "string"}, "tags": {"type": "object"}}
+      }
+    },
+    "originalSettings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "setting", "value"],
+        "properties": {"id": {"type": "string"}, "setting": {"type": "string"}, "value": {}}
+      }
+    }
+  }
+}

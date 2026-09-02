@@ -1,0 +1,1443 @@
+schemaVersion: '1.0.0'
+labs:
+  - number: '01'
+    scenario: >-
+      Contoso Retail has acquired two regional brands whose Azure resources emit platform logs, application telemetry, and
+      security events into unrelated destinations. Operations cannot correlate an incident across subscriptions, while the
+      security team requires immutable export of selected control-plane records and regional teams need bounded access to
+      their own data. You are the lead solutions architect. Design a centralized logging platform that uses Azure Monitor
+      Agent, data collection rules and associations, resource diagnostic settings, and deliberate retention rather than a
+      legacy agent. The design must limit duplicate ingestion, preserve data sovereignty, expose routing evidence through
+      commands, and separate collection architecture from the alerting decisions owned by Lab 02.
+    role: Lead cloud solutions architect
+    outcome: A defensible centralized collection and routing design with independently verifiable destinations and no legacy monitoring agent.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Reduce incident investigation time while giving security and regional operators governed access to complete, correctly routed telemetry.
+    stakeholders:
+      - Security operations
+      - Regional platform teams
+      - Data protection officer
+      - FinOps
+    primarySource:
+      title: Diagnostic settings in Azure Monitor
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
+    candidates:
+      - Central Log Analytics workspace with DCR-based collection and archive export
+      - Regional workspaces with cross-workspace queries and policy-driven routing
+      - Dedicated workspace per workload with independent retention and access
+    selected: Regional workspaces with cross-workspace queries and policy-driven routing
+    checkpoints:
+      - title: Establish regional workspace boundaries
+        requirement: LAB01-REQ-01
+        command: >-
+          az monitor log-analytics workspace create --resource-group $ResourceGroup --workspace-name $WorkspaceName --location $Location --retention-time 30 --tags purpose=az305-lab labId=LAB-01 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az monitor log-analytics workspace show --resource-group $ResourceGroup --workspace-name $WorkspaceName --query "{name:name,location:location,retention:retentionInDays}" -o json
+        negativeCommand: >-
+          az monitor log-analytics workspace list --resource-group $ResourceGroup --query "[?name!='$WorkspaceName'].name" -o tsv
+        expected: The workspace is in the approved data boundary with thirty-day interactive retention and ownership tags.
+        negative: No unapproved workspace is selected as a destination for this run.
+        evidence: Sanitized workspace name, region, retention, and resource ID.
+        failure: A conflicting regional residency rule or unavailable workspace SKU blocks the chosen topology.
+        retry: Re-evaluate the approved region and pricing tier, retain the same RunId, and preview before execution.
+        cleanup: Remove diagnostic settings and DCR associations before deleting the workspace.
+        waf: 'Reliability: regional telemetry boundaries remain available and supportable during an incident.'
+      - title: Define an Azure Monitor Agent data collection rule
+        requirement: LAB01-REQ-02
+        command: >-
+          az monitor data-collection rule create --resource-group $ResourceGroup --location $Location --name $DcrName --rule-file artifacts/dcr.json --tags purpose=az305-lab labId=LAB-01 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az monitor data-collection rule show --resource-group $ResourceGroup --name $DcrName --query "{streams:dataFlows[].streams,destinations:destinations.logAnalytics[].name}" -o json
+        negativeCommand: >-
+          az monitor data-collection rule show --resource-group $ResourceGroup --name $DcrName --query "dataSources.extensions[?name=='LegacyAgent']" -o json
+        expected: The DCR maps only the required streams to a named Log Analytics destination.
+        negative: No legacy Log Analytics agent or unapproved stream is represented in the rule.
+        evidence: DCR resource ID, stream names, destinations, and source file hash.
+        failure: A stream name is incompatible with the selected data source or destination.
+        retry: Correct artifacts/dcr.json against the current DCR schema and rerun the preview.
+        cleanup: Delete all DCR associations before deleting the DCR.
+        waf: 'Performance Efficiency: filtering noisy streams near the source protects ingestion and query capacity.'
+      - title: Associate the rule with an explicit resource scope
+        requirement: LAB01-REQ-03
+        command: >-
+          az monitor data-collection rule association show --name $AssociationName --resource $TargetResourceId --query "{name:name,dcr:dataCollectionRuleId}" -o json --only-show-errors
+        positiveCommand: >-
+          az monitor data-collection rule association show --name $AssociationName --resource $TargetResourceId --query "{name:name,dcr:dataCollectionRuleId}" -o json
+        negativeCommand: >-
+          az monitor data-collection rule association list --resource $TargetResourceId --query "[?dataCollectionRuleId!='$DcrId'].name" -o tsv
+        expected: The target has one intentional association to the approved DCR.
+        negative: The target is not simultaneously associated with a competing lab DCR.
+        evidence: Target resource ID, association name, and DCR ID without host or user data.
+        failure: The target resource type, region, or authorization scope does not support the association.
+        retry: Confirm the exact target ID and regional compatibility, then recreate only the missing association.
+        cleanup: Delete the association before its DCR or target resource.
+        waf: 'Security: explicit DCR associations limit collection to approved assets and destinations.'
+      - title: Route resource logs with diagnostic settings
+        requirement: LAB01-REQ-04
+        command: >-
+          az monitor diagnostic-settings show --name $DiagnosticSettingName --resource $TargetResourceId --query "{workspace:workspaceId,logs:logs[?enabled].categoryGroup,metrics:metrics[?enabled].category}" -o json --only-show-errors
+        positiveCommand: >-
+          az monitor diagnostic-settings show --name $DiagnosticSettingName --resource $TargetResourceId --query "{workspace:workspaceId,logs:logs[?enabled].categoryGroup,metrics:metrics[?enabled].category}" -o json
+        negativeCommand: >-
+          az monitor diagnostic-settings show --name $DiagnosticSettingName --resource $TargetResourceId --query "{eventHub:eventHubAuthorizationRuleId,storage:storageAccountId}" -o json
+        expected: Supported log categories and metrics route to the intended regional workspace.
+        negative: Event Hubs or storage are not silently configured as extra destinations.
+        evidence: Diagnostic-setting name, enabled categories, destination IDs, and export mode.
+        failure: The chosen category group is unsupported by the resource provider.
+        retry: Query diagnostic categories, update the design artifact, and apply the smallest corrected setting.
+        cleanup: Delete the diagnostic setting before deleting either source or destination.
+        waf: 'Operational Excellence: diagnostic settings create a repeatable routing contract that teams can inspect.'
+      - title: Validate retention and archive economics
+        requirement: LAB01-REQ-05
+        command: >-
+          az monitor log-analytics workspace table list --resource-group $ResourceGroup --workspace-name $WorkspaceName --query "[].{table:name,retention:retentionInDays,totalRetention:totalRetentionInDays}" -o json
+        positiveCommand: >-
+          az monitor log-analytics workspace table show --resource-group $ResourceGroup --workspace-name $WorkspaceName --name AzureActivity --query "{retention:retentionInDays,totalRetention:totalRetentionInDays}" -o json
+        negativeCommand: >-
+          az monitor log-analytics workspace table list --resource-group $ResourceGroup --workspace-name $WorkspaceName --query '[?retentionInDays > `30` && name != ''SecurityEvent''].name' -o tsv
+        expected: Interactive and total retention match the documented use case for each reviewed table.
+        negative: High-volume tables do not inherit unjustified extended interactive retention.
+        evidence: Table-level retention summary and a synthetic monthly-ingestion estimate.
+        failure: Workspace defaults obscure a table-specific compliance or cost requirement.
+        retry: Recalculate retention by evidence class and update only the affected table plan.
+        cleanup: Export required sanitized evidence before removing the workspace; never retain customer log data.
+        waf: 'Cost Optimization: table-level retention aligns searchable and archived data with its continuing value.'
+    changeRequest: A new regulator requires security control-plane records to remain in-region for seven years while application traces must stay searchable for only thirty days; revise routing and retention without duplicating every stream.
+    challenge: Defend whether a central security workspace plus regional operations workspaces is preferable to the selected topology after the regulator change.
+    troubleshooting:
+      - Confirm the provider exposes a diagnostic category group before referencing allLogs.
+      - Check DCR stream-to-destination mappings when an association exists but data is absent.
+      - Investigate duplicate diagnostic settings and overlapping DCRs before increasing retention or ingestion capacity.
+
+  - number: '02'
+    scenario: >-
+      Fabrikam Payments has a centralized Log Analytics estate, but responders learn about customer impact from support tickets.
+      Platform metrics, resource health events, query-based service-level indicators, and application telemetry are monitored by
+      different teams with inconsistent thresholds. As the monitoring architect, design the health model, action routing,
+      alert severity, suppression, and workbook views that turn the collection architecture from Lab 01 into actionable
+      operational visibility. The solution must avoid noisy static thresholds, distinguish symptoms from causes, preserve
+      independent positive and negative validation, and document ownership for every notification path without embedding
+      personal addresses, secrets, or live incident data.
+    role: Monitoring and reliability architect
+    outcome: An actionable monitoring design that detects customer-impacting conditions, routes owned alerts, and proves noise controls.
+    duration: 140 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Detect and triage material service degradation before customers report it while reducing unactionable alerts.
+    stakeholders:
+      - Site reliability engineering
+      - Application owners
+      - Security operations
+      - Service desk
+    primarySource:
+      title: Azure Monitor best practices - Alerts and automated actions
+      url: https://learn.microsoft.com/en-us/azure/azure-monitor/best-practices-alerts
+    candidates:
+      - Service-centric alerts with shared action groups and curated workbooks
+      - Resource-by-resource static thresholds with team-specific receivers
+      - External monitoring only with Azure telemetry exported downstream
+    selected: Service-centric alerts with shared action groups and curated workbooks
+    checkpoints:
+      - title: Build a layered signal inventory
+        requirement: LAB02-REQ-01
+        command: >-
+          Get-AzMetricDefinition -ResourceId $TargetResourceId
+        positiveCommand: >-
+          Get-AzMetricDefinition -ResourceId $TargetResourceId | Where-Object { $_.Name.Value -eq $RequiredMetricName }
+        negativeCommand: >-
+          Get-AzMetricDefinition -ResourceId $TargetResourceId | Where-Object { $_.Name.Value -eq $DeprecatedMetricName }
+        expected: The design identifies platform, application, dependency, and business signals with explicit owners.
+        negative: No unsupported or deprecated metric is used as a release gate.
+        evidence: Metric namespace, aggregation, grain, owner, and business symptom mapping.
+        failure: A desired metric is unavailable at the resource SKU or namespace.
+        retry: Select a supported proxy signal and record the detection trade-off before continuing.
+        cleanup: No resource cleanup is required for this read-only inventory checkpoint.
+        waf: 'Performance Efficiency: signals aligned to saturation and latency expose capacity bottlenecks without indiscriminate telemetry.'
+      - title: Design platform and resource-health alerts
+        requirement: LAB02-REQ-02
+        command: >-
+          New-AzActivityLogAlert -Name $HealthAlertName -ResourceGroupName $ResourceGroup -Location global -Scope $TargetResourceId -Action (New-AzActivityLogAlertActionGroupObject -Id $ActionGroupResourceId) -Condition @((New-AzActivityLogAlertAlertRuleAnyOfOrLeafConditionObject -Field category -Equal ResourceHealth)) -Enabled $true -Tag @{purpose='az305-lab';labId='LAB-02';runId=$RunId;expiresOn=$ExpiresOn}
+        positiveCommand: >-
+          Get-AzActivityLogAlert -ResourceGroupName $ResourceGroup -Name $HealthAlertName
+        negativeCommand: >-
+          Get-AzActivityLogAlert -ResourceGroupName $ResourceGroup | Where-Object { $_.ConditionAllOf.Field -eq 'category' -and $_.ConditionAllOf.Equals -eq 'Administrative' }
+        expected: Resource Health and Service Health alerts are separated from routine administrative events and have owned severities.
+        negative: Broad administrative activity does not page the reliability team without a material condition.
+        evidence: Alert scope, category, status, severity rationale, and owner alias using synthetic contacts.
+        failure: Subscription scope or action authorization is narrower than the intended failure domain.
+        retry: Reduce scope to an authorized management boundary and document any coverage gap.
+        cleanup: Remove test activity-log alerts before action groups when cleanup is authorized.
+        waf: 'Reliability: resource and service-health signals cover failures outside the application process.'
+      - title: Define a query-based service-level alert
+        requirement: LAB02-REQ-03
+        command: >-
+          Get-AzScheduledQueryRule -ResourceGroupName $ResourceGroup -Name $ScheduledQueryRuleName
+        positiveCommand: >-
+          Get-AzScheduledQueryRule -ResourceGroupName $ResourceGroup -Name $ScheduledQueryRuleName
+        negativeCommand: >-
+          Get-AzScheduledQueryRule -ResourceGroupName $ResourceGroup | Where-Object { $_.WindowSize -lt $_.EvaluationFrequency }
+        expected: The selected log alert evaluates an auditable customer-impact query over a suitable window and frequency.
+        negative: No rule uses an evaluation cadence that can systematically miss its own observation window.
+        evidence: Sanitized KQL fingerprint, window, frequency, threshold, severity, and failing-period configuration.
+        failure: Query latency or ingestion delay exceeds the intended detection time.
+        retry: Test against synthetic fixtures, widen the window only as needed, and document slower detection.
+        cleanup: Delete the scheduled-query rule before deleting its action group or workspace dependency.
+        waf: 'Cost Optimization: query cadence balances detection value against repeated log-query consumption.'
+      - title: Curate an operator workbook
+        requirement: LAB02-REQ-04
+        command: >-
+          New-AzApplicationInsightsWorkbook -ResourceGroupName $ResourceGroup -Name $WorkbookResourceName -Location $Location -DisplayName $WorkbookDisplayName -SourceId $TargetResourceId -Category workbook -SerializedData $WorkbookJson -Tag @{purpose='az305-lab';labId='LAB-02';runId=$RunId;expiresOn=$ExpiresOn}
+        positiveCommand: >-
+          Get-AzApplicationInsightsWorkbook -ResourceGroupName $ResourceGroup -Name $WorkbookResourceName
+        negativeCommand: >-
+          Get-AzApplicationInsightsWorkbook -ResourceGroupName $ResourceGroup -Category workbook | Where-Object { [string]::IsNullOrWhiteSpace($_.DisplayName) }
+        expected: The workbook leads from business health to dependencies and resource diagnostics without exposing sensitive dimensions.
+        negative: No panel depends on personal data, raw secrets, or an undocumented cross-workspace permission.
+        evidence: Workbook resource ID, display name, query-purpose inventory, and accessibility review.
+        failure: A cross-workspace query cannot resolve because the operator lacks access to one workspace.
+        retry: Validate workspace-scoped RBAC and replace inaccessible panels with an explicit coverage notice.
+        cleanup: Delete the workbook before its supporting workspace only when it was created by this run.
+        waf: 'Security: curated views expose only the telemetry dimensions operators need for diagnosis.'
+      - title: Verify action routing and noise controls
+        requirement: LAB02-REQ-05
+        command: >-
+          Get-AzActionGroup -ResourceGroupName $ResourceGroup
+        positiveCommand: >-
+          Get-AzActionGroup -ResourceGroupName $ResourceGroup -Name $ActionGroupName
+        negativeCommand: >-
+          Get-AzActionGroup -ResourceGroupName $ResourceGroup | Where-Object { $_.EmailReceiver.EmailAddress -match '@(gmail|outlook)\.com$' }
+        expected: Every actionable severity maps to a durable team-owned receiver and documented suppression rule.
+        negative: No personal mailbox or receiver without an accountable service owner is present.
+        evidence: Receiver type, synthetic endpoint label, severity routing table, suppression window, and owner.
+        failure: An action group exists but a receiver is disabled, unverified, or unsupported in the region.
+        retry: Correct the synthetic routing design and retest the alert-to-owner mapping without sending notifications.
+        cleanup: Delete alert rules before deleting the shared action group.
+        waf: 'Operational Excellence: severity and action routing send actionable work to durable, accountable teams.'
+    changeRequest: The payment API adopts a bursty promotion model that triples legitimate traffic for fifteen minutes, so static latency and error-rate thresholds must be revised without masking genuine customer impact.
+    challenge: Propose a multi-window burn-rate alert and explain how it changes severity, evaluation frequency, and operator context.
+    troubleshooting:
+      - Compare alert evaluation frequency, observation window, and ingestion delay before changing thresholds.
+      - Verify action-group receiver state and rule association separately when an alert fires without notification.
+      - Test workbook queries with the least-privileged operator role to expose hidden cross-workspace dependencies.
+
+  - number: '03'
+    scenario: >-
+      Northwind Health is modernizing an employee application, a partner collaboration site, and a new patient-facing application.
+      Architects disagree whether all identities belong in the workforce tenant and whether a historical Azure AD B2C pattern
+      should be copied for the patient experience. You must recommend tenant boundaries, Microsoft Entra External ID for the
+      new customer identity scenario, federation and authentication methods, Conditional Access, application registrations,
+      and managed workload identities. The design must account for regulated attributes, self-service journeys, privileged
+      administration, protocol compatibility, and lifecycle ownership. Use GA Microsoft Graph PowerShell inspection commands
+      only and leave post-authentication Azure authorization decisions to Lab 04.
+    role: Identity and authentication architect
+    outcome: A tenant and authentication architecture that separates workforce, partner, customer, and workload identities with modern controls.
+    duration: 165 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Provide secure low-friction sign-in for three populations while reducing credential and tenant-boundary risk.
+    stakeholders:
+      - Chief information security officer
+      - Patient application owner
+      - Partner operations
+      - Privacy counsel
+    primarySource:
+      title: Overview of Microsoft Entra External ID in external tenants
+      url: https://learn.microsoft.com/en-us/entra/external-id/customers/overview-customers-ciam
+    candidates:
+      - Workforce tenant plus a dedicated External ID external tenant and managed identities
+      - Single workforce tenant for employees partners and customers
+      - Separate workforce tenants with custom application-managed customer credentials
+    selected: Workforce tenant plus a dedicated External ID external tenant and managed identities
+    checkpoints:
+      - title: Establish identity population and tenant boundaries
+        requirement: LAB03-REQ-01
+        command: >-
+          Get-MgOrganization
+        positiveCommand: >-
+          Get-MgOrganization -Property Id,DisplayName,VerifiedDomains,TenantType
+        negativeCommand: >-
+          Get-MgOrganization -Property VerifiedDomains | Where-Object { $_.VerifiedDomains.Name -like '*.invalid' }
+        expected: Workforce, partner, customer, and workload identities have explicit tenant placement and data ownership.
+        negative: No production domain, tenant identifier, or live organization evidence is committed to the lab.
+        evidence: Synthetic tenant labels, boundary rationale, identity population, residency constraint, and administrative owner.
+        failure: A business population has conflicting collaboration, residency, or branding requirements.
+        retry: Split the population decision and evaluate the constraint against a dedicated external tenant.
+        cleanup: This design checkpoint is read-only and creates no directory object.
+        waf: 'Reliability: explicit tenant ownership and emergency administration make each identity control plane recoverable.'
+      - title: Select protocols and application registrations
+        requirement: LAB03-REQ-02
+        command: >-
+          Get-MgApplication -Filter "displayName eq '$AppDisplayName'" -Property Id,AppId,DisplayName,SignInAudience,Web,Spa
+        positiveCommand: >-
+          Get-MgApplication -Filter "displayName eq '$AppDisplayName'" -Property AppId,SignInAudience,RequiredResourceAccess
+        negativeCommand: >-
+          Get-MgApplication -Filter "displayName eq '$AppDisplayName'" -Property PasswordCredentials | Where-Object { $_.PasswordCredentials.EndDateTime -gt (Get-Date).AddYears(1) }
+        expected: Each application has a supported OIDC or SAML pattern, audience, redirect ownership, and least-privilege API consent plan.
+        negative: No long-lived client secret or unnecessarily broad multitenant audience is accepted.
+        evidence: Synthetic application label, protocol, audience, redirect class, and permission rationale without credentials.
+        failure: A legacy application cannot support modern federation or secure redirect handling.
+        retry: Introduce an identity-aware modernization facade or isolate the legacy protocol with compensating controls.
+        cleanup: No application is removed automatically; tenant changes require explicit acknowledgement and exact object ownership.
+        waf: 'Performance Efficiency: standardized federation avoids duplicating credential validation and identity stores in each application.'
+      - title: Design authentication methods and recovery
+        requirement: LAB03-REQ-03
+        command: >-
+          Get-MgPolicyAuthenticationMethodPolicy
+        positiveCommand: >-
+          Get-MgPolicyAuthenticationMethodPolicy -Property Id,DisplayName,PolicyVersion,RegistrationEnforcement
+        negativeCommand: >-
+          Get-MgPolicyAuthenticationMethodPolicyAuthenticationMethodConfiguration | Where-Object { $_.State -eq 'enabled' -and $_.Id -eq 'Email' }
+        expected: Phishing-resistant workforce methods, customer journey methods, bootstrap, and account recovery are deliberately separated.
+        negative: Weak recovery factors are not treated as equivalent to phishing-resistant authentication for privileged roles.
+        evidence: Method-class matrix, population scope, recovery owner, rollout dependency, and exception expiry.
+        failure: The target population lacks compatible devices or a safe bootstrap channel.
+        retry: Phase registration with Temporary Access Pass or an approved customer method and time-bound exceptions.
+        cleanup: No authentication-method policy is changed by this inspection-only checkpoint.
+        waf: 'Operational Excellence: phased registration and owned recovery paths make strong authentication supportable.'
+      - title: Evaluate Conditional Access architecture
+        requirement: LAB03-REQ-04
+        command: >-
+          Get-MgIdentityConditionalAccessPolicy -All
+        positiveCommand: >-
+          Get-MgIdentityConditionalAccessPolicy -All | Where-Object { $_.State -in @('enabled','enabledForReportingButNotEnforced') }
+        negativeCommand: >-
+          Get-MgIdentityConditionalAccessPolicy -All | Where-Object { $_.State -eq 'enabled' -and $_.Conditions.Users.IncludeUsers -contains 'All' -and $_.Conditions.Users.ExcludeUsers.Count -eq 0 }
+        expected: Baseline, privileged, workload, guest, and customer access controls have explicit scope, exclusions, and rollout mode.
+        negative: No broad enforcement is accepted without emergency access exclusions and report-only evidence.
+        evidence: Synthetic policy matrix, included populations, excluded emergency accounts, grant controls, and rollout stage.
+        failure: Overlapping policies create an untested lockout path or contradict a customer journey.
+        retry: Evaluate policies in report-only mode against synthetic personas and resolve overlap before enforcement.
+        cleanup: No policy mutation or deletion occurs; real tenant values are never retained.
+        waf: 'Security: contextual access policies strengthen verification while protecting an explicit emergency path.'
+      - title: Prefer managed workload identities
+        requirement: LAB03-REQ-05
+        command: >-
+          Get-MgServicePrincipal -Filter "displayName eq '$WorkloadIdentityName'" -Property Id,AppId,DisplayName,ServicePrincipalType,AlternativeNames
+        positiveCommand: >-
+          Get-MgServicePrincipal -Filter "displayName eq '$WorkloadIdentityName'" -Property Id,ServicePrincipalType,AccountEnabled
+        negativeCommand: >-
+          Get-MgServicePrincipal -Filter "displayName eq '$WorkloadIdentityName'" -Property PasswordCredentials | Where-Object { $_.PasswordCredentials.Count -gt 0 }
+        expected: Azure-hosted components use system- or user-assigned managed identities with documented lifecycle ownership.
+        negative: No reusable application secret is selected where a managed identity can satisfy the trust boundary.
+        evidence: Synthetic workload identity label, identity type, lifecycle owner, token audience, and downstream dependency.
+        failure: The destination service or hosting model does not support the required managed identity flow.
+        retry: Evaluate workload identity federation or a certificate credential stored in Key Vault with a short rotation interval.
+        cleanup: Directory objects are never deleted automatically; any future cleanup requires exact IDs and tenant-change acknowledgement.
+        waf: 'Cost Optimization: reusable user-assigned identities are introduced only when their independent lifecycle justifies administration.'
+    changeRequest: A mobile patient application now requires native authentication and social federation while a regulator forbids health attributes from being stored in the customer directory; revise the journey and profile-data boundary.
+    challenge: Compare browser-delegated and native authentication for the changed patient journey and justify where custom business logic executes.
+    troubleshooting:
+      - Separate workforce B2B collaboration from customer CIAM when user types appear similar.
+      - Validate application audience, redirect type, and consent requirements as independent decisions.
+      - Preserve emergency access and report-only evaluation when diagnosing overlapping Conditional Access controls.
+
+  - number: '04'
+    scenario: >-
+      Adventure Works operates Azure subscriptions alongside factories whose Windows and Linux servers are projected through
+      Azure Arc. Authentication is standardized, yet authorization grew through direct owner assignments, nested groups, and
+      local administrator exceptions. Audit cannot explain why a principal can change a production resource or read a vault
+      secret. As the authorization architect, create a scope and delegation model using Microsoft Entra groups, Azure RBAC,
+      narrowly designed custom roles, resource-provider data-plane roles, and an explicit hybrid boundary. The design must
+      preserve separation of duties, expose inherited access, avoid classic administrators, and distinguish Azure control-plane
+      authorization from operating-system permissions on connected machines.
+    role: Hybrid authorization architect
+    outcome: A least-privilege Azure and hybrid authorization model with traceable scope, inheritance, and data-plane boundaries.
+    duration: 150 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Reduce standing privilege and audit ambiguity without preventing platform and factory teams from meeting support obligations.
+    stakeholders:
+      - Cloud platform owner
+      - Factory operations
+      - Security assurance
+      - Internal audit
+    primarySource:
+      title: Best practices for Azure RBAC
+      url: https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices
+    candidates:
+      - Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+      - Direct user assignments on individual resources and servers
+      - Subscription-wide custom roles mirrored into local administrator groups
+    selected: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+    checkpoints:
+      - title: Model scopes and inherited access
+        requirement: LAB04-REQ-01
+        command: >-
+          az role assignment list --scope $Scope --include-inherited --all -o json
+        positiveCommand: >-
+          az role assignment list --scope $Scope --include-inherited --assignee-object-id $PrincipalObjectId --query "[].{role:roleDefinitionName,scope:scope}" -o json
+        negativeCommand: >-
+          az role assignment list --scope $Scope --include-inherited --query "[?principalType=='User' && roleDefinitionName=='Owner'].{principal:principalName,scope:scope}" -o json
+        expected: Stable management scopes and group assignments explain both direct and inherited effective access.
+        negative: No individual user holds standing Owner at the reviewed production scope.
+        evidence: Synthetic principal labels, role names, assignment scopes, inheritance path, and business owner.
+        failure: A broad inherited assignment masks the intended resource-group delegation.
+        retry: Trace the assignment to its parent scope and redesign at the narrowest stable boundary.
+        cleanup: Remove child assignments before groups only when exact run-owned IDs and tags are proven.
+        waf: 'Operational Excellence: an explicit inheritance map makes effective access reviewable and supportable.'
+      - title: Delegate through groups rather than people
+        requirement: LAB04-REQ-02
+        command: >-
+          az role assignment list --assignee-object-id $GroupObjectId --scope $ResourceGroupId --include-inherited --query "[].{role:roleDefinitionName,scope:scope,principalType:principalType}" -o json
+        positiveCommand: >-
+          az role assignment list --assignee-object-id $GroupObjectId --scope $ResourceGroupId --query "[?roleDefinitionName=='Contributor'].id" -o tsv
+        negativeCommand: >-
+          az role assignment list --scope $ResourceGroupId --query "[?principalType=='User' && roleDefinitionName=='Contributor'].id" -o tsv
+        expected: The operating team receives resource-group Contributor through an owned Microsoft Entra group.
+        negative: No equivalent direct-user assignment remains at the delegated scope.
+        evidence: Synthetic group object ID, role definition, exact scope, owner, and access-review cadence.
+        failure: The caller cannot resolve the group or create assignments at the requested scope.
+        retry: Validate directory read access and role-assignment permissions without broadening the target scope.
+        cleanup: Delete the run-owned assignment before considering any group lifecycle action.
+        waf: 'Cost Optimization: group-based delegation reduces repetitive assignment and recertification effort.'
+      - title: Constrain a custom control-plane role
+        requirement: LAB04-REQ-03
+        command: >-
+          az role definition list --name $CustomRoleName --query "[0].{name:roleName,actions:permissions[0].actions,notActions:permissions[0].notActions,assignableScopes:assignableScopes}" -o json
+        positiveCommand: >-
+          az role definition list --name $CustomRoleName --query "[0].{actions:permissions[0].actions,notActions:permissions[0].notActions,scopes:assignableScopes}" -o json
+        negativeCommand: >-
+          az role definition list --name $CustomRoleName --query "[0].permissions[0].actions[?@=='*']" -o json
+        expected: The custom role contains only documented support actions and the minimum assignable scopes.
+        negative: No wildcard action, role-assignment write, or destructive permission is granted.
+        evidence: Role definition hash, actions, notActions, dataActions, and assignable scopes.
+        failure: An operational task depends on a hidden action not represented in provider operations.
+        retry: Capture the denied operation, add only its documented action, and repeat the privilege review.
+        cleanup: Remove assignments that reference the custom role before deleting the definition.
+        waf: 'Performance Efficiency: a task-focused role lets operators complete supported recovery work without broad authorization workflows.'
+      - title: Separate control-plane and data-plane access
+        requirement: LAB04-REQ-04
+        command: >-
+          az role assignment list --assignee-object-id $WorkloadPrincipalId --scope $VaultResourceId --include-inherited --query "[].{role:roleDefinitionName,scope:scope}" -o json
+        positiveCommand: >-
+          az role assignment list --assignee-object-id $WorkloadPrincipalId --scope $VaultResourceId --query "[?roleDefinitionName=='Key Vault Secrets User'].{role:roleDefinitionName,scope:scope}" -o json
+        negativeCommand: >-
+          az role assignment list --assignee-object-id $WorkloadPrincipalId --scope $VaultResourceId --query "[?contains(['Owner','Contributor'],roleDefinitionName)].roleDefinitionName" -o tsv
+        expected: The workload identity can read secret values through a data-plane role without managing the vault.
+        negative: The workload receives neither Owner nor Contributor at the vault or a parent scope.
+        evidence: Synthetic workload principal, data-plane role, exact vault scope, and denied management operations.
+        failure: The vault still uses access policies or an inherited management role supplies unintended power.
+        retry: Document the authorization model, remove overlap in a controlled change, and validate both planes independently.
+        cleanup: Remove the exact run-owned role assignment; do not alter unrelated vault access.
+        waf: 'Reliability: data-plane roles let workloads consume dependencies without coupling service availability to vault administration.'
+      - title: Define the Azure Arc authorization boundary
+        requirement: LAB04-REQ-05
+        command: >-
+          az resource show --ids $ArcServerResourceId --api-version 2024-07-10 -o json
+        positiveCommand: >-
+          az role assignment list --scope $ArcServerResourceId --include-inherited --query "[].{role:roleDefinitionName,scope:scope}" -o json
+        negativeCommand: >-
+          az role assignment list --scope $ArcServerResourceId --query "[?principalType=='User' && contains(roleDefinitionName,'Administrator')].id" -o tsv
+        expected: Azure resource actions and guest operating-system privileges have separate accountable delegation paths.
+        negative: An Azure assignment is not assumed to grant local administrator access, and no direct-user exception is accepted.
+        evidence: Synthetic Arc resource ID, Azure role path, local-role owner, elevation mechanism, and review cadence.
+        failure: Teams conflate Arc resource management with guest configuration or local sign-in rights.
+        retry: Split the permission matrix by control plane, Arc extension action, and guest operating-system action.
+        cleanup: Remove only tagged run-owned Azure assignments; never alter a connected server or local group automatically.
+        waf: 'Security: the hybrid boundary prevents Azure control-plane access from being mistaken for guest administrator privilege.'
+    changeRequest: A managed-service provider must troubleshoot factory servers for ninety days but may not change subscription networking or receive permanent local administrator membership; revise delegation and expiry controls.
+    challenge: Produce a responsibility matrix that distinguishes Azure RBAC, Arc extension permissions, just-in-time local elevation, and evidence ownership.
+    troubleshooting:
+      - Resolve inherited assignments from parent scopes before adding a new role.
+      - Check control-plane Actions and data-plane DataActions separately when access appears inconsistent.
+      - Treat Azure Arc resource permissions and guest operating-system privileges as different authorization systems.
+
+  - number: '05'
+    scenario: >-
+      Litware Financial runs signing, encryption, and TLS-dependent services across multiple subscriptions. Teams store secrets in
+      separate vaults, rotate keys inconsistently, and confuse Key Vault Premium with Managed HSM. A planned payment service
+      needs hardware-protected signing keys, short-lived certificates, managed-identity access, private connectivity, and
+      evidence that recovery and rotation are configured without exporting sensitive material. As the cryptographic-services
+      architect, select the appropriate vault boundaries and tiers, define ownership and separation of duties, and produce a
+      command-verifiable lifecycle. The design must never place secret values, keys, certificates, access tokens, connection
+      strings, or recovery material in repository state or retained evidence.
+    role: Cryptographic services architect
+    outcome: A governed Key Vault architecture for secrets, certificates, and keys with explicit rotation, access, and network controls.
+    duration: 160 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Protect payment cryptographic assets and reduce outage risk caused by unmanaged expiry or overprivileged access.
+    stakeholders:
+      - Payment engineering
+      - Cryptographic governance
+      - Security operations
+      - Business continuity
+    primarySource:
+      title: Azure Key Vault best practices
+      url: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+    candidates:
+      - Azure Key Vault Premium with RBAC and private endpoints
+      - Azure Managed HSM with centralized HSM administration
+      - Application-owned encrypted configuration in general-purpose storage
+    selected: Azure Key Vault Premium with RBAC and private endpoints
+    checkpoints:
+      - title: Select vault boundary and service tier
+        requirement: LAB05-REQ-01
+        command: >-
+          New-AzKeyVault -Name $VaultName -ResourceGroupName $ResourceGroup -Location $Location -Sku Premium -DisableRbacAuthorization:$false -Tag @{purpose='az305-lab';labId='LAB-05';runId=$RunId;expiresOn=$ExpiresOn}
+        positiveCommand: >-
+          Get-AzKeyVault -VaultName $VaultName | Select-Object VaultName,Location,Sku,EnableRbacAuthorization,ResourceId
+        negativeCommand: >-
+          Get-AzKeyVault -VaultName $VaultName | Where-Object { -not $_.EnableRbacAuthorization -or $_.Sku -ne 'Premium' }
+        expected: A Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates supportable.
+        negative: A software-only tier or legacy access-policy model is not silently substituted.
+        evidence: Vault label, region, SKU, authorization model, business owner, and resource ID only.
+        failure: A requirement actually needs single-tenant HSM control or unsupported cryptographic functionality.
+        retry: Re-score Managed HSM and Key Vault Premium against key custody, API, availability, and cost requirements.
+        cleanup: Remove private endpoints, assignments, certificates, secrets, and keys before the vault; never automate purge.
+        waf: 'Cost Optimization: Key Vault Premium supplies required HSM-backed keys without unnecessary dedicated HSM capacity.'
+      - title: Define key protection and rotation
+        requirement: LAB05-REQ-02
+        command: >-
+          Get-AzKeyVaultKeyRotationPolicy -VaultName $VaultName -Name $KeyName
+        positiveCommand: >-
+          Get-AzKeyVaultKeyRotationPolicy -VaultName $VaultName -Name $KeyName
+        negativeCommand: >-
+          Get-AzKeyVaultKey -VaultName $VaultName -Name $KeyName | Where-Object { -not $_.Enabled -or $_.Expires -eq $null }
+        expected: The HSM-backed key has a ninety-day lifetime and rotates thirty days before expiry with a named application owner.
+        negative: No enabled production key lacks an expiry and rotation policy.
+        evidence: Key name, key type, protection class, expiry date, rotation actions, and version count without key material.
+        failure: A dependent application pins a key version and cannot tolerate automated rotation.
+        retry: Test versionless key references and staged rollover before enabling automatic rotation.
+        cleanup: Disable and delete only run-owned key versions; retain recoverability and never purge.
+        waf: 'Reliability: scheduled rotation and versionless references turn rollover into an exercised application behavior.'
+      - title: Govern certificate issuance and renewal
+        requirement: LAB05-REQ-03
+        command: >-
+          Get-AzKeyVaultCertificatePolicy -VaultName $VaultName -Name $CertificateName
+        positiveCommand: >-
+          Get-AzKeyVaultCertificate -VaultName $VaultName -Name $CertificateName | Select-Object Name,Enabled,Expires,Thumbprint
+        negativeCommand: >-
+          Get-AzKeyVaultCertificate -VaultName $VaultName | Where-Object { $_.Enabled -and $_.Expires -lt (Get-Date).AddDays(30) }
+        expected: Issuer, subject, validity, renewal threshold, exportability, and application binding are documented and inspectable.
+        negative: No enabled certificate approaches expiry without an owned renewal path.
+        evidence: Certificate name, issuer class, expiry, non-secret thumbprint, renewal threshold, and consuming service.
+        failure: The issuer cannot complete validation or the application does not reload a renewed certificate.
+        retry: Validate issuer permissions and exercise application rebinding with a synthetic certificate before production rollout.
+        cleanup: Delete only synthetic run-owned certificates and never purge recoverable versions.
+        waf: 'Operational Excellence: explicit renewal and rebind ownership prevents unmanaged certificate expiry.'
+      - title: Grant managed-identity data-plane access
+        requirement: LAB05-REQ-04
+        command: >-
+          Get-AzRoleAssignment -ObjectId $WorkloadPrincipalId -Scope $VaultResourceId | Where-Object { $_.RoleDefinitionName -eq 'Key Vault Secrets User' }
+        positiveCommand: >-
+          Get-AzRoleAssignment -ObjectId $WorkloadPrincipalId -Scope $VaultResourceId | Where-Object { $_.RoleDefinitionName -eq 'Key Vault Secrets User' }
+        negativeCommand: >-
+          Get-AzRoleAssignment -ObjectId $WorkloadPrincipalId -Scope $VaultResourceId | Where-Object { $_.RoleDefinitionName -in @('Owner','Contributor','Key Vault Administrator') }
+        expected: The workload identity receives only the data action needed to consume its secret at the vault boundary.
+        negative: The workload cannot administer the vault, roles, keys, or certificates.
+        evidence: Synthetic principal ID, role name, exact scope, assignment ID, and access owner.
+        failure: The application still relies on an access policy, shared principal, or embedded credential.
+        retry: Remove authorization-model overlap through a separately approved migration and retest the managed identity.
+        cleanup: Remove the exact assignment before deleting the run-owned identity or vault.
+        waf: 'Performance Efficiency: managed identity token handling removes custom secret distribution and refresh work from applications.'
+      - title: Enforce a private network path
+        requirement: LAB05-REQ-05
+        command: >-
+          $vaultBeforeUpdate = Get-AzKeyVault -VaultName $VaultName -ResourceGroupName $ResourceGroup; if ($vaultBeforeUpdate.ResourceId -ine $VaultResourceId) { throw 'The supplied Key Vault ID is not the exact run-owned vault.' }; Update-AzKeyVault -VaultName $VaultName -ResourceGroupName $ResourceGroup -PublicNetworkAccess Disabled
+        positiveCommand: >-
+          Get-AzKeyVault -VaultName $VaultName -ResourceGroupName $ResourceGroup | Select-Object VaultName,ResourceId,PublicNetworkAccess
+        negativeCommand: >-
+          Get-AzKeyVault -VaultName $VaultName | Where-Object { $_.PublicNetworkAccess -ne 'Disabled' }
+        expected: Approved private endpoint connectivity and private DNS support access from the intended workload network.
+        negative: Public network access is not used as a fallback for DNS or routing mistakes.
+        evidence: Vault resource ID, private endpoint ID, approval state, subnet, and private DNS zone label.
+        failure: Name resolution returns the public endpoint or the private endpoint connection is pending.
+        retry: Correct DNS linking and approval independently before keeping public access disabled.
+        cleanup: Remove private DNS records and the private endpoint before the vault; preserve unrelated shared zones.
+        waf: 'Security: private endpoints and denied public access reduce vault exposure and exfiltration paths.'
+    changeRequest: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration and cannot share the payment application vault boundary; revise the selected service and operating model.
+    challenge: Explain which assets remain in Key Vault and which move to Managed HSM, including role separation, backup ownership, cost, and application compatibility.
+    troubleshooting:
+      - Distinguish control-plane RBAC from key, secret, and certificate data-plane permissions.
+      - Check private DNS resolution and endpoint approval separately when vault requests fail.
+      - Verify applications use versionless references before relying on automated key or certificate rollover.
+
+  - number: '06'
+    scenario: >-
+      Contoso Manufacturing has one tenant, twelve subscriptions, and rapidly growing regional programs. Its current structure
+      mirrors temporary project teams, tags use inconsistent names, and cost, ownership, residency, and environment cannot be
+      queried reliably. The platform board wants a durable Cloud Adoption Framework-aligned hierarchy that delegates at stable
+      boundaries without turning management groups into an organizational chart. As the governance architect, design management
+      groups, subscription placement, resource-group lifecycles, and a controlled tag vocabulary. Demonstrate scope inheritance
+      and portfolio queries through Azure CLI, but leave policy compliance evidence and identity lifecycle governance to Lab 07.
+    role: Enterprise governance architect
+    outcome: A stable Azure resource hierarchy and tag model that supports delegated operations, cost allocation, and residency decisions.
+    duration: 145 minutes
+    difficulty: advanced
+    costClass: low
+    businessOutcome: Make ownership, environment, cost, and residency consistently discoverable across a growing subscription estate.
+    stakeholders:
+      - Cloud center of excellence
+      - Business-unit technology leads
+      - FinOps
+      - Risk and compliance
+    primarySource:
+      title: Azure landing zone design area - Resource organization
+      url: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org
+    candidates:
+      - Archetype-based management groups with workload subscriptions and governed tags
+      - Management groups that mirror the corporate reporting hierarchy
+      - One shared subscription with resource groups per application
+    selected: Archetype-based management groups with workload subscriptions and governed tags
+    checkpoints:
+      - title: Design durable management-group archetypes
+        requirement: LAB06-REQ-01
+        command: >-
+          az account management-group list --query "[].{name:name,displayName:displayName}" -o json
+        positiveCommand: >-
+          az account management-group show --name $ManagementGroupId --expand --recurse --query "{name:name,displayName:displayName,children:children[].name}" -o json
+        negativeCommand: >-
+          az account management-group show --name $ManagementGroupId --query "children[?type=='Microsoft.Management/managementGroups' && contains(displayName,'Team')]" -o json
+        expected: Platform, landing-zone, sandbox, and decommissioned archetypes reflect policy and delegation needs rather than team names.
+        negative: Temporary projects or reporting-line names do not become durable management-group boundaries.
+        evidence: Synthetic hierarchy tree, archetype purpose, owner, and inheritance rationale.
+        failure: Existing scope limits or tenant-root permissions prevent the proposed parent relationship.
+        retry: Model the hierarchy offline, verify the authorized deployment level, and phase the move without creating duplicates.
+        cleanup: Move child subscriptions and management groups before removing a run-owned empty group.
+        waf: 'Reliability: archetype-based boundaries limit disruptive hierarchy churn as teams and reporting lines change.'
+      - title: Place subscriptions by workload archetype
+        requirement: LAB06-REQ-02
+        command: >-
+          az account management-group show --name $ManagementGroupId --expand --recurse --query "{name:name,children:children[].name}" -o json
+        positiveCommand: >-
+          az account management-group subscription show --name $ManagementGroupId --subscription $SubscriptionId -o json
+        negativeCommand: >-
+          az account management-group show --name $SandboxManagementGroupId --expand --recurse --query "children[?name=='$SubscriptionId'].name" -o tsv
+        expected: The workload subscription is attached to the production landing-zone archetype with explicit platform dependencies.
+        negative: The same subscription is not represented under the sandbox archetype.
+        evidence: Synthetic subscription label, parent management group, workload class, residency, and owner.
+        failure: The subscription has pending operations or the caller lacks rights at old and new parents.
+        retry: Verify current parent and permissions, then perform one controlled move using the same target.
+        cleanup: Restore the recorded original parent before deleting a run-owned management group.
+        waf: 'Security: correct subscription placement inherits the intended enterprise guardrails.'
+      - title: Align resource groups with lifecycle boundaries
+        requirement: LAB06-REQ-03
+        command: >-
+          az group create --name $ResourceGroup --location $Location --tags purpose=az305-lab labId=LAB-06 runId=$RunId expiresOn=$ExpiresOn workload=$WorkloadName environment=learning
+        positiveCommand: >-
+          az group show --name $ResourceGroup --query "{name:name,location:location,tags:tags}" -o json
+        negativeCommand: >-
+          az resource list --resource-group $ResourceGroup --query "[?tags.workload!='$WorkloadName'].id" -o tsv
+        expected: Resources sharing deployment, ownership, and deletion lifecycles are grouped together and tagged consistently.
+        negative: A resource with a different lifecycle or owner is not hidden in the group.
+        evidence: Resource-group name, region, lifecycle owner, required tags, and dependency summary.
+        failure: A shared dependency cannot follow the application release or deletion lifecycle.
+        retry: Move the dependency to a platform-owned resource group in the architecture before deployment.
+        cleanup: Delete only the exactly named and tagged run-owned resource group after child ownership verification.
+        waf: 'Operational Excellence: resource groups align deployment, ownership, and deletion into a repeatable lifecycle.'
+      - title: Apply a controlled tag vocabulary
+        requirement: LAB06-REQ-04
+        command: >-
+          az tag update --resource-id $ResourceGroupId --operation Merge --tags owner=$OwnerAlias costCenter=$CostCenter dataClass=$DataClass environment=$Environment
+        positiveCommand: >-
+          az tag list --resource-id $ResourceGroupId --query "properties.tags" -o json
+        negativeCommand: >-
+          az tag list --resource-id $ResourceGroupId --query "{owner:properties.tags.owner,costCenter:properties.tags.costCenter,dataClass:properties.tags.dataClass,environment:properties.tags.environment}" -o json
+        expected: Required tags use canonical names and controlled values that serve ownership, cost, data, and environment decisions.
+        negative: Free-form aliases, personal data, secrets, and conflicting case variants are absent.
+        evidence: Tag dictionary version, sanitized values, inheritance rule, exception owner, and expiry.
+        failure: A resource type does not support tags or an inherited value conflicts with workload truth.
+        retry: Record the limitation and use the nearest supported scope or resource-graph join without fabricating coverage.
+        cleanup: Restore recorded original non-secret tags rather than deleting unrelated values.
+        waf: 'Cost Optimization: canonical ownership and cost-center tags support accountable allocation.'
+      - title: Query portfolio conformance
+        requirement: LAB06-REQ-05
+        command: >-
+          az graph query -q "Resources | project id, type, location, owner=tostring(tags.owner), costCenter=tostring(tags.costCenter), dataClass=tostring(tags.dataClass)" -o json
+        positiveCommand: >-
+          az graph query -q "Resources | where tags['purpose'] =~ 'az305-lab' and tags['labId'] =~ 'LAB-06' | summarize count() by tostring(tags.runId)" -o json
+        negativeCommand: >-
+          az graph query -q "Resources | where tags['purpose'] =~ 'az305-lab' and (isempty(tags['owner']) or isempty(tags['costCenter'])) | project id" -o json
+        expected: Resource Graph produces an explainable inventory grouped by ownership and cost dimensions.
+        negative: No in-scope lab resource lacks its required governance metadata.
+        evidence: Sanitized query text, row counts, missing-tag count, scope, and query timestamp.
+        failure: Resource Graph indexing delay or query scope creates an incomplete inventory.
+        retry: Confirm subscription scope and retry after the documented indexing interval without adding duplicate tags.
+        cleanup: The query creates no resource; remove only run-owned artifacts found through exact ownership checks.
+        waf: 'Performance Efficiency: Resource Graph evaluates the portfolio without serial subscription-by-subscription enumeration.'
+    changeRequest: A regulated subsidiary must retain its own administrators and billing while inheriting enterprise security guardrails and keeping resources exclusively in approved European regions; revise hierarchy and tagging decisions.
+    challenge: Defend whether the subsidiary needs a distinct management-group archetype, separate tenant, or only dedicated subscriptions.
+    troubleshooting:
+      - Check the current management-group parent before proposing or performing a subscription move.
+      - Treat resource-group location as metadata and evaluate each resource's actual deployment region.
+      - Account for Resource Graph indexing delay before labeling a tag operation unsuccessful.
+
+  - number: '07'
+    scenario: >-
+      Tailwind Traders can organize Azure resources, but control owners still exchange spreadsheets to prove compliance and retain
+      partner access indefinitely. The organization needs Azure Policy evidence for resource controls and Microsoft Entra ID
+      Governance for entitlement, access review, and privileged-role lifecycle. As the compliance and identity-governance
+      architect, design initiative assignments, exemptions, remediation ownership, access-package catalogs, recurring reviews,
+      and eligible rather than standing privileged access. Work exclusively through GA Az and Microsoft Graph PowerShell
+      inspection surfaces in the lab. The design must explain licensing, delegated permissions, evidence retention, exception
+      expiry, and the boundary between detecting noncompliance and changing a production tenant.
+    role: Compliance and identity governance architect
+    outcome: A continuous compliance and identity lifecycle design with accountable exceptions, review evidence, and least standing privilege.
+    duration: 170 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Replace manual attestations with repeatable technical evidence while ensuring access ends when business need ends.
+    stakeholders:
+      - Compliance control owners
+      - Microsoft Entra administrators
+      - Application sponsors
+      - Internal audit
+    primarySource:
+      title: What is Microsoft Entra ID Governance?
+      url: https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
+    candidates:
+      - Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+      - Azure Policy for resources with manual identity recertification
+      - Third-party GRC attestations with standing directory and Azure assignments
+    selected: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+    checkpoints:
+      - title: Map controls to policy initiatives
+        requirement: LAB07-REQ-01
+        command: >-
+          Get-AzPolicySetDefinition | Where-Object { $_.Properties.Metadata.category -eq $PolicyCategory }
+        positiveCommand: >-
+          Get-AzPolicySetDefinition -Name $InitiativeName | Select-Object Name,ResourceId,Properties
+        negativeCommand: >-
+          Get-AzPolicySetDefinition | Where-Object { $_.Properties.PolicyDefinitions.Count -eq 0 }
+        expected: Each applicable control maps to an initiative definition, effect, evaluation scope, owner, and evidence source.
+        negative: No empty initiative or control without an accountable technical or manual evidence path is accepted.
+        evidence: Initiative ID, control mappings, definition references, effect classes, and owner aliases.
+        failure: A policy alias or effect cannot evaluate the required resource property.
+        retry: Replace unsupported automation with a documented manual control and preserve the coverage gap.
+        cleanup: Definitions are read-only in this checkpoint and are never removed automatically.
+        waf: 'Performance Efficiency: grouped initiatives evaluate shared controls consistently instead of duplicating assignments at every resource.'
+      - title: Evaluate assignments exemptions and compliance state
+        requirement: LAB07-REQ-02
+        command: >-
+          Get-AzPolicyState -Filter "ComplianceState eq 'NonCompliant'" -Top 100
+        positiveCommand: >-
+          Get-AzPolicyAssignment -Name $PolicyAssignmentName -Scope $PolicyScope
+        negativeCommand: >-
+          Get-AzPolicyExemption -Scope $PolicyScope | Where-Object { $_.ExpiresOn -eq $null -or $_.ExpiresOn -lt (Get-Date) }
+        expected: Assignment scope, noncompliant resources, exemption category, expiry, and remediation owner are reviewable independently.
+        negative: No expired or non-expiring waiver is treated as valid compliance.
+        evidence: Sanitized counts by state, assignment ID, exemption ID, expiry, justification, and owner.
+        failure: Compliance data is stale or a managed identity lacks permissions needed for remediation.
+        retry: Wait for evaluation, inspect assignment identity and scope, and keep detection separate from remediation execution.
+        cleanup: Do not delete shared assignments; remove only an exact run-owned exemption after dependency review.
+        waf: 'Reliability: evaluation timestamps and scoped exemptions distinguish stale evidence from an active control failure.'
+      - title: Design entitlement-management catalogs
+        requirement: LAB07-REQ-03
+        command: >-
+          Get-MgEntitlementManagementCatalog -All -Property Id,DisplayName,Description,State,IsExternallyVisible
+        positiveCommand: >-
+          Get-MgEntitlementManagementCatalog -AccessPackageCatalogId $CatalogId -Property Id,DisplayName,State,IsExternallyVisible
+        negativeCommand: >-
+          Get-MgEntitlementManagementCatalog -All | Where-Object { $_.IsExternallyVisible -and $_.State -ne 'published' }
+        expected: A business-owned catalog contains only approved groups, applications, and sites for the partner population.
+        negative: Draft or unowned catalogs are not externally visible.
+        evidence: Synthetic catalog ID, display name, state, external visibility, resource classes, and sponsor.
+        failure: Resources lack an accountable owner or cannot be added with the delegated Graph permission.
+        retry: Resolve resource ownership and least-privileged permissions before designing access packages.
+        cleanup: Never delete a tenant catalog automatically; future changes require explicit tenant acknowledgement and exact IDs.
+        waf: 'Cost Optimization: governed catalogs focus premium identity-governance licensing and administration on populations that require it.'
+      - title: Require recurring access reviews
+        requirement: LAB07-REQ-04
+        command: >-
+          Get-MgIdentityGovernanceAccessReviewDefinition -All -Property Id,DisplayName,Status,Scope,Settings
+        positiveCommand: >-
+          Get-MgIdentityGovernanceAccessReviewDefinition -AccessReviewScheduleDefinitionId $ReviewDefinitionId -Property Id,DisplayName,Status,Settings
+        negativeCommand: >-
+          Get-MgIdentityGovernanceAccessReviewDefinition -All | Where-Object { $_.Status -eq 'InProgress' -and -not $_.Settings.Recurrence }
+        expected: Guest, access-package, and privileged populations have recurring reviews with named reviewers and deny-by-default handling.
+        negative: A one-time review without recurrence is not accepted for continuing partner access.
+        evidence: Synthetic definition ID, scope class, reviewer role, recurrence, fallback behavior, and evidence-retention period.
+        failure: Reviewer selection creates self-review or has no fallback when the sponsor leaves.
+        retry: Assign resource owners or independent reviewers and add an escalation path before scheduling.
+        cleanup: Access-review definitions are not deleted automatically; record the owner and proposed retirement process.
+        waf: 'Operational Excellence: recurring reviews, fallback reviewers, and default decisions make recertification repeatable.'
+      - title: Minimize standing privileged roles
+        requirement: LAB07-REQ-05
+        command: >-
+          Get-MgRoleManagementDirectoryRoleEligibilitySchedule -All -Property Id,PrincipalId,RoleDefinitionId,DirectoryScopeId,ScheduleInfo
+        positiveCommand: >-
+          Get-MgRoleManagementDirectoryRoleAssignmentScheduleInstance -All | Where-Object { $_.AssignmentType -eq 'Activated' }
+        negativeCommand: >-
+          Get-MgRoleManagementDirectoryRoleAssignmentScheduleInstance -All | Where-Object { $_.AssignmentType -eq 'Assigned' -and $_.EndDateTime -eq $null }
+        expected: Administrators are eligible for scoped, time-bound activation with approval and auditable justification where risk warrants it.
+        negative: No unexplained permanent active privileged assignment is accepted.
+        evidence: Synthetic principal label, role, scope, eligibility window, activation controls, and review owner.
+        failure: A break-glass or service dependency cannot use just-in-time activation.
+        retry: Document the exception, constrain scope, monitor use, and set a review and expiry rather than weakening all roles.
+        cleanup: Never remove a live privileged assignment automatically; tenant mutation requires separate approval and recovery planning.
+        waf: 'Security: eligible, scoped, time-bound roles minimize standing privilege while retaining explicit emergency exceptions.'
+    changeRequest: A regulator now requires quarterly evidence that external partner access was reviewed by the resource owner and that every exemption expired within ninety days; revise evidence flow and escalation.
+    challenge: Design the minimum licensing and Graph permission model for auditors to read results without managing access packages or reviews.
+    troubleshooting:
+      - Separate policy evaluation delay from a genuinely noncompliant resource state.
+      - Verify Graph permission, license, and object ownership independently when governance objects are absent.
+      - Detect self-review and missing fallback reviewers before an access review is scheduled.
+
+  - number: '08'
+    scenario: >-
+      Woodgrove Bank is replacing a small line-of-business database hosted on aging virtual machines. The application uses
+      ordinary SQL transactions and predictable daytime demand, can change connection handling, and has no instance-scoped
+      SQL Server dependency. Demand falls close to zero overnight, yet month-end processing needs temporary compute growth.
+      Architects must compare Azure SQL Database, Azure SQL Managed Instance, and Azure Database for PostgreSQL rather than
+      defaulting to the familiar engine. As the data architect, select the relational platform and service tier, define identity
+      and network boundaries, and provide command evidence that the chosen compute model matches compatibility, operations,
+      elasticity, latency, and cost constraints.
+    role: Relational data platform architect
+    outcome: A justified relational service and tier selection with a secure, elastic reference configuration.
+    duration: 155 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Modernize the database with less operational toil and cost while retaining transactional correctness and month-end capacity.
+    stakeholders:
+      - Application engineering
+      - Database administration
+      - Information security
+      - FinOps
+    primarySource:
+      title: Choose a data store in Azure
+      url: https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-stores-getting-started
+    candidates:
+      - Azure SQL Database General Purpose serverless
+      - Azure SQL Managed Instance General Purpose
+      - Azure Database for PostgreSQL Flexible Server General Purpose
+    selected: Azure SQL Database General Purpose serverless
+    checkpoints:
+      - title: Convert workload facts into platform criteria
+        requirement: LAB08-REQ-01
+        command: >-
+          az sql db list-editions --location $Location --query "[?name=='GeneralPurpose'].{edition:name,families:supportedFamilies}" -o json
+        positiveCommand: >-
+          az sql db list-editions --location $Location --query '[?name == ''GeneralPurpose'' && zoneRedundant == `true`].name' -o tsv
+        negativeCommand: >-
+          az sql db list-editions --location $Location --query "[?name=='Web' || name=='Business'].name" -o tsv
+        expected: Compatibility, transaction, scale, latency, maintenance, and cost facts map to supported current service tiers.
+        negative: Retired service tiers or unverified regional capabilities are not used in the decision.
+        evidence: Sanitized workload fact sheet, edition names, supported families, region, and decision criteria.
+        failure: A required feature is instance-scoped or unavailable in the target region and tier.
+        retry: Reclassify the requirement as mandatory and rescore Managed Instance before choosing a larger database tier.
+        cleanup: This regional capability query creates no resource.
+        waf: 'Performance Efficiency: measured workload demand and compatibility select a supported service tier.'
+      - title: Establish a logical server boundary
+        requirement: LAB08-REQ-02
+        command: >-
+          az sql server create --name $SqlServerName --resource-group $ResourceGroup --location $Location --enable-ad-only-auth --external-admin-principal-type Group --external-admin-name $AdminGroupName --external-admin-sid $AdminGroupObjectId --tags purpose=az305-lab labId=LAB-08 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az sql server show --name $SqlServerName --resource-group $ResourceGroup --query "{name:name,location:location,publicNetworkAccess:publicNetworkAccess,identity:identity.type}" -o json
+        negativeCommand: >-
+          az sql server ad-admin list --server-name $SqlServerName --resource-group $ResourceGroup --query "[?administratorType!='ActiveDirectory'].administratorType" -o tsv
+        expected: The logical server has a group-owned Microsoft Entra administrator and no SQL authentication dependency.
+        negative: No personal administrator or legacy SQL administrator is part of the access design.
+        evidence: Server label, region, administrator group label, authentication mode, and resource ID without credentials.
+        failure: Directory object lookup or SQL Entra-only authentication is unavailable to the executing identity.
+        retry: Confirm the group object ID and delegated permission; do not substitute a committed password.
+        cleanup: Delete databases and private endpoints before the run-owned logical server.
+        waf: 'Security: Entra-only authentication and group administration remove personal and password-based control paths.'
+      - title: Configure an elastic serverless database
+        requirement: LAB08-REQ-03
+        command: >-
+          az sql db create --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --edition GeneralPurpose --compute-model Serverless --family Gen5 --capacity 2 --min-capacity 0.5 --auto-pause-delay 60 --zone-redundant false --tags purpose=az305-lab labId=LAB-08 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az sql db show --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --query "{edition:edition,computeModel:computeModel,capacity:sku.capacity,minCapacity:minCapacity,autoPause:autoPauseDelay}" -o json
+        negativeCommand: >-
+          az sql db show --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --query "{edition:edition,serviceObjective:currentServiceObjectiveName}" -o json
+        expected: General Purpose serverless supplies bounded autoscaling and one-hour autopause for the intermittent workload.
+        negative: A continuously provisioned premium or warehouse tier is not selected without a requirement.
+        evidence: Database label, edition, family, maximum and minimum vCores, autopause delay, and zone decision.
+        failure: Features such as geo replicas or sustained minimum activity prevent autopause or serverless use.
+        retry: Measure the blocking dependency and compare provisioned General Purpose without changing database engine.
+        cleanup: Delete the run-owned database before its logical server; do not purge backups.
+        waf: 'Cost Optimization: serverless compute scales down during idle periods within an approved capacity ceiling.'
+      - title: Require private application connectivity
+        requirement: LAB08-REQ-04
+        command: >-
+          az network private-endpoint create --name $PrivateEndpointName --resource-group $ResourceGroup --location $Location --subnet $SubnetId --private-connection-resource-id $SqlServerResourceId --group-id sqlServer --connection-name $PrivateConnectionName --tags purpose=az305-lab labId=LAB-08 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az network private-endpoint-connection list --id $SqlServerResourceId --query "[?properties.privateLinkServiceConnectionState.status=='Approved'].id" -o tsv
+        negativeCommand: >-
+          az sql server firewall-rule list --resource-group $ResourceGroup --server $SqlServerName --query "[?startIpAddress=='0.0.0.0' && endIpAddress=='0.0.0.0'].name" -o tsv
+        expected: The application reaches the logical server through an approved private endpoint and private DNS path.
+        negative: The Azure-services firewall bypass is absent and public access is not the recovery path for DNS errors.
+        evidence: Private endpoint ID, connection status, subnet ID, DNS zone label, and firewall-rule count.
+        failure: Private DNS resolves incorrectly or the endpoint connection remains pending.
+        retry: Correct DNS linkage and approval independently before disabling or reopening any network path.
+        cleanup: Delete private DNS records and endpoint connections before server cleanup; preserve shared zones.
+        waf: 'Reliability: private DNS and endpoint approval are explicit, independently testable application dependencies.'
+      - title: Validate the service-tier decision
+        requirement: LAB08-REQ-05
+        command: >-
+          az sql db show --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --query "{status:status,sku:sku,requestedServiceObjectiveName:requestedServiceObjectiveName,zoneRedundant:zoneRedundant}" -o json
+        positiveCommand: >-
+          az sql db show --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --query "status" -o tsv
+        negativeCommand: >-
+          az sql db list-usages --resource-group $ResourceGroup --server $SqlServerName --name $DatabaseName --query "[?currentValue>=limit].name" -o tsv
+        expected: Provisioned configuration matches the selected candidate and all mandatory compatibility and capacity requirements.
+        negative: No reported database usage dimension is already at its service limit.
+        evidence: SKU, status, objective, capacity bounds, utilization assumptions, and selected-candidate traceability.
+        failure: Observed capacity demand contradicts the serverless cost or latency assumptions.
+        retry: Re-run the decision matrix with measured demand and choose provisioned compute or another tier deliberately.
+        cleanup: Retain only sanitized configuration evidence, then follow database-to-server cleanup order.
+        waf: 'Operational Excellence: configuration and usage evidence tie the deployed database back to the reviewed service decision.'
+    changeRequest: The acquired application reveals a hard dependency on SQL Agent, cross-database transactions, and instance-level collation; revise the platform choice without treating a larger SQL Database tier as compatibility.
+    challenge: Quantify the operational and cost consequences of moving the design to Azure SQL Managed Instance General Purpose.
+    troubleshooting:
+      - Separate engine compatibility requirements from performance symptoms when scoring platform candidates.
+      - Verify regional edition and feature availability before treating a deployment error as invalid syntax.
+      - Diagnose private endpoint approval, DNS, and SQL authorization as independent connection layers.
+
+  - number: '09'
+    scenario: >-
+      Proseware operates a rapidly growing software-as-a-service ledger whose largest tenant is outgrowing a conventional Azure
+      SQL Database service objective. Reads dominate during business hours, write volume climbs predictably, and auditors require
+      encryption, database auditing, and bounded backup retention. The continuity program will define failover and recovery
+      objectives later in Lab 16, so this architecture must focus on scale mechanics and protection controls rather than claim
+      an untested recovery outcome. As the relational scalability architect, compare Hyperscale, elastic pools, and Managed
+      Instance Business Critical, then validate capacity, read scale, transparent data encryption, auditing, and retention using
+      Azure PowerShell.
+    role: Relational scalability and protection architect
+    outcome: A scalable Azure SQL design with auditable encryption and retention controls, clearly separated from continuity promises.
+    duration: 165 minutes
+    difficulty: advanced
+    costClass: elevated
+    businessOutcome: Sustain ledger growth and read demand while meeting data-protection controls without overpromising disaster recovery.
+    stakeholders:
+      - SaaS product engineering
+      - Database reliability engineering
+      - Audit and risk
+      - FinOps
+    primarySource:
+      title: Hyperscale service tier
+      url: https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tier-hyperscale
+    candidates:
+      - Azure SQL Database Hyperscale with named read-scale replicas
+      - Azure SQL Database elastic pool partitioned by tenant
+      - Azure SQL Managed Instance Business Critical
+    selected: Azure SQL Database Hyperscale with named read-scale replicas
+    checkpoints:
+      - title: Choose the scale unit and capacity ceiling
+        requirement: LAB09-REQ-01
+        command: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Select-Object ResourceId,Edition,Capacity,ComputeGeneration
+        positiveCommand: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Select-Object DatabaseName,Edition,CurrentServiceObjectiveName,Capacity,MaxSizeBytes
+        negativeCommand: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.Edition -ne 'Hyperscale' -or $_.Capacity -gt $ApprovedVCoreCeiling }
+        expected: The database uses Hyperscale with an approved initial vCore count and documented vertical and horizontal scale triggers.
+        negative: Capacity does not exceed the FinOps ceiling and no incompatible edition remains selected.
+        evidence: Edition, compute generation, vCores, storage limit, scale trigger, and approval owner.
+        failure: Migration blockers or regional hardware availability prevent the chosen compute generation.
+        retry: Validate compatibility and regional capacity, then select another supported Hyperscale hardware family.
+        cleanup: Return a resized run-owned database to its recorded original objective before deletion or handoff.
+        waf: 'Cost Optimization: an approved initial size and vCore ceiling constrain Hyperscale spend.'
+      - title: Design read workload isolation
+        requirement: LAB09-REQ-02
+        command: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Select-Object ReadScale,HighAvailabilityReplicaCount
+        positiveCommand: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.ReadScale -eq 'Enabled' }
+        negativeCommand: >-
+          Get-AzSqlDatabase -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.HighAvailabilityReplicaCount -gt $ApprovedReplicaCount }
+        expected: Read-intent routing and replica count isolate reporting demand within an approved capacity envelope.
+        negative: Replica count does not grow without a measured read-throughput requirement and cost approval.
+        evidence: ReadScale state, replica count, read-intent connection design, workload split, and capacity owner.
+        failure: The application connection string does not request read intent or requires read-after-write consistency.
+        retry: Classify query consistency needs and route only tolerant read workloads to replicas.
+        cleanup: Restore recorded read-scale and replica settings before disposing of the run-owned database.
+        waf: 'Performance Efficiency: read-intent routing isolates suitable queries and protects primary write capacity.'
+      - title: Verify transparent data encryption and key custody
+        requirement: LAB09-REQ-03
+        command: >-
+          Get-AzSqlDatabaseTransparentDataEncryption -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName
+        positiveCommand: >-
+          Get-AzSqlDatabaseTransparentDataEncryption -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.State -eq 'Enabled' }
+        negativeCommand: >-
+          Get-AzSqlServerKeyVaultKey -ResourceGroupName $ResourceGroup -ServerName $SqlServerName | Where-Object { $_.Type -eq 'AzureKeyVault' -and $_.Uri -eq $null }
+        expected: TDE is enabled and the Microsoft-managed or customer-managed key decision names custody, rotation, and availability dependencies.
+        negative: No customer-managed key reference lacks a resolvable vault key URI.
+        evidence: Encryption state, protector class, non-secret key URI, rotation owner, and dependency rationale.
+        failure: The server identity cannot unwrap a customer-managed key or the vault path is unavailable.
+        retry: Validate managed identity, Key Vault RBAC, key state, and network access independently.
+        cleanup: Restore the original protector before removing a run-owned key association; never purge keys.
+        waf: 'Reliability: key identity, vault reachability, and rotation ownership make the external encryption dependency operable.'
+      - title: Configure tamper-resistant auditing
+        requirement: LAB09-REQ-04
+        command: >-
+          Get-AzSqlDatabaseAudit -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Select-Object BlobStorageTargetState,StorageAccountResourceId,RetentionInDays
+        positiveCommand: >-
+          Get-AzSqlDatabaseAudit -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Select-Object BlobStorageTargetState,StorageAccountResourceId,RetentionInDays
+        negativeCommand: >-
+          Get-AzSqlDatabaseAudit -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.BlobStorageTargetState -ne 'Enabled' -or $_.RetentionInDays -lt 90 }
+        expected: Database audit events route to the approved protected storage target for the mandated ninety days.
+        negative: Auditing is not disabled and retention is not shorter than the control requirement.
+        evidence: Audit state, sanitized storage resource ID, retention days, event categories, and control owner.
+        failure: Storage authorization, firewall rules, or destination immutability prevents audit delivery.
+        retry: Validate identity, network, and storage protection separately before changing the audit control.
+        cleanup: Restore recorded audit settings before removing a run-owned destination; retain required evidence lawfully.
+        waf: 'Security: protected auditing creates accountable evidence of material database activity.'
+      - title: Bound backup retention without claiming recovery
+        requirement: LAB09-REQ-05
+        command: >-
+          Get-AzSqlDatabaseBackupShortTermRetentionPolicy -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName
+        positiveCommand: >-
+          Get-AzSqlDatabaseBackupLongTermRetentionPolicy -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName
+        negativeCommand: >-
+          Get-AzSqlDatabaseBackupShortTermRetentionPolicy -ResourceGroupName $ResourceGroup -ServerName $SqlServerName -DatabaseName $DatabaseName | Where-Object { $_.RetentionDays -gt $ApprovedShortTermRetentionDays }
+        expected: Short- and long-term retention satisfy legal and operational protection requirements with an identified cost owner.
+        negative: Retention is not extended beyond approval and is not presented as proof of tested RPO or restore time.
+        evidence: Retention values, backup storage redundancy choice, legal rationale, cost owner, and Lab 16 dependency.
+        failure: Legal-hold needs conflict with the database-native retention limit or cost envelope.
+        retry: Evaluate immutable archive evidence and revise the protection design without inventing a recovery claim.
+        cleanup: Never purge service-managed backups; remove only run-owned configuration through supported retention behavior.
+        waf: 'Operational Excellence: explicit retention evidence separates configured protection from recovery claims owned by Lab 16.'
+    changeRequest: A new tenant produces unpredictable read bursts but contributes little write load and requires strict cost attribution; revise replica and tenancy decisions without weakening encryption or audit controls.
+    challenge: Compare a named Hyperscale replica with tenant extraction into an elastic pool, including consistency, routing, isolation, and cost evidence.
+    troubleshooting:
+      - Verify application read-intent routing before adding replicas to solve a read bottleneck.
+      - Diagnose TDE state, server identity, vault RBAC, and key reachability as separate layers.
+      - Treat configured backup retention as protection evidence, not proof that recovery objectives were achieved.
+
+  - number: '10'
+    scenario: >-
+      Alpine Ski House is designing a global product-catalog API whose items have optional attributes, localized descriptions,
+      and tenant-specific extensions. Reads arrive by tenant and product category, seasonal traffic is highly variable, and the
+      application needs predictable low-latency access without relational joins. The team is considering Azure Cosmos DB for
+      NoSQL, Azure Table Storage, and storing JSON in Azure SQL Database. As the semi-structured data architect, select a model,
+      partition key, consistency level, indexing policy, throughput mode, and network boundary. Commands must expose the
+      architectural choices and avoid treating global distribution or unlimited scale as automatic consequences of selecting a
+      NoSQL service.
+    role: Semi-structured data architect
+    outcome: A partition-aware Azure Cosmos DB design whose consistency, indexing, throughput, and security decisions match access patterns.
+    duration: 160 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Serve a variable global catalog workload with predictable latency and controlled throughput cost.
+    stakeholders:
+      - Digital commerce engineering
+      - Product data owners
+      - Security architecture
+      - FinOps
+    primarySource:
+      title: Partitioning and horizontal scaling in Azure Cosmos DB
+      url: https://learn.microsoft.com/en-us/azure/cosmos-db/partitioning-overview
+    candidates:
+      - Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+      - Azure Table Storage with denormalized entities and account-level scale
+      - Azure SQL Database with JSON columns and relational indexes
+    selected: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+    checkpoints:
+      - title: Choose API and consistency deliberately
+        requirement: LAB10-REQ-01
+        command: >-
+          az cosmosdb create --name $CosmosAccountName --resource-group $ResourceGroup --locations regionName=$Location failoverPriority=0 isZoneRedundant=false --default-consistency-level Session --enable-free-tier false --tags purpose=az305-lab labId=LAB-10 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query "{kind:kind,consistency:consistencyPolicy.defaultConsistencyLevel,locations:locations[].locationName}" -o json
+        negativeCommand: >-
+          az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query "{consistency:consistencyPolicy.defaultConsistencyLevel,regionCount:length(locations)}" -o json
+        expected: The NoSQL API and Session consistency support session read-your-writes with documented cross-session behavior.
+        negative: Strong consistency is not selected reflexively for a multi-region catalog without its latency and availability trade-off.
+        evidence: Account label, API kind, consistency, region count, application session boundary, and rationale.
+        failure: A required read guarantee cannot be expressed with Session consistency and session-token propagation.
+        retry: Model the exact anomaly, then compare Bounded Staleness or Strong consistency against latency and availability.
+        cleanup: Delete containers and databases before the run-owned account; never treat account deletion as data recovery.
+        waf: 'Reliability: a documented consistency contract makes read behavior predictable across sessions and regions.'
+      - title: Design a high-cardinality partition key
+        requirement: LAB10-REQ-02
+        command: >-
+          $ownedCosmosId = az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query id -o tsv --only-show-errors; if ($ownedCosmosId -ine $CosmosAccountResourceId) { throw 'The supplied Cosmos DB ID is not the exact run-owned account.' }; az cosmosdb sql database create --account-name $CosmosAccountName --resource-group $ResourceGroup --name $CosmosDatabaseName --only-show-errors | Out-Null; az cosmosdb sql container create --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --partition-key-path /tenantId --max-throughput 4000 --only-show-errors
+        positiveCommand: >-
+          az cosmosdb sql container show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "{partitionKey:resource.partitionKey.paths,maxThroughput:resource.offerThroughput}" -o json
+        negativeCommand: >-
+          az cosmosdb sql container show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "resource.partitionKey.paths[?@=='/status']" -o json
+        expected: The tenant-aware key distributes writes, supports dominant reads, and has a mitigation for exceptionally large tenants.
+        negative: A low-cardinality mutable property such as status is not used as the partition key.
+        evidence: Partition-key path, cardinality estimate, largest logical partition estimate, query patterns, and hotspot mitigation.
+        failure: One tenant can exceed logical-partition storage or throughput limits.
+        retry: Evaluate a hierarchical tenant-and-category key or synthetic suffix using measured access patterns.
+        cleanup: Delete the run-owned container before its database and account.
+        waf: 'Performance Efficiency: a high-cardinality access-aligned key distributes storage and request units.'
+      - title: Minimize indexing write amplification
+        requirement: LAB10-REQ-03
+        command: >-
+          $ownedCosmosId = az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query id -o tsv --only-show-errors; if ($ownedCosmosId -ine $CosmosAccountResourceId) { throw 'The supplied Cosmos DB ID is not the exact run-owned account.' }; az cosmosdb sql container update --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --idx @artifacts/indexing-policy.json --only-show-errors
+        positiveCommand: >-
+          az cosmosdb sql container show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "resource.indexingPolicy.{mode:indexingMode,included:includedPaths,excluded:excludedPaths}" -o json
+        negativeCommand: >-
+          az cosmosdb sql container show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "resource.indexingPolicy.includedPaths[?path=='/*']" -o json
+        expected: Indexed paths serve known filters and ordering while large descriptive payloads are explicitly excluded.
+        negative: A blanket include-all policy is not retained when measured writes and unused fields make it wasteful.
+        evidence: Index-policy hash, included and excluded paths, composite indexes, query examples, and RU estimate.
+        failure: A production query requires a path or composite order omitted from the policy.
+        retry: Add the narrowest supported index after evaluating transformation cost and expected RU reduction.
+        cleanup: Restore the original indexing policy before deleting a retained container.
+        waf: 'Operational Excellence: a versioned indexing policy makes query support and write amplification reviewable.'
+      - title: Bound autoscale throughput
+        requirement: LAB10-REQ-04
+        command: >-
+          $ownedCosmosId = az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query id -o tsv --only-show-errors; if ($ownedCosmosId -ine $CosmosAccountResourceId) { throw 'The supplied Cosmos DB ID is not the exact run-owned account.' }; az cosmosdb sql container throughput migrate --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --throughput-type autoscale --only-show-errors
+        positiveCommand: >-
+          az cosmosdb sql container throughput show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "resource.autoscaleSettings.maxThroughput" -o tsv
+        negativeCommand: >-
+          az cosmosdb sql container throughput show --account-name $CosmosAccountName --resource-group $ResourceGroup --database-name $CosmosDatabaseName --name $ContainerName --query "resource.autoscaleSettings.maxThroughput" -o tsv
+        expected: Autoscale absorbs seasonal bursts up to an approved maximum RU/s with alerts for sustained saturation.
+        negative: The configured maximum does not exceed the approved cost envelope.
+        evidence: Throughput mode, maximum RU/s, minimum billing implication, scale trigger, and cost owner.
+        failure: Shared-container tenants cannot be attributed or one partition consumes the full maximum.
+        retry: Measure normalized RU consumption by tenant and reconsider dedicated containers or partitioning before raising the maximum.
+        cleanup: Restore recorded throughput mode only when the service supports reversal; otherwise record the limitation.
+        waf: 'Cost Optimization: a governed autoscale maximum absorbs bursts while bounding throughput spend.'
+      - title: Restrict the account network boundary
+        requirement: LAB10-REQ-05
+        command: >-
+          az network private-endpoint create --name $PrivateEndpointName --resource-group $ResourceGroup --location $Location --subnet $SubnetId --private-connection-resource-id $CosmosAccountResourceId --group-id Sql --connection-name $PrivateConnectionName --tags purpose=az305-lab labId=LAB-10 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az network private-endpoint-connection list --id $CosmosAccountResourceId --query "[?properties.privateLinkServiceConnectionState.status=='Approved'].id" -o tsv --only-show-errors
+        negativeCommand: >-
+          az cosmosdb show --name $CosmosAccountName --resource-group $ResourceGroup --query "{publicNetworkAccess:publicNetworkAccess,ipRuleCount:length(ipRules)}" -o json
+        expected: Application access resolves through an approved private endpoint and the intended private DNS zone.
+        negative: Unrestricted public network access is not retained as a fallback.
+        evidence: Account ID, endpoint ID, group ID, approval state, subnet, and private DNS zone label.
+        failure: The wrong subresource group or DNS zone produces a public endpoint resolution.
+        retry: Validate Sql group selection, private DNS linking, and endpoint approval independently.
+        cleanup: Remove DNS records and the private endpoint before the account; preserve shared network assets.
+        waf: 'Security: private connectivity prevents unrestricted public access to the semi-structured data account.'
+    changeRequest: One enterprise tenant grows to forty percent of all traffic and requires per-tenant cost attribution and data isolation; revise partition and container strategy without breaking other tenants.
+    challenge: Compare hierarchical partition keys, a dedicated container, and a dedicated account for the dominant tenant using scale, blast radius, and cost criteria.
+    troubleshooting:
+      - Diagnose partition skew with normalized RU and logical-partition size before raising throughput.
+      - Validate indexing-path and composite-index needs from real query shapes rather than indexing every field.
+      - Check private endpoint subresource, approval, and private DNS separately when connectivity fails.
+
+  - number: '11'
+    scenario: >-
+      Wide World Importers is consolidating product images, supplier documents, analytics landing files, and a small set of shared
+      departmental documents. The data varies from kilobytes to multi-gigabyte objects, analytics jobs need directory-like
+      organization and fine-grained access, and no requirement calls for SMB semantics on the primary corpus. Teams disagree
+      between flat Blob Storage, Azure Data Lake Storage Gen2, and Azure Files. As the unstructured-data architect, select the
+      service, namespace, authorization, encryption, and private connectivity model. Keep lifecycle economics and detailed
+      durability choices in Lab 12, and do not treat a hierarchical namespace as a substitute for sound partitioning or
+      ownership boundaries.
+    role: Unstructured data platform architect
+    outcome: A secure ADLS Gen2 landing-zone design with deliberate namespace, access, encryption, and network boundaries.
+    duration: 155 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Consolidate unstructured content for governed analytics while preserving scalable access and clear ownership.
+    stakeholders:
+      - Data platform engineering
+      - Supplier integration team
+      - Analytics consumers
+      - Information security
+    primarySource:
+      title: Introduction to Azure Data Lake Storage
+      url: https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction
+    candidates:
+      - ADLS Gen2 on a hierarchical-namespace StorageV2 account
+      - Flat Azure Blob Storage containers with prefix conventions
+      - Azure Files shares mounted by analytics and document clients
+    selected: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+    checkpoints:
+      - title: Match service semantics to access patterns
+        requirement: LAB11-REQ-01
+        command: >-
+          Get-AzStorageAccountNameAvailability -Name $StorageAccountName
+        positiveCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Select-Object StorageAccountName,Kind,PrimaryLocation,EnableHierarchicalNamespace
+        negativeCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.Kind -ne 'StorageV2' -or -not $_.EnableHierarchicalNamespace }
+        expected: Object scale, analytics engines, directory operations, and access patterns justify StorageV2 with hierarchical namespace.
+        negative: SMB semantics or arbitrary relational queries are not claimed for the selected data-lake workload.
+        evidence: Data classes, object-size distribution, protocol needs, namespace choice, and service-fit matrix.
+        failure: A consumer has a mandatory SMB or NFS behavior not supported by the selected endpoint design.
+        retry: Isolate that data class and evaluate Azure Files rather than forcing one service across incompatible protocols.
+        cleanup: This selection checkpoint is read-only; subsequent cleanup follows filesystem-to-account order.
+        waf: 'Performance Efficiency: hierarchical namespace semantics align directory operations with analytics access patterns.'
+      - title: Create a hierarchical namespace boundary
+        requirement: LAB11-REQ-02
+        command: >-
+          New-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName -Location $Location -SkuName Standard_ZRS -Kind StorageV2 -EnableHierarchicalNamespace $true -MinimumTlsVersion TLS1_2 -AllowBlobPublicAccess $false -Tag @{purpose='az305-lab';labId='LAB-11';runId=$RunId;expiresOn=$ExpiresOn}
+        positiveCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.EnableHierarchicalNamespace -and -not $_.AllowBlobPublicAccess }
+        negativeCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.MinimumTlsVersion -ne 'TLS1_2' -or $_.AllowSharedKeyAccess }
+        expected: The account has hierarchical namespace, blocked public blob access, current TLS minimum, and run ownership tags.
+        negative: Public containers and Shared Key dependence are not accepted for workload access.
+        evidence: Account name, kind, namespace state, TLS version, public-access state, SKU, and ownership tags.
+        failure: Hierarchical namespace cannot be enabled after an incompatible account was already created.
+        retry: Stop before data ingestion, create a correctly designed account, and migrate only synthetic lab data.
+        cleanup: Delete run-owned filesystems and private endpoints before deleting the account.
+        waf: 'Reliability: choosing hierarchical namespace before ingestion avoids a disruptive late account migration.'
+      - title: Design filesystem and directory ownership
+        requirement: LAB11-REQ-03
+        command: >-
+          $ownedStorage = Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName; if ($ownedStorage.Id -ine $StorageAccountResourceId) { throw 'The supplied storage account ID is not the exact run-owned account.' }; New-AzStorageContainer -Context $ownedStorage.Context -Name $FileSystemName
+        positiveCommand: >-
+          $storageContext = (Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName).Context; Get-AzDataLakeGen2Item -Context $storageContext -FileSystem $FileSystemName -Path $DirectoryPath | Select-Object Path,IsDirectory,Owner,Group,Permissions
+        negativeCommand: >-
+          $storageContext = (Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName).Context; Get-AzDataLakeGen2ChildItem -Context $storageContext -FileSystem $FileSystemName -Recurse | Where-Object { $_.Permissions -eq 'rwxrwxrwx' }
+        expected: Filesystems represent durable data-product boundaries and directories have group-owned default and access ACLs.
+        negative: World-writable paths and user-owned production directories are absent.
+        evidence: Synthetic filesystem and path names, owner and group labels, normalized ACL summary, and data-product owner.
+        failure: Azure RBAC grants endpoint access but POSIX ACL traversal denies a child path.
+        retry: Trace execute permission on every parent and apply the minimum group ACL with a corresponding default ACL.
+        cleanup: Remove child paths before filesystems and retain no file content as evidence.
+        waf: 'Operational Excellence: data-product filesystem ownership and inherited ACLs create a supportable namespace.'
+      - title: Define encryption and key dependency
+        requirement: LAB11-REQ-04
+        command: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Select-Object Encryption,Identity
+        positiveCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.Encryption.Services.Blob.Enabled }
+        negativeCommand: >-
+          Get-AzStorageAccount -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.Encryption.KeySource -eq 'Microsoft.Keyvault' -and $_.Identity.Type -eq 'None' }
+        expected: Service encryption is enabled and any customer-managed-key choice includes managed identity, vault, rotation, and availability ownership.
+        negative: A customer-managed key is not referenced without an identity capable of unwrapping it.
+        evidence: Encryption services, key-source class, identity type, non-secret vault reference, and rotation owner.
+        failure: The storage identity lacks key permissions or cannot reach the vault network path.
+        retry: Validate identity, Key Vault RBAC, key state, DNS, and network reachability independently.
+        cleanup: Restore the recorded key source before removing any run-owned key association; never purge keys.
+        waf: 'Cost Optimization: customer-managed keys are adopted only when custody requirements justify their lifecycle overhead.'
+      - title: Validate private endpoint access
+        requirement: LAB11-REQ-05
+        command: >-
+          Get-AzPrivateEndpointConnection -PrivateLinkResourceId $StorageAccountResourceId
+        positiveCommand: >-
+          Get-AzPrivateEndpointConnection -PrivateLinkResourceId $StorageAccountResourceId | Where-Object { $_.PrivateLinkServiceConnectionState.Status -eq 'Approved' -and $_.GroupId -contains 'dfs' }
+        negativeCommand: >-
+          Get-AzStorageAccountNetworkRuleSet -ResourceGroupName $ResourceGroup -Name $StorageAccountName | Where-Object { $_.DefaultAction -ne 'Deny' }
+        expected: The dfs private endpoint is approved, private DNS resolves correctly, and the default network action is deny.
+        negative: Public network access is not retained to compensate for a missing dfs endpoint or DNS record.
+        evidence: Endpoint ID, dfs group, approval state, subnet, private DNS label, and network default action.
+        failure: Only a blob endpoint exists, so hierarchical namespace operations resolve or authorize inconsistently.
+        retry: Add and validate the dfs private endpoint and DNS zone without opening public access.
+        cleanup: Remove private DNS records and endpoints before the account; preserve shared network resources.
+        waf: 'Security: denied public access and explicit dfs connectivity constrain unintended data paths.'
+    changeRequest: The legal department introduces collaborative document shares that require native SMB locking and Windows ACL behavior, but analytics ingestion must remain object-native; revise the service boundaries.
+    challenge: Design a dual-service pattern that avoids synchronizing every object while preserving classification and authoritative ownership.
+    troubleshooting:
+      - Distinguish Blob and dfs private endpoints when hierarchical namespace operations fail.
+      - Trace Azure RBAC and every parent-directory ACL independently for authorization failures.
+      - Re-evaluate Azure Files only for workloads with true file-protocol semantics, not familiar folder terminology.
+
+  - number: '12'
+    scenario: >-
+      Fourth Coffee retains media, transaction exports, and audit packages in a general-purpose storage estate. All objects remain
+      in the Hot tier, replication choices differ by project, deletes are difficult to investigate, and monthly cost grows faster
+      than usable data. The business needs an architecture that balances access frequency, retrieval delay, capacity and
+      transaction charges, regional durability, versioning, soft delete, and immutable evidence. Explicit recovery objectives
+      and failover exercises belong to Lab 17; this lab must recommend protection and durability characteristics without
+      claiming recovery readiness. As the storage economics architect, encode lifecycle and protection decisions with Azure CLI
+      and preserve a cost owner for every retention choice.
+    role: Storage economics and durability architect
+    outcome: A cost-aware StorageV2 design with justified redundancy, lifecycle automation, versioning, retention, and immutability.
+    duration: 160 minutes
+    difficulty: advanced
+    costClass: moderate
+    businessOutcome: Lower long-term storage cost while preserving the durability and evidentiary controls each data class requires.
+    stakeholders:
+      - Data owners
+      - Records management
+      - FinOps
+      - Business continuity
+    primarySource:
+      title: Azure Storage redundancy
+      url: https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy
+    candidates:
+      - StorageV2 with GZRS and class-specific lifecycle policies
+      - StorageV2 with LRS and application-managed secondary copies
+      - Premium block blob accounts with uniform online retention
+    selected: StorageV2 with GZRS and class-specific lifecycle policies
+    checkpoints:
+      - title: Classify access and cost drivers
+        requirement: LAB12-REQ-01
+        command: >-
+          az storage account show --name $StorageAccountName --resource-group $ResourceGroup --query "{kind:kind,accessTier:accessTier,sku:sku.name,location:primaryLocation}" -o json
+        positiveCommand: >-
+          az storage blob list --account-name $StorageAccountName --container-name $ContainerName --auth-mode login --query "[].{name:name,tier:properties.blobTier,size:properties.contentLength}" -o json
+        negativeCommand: >-
+          az storage blob list --account-name $StorageAccountName --container-name $ContainerName --auth-mode login --query '[?properties.blobTier == ''Hot'' && properties.contentLength > `1073741824`].name' -o tsv
+        expected: Data classes map age, access frequency, minimum retention, retrieval tolerance, object size, and transaction patterns to cost drivers.
+        negative: Large cold objects are not left in Hot solely because no lifecycle owner was assigned.
+        evidence: Synthetic object distribution, age bands, access assumptions, tier mapping, and monthly cost model.
+        failure: Access telemetry is incomplete or a minimum storage duration makes an early transition uneconomic.
+        retry: Use a conservative age threshold, document uncertainty, and validate costs before broadening the rule.
+        cleanup: Inventory commands create no resources and retained evidence contains names and aggregates only.
+        waf: 'Performance Efficiency: tier mapping respects retrieval latency, rehydration limits, and transaction patterns.'
+      - title: Select regional durability
+        requirement: LAB12-REQ-02
+        command: >-
+          az storage account create --name $StorageAccountName --resource-group $ResourceGroup --location $Location --sku Standard_GZRS --kind StorageV2 --access-tier Hot --https-only true --min-tls-version TLS1_2 --allow-blob-public-access false --tags purpose=az305-lab labId=LAB-12 runId=$RunId expiresOn=$ExpiresOn
+        positiveCommand: >-
+          az storage account show --name $StorageAccountName --resource-group $ResourceGroup --query "{sku:sku.name,primary:primaryLocation,secondary:secondaryLocation,status:statusOfSecondary}" -o json
+        negativeCommand: >-
+          az storage account show --name $StorageAccountName --resource-group $ResourceGroup --query "{sku:sku.name,allowBlobPublicAccess:allowBlobPublicAccess}" -o json
+        expected: GZRS provides zonal durability in the primary region and asynchronous geo-replication to the paired secondary region.
+        negative: Locally redundant storage is not substituted where regional durability is mandatory.
+        evidence: SKU, primary and secondary regions, secondary status, durability rationale, and cost owner.
+        failure: GZRS or the required account feature is unavailable in the selected region.
+        retry: Compare ZRS plus a separate protected copy or an approved GRS design without overstating availability.
+        cleanup: Delete child containers and endpoints before the run-owned account; geo-replicated deletion is not recovery.
+        waf: 'Reliability: GZRS makes zonal and regional durability characteristics explicit.'
+      - title: Automate lifecycle transitions
+        requirement: LAB12-REQ-03
+        command: >-
+          $ownedStorageId = az storage account show --name $StorageAccountName --resource-group $ResourceGroup --query id -o tsv --only-show-errors; if ($ownedStorageId -ine $StorageAccountResourceId) { throw 'The supplied storage account ID is not the exact run-owned account.' }; az storage account management-policy create --account-name $StorageAccountName --resource-group $ResourceGroup --policy @artifacts/lifecycle-policy.json --only-show-errors
+        positiveCommand: >-
+          az storage account management-policy show --account-name $StorageAccountName --resource-group $ResourceGroup --query "policy.rules[?enabled].{name:name,filters:definition.filters,actions:definition.actions}" -o json
+        negativeCommand: >-
+          az storage account management-policy show --account-name $StorageAccountName --resource-group $ResourceGroup --query 'policy.rules[?enabled == `false` || definition.actions.baseBlob.delete.daysAfterModificationGreaterThan < `30`].name' -o tsv
+        expected: Prefix- and tag-scoped rules move objects to cooler tiers and delete only after approved retention.
+        negative: Disabled rules and deletion earlier than the control minimum do not satisfy the design.
+        evidence: Policy hash, enabled rules, filters, transition ages, deletion ages, and exception owner.
+        failure: Overlapping filters apply an unintended earlier transition or deletion to a protected data class.
+        retry: Evaluate rules against synthetic object fixtures and narrow filters before enabling deletion.
+        cleanup: Restore the recorded policy or delete only the run-owned policy before account cleanup.
+        waf: 'Operational Excellence: versioned lifecycle rules replace manual object-by-object retention decisions.'
+      - title: Layer versioning and delete protection
+        requirement: LAB12-REQ-04
+        command: >-
+          $ownedStorageId = az storage account show --name $StorageAccountName --resource-group $ResourceGroup --query id -o tsv --only-show-errors; if ($ownedStorageId -ine $StorageAccountResourceId) { throw 'The supplied storage account ID is not the exact run-owned account.' }; az storage account blob-service-properties update --account-name $StorageAccountName --resource-group $ResourceGroup --enable-versioning true --enable-delete-retention true --delete-retention-days 14 --enable-container-delete-retention true --container-delete-retention-days 14 --only-show-errors
+        positiveCommand: >-
+          az storage account blob-service-properties show --account-name $StorageAccountName --resource-group $ResourceGroup --query "{versioning:isVersioningEnabled,blobDelete:deleteRetentionPolicy,containerDelete:containerDeleteRetentionPolicy}" -o json
+        negativeCommand: >-
+          az storage account blob-service-properties show --account-name $StorageAccountName --resource-group $ResourceGroup --query "{versioning:isVersioningEnabled,blobDeleteEnabled:deleteRetentionPolicy.enabled}" -o json
+        expected: Versioning plus blob and container soft delete protect against routine overwrite and deletion for fourteen days.
+        negative: Soft delete is not described as immutability or a substitute for a separate protected copy.
+        evidence: Versioning state, retention days, data-class applicability, restore responsibility, and incremental cost estimate.
+        failure: Version accumulation materially exceeds the forecast because high-churn objects lack lifecycle handling.
+        retry: Add a reviewed previous-version lifecycle rule without shortening required recovery windows.
+        cleanup: Restore original service properties when safe; never purge retained versions during automated cleanup.
+        waf: 'Cost Optimization: bounded soft-delete and previous-version windows control protection overhead.'
+      - title: Validate immutable evidence boundaries
+        requirement: LAB12-REQ-05
+        command: >-
+          az storage container immutability-policy show --account-name $StorageAccountName --container-name $EvidenceContainerName --auth-mode login -o json
+        positiveCommand: >-
+          az storage container immutability-policy show --account-name $StorageAccountName --container-name $EvidenceContainerName --auth-mode login --query "{state:state,period:immutabilityPeriodSinceCreationInDays,append:allowProtectedAppendWrites}" -o json
+        negativeCommand: >-
+          az storage container legal-hold show --account-name $StorageAccountName --container-name $EvidenceContainerName --auth-mode login --query "tags[?name=='temporary-lab-hold']" -o json
+        expected: The evidence container has a documented time-based immutability mode, retention period, and authorized lock procedure.
+        negative: A synthetic temporary legal hold is not left behind and unlocked configuration is not called immutable evidence.
+        evidence: Container label, policy state, retention days, protected-append choice, lock authority, and cost owner.
+        failure: A locked policy conflicts with deletion, lifecycle, or legal retention expectations.
+        retry: Validate policy behavior on a synthetic unlocked container before any authorized lock action.
+        cleanup: Never automate legal-hold removal, policy unlock, or purge; report residual protected objects for review.
+        waf: 'Security: time-based immutability protects evidence from unauthorized modification or deletion.'
+    changeRequest: Audit packages become subject to a seven-year immutable retention mandate while media can be deleted after eighteen months; revise account, container, lifecycle, and cost boundaries.
+    challenge: Decide whether regulated evidence deserves a separate account and explain how that affects blast radius, administration, billing, and cleanup.
+    troubleshooting:
+      - Evaluate minimum tier duration and retrieval charges before interpreting a lifecycle transition as savings.
+      - Distinguish versioning, soft delete, time-based immutability, and legal holds by the failure each mitigates.
+      - Treat geo-replication durability as distinct from tested failover and recovery objectives.
+
+  - number: '13'
+    scenario: >-
+      Contoso Energy receives hourly files from field partners, change data from operational databases, and telemetry from regional
+      systems. Analysts need governed SQL exploration and curated datasets, while some sources remain on private networks and
+      business owners require lineage from ingestion to published data. The architecture board is comparing Microsoft Fabric,
+      Azure Data Factory with Azure Synapse serverless SQL, and Azure Databricks with orchestration. As the integration and
+      analytics architect, select the platform combination, integration runtime, identity, pipeline, transformation, serving,
+      monitoring, and cost boundaries. The lab uses a safe analogue and must not claim that offline pipeline definitions prove
+      source connectivity, data correctness, or production performance.
+    role: Data integration and analytics architect
+    outcome: A governed integration and analytics architecture with explicit hybrid connectivity, orchestration, serving, and evidence boundaries.
+    duration: 175 minutes
+    difficulty: advanced
+    costClass: elevated
+    businessOutcome: Deliver traceable analytics datasets from cloud and private sources without creating unmanaged credentials or always-on analytics cost.
+    stakeholders:
+      - Data engineering
+      - Analytics consumers
+      - Operational system owners
+      - Data governance council
+    primarySource:
+      title: Azure Data Architecture Guide
+      url: https://learn.microsoft.com/en-us/azure/architecture/data-guide/
+    candidates:
+      - Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+      - Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+      - Azure Databricks with Azure Data Factory orchestration and Delta Lake
+    selected: Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+    checkpoints:
+      - title: Select integration patterns and runtimes
+        requirement: LAB13-REQ-01
+        command: >-
+          Get-AzDataFactoryV2IntegrationRuntime -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName
+        positiveCommand: >-
+          Get-AzDataFactoryV2IntegrationRuntime -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName -Name $IntegrationRuntimeName | Select-Object Name,DataFactoryName,State,Description
+        negativeCommand: >-
+          Get-AzDataFactoryV2IntegrationRuntime -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName | Where-Object { $_.Name -like '*shared*' -and [string]::IsNullOrWhiteSpace($_.Description) }
+        expected: Batch, CDC, event, and private-source needs map to appropriate Azure or self-hosted integration runtime boundaries.
+        negative: An undocumented shared self-hosted runtime is not accepted as a universal connectivity solution.
+        evidence: Source class, integration pattern, runtime type, network boundary, owner, and latency expectation.
+        failure: A source protocol, firewall, or driver is unsupported by the selected runtime.
+        retry: Validate connector and network prerequisites with synthetic endpoints before changing the platform decision.
+        cleanup: Stop and remove only a run-owned synthetic runtime after linked-service dependencies are removed.
+        waf: 'Reliability: explicit runtime ownership and network prerequisites make hybrid data movement recoverable.'
+      - title: Use managed identity for linked services
+        requirement: LAB13-REQ-02
+        command: >-
+          Get-AzDataFactoryV2LinkedService -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName
+        positiveCommand: >-
+          Get-AzDataFactoryV2LinkedService -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName -Name $LinkedServiceName | Select-Object Name,@{Name='ConnectorType';Expression={$_.Properties.GetType().Name}}
+        negativeCommand: >-
+          Get-AzDataFactoryV2LinkedService -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName | Where-Object { $_.Properties.TypeProperties.ConnectionString -or $_.Properties.TypeProperties.AccountKey } | Select-Object -ExpandProperty Name
+        expected: Supported sources and sinks use the data-factory managed identity or a Key Vault reference with least privilege.
+        negative: Inline connection strings, account keys, and embedded credentials are absent from pipeline definitions and evidence.
+        evidence: Linked-service name, connector type, authentication class, Key Vault reference label, and target scope.
+        failure: The connector lacks managed-identity support or the identity cannot traverse a private network boundary.
+        retry: Use a Key Vault-referenced short-lived credential only where required and document rotation and runtime access.
+        cleanup: Delete dependent datasets and pipelines before a run-owned linked service; never export secret properties.
+        waf: 'Security: managed identity and Key Vault references keep credentials out of pipeline definitions and evidence.'
+      - title: Orchestrate idempotent ingestion
+        requirement: LAB13-REQ-03
+        command: >-
+          Get-Content -LiteralPath artifacts/pipeline.json -Raw | ConvertFrom-Json
+        positiveCommand: >-
+          $definition = Get-Content -LiteralPath artifacts/pipeline.json -Raw | ConvertFrom-Json; if ($definition.properties.activities.Count -lt 1) { throw 'The synthetic pipeline has no activity.' }
+        negativeCommand: >-
+          $definition = Get-Content -LiteralPath artifacts/pipeline.json -Raw | ConvertFrom-Json; if (($definition | ConvertTo-Json -Depth 30) -match '(?i)password|accountKey|connectionString') { throw 'The synthetic pipeline contains an inline credential field.' }
+        expected: The pipeline uses watermarks, deterministic paths, retry policy, and quarantine handling to make reruns safe.
+        negative: Empty pipelines and blind append operations without duplicate handling do not satisfy ingestion.
+        evidence: Definition hash, activity graph, retry policy, watermark owner, quarantine path, and synthetic run result.
+        failure: A partial copy advances the watermark or rerun duplicates already committed data.
+        retry: Reconcile the checkpoint table and target partition, then rerun only the idempotent failed slice.
+        cleanup: Stop triggers and delete dependent datasets before deleting a run-owned pipeline.
+        waf: 'Operational Excellence: watermarks, quarantine, and idempotent replay make partial pipeline failure supportable.'
+      - title: Serve governed analytical queries
+        requirement: LAB13-REQ-04
+        command: >-
+          Get-AzSynapseWorkspace -ResourceGroupName $ResourceGroup -Name $SynapseWorkspaceName
+        positiveCommand: >-
+          Get-AzSynapseWorkspace -ResourceGroupName $ResourceGroup -Name $SynapseWorkspaceName | Select-Object Name,ConnectivityEndpoints,DefaultDataLakeStorage
+        negativeCommand: >-
+          Get-AzSynapseSqlPool -ResourceGroupName $ResourceGroup -WorkspaceName $SynapseWorkspaceName | Where-Object { $_.Sku.Name -like 'DW*' -and $_.Status -eq 'Online' -and $_.Tags.costOwner -eq $null }
+        expected: Curated lake data is exposed through governed serverless SQL views, with a dedicated pool considered only for measured isolation or performance needs.
+        negative: An always-on dedicated SQL pool without a cost owner is not introduced by default.
+        evidence: Workspace label, serving mode, curated-zone path, semantic owner, authorization groups, and query-cost controls.
+        failure: File layout, schema drift, or small-file volume makes serverless queries unstable or expensive.
+        retry: Compact and curate files, enforce schema contracts, and measure scanned bytes before provisioning dedicated capacity.
+        cleanup: Remove run-owned SQL artifacts before workspace deletion; retain no source data in evidence.
+        waf: 'Performance Efficiency: curated file layout and serverless views reduce scan amplification for analytical queries.'
+      - title: Validate lineage operations and spend
+        requirement: LAB13-REQ-05
+        command: >-
+          Get-AzDataFactoryV2PipelineRun -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName -PipelineRunId $PipelineRunId
+        positiveCommand: >-
+          Get-AzDataFactoryV2ActivityRun -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName -PipelineRunId $PipelineRunId -RunStartedAfter $RunStartedAfter -RunStartedBefore $RunStartedBefore
+        negativeCommand: >-
+          Get-AzDataFactoryV2PipelineRun -ResourceGroupName $ResourceGroup -DataFactoryName $DataFactoryName -LastUpdatedAfter $RunStartedAfter -LastUpdatedBefore $RunStartedBefore | Where-Object { $_.Status -eq 'InProgress' -and $_.RunEnd -lt (Get-Date).AddHours(-2) }
+        expected: A synthetic run links source slice, pipeline and activity IDs, curated output, status, duration, owner, and estimated service cost.
+        negative: Stalled runs, sensitive input or output payloads, and unowned spend are not treated as successful evidence.
+        evidence: Sanitized run and activity IDs, statuses, durations, row counts, lineage references, and cost estimate.
+        failure: Monitoring records show success while downstream reconciliation detects missing or duplicate rows.
+        retry: Fail the validation, quarantine the slice, and reconcile business counts before republishing.
+        cleanup: Cancel run-owned triggers and remove synthetic outputs in dependency order; preserve sanitized validation only.
+        waf: 'Cost Optimization: correlated run, activity, volume, and duration evidence attributes consumption to an owned pipeline.'
+    changeRequest: Executives mandate near-real-time operational dashboards for one telemetry stream while partner files remain hourly and analysts prefer a unified Microsoft Fabric experience; revise the platform boundary without forcing every flow into streaming.
+    challenge: Compare adding an event-streaming path, adopting Fabric for all workloads, and retaining the selected batch architecture with a separate real-time serving path.
+    troubleshooting:
+      - Diagnose connector support, runtime network reachability, and target authorization as distinct integration failures.
+      - Reconcile source and sink business counts even when orchestration reports a successful activity.
+      - Measure file layout and scanned bytes before solving serverless query cost with dedicated capacity.

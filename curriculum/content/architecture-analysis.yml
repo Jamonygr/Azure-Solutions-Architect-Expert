@@ -1,0 +1,2017 @@
+schemaVersion: 1.0.0
+labs:
+  - number: '00'
+    architectureAnalysis:
+      permissions: No Azure role is needed; the exercise reads local registries and creates state only beneath the copied lab.
+      licensing: No Azure service license is used because every checkpoint is an offline bootstrap-contract exercise.
+      costNotes: The lab has no cloud consumption; only local container compute and repository storage contribute cost.
+      constraints:
+        - The bootstrap must write run state before any command that could mutate an external system.
+        - Design-simulation mode must refuse every Azure or Microsoft Graph request, even when Execute is supplied.
+      assumptions:
+        - The learner runs the copied lab inside the frozen dev container with no cached Azure context.
+        - Synthetic run identifiers are sufficient to exercise validation, recovery, and cleanup behavior.
+      facts:
+        data: Inputs and outputs are synthetic JSON documents; secrets, tokens, tenant identifiers, and live evidence are prohibited.
+        scale: The contract supports one isolated state directory per RunId and all twenty-eight fixed lab identifiers.
+        latency: No service-response target applies; state persistence must complete synchronously before a mutation adapter can be called.
+        availability: Bootstrap availability depends only on the copied lab files and frozen container, not on Azure or network reachability.
+        rto: Recovery from an interrupted preview is immediate after reopening the persisted run document; no cloud recovery objective applies.
+        rpo: The recoverability target is zero lost recorded mutations because every returned identifier must be persisted immediately.
+        budget: Cloud spend is zero and the design does not expose a cost-acknowledgement path that can provision a resource.
+      candidateAnalyses:
+        - name: Shared bootstrap contract with immutable run state and explicit execution gates
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 4, C5: 4}
+          rationale: A state-first contract gives every copied lab the same recoverable boundary while explicit execution and acknowledgement gates remain locally testable.
+          rejectedReason: null
+        - name: Manual operator checklist without persisted state
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 3, C4: 2, C5: 5}
+          rationale: A checklist is inexpensive and readable but cannot prove mutation ordering or recover after a partially completed command.
+          rejectedReason: Its low recovery and operating scores leave no machine-verifiable record of returned identifiers.
+        - name: Central automation account that executes every lab on behalf of learners
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 2, C4: 4, C5: 2}
+          rationale: Central execution can standardize runs, but it introduces a privileged shared identity and a runtime dependency on external automation.
+          rejectedReason: The shared privilege boundary conflicts with isolated self-paced operation and adds an unnecessary control plane.
+        - name: Untracked shell snippets with implicit cached credentials
+          eligible: false
+          disqualifiers:
+            - LAB00-REQ-01 requires explicit validated inputs and durable state before any potential mutation.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 2, C5: 5}
+          rationale: Ad hoc snippets may be quick to type but neither establish ownership nor bind activity to the requested tenant, subscription, and run.
+          rejectedReason: The candidate is ineligible because it violates the state-first mandatory boundary.
+      risks:
+        - risk: A malformed or reused RunId could merge evidence from unrelated exercises.
+          mitigation: Validate the RunId pattern and isolate every artifact beneath the exact run directory before command evaluation.
+        - risk: A future author could add a cloud command to a simulation checkpoint.
+          mitigation: Parse command surfaces in CI and force design-simulation lifecycle scripts to exit before context discovery.
+      waf:
+        reliability: Atomic state replacement and resumable status values preserve an intelligible recovery point after interruption.
+        security: Explicit tenant and subscription inputs eliminate reliance on cached identity context and sensitive fields are recursively rejected.
+        costOptimization: An offline simulation produces the required evidence without standing cloud resources or idle automation accounts.
+        operationalExcellence: One lifecycle contract, fixed exit codes, and schema-validated artifacts make faults reproducible across copied labs.
+        performanceEfficiency: Local registry lookups and bounded JSON files avoid network latency and scale work only with the current run.
+      safeAnalogue: Exercise state creation, injected failure, validation, and idempotent cleanup entirely against synthetic fixtures in the copied lab.
+      adrConsequences:
+        - Every lab carries duplicated lifecycle helpers so portability is favored over reducing repository line count.
+        - Authors must evolve schemas and generators together whenever the public run contract changes.
+      changeExpectedRevision: Prove that the chosen bootstrap remains self-contained on an isolated worker and remove any dependency on tenant discovery.
+      revisedDecision:
+        selectedCandidate: Shared bootstrap contract with immutable run state and explicit execution gates
+        mandatoryRequirementId: LAB00-REQ-01
+        reason: LAB00-REQ-01 now requires isolated-worker reproducibility, which the local registries, persisted state, and pre-context simulation gate satisfy without tenant access.
+        waf:
+          reliability: The isolated worker can resume from the same run artifact after process loss.
+          security: Removing cached-context discovery narrows the trust boundary to explicit inputs and local files.
+          costOptimization: No central worker service or cloud resource must remain allocated between exercises.
+          operationalExcellence: The frozen container becomes the single repeatable execution surface for release validation.
+          performanceEfficiency: Dependency checks execute locally and avoid remote discovery round trips.
+
+  - number: '01'
+    architectureAnalysis:
+      permissions: Reader plus Log Analytics Reader is sufficient for inspection; an authorized deployment separately needs rights to create workspaces, DCRs, DCR associations, and diagnostic settings.
+      licensing: Seven-year searchable or archived retention can incur Log Analytics commitment, retention, archive, and query charges that must be confirmed for each region.
+      costNotes: Cost is driven by regional ingestion volume, interactive-retention days, archive-retention years, cross-workspace queries, and export destinations.
+      constraints:
+        - Security control-plane records must remain in their originating region for seven years.
+        - Application traces have a thirty-day searchable requirement and must not be duplicated into every workspace.
+      assumptions:
+        - Workloads already emit through Azure Monitor Agent and DCR-compatible sources rather than the legacy Log Analytics agent.
+        - Security analysts are permitted to query multiple regional workspaces through a governed workbook scope.
+      facts:
+        data: Security records and application traces have different residency, retention, access, and evidentiary classifications.
+        scale: The estate spans multiple regions and operations teams; measured daily gigabytes per stream remain an owner-supplied sizing input.
+        latency: Security triage needs queryable recent records, while seven-year history may tolerate archive-search rehydration delay.
+        availability: Regional collection must continue if another region or its workspace is unavailable, with queries degrading to the reachable scope.
+        rto: Monitoring restoration time is an operational objective to be agreed with the security owner; the scenario specifies no numerical RTO.
+        rpo: Loss tolerance for control-plane audit records is effectively zero after Azure accepts them into the monitoring pipeline.
+        budget: Differentiated table plans and retention are required to avoid paying interactive rates for seven years of low-access evidence.
+      candidateAnalyses:
+        - name: Regional workspaces with cross-workspace queries and policy-driven routing
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 4, C5: 3}
+          rationale: Region-bound workspaces satisfy residency and isolate collection failure while DCR routing and cross-workspace views preserve a common operating experience.
+          rejectedReason: null
+        - name: Central Log Analytics workspace with DCR-based collection and archive export
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 5, C5: 4}
+          rationale: Centralization simplifies queries and governance, but exporting after ingestion does not cure an in-region processing requirement.
+          rejectedReason: Its simpler operations do not compensate for weaker residency fit and a larger regional failure domain.
+        - name: Dedicated workspace per workload with independent retention and access
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 2, C5: 2}
+          rationale: Workload isolation gives precise access and retention control but multiplies policy, query, commitment-tier, and incident-correlation overhead.
+          rejectedReason: Workspace proliferation raises management and ingestion cost without improving the mandated regional boundary.
+        - name: One global workspace retaining every stream interactively for seven years
+          eligible: false
+          disqualifiers:
+            - LAB01-REQ-01 requires the workspace boundary to remain in the approved data region with intentional retention.
+          scores: {C1: 1, C2: 3, C3: 1, C4: 4, C5: 1}
+          rationale: A global all-hot workspace is operationally familiar but crosses the residency boundary and applies the most expensive retention to low-value traces.
+          rejectedReason: The candidate is disqualified by the regional security-record mandate.
+      risks:
+        - risk: A DCR association omission can create a silent telemetry gap for one workload or region.
+          mitigation: Reconcile source inventory to DCR and DCRA resource IDs and fail the coverage assertion for any unmatched source.
+        - risk: Cross-workspace permissions can expose regulated records to regional operators who need only application telemetry.
+          mitigation: Separate table access and workbook scopes, then test both an allowed query and a denied cross-boundary query.
+      waf:
+        reliability: Independent regional ingestion limits correlated collection loss and makes partial query behavior explicit.
+        security: Workspace and table boundaries enforce residency and least-privilege access for security evidence.
+        costOptimization: Thirty-day trace search and archived audit retention align price with access frequency instead of duplicating streams.
+        operationalExcellence: Policy-assigned DCRs and shared workbooks make coverage drift and incident handoffs observable.
+        performanceEfficiency: Regional ingestion reduces collection paths, while scoped cross-workspace queries avoid scanning unrelated tables.
+      safeAnalogue: null
+      adrConsequences:
+        - Incident queries must name the intended regional workspace set and tolerate an unavailable region.
+        - Platform owners must govern DCR association coverage and table-specific retention as separate controls.
+      changeExpectedRevision: Split control-plane and application streams by DCR and table policy, then recalculate retention cost without cloning either stream.
+      revisedDecision:
+        selectedCandidate: Regional workspaces with cross-workspace queries and policy-driven routing
+        mandatoryRequirementId: LAB01-REQ-05
+        reason: LAB01-REQ-05 makes the seven-year in-region evidence boundary mandatory, so the regional-workspace decision is retained with archive retention for security tables and thirty-day trace search.
+        waf:
+          reliability: Each region keeps collecting its own control-plane stream during a remote workspace outage.
+          security: Long-lived records never traverse the mandated regional boundary.
+          costOptimization: Only the regulated stream receives seven-year retention and application traces remain thirty-day searchable.
+          operationalExcellence: DCR and table-policy evidence reveals exactly which stream follows each rule.
+          performanceEfficiency: Routine trace queries scan short-lived regional tables instead of the seven-year archive.
+
+  - number: '02'
+    architectureAnalysis:
+      permissions: Reader and Monitoring Reader support inspection; changing alert rules, processing rules, action groups, or workbooks requires separately approved monitoring contributor rights.
+      licensing: Metric alerts, log alerts, notification channels, and workbook queries have distinct Azure Monitor charging behavior that owners must validate.
+      costNotes: Evaluate alert-rule evaluation frequency, log-query volume, notification fan-out, and operator time lost to false positives.
+      constraints:
+        - Legitimate promotion traffic can triple for fifteen minutes and cannot be treated automatically as an incident.
+        - Customer-impact signals must continue detecting real payment failure during the same burst window.
+      assumptions:
+        - The service emits request rate, latency, failure rate, dependency health, and deployment annotations with consistent dimensions.
+        - Service owners provide an approved SLO and action-group escalation roster before live alert changes.
+      facts:
+        data: Metric time series, log events, action-group delivery records, and workbook annotations form separate evidence sources.
+        scale: A scheduled promotion creates a threefold fifteen-minute demand spike; absolute baseline request volume is intentionally left for measurement.
+        latency: Detection must be fast enough to precede customer reports, but the exact alert window follows the approved payment-service SLO.
+        availability: Alert routing needs at least one tested receiver path when a team-specific channel or integration is unavailable.
+        rto: The incident-response RTO is not supplied; the exercise measures detection and notification delay for owner approval.
+        rpo: Historical alert and deployment context must cover the investigation window; transactional payment RPO belongs to the workload design.
+        budget: The preferred design trades a small curated alert set for lower query and responder cost than resource-by-resource duplication.
+      candidateAnalyses:
+        - name: Service-centric alerts with shared action groups and curated workbooks
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 5, C5: 4}
+          rationale: SLO-oriented multi-signal alerts correlate customer impact, dependency state, and deployment context while reusable action groups control routing.
+          rejectedReason: null
+        - name: Resource-by-resource static thresholds with team-specific receivers
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 4, C4: 2, C5: 3}
+          rationale: Static resource rules are easy to assign but amplify transient promotion noise and obscure end-to-end payment impact.
+          rejectedReason: It scores poorly on operability because duplicated thresholds and receiver lists drift independently.
+        - name: External monitoring only with Azure telemetry exported downstream
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 3, C5: 2}
+          rationale: External correlation can provide an independent vantage point, although export delay and lost Azure resource context weaken first response.
+          rejectedReason: Export-only detection adds latency and makes Azure-native dependency and deployment context harder to preserve.
+        - name: One fixed latency threshold copied to every resource
+          eligible: false
+          disqualifiers:
+            - LAB02-REQ-03 requires a service-level query and evaluation window grounded in auditable customer impact.
+          scores: {C1: 1, C2: 2, C3: 3, C4: 2, C5: 4}
+          rationale: A copied threshold is cheap to create but cannot distinguish a planned demand surge from a failing dependency.
+          rejectedReason: It is ineligible because it cannot meet the independent alert-quality acceptance criteria.
+      risks:
+        - risk: Dynamic thresholds may learn a promotion spike and suppress a genuine payment-path failure.
+          mitigation: Combine demand-aware baselines with an invariant failed-transaction or availability SLO signal.
+        - risk: A shared action group can become a single notification dependency.
+          mitigation: Configure and exercise independent receiver types, then retain delivery-status evidence for each route.
+      waf:
+        reliability: Multi-signal service alerts detect degraded customer outcomes even when individual resources report healthy.
+        security: Least-privilege action-group maintenance and sanitized alert payloads limit exposure through notification channels.
+        costOptimization: Curated rules reduce duplicate evaluations and the labor cost of unactionable pages.
+        operationalExcellence: Workbooks join SLO, dependency, deployment, and alert evidence into one triage sequence.
+        performanceEfficiency: Demand-relative thresholds absorb planned bursts while invariant failure signals protect sensitivity.
+      safeAnalogue: null
+      adrConsequences:
+        - Service owners must maintain SLO thresholds and promotion annotations as product behavior changes.
+        - Shared receiver governance becomes a platform responsibility with regular delivery tests.
+      changeExpectedRevision: Replace static burst-sensitive thresholds with an SLO and multi-window evaluation that still pages on failed customer transactions.
+      revisedDecision:
+        selectedCandidate: Service-centric alerts with shared action groups and curated workbooks
+        mandatoryRequirementId: LAB02-REQ-03
+        reason: LAB02-REQ-03 requires an auditable customer-impact query, so the promotion case uses demand-relative latency evaluation plus an invariant failure-rate signal rather than a static resource threshold.
+        waf:
+          reliability: Two independent signals prevent a benign traffic surge from hiding a true outage.
+          security: Receiver scopes and payload fields remain unchanged while alert logic evolves.
+          costOptimization: Noise suppression avoids a threefold burst producing redundant pages and log queries.
+          operationalExcellence: Promotion annotations give responders an auditable reason for changed baselines.
+          performanceEfficiency: Multi-window evaluation reflects short bursts without permanently raising the latency threshold.
+
+  - number: '03'
+    architectureAnalysis:
+      permissions: Directory Readers is sufficient for discovery; any External ID, application, federation, or consent change requires a dedicated approved directory role and tenant-change acknowledgement.
+      licensing: External ID monthly active user pricing and workforce Conditional Access or governance entitlements must be assessed separately.
+      costNotes: Compare active external-user volume, federation operations, help-desk recovery load, and custom identity-code maintenance.
+      constraints:
+        - Employees, partners, and customers require distinct trust, lifecycle, and authentication journeys.
+        - Health attributes must remain outside the external directory even when the mobile journey uses native authentication and social federation.
+      assumptions:
+        - The application can resolve a directory subject to a profile held in an authorized health-data store.
+        - New customer identity design uses Microsoft Entra External ID rather than Azure AD B2C.
+      facts:
+        data: Directory profiles contain identifiers and authentication attributes; regulated health facts remain in the application data boundary.
+        scale: Three identity populations have different issuers and lifecycle owners; monthly active customer count remains a sizing input.
+        latency: Interactive sign-in must avoid avoidable cross-system lookups, while profile enrichment occurs after token validation.
+        availability: Workforce and customer sign-in failure domains are separated so an external journey incident does not block employee administration.
+        rto: Identity-service recovery targets inherit the application access objective and require an owner decision before production approval.
+        rpo: Directory object recovery and application-profile recovery are separate; no numerical identity RPO is supplied.
+        budget: Managed federation and External ID usage are compared with the support and security cost of custom credentials.
+      candidateAnalyses:
+        - name: Workforce tenant plus a dedicated External ID external tenant and managed identities
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 4, C5: 4}
+          rationale: Separate workforce and external directories establish clear policy boundaries while managed identities remove application secrets from service access.
+          rejectedReason: null
+        - name: Single workforce tenant for employees partners and customers
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 2, C4: 4, C5: 4}
+          rationale: One tenant simplifies administration but couples customer journeys, workforce controls, and regulated profile exposure.
+          rejectedReason: Its weak trust-boundary score outweighs the operational convenience of one directory.
+        - name: Separate workforce tenants with custom application-managed customer credentials
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 2, C4: 2, C5: 3}
+          rationale: Multiple workforce tenants isolate organizations, but custom password storage transfers authentication defense and recovery to the application team.
+          rejectedReason: Custom customer credentials create avoidable security and lifecycle ownership that managed External ID provides.
+        - name: New Azure AD B2C tenant storing patient profile attributes
+          eligible: false
+          disqualifiers:
+            - LAB03-REQ-03 requires the current External ID service boundary and excludes regulated health attributes from directory profiles.
+          scores: {C1: 1, C2: 3, C3: 1, C4: 2, C5: 3}
+          rationale: This legacy-oriented proposal combines a superseded new-design direction with prohibited health-profile storage.
+          rejectedReason: It is disqualified by both the current-service and data-boundary requirements.
+      risks:
+        - risk: Subject-to-profile mapping could expose health attributes in tokens or directory extension fields.
+          mitigation: Use an opaque subject key and assert that issued claims and external user objects contain no regulated fields.
+        - risk: Social identity-provider failure can prevent a customer cohort from signing in.
+          mitigation: Define provider-specific monitoring, recovery communication, and an approved alternate authentication journey.
+      waf:
+        reliability: Separate populations and provider-aware journeys contain authentication failure to the affected trust path.
+        security: External ID, minimal claims, managed identities, and isolated health profiles reduce credential and data exposure.
+        costOptimization: Monthly-active-user billing and managed federation avoid funding custom password infrastructure.
+        operationalExcellence: Lifecycle owners and journey-specific evidence make failed federation and provisioning easier to diagnose.
+        performanceEfficiency: Tokens carry only authorization context and defer regulated profile retrieval to the workload data tier.
+      safeAnalogue: Inspect synthetic tenant, app, claim, and lifecycle fixtures; do not connect to Graph or create any directory object.
+      adrConsequences:
+        - Application teams must maintain the opaque link between external subjects and health profiles.
+        - Identity operations now own two tenant policy surfaces and provider-specific runbooks.
+      changeExpectedRevision: Add native and social sign-in to the External ID journey while proving that health facts remain application-owned.
+      revisedDecision:
+        selectedCandidate: Workforce tenant plus a dedicated External ID external tenant and managed identities
+        mandatoryRequirementId: LAB03-REQ-03
+        reason: LAB03-REQ-03 makes the native and social authentication journey mandatory, so External ID is retained with opaque subject claims that never write health attributes to the directory.
+        waf:
+          reliability: Provider-specific fallback and monitoring isolate a social federation disruption.
+          security: Opaque subject claims keep regulated data outside the external directory and tokens.
+          costOptimization: Managed native authentication avoids developing and auditing a password service.
+          operationalExcellence: Journey tests separately verify federation, token claims, and profile lookup.
+          performanceEfficiency: Minimal tokens reduce sign-in payload and leave profile queries to the regional application store.
+
+  - number: '04'
+    architectureAnalysis:
+      permissions: Reader, Role Based Access Control Reader, and Azure Connected Machine Resource Administrator discovery rights are separated from any role-assignment or local-access mutation.
+      licensing: Azure Arc-enabled server features and Microsoft Entra governance or PIM licensing must be verified for time-bound delegation.
+      costNotes: Compare governance licensing and Arc management charges with the incident and audit cost of direct standing assignments.
+      constraints:
+        - The managed-service provider may troubleshoot factory servers for ninety days only.
+        - Provider identities cannot change subscription networking or retain permanent local administrator membership.
+      assumptions:
+        - Factory servers are represented through Azure Arc and have an accountable plant owner.
+        - Stable Entra groups can map provider personnel to approved Azure and machine-level duties.
+      facts:
+        data: The design handles directory groups, Azure role assignments, Arc machine scope, eligibility schedules, and access-review evidence.
+        scale: Delegation spans multiple factories and a changing provider roster; exact server and technician counts are inventory inputs.
+        latency: Emergency troubleshooting activation must meet the support response target while approval delay remains measured.
+        availability: A deputy approver and emergency process are required if the primary plant owner is unavailable.
+        rto: The service repair target is owned by plant operations; this lab measures privilege activation and revocation time rather than workload recovery.
+        rpo: Authorization configuration must be reconstructable from exported assignments; application-data RPO is outside this decision.
+        budget: Time-bound group governance adds license cost but reduces recurring manual assignment and quarterly audit effort.
+      candidateAnalyses:
+        - name: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 5, C5: 3}
+          rationale: Stable groups decouple personnel churn from role definitions and Arc-aware local delegation avoids granting subscription networking rights.
+          rejectedReason: null
+        - name: Direct user assignments on individual resources and servers
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 2, C4: 2, C5: 4}
+          rationale: Direct grants can be narrowly scoped but are difficult to expire, review, and reconcile as technicians or factories change.
+          rejectedReason: Assignment sprawl and person-by-person expiry weaken both auditability and operations.
+        - name: Subscription-wide custom roles mirrored into local administrator groups
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 4, C3: 2, C4: 3, C5: 3}
+          rationale: A custom role can describe tasks precisely, yet subscription scope and permanent local mirroring enlarge the blast radius.
+          rejectedReason: The broad scope gives the provider capabilities beyond factory troubleshooting and complicates revocation.
+        - name: Shared Owner account with permanent factory administrator membership
+          eligible: false
+          disqualifiers:
+            - LAB04-REQ-05 requires accountable separation between Azure actions and persistent guest operating-system privilege.
+          scores: {C1: 1, C2: 3, C3: 1, C4: 1, C5: 4}
+          rationale: A shared powerful account may reduce activation steps but destroys individual attribution and least privilege.
+          rejectedReason: The candidate is ineligible because standing shared privilege violates the provider boundary.
+      risks:
+        - risk: Azure role expiry may not remove a separately granted operating-system group membership.
+          mitigation: Reconcile cloud eligibility and Arc machine authorization as two explicit controls with the same end date.
+        - risk: An unavailable approver could delay urgent factory recovery.
+          mitigation: Assign a trained deputy, document emergency activation, and review every emergency use after the incident.
+      waf:
+        reliability: Deputy approval and scoped emergency access preserve support during an identity-owner absence.
+        security: Group eligibility, minimal scopes, and Arc-specific delegation remove standing subscription and local-admin privilege.
+        costOptimization: Reusable groups reduce assignment administration while governance-license cost remains visible.
+        operationalExcellence: Expiry, access reviews, and assignment exports provide one auditable provider offboarding sequence.
+        performanceEfficiency: Stable group evaluation scales with personnel turnover without cloning role definitions per server.
+      safeAnalogue: Evaluate synthetic role assignments, eligibility schedules, and Arc server mappings with local fixtures; issue no Azure or Graph mutation.
+      adrConsequences:
+        - Plant owners accept responsibility for time-bound activation and review decisions.
+        - Local machine authorization must be monitored separately from Azure RBAC because neither proves the other.
+      changeExpectedRevision: Introduce a ninety-day provider group eligibility and prove that network actions and persistent local membership remain absent.
+      revisedDecision:
+        selectedCandidate: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+        mandatoryRequirementId: LAB04-REQ-05
+        reason: LAB04-REQ-05 requires deterministic expiry and prohibited-network evidence, so the selected model adds ninety-day eligible group access plus independent Arc local-membership removal.
+        waf:
+          reliability: A deputy activation route supports incidents without keeping access permanently active.
+          security: Provider permissions end automatically and exclude subscription-network operations.
+          costOptimization: Group-based renewal replaces repeated per-user assignment work.
+          operationalExcellence: Cloud and server revocation assertions expose partial offboarding.
+          performanceEfficiency: One stable role mapping supports the approved server fleet as technicians rotate.
+
+  - number: '05'
+    architectureAnalysis:
+      permissions: Key Vault Reader supports configuration inspection; vault, key, role-assignment, private-endpoint, or Managed HSM changes require separately approved data-plane and control-plane roles.
+      licensing: Premium Key Vault HSM-backed keys and Managed HSM pools use different pricing, administration, and minimum-cost models.
+      costNotes: Include vault transactions, private connectivity, certificate renewal operations, and the continuously allocated Managed HSM pool.
+      constraints:
+        - Payment secrets and keys require private access, RBAC authorization, rotation evidence, and recoverable deletion controls.
+        - The acquired card workload requires a single-tenant FIPS-validated HSM administration boundary separate from application vaults.
+      assumptions:
+        - Applications support managed identity and can rotate key or secret references without embedding credentials.
+        - Security owners approve emergency recovery responsibilities before enabling a production cryptographic boundary.
+      facts:
+        data: The inventory distinguishes secrets, certificates, encryption keys, HSM keys, owners, expiry dates, and recovery settings.
+        scale: Multiple applications share payment-vault operations, while the acquired processor introduces one separately governed HSM workload.
+        latency: Cryptographic calls remain on private network paths; the owner must benchmark workload-specific operation latency before sizing.
+        availability: Vault regional resiliency and application retry behavior are assessed separately from Managed HSM disaster-recovery procedures.
+        rto: Key-access restoration must fit the payment-service recovery objective, but no numerical value is supplied in the scenario.
+        rpo: Cryptographic material must remain recoverable through soft delete and purge protection; rotation history loss is not accepted.
+        budget: Premium vaults suit shared application assets, while the fixed Managed HSM cost is justified only for the acquired regulated boundary.
+      candidateAnalyses:
+        - name: Azure Key Vault Premium with RBAC and private endpoints
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 4, C5: 3}
+          rationale: Premium vaults provide HSM-backed keys, secret and certificate management, managed-identity access, and a bounded private application interface.
+          rejectedReason: null
+        - name: Azure Managed HSM with centralized HSM administration
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 5, C4: 3, C5: 2}
+          rationale: Managed HSM creates a single-tenant cryptographic boundary and distinct administration model, but does not replace general secret and certificate storage.
+          rejectedReason: The initial shared application scope does not justify moving every asset into a costlier key-only HSM pool.
+        - name: Application-owned encrypted configuration in general-purpose storage
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 2, C3: 2, C4: 2, C5: 4}
+          rationale: Application encryption can protect stored values but transfers key hierarchy, rotation, audit, and recovery duties to each workload.
+          rejectedReason: It provides weaker centralized control and creates duplicated key-management code across payment applications.
+        - name: Plaintext secrets in deployment variables and source-controlled parameters
+          eligible: false
+          disqualifiers:
+            - LAB05-REQ-02 requires nonexportable or protected cryptographic material with least-privilege access and rotation evidence.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 2, C5: 5}
+          rationale: Plaintext variables minimize initial setup but expose credentials to build logs, repositories, and broad deployment identities.
+          rejectedReason: The proposal is ineligible because it cannot meet the mandatory secret-protection boundary.
+      risks:
+        - risk: Enabling a private endpoint without validated name resolution can make the vault unreachable to payment workloads.
+          mitigation: Test private DNS resolution and a permitted managed-identity operation before disabling the public path.
+        - risk: Separating Managed HSM administration can leave too few trained recovery officers.
+          mitigation: Assign independent deputies, rehearse quorum and recovery procedures, and monitor administrator-role expiry.
+      waf:
+        reliability: Soft delete, purge protection, tested rotation, and explicit HSM recovery ownership reduce key-loss outages.
+        security: RBAC, private endpoints, managed identities, and a separate single-tenant HSM boundary enforce cryptographic least privilege.
+        costOptimization: Premium vaults remain the economical shared service and Managed HSM is limited to the workload that mandates it.
+        operationalExcellence: Expiry inventory, rotation alerts, and recovery drills turn cryptographic lifecycle into an auditable runbook.
+        performanceEfficiency: Applications reuse managed identities and private endpoints while key-operation throughput is benchmarked per service.
+      safeAnalogue: null
+      adrConsequences:
+        - Platform teams operate shared premium vaults while a separate security team owns Managed HSM administration.
+        - Private DNS and managed-identity readiness become deployment prerequisites for payment services.
+      changeExpectedRevision: Split the acquired processor keys into Managed HSM while retaining Key Vault for application secrets and certificates.
+      revisedDecision:
+        selectedCandidate: Azure Managed HSM with centralized HSM administration
+        mandatoryRequirementId: LAB05-REQ-01
+        reason: LAB05-REQ-01 makes the cryptographic service boundary a mandatory decision, so the acquired processor selects single-tenant Managed HSM while shared secrets and certificates remain in Key Vault.
+        waf:
+          reliability: Dedicated HSM recovery officers and drills become necessary for the acquired workload.
+          security: The processor receives a nonshared HSM trust and administration boundary.
+          costOptimization: Only mandated processor keys incur the continuously allocated HSM cost.
+          operationalExcellence: Two service inventories and escalation paths must be maintained without mixing ownership.
+          performanceEfficiency: Processor key-operation throughput is sized independently from ordinary vault transactions.
+
+  - number: '06'
+    architectureAnalysis:
+      permissions: Management Group Reader, Resource Policy Reader, and Cost Management Reader cover assessment; hierarchy, policy, or tag remediation needs separate governance authorization.
+      licensing: Core management groups, tags, and Azure Policy do not require an add-on license, while Defender, Purview, or governance services referenced by policy may.
+      costNotes: Measure policy remediation activity, shared-platform subscriptions, logging obligations, and chargeback accuracy rather than only resource price.
+      constraints:
+        - Enterprise security guardrails must inherit across a growing subscription estate.
+        - The regulated subsidiary retains its own administrators and billing while resources remain exclusively in approved European regions.
+      assumptions:
+        - Subscriptions can be reorganized under management groups without changing workload resource identifiers.
+        - Ownership, environment, data classification, and cost-center values have accountable authoritative sources.
+      facts:
+        data: The governance model classifies subscriptions and resources by owner, environment, residency, workload, and financial responsibility.
+        scale: Multiple business units and a separately billed subsidiary require hierarchy that grows by archetype instead of reporting-line depth.
+        latency: Policy evaluation is not an application latency control; remediation timing is measured as a governance compliance SLO.
+        availability: Moving or restructuring management groups must not create a window without inherited security and allowed-location controls.
+        rto: Governance restoration means reapplying the versioned hierarchy and assignments; a numerical business-service RTO is not applicable.
+        rpo: Policy, initiative, exemption, and tag definitions require version-controlled recovery with no unrecorded production change.
+        budget: Subscription chargeback stays separate for the subsidiary and shared-platform cost is allocated with governed tags.
+      candidateAnalyses:
+        - name: Archetype-based management groups with workload subscriptions and governed tags
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 3, C5: 4}
+          rationale: Archetypes provide stable inheritance for platform, sandbox, and regulated workloads while subscription ownership preserves billing separation.
+          rejectedReason: null
+        - name: Management groups that mirror the corporate reporting hierarchy
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 4, C4: 2, C5: 3}
+          rationale: A reporting hierarchy appears intuitive, but reorganizations force technical inheritance changes unrelated to workload risk.
+          rejectedReason: Organizational churn weakens policy stability and creates avoidable migration work.
+        - name: One shared subscription with resource groups per application
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 3, C3: 2, C4: 4, C5: 3}
+          rationale: Resource groups simplify the initial estate but cannot provide independent subscription billing and administrative isolation.
+          rejectedReason: The model cannot preserve the subsidiary's required billing and administrator boundary at useful scope.
+        - name: Resource-group-only tagging with no inherited policy boundary
+          eligible: false
+          disqualifiers:
+            - LAB06-REQ-01 requires durable management-group archetypes that can inherit regional and security guardrails.
+          scores: {C1: 1, C2: 2, C3: 2, C4: 2, C5: 4}
+          rationale: Tags without inherited enforcement describe intent but cannot prevent a disallowed deployment or preserve subsidiary separation.
+          rejectedReason: It is disqualified because metadata alone cannot enforce the mandatory hierarchy controls.
+      risks:
+        - risk: Existing assignments at lower scopes can conflict with or dilute new inherited policies.
+          mitigation: Export effective policy state, resolve conflicts in a canary subscription, and move subscriptions only after both assertions pass.
+        - risk: Tag inheritance can overwrite a valid workload-specific financial owner.
+          mitigation: Define precedence per tag key and test append, inherit, and deny behavior against representative resources.
+      waf:
+        reliability: Stable archetypes keep critical guardrails attached through organizational change and subscription growth.
+        security: Inherited security and European-location policies establish a consistent subsidiary boundary.
+        costOptimization: Separate billing plus governed allocation tags makes shared and workload cost attributable.
+        operationalExcellence: Versioned hierarchy, policy, and exemption records expose drift and simplify onboarding.
+        performanceEfficiency: Management-group evaluation scales across subscriptions without duplicating assignments at every resource group.
+      safeAnalogue: Score a synthetic tenant hierarchy and policy-state fixture, including conflicts and exemptions, without moving a subscription or assigning policy.
+      adrConsequences:
+        - Corporate reporting remains a metadata concern rather than controlling the technical hierarchy.
+        - Subsidiary administrators gain subscription autonomy but cannot bypass inherited regional and security policy.
+      changeExpectedRevision: Add a regulated-subsidiary archetype with separate billing and administration beneath immutable European guardrails.
+      revisedDecision:
+        selectedCandidate: Archetype-based management groups with workload subscriptions and governed tags
+        mandatoryRequirementId: LAB06-REQ-01
+        reason: LAB06-REQ-01 requires the hierarchy to follow durable governance archetypes, so the subsidiary receives its own regulated branch beneath inherited European controls without mirroring reporting lines.
+        waf:
+          reliability: The subsidiary keeps the same guardrails when its corporate reporting line changes.
+          security: Approved-region and security initiatives inherit above the subsidiary subscription boundary.
+          costOptimization: Billing remains directly attributable while shared services use governed allocation tags.
+          operationalExcellence: A dedicated archetype documents onboarding, exemption, and administrator responsibilities.
+          performanceEfficiency: One inherited policy set replaces repeated assignments across subsidiary workloads.
+
+  - number: '07'
+    architectureAnalysis:
+      permissions: Resource Policy Reader and directory governance read roles support assessment; policy assignments, access packages, reviews, and lifecycle workflows require separate approved roles and tenant acknowledgement.
+      licensing: Microsoft Entra ID Governance capabilities can require per-user licensing; Azure Policy remediation may also create workload-specific service charges.
+      costNotes: Compare governance licenses and evidence retention with manual attestation labor, exception chasing, and the risk of orphaned access.
+      constraints:
+        - External partner access must be reviewed quarterly by the accountable resource owner.
+        - Every compliance exemption must have an expiry no later than ninety days and an escalation path.
+      assumptions:
+        - Each regulated resource and access package maps to a named business owner.
+        - Evidence can store immutable identifiers and outcomes without retaining personal or secret fields.
+      facts:
+        data: Policy compliance, exemption expiry, access-package assignments, review decisions, and lifecycle events form the evidence chain.
+        scale: External partners and regulated resources change continuously; exact user and assignment counts are inventory-derived.
+        latency: Revocation must follow a denied or expired review promptly, with the acceptable processing window owned by compliance.
+        availability: Reviewer absence needs escalation to a deputy so a quarterly campaign cannot silently auto-approve access.
+        rto: Restoring the evidence workflow is a governance objective; production workload RTO is not governed by this decision.
+        rpo: Review decisions and exemption history must not be lost between quarterly attestations because they support audit reconstruction.
+        budget: Governance automation is justified by recurring campaigns and expiring exceptions rather than a one-time compliance snapshot.
+      candidateAnalyses:
+        - name: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 5, C5: 4}
+          rationale: Policy evaluates resource state while access packages, reviews, and workflows assign accountable identity lifecycle decisions.
+          rejectedReason: null
+        - name: Azure Policy for resources with manual identity recertification
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 2, C5: 4}
+          rationale: Resource compliance is automatable, but spreadsheet recertification leaves expiry, escalation, and revocation weakly coupled.
+          rejectedReason: Manual identity evidence cannot reliably prove quarterly owner action and timely revocation at scale.
+        - name: Third-party GRC attestations with standing directory and Azure assignments
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 3, C3: 2, C4: 3, C5: 2}
+          rationale: GRC attestations centralize reporting but do not themselves remove standing Azure or directory access.
+          rejectedReason: The evidence system remains detached from enforcement and permits reviewed findings to stay active.
+        - name: Permanent partner access with nonexpiring policy exemptions
+          eligible: false
+          disqualifiers:
+            - LAB07-REQ-04 requires time-bounded access and exceptions with independently verified expiry.
+          scores: {C1: 1, C2: 2, C3: 1, C4: 3, C5: 4}
+          rationale: Permanent exceptions reduce renewal work but defeat the stated review, revocation, and expiry outcomes.
+          rejectedReason: The approach is ineligible because neither partner access nor exemptions end deterministically.
+      risks:
+        - risk: A resource owner can ignore a review campaign until access is implicitly retained.
+          mitigation: Configure explicit denial or escalation behavior, named deputies, and an assertion for overdue decisions.
+        - risk: Policy exemptions can be recreated with a new identifier to evade the ninety-day limit.
+          mitigation: Query all effective exemptions by scope and owner, then flag overlapping replacements in the evidence ledger.
+      waf:
+        reliability: Deputy reviewers and deterministic campaign outcomes prevent governance from stalling on one unavailable owner.
+        security: Expiring access packages and exemptions reduce standing privilege and policy bypass duration.
+        costOptimization: Automated recurring evidence replaces manual quarterly reconciliation while license scope remains explicit.
+        operationalExcellence: One trace joins policy state, review decisions, revocation, owners, and escalation timestamps.
+        performanceEfficiency: Campaign scoping and incremental compliance queries avoid reevaluating unrelated identities and resources.
+      safeAnalogue: Use synthetic policy, exemption, access-review, and lifecycle fixtures to prove joins and expiry handling without a Graph or Azure request.
+      adrConsequences:
+        - Resource owners become accountable for both access reviews and policy-exemption business justification.
+        - Identity and Azure governance evidence must be correlated without assuming either system proves the other.
+      changeExpectedRevision: Add quarterly resource-owner campaigns, ninety-day exemption bounds, and overdue escalation to the evidence flow.
+      revisedDecision:
+        selectedCandidate: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+        mandatoryRequirementId: LAB07-REQ-04
+        reason: LAB07-REQ-04 requires recurring owner-attributed access review, so linked Policy and Entra governance evidence adds quarterly partner decisions alongside independently bounded ninety-day exemptions.
+        waf:
+          reliability: Deputy review and escalation prevent a campaign from failing because one owner is absent.
+          security: Access and exemptions terminate automatically when their approved period ends.
+          costOptimization: Targeted licensed governance replaces broad manual evidence collection.
+          operationalExcellence: Correlated timestamps demonstrate review, expiry, revocation, and escalation outcomes.
+          performanceEfficiency: Owner-scoped campaigns limit review volume and focus compliance queries on exceptions.
+
+  - number: '08'
+    architectureAnalysis:
+      permissions: SQL resource read access supports discovery; server, database, networking, or migration changes require a separately approved SQL control-plane role and database permissions.
+      licensing: Azure SQL Database serverless and Azure SQL Managed Instance use different compute, storage, backup, and license-benefit models.
+      costNotes: Compare idle auto-pause savings, month-end compute, managed-instance baseline capacity, backup storage, and migration effort.
+      constraints:
+        - Transactional correctness and month-end processing must be preserved while reducing database administration.
+        - SQL Agent, cross-database transactions, and instance-level collation are mandatory after discovery of the acquired application.
+      assumptions:
+        - Compatibility assessment evidence is available before a target platform is provisioned.
+        - The application owner can schedule migration testing without changing the source database during this lab.
+      facts:
+        data: The source uses relational transactions plus instance-scoped behaviors discovered through compatibility assessment.
+        scale: Ordinary utilization is intermittent but month-end capacity is materially higher; measured vCore and storage values remain source evidence.
+        latency: Transaction response and month-end batch deadlines require benchmarks; the scenario does not invent a millisecond target.
+        availability: Managed service high availability must cover platform faults without confusing backups with service continuity.
+        rto: Cutover rollback and database restoration need owner-approved targets before production migration.
+        rpo: Transaction-loss tolerance is an application requirement to be measured; no numerical value is supplied here.
+        budget: Serverless can reduce idle cost, whereas Managed Instance commits baseline capacity to satisfy instance compatibility.
+      candidateAnalyses:
+        - name: Azure SQL Database General Purpose serverless
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 5, C5: 5}
+          rationale: Before the acquired dependency is known, serverless SQL Database best matches intermittent load and minimizes platform administration.
+          rejectedReason: null
+        - name: Azure SQL Managed Instance General Purpose
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 4, C5: 2}
+          rationale: Managed Instance provides broader instance compatibility and managed operations, with a higher continuously allocated cost floor.
+          rejectedReason: Its initial cost is not justified until SQL Agent and instance-level dependencies become mandatory.
+        - name: Azure Database for PostgreSQL Flexible Server General Purpose
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 4, C3: 4, C4: 3, C5: 3}
+          rationale: PostgreSQL is a capable managed relational target, but engine conversion expands schema, code, testing, and cutover work.
+          rejectedReason: Engine migration risk is unnecessary for an application whose discovered dependencies remain SQL Server specific.
+        - name: Larger Azure SQL Database tier without compatibility remediation
+          eligible: false
+          disqualifiers:
+            - LAB08-REQ-01 requires mandatory engine and instance compatibility to be established before selecting a service tier.
+          scores: {C1: 1, C2: 4, C3: 4, C4: 3, C5: 2}
+          rationale: More database compute changes capacity but does not add missing instance-scoped compatibility features.
+          rejectedReason: The candidate is disqualified because scaling cannot repair a platform compatibility gap.
+      risks:
+        - risk: Compatibility tooling can miss runtime jobs or infrequently used cross-database paths.
+          mitigation: Reconcile assessment output with SQL Agent history, dependency telemetry, and an owner-signed feature inventory.
+        - risk: Managed Instance baseline cost may exceed the modernization budget during idle periods.
+          mitigation: Size from measured month-end and ordinary load, apply license benefits where eligible, and expose the fixed-cost delta.
+      waf:
+        reliability: Managed database high availability and tested rollback protect transactions during platform and migration failure.
+        security: Private access, managed identity where supported, encryption, and least-privilege database roles remain target requirements.
+        costOptimization: Compute model follows measured utilization while compatibility prevents false savings that reappear as remediation work.
+        operationalExcellence: Compatibility findings, cutover gates, and post-migration assertions make the target decision auditable.
+        performanceEfficiency: Month-end benchmarks and workload-specific sizing replace an assumption that a larger tier fixes incompatibility.
+      safeAnalogue: null
+      adrConsequences:
+        - The initial serverless recommendation is superseded for the acquired workload after compatibility evidence changes.
+        - Managed Instance capacity and networking require a longer provisioning and cost-planning lead time.
+      changeExpectedRevision: Re-score compatibility as mandatory and select Managed Instance rather than increasing the SQL Database tier.
+      revisedDecision:
+        selectedCandidate: Azure SQL Managed Instance General Purpose
+        mandatoryRequirementId: LAB08-REQ-05
+        reason: LAB08-REQ-05 makes SQL Agent, cross-database transactions, and instance collation mandatory, so compatibility overrides the initial serverless score and selects Managed Instance.
+        waf:
+          reliability: Managed Instance retains managed high availability while avoiding unsupported job and transaction workarounds.
+          security: The target still requires private networking and least-privilege database administration.
+          costOptimization: Higher baseline compute is accepted and must be offset with measured sizing and eligible license benefits.
+          operationalExcellence: Existing Agent jobs and instance behaviors move into a supported managed operating model.
+          performanceEfficiency: Capacity is benchmarked for both ordinary and month-end demand after compatibility is established.
+
+  - number: '09'
+    architectureAnalysis:
+      permissions: SQL resource read access and database metadata visibility support assessment; replica, audit, key, or scaling changes require separate authorized roles.
+      licensing: Hyperscale replicas, elastic pools, Managed Instance Business Critical replicas, audit storage, and customer-managed keys have different billing implications.
+      costNotes: Attribute primary compute, named replica capacity, storage growth, backup retention, auditing, and tenant-specific burst consumption.
+      constraints:
+        - Ledger growth and read demand must scale without weakening encryption, auditing, or recovery evidence.
+        - One low-write tenant has unpredictable read bursts and requires strict cost attribution.
+      assumptions:
+        - Tenant identity is available in query and telemetry dimensions without exposing ledger content.
+        - Read-only workloads can be routed separately from transactional writes and tolerate documented replica lag.
+      facts:
+        data: An append-heavy relational ledger requires encrypted storage, immutable audit evidence, backups, and tenant-attributed query telemetry.
+        scale: Storage and read concurrency grow independently; one tenant creates bursty reads while contributing little write volume.
+        latency: Transaction writes need predictable primary latency and reporting reads have a separately measured replica-lag tolerance.
+        availability: Read replicas must not be presented as disaster recovery unless failover, data-loss, and connection behavior are validated.
+        rto: Regional recovery remains an owner-approved continuity requirement; the exercise does not assign an unsupported numerical RTO.
+        rpo: Ledger protection requires an explicit recovery window and backup validation even when read replicas are healthy.
+        budget: Dedicated burst capacity is charged to the tenant only when telemetry can separate its replica and query consumption.
+      candidateAnalyses:
+        - name: Azure SQL Database Hyperscale with named read-scale replicas
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 4, C5: 3}
+          rationale: Hyperscale decouples storage growth from named read replicas and supports intentional routing of tenant reporting load.
+          rejectedReason: null
+        - name: Azure SQL Database elastic pool partitioned by tenant
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 3, C3: 4, C4: 3, C5: 4}
+          rationale: Tenant databases in an elastic pool improve chargeback and isolation but add partition routing and cross-tenant reporting work.
+          rejectedReason: Pool partitioning does not match the shared ledger model as cleanly and increases operational fragmentation.
+        - name: Azure SQL Managed Instance Business Critical
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 5, C3: 4, C4: 3, C5: 2}
+          rationale: Business Critical offers strong local availability and readable secondaries, but its fixed instance footprint is costly for variable reads.
+          rejectedReason: The design pays for broad instance capability that the ledger does not require and weakens tenant-specific attribution.
+        - name: One vertically scaled database with no read routing or tenant telemetry
+          eligible: false
+          disqualifiers:
+            - LAB09-REQ-02 requires independent read workload isolation inside an approved and attributable capacity envelope.
+          scores: {C1: 1, C2: 3, C3: 2, C4: 3, C5: 2}
+          rationale: Vertical scaling is simple but couples writes, all tenant reads, and cost into one opaque capacity ceiling.
+          rejectedReason: It is ineligible because it cannot isolate the burst or prove tenant cost attribution.
+      risks:
+        - risk: A named replica can lag and return stale ledger projections during a burst.
+          mitigation: Route only approved read workloads, measure replica delay, and fall back to the primary when freshness exceeds the contract.
+        - risk: Tenant labels in telemetry may be inconsistent and produce disputed chargeback.
+          mitigation: Validate the tenant dimension at ingress and reconcile replica/query usage against the authoritative tenant registry.
+      waf:
+        reliability: Primary writes, read routing, backup recovery, and regional continuity are validated as distinct mechanisms.
+        security: Encryption, auditing, and tenant-aware access remain mandatory across primary and replica endpoints.
+        costOptimization: Named burst capacity and query telemetry make the exceptional tenant's demand attributable.
+        operationalExcellence: Replica lag, routing, protection, and audit evidence share one tenant-labeled operating view.
+        performanceEfficiency: Read replicas absorb unpredictable reporting load without scaling the transactional primary for every burst.
+      safeAnalogue: null
+      adrConsequences:
+        - Applications must classify read paths by freshness and support intentional replica routing.
+        - Finance needs durable tenant dimensions in performance and cost evidence before chargeback is enforceable.
+      changeExpectedRevision: Isolate the bursty tenant's read workload on named capacity and make its consumption visible without changing ledger protection.
+      revisedDecision:
+        selectedCandidate: Azure SQL Database Hyperscale with named read-scale replicas
+        mandatoryRequirementId: LAB09-REQ-02
+        reason: LAB09-REQ-02 makes read-workload isolation mandatory, so Hyperscale is retained with a named replica and routing policy dedicated to the bursty tenant's attributable reads.
+        waf:
+          reliability: Freshness checks keep stale replica results from silently entering ledger workflows.
+          security: The tenant replica preserves encryption, audit, and authorization controls from the primary design.
+          costOptimization: Dedicated replica hours and queries can be assigned to the tenant that creates them.
+          operationalExcellence: Tenant-tagged lag and routing telemetry expose when fallback to the primary occurs.
+          performanceEfficiency: Bursty reads scale independently while write capacity remains sized for actual ledger traffic.
+
+  - number: '10'
+    architectureAnalysis:
+      permissions: Cosmos DB Account Reader and data-plane read permissions support inspection; account, container, throughput, role, or partition changes require separate authorization.
+      licensing: Request-unit throughput, autoscale ceilings, storage, multi-region distribution, backups, and analytical features are independently billed.
+      costNotes: Model request units by tenant and operation, hot-partition amplification, index cost, retained data, and any dedicated container capacity.
+      constraints:
+        - The global catalog needs predictable latency under variable semi-structured demand.
+        - One enterprise tenant reaches forty percent of traffic and requires both cost attribution and data isolation.
+      assumptions:
+        - Catalog requests include stable tenant and item hierarchy fields suitable for a partition strategy.
+        - The application can route an exceptional tenant to a dedicated container without changing public identifiers.
+      facts:
+        data: Semi-structured catalog documents vary by product class and carry tenant, category, item, and lifecycle attributes.
+        scale: One tenant generates forty percent of traffic; item count and request-unit measurements remain workload-supplied sizing inputs.
+        latency: Customer catalog reads need predictable global response, while cross-partition administrative queries may tolerate higher latency.
+        availability: Regional reads and writes require an explicit consistency and failover choice rather than assuming distribution alone guarantees continuity.
+        rto: Regional service recovery follows the selected replication topology; the scenario does not specify a numerical RTO.
+        rpo: Consistency and multi-region write choices determine accepted-write loss behavior and require business approval.
+        budget: Shared autoscale capacity is economical until the dominant tenant's hot partitions and chargeback justify a dedicated boundary.
+      candidateAnalyses:
+        - name: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 4, C5: 5}
+          rationale: Hierarchical partition keys distribute tenant and catalog access while preserving native document evolution and global service capabilities.
+          rejectedReason: null
+        - name: Azure Table Storage with denormalized entities and account-level scale
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 3, C5: 5}
+          rationale: Table Storage offers inexpensive key-value access but provides fewer global consistency and tenant-level throughput controls.
+          rejectedReason: Lower unit cost does not offset weaker global behavior and limited isolation for the dominant tenant.
+        - name: Azure SQL Database with JSON columns and relational indexes
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 4, C4: 4, C5: 2}
+          rationale: SQL JSON supports relational governance, although schema variability and global document scaling require more application and index management.
+          rejectedReason: It couples variable catalog structure to relational capacity and provides a less direct global partition model.
+        - name: One fixed partition containing the entire catalog
+          eligible: false
+          disqualifiers:
+            - LAB10-REQ-02 requires a partition design that distributes load and isolates the dominant tenant.
+          scores: {C1: 1, C2: 2, C3: 2, C4: 3, C5: 2}
+          rationale: A single partition simplifies queries but imposes one throughput and storage bottleneck for every tenant.
+          rejectedReason: The proposal is disqualified because it cannot satisfy scale or tenant-isolation acceptance criteria.
+      risks:
+        - risk: A hierarchical key can still concentrate traffic if the leading tenant segment dominates requests.
+          mitigation: Measure normalized RU consumption and move the exceptional tenant to a dedicated container when the threshold is crossed.
+        - risk: Splitting a tenant can create inconsistent indexing or consistency policies across containers.
+          mitigation: Version a common container baseline and compare policy hashes before routing production traffic.
+      waf:
+        reliability: Explicit region, consistency, and failover behavior protects accepted catalog changes beyond simple data distribution.
+        security: Tenant-aware data roles and an optional dedicated container provide enforceable isolation boundaries.
+        costOptimization: RU attribution and selective tenant separation avoid overprovisioning every catalog partition.
+        operationalExcellence: Hot-partition, throttling, policy, and tenant-routing evidence supports repeatable scale decisions.
+        performanceEfficiency: Hierarchical partitioning aligns common reads with physical distribution and isolates exceptional demand.
+      safeAnalogue: null
+      adrConsequences:
+        - Application routing and telemetry must preserve the tenant partition dimension on every catalog request.
+        - A dedicated enterprise container becomes a governed exception with independently tracked throughput and policy.
+      changeExpectedRevision: Move the dominant tenant behind a dedicated container boundary while keeping hierarchical partitioning for the shared catalog.
+      revisedDecision:
+        selectedCandidate: Azure Cosmos DB for NoSQL with hierarchical tenant-aware partitioning
+        mandatoryRequirementId: LAB10-REQ-02
+        reason: LAB10-REQ-02 requires a partition strategy that mitigates an exceptionally large tenant, so Cosmos DB adds a dedicated container with independently attributable throughput.
+        waf:
+          reliability: Tenant separation contains throttling and partition pressure to the exceptional workload.
+          security: A dedicated data-plane role and container scope strengthen enterprise-tenant isolation.
+          costOptimization: Its provisioned or autoscale RU consumption is measured and charged independently.
+          operationalExcellence: Versioned routing and policy checks prevent shared and dedicated containers from drifting.
+          performanceEfficiency: The shared hierarchy stays balanced while the dominant tenant scales on its own ceiling.
+
+  - number: '11'
+    architectureAnalysis:
+      permissions: Storage account and data-plane read roles support discovery; account, filesystem, share, ACL, network, or lifecycle changes need separately approved rights.
+      licensing: ADLS Gen2 transactions, Azure Files provisioned or used capacity, redundancy, snapshots, and private connectivity use different meters.
+      costNotes: Separate object-ingestion, analytics scan, namespace operation, SMB share, snapshot, egress, and retained-capacity costs.
+      constraints:
+        - Analytics content must remain object-native with hierarchical namespace and governed ownership.
+        - Legal collaboration requires native SMB locking and Windows ACL behavior without converting the analytics lake into a file share.
+      assumptions:
+        - Data producers can classify objects and collaborative documents before ingestion.
+        - Private DNS and network paths can reach both storage service endpoints from authorized clients.
+      facts:
+        data: Analytics objects and collaborative legal documents have different protocols, namespace semantics, ACLs, and lifecycle owners.
+        scale: Object ingestion grows independently from legal share usage; exact terabytes, file counts, and operation rates remain measured inputs.
+        latency: Analytics favors throughput and parallel scans, while interactive SMB users require responsive metadata and locking operations.
+        availability: Redundancy and recovery are selected separately for lake data and legal shares based on their business impact.
+        rto: Service restoration targets are owner decisions per boundary; a single combined storage RTO would hide differing needs.
+        rpo: Lake ingestion replay and file-share snapshots provide distinct recovery points and must be validated independently.
+        budget: Object storage tiers optimize analytical retention while Azure Files cost is limited to content that needs SMB semantics.
+      candidateAnalyses:
+        - name: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 4, C5: 5}
+          rationale: ADLS Gen2 provides object-scale analytics, directory-aware ACLs, and integration with the governed data pipeline.
+          rejectedReason: null
+        - name: Flat Azure Blob Storage containers with prefix conventions
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 3, C4: 3, C5: 5}
+          rationale: Flat blobs are economical for objects, but prefix conventions do not provide the same directory operations and ACL model.
+          rejectedReason: It weakens analytics namespace governance without solving the legal SMB requirement.
+        - name: Azure Files shares mounted by analytics and document clients
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 4, C4: 3, C5: 2}
+          rationale: Azure Files supplies SMB behavior for legal users, yet mounting all analytics through file semantics limits object-native processing.
+          rejectedReason: A universal share imposes the wrong access pattern and cost model on the analytics estate.
+        - name: One unmanaged file server for lake ingestion and legal collaboration
+          eligible: false
+          disqualifiers:
+            - LAB11-REQ-01 requires storage service semantics to match object-native analytics engines and access patterns.
+          scores: {C1: 1, C2: 2, C3: 2, C4: 2, C5: 3}
+          rationale: A conventional server supports SMB but creates a capacity ceiling and no native object analytics boundary.
+          rejectedReason: It is ineligible because the analytics access and scale requirements cannot be met.
+      risks:
+        - risk: Users can copy regulated legal documents into the analytics lake and bypass share controls.
+          mitigation: Classify ingress, deny unapproved paths, and reconcile file manifests across the two ownership boundaries.
+        - risk: Private endpoint or DNS configuration can work for Blob while failing for File.
+          mitigation: Validate each service subresource and protocol independently from every authorized network zone.
+      waf:
+        reliability: Independent redundancy, snapshots, and replay paths match the failure behavior of lake objects and collaborative files.
+        security: ACLs, service-specific private endpoints, and classified ingress keep legal and analytics data in distinct trust boundaries.
+        costOptimization: SMB-priced capacity is reserved for collaboration and lower-cost object tiers serve analytics retention.
+        operationalExcellence: Separate owners, inventories, lifecycle rules, and restore assertions prevent protocol ambiguity.
+        performanceEfficiency: Object-native parallelism serves analytics while Azure Files supplies locking and metadata behavior for users.
+      safeAnalogue: null
+      adrConsequences:
+        - Legal collaboration becomes a separate Azure Files service boundary instead of a directory inside the data lake.
+        - Pipelines need an approved transfer process when legal content is intentionally published for analytics.
+      changeExpectedRevision: Retain ADLS Gen2 for analytics and add an independently governed Azure Files boundary for collaborative legal documents.
+      revisedDecision:
+        selectedCandidate: ADLS Gen2 on a hierarchical-namespace StorageV2 account
+        mandatoryRequirementId: LAB11-REQ-01
+        reason: LAB11-REQ-01 requires service semantics to match access patterns, so ADLS remains the object-analytics decision and Azure Files is added only for native SMB legal collaboration.
+        waf:
+          reliability: Each service uses recovery controls suited to its protocol and business owner.
+          security: Transfers between legal shares and the lake become explicit classified operations.
+          costOptimization: File-service charges apply only to documents that need SMB semantics.
+          operationalExcellence: Separate inventories and restore tests remove ambiguity about ownership and recovery.
+          performanceEfficiency: Analytics avoids SMB overhead and legal users retain native locking behavior.
+
+  - number: '12'
+    architectureAnalysis:
+      permissions: Storage account, blob, lifecycle, and immutability read access supports assessment; changing accounts, policies, locks, or redundancy requires explicit authorization.
+      licensing: Redundancy, access tiers, early-deletion minimums, rehydration, versioning, immutability, and operations each affect StorageV2 billing.
+      costNotes: Price data classes separately by capacity duration, write and read operations, replication, retrieval, rehydration time, and deletion timing.
+      constraints:
+        - Durability and evidence controls differ across active media, recoverable working data, and audit packages.
+        - Audit packages require seven-year immutable retention while media can be deleted after eighteen months.
+      assumptions:
+        - Producers attach a validated data-class value before lifecycle evaluation.
+        - Legal owners approve retention and immutability scope before a locked production policy is applied.
+      facts:
+        data: Media, operational objects, and audit packages have distinct retention, mutability, retrieval, and legal-evidence requirements.
+        scale: Capacity accumulates over years, but per-class growth and retrieval rates remain measured rather than fabricated.
+        latency: Active media needs immediate retrieval; archived audit evidence accepts documented rehydration delay unless legal sets a faster target.
+        availability: GZRS protects against zone and regional failure, while immutability protects evidence from change rather than improving service uptime.
+        rto: Restore or rehydration time is defined per data class; no single numerical RTO applies to the entire account.
+        rpo: GZRS replication and versioning objectives differ from the zero-alteration requirement of locked audit evidence.
+        budget: Lifecycle tiers and deletion at eighteen months limit media cost, while seven-year immutable evidence is isolated for transparent pricing.
+      candidateAnalyses:
+        - name: StorageV2 with GZRS and class-specific lifecycle policies
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 3, C5: 3}
+          rationale: StorageV2 combines regional durability with data-class lifecycle rules and supports a dedicated immutable evidence boundary.
+          rejectedReason: null
+        - name: StorageV2 with LRS and application-managed secondary copies
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 4, C4: 2, C5: 4}
+          rationale: Application copies may lower account pricing but transfer replication ordering, integrity, and failover proof to custom code.
+          rejectedReason: The custom secondary lacks the managed regional durability and auditable behavior required by evidence classes.
+        - name: Premium block blob accounts with uniform online retention
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 4, C4: 4, C5: 1}
+          rationale: Premium online storage provides consistent low latency but overpays for cold long-lived packages and does not express class retention alone.
+          rejectedReason: Uniform premium retention ignores different retrieval and deletion requirements and produces the weakest cost fit.
+        - name: One mutable hot-tier container with manual seven-year deletion reminders
+          eligible: false
+          disqualifiers:
+            - LAB12-REQ-05 requires an enforceable immutable evidence boundary with approved retention and lock procedure.
+          scores: {C1: 1, C2: 3, C3: 1, C4: 2, C5: 2}
+          rationale: Manual reminders and a mutable container cannot prevent premature alteration or deletion of regulated evidence.
+          rejectedReason: The candidate is disqualified because procedural intent is not an immutable storage control.
+      risks:
+        - risk: An incorrect data-class tag can archive active media or leave audit evidence mutable.
+          mitigation: Validate classification at ingestion and run policy simulations against representative objects before activation.
+        - risk: Locked immutability can preserve erroneous or sensitive content for seven years.
+          mitigation: Establish legal approval, narrow the immutable container, and test content validation before final locking.
+      waf:
+        reliability: GZRS and per-class recovery tests protect durability without confusing immutability with availability.
+        security: Locked audit containers, least-privilege data roles, and private access preserve evidence integrity.
+        costOptimization: Lifecycle timing follows actual retention and retrieval behavior for media and audit classes.
+        operationalExcellence: Classification, policy simulation, lock approval, and exception evidence form a controlled lifecycle process.
+        performanceEfficiency: Hot access remains available for active media while cold evidence uses capacity-efficient tiers.
+      safeAnalogue: null
+      adrConsequences:
+        - Audit evidence moves to a separately approved immutable container or account with restricted administration.
+        - Data producers become accountable for correct classification before lifecycle policy can act.
+      changeExpectedRevision: Separate audit and media policy boundaries, lock audit packages for seven years, and delete eligible media after eighteen months.
+      revisedDecision:
+        selectedCandidate: StorageV2 with GZRS and class-specific lifecycle policies
+        mandatoryRequirementId: LAB12-REQ-05
+        reason: LAB12-REQ-05 requires enforceable seven-year immutability and eighteen-month media deletion, so class-specific GZRS boundaries are retained with a separately locked audit container.
+        waf:
+          reliability: Regional redundancy remains independent from the immutable evidence control.
+          security: Audit objects cannot be altered or deleted by ordinary storage administrators.
+          costOptimization: Media exits storage at eighteen months while long-lived evidence uses an intentional tier.
+          operationalExcellence: Lock approval and lifecycle simulation become required release evidence.
+          performanceEfficiency: Active media avoids archive delay and rarely read audit packages avoid premium capacity.
+
+  - number: '13'
+    architectureAnalysis:
+      permissions: Data Factory, storage, Synapse, and Fabric read roles support inventory; pipeline, connection, capacity, or identity changes require separate platform authorization.
+      licensing: Data Factory activities, self-hosted integration runtime, Synapse serverless scans, Fabric capacity, and streaming workloads use distinct meters.
+      costNotes: Attribute orchestration runs, data movement, private runtime hours, scanned terabytes, Fabric capacity time, and streaming retention per flow.
+      constraints:
+        - Cloud and private sources must move without embedded credentials and retain lineage and reconciliation evidence.
+        - One telemetry stream becomes near-real-time while partner files remain hourly and executives prefer a unified Fabric experience.
+      assumptions:
+        - Private sources can reach a hardened self-hosted integration runtime without inbound exposure.
+        - Source owners provide watermark, schema, and reconciliation rules for batch and stream paths.
+      facts:
+        data: Partner files, private operational sources, and telemetry events have different arrival, schema, lineage, and replay semantics.
+        scale: Hourly batch volume and continuous telemetry throughput are measured per source; no unsupported row-rate estimate is introduced.
+        latency: Executive telemetry dashboards require near-real-time updates, while partner-file freshness remains an hourly objective.
+        availability: Failed batch slices must resume from watermarks and streaming checkpoints must recover without duplicating accepted events.
+        rto: Pipeline restoration is set per flow; the scenario gives no single numerical recovery target.
+        rpo: Batch reconciliation and stream checkpoint retention define different tolerated replay windows and require owner approval.
+        budget: Serverless query and scheduled orchestration avoid always-on analytics cost until Fabric capacity is justified by unified use.
+      candidateAnalyses:
+        - name: Azure Data Factory with ADLS Gen2 and Azure Synapse serverless SQL
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 4, C5: 4}
+          rationale: Data Factory handles governed batch and private connectivity while ADLS and serverless SQL minimize idle analytics capacity.
+          rejectedReason: null
+        - name: Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 5, C5: 2}
+          rationale: Fabric provides a unified analytics and dashboard experience, though continuously sized capacity and private-source fit require validation.
+          rejectedReason: The initial periodic workload does not yet justify moving every flow onto a Fabric capacity commitment.
+        - name: Azure Databricks with Azure Data Factory orchestration and Delta Lake
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 3, C5: 2}
+          rationale: Databricks offers powerful stream and lake processing but adds a second engineering and cluster operating model.
+          rejectedReason: Its flexibility exceeds the transformation need and carries more platform ownership for this team.
+        - name: Self-hosted scripts with embedded source passwords and no checkpoints
+          eligible: false
+          disqualifiers:
+            - LAB13-REQ-02 requires managed identity or protected connections plus replayable lineage evidence.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 2, C5: 4}
+          rationale: Handwritten transfers may appear inexpensive but expose credentials and cannot prove restart or reconciliation behavior.
+          rejectedReason: It is ineligible because secretless access and recoverable lineage are mandatory.
+      risks:
+        - risk: Forcing hourly partner files through a streaming design can increase cost and duplicate late-arrival handling.
+          mitigation: Keep a batch contract for files and integrate its curated output into the shared semantic layer.
+        - risk: A Fabric preference can create capacity lock-in before private connectivity and throughput are proven.
+          mitigation: Benchmark the telemetry slice, record capacity utilization, and retain a reversible batch boundary for remaining flows.
+      waf:
+        reliability: Watermarks, checkpoints, replay rules, and reconciliation distinguish recoverable batch and streaming failures.
+        security: Managed identities and hardened private runtimes keep credentials out of pipeline definitions.
+        costOptimization: Batch serverless processing and targeted Fabric capacity align spend with each flow's freshness requirement.
+        operationalExcellence: Lineage, schema, watermark, and reconciliation evidence give operators a common failure model.
+        performanceEfficiency: Near-real-time resources serve only the telemetry stream while hourly files retain efficient batch movement.
+      safeAnalogue: Run local batch and event fixtures through watermark, checkpoint, and reconciliation logic without creating a pipeline or Fabric capacity.
+      adrConsequences:
+        - The analytics platform accepts a hybrid ingestion boundary instead of forcing one cadence onto every source.
+        - Fabric capacity must be justified and monitored specifically for the executive telemetry experience.
+      changeExpectedRevision: Add a Fabric near-real-time path for telemetry while preserving hourly governed batch contracts for partner files.
+      revisedDecision:
+        selectedCandidate: Microsoft Fabric Data Factory with OneLake and Fabric Warehouse
+        mandatoryRequirementId: LAB13-REQ-01
+        reason: LAB13-REQ-01 requires integration patterns to follow cadence and source boundaries, so Fabric serves the near-real-time telemetry experience while partner files remain hourly batch.
+        waf:
+          reliability: Stream checkpoints and batch watermarks retain independent replay behavior.
+          security: Private-source credentials remain protected even as curated output enters OneLake.
+          costOptimization: Capacity is sized for the dashboard stream instead of converting every file flow to continuous processing.
+          operationalExcellence: Shared lineage joins both cadences without erasing their distinct failure states.
+          performanceEfficiency: Telemetry receives low-latency processing and partner files keep throughput-efficient hourly loads.
+
+  - number: '14'
+    architectureAnalysis:
+      permissions: No Azure role is needed for the simulation; production inventory evidence would require read-only access to backup, replication, monitoring, and dependency metadata.
+      licensing: Azure Backup, Site Recovery, replicated data, standby compute, and monitoring costs must be estimated per service tier before approval.
+      costNotes: Price retained recovery points, replication churn, warm capacity, exercise consumption, and operator recovery effort by tier.
+      constraints:
+        - Recovery order must follow service dependencies and residency boundaries rather than treating every workload uniformly.
+        - Tier 1 RTO falls from four hours to forty-five minutes without adding cross-border data replication.
+      assumptions:
+        - Business owners validate tier, maximum outage, data-loss tolerance, and degraded-mode capacity.
+        - A synthetic dependency inventory accurately represents the recovery ordering problem for offline analysis.
+      facts:
+        data: Workload inventory includes dependency, region, residency, backup, replication, owner, RTO, and RPO attributes.
+        scale: Multiple service tiers share identity, network, data, and notification dependencies; exact application count remains an inventory input.
+        latency: Recovery sequencing includes detection, authority, infrastructure, data, application, and business-validation elapsed time.
+        availability: Tier 1 must tolerate the declared failure domain with warm in-boundary capacity; lower tiers may use slower rehydration.
+        rto: Tier 1 changes from four hours to forty-five minutes; other tier targets remain owner-approved inputs.
+        rpo: Data-loss objectives remain service-specific and cross-border replication is forbidden for the affected data.
+        budget: Warm capacity is funded only for Tier 1, with lower tiers retaining backup or staged recovery where their objectives permit.
+      candidateAnalyses:
+        - name: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 4, C5: 4}
+          rationale: Tiering maps recovery technology and retained capacity to business targets while keeping residency and dependency decisions explicit.
+          rejectedReason: null
+        - name: Uniform paired-region warm standby for every business service
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 5, C3: 3, C4: 4, C5: 1}
+          rationale: Uniform standby simplifies a headline recovery pattern but overfunds low tiers and can cross regulated data boundaries.
+          rejectedReason: It spends continuously on workloads that tolerate slower recovery and weakens residency fit.
+        - name: Active-active deployment across two Azure regions with independent factory edges
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 5, C3: 3, C4: 2, C5: 1}
+          rationale: Active-active minimizes outage for suitable services but requires conflict handling, duplicate capacity, and independent edge operations.
+          rejectedReason: Its cost and operational complexity exceed most tiers and do not inherently solve residency constraints.
+        - name: Untested backup-only plan with no dependency or business validation
+          eligible: false
+          disqualifiers:
+            - LAB14-REQ-05 requires measured end-to-end recovery against tier RTO and RPO objectives.
+          scores: {C1: 1, C2: 1, C3: 3, C4: 1, C5: 4}
+          rationale: Backup retention preserves copies but does not prove sequencing, application usability, capacity, or business acceptance.
+          rejectedReason: It is disqualified because restore media alone cannot satisfy end-to-end recovery evidence.
+      risks:
+        - risk: Shared identity or network dependencies can consume most of the forty-five-minute Tier 1 window.
+          mitigation: Place prerequisites in recovery wave zero, assign decision timestamps, and measure their degraded-mode startup independently.
+        - risk: Warm in-boundary capacity can sit idle and be removed during cost optimization.
+          mitigation: Tag the capacity to the Tier 1 objective, include it in exercises, and report its cost as an explicit resilience control.
+      waf:
+        reliability: Dependency waves and tier-specific mechanisms align recovery behavior with validated business targets.
+        security: Residency, privileged recovery identities, and isolated evidence remain explicit in every recovery pattern.
+        costOptimization: Warm capacity is limited to Tier 1 while slower tiers use lower-cost protection that meets their objectives.
+        operationalExcellence: Timed authority, technical, communication, and business gates expose where recovery actually spends time.
+        performanceEfficiency: Degraded-mode sizing reserves enough in-boundary capacity for Tier 1 without duplicating peak capacity everywhere.
+      safeAnalogue: Traverse the synthetic dependency graph, inject failed approvals and services, and calculate recovery waves locally without issuing Azure queries.
+      adrConsequences:
+        - Tier owners must fund and exercise the recovery mechanism attached to their declared objective.
+        - Tier 1 accepts warm capacity cost and residual same-geography correlated risk to preserve residency.
+      changeExpectedRevision: Replace Tier 1 rehydration with in-boundary warm capacity and compress decision and dependency gates to forty-five minutes.
+      revisedDecision:
+        selectedCandidate: Tiered recovery using Azure Backup, Azure Site Recovery, and application-native replication
+        mandatoryRequirementId: LAB14-REQ-05
+        reason: LAB14-REQ-05 now requires a forty-five-minute Tier 1 recovery without cross-border replication, so tiering is retained with warm capacity inside the approved geography and faster orchestration gates.
+        waf:
+          reliability: Warm Tier 1 capacity removes provisioning from the critical recovery path.
+          security: Data remains within the approved geography and emergency identities stay time-bound.
+          costOptimization: Only Tier 1 carries the new standby premium.
+          operationalExcellence: Shorter authority and dependency gates require more frequent timed exercises.
+          performanceEfficiency: Degraded-mode capacity is sized to the recovery load rather than ordinary peak demand.
+
+  - number: '15'
+    architectureAnalysis:
+      permissions: Virtual machine, SKU, and backup read roles support assessment; protection, immutability, restore, failover, or compute changes require separate authorization.
+      licensing: Azure Backup protected instances and storage, Site Recovery protected instances, restored disks, and temporary isolated compute are separately billed.
+      costNotes: Compare zone-spread steady capacity, retained recovery points, cross-region replication where allowed, and short-lived isolated restore resources.
+      constraints:
+        - Clinical coordination must survive a datacenter failure and restore compromised VMs without reconnecting unsafe systems.
+        - A known-clean point must be restorable within two hours even when the latest three recovery points are suspect.
+      assumptions:
+        - Application tiers can run across supported availability zones and have documented startup dependencies.
+        - Security can classify a recovery point and approve release from a quarantined restore network.
+      facts:
+        data: VM inventory includes zones, disks, backup policy, recovery points, dependencies, health, and isolation evidence.
+        scale: Windows and Linux tiers span several machines; exact disk size, change rate, and restore throughput remain measured inputs.
+        latency: Clinical transaction checks and restore transfer time are measured separately from infrastructure boot time.
+        availability: Zone distribution covers a datacenter fault while trusted restore handles destructive or compromised state.
+        rto: Cyber recovery must deliver a known-clean restore within two hours after excluding the latest three points.
+        rpo: The acceptable older recovery point depends on backup frequency and forensic confidence and requires clinical owner approval.
+        budget: A safe analogue avoids permanent second-region compute while retaining zone capacity and temporary isolated restore cost.
+      candidateAnalyses:
+        - name: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 4, C5: 3}
+          rationale: Zone-spread compute covers datacenter loss and Azure Backup supplies protected recovery points for a controlled quarantined restore.
+          rejectedReason: null
+        - name: Availability sets with locally redundant vault protection
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 4, C4: 3, C5: 4}
+          rationale: Availability sets distribute host faults but do not establish a zone boundary and local vault redundancy enlarges regional-loss exposure.
+          rejectedReason: It does not meet the datacenter-failure requirement as directly as zone-spread placement.
+        - name: Azure Site Recovery warm replicas in a secondary region for every virtual machine
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 5, C3: 4, C4: 3, C5: 1}
+          rationale: Warm replicas improve regional recovery but cost more and may replicate compromised state without trusted-point selection.
+          rejectedReason: Uniform replication exceeds the lab budget and does not replace immutable clean recovery points.
+        - name: In-place production restore over the suspected virtual machines
+          eligible: false
+          disqualifiers:
+            - LAB15-REQ-04 requires quarantine, malware inspection, application validation, and release approval before reconnection.
+          scores: {C1: 1, C2: 2, C3: 1, C4: 2, C5: 4}
+          rationale: An in-place restore uses fewer resources but destroys rollback evidence and can reconnect compromise to production.
+          rejectedReason: It is disqualified because a trusted isolated-restore boundary is mandatory.
+      risks:
+        - risk: Excluding three recovery points may leave no point inside the two-hour transfer and validation window.
+          mitigation: Increase protected-point frequency or pre-stage isolated restore capacity after measuring older-point restore duration.
+        - risk: A zone-spread VM set can still depend on a single-zone database or ingress component.
+          mitigation: Map and assert every upstream dependency's failure domain before accepting the compute availability result.
+      waf:
+        reliability: Zone placement, backup coverage, clean-point selection, and dependency-aware startup address distinct failure modes.
+        security: Immutable recovery points and quarantined validation prevent compromised machines from rejoining automatically.
+        costOptimization: Permanent capacity covers zonal availability while secondary-region and restore resources remain risk-based.
+        operationalExcellence: Timed restore, forensic approval, transaction checks, and rollback form one rehearsable recovery record.
+        performanceEfficiency: SKU and degraded-capacity evidence ensure surviving zones and restore hosts can process the clinical load.
+      safeAnalogue: Model recovery-point rejection, isolated-network validation, startup waves, and cleanup with synthetic VM and backup fixtures only.
+      adrConsequences:
+        - Backup policy must retain enough points that rejecting the newest three still leaves a recoverable candidate.
+        - Security approval becomes part of the measured clinical recovery path, not a post-restore note.
+      changeExpectedRevision: Increase protected-point depth and preplan isolated restore capacity so the fourth-newest trusted point can pass within two hours.
+      revisedDecision:
+        selectedCandidate: Zone-spread virtual machine scale sets with Azure Backup and isolated restore
+        mandatoryRequirementId: LAB15-REQ-04
+        reason: LAB15-REQ-04 makes isolated trusted recovery mandatory, so the selected design adds enough immutable points and prevalidated quarantine capacity to reject three suspect copies and finish within two hours.
+        waf:
+          reliability: A deeper point set and measured restore throughput protect the two-hour target.
+          security: Forensic rejection and quarantine remain gates before any production reconnection.
+          costOptimization: Temporary restore capacity is funded instead of a full permanent secondary estate.
+          operationalExcellence: Exercises record selection, transfer, validation, approval, and rollback timestamps.
+          performanceEfficiency: Prevalidated restore sizing avoids discovering disk-throughput limits during a cyber event.
+
+  - number: '16'
+    architectureAnalysis:
+      permissions: SQL account and failover configuration read access supports assessment; database creation, replication, failover, DNS, or connection changes require separate authorization.
+      licensing: Primary and secondary database compute, backup storage, zone redundancy, geo-replication traffic, and test capacity affect price.
+      costNotes: Model both regions, readable secondary use, peak write tier, backup retention, failover exercises, and duplicate application dependencies.
+      constraints:
+        - Committed reservations must remain inside a five-minute data-loss window through regional disruption.
+        - Peak writes double and the reservation API recovery target drops from one hour to fifteen minutes.
+      assumptions:
+        - Applications use a failover-group listener and retry transient connection changes safely.
+        - Dependent identity, network, and secret services have compatible regional recovery behavior.
+      facts:
+        data: Reservation, seat inventory, and payment-state transactions require consistency plus measurable replication and failover evidence.
+        scale: A flash sale doubles peak write volume; baseline transactions, database size, and log rate remain measured inputs.
+        latency: Write latency and replication delay must stay compatible with the five-minute RPO during doubled demand.
+        availability: Zone-redundant primary and secondary databases plus controlled regional failover cover separate fault domains.
+        rto: The end-to-end reservation API recovery target changes from one hour to fifteen minutes.
+        rpo: Accepted reservations may lose no more than five minutes, including replication backlog at peak write rate.
+        budget: Continuous secondary compute is accepted for regional continuity, but duplicate application capacity can use a bounded warm strategy.
+      candidateAnalyses:
+        - name: Azure SQL Database failover group with zone-redundant primary and secondary databases
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 5, C5: 3}
+          rationale: Failover groups provide listener-based application continuity and managed regional database relationships with zonal protection.
+          rejectedReason: null
+        - name: Active geo-replication with application-managed endpoints and failover
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 2, C5: 3}
+          rationale: Active geo-replication supports flexible database relationships but shifts endpoint selection and coordinated failover into application operations.
+          rejectedReason: Application-managed endpoint and database coordination adds recovery steps that threaten the shorter RTO.
+        - name: SQL Server on Azure Virtual Machines with an Always On availability group
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 5, C3: 4, C4: 2, C5: 1}
+          rationale: Always On offers deep control but adds operating systems, clustering, patching, quorum, and listener ownership.
+          rejectedReason: The extra infrastructure operations are unnecessary for the managed-database workload and increase recovery complexity.
+        - name: Backups with manual DNS switching and no continuously replicated secondary
+          eligible: false
+          disqualifiers:
+            - LAB16-REQ-04 requires measured regional replication health to remain inside the five-minute RPO.
+          scores: {C1: 1, C2: 2, C3: 3, C4: 2, C5: 4}
+          rationale: Restore-based recovery lowers standby cost but cannot reliably restore and redirect the API inside the new target.
+          rejectedReason: It is ineligible because backup restore cannot prove the mandatory RTO and RPO combination.
+      risks:
+        - risk: Doubled log generation can increase replication lag beyond the five-minute data-loss window.
+          mitigation: Load-test the peak write profile, monitor lag, and size both databases and network dependencies for the observed rate.
+        - risk: The database listener can fail over while application configuration or secrets remain region-bound.
+          mitigation: Test the API transaction through all regional dependencies and treat any failed business assertion as recovery failure.
+      waf:
+        reliability: Zonal databases, regional replication, listener failover, and application checks cover layered failure domains.
+        security: Encrypted connections, private access, identity, and audit controls apply in both primary and secondary regions.
+        costOptimization: Secondary capacity is a funded RPO/RTO control and can serve approved reads rather than remain entirely idle.
+        operationalExcellence: Lag, failover, DNS, API transaction, and failback timestamps form the recovery scorecard.
+        performanceEfficiency: Both regions are sized and tested for doubled write throughput instead of assuming replication keeps pace.
+      safeAnalogue: Use local topology, lag, connection, and transaction fixtures to simulate failover and failback without invoking a database operation.
+      adrConsequences:
+        - Application connections must use the failover-group listener and bounded retry behavior.
+        - Both regions require capacity and dependency validation at the doubled flash-sale write rate.
+      changeExpectedRevision: Resize both sides and automate the listener-based recovery sequence to demonstrate fifteen-minute API restoration at doubled writes.
+      revisedDecision:
+        selectedCandidate: Azure SQL Database failover group with zone-redundant primary and secondary databases
+        mandatoryRequirementId: LAB16-REQ-05
+        reason: LAB16-REQ-05 now requires fifteen-minute application recovery under doubled writes, so the failover group is retained with peak-tested secondary capacity and prevalidated dependency routing.
+        waf:
+          reliability: Peak-tested lag and application failover protect both the five-minute RPO and fifteen-minute RTO.
+          security: Secondary-region identities, private paths, and auditing are validated before an incident.
+          costOptimization: Higher standby capacity is explicitly tied to the contracted flash-sale continuity target.
+          operationalExcellence: Automated connection and business checks replace manual endpoint edits.
+          performanceEfficiency: Capacity evidence covers doubled writes and the replication work they generate.
+
+  - number: '17'
+    architectureAnalysis:
+      permissions: Cosmos DB and Storage read access supports topology review; region, failover, consistency, container, or replication changes require separately approved data roles.
+      licensing: Multi-region Cosmos DB throughput, multi-write regions, zone redundancy, storage replication, egress, and backups all affect recurring cost.
+      costNotes: Separate document request units and replicated writes from public-media capacity, retrieval, CDN transfer, and restricted-content storage.
+      constraints:
+        - Accepted editorial changes cannot be silently lost during a regional disruption.
+        - Rights-controlled documents cannot replicate outside one country, while public media must remain globally retrievable within two seconds.
+      assumptions:
+        - Editorial applications implement conflict resolution and expose committed-version evidence.
+        - Content classification reliably separates restricted documents from public media before storage.
+      facts:
+        data: Editorial documents, conflict metadata, restricted rights files, and public media require different consistency and replication boundaries.
+        scale: Global consumers heavily read public media while editorial writes are smaller; measured RU and object volume remain owner inputs.
+        latency: Public media retrieval has a two-second target; editorial consistency and conflict handling use a separate latency contract.
+        availability: Public media needs multi-region delivery, while restricted documents remain available only within their approved country boundary.
+        rto: Regional editorial recovery is defined by tested failover; the rights agreement may accept longer restricted-document outage than unlawful replication.
+        rpo: Accepted editorial changes require explicit consistency and conflict rules rather than an assumed zero-loss promise.
+        budget: Global replication is funded for public media and editorial metadata, not automatically for every rights-controlled object.
+      candidateAnalyses:
+        - name: Cosmos DB multi-region writes with zone redundancy plus GZRS Blob Storage
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 4, C5: 5}
+          rationale: Multi-write Cosmos DB supports global editorial availability and explicit conflicts while GZRS protects and serves public objects.
+          rejectedReason: null
+        - name: Single write region with secondary reads plus RA-GRS Blob Storage and manual failover
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 3, C3: 4, C4: 3, C5: 4}
+          rationale: A single writer simplifies consistency and cost, but manual promotion increases outage and accepted-write risk.
+          rejectedReason: Its slower recovery and manual decision path are weaker for active global editorial operations.
+        - name: Independent regional data stacks synchronized by an application-owned event log
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 5, C4: 2, C5: 2}
+          rationale: Independent stacks can enforce geography boundaries precisely but transfer ordering, replay, and conflict correctness to application code.
+          rejectedReason: The custom synchronization burden is not justified before the new restricted-content boundary appears.
+        - name: Replicate every document and media object to all regions
+          eligible: false
+          disqualifiers:
+            - LAB17-REQ-03 requires explicit object-replication boundaries and documented geography behavior.
+          scores: {C1: 1, C2: 5, C3: 1, C4: 4, C5: 2}
+          rationale: Universal replication maximizes reach but ignores content-specific legal boundaries and egress cost.
+          rejectedReason: It is disqualified because restricted-document replication would breach the mandatory rights agreement.
+      risks:
+        - risk: Misclassification can send a restricted document into globally replicated public storage.
+          mitigation: Enforce classification at ingestion and assert account, container, and replication placement before publication.
+        - risk: Multi-write conflict resolution can preserve a technically valid but editorially wrong version.
+          mitigation: Use deterministic domain rules, retain conflicting versions, and require an editor-owned reconciliation workflow.
+      waf:
+        reliability: Multi-region document writes and global public media delivery reduce regional outage while exposing conflict behavior.
+        security: Classification and country-bound storage keep rights-controlled content out of global replication paths.
+        costOptimization: Replication and throughput are allocated by content class instead of copying every object worldwide.
+        operationalExcellence: Conflict, classification, failover, and publication evidence make regional recovery auditable.
+        performanceEfficiency: Public objects use globally distributed retrieval while restricted content avoids unnecessary egress and replicas.
+      safeAnalogue: Simulate classification, conflict resolution, regional unavailability, and public-media timing with synthetic documents and object manifests.
+      adrConsequences:
+        - Storage topology becomes content-class aware and publishing must verify the classification boundary.
+        - Editors own conflict outcomes; infrastructure health alone cannot declare recovery successful.
+      changeExpectedRevision: Split restricted documents into a country-bound stack while retaining global distribution for public media and permitted metadata.
+      revisedDecision:
+        selectedCandidate: Independent regional data stacks synchronized by an application-owned event log
+        mandatoryRequirementId: LAB17-REQ-03
+        reason: LAB17-REQ-03 makes object replication boundaries explicit, so restricted documents move to an independent in-country stack while public media remains globally distributed.
+        waf:
+          reliability: Public media stays multi-region while restricted content accepts the documented in-country failure domain.
+          security: Rights-controlled bytes never enter the cross-region event or blob replication path.
+          costOptimization: Only globally consumable media carries worldwide replication and egress cost.
+          operationalExcellence: Classification and event-contract tests become mandatory publication gates.
+          performanceEfficiency: Edge-served public media meets the two-second target without exporting restricted documents.
+
+  - number: '18'
+    architectureAnalysis:
+      permissions: Compute, Batch, network, and deployment read access supports assessment; resource-group or template deployment requires an approved contributor role and cost acknowledgement.
+      licensing: Azure Batch service orchestration has no separate license, but pool nodes, disks, networking, storage, and control VMs incur usage charges.
+      costNotes: Compare dedicated and low-priority node hours, autoscale ramp time, control-plane VM capacity, storage transfer, and failed-job reruns.
+      constraints:
+        - Simulation batches must complete inside the overnight processing window while orchestration remains available.
+        - Export-controlled jobs cannot use low-priority capacity and the processing window contracts from eight hours to five.
+      assumptions:
+        - The simulation executable can run unattended on an approved Batch node image.
+        - Historical job duration and node-utilization evidence are available for capacity calculation.
+      facts:
+        data: Job packages, input sets, result objects, queue state, node images, and execution logs carry export-control classification.
+        scale: Capacity must process the existing eight-hour workload in five hours using measured task parallelism and node throughput.
+        latency: Queue wait, pool scale-out, task execution, and result upload all consume the five-hour completion window.
+        availability: Zonal control VMs preserve orchestration while Batch task retry and pool replacement handle worker loss.
+        rto: Control-plane recovery must not prevent the five-hour batch deadline; an independent numerical control RTO is owner-defined.
+        rpo: Completed results and accepted task state must survive worker replacement so only incomplete units are rerun.
+        budget: Dedicated export-approved nodes cost more than low-priority capacity and should scale down immediately after the bounded batch.
+      candidateAnalyses:
+        - name: Zonal control virtual machines with an autoscaled Azure Batch pool
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 5, C5: 3}
+          rationale: Batch supplies queue, pool, task, and retry primitives while zonal control VMs protect orchestration and autoscale bounds worker spend.
+          rejectedReason: null
+        - name: Flexible Virtual Machine Scale Sets running custom queue workers
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 4, C4: 2, C5: 3}
+          rationale: Scale sets provide flexible compute and zone placement but require the team to own scheduling, retries, task state, and result coordination.
+          rejectedReason: Custom batch orchestration adds operating risk without a workload feature that requires it.
+        - name: Dedicated zonal virtual machines scheduled for the nightly processing window
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 4, C4: 3, C5: 2}
+          rationale: Scheduled VMs are straightforward but scale in coarse units and retain more manual task-distribution responsibility.
+          rejectedReason: Fixed nightly hosts respond less efficiently to queue variation and require more orchestration work.
+        - name: Analyst desktops running jobs with local result files
+          eligible: false
+          disqualifiers:
+            - LAB18-REQ-01 requires governed compute, image, capacity, data-gravity, and availability characteristics.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 1, C5: 4}
+          rationale: Desktop execution avoids platform setup but cannot prove access boundaries, availability, scale, or durable result ownership.
+          rejectedReason: It is ineligible because local unmanaged execution violates the workload control boundary.
+      risks:
+        - risk: Dedicated node allocation may not ramp quickly enough to meet the shorter window.
+          mitigation: Measure allocation lead time, maintain approved quota headroom, and begin pool scale before the job release gate.
+        - risk: Export-controlled packages can leak through general-purpose storage or logs.
+          mitigation: Use run-owned private storage, minimal sanitized telemetry, approved images, and an explicit data-placement assertion.
+      waf:
+        reliability: Zonal orchestration, durable task state, retry, and worker replacement keep the batch recoverable.
+        security: Dedicated approved nodes, private data paths, and classified package handling enforce export controls.
+        costOptimization: Autoscale removes dedicated workers after the five-hour batch while preserving justified control capacity.
+        operationalExcellence: Queue depth, allocation, task failure, result integrity, and cleanup evidence provide one run ledger.
+        performanceEfficiency: Measured task throughput and parallelism size dedicated capacity for the shortened completion window.
+      safeAnalogue: null
+      adrConsequences:
+        - Quota and approved dedicated-node capacity become release prerequisites for export-controlled runs.
+        - Batch state and result integrity, rather than individual VM uptime, define successful completion.
+      changeExpectedRevision: Remove low-priority nodes and raise the bounded dedicated-pool ceiling using measured throughput for the five-hour deadline.
+      revisedDecision:
+        selectedCandidate: Zonal control virtual machines with an autoscaled Azure Batch pool
+        mandatoryRequirementId: LAB18-REQ-05
+        reason: LAB18-REQ-05 requires a five-hour export-controlled completion window, so Batch remains selected with dedicated-only nodes, quota headroom, and earlier scale-out.
+        waf:
+          reliability: Dedicated quota and pre-scaling reduce allocation uncertainty inside the batch window.
+          security: No export-controlled task can land on low-priority or unapproved worker capacity.
+          costOptimization: Dedicated nodes still scale to zero after results and ownership-checked cleanup complete.
+          operationalExcellence: Allocation and queue timing become explicit go/no-go evidence before job submission.
+          performanceEfficiency: Pool size derives from observed task throughput needed to compress eight hours into five.
+
+  - number: '19'
+    architectureAnalysis:
+      permissions: Container Apps, Functions, container registry, identity, logging, and quota read roles support assessment; environment or workload deployment requires separate contributor rights.
+      licensing: Container Apps workload profiles, executions, Functions plans, GPU capacity, registry, logging, and networking have separate cost behavior.
+      costNotes: Attribute API requests, event-handler executions, worker CPU or GPU seconds, idle profile minimums, images, and observability ingestion.
+      constraints:
+        - Claim intake must absorb catastrophe spikes without permanent cluster overhead or credentials in application images.
+        - GPU scoring is needed for two hours after an event while the intake API must still scale to zero overnight.
+      assumptions:
+        - API, event, and scoring components can be packaged independently and communicate through durable messaging.
+        - GPU quota and regional availability are verified before any production design is approved.
+      facts:
+        data: Claim requests, documents, events, model artifacts, scoring outputs, and audit records have distinct retention and access needs.
+        scale: Catastrophe traffic is burst-driven and GPU demand lasts two hours; measured request rate and model throughput remain sizing inputs.
+        latency: Intake response and asynchronous risk-score completion have separate service objectives and scaling triggers.
+        availability: Durable messaging decouples API availability from temporary scorer or event-handler capacity loss.
+        rto: Worker recovery must preserve queued claims; the scenario does not assign a numerical platform RTO.
+        rpo: Accepted intake events require durable storage before acknowledgment so scale-to-zero does not lose work.
+        budget: Serverless idle behavior is preserved for intake, while scarce GPU capacity is activated only for the catastrophe window.
+      candidateAnalyses:
+        - name: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 4, C4: 4, C5: 3}
+          rationale: Container Apps and Functions provide event-driven independent scaling, managed identity, revision controls, and low idle consumption.
+          rejectedReason: null
+        - name: Azure Kubernetes Service for every application component
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 5, C3: 4, C4: 2, C5: 2}
+          rationale: AKS handles specialized GPU node pools and complex scheduling but imposes cluster capacity and operations on every component.
+          rejectedReason: Universal AKS keeps an operational and cost baseline that conflicts with simple overnight scale-to-zero goals.
+        - name: Azure App Service containers with WebJobs for all background processing
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 4, C4: 4, C5: 3}
+          rationale: App Service is familiar for APIs and background jobs, but GPU specialization and independent event scaling are a weaker fit.
+          rejectedReason: Coupled plan capacity makes the short GPU burst and zero-idle API less efficient.
+        - name: Public webhook functions with embedded registry and queue credentials
+          eligible: false
+          disqualifiers:
+            - LAB19-REQ-04 requires managed identity, runtime secret retrieval, and only approved network paths.
+          scores: {C1: 1, C2: 2, C3: 1, C4: 2, C5: 4}
+          rationale: Direct public functions can start quickly but expose secret rotation and couple acceptance to downstream availability.
+          rejectedReason: It is ineligible because secretless durable intake is mandatory.
+      risks:
+        - risk: GPU capacity may be unavailable when a catastrophe causes the burst.
+          mitigation: Validate quota and regions, define a CPU degraded mode, and queue work without rejecting accepted claims.
+        - risk: Independent scaling can overwhelm a downstream claims database.
+          mitigation: Limit concurrency from observed database capacity and monitor queue age rather than scaling only on item count.
+      waf:
+        reliability: Durable queues and independent component revisions keep intake available while scorers recover or scale.
+        security: Managed identities, private registry access, and secret-free images reduce credential exposure.
+        costOptimization: Intake and handlers scale to zero while GPU capacity exists only for the bounded risk-scoring interval.
+        operationalExcellence: Revision, queue-age, retry, model, and dead-letter evidence separate deployment from workload failure.
+        performanceEfficiency: Each component scales on its own demand signal and specialized GPU workers do not dictate API capacity.
+      safeAnalogue: Replay synthetic claims through local queue and scaling fixtures, including GPU-unavailable and downstream-throttle cases, without deploying compute.
+      adrConsequences:
+        - The scoring worker needs a separately validated GPU-capable workload profile or bounded specialized execution path.
+        - Intake acknowledges only durable messages and remains independent from model execution completion.
+      changeExpectedRevision: Add a time-bounded GPU worker profile while retaining scale-to-zero intake and durable claim buffering.
+      revisedDecision:
+        selectedCandidate: Azure Container Apps for APIs and workers with Azure Functions for event handlers
+        mandatoryRequirementId: LAB19-REQ-05
+        reason: LAB19-REQ-05 requires both two-hour GPU scoring and overnight zero scale, so the selected design adds an approved GPU workload profile only for the scorer while intake remains event-driven.
+        waf:
+          reliability: Claims remain queued if GPU quota or model execution is temporarily unavailable.
+          security: The GPU worker uses managed identity and the same private artifact boundary.
+          costOptimization: Expensive accelerators are active only for the measured catastrophe backlog.
+          operationalExcellence: GPU availability and CPU degraded mode are explicit runbook decisions.
+          performanceEfficiency: Queue age and model throughput independently control the specialized worker profile.
+
+  - number: '20'
+    architectureAnalysis:
+      permissions: Service Bus, Event Grid, Event Hubs, API Management, identity, and monitoring read roles support discovery; namespace, route, policy, or API changes require separate authorization.
+      licensing: Messaging tiers, throughput or processing units, brokered connections, API Management capacity, retention, capture, and networking affect cost.
+      costNotes: Attribute command operations, topic subscriptions, telemetry ingress, retained events, APIM units, retries, and dead-letter processing.
+      constraints:
+        - Accepted shipments must be processed once effectively and status events reach only authorized consumers.
+        - Commands for each shipment must remain ordered while peak-season telemetry grows tenfold.
+      assumptions:
+        - Shipment identifiers are stable session keys and consumers implement idempotent state transitions.
+        - Telemetry is analytically consumed and does not require per-message transactional command settlement.
+      facts:
+        data: Shipment commands, state-change events, high-volume telemetry, partner requests, and dead letters require distinct delivery semantics.
+        scale: Telemetry increases tenfold at peak while command volume follows shipments; measured events per second remain a capacity input.
+        latency: Partner command acknowledgement and status-event delivery have service objectives separate from telemetry ingestion delay.
+        availability: Durable commands survive processor interruption and subscriptions isolate a failed status consumer from other recipients.
+        rto: Integration recovery depends on backlog age and consumer capacity; no numerical platform RTO is supplied.
+        rpo: Accepted commands require durable settlement and idempotency so broker or consumer retry does not lose or double-apply shipment state.
+        budget: Each message class uses the least expensive service that supplies its required ordering, routing, replay, and partner controls.
+      candidateAnalyses:
+        - name: Service Bus for commands, Event Grid for state events, Event Hubs for telemetry, and API Management for partners
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 5, C5: 4}
+          rationale: Purpose-specific services map ordered commands, routed events, high-throughput telemetry, and governed partner APIs to their native semantics.
+          rejectedReason: null
+        - name: Event Hubs as the transport for all commands, events, telemetry, and partner requests
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 3, C5: 4}
+          rationale: One event log scales well, but command settlement, session ordering, request policy, and per-consumer routing move into application code.
+          rejectedReason: Uniform transport simplifies inventory at the cost of weak command and partner semantics.
+        - name: Storage queues and direct partner webhooks with application-owned routing
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 2, C4: 2, C5: 5}
+          rationale: Storage queues are economical, but session ordering, event fan-out, authorization, and webhook retry become bespoke responsibilities.
+          rejectedReason: Custom routing and direct partner exposure produce the weakest security and operating fit.
+        - name: Synchronous depot-to-carrier call chain with no durable broker
+          eligible: false
+          disqualifiers:
+            - LAB20-REQ-02 requires accepted commands to remain durable and ordered through downstream interruption.
+          scores: {C1: 1, C2: 1, C3: 2, C4: 2, C5: 4}
+          rationale: Direct calls minimize components but couple depot acceptance to every carrier and processing dependency.
+          rejectedReason: It is ineligible because a downstream outage can lose or reject an accepted shipment command.
+      risks:
+        - risk: A shipment session can block behind one poison command and delay all later updates for that shipment.
+          mitigation: Bound delivery attempts, dead-letter with full correlation, and require an idempotent repair and replay procedure.
+        - risk: Tenfold telemetry can consume shared namespace or network capacity needed by commands.
+          mitigation: Isolate telemetry units and quotas from Service Bus, then load-test each path independently.
+      waf:
+        reliability: Durable sessions, dead letters, isolated subscriptions, and idempotent consumers preserve shipment processing.
+        security: APIM policy, managed identities, and recipient-specific subscriptions constrain partner and event access.
+        costOptimization: Broker features and capacity are purchased per message class instead of overengineering telemetry or commands.
+        operationalExcellence: Correlation IDs join API acceptance, command settlement, state events, telemetry, and repair actions.
+        performanceEfficiency: Event Hubs absorbs tenfold telemetry while Service Bus session capacity scales on ordered shipment demand.
+      safeAnalogue: null
+      adrConsequences:
+        - Teams must own four intentional service contracts rather than treating every payload as a generic event.
+        - Shipment consumers become responsible for idempotency and poison-session repair evidence.
+      changeExpectedRevision: Enable shipment-keyed Service Bus sessions and scale Event Hubs independently for the tenfold telemetry peak.
+      revisedDecision:
+        selectedCandidate: Service Bus for commands, Event Grid for state events, Event Hubs for telemetry, and API Management for partners
+        mandatoryRequirementId: LAB20-REQ-05
+        reason: LAB20-REQ-05 makes per-shipment ordering and tenfold telemetry isolation mandatory, so the selected split-service design adds Service Bus sessions while scaling Event Hubs separately.
+        waf:
+          reliability: Session ordering and durable settlement protect shipment state through retries.
+          security: Partner APIs and event subscribers retain separate authorization boundaries.
+          costOptimization: Only telemetry processing units rise for the seasonal peak.
+          operationalExcellence: Correlation and dead-letter evidence expose stalled sessions without hiding later failures.
+          performanceEfficiency: Commands and telemetry scale on different units and cannot consume the same broker ceiling.
+
+  - number: '21'
+    architectureAnalysis:
+      permissions: Managed Redis, App Configuration, deployment, identity, and monitoring read access supports review; resource or key-value mutation requires separate contributor and data roles.
+      licensing: Azure Managed Redis tiers, App Configuration replicas and request quotas, deployment-stack resources, private networking, and monitoring affect price.
+      costNotes: Model cache capacity and operations, regional replicas, configuration requests, deployment resources, data transfer, and stale-data protection value.
+      constraints:
+        - Storefront reads and releases must work across regions without embedded secrets or imperative configuration drift.
+        - Last-known-safe catalog data must be served for thirty minutes during configuration-store or source-database unavailability.
+      assumptions:
+        - Catalog entries carry version and freshness metadata and are safe to serve within an approved staleness window.
+        - Application revisions can bundle a tested configuration snapshot reference without exposing secret values.
+      facts:
+        data: Catalog cache entries, feature and configuration values, deployment manifests, versions, and secret references have separate owners.
+        scale: Read-heavy storefront traffic spans regions; measured working set, operations per second, and miss rate determine cache size.
+        latency: Cache serves the interactive read target and stale-mode activation must occur before dependency timeout cascades.
+        availability: Regional application stamps retain a last-known-safe cache path when App Configuration or the source database is unavailable.
+        rto: Dependency restoration may take thirty minutes without stopping reads; write-path recovery remains a separate owner objective.
+        rpo: The degraded read path intentionally accepts up to the approved catalog staleness boundary rather than inventing current source data.
+        budget: Managed cache and configuration replicas are justified against database load, latency, and the value of thirty-minute read continuity.
+      candidateAnalyses:
+        - name: Azure Managed Redis with Azure App Configuration and Bicep deployment stacks
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 5, C5: 5}
+          rationale: Managed Redis accelerates catalog reads, App Configuration versions settings, and Bicep deployment stacks make regional release state declarative.
+          rejectedReason: null
+        - name: Per-instance memory caches with image-baked configuration and imperative scripts
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 2, C3: 2, C4: 2, C5: 4}
+          rationale: Local caches are inexpensive but fragment state across replicas and require image releases for configuration change or rollback.
+          rejectedReason: Inconsistent caches and baked settings undermine regional release consistency and degraded-mode proof.
+        - name: Cosmos DB integrated cache with Key Vault references and Terraform delivery
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 5, C4: 3, C5: 2}
+          rationale: An integrated cache can suit Cosmos-backed workloads, but this catalog architecture needs a source-neutral cache and existing Bicep delivery contract.
+          rejectedReason: Coupling cache choice to a new database platform and delivery tool expands the decision without a requirement.
+        - name: New Azure Cache for Redis deployment with mutable portal configuration
+          eligible: false
+          disqualifiers:
+            - LAB21-REQ-03 requires Azure Managed Redis for new caching designs and declarative drift-controlled delivery.
+          scores: {C1: 1, C2: 3, C3: 2, C4: 1, C5: 3}
+          rationale: The retiring service direction and manual configuration create lifecycle and drift risk for a new platform.
+          rejectedReason: It is disqualified by the current-service and declarative-delivery requirements.
+      risks:
+        - risk: A stale cache can serve a recalled or legally invalid catalog item for the full thirty-minute window.
+          mitigation: Define noncacheable emergency flags and a signed invalidation path independent of the source database.
+        - risk: Configuration refresh failure can leave regions on different feature versions.
+          mitigation: Pin a last-known-safe snapshot identifier and assert regional version convergence during every release.
+      waf:
+        reliability: Versioned safe snapshots and cache fallback maintain catalog reads through configuration or source failure.
+        security: Managed identities, private paths, and external secret references keep credentials out of images and templates.
+        costOptimization: Cache capacity is tied to the measured working set and avoids scaling the source for repeated reads.
+        operationalExcellence: Declarative stacks, configuration labels, snapshot versions, and rollback evidence control regional drift.
+        performanceEfficiency: Managed Redis handles the read working set while refresh and invalidation protect data freshness.
+      safeAnalogue: Deploy only the self-contained low-cost Bicep analogue when explicitly authorized; otherwise test snapshot, fallback, and drift behavior with local fixtures.
+      adrConsequences:
+        - Product owners must define which catalog fields may be stale and which require emergency invalidation.
+        - Releases promote a configuration snapshot and infrastructure declaration as independently verifiable artifacts.
+      changeExpectedRevision: Add a thirty-minute last-known-safe snapshot and emergency invalidation path without treating stale mode as source recovery.
+      revisedDecision:
+        selectedCandidate: Azure Managed Redis with Azure App Configuration and Bicep deployment stacks
+        mandatoryRequirementId: LAB21-REQ-01
+        reason: LAB21-REQ-01 requires explicit cache failure behavior, so the selected design retains a versioned thirty-minute last-known-safe snapshot plus a source-independent invalidation control.
+        waf:
+          reliability: Catalog reads continue through temporary configuration or database loss.
+          security: Emergency invalidation is narrowly authorized and does not expose configuration secrets.
+          costOptimization: Existing cache capacity supplies continuity without a duplicate active database.
+          operationalExcellence: Snapshot version, activation, expiry, and recovery are recorded in the release runbook.
+          performanceEfficiency: Bounded stale reads prevent dependency retry storms and protect storefront latency.
+
+  - number: '22'
+    architectureAnalysis:
+      permissions: No Azure role is required for the portfolio simulation; production discovery would use read-only inventory, cost, dependency, and security evidence.
+      licensing: Assessment tooling, migration services, hybrid management, target platforms, and extended datacenter operation require workload-specific estimates.
+      costNotes: Compare lease deadlines, dual-running periods, remediation, migration factory throughput, target run cost, and delayed value by wave.
+      constraints:
+        - Migration waves must prioritize measurable outcomes and dependency safety rather than server age alone.
+        - One lease ends six months earlier while two classified applications cannot move until encryption evidence is approved.
+      assumptions:
+        - Application owners validate dependencies, disposition, business value, and blackout periods in the portfolio register.
+        - Classified workloads can remain temporarily in an approved source or coexistence location after the first lease exit.
+      facts:
+        data: Portfolio records contain dependency, classification, owner, cost, readiness, disposition, risk, and outcome measures.
+        scale: Multiple datacenters and coupled applications form migration waves; exact server count is intentionally inventory-derived.
+        latency: Migration program latency is measured as assessment-to-wave lead time and cutover outage, not end-user request latency.
+        availability: Coexistence and rollback preserve service while dependencies move; unsupported wave splits are explicitly blocked.
+        rto: Each workload retains its business continuity target during migration; the portfolio has no single meaningful RTO.
+        rpo: Data synchronization and rollback points are chosen per workload and cannot be inferred from the wave schedule.
+        budget: The earlier lease exit raises temporary coexistence and acceleration cost, which is balanced against six months of avoided facility expense.
+      candidateAnalyses:
+        - name: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 4, C3: 5, C4: 5, C5: 4}
+          rationale: Outcome-led assessment joins readiness, value, dependency, governance, and measurable success before workloads enter waves.
+          rejectedReason: null
+        - name: Datacenter-by-datacenter rehost schedule based only on server age
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 2, C2: 2, C3: 2, C4: 4, C5: 3}
+          rationale: Facility ordering supports lease planning but can split applications from dependencies and carry unresolved risk into Azure.
+          rejectedReason: Server age is not a sufficient readiness or value measure and produces unsafe dependency cuts.
+        - name: Application-team modernization projects without a shared portfolio assessment
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 3, C4: 2, C5: 2}
+          rationale: Team autonomy can accelerate local redesign, though shared dependencies, landing-zone readiness, and value reporting become fragmented.
+          rejectedReason: Uncoordinated projects cannot reliably satisfy the fixed lease exit or portfolio risk controls.
+        - name: Move classified applications before encryption approval to preserve the lease schedule
+          eligible: false
+          disqualifiers:
+            - LAB22-REQ-04 requires mandatory compliance evidence before a classified workload can enter a migration wave.
+          scores: {C1: 1, C2: 3, C3: 1, C4: 3, C5: 3}
+          rationale: Advancing classified systems may simplify facility closure but knowingly crosses a regulatory release gate.
+          rejectedReason: It is disqualified because lease pressure cannot override mandatory encryption approval.
+      risks:
+        - risk: The accelerated facility wave can strand an application whose dependency is blocked by classification review.
+          mitigation: Model temporary coexistence, dependency proxies, or an approved alternate hosting location before wave approval.
+        - risk: Outcome measures may be replaced by completion counts once schedule pressure rises.
+          mitigation: Keep value, reliability, cost, and risk measures in the wave exit gate alongside migrated-server count.
+      waf:
+        reliability: Dependency-based waves, coexistence, and rollback protect service during portfolio transition.
+        security: Classification and encryption evidence are hard gates rather than schedule-adjustable preferences.
+        costOptimization: Lease avoidance, dual running, remediation, and target run cost are evaluated in one wave business case.
+        operationalExcellence: Owners, decisions, readiness evidence, and outcome measures make wave approval reviewable.
+        performanceEfficiency: Migration-factory capacity is allocated to ready waves instead of blocked or low-value server batches.
+      safeAnalogue: Score the supplied synthetic portfolio and dependency graph, inject the lease and compliance changes, and produce revised waves offline.
+      adrConsequences:
+        - The first facility wave accelerates only workloads whose dependencies and landing-zone controls are ready.
+        - Classified applications receive a documented coexistence path and cannot move on a schedule exception.
+      changeExpectedRevision: Reorder the first waves around the earlier lease while holding classified applications behind encryption approval.
+      revisedDecision:
+        selectedCandidate: Cloud Adoption Framework outcome-led assessment and dependency-based waves
+        mandatoryRequirementId: LAB22-REQ-04
+        reason: LAB22-REQ-04 requires dependency-safe waves and explicit readiness gates, so ready workloads advance for the lease exit while classified systems remain behind encryption approval.
+        waf:
+          reliability: Coexistence prevents an accelerated wave from severing blocked dependencies.
+          security: Classified applications remain behind the encryption-evidence gate.
+          costOptimization: Six months of facility cost is compared transparently with temporary hosting and acceleration expense.
+          operationalExcellence: Revised wave decisions record owner, blocker, exit evidence, and outcome measure.
+          performanceEfficiency: Migration teams focus on ready dependency groups instead of spending capacity on compliance-blocked systems.
+
+  - number: '23'
+    architectureAnalysis:
+      permissions: Azure Migrate, Database Migration Service, storage, network, and target read access supports planning; replication, transfer, migration, or cutover requires separate authorization.
+      licensing: Migration tooling may be free for assessment periods, while replication storage, DMS SKUs, AzCopy transfer, target compute, and egress can incur charges.
+      costNotes: Model assessment, replication duration, target validation, transfer churn, dual running, outage labor, rollback retention, and post-cutover scale.
+      constraints:
+        - Manufacturing compute, databases, and engineering files need integrity evidence and a controlled return path.
+        - The outage window drops from four hours to ninety minutes and file writes continue until fifteen minutes before redirection.
+      assumptions:
+        - Network throughput and source change rates can be measured before the migration event.
+        - Application owners can freeze database and file changes at separately defined cutover gates.
+      facts:
+        data: Virtual machines, relational data, and large engineering files use distinct replication, integrity, and cutover mechanisms.
+        scale: Bulk files are preseeded and only the final fifteen-minute delta enters the outage path; measured bytes and change rate determine feasibility.
+        latency: The critical path includes final synchronization, validation, redirection, and business acceptance inside ninety minutes.
+        availability: Source systems remain the rollback authority until target integrity and manufacturing transactions pass.
+        rto: The migration outage ceiling is ninety minutes from the approved freeze to service redirection.
+        rpo: Engineering-file writes continue until fifteen minutes before redirection, defining the maximum planned file delta window.
+        budget: Staged replication and temporary dual running are funded to reduce outage risk and avoid emergency transfer capacity.
+      candidateAnalyses:
+        - name: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 4, C4: 4, C5: 4}
+          rationale: Specialized migration paths preseed each workload type, preserve assessment and integrity evidence, and constrain final deltas.
+          rejectedReason: null
+        - name: Manual virtual machine rebuild plus database backup restore and one-time file copy
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 3, C4: 2, C5: 4}
+          rationale: Manual rebuild and restore are familiar but put full transfer, configuration, and troubleshooting into the outage window.
+          rejectedReason: The shortened window cannot absorb full database and engineering-file copies plus manual validation.
+        - name: Partner replication appliance for all servers, databases, and files as one opaque unit
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 3, C4: 2, C5: 2}
+          rationale: An appliance can simplify bulk movement but obscures workload-specific consistency, integrity, and rollback evidence.
+          rejectedReason: Opaque replication weakens independent database, file, and VM acceptance even if transfer completes.
+        - name: Unstaged live copy with no source rollback point
+          eligible: false
+          disqualifiers:
+            - LAB23-REQ-05 requires a timed cutover with integrity proof and an executable rollback decision.
+          scores: {C1: 1, C2: 1, C3: 2, C4: 1, C5: 4}
+          rationale: Copying once during outage avoids temporary storage but makes duration unpredictable and destroys a safe decision point.
+          rejectedReason: It is ineligible because neither the ninety-minute window nor reversibility can be proven.
+      risks:
+        - risk: Engineering-file churn in the final fifteen minutes can exceed available transfer throughput.
+          mitigation: Measure change rate, journal final deltas, set a go/no-go threshold, and preserve source write logs for reconciliation.
+        - risk: A successful infrastructure cutover can hide database or file inconsistency.
+          mitigation: Run workload-specific row, checksum, and manufacturing transaction assertions before redirecting users.
+      waf:
+        reliability: Preseeding, independent consistency checks, and preserved source rollback reduce cutover failure impact.
+        security: Managed identities, private transfer paths, sanitized evidence, and least-privilege migration roles protect source data.
+        costOptimization: Temporary replication and dual running are bounded to the period that buys a shorter controlled outage.
+        operationalExcellence: Timed gates, owners, integrity results, redirection, and rollback criteria create an executable cutover record.
+        performanceEfficiency: Only measured final deltas and validation remain inside the ninety-minute critical path.
+      safeAnalogue: Replay synthetic VM, database, and file manifests through preseed, delta, checksum, cutover, and rollback gates without starting a migration.
+      adrConsequences:
+        - Source systems remain authoritative until every workload-specific acceptance check passes.
+        - File change rate and network throughput become explicit go/no-go evidence fifteen minutes before redirection.
+      changeExpectedRevision: Prestage all bulk data, journal the final file delta, and compress the ordered cutover gates into ninety minutes.
+      revisedDecision:
+        selectedCandidate: Azure Migrate plus Azure Database Migration Service and staged AzCopy transfer
+        mandatoryRequirementId: LAB23-REQ-05
+        reason: LAB23-REQ-05 requires a ninety-minute outage with writes continuing to minute fifteen, so staged services remain selected and only recorded deltas plus acceptance enter the critical path.
+        waf:
+          reliability: A preserved source and explicit abort threshold keep the shortened event reversible.
+          security: Final deltas travel through the same approved protected transfer boundary.
+          costOptimization: Temporary staging cost avoids emergency bandwidth and extended factory downtime.
+          operationalExcellence: Minute-by-minute gates expose when to continue, abort, or roll back.
+          performanceEfficiency: Preseeded bulk data leaves a measured fifteen-minute write delta for final transfer.
+
+  - number: '24'
+    architectureAnalysis:
+      permissions: Front Door, ExpressRoute, VPN, Virtual WAN, routing, and network monitoring read roles support inspection; profile, circuit, gateway, route, or encryption changes require separate authorization.
+      licensing: Front Door Premium, ExpressRoute circuits and gateways, Virtual WAN hubs, VPN gateways, bandwidth, and monitoring each have recurring charges.
+      costNotes: Include dual circuits, provider ports, gateway scale units, VPN peak capacity, Front Door requests and transfer, and encrypted-path operations.
+      constraints:
+        - Customer entry must remain globally available while risk-system access follows predictable private paths through circuit or tunnel failure.
+        - Private transaction traffic must be encrypted over ExpressRoute and the backup VPN must carry four hours of full peak load.
+      assumptions:
+        - Colocation and network providers support the selected ExpressRoute encryption option or application-layer encryption.
+        - Branch and hub address spaces permit deterministic routing without overlapping prefixes.
+      facts:
+        data: Customer HTTPS traffic and private transaction flows cross distinct edge, WAN, routing, inspection, and encryption boundaries.
+        scale: Backup VPN is sized for one hundred percent of measured peak transaction traffic for four hours; circuit throughput remains measured evidence.
+        latency: Front Door optimizes customer entry and ExpressRoute serves private latency, with encrypted VPN failover tested against the workload target.
+        availability: Dual circuits, independent paths, VPN fallback, and hub routing cover provider, gateway, and connection failures separately.
+        rto: Path convergence must occur within the risk-system recovery objective; no unsupported numerical target is assigned.
+        rpo: Connectivity carries transactions but does not define their data RPO; in-flight retry and idempotency remain application requirements.
+        budget: Full-size VPN standby and encrypted circuit paths are explicit regulatory continuity costs rather than assumed free redundancy.
+      candidateAnalyses:
+        - name: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 4, C5: 2}
+          rationale: Premium edge security, redundant private circuits, scaled VPN fallback, and managed transit form explicit customer and private failure paths.
+          rejectedReason: null
+        - name: Regional Application Gateway with internet VPN tunnels and manual branch routing
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 3, C3: 4, C4: 2, C5: 4}
+          rationale: Regional ingress and VPN can reduce cost, but global entry, route convergence, and manual branch failover are weaker.
+          rejectedReason: It lacks the selected design's global edge and predictable automated transit behavior.
+        - name: Front Door Standard with provider-managed SD-WAN and direct spoke connections
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 3, C4: 3, C5: 3}
+          rationale: Provider SD-WAN may simplify branch operations, but direct spokes fragment route and security ownership and Standard lacks Premium private-origin capabilities.
+          rejectedReason: Split provider and spoke controls make end-to-end private path evidence harder to establish.
+        - name: One ExpressRoute circuit with unencrypted private traffic and undersized VPN
+          eligible: false
+          disqualifiers:
+            - LAB24-REQ-02 requires encrypted private paths and a VPN failover design sized to the approved traffic load.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 3, C5: 4}
+          rationale: Minimal redundant capacity lowers cost but leaves a circuit failure and unencrypted path outside the regulatory contract.
+          rejectedReason: It is ineligible because both encryption and backup-capacity requirements are mandatory.
+      risks:
+        - risk: Encryption overhead can reduce effective throughput below the four-hour peak requirement.
+          mitigation: Load-test encrypted circuit and VPN paths with production packet sizes and reserve measured headroom.
+        - risk: Advertised routes can prefer an unintended path and bypass inspection during failover.
+          mitigation: Capture effective routes and next hops for normal, circuit-loss, and recovery states before approval.
+      waf:
+        reliability: Independent edge, dual-circuit, VPN, gateway, and route tests expose each connectivity failure domain.
+        security: Premium edge controls and encrypted private transport protect both public entry and regulated transactions.
+        costOptimization: Redundant circuits and full VPN capacity are tied to regulatory continuity instead of duplicated indiscriminately.
+        operationalExcellence: Route, encryption, health, failover, and restoration evidence provide a deterministic network runbook.
+        performanceEfficiency: Measured encrypted throughput sizes gateways and tunnels for the full four-hour peak.
+      safeAnalogue: Inspect synthetic topology, routes, cipher requirements, and capacity calculations; use the offline Front Door REST fixture and issue no network change.
+      adrConsequences:
+        - Network owners must operate and exercise both circuit and VPN encryption paths at production-equivalent load.
+        - Effective-route evidence becomes a release artifact because nominal connection health cannot prove path choice.
+      changeExpectedRevision: Add approved encryption to the ExpressRoute path and size the VPN gateway from measured encrypted peak throughput for four hours.
+      revisedDecision:
+        selectedCandidate: Front Door Premium with dual ExpressRoute connectivity, VPN failover, and Virtual WAN transit
+        mandatoryRequirementId: LAB24-REQ-02
+        reason: LAB24-REQ-02 requires explicit private-circuit and VPN failover design, so the selected path adds ExpressRoute encryption and a load-tested full-peak VPN capacity floor.
+        waf:
+          reliability: Full-capacity VPN prevents regulatory traffic from becoming a partial service during circuit loss.
+          security: Transaction traffic remains encrypted on primary and fallback private paths.
+          costOptimization: Higher gateway and encryption cost is attributed to the four-hour compliance objective.
+          operationalExcellence: Normal, failure, and restoration route captures prove the intended path.
+          performanceEfficiency: Gateway selection follows encrypted throughput measurements rather than nominal SKU bandwidth.
+
+  - number: '25'
+    architectureAnalysis:
+      permissions: Front Door, Application Gateway, Firewall, Load Balancer, NAT Gateway, NSG, route, and Network Watcher read roles support review; rule or resource changes require separate authorization.
+      licensing: Premium WAF and Firewall tiers, inspection data, gateway capacity, NAT processing and addresses, logs, and Front Door requests contribute recurring cost.
+      costNotes: Attribute global edge, regional WAF units, firewall scale, TLS inspection, outbound data, NAT ports, logs, and redundant-zone capacity.
+      constraints:
+        - Clinical ingress, east-west, and outbound traffic must remain controlled through zonal or regional component failure.
+        - Outbound updates require FQDN allowlisting and TLS inspection except one certificate-pinned vendor that cannot be intercepted.
+      assumptions:
+        - Clinical flows have named owners, source, destination, protocol, inspection need, and failure behavior.
+        - The pinned vendor endpoint can be narrowly identified and monitored without granting a broad inspection bypass.
+      facts:
+        data: Flow inventory covers patient-facing HTTPS, internal service paths, health probes, update destinations, logs, and certificate exceptions.
+        scale: Gateway, firewall, and NAT capacity follow measured concurrent connections, throughput, and source-port demand.
+        latency: TLS inspection and multiple traffic hops must preserve the clinical response target, which remains an owner-supplied value.
+        availability: Global edge, zonal gateways, firewall scaling, explicit Standard Load Balancer outbound design, and NAT cover separate failures.
+        rto: Regional ingress and egress restoration must meet the clinical service objective; no fabricated numerical RTO is introduced.
+        rpo: Network controls do not set clinical-data RPO; connection retry must avoid duplicating state-changing requests.
+        budget: Premium inspection and redundant components are limited to flows whose security and continuity classification requires them.
+      candidateAnalyses:
+        - name: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer, and NAT Gateway
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 5, C5: 2}
+          rationale: Layered global, regional, east-west, and explicit outbound services provide native WAF, TLS inspection, FQDN policy, and failure-domain controls.
+          rejectedReason: null
+        - name: Traffic Manager, regional WAF gateways, NSG-only inspection, Standard Load Balancer, and NAT Gateway
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 2, C4: 4, C5: 4}
+          rationale: DNS steering and NSGs lower cost but cannot provide centralized FQDN filtering or TLS inspection for outbound content.
+          rejectedReason: The model cannot meet the new outbound inspection requirement without adding another control plane.
+        - name: Front Door Standard, third-party NVAs behind Gateway Load Balancer, and centralized proxy egress
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 4, C3: 5, C4: 2, C5: 2}
+          rationale: NVAs can deliver advanced inspection and vendor features, though appliance scaling, patching, routes, and support become customer responsibilities.
+          rejectedReason: Equivalent controls carry greater lifecycle and routing complexity than the managed-service design.
+        - name: Basic Load Balancer implicit outbound with unrestricted internet egress
+          eligible: false
+          disqualifiers:
+            - LAB25-REQ-04 requires Standard Load Balancer with explicit outbound connectivity and governed destination policy.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 2, C5: 4}
+          rationale: Implicit outbound and unrestricted egress avoid policy configuration but provide neither the supported availability baseline nor destination control.
+          rejectedReason: It is ineligible because current-service and mandatory outbound requirements are unmet.
+      risks:
+        - risk: A broad TLS bypass for the pinned vendor can become an unmonitored exfiltration route.
+          mitigation: Scope bypass to exact FQDN and flow identity, retain SNI and connection logs, and review vendor certificate changes.
+        - risk: Centralized inspection can exhaust SNAT ports or throughput during a regional event.
+          mitigation: Calculate peak concurrent flows, distribute NAT capacity, and load-test the surviving zone and regional path.
+      waf:
+        reliability: Layered health probes, zonal capacity, regional routing, and explicit outbound remove implicit traffic dependencies.
+        security: Premium WAF, firewall FQDN policy, TLS inspection, and a narrow pinned-certificate exception enforce flow intent.
+        costOptimization: Premium controls apply to classified clinical paths and capacity follows measured throughput and connection demand.
+        operationalExcellence: Effective routes, rule hits, certificates, probes, NAT ports, and exception ownership form the network evidence set.
+        performanceEfficiency: Each hop and inspection stage is measured so security does not silently consume the clinical latency budget.
+      safeAnalogue: Evaluate synthetic flows, routes, rules, health, NAT-port, and pinned-certificate fixtures; make no network or policy change.
+      adrConsequences:
+        - The certificate-pinned vendor receives a narrowly governed TLS-inspection exception with an owner and review date.
+        - Standard Load Balancer never supplies accidental outbound access; NAT and firewall routing are deliberate dependencies.
+      changeExpectedRevision: Add FQDN-filtered TLS inspection and a single monitored nonintercept exception for the pinned vendor.
+      revisedDecision:
+        selectedCandidate: Front Door Premium, Application Gateway WAF v2, Azure Firewall Premium, Standard Load Balancer, and NAT Gateway
+        mandatoryRequirementId: LAB25-REQ-02
+        reason: LAB25-REQ-02 requires owned FQDN and TLS inspection policy, so the selected design adds an exact pinned-vendor bypass with independent logging and expiry review.
+        waf:
+          reliability: The vendor exception remains reachable through explicit redundant outbound paths.
+          security: All other update traffic is inspected and the bypass is constrained to the exact destination.
+          costOptimization: Premium inspection spend remains tied to clinical flows instead of a blanket enterprise rollout.
+          operationalExcellence: Rule hits, certificates, owner, and review date make the exceptional path auditable.
+          performanceEfficiency: Inspection and bypass latency are tested independently against clinical response needs.
+
+  - number: '26'
+    architectureAnalysis:
+      permissions: Architecture review uses read-only identity, policy, network, application, data, and monitoring evidence; the safe analogue needs only a bounded resource-group deployment role when explicitly authorized.
+      licensing: Front Door Premium, regional PaaS, managed data replicas, private networking, monitoring, governance, and security tiers all require current regional estimates.
+      costNotes: Model two regional stamps, global edge, geography-isolated profiles, anonymous catalog replicas, reserved baselines, burst capacity, logs, and exercises.
+      constraints:
+        - The launch platform needs secure global delivery, controlled regional failure, auditable governance, and a defensible production budget.
+        - Customer profiles must remain in one geography while anonymous catalog traffic survives a complete regional outage globally.
+      assumptions:
+        - The application separates profile identity and personalization from anonymous catalog content at API and data layers.
+        - Target regions support the selected PaaS, availability-zone, private endpoint, and monitoring capabilities.
+      facts:
+        data: Customer profiles are geography-bound; anonymous catalog, configuration, events, audit, and operational telemetry have separate distribution rules.
+        scale: Global launch demand varies by market; request rate, profile volume, catalog size, and regional concurrency are measured sizing inputs.
+        latency: Anonymous catalog uses global edge and regional stamps, while profile operations route only to their authorized geography.
+        availability: Two regional PaaS stamps and global routing preserve catalog service; profile continuity remains inside its legal geography.
+        rto: Catalog regional failover follows an owner-tested target; profile recovery cannot violate residency to improve restoration time.
+        rpo: Profile replication stays within geography and catalog rebuild or replication has an independently approved freshness tolerance.
+        budget: Active regional catalog capacity is justified by launch continuity, while profile stacks and premium features are scoped by market.
+      candidateAnalyses:
+        - name: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 5, C5: 3}
+          rationale: PaaS stamps and Premium edge controls support independent regional release and routing while data services can be split by residency class.
+          rejectedReason: null
+        - name: Active-passive AKS clusters with database failover and a warm secondary region
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 4, C2: 5, C3: 4, C4: 2, C5: 2}
+          rationale: AKS offers application portability and warm recovery but adds cluster, upgrade, policy, and capacity operations to launch readiness.
+          rejectedReason: The platform does not need Kubernetes-specific control enough to justify its operational burden and slower passive activation.
+        - name: Single-region modular PaaS platform with cross-region backups and rebuild automation
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 5, C4: 4, C5: 5}
+          rationale: A single region lowers steady cost and keeps modules clear, but backup rebuild cannot sustain catalog traffic through a full regional outage.
+          rejectedReason: Its recovery behavior misses the anonymous-catalog continuity outcome despite attractive economics.
+        - name: One global customer-profile store replicated to every launch region
+          eligible: false
+          disqualifiers:
+            - LAB26-REQ-01 requires mandatory residency constraints to be reconciled with the selected architecture.
+          scores: {C1: 1, C2: 5, C3: 1, C4: 4, C5: 3}
+          rationale: Universal profile replication simplifies failover but ignores the mandatory geography boundary.
+          rejectedReason: It is ineligible because profile availability cannot override residency.
+      risks:
+        - risk: Anonymous responses can accidentally include profile-derived fields and enter the global cache or logs.
+          mitigation: Enforce separate contracts, classify fields, and assert that global responses and telemetry contain no profile attributes.
+        - risk: Active-active stamps can drift in policy, secret references, or feature configuration.
+          mitigation: Promote immutable Bicep and configuration versions and block release when regional evidence hashes differ.
+      waf:
+        reliability: Independent stamps and global routing keep catalog service available through regional loss while honoring profile boundaries.
+        security: Premium edge controls, private origins, managed identities, policy, and geography-scoped data reduce exposure.
+        costOptimization: Shared global catalog capacity and market-specific profile stacks make continuity and residency spend attributable.
+        operationalExcellence: Declarative releases, regional assertions, failover exercises, governance evidence, and rollback support fast controlled delivery.
+        performanceEfficiency: Edge caching and regional PaaS autoscale serve anonymous demand while profile calls remain geography-local.
+      safeAnalogue: Use the self-contained Bicep template only as a bounded tagged topology analogue; validate data-boundary and failover decisions primarily with offline fixtures.
+      adrConsequences:
+        - APIs and data contracts permanently separate anonymous catalog content from geography-bound customer profiles.
+        - Regional releases must prove parity without copying regulated profile data across the boundary.
+      changeExpectedRevision: Partition profile storage and routing by geography while leaving catalog content eligible for global active-active delivery.
+      revisedDecision:
+        selectedCandidate: Active-active regional PaaS stamps behind Front Door Premium with globally coordinated data services
+        mandatoryRequirementId: LAB26-REQ-01
+        reason: LAB26-REQ-01 requires mandatory constraints to drive the architecture decision, so active-active stamps split into geography-specific profile planes and a separate global anonymous catalog plane.
+        waf:
+          reliability: Anonymous catalog survives a regional loss without failing over restricted profile data unlawfully.
+          security: Profile routes, stores, caches, and logs are constrained to the assigned geography.
+          costOptimization: Global replication is purchased for catalog data, while profile capacity is funded per regulated market.
+          operationalExcellence: Contract and routing assertions detect profile leakage before regional release.
+          performanceEfficiency: Catalog requests use edge and nearest healthy stamp; profile calls remain within geography.
+
+  - number: '27'
+    architectureAnalysis:
+      permissions: No Azure or Graph role is needed for the capstone simulation; real discovery would use separately approved read-only inventory across both tenants and hybrid resources.
+      licensing: Azure Arc, migration tooling, managed PaaS, connectivity, edge databases, governance, and dual-tenant operations require workload-specific estimates.
+      costNotes: Compare coexistence, branch edge capacity, two tenant landing zones, data transfer, modernization waves, licenses, rollback retention, and retired datacenter cost.
+      constraints:
+        - Modernization must preserve branch service, regulatory evidence, reversibility, and transparent residual risk.
+        - A merger adds a second tenant and regulated geography, and branch order capture must work for eight hours without WAN connectivity.
+      assumptions:
+        - Branch applications can persist orders locally with stable identifiers and synchronize through an idempotent contract.
+        - Tenant and geography ownership can be assigned before a workload enters a modernization wave.
+      facts:
+        data: Orders, product reference data, identities, dependency records, Arc inventory, migration evidence, and regulatory classifications cross distinct boundaries.
+        scale: Branch count, order rate, eight-hour offline volume, application dependencies, and tenant split are measured in the supplied portfolio.
+        latency: Local order capture remains responsive without WAN; synchronization latency is measured after connectivity returns.
+        availability: Branch edge operation covers an eight-hour WAN loss while Azure regions, tenants, and datacenters remain separate failure domains.
+        rto: Branch capture has effectively immediate local continuity; centralized reconciliation recovery follows an owner-approved target.
+        rpo: Accepted offline orders require zero local loss before synchronization, with conflict resolution for updates from both sides.
+        budget: Edge capacity and dual-tenant governance are funded where they reduce outage and regulatory risk; indefinite datacenter retention is not free.
+      candidateAnalyses:
+        - name: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets, and staged coexistence
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 5, C2: 5, C3: 5, C4: 4, C5: 4}
+          rationale: Dependency waves preserve rollback and evidence while Arc inventory, migration patterns, and PaaS targets support deliberate modernization by workload.
+          rejectedReason: null
+        - name: Parallel cloud rebuild followed by one enterprise-wide big-bang cutover
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 2, C3: 3, C4: 2, C5: 2}
+          rationale: A parallel rebuild can produce a clean target but concentrates dependency, tenant, data, and branch risk in one irreversible event.
+          rejectedReason: The combined cutover cannot expose or contain failures by wave and leaves little credible rollback time.
+        - name: Indefinite hybrid retention with lifecycle-only virtual machine rehosting
+          eligible: true
+          disqualifiers: []
+          scores: {C1: 3, C2: 4, C3: 3, C4: 3, C5: 2}
+          rationale: Long-lived hybrid and rehosting reduce near-term change but preserve datacenter dependency, duplicated governance, and technical debt.
+          rejectedReason: It does not deliver the modernization outcome or transparent retirement economics.
+        - name: Single-tenant big-bang migration with WAN-dependent branch order entry
+          eligible: false
+          disqualifiers:
+            - LAB27-REQ-04 requires two-tenant geography separation and eight hours of offline branch order capture.
+          scores: {C1: 1, C2: 1, C3: 1, C4: 2, C5: 3}
+          rationale: Ignoring the merger and edge requirement simplifies a diagram but fails the two newest mandatory business boundaries.
+          rejectedReason: It is ineligible because it cannot preserve regulated separation or branch continuity.
+      risks:
+        - risk: Offline branches can generate conflicting order updates when centralized service continues processing.
+          mitigation: Use globally unique order identifiers, versioned commands, deterministic conflict policy, and an exception queue with business ownership.
+        - risk: Cross-tenant administration can create hidden shared identities or copy regulated evidence between geographies.
+          mitigation: Maintain separate identity and logging boundaries, broker only approved business messages, and test prohibited cross-tenant paths.
+      waf:
+        reliability: Edge persistence, staged coexistence, dependency waves, and rollback contain WAN, workload, and migration failure.
+        security: Tenant and geography boundaries, Arc governance, classified message contracts, and least privilege preserve regulatory separation.
+        costOptimization: Wave business cases include coexistence and edge cost alongside eliminated facilities and managed-service value.
+        operationalExcellence: Portfolio, dependency, sync, conflict, evidence, cutover, and residual-risk records make modernization governable.
+        performanceEfficiency: Local branch writes avoid WAN latency and managed targets scale independently after each approved wave.
+      safeAnalogue: Run the complete portfolio, branch-outage, conflict, tenant-boundary, wave, and rollback simulation locally; Lab 27 never queries or deploys Azure.
+      adrConsequences:
+        - Branch software gains an offline queue and reconciliation responsibility that must be tested at the full eight-hour volume.
+        - Two tenant and geography governance planes remain distinct even when business workflows exchange approved messages.
+      changeExpectedRevision: Add a second regulated landing-zone boundary and place offline-capable branch order capture ahead of WAN-dependent modernization waves.
+      revisedDecision:
+        selectedCandidate: Dependency-wave modernization using Azure Arc, Azure Migrate patterns, managed PaaS targets, and staged coexistence
+        mandatoryRequirementId: LAB27-REQ-04
+        reason: LAB27-REQ-04 requires deterministic continuity and security injects, so dependency waves add an eight-hour branch outbox plus distinct tenant and geography landing-zone boundaries.
+        waf:
+          reliability: Branch orders remain durable for eight hours and synchronize after WAN recovery.
+          security: Tenant and geography planes exchange only classified, authorized business messages.
+          costOptimization: Edge and dual-governance costs are visible against avoided branch outage and datacenter expense.
+          operationalExcellence: Conflict queues, wave gates, rollback, and residual risk have named owners.
+          performanceEfficiency: Local capture avoids WAN delay and post-recovery synchronization is paced to central capacity.

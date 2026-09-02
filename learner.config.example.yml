@@ -1,0 +1,17 @@
+schemaVersion: "1.0.0"
+learner:
+  displayName: "Local learner"
+  weeklyHours: 8
+  targetDate: null
+defaults:
+  location: "westeurope"
+  secondaryLocation: "northeurope"
+  commandPreference: "follow-lab-lane"
+privacy:
+  progressStorage: "browser-local-only"
+  browserStorageKey: "az305LearnerProgress.v1"
+  cliSynchronization: false
+notes:
+  - "Copy this file to learner.config.yml for local preferences."
+  - "Do not add tenant, subscription, account, credential, or secret values."
+

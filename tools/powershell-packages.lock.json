@@ -1,0 +1,959 @@
+{
+  "$schema": "urn:az305:schema:powershell-package-lock:1.0.0",
+  "schemaVersion": "1.0.0",
+  "verifiedOn": "2026-09-02",
+  "source": "https://www.powershellgallery.com/api/v2/package/",
+  "dependencyClosureOf": [
+    {
+      "name": "Az",
+      "version": "16.3.0"
+    },
+    {
+      "name": "Pester",
+      "version": "5.7.1"
+    },
+    {
+      "name": "PSScriptAnalyzer",
+      "version": "1.25.0"
+    },
+    {
+      "name": "Microsoft.Graph.Authentication",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Users",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Groups",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Applications",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Identity.DirectoryManagement",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Identity.SignIns",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Identity.Governance",
+      "version": "2.39.0"
+    },
+    {
+      "name": "Microsoft.Graph.Reports",
+      "version": "2.39.0"
+    }
+  ],
+  "packageCount": 113,
+  "packages": [
+    {
+      "name": "Az",
+      "version": "16.3.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az/16.3.0",
+      "sha256": "585fb0c477eed53d3358bd51245efd51986289afb4a15a8a03f6ea79e82cf64d",
+      "size": 46014
+    },
+    {
+      "name": "Az.Accounts",
+      "version": "5.5.3",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Accounts/5.5.3",
+      "sha256": "5a8be006e80a7ca66134df1f28e0ead93ef4bc437685b647b6720583cb58e615",
+      "size": 10203337
+    },
+    {
+      "name": "Az.Advisor",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Advisor/3.0.0",
+      "sha256": "1077d6b978ce4ef4e2a5a8e524e135b9c14a3bd9fe86b89ead5125f8415f2132",
+      "size": 499847
+    },
+    {
+      "name": "Az.Aks",
+      "version": "7.2.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Aks/7.2.1",
+      "sha256": "17876cb8f1ce4344788962941b5525e8bdd54c6f6b370bb25bab040118981812",
+      "size": 1577641
+    },
+    {
+      "name": "Az.AnalysisServices",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.AnalysisServices/1.3.0",
+      "sha256": "8419d8f54da2bfa14164f3894482ee3dec2c7c760a0c7d37cefdd52b2e4d67f7",
+      "size": 138761
+    },
+    {
+      "name": "Az.ApiManagement",
+      "version": "4.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ApiManagement/4.2.0",
+      "sha256": "1aaca7ad3b8664af4972566b88745b1af47ec0d0421c3e2028b09ce7f7f016e5",
+      "size": 1335302
+    },
+    {
+      "name": "Az.App",
+      "version": "2.0.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.App/2.0.1",
+      "sha256": "e71f1c975469664c67e1b1790a6f6816b64fad222a2b4b5322d941819bd884f6",
+      "size": 1929577
+    },
+    {
+      "name": "Az.AppConfiguration",
+      "version": "2.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.AppConfiguration/2.2.0",
+      "sha256": "34e656cfaa57c65565fdfaa61212198b474b7cb18b93b793306d653a8552a6be",
+      "size": 1102310
+    },
+    {
+      "name": "Az.ApplicationInsights",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ApplicationInsights/3.0.0",
+      "sha256": "c8b21d69d756c85c92080dc41f21b85b9fcc5369b5b246722f791b3a39dc3447",
+      "size": 1127315
+    },
+    {
+      "name": "Az.ArcResourceBridge",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ArcResourceBridge/2.0.0",
+      "sha256": "305165b6faaaa3275fb1d76cdb97a5911f10ada551875d9d5f254ef02aff154f",
+      "size": 442206
+    },
+    {
+      "name": "Az.ArizeAI",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ArizeAI/1.0.0",
+      "sha256": "b8bd121559c566619795ede0367e20bb8724756920623686860d46f6804a4d6c",
+      "size": 409738
+    },
+    {
+      "name": "Az.Attestation",
+      "version": "3.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Attestation/3.1.0",
+      "sha256": "1cd005e8d477065d627e94ff25de8e94169bf363245d3a4e1d8d401b84fecf51",
+      "size": 623194
+    },
+    {
+      "name": "Az.Automanage",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Automanage/2.0.0",
+      "sha256": "3b30f7661274e5051444121175753ac39e211361faf59ee1e2668306ba32743d",
+      "size": 627687
+    },
+    {
+      "name": "Az.Automation",
+      "version": "1.12.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Automation/1.12.1",
+      "sha256": "5729e1a21d08dd996e84f434995327fdbee8c7311b4fdd9898617bb819758f2c",
+      "size": 508788
+    },
+    {
+      "name": "Az.Batch",
+      "version": "4.1.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Batch/4.1.1",
+      "sha256": "e9237010f0a60710395a26c3bebec14b88d22e4d3d6cbf6dcaf1f54b61ac4821",
+      "size": 908320
+    },
+    {
+      "name": "Az.Billing",
+      "version": "2.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Billing/2.3.0",
+      "sha256": "135c9277060115a17b4006090ad2c09c3cb3aa093779c8987bfb4fdbb5a22d80",
+      "size": 360150
+    },
+    {
+      "name": "Az.Cdn",
+      "version": "6.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Cdn/6.2.0",
+      "sha256": "1d60ec6bb1a39356c6fd3b24f454b4f2aa18facfbc4c4ac850620ed074e2aed1",
+      "size": 3389300
+    },
+    {
+      "name": "Az.CloudService",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.CloudService/3.0.0",
+      "sha256": "f3ce194baf49197f1940db31b8ee2969f3d98cc00c312954bce9e2212217f458",
+      "size": 1058505
+    },
+    {
+      "name": "Az.CognitiveServices",
+      "version": "1.17.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.CognitiveServices/1.17.1",
+      "sha256": "8c2a3da19f85a0ea40637790f951259963ed6b2328f477622d69e6dcc65b7938",
+      "size": 276206
+    },
+    {
+      "name": "Az.Compute",
+      "version": "11.9.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Compute/11.9.0",
+      "sha256": "02626e5e7c9aff2202acf26cf0c6193472a0bbaa06ecdf07c17122100f833cee",
+      "size": 3489391
+    },
+    {
+      "name": "Az.ConfidentialLedger",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ConfidentialLedger/2.0.0",
+      "sha256": "f2fbee72a74e640fdfcb2ba61364064673a36ece473463b915f013a47bb15c07",
+      "size": 426801
+    },
+    {
+      "name": "Az.ConnectedMachine",
+      "version": "1.1.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ConnectedMachine/1.1.1",
+      "sha256": "bbe2430b45ce2994b6cb836adf63bfcebde5bcc3c8ded7f86e2957a8b305d943",
+      "size": 1237538
+    },
+    {
+      "name": "Az.ContainerInstance",
+      "version": "5.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ContainerInstance/5.0.0",
+      "sha256": "ed9287d13cd31cd1053a5fb9f44d90445d9311b5c0ad25c520bcaa8ed203c0b2",
+      "size": 835498
+    },
+    {
+      "name": "Az.ContainerRegistry",
+      "version": "5.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ContainerRegistry/5.1.0",
+      "sha256": "5bdef858c44c04cab7d437669d9cf04ce5ec422291e10d8168fafd8934a77354",
+      "size": 2036849
+    },
+    {
+      "name": "Az.CosmosDB",
+      "version": "1.22.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.CosmosDB/1.22.0",
+      "sha256": "756ee3bdb3d4cb731adb5751ab5a46e9bbd438cc46d23c14666c929bd4a44f4c",
+      "size": 983496
+    },
+    {
+      "name": "Az.DataBoxEdge",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataBoxEdge/1.3.0",
+      "sha256": "10546114e8a6f5f0cbe7fb9b9243e9dce0ee3d507dd5268cb2e8c33510f3ad1d",
+      "size": 272303
+    },
+    {
+      "name": "Az.Databricks",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Databricks/2.0.0",
+      "sha256": "06ce1cd515259157a8d047439bd3668f2a61bfa79a36a58259e1037551580a14",
+      "size": 693975
+    },
+    {
+      "name": "Az.DataFactory",
+      "version": "1.20.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataFactory/1.20.1",
+      "sha256": "fd7d2581c5459370dcb34775616049e9f9580147796c0369a31ed761a65c06e8",
+      "size": 1289864
+    },
+    {
+      "name": "Az.DataLakeAnalytics",
+      "version": "1.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataLakeAnalytics/1.2.0",
+      "sha256": "940038e15cbea528dd362bd2b24520dce44c96441de12c4601a15337bf5c4a59",
+      "size": 314354
+    },
+    {
+      "name": "Az.DataLakeStore",
+      "version": "1.6.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataLakeStore/1.6.0",
+      "sha256": "e1356570da2b12f2d86dd7a6033bb5cf03800f20953694cdf3ce03b712039c1f",
+      "size": 732915
+    },
+    {
+      "name": "Az.DataMigration",
+      "version": "1.1.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataMigration/1.1.1",
+      "sha256": "7c3f6f8419ecc53f4c7a9a3aeef91070acbfd1468320586396f68c80a4bfeba1",
+      "size": 978763
+    },
+    {
+      "name": "Az.DataProtection",
+      "version": "3.0.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataProtection/3.0.1",
+      "sha256": "880635da4c9b563e2af34550a0b8bdbed8f84eb0ebea8dc39f6f11d2955e51aa",
+      "size": 1684360
+    },
+    {
+      "name": "Az.DataShare",
+      "version": "1.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataShare/1.2.0",
+      "sha256": "a4463f20ffae345432110b399eed8b99bc9875bdf80d31c71497bd55f57fa5b1",
+      "size": 223201
+    },
+    {
+      "name": "Az.DataTransfer",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DataTransfer/1.0.0",
+      "sha256": "332975aa80acec56948467a7a16d1f03c423cf39cbc288f55b0c3875704bed05",
+      "size": 747584
+    },
+    {
+      "name": "Az.DesktopVirtualization",
+      "version": "6.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DesktopVirtualization/6.0.0",
+      "sha256": "9a18893336ca89de78bb624695b51d5c6939bc3ac5a927e3a3cb029d62b04ef5",
+      "size": 1395367
+    },
+    {
+      "name": "Az.DevCenter",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DevCenter/3.0.0",
+      "sha256": "32ad14e7c1b5ea620638177350da54d56f0beeacd20eaf64069982a26c04f39a",
+      "size": 2994454
+    },
+    {
+      "name": "Az.DeviceRegistry",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DeviceRegistry/1.0.0",
+      "sha256": "db9a89590383b4bf85a2126d888fc29a8b4062478cfef429a0c80afb8c0a81e7",
+      "size": 1207678
+    },
+    {
+      "name": "Az.DevTestLabs",
+      "version": "1.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DevTestLabs/1.2.0",
+      "sha256": "294ac4c7ac6c2acafe3865cd86b05d4658c76ca0f684f181845b306c081bade6",
+      "size": 274739
+    },
+    {
+      "name": "Az.Dns",
+      "version": "2.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Dns/2.2.0",
+      "sha256": "6d47b1b4a40875cb48d9da43803bae22ac7f859ea33ef5cf969370737faeb698",
+      "size": 564749
+    },
+    {
+      "name": "Az.DnsResolver",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.DnsResolver/2.0.0",
+      "sha256": "63c8dcb06d9d30fb48014ff55df706c8d84c96e52160ed1e2a09b74edae609d3",
+      "size": 1059419
+    },
+    {
+      "name": "Az.ElasticSan",
+      "version": "1.7.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ElasticSan/1.7.0",
+      "sha256": "cf4ecd93b594a88ea7fcd68ec69e8986ec12c05b3f7c3c487b490020e2fdf367",
+      "size": 771901
+    },
+    {
+      "name": "Az.EventGrid",
+      "version": "2.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.EventGrid/2.2.0",
+      "sha256": "920a9069d2fa78730cbaa07902916e50c3b593a9a0e62c4d2195d67a548020cf",
+      "size": 2858135
+    },
+    {
+      "name": "Az.EventHub",
+      "version": "5.6.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.EventHub/5.6.0",
+      "sha256": "d08e4b2b49b1e53b4fffbc7f4b947c8205ad67395de89078a970b941da764b64",
+      "size": 1647393
+    },
+    {
+      "name": "Az.Fabric",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Fabric/1.0.0",
+      "sha256": "a01c206dfab90c182679d3c11cc9eddc13b48d5a553ecb3e7dc6ab75eba6f668",
+      "size": 441878
+    },
+    {
+      "name": "Az.FileShare",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.FileShare/1.0.0",
+      "sha256": "a40847891bb871af9a360c86d2cf519c539cba49d520fdf0e9ee7a00433d402f",
+      "size": 574675
+    },
+    {
+      "name": "Az.FirmwareAnalysis",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.FirmwareAnalysis/1.0.0",
+      "sha256": "93fb00be7e40eb37f44cac882ca3ed6eee8ee038b670a441172086fb482404f7",
+      "size": 603173
+    },
+    {
+      "name": "Az.FrontDoor",
+      "version": "2.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.FrontDoor/2.3.0",
+      "sha256": "658f6e496a31b13421a852e8a9b722e914d451a2258fadcd81bfe9e78b9dafbd",
+      "size": 1294712
+    },
+    {
+      "name": "Az.Functions",
+      "version": "5.0.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Functions/5.0.1",
+      "sha256": "af4fd72daae063fe4ca2aa90c5345fa6fbbcc8a1406e5530c89840b60ca366cb",
+      "size": 5159736
+    },
+    {
+      "name": "Az.HDInsight",
+      "version": "6.5.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.HDInsight/6.5.0",
+      "sha256": "ac03fd7b951d504e59e143c7b93ed02e0999043fde11c1bad8fa428628038b37",
+      "size": 590931
+    },
+    {
+      "name": "Az.HealthcareApis",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.HealthcareApis/3.0.0",
+      "sha256": "e163728fe3ed30b538944948d12229a920e99eba20a652a21fce62d2dbe5ca57",
+      "size": 950524
+    },
+    {
+      "name": "Az.HealthDataAIServices",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.HealthDataAIServices/1.0.0",
+      "sha256": "064e51a677d0b857031543414305afaa53a4219558311a9087f0968185cf0ca0",
+      "size": 432718
+    },
+    {
+      "name": "Az.IotHub",
+      "version": "2.9.2",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.IotHub/2.9.2",
+      "sha256": "f050b8e59191957847e93625876c34eae32ca07a3c6cc843a747c9ca9f89cc09",
+      "size": 1255962
+    },
+    {
+      "name": "Az.KeyVault",
+      "version": "6.6.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.KeyVault/6.6.1",
+      "sha256": "a2d3ed00c5547124b9ebfba7779240c006d4cefa6a3a6f30b788250083b3b79d",
+      "size": 2983496
+    },
+    {
+      "name": "Az.Kusto",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Kusto/3.0.0",
+      "sha256": "46940a2d4f04fa3b754c27d1f457159f0f1b319ac1e551d61baf4c2e948583ff",
+      "size": 1521468
+    },
+    {
+      "name": "Az.LambdaTest",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.LambdaTest/1.0.0",
+      "sha256": "506ec37e38f59ec7310afcb1c234a8b54a32939d6e6ef74302446381bd9fe923",
+      "size": 410491
+    },
+    {
+      "name": "Az.LoadTesting",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.LoadTesting/2.0.0",
+      "sha256": "d459fa60e0d4487041810a5392b5a38506e093a74f93b40dc00f8551b0ae1e38",
+      "size": 455753
+    },
+    {
+      "name": "Az.LogicApp",
+      "version": "1.7.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.LogicApp/1.7.0",
+      "sha256": "bda598a1ec1633bdfd43621bdca7589c7f396c0cc665ab88dfb218d37c967e4f",
+      "size": 331047
+    },
+    {
+      "name": "Az.MachineLearning",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.MachineLearning/1.3.0",
+      "sha256": "7f3d75ee2df5907a54d0de0aa6cf1fbf1ec270d678d437a8862292d5d357804d",
+      "size": 136032
+    },
+    {
+      "name": "Az.MachineLearningServices",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.MachineLearningServices/2.0.0",
+      "sha256": "48a8f2fc8b8d57934b25773b30189a7d77eb4d3bbc1ee0ab94951905af509965",
+      "size": 3742627
+    },
+    {
+      "name": "Az.Maintenance",
+      "version": "1.6.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Maintenance/1.6.0",
+      "sha256": "e99f77fa04f3aeb722404dcbf5b0ece4b17c59130e4a8d3c6272f39808c699d6",
+      "size": 283278
+    },
+    {
+      "name": "Az.ManagedServiceIdentity",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ManagedServiceIdentity/2.0.0",
+      "sha256": "ead7d929e83ed2d6d88ed025ddc532d669e315907417b939e33d0b2edeffee59",
+      "size": 505261
+    },
+    {
+      "name": "Az.ManagedServices",
+      "version": "4.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ManagedServices/4.0.0",
+      "sha256": "1927ff963d54df0857059eb3a5a675b5512800cf41a68b92869567afb4840856",
+      "size": 499136
+    },
+    {
+      "name": "Az.MarketplaceOrdering",
+      "version": "2.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.MarketplaceOrdering/2.2.0",
+      "sha256": "ccdf1e960358dd6b27a46cbeb55bb04fd6cd4e5e5e807fe4a26261239addea08",
+      "size": 394011
+    },
+    {
+      "name": "Az.Migrate",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Migrate/3.0.0",
+      "sha256": "bd85f27c6acdec35597f1b7d35731b2982655f90489b841b34cbf7c9be6fe15f",
+      "size": 3881208
+    },
+    {
+      "name": "Az.Monitor",
+      "version": "8.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Monitor/8.0.0",
+      "sha256": "8fe2942460881f3949253963978b91a6479503bbe9afc3c5f9e876881a02ffbb",
+      "size": 4623431
+    },
+    {
+      "name": "Az.MySql",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.MySql/2.0.0",
+      "sha256": "8c69747d302d5ecd70f6c750608c05489d96aa92c11dfc7104a6685eea9b6592",
+      "size": 883353
+    },
+    {
+      "name": "Az.NetAppFiles",
+      "version": "1.4.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.NetAppFiles/1.4.1",
+      "sha256": "20b3315573cab2a2372ca832669680b4414812d37689d7bb3336af64b3f87947",
+      "size": 646621
+    },
+    {
+      "name": "Az.Network",
+      "version": "8.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Network/8.2.0",
+      "sha256": "3c44b9de4b101dff7f102573e3095b2485313030f15fbf4819ddaf292562db5d",
+      "size": 4145867
+    },
+    {
+      "name": "Az.NetworkCloud",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.NetworkCloud/3.0.0",
+      "sha256": "d2cf8c076e6a178ebfa5a82865a714cc662d02c91a113dd922f115df01b912aa",
+      "size": 2134334
+    },
+    {
+      "name": "Az.Nginx",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Nginx/2.0.0",
+      "sha256": "e9c5e80daeeec149b0c94766e11663f3ab77df1af4ec746823cd0dc3b39effe0",
+      "size": 620062
+    },
+    {
+      "name": "Az.NotificationHubs",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.NotificationHubs/1.3.0",
+      "sha256": "8bd7a7ea9e4ab27b40ce7df3aaf0302ced19b76454e51185611a134340d0d404",
+      "size": 134789
+    },
+    {
+      "name": "Az.OperationalInsights",
+      "version": "3.4.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.OperationalInsights/3.4.1",
+      "sha256": "654ab0cbfb38dbacdad09ed1bf562221602ce9dd56f3c4bd162723ba88ef0644",
+      "size": 319030
+    },
+    {
+      "name": "Az.Oracle",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Oracle/2.0.0",
+      "sha256": "b393f774661bea6fa99f4d7bb178c68e95f700a8c2fba93bb057262aab68ea90",
+      "size": 1678541
+    },
+    {
+      "name": "Az.PolicyInsights",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.PolicyInsights/2.0.0",
+      "sha256": "88fa1ed509dfffcfba37c9597b855200640634e625fa1dc6d5cebc857c30b241",
+      "size": 1079684
+    },
+    {
+      "name": "Az.PowerBIEmbedded",
+      "version": "2.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.PowerBIEmbedded/2.2.0",
+      "sha256": "66e2fb13f7d5219e003a80708bbeeb90ac54906a100a7d3eb1955054c8ae70d2",
+      "size": 142807
+    },
+    {
+      "name": "Az.PrivateDns",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.PrivateDns/1.3.0",
+      "sha256": "763874cbd5f3b84fdf1ee4374058580403e4824184ac4164d6a31ab477106b5e",
+      "size": 146682
+    },
+    {
+      "name": "Az.RecoveryServices",
+      "version": "7.14.1",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.RecoveryServices/7.14.1",
+      "sha256": "7042c52897688d66de0e0c4b4bfc209e44f56982d0aa50c24217f4f9931d0992",
+      "size": 1911260
+    },
+    {
+      "name": "Az.RedisCache",
+      "version": "1.12.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.RedisCache/1.12.0",
+      "sha256": "8d5b5a02fac58a4472f02c136b158ca1006670a48998f3d9e4b6f5dbc8bd26b7",
+      "size": 271372
+    },
+    {
+      "name": "Az.RedisEnterpriseCache",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.RedisEnterpriseCache/2.0.0",
+      "sha256": "d3ea053d098b6eb3ddc7230f7a6a8652298905d5820c9060c4f886bb428678be",
+      "size": 813134
+    },
+    {
+      "name": "Az.Relay",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Relay/3.0.0",
+      "sha256": "7bc633d7843b90c9db002e01004431d4e4636720f3c167a2be7fc2692bfc3622",
+      "size": 866725
+    },
+    {
+      "name": "Az.ResourceGraph",
+      "version": "1.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ResourceGraph/1.3.0",
+      "sha256": "55a7a30d33b83bb2de451153c5c6da91a175ef3ccb05466216ca6ddc03ac0693",
+      "size": 458026
+    },
+    {
+      "name": "Az.ResourceMover",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ResourceMover/2.0.0",
+      "sha256": "30f936793905ddde6b01fc3dc54bd02206d9572ad27d1d948901ec6a5dc55dce",
+      "size": 617212
+    },
+    {
+      "name": "Az.Resources",
+      "version": "10.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Resources/10.2.0",
+      "sha256": "d291d048b6e303c18acb71c57d1ed5ccc7e953ad915a7e34960ce91dff8dacab",
+      "size": 6111147
+    },
+    {
+      "name": "Az.Security",
+      "version": "1.10.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Security/1.10.0",
+      "sha256": "8684e1c3d8f1e8f4cbe9719ff1ee318a632689ae0754a8d4cc3469fca02a86dd",
+      "size": 2055323
+    },
+    {
+      "name": "Az.SecurityInsights",
+      "version": "4.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.SecurityInsights/4.0.0",
+      "sha256": "dcd247162407a621fdbd79870bddeb87a10e1f6f25738ed648e57b0c3da75787",
+      "size": 1907438
+    },
+    {
+      "name": "Az.ServiceBus",
+      "version": "4.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ServiceBus/4.3.0",
+      "sha256": "bef621a8ed136e77311fab659f1b9ab81289e46e0e3730bacfdddbcf6fd89b82",
+      "size": 1649516
+    },
+    {
+      "name": "Az.ServiceFabric",
+      "version": "5.2.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.ServiceFabric/5.2.0",
+      "sha256": "bed0b0d516a33e498f47680860e7fc0d0b53b71e21434161fb85f74f350daac1",
+      "size": 699046
+    },
+    {
+      "name": "Az.SignalR",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.SignalR/3.0.0",
+      "sha256": "aeb7475f1bf6a9cfbe28282d0a5cc668734f7a54be61ba26e28ca48b6af76f15",
+      "size": 961294
+    },
+    {
+      "name": "Az.Sql",
+      "version": "7.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Sql/7.1.0",
+      "sha256": "18828c52e92a86be3a8d3a700fff0f4f9063fb95ddceaa4c8c0eef8d45964db3",
+      "size": 1916399
+    },
+    {
+      "name": "Az.SqlVirtualMachine",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.SqlVirtualMachine/3.0.0",
+      "sha256": "c37035ab2f1ecb185d45bf65b9db884b86cd6469266fe94823691e27cf0783a9",
+      "size": 712936
+    },
+    {
+      "name": "Az.StackHCI",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StackHCI/3.0.0",
+      "sha256": "912c94bfe1ac885cdf011f58c8c694cf24ce5cfa63d851a3e7083f65f945aac0",
+      "size": 1158161
+    },
+    {
+      "name": "Az.StackHCIVM",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StackHCIVM/2.0.0",
+      "sha256": "9d98ab66a48c9dbfac9946e79244730f6cda453328ac55d0dd203de7addfa443",
+      "size": 1657626
+    },
+    {
+      "name": "Az.Storage",
+      "version": "9.7.2",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Storage/9.7.2",
+      "sha256": "3315c55c108f6da11a704cebae3094b447a4cd57861a2fa1f37af685526578bc",
+      "size": 6140621
+    },
+    {
+      "name": "Az.StorageAction",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StorageAction/2.0.0",
+      "sha256": "f18c46e10ba9a348a4ec37c8fc0450a0b04dd8a95526ebb28bcca46862048d56",
+      "size": 478544
+    },
+    {
+      "name": "Az.StorageDiscovery",
+      "version": "1.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StorageDiscovery/1.0.0",
+      "sha256": "e39d53e01a201bff81a75ccdee8c66be1c32c4aaaa69b4903368009f28deace9",
+      "size": 433989
+    },
+    {
+      "name": "Az.StorageMover",
+      "version": "2.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StorageMover/2.1.0",
+      "sha256": "738df7b8a5fa95d11c7999c3c2512e6e4e0d77a8a1726abddb098c8fe78a4613",
+      "size": 999546
+    },
+    {
+      "name": "Az.StorageSync",
+      "version": "2.6.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StorageSync/2.6.0",
+      "sha256": "1d92cc790840afd8cdc9c6603b8c17005db17e444919adb51debd51d9ef6a062",
+      "size": 516991
+    },
+    {
+      "name": "Az.StreamAnalytics",
+      "version": "3.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.StreamAnalytics/3.0.0",
+      "sha256": "026bf57c016a2603145e270ff685ef0f727e8fb50c6e4921a35d1c2df7f63d7d",
+      "size": 1096339
+    },
+    {
+      "name": "Az.Support",
+      "version": "2.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Support/2.1.0",
+      "sha256": "d2b0d6fb242007ef8776c9de97cdf3353612bb2c199b7cb098c04fde1a14f836",
+      "size": 774251
+    },
+    {
+      "name": "Az.Synapse",
+      "version": "3.3.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Synapse/3.3.0",
+      "sha256": "102d61c8ed99c393f627dca37fbe42b118fad0f60c49e0c19a55d35c9f92719b",
+      "size": 2640021
+    },
+    {
+      "name": "Az.TrafficManager",
+      "version": "1.4.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.TrafficManager/1.4.0",
+      "sha256": "5870a831d5c395c6f7148c677b6f0e0ee538173a8faed24ebe998800fedd7f6e",
+      "size": 131942
+    },
+    {
+      "name": "Az.Websites",
+      "version": "4.1.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Websites/4.1.0",
+      "sha256": "ec5825f3aaa53dc869ee8c24ec1c4cd299f9e7623afca47357a78d4fe7bea9c2",
+      "size": 2805279
+    },
+    {
+      "name": "Az.Workloads",
+      "version": "2.0.0",
+      "topLevel": false,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Az.Workloads/2.0.0",
+      "sha256": "0a9b1c565290844602be4be15bef19662e5c67dfa8c89e2cc3111fe37b7f15cf",
+      "size": 1533453
+    },
+    {
+      "name": "Microsoft.Graph.Applications",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Applications/2.39.0",
+      "sha256": "8d705873171e61e017cb5f525804c4ac2c15828fd8aad8374cc155732562a37f",
+      "size": 4456581
+    },
+    {
+      "name": "Microsoft.Graph.Authentication",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication/2.39.0",
+      "sha256": "2b91eed8dbb28875f0e7884ebf4e087d44fb49722fd730f7ed1fc1d873b90d62",
+      "size": 8115029
+    },
+    {
+      "name": "Microsoft.Graph.Groups",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Groups/2.39.0",
+      "sha256": "526c558609925658a691e4c8b216f5de2fc39685eaea897cfe15908a82ac0615",
+      "size": 4787483
+    },
+    {
+      "name": "Microsoft.Graph.Identity.DirectoryManagement",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Identity.DirectoryManagement/2.39.0",
+      "sha256": "8ae9736272662510fd4ba303c6d9c9aca031395e6cd86e296ffc84f0b4fb800d",
+      "size": 5002154
+    },
+    {
+      "name": "Microsoft.Graph.Identity.Governance",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Identity.Governance/2.39.0",
+      "sha256": "9bea64f0f40c405ee208f83c80fa130cd1b0083ec9dba0fb313c500cdc7d7903",
+      "size": 20505923
+    },
+    {
+      "name": "Microsoft.Graph.Identity.SignIns",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Identity.SignIns/2.39.0",
+      "sha256": "355d7ef5ec851600724b8b69fda77a788bca74de7925aa456b7e45e5ddbd0dff",
+      "size": 5472527
+    },
+    {
+      "name": "Microsoft.Graph.Reports",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Reports/2.39.0",
+      "sha256": "a2247226394de80f6615678dd9864e9cf7923b1e0dea12551952a4e71d2a8b69",
+      "size": 1515229
+    },
+    {
+      "name": "Microsoft.Graph.Users",
+      "version": "2.39.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users/2.39.0",
+      "sha256": "a5975db5f42f2e74169c25b9ce73d89f778a0de2d09e393ac6df20f765017360",
+      "size": 5573401
+    },
+    {
+      "name": "Pester",
+      "version": "5.7.1",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/Pester/5.7.1",
+      "sha256": "4a27904c6814a5fbe4758f8e49861f6a1994aee77b71165a5c43c0371ba6c580",
+      "size": 325233
+    },
+    {
+      "name": "PSScriptAnalyzer",
+      "version": "1.25.0",
+      "topLevel": true,
+      "uri": "https://www.powershellgallery.com/api/v2/package/PSScriptAnalyzer/1.25.0",
+      "sha256": "14e634c828eb98efb9f40b2918ba90f139ed5eccdf663a2a747736d996995d60",
+      "size": 14658674
+    }
+  ]
+}

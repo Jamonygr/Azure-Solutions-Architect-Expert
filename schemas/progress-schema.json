@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:az305:schema:progress:1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "exportedAt", "labs"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "exportedAt": {"type": "string", "format": "date-time"},
+    "labs": {
+      "type": "object",
+      "minProperties": 28,
+      "maxProperties": 28,
+      "propertyNames": {
+        "enum": ["LAB-00", "LAB-01", "LAB-02", "LAB-03", "LAB-04", "LAB-05", "LAB-06", "LAB-07", "LAB-08", "LAB-09", "LAB-10", "LAB-11", "LAB-12", "LAB-13", "LAB-14", "LAB-15", "LAB-16", "LAB-17", "LAB-18", "LAB-19", "LAB-20", "LAB-21", "LAB-22", "LAB-23", "LAB-24", "LAB-25", "LAB-26", "LAB-27"]
+      },
+      "patternProperties": {
+        "^LAB-(0[1-9]|1[0-9]|2[0-5])$": {"$ref": "#/$defs/scoredLab"},
+        "^LAB-(00|26|27)$": {"$ref": "#/$defs/unscoredLab"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "baseProperties": {
+      "completed": {"type": "boolean"},
+      "checkpoints": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "boolean"}}
+    },
+    "scoredLab": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed", "checkpoints", "score"],
+      "properties": {
+        "completed": {"type": "boolean"},
+        "checkpoints": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "boolean"}},
+        "score": {"type": ["integer", "null"], "minimum": 0, "maximum": 50}
+      }
+    },
+    "unscoredLab": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed", "checkpoints"],
+      "properties": {
+        "completed": {"type": "boolean"},
+        "checkpoints": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "boolean"}}
+      }
+    }
+  }
+}
