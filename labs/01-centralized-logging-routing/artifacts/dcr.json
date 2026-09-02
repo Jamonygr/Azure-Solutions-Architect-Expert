@@ -1,0 +1,37 @@
+{
+  "location": "westeurope",
+  "properties": {
+    "dataSources": {
+      "performanceCounters": [
+        {
+          "name": "baseline",
+          "streams": [
+            "Microsoft-Perf"
+          ],
+          "samplingFrequencyInSeconds": 60,
+          "counterSpecifiers": [
+            "\\Processor(_Total)\\% Processor Time"
+          ]
+        }
+      ]
+    },
+    "destinations": {
+      "logAnalytics": [
+        {
+          "name": "regional",
+          "workspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000305/resourceGroups/rg-synthetic/providers/Microsoft.OperationalInsights/workspaces/log-synthetic"
+        }
+      ]
+    },
+    "dataFlows": [
+      {
+        "streams": [
+          "Microsoft-Perf"
+        ],
+        "destinations": [
+          "regional"
+        ]
+      }
+    ]
+  }
+}

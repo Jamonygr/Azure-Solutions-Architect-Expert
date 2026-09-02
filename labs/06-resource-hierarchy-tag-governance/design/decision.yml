@@ -1,0 +1,143 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-06
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Archetype-based management groups with workload subscriptions and governed tags
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 3
+    C5: 4
+  weightedTotal: 92.0
+  rationale: Archetypes provide stable inheritance for platform, sandbox, and regulated workloads while subscription
+    ownership preserves billing separation.
+- id: CAND-B
+  name: Management groups that mirror the corporate reporting hierarchy
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 4
+    C4: 2
+    C5: 3
+  weightedTotal: 61.0
+  rationale: A reporting hierarchy appears intuitive, but reorganizations force technical inheritance changes unrelated
+    to workload risk.
+- id: CAND-C
+  name: One shared subscription with resource groups per application
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 3
+    C3: 2
+    C4: 4
+    C5: 3
+  weightedTotal: 53.0
+  rationale: Resource groups simplify the initial estate but cannot provide independent subscription billing and
+    administrative isolation.
+- id: CAND-D
+  name: Resource-group-only tagging with no inherited policy boundary
+  eligible: false
+  disqualifiers:
+  - LAB06-REQ-01 requires durable management-group archetypes that can inherit regional and security guardrails.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 2
+    C4: 2
+    C5: 4
+  weightedTotal: 38.0
+  rationale: Tags without inherited enforcement describe intent but cannot prevent a disallowed deployment or preserve
+    subsidiary separation.
+selectedCandidate: Archetype-based management groups with workload subscriptions and governed tags
+rejectedAlternatives:
+- candidate: Management groups that mirror the corporate reporting hierarchy
+  reason: Organizational churn weakens policy stability and creates avoidable migration work.
+- candidate: One shared subscription with resource groups per application
+  reason: The model cannot preserve the subsidiary's required billing and administrator boundary at useful scope.
+- candidate: Resource-group-only tagging with no inherited policy boundary
+  reason: It is disqualified because metadata alone cannot enforce the mandatory hierarchy controls.
+risks:
+- risk: Existing assignments at lower scopes can conflict with or dilute new inherited policies.
+  mitigation: Export effective policy state, resolve conflicts in a canary subscription, and move subscriptions
+    only after both assertions pass.
+- risk: Tag inheritance can overwrite a valid workload-specific financial owner.
+  mitigation: Define precedence per tag key and test append, inherit, and deny behavior against representative resources.
+waf:
+  reliability: Stable archetypes keep critical guardrails attached through organizational change and subscription
+    growth.
+  security: Inherited security and European-location policies establish a consistent subsidiary boundary.
+  costOptimization: Separate billing plus governed allocation tags makes shared and workload cost attributable.
+  operationalExcellence: Versioned hierarchy, policy, and exemption records expose drift and simplify onboarding.
+  performanceEfficiency: Management-group evaluation scales across subscriptions without duplicating assignments
+    at every resource group.
+safeAnalogue: Score a synthetic tenant hierarchy and policy-state fixture, including conflicts and exemptions, without
+  moving a subscription or assigning policy.
+traceability:
+- objectiveId: IGM-GOV-01
+  requirementId: LAB06-REQ-01
+  checkpointId: LAB06-CP01
+- objectiveId: IGM-GOV-01
+  requirementId: LAB06-REQ-02
+  checkpointId: LAB06-CP02
+- objectiveId: IGM-GOV-01
+  requirementId: LAB06-REQ-03
+  checkpointId: LAB06-CP03
+- objectiveId: IGM-GOV-01
+  requirementId: LAB06-REQ-04
+  checkpointId: LAB06-CP04
+- objectiveId: IGM-GOV-01
+  requirementId: LAB06-REQ-05
+  checkpointId: LAB06-CP05
+adr:
+  id: ADR-LAB06-001
+  status: accepted
+  context: Contoso Manufacturing has one tenant, twelve subscriptions, and rapidly growing regional programs. Its
+    current structure mirrors temporary project teams, tags use inconsistent names, and cost, ownership, residency,
+    and environment cannot be queried reliably. The platform board wants a durable Cloud Adoption Framework-aligned
+    hierarchy that delegates at stable boundaries without turning management groups into an organizational chart.
+    As the governance architect, design management groups, subscription placement, resource-group lifecycles, and
+    a controlled tag vocabulary. Demonstrate scope inheritance and portfolio queries through Azure CLI, but leave
+    policy compliance evidence and identity lifecycle governance to Lab 07.
+  decision: 'Select Archetype-based management groups with workload subscriptions and governed tags: Archetypes
+    provide stable inheritance for platform, sandbox, and regulated workloads while subscription ownership preserves
+    billing separation.'
+  consequences:
+  - Corporate reporting remains a metadata concern rather than controlling the technical hierarchy.
+  - Subsidiary administrators gain subscription autonomy but cannot bypass inherited regional and security policy.
+revisedDecision:
+  changeRequestId: LAB06-CR-01
+  selectedCandidate: Archetype-based management groups with workload subscriptions and governed tags
+  reason: LAB06-REQ-01 requires the hierarchy to follow durable governance archetypes, so the subsidiary receives
+    its own regulated branch beneath inherited European controls without mirroring reporting lines.
+  mandatoryRequirementId: LAB06-REQ-01
+  waf:
+    reliability: The subsidiary keeps the same guardrails when its corporate reporting line changes.
+    security: Approved-region and security initiatives inherit above the subsidiary subscription boundary.
+    costOptimization: Billing remains directly attributable while shared services use governed allocation tags.
+    operationalExcellence: A dedicated archetype documents onboarding, exemption, and administrator responsibilities.
+    performanceEfficiency: One inherited policy set replaces repeated assignments across subsidiary workloads.
+# END GENERATED AZ305 V1

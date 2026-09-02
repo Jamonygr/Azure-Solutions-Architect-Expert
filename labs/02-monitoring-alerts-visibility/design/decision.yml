@@ -1,0 +1,144 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-02
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Service-centric alerts with shared action groups and curated workbooks
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 4
+    C4: 5
+    C5: 4
+  weightedTotal: 89.0
+  rationale: SLO-oriented multi-signal alerts correlate customer impact, dependency state, and deployment context
+    while reusable action groups control routing.
+- id: CAND-B
+  name: Resource-by-resource static thresholds with team-specific receivers
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 4
+    C4: 2
+    C5: 3
+  weightedTotal: 61.0
+  rationale: Static resource rules are easy to assign but amplify transient promotion noise and obscure end-to-end
+    payment impact.
+- id: CAND-C
+  name: External monitoring only with Azure telemetry exported downstream
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 3
+    C4: 3
+    C5: 2
+  weightedTotal: 58.0
+  rationale: External correlation can provide an independent vantage point, although export delay and lost Azure
+    resource context weaken first response.
+- id: CAND-D
+  name: One fixed latency threshold copied to every resource
+  eligible: false
+  disqualifiers:
+  - LAB02-REQ-03 requires a service-level query and evaluation window grounded in auditable customer impact.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 3
+    C4: 2
+    C5: 4
+  weightedTotal: 42.0
+  rationale: A copied threshold is cheap to create but cannot distinguish a planned demand surge from a failing
+    dependency.
+selectedCandidate: Service-centric alerts with shared action groups and curated workbooks
+rejectedAlternatives:
+- candidate: Resource-by-resource static thresholds with team-specific receivers
+  reason: It scores poorly on operability because duplicated thresholds and receiver lists drift independently.
+- candidate: External monitoring only with Azure telemetry exported downstream
+  reason: Export-only detection adds latency and makes Azure-native dependency and deployment context harder to
+    preserve.
+- candidate: One fixed latency threshold copied to every resource
+  reason: It is ineligible because it cannot meet the independent alert-quality acceptance criteria.
+risks:
+- risk: Dynamic thresholds may learn a promotion spike and suppress a genuine payment-path failure.
+  mitigation: Combine demand-aware baselines with an invariant failed-transaction or availability SLO signal.
+- risk: A shared action group can become a single notification dependency.
+  mitigation: Configure and exercise independent receiver types, then retain delivery-status evidence for each route.
+waf:
+  reliability: Multi-signal service alerts detect degraded customer outcomes even when individual resources report
+    healthy.
+  security: Least-privilege action-group maintenance and sanitized alert payloads limit exposure through notification
+    channels.
+  costOptimization: Curated rules reduce duplicate evaluations and the labor cost of unactionable pages.
+  operationalExcellence: Workbooks join SLO, dependency, deployment, and alert evidence into one triage sequence.
+  performanceEfficiency: Demand-relative thresholds absorb planned bursts while invariant failure signals protect
+    sensitivity.
+safeAnalogue: null
+traceability:
+- objectiveId: IGM-MON-01
+  requirementId: LAB02-REQ-01
+  checkpointId: LAB02-CP01
+- objectiveId: IGM-MON-01
+  requirementId: LAB02-REQ-02
+  checkpointId: LAB02-CP02
+- objectiveId: IGM-MON-01
+  requirementId: LAB02-REQ-03
+  checkpointId: LAB02-CP03
+- objectiveId: IGM-MON-01
+  requirementId: LAB02-REQ-04
+  checkpointId: LAB02-CP04
+- objectiveId: IGM-MON-01
+  requirementId: LAB02-REQ-05
+  checkpointId: LAB02-CP05
+adr:
+  id: ADR-LAB02-001
+  status: accepted
+  context: Fabrikam Payments has a centralized Log Analytics estate, but responders learn about customer impact
+    from support tickets. Platform metrics, resource health events, query-based service-level indicators, and application
+    telemetry are monitored by different teams with inconsistent thresholds. As the monitoring architect, design
+    the health model, action routing, alert severity, suppression, and workbook views that turn the collection architecture
+    from Lab 01 into actionable operational visibility. The solution must avoid noisy static thresholds, distinguish
+    symptoms from causes, preserve independent positive and negative validation, and document ownership for every
+    notification path without embedding personal addresses, secrets, or live incident data.
+  decision: 'Select Service-centric alerts with shared action groups and curated workbooks: SLO-oriented multi-signal
+    alerts correlate customer impact, dependency state, and deployment context while reusable action groups control
+    routing.'
+  consequences:
+  - Service owners must maintain SLO thresholds and promotion annotations as product behavior changes.
+  - Shared receiver governance becomes a platform responsibility with regular delivery tests.
+revisedDecision:
+  changeRequestId: LAB02-CR-01
+  selectedCandidate: Service-centric alerts with shared action groups and curated workbooks
+  reason: LAB02-REQ-03 requires an auditable customer-impact query, so the promotion case uses demand-relative latency
+    evaluation plus an invariant failure-rate signal rather than a static resource threshold.
+  mandatoryRequirementId: LAB02-REQ-03
+  waf:
+    reliability: Two independent signals prevent a benign traffic surge from hiding a true outage.
+    security: Receiver scopes and payload fields remain unchanged while alert logic evolves.
+    costOptimization: Noise suppression avoids a threefold burst producing redundant pages and log queries.
+    operationalExcellence: Promotion annotations give responders an auditable reason for changed baselines.
+    performanceEfficiency: Multi-window evaluation reflects short bursts without permanently raising the latency
+      threshold.
+# END GENERATED AZ305 V1

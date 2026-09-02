@@ -1,0 +1,144 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-04
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 5
+    C5: 3
+  weightedTotal: 91.0
+  rationale: Stable groups decouple personnel churn from role definitions and Arc-aware local delegation avoids
+    granting subscription networking rights.
+- id: CAND-B
+  name: Direct user assignments on individual resources and servers
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 2
+    C4: 2
+    C5: 4
+  weightedTotal: 55.0
+  rationale: Direct grants can be narrowly scoped but are difficult to expire, review, and reconcile as technicians
+    or factories change.
+- id: CAND-C
+  name: Subscription-wide custom roles mirrored into local administrator groups
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 4
+    C3: 2
+    C4: 3
+    C5: 3
+  weightedTotal: 55.0
+  rationale: A custom role can describe tasks precisely, yet subscription scope and permanent local mirroring enlarge
+    the blast radius.
+- id: CAND-D
+  name: Shared Owner account with permanent factory administrator membership
+  eligible: false
+  disqualifiers:
+  - LAB04-REQ-05 requires accountable separation between Azure actions and persistent guest operating-system privilege.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 1
+    C4: 1
+    C5: 4
+  weightedTotal: 36.0
+  rationale: A shared powerful account may reduce activation steps but destroys individual attribution and least
+    privilege.
+selectedCandidate: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+rejectedAlternatives:
+- candidate: Direct user assignments on individual resources and servers
+  reason: Assignment sprawl and person-by-person expiry weaken both auditability and operations.
+- candidate: Subscription-wide custom roles mirrored into local administrator groups
+  reason: The broad scope gives the provider capabilities beyond factory troubleshooting and complicates revocation.
+- candidate: Shared Owner account with permanent factory administrator membership
+  reason: The candidate is ineligible because standing shared privilege violates the provider boundary.
+risks:
+- risk: Azure role expiry may not remove a separately granted operating-system group membership.
+  mitigation: Reconcile cloud eligibility and Arc machine authorization as two explicit controls with the same end
+    date.
+- risk: An unavailable approver could delay urgent factory recovery.
+  mitigation: Assign a trained deputy, document emergency activation, and review every emergency use after the incident.
+waf:
+  reliability: Deputy approval and scoped emergency access preserve support during an identity-owner absence.
+  security: Group eligibility, minimal scopes, and Arc-specific delegation remove standing subscription and local-admin
+    privilege.
+  costOptimization: Reusable groups reduce assignment administration while governance-license cost remains visible.
+  operationalExcellence: Expiry, access reviews, and assignment exports provide one auditable provider offboarding
+    sequence.
+  performanceEfficiency: Stable group evaluation scales with personnel turnover without cloning role definitions
+    per server.
+safeAnalogue: Evaluate synthetic role assignments, eligibility schedules, and Arc server mappings with local fixtures;
+  issue no Azure or Graph mutation.
+traceability:
+- objectiveId: IGM-AUTHZ-01
+  requirementId: LAB04-REQ-01
+  checkpointId: LAB04-CP01
+- objectiveId: IGM-AUTHZ-02
+  requirementId: LAB04-REQ-02
+  checkpointId: LAB04-CP02
+- objectiveId: IGM-AUTHZ-01
+  requirementId: LAB04-REQ-03
+  checkpointId: LAB04-CP03
+- objectiveId: IGM-AUTHZ-02
+  requirementId: LAB04-REQ-04
+  checkpointId: LAB04-CP04
+- objectiveId: IGM-AUTHZ-01
+  requirementId: LAB04-REQ-05
+  checkpointId: LAB04-CP05
+adr:
+  id: ADR-LAB04-001
+  status: accepted
+  context: Adventure Works operates Azure subscriptions alongside factories whose Windows and Linux servers are
+    projected through Azure Arc. Authentication is standardized, yet authorization grew through direct owner assignments,
+    nested groups, and local administrator exceptions. Audit cannot explain why a principal can change a production
+    resource or read a vault secret. As the authorization architect, create a scope and delegation model using Microsoft
+    Entra groups, Azure RBAC, narrowly designed custom roles, resource-provider data-plane roles, and an explicit
+    hybrid boundary. The design must preserve separation of duties, expose inherited access, avoid classic administrators,
+    and distinguish Azure control-plane authorization from operating-system permissions on connected machines.
+  decision: 'Select Group-based Azure RBAC at stable scopes with Arc-aware local delegation: Stable groups decouple
+    personnel churn from role definitions and Arc-aware local delegation avoids granting subscription networking
+    rights.'
+  consequences:
+  - Plant owners accept responsibility for time-bound activation and review decisions.
+  - Local machine authorization must be monitored separately from Azure RBAC because neither proves the other.
+revisedDecision:
+  changeRequestId: LAB04-CR-01
+  selectedCandidate: Group-based Azure RBAC at stable scopes with Arc-aware local delegation
+  reason: LAB04-REQ-05 requires deterministic expiry and prohibited-network evidence, so the selected model adds
+    ninety-day eligible group access plus independent Arc local-membership removal.
+  mandatoryRequirementId: LAB04-REQ-05
+  waf:
+    reliability: A deputy activation route supports incidents without keeping access permanently active.
+    security: Provider permissions end automatically and exclude subscription-network operations.
+    costOptimization: Group-based renewal replaces repeated per-user assignment work.
+    operationalExcellence: Cloud and server revocation assertions expose partial offboarding.
+    performanceEfficiency: One stable role mapping supports the approved server fleet as technicians rotate.
+# END GENERATED AZ305 V1

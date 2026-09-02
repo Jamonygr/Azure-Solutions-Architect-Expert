@@ -1,0 +1,79 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-03
+number: 3
+slug: 03-authentication-identity-design
+title: Authentication and Identity Management Architecture
+domain: identity-governance-monitoring
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Identity and authentication architect
+outcome: A tenant and authentication architecture that separates workforce, partner, customer, and workload identities
+  with modern controls.
+duration: 165 minutes
+difficulty: advanced
+costClass: low
+permissions: Directory Readers is sufficient for discovery; any External ID, application, federation, or consent
+  change requires a dedicated approved directory role and tenant-change acknowledgement.
+licensing: External ID monthly active user pricing and workforce Conditional Access or governance entitlements must
+  be assessed separately.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/entra/external-id/customers/overview-customers-ciam
+objectives:
+  primary:
+  - IGM-AUTH-01
+  - IGM-AUTH-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- AppDisplayName
+- WorkloadIdentityName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB03-CP01
+  title: Establish identity population and tenant boundaries
+  requirementIds:
+  - LAB03-REQ-01
+  objectiveIds:
+  - IGM-AUTH-01
+- id: LAB03-CP02
+  title: Select protocols and application registrations
+  requirementIds:
+  - LAB03-REQ-02
+  objectiveIds:
+  - IGM-AUTH-02
+- id: LAB03-CP03
+  title: Design authentication methods and recovery
+  requirementIds:
+  - LAB03-REQ-03
+  objectiveIds:
+  - IGM-AUTH-01
+- id: LAB03-CP04
+  title: Evaluate Conditional Access architecture
+  requirementIds:
+  - LAB03-REQ-04
+  objectiveIds:
+  - IGM-AUTH-02
+- id: LAB03-CP05
+  title: Prefer managed workload identities
+  requirementIds:
+  - LAB03-REQ-05
+  objectiveIds:
+  - IGM-AUTH-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

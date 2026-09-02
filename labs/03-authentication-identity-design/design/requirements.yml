@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-03
+businessOutcome: Provide secure low-friction sign-in for three populations while reducing credential and tenant-boundary
+  risk.
+stakeholders:
+- Chief information security officer
+- Patient application owner
+- Partner operations
+- Privacy counsel
+functionalRequirements:
+- id: LAB03-REQ-01
+  statement: Workforce, partner, customer, and workload identities have explicit tenant placement and data ownership.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-01
+- id: LAB03-REQ-02
+  statement: Each application has a supported OIDC or SAML pattern, audience, redirect ownership, and least-privilege
+    API consent plan.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-02
+- id: LAB03-REQ-03
+  statement: Phishing-resistant workforce methods, customer journey methods, bootstrap, and account recovery are
+    deliberately separated.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-01
+nonfunctionalRequirements:
+- id: LAB03-REQ-04
+  statement: Baseline, privileged, workload, guest, and customer access controls have explicit scope, exclusions,
+    and rollout mode.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-02
+- id: LAB03-REQ-05
+  statement: Azure-hosted components use system- or user-assigned managed identities with documented lifecycle ownership.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTH-01
+constraints:
+- Employees, partners, and customers require distinct trust, lifecycle, and authentication journeys.
+- Health attributes must remain outside the external directory even when the mobile journey uses native authentication
+  and social federation.
+- Use only the PowerShell/Graph command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- The application can resolve a directory subject to a profile held in an authorized health-data store.
+- New customer identity design uses Microsoft Entra External ID rather than Azure AD B2C.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Directory profiles contain identifiers and authentication attributes; regulated health facts remain in the
+    application data boundary.
+  scale: Three identity populations have different issuers and lifecycle owners; monthly active customer count remains
+    a sizing input.
+  latency: Interactive sign-in must avoid avoidable cross-system lookups, while profile enrichment occurs after
+    token validation.
+  availability: Workforce and customer sign-in failure domains are separated so an external journey incident does
+    not block employee administration.
+  rto: Identity-service recovery targets inherit the application access objective and require an owner decision
+    before production approval.
+  rpo: Directory object recovery and application-profile recovery are separate; no numerical identity RPO is supplied.
+  budget: Managed federation and External ID usage are compared with the support and security cost of custom credentials.
+acceptanceCriteria:
+- LAB03-REQ-01 passes its independent positive and negative assertions.
+- LAB03-REQ-02 passes its independent positive and negative assertions.
+- LAB03-REQ-03 passes its independent positive and negative assertions.
+- LAB03-REQ-04 passes its independent positive and negative assertions.
+- LAB03-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB03-CR-01
+  trigger: A mobile patient application now requires native authentication and social federation while a regulator
+    forbids health attributes from being stored in the customer directory; revise the journey and profile-data boundary.
+  materialChange: A mobile patient application now requires native authentication and social federation while a
+    regulator forbids health attributes from being stored in the customer directory; revise the journey and profile-data
+    boundary.
+  mandatoryRequirementId: LAB03-REQ-03
+  expectedRevision: Add native and social sign-in to the External ID journey while proving that health facts remain
+    application-owned.
+# END GENERATED AZ305 V1

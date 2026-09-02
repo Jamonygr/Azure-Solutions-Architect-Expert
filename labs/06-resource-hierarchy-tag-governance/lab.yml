@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-06
+number: 6
+slug: 06-resource-hierarchy-tag-governance
+title: Azure Resource Hierarchy and Tag Governance
+domain: identity-governance-monitoring
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Enterprise governance architect
+outcome: A stable Azure resource hierarchy and tag model that supports delegated operations, cost allocation, and
+  residency decisions.
+duration: 145 minutes
+difficulty: advanced
+costClass: low
+permissions: Management Group Reader, Resource Policy Reader, and Cost Management Reader cover assessment; hierarchy,
+  policy, or tag remediation needs separate governance authorization.
+licensing: Core management groups, tags, and Azure Policy do not require an add-on license, while Defender, Purview,
+  or governance services referenced by policy may.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/design-area/resource-org
+objectives:
+  primary:
+  - IGM-GOV-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- CostCenter
+- DataClass
+- Environment
+- ManagementGroupId
+- OwnerAlias
+- ResourceGroupId
+- SandboxManagementGroupId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB06-CP01
+  title: Design durable management-group archetypes
+  requirementIds:
+  - LAB06-REQ-01
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-CP02
+  title: Place subscriptions by workload archetype
+  requirementIds:
+  - LAB06-REQ-02
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-CP03
+  title: Align resource groups with lifecycle boundaries
+  requirementIds:
+  - LAB06-REQ-03
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-CP04
+  title: Apply a controlled tag vocabulary
+  requirementIds:
+  - LAB06-REQ-04
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-CP05
+  title: Query portfolio conformance
+  requirementIds:
+  - LAB06-REQ-05
+  objectiveIds:
+  - IGM-GOV-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

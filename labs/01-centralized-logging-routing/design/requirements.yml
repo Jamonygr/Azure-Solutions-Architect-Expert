@@ -1,0 +1,82 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-01
+businessOutcome: Reduce incident investigation time while giving security and regional operators governed access
+  to complete, correctly routed telemetry.
+stakeholders:
+- Security operations
+- Regional platform teams
+- Data protection officer
+- FinOps
+functionalRequirements:
+- id: LAB01-REQ-01
+  statement: The workspace is in the approved data boundary with thirty-day interactive retention and ownership
+    tags.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-01
+- id: LAB01-REQ-02
+  statement: The DCR maps only the required streams to a named Log Analytics destination.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-02
+- id: LAB01-REQ-03
+  statement: The target has one intentional association to the approved DCR.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-01
+nonfunctionalRequirements:
+- id: LAB01-REQ-04
+  statement: Supported log categories and metrics route to the intended regional workspace.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-02
+- id: LAB01-REQ-05
+  statement: Interactive and total retention match the documented use case for each reviewed table.
+  mandatory: true
+  objectiveIds:
+  - IGM-LOG-01
+constraints:
+- Security control-plane records must remain in their originating region for seven years.
+- Application traces have a thirty-day searchable requirement and must not be duplicated into every workspace.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Workloads already emit through Azure Monitor Agent and DCR-compatible sources rather than the legacy Log Analytics
+  agent.
+- Security analysts are permitted to query multiple regional workspaces through a governed workbook scope.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Security records and application traces have different residency, retention, access, and evidentiary classifications.
+  scale: The estate spans multiple regions and operations teams; measured daily gigabytes per stream remain an owner-supplied
+    sizing input.
+  latency: Security triage needs queryable recent records, while seven-year history may tolerate archive-search
+    rehydration delay.
+  availability: Regional collection must continue if another region or its workspace is unavailable, with queries
+    degrading to the reachable scope.
+  rto: Monitoring restoration time is an operational objective to be agreed with the security owner; the scenario
+    specifies no numerical RTO.
+  rpo: Loss tolerance for control-plane audit records is effectively zero after Azure accepts them into the monitoring
+    pipeline.
+  budget: Differentiated table plans and retention are required to avoid paying interactive rates for seven years
+    of low-access evidence.
+acceptanceCriteria:
+- LAB01-REQ-01 passes its independent positive and negative assertions.
+- LAB01-REQ-02 passes its independent positive and negative assertions.
+- LAB01-REQ-03 passes its independent positive and negative assertions.
+- LAB01-REQ-04 passes its independent positive and negative assertions.
+- LAB01-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB01-CR-01
+  trigger: A new regulator requires security control-plane records to remain in-region for seven years while application
+    traces must stay searchable for only thirty days; revise routing and retention without duplicating every stream.
+  materialChange: A new regulator requires security control-plane records to remain in-region for seven years while
+    application traces must stay searchable for only thirty days; revise routing and retention without duplicating
+    every stream.
+  mandatoryRequirementId: LAB01-REQ-05
+  expectedRevision: Split control-plane and application streams by DCR and table policy, then recalculate retention
+    cost without cloning either stream.
+# END GENERATED AZ305 V1

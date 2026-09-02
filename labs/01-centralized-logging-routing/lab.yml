@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-01
+number: 1
+slug: 01-centralized-logging-routing
+title: Centralized Logging and Diagnostic Routing
+domain: identity-governance-monitoring
+track: azure-cli
+implementationMode: reference-deployable
+status: offline-validated
+role: Lead cloud solutions architect
+outcome: A defensible centralized collection and routing design with independently verifiable destinations and no
+  legacy monitoring agent.
+duration: 150 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Reader plus Log Analytics Reader is sufficient for inspection; an authorized deployment separately
+  needs rights to create workspaces, DCRs, DCR associations, and diagnostic settings.
+licensing: Seven-year searchable or archived retention can incur Log Analytics commitment, retention, archive, and
+  query charges that must be confirmed for each region.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/azure-monitor/platform/diagnostic-settings
+objectives:
+  primary:
+  - IGM-LOG-01
+  - IGM-LOG-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- AssociationName
+- DcrId
+- DcrName
+- DiagnosticSettingName
+- TargetResourceId
+- WorkspaceName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB01-CP01
+  title: Establish regional workspace boundaries
+  requirementIds:
+  - LAB01-REQ-01
+  objectiveIds:
+  - IGM-LOG-01
+- id: LAB01-CP02
+  title: Define an Azure Monitor Agent data collection rule
+  requirementIds:
+  - LAB01-REQ-02
+  objectiveIds:
+  - IGM-LOG-02
+- id: LAB01-CP03
+  title: Associate the rule with an explicit resource scope
+  requirementIds:
+  - LAB01-REQ-03
+  objectiveIds:
+  - IGM-LOG-01
+- id: LAB01-CP04
+  title: Route resource logs with diagnostic settings
+  requirementIds:
+  - LAB01-REQ-04
+  objectiveIds:
+  - IGM-LOG-02
+- id: LAB01-CP05
+  title: Validate retention and archive economics
+  requirementIds:
+  - LAB01-REQ-05
+  objectiveIds:
+  - IGM-LOG-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

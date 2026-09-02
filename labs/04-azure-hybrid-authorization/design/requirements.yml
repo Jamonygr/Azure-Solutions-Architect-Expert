@@ -1,0 +1,79 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-04
+businessOutcome: Reduce standing privilege and audit ambiguity without preventing platform and factory teams from
+  meeting support obligations.
+stakeholders:
+- Cloud platform owner
+- Factory operations
+- Security assurance
+- Internal audit
+functionalRequirements:
+- id: LAB04-REQ-01
+  statement: Stable management scopes and group assignments explain both direct and inherited effective access.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTHZ-01
+- id: LAB04-REQ-02
+  statement: The operating team receives resource-group Contributor through an owned Microsoft Entra group.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTHZ-02
+- id: LAB04-REQ-03
+  statement: The custom role contains only documented support actions and the minimum assignable scopes.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTHZ-01
+nonfunctionalRequirements:
+- id: LAB04-REQ-04
+  statement: The workload identity can read secret values through a data-plane role without managing the vault.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTHZ-02
+- id: LAB04-REQ-05
+  statement: Azure resource actions and guest operating-system privileges have separate accountable delegation paths.
+  mandatory: true
+  objectiveIds:
+  - IGM-AUTHZ-01
+constraints:
+- The managed-service provider may troubleshoot factory servers for ninety days only.
+- Provider identities cannot change subscription networking or retain permanent local administrator membership.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Factory servers are represented through Azure Arc and have an accountable plant owner.
+- Stable Entra groups can map provider personnel to approved Azure and machine-level duties.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: The design handles directory groups, Azure role assignments, Arc machine scope, eligibility schedules, and
+    access-review evidence.
+  scale: Delegation spans multiple factories and a changing provider roster; exact server and technician counts
+    are inventory inputs.
+  latency: Emergency troubleshooting activation must meet the support response target while approval delay remains
+    measured.
+  availability: A deputy approver and emergency process are required if the primary plant owner is unavailable.
+  rto: The service repair target is owned by plant operations; this lab measures privilege activation and revocation
+    time rather than workload recovery.
+  rpo: Authorization configuration must be reconstructable from exported assignments; application-data RPO is outside
+    this decision.
+  budget: Time-bound group governance adds license cost but reduces recurring manual assignment and quarterly audit
+    effort.
+acceptanceCriteria:
+- LAB04-REQ-01 passes its independent positive and negative assertions.
+- LAB04-REQ-02 passes its independent positive and negative assertions.
+- LAB04-REQ-03 passes its independent positive and negative assertions.
+- LAB04-REQ-04 passes its independent positive and negative assertions.
+- LAB04-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB04-CR-01
+  trigger: A managed-service provider must troubleshoot factory servers for ninety days but may not change subscription
+    networking or receive permanent local administrator membership; revise delegation and expiry controls.
+  materialChange: A managed-service provider must troubleshoot factory servers for ninety days but may not change
+    subscription networking or receive permanent local administrator membership; revise delegation and expiry controls.
+  mandatoryRequirementId: LAB04-REQ-05
+  expectedRevision: Introduce a ninety-day provider group eligibility and prove that network actions and persistent
+    local membership remain absent.
+# END GENERATED AZ305 V1

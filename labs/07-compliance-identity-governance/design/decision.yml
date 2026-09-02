@@ -1,0 +1,142 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-07
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 5
+    C5: 4
+  weightedTotal: 93.0
+  rationale: Policy evaluates resource state while access packages, reviews, and workflows assign accountable identity
+    lifecycle decisions.
+- id: CAND-B
+  name: Azure Policy for resources with manual identity recertification
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 3
+    C4: 2
+    C5: 4
+  weightedTotal: 59.0
+  rationale: Resource compliance is automatable, but spreadsheet recertification leaves expiry, escalation, and
+    revocation weakly coupled.
+- id: CAND-C
+  name: Third-party GRC attestations with standing directory and Azure assignments
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 3
+    C3: 2
+    C4: 3
+    C5: 2
+  weightedTotal: 48.0
+  rationale: GRC attestations centralize reporting but do not themselves remove standing Azure or directory access.
+- id: CAND-D
+  name: Permanent partner access with nonexpiring policy exemptions
+  eligible: false
+  disqualifiers:
+  - LAB07-REQ-04 requires time-bounded access and exceptions with independently verified expiry.
+  scores:
+    C1: 1
+    C2: 2
+    C3: 1
+    C4: 3
+    C5: 4
+  weightedTotal: 37.0
+  rationale: Permanent exceptions reduce renewal work but defeat the stated review, revocation, and expiry outcomes.
+selectedCandidate: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+rejectedAlternatives:
+- candidate: Azure Policy for resources with manual identity recertification
+  reason: Manual identity evidence cannot reliably prove quarterly owner action and timely revocation at scale.
+- candidate: Third-party GRC attestations with standing directory and Azure assignments
+  reason: The evidence system remains detached from enforcement and permits reviewed findings to stay active.
+- candidate: Permanent partner access with nonexpiring policy exemptions
+  reason: The approach is ineligible because neither partner access nor exemptions end deterministically.
+risks:
+- risk: A resource owner can ignore a review campaign until access is implicitly retained.
+  mitigation: Configure explicit denial or escalation behavior, named deputies, and an assertion for overdue decisions.
+- risk: Policy exemptions can be recreated with a new identifier to evade the ninety-day limit.
+  mitigation: Query all effective exemptions by scope and owner, then flag overlapping replacements in the evidence
+    ledger.
+waf:
+  reliability: Deputy reviewers and deterministic campaign outcomes prevent governance from stalling on one unavailable
+    owner.
+  security: Expiring access packages and exemptions reduce standing privilege and policy bypass duration.
+  costOptimization: Automated recurring evidence replaces manual quarterly reconciliation while license scope remains
+    explicit.
+  operationalExcellence: One trace joins policy state, review decisions, revocation, owners, and escalation timestamps.
+  performanceEfficiency: Campaign scoping and incremental compliance queries avoid reevaluating unrelated identities
+    and resources.
+safeAnalogue: Use synthetic policy, exemption, access-review, and lifecycle fixtures to prove joins and expiry handling
+  without a Graph or Azure request.
+traceability:
+- objectiveId: IGM-GOV-02
+  requirementId: LAB07-REQ-01
+  checkpointId: LAB07-CP01
+- objectiveId: IGM-GOV-03
+  requirementId: LAB07-REQ-02
+  checkpointId: LAB07-CP02
+- objectiveId: IGM-GOV-02
+  requirementId: LAB07-REQ-03
+  checkpointId: LAB07-CP03
+- objectiveId: IGM-GOV-03
+  requirementId: LAB07-REQ-04
+  checkpointId: LAB07-CP04
+- objectiveId: IGM-GOV-02
+  requirementId: LAB07-REQ-05
+  checkpointId: LAB07-CP05
+adr:
+  id: ADR-LAB07-001
+  status: accepted
+  context: Tailwind Traders can organize Azure resources, but control owners still exchange spreadsheets to prove
+    compliance and retain partner access indefinitely. The organization needs Azure Policy evidence for resource
+    controls and Microsoft Entra ID Governance for entitlement, access review, and privileged-role lifecycle. As
+    the compliance and identity-governance architect, design initiative assignments, exemptions, remediation ownership,
+    access-package catalogs, recurring reviews, and eligible rather than standing privileged access. Work exclusively
+    through GA Az and Microsoft Graph PowerShell inspection surfaces in the lab. The design must explain licensing,
+    delegated permissions, evidence retention, exception expiry, and the boundary between detecting noncompliance
+    and changing a production tenant.
+  decision: 'Select Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls: Policy evaluates
+    resource state while access packages, reviews, and workflows assign accountable identity lifecycle decisions.'
+  consequences:
+  - Resource owners become accountable for both access reviews and policy-exemption business justification.
+  - Identity and Azure governance evidence must be correlated without assuming either system proves the other.
+revisedDecision:
+  changeRequestId: LAB07-CR-01
+  selectedCandidate: Azure Policy initiatives plus Microsoft Entra ID Governance lifecycle controls
+  reason: LAB07-REQ-04 requires recurring owner-attributed access review, so linked Policy and Entra governance
+    evidence adds quarterly partner decisions alongside independently bounded ninety-day exemptions.
+  mandatoryRequirementId: LAB07-REQ-04
+  waf:
+    reliability: Deputy review and escalation prevent a campaign from failing because one owner is absent.
+    security: Access and exemptions terminate automatically when their approved period ends.
+    costOptimization: Targeted licensed governance replaces broad manual evidence collection.
+    operationalExcellence: Correlated timestamps demonstrate review, expiry, revocation, and escalation outcomes.
+    performanceEfficiency: Owner-scoped campaigns limit review volume and focus compliance queries on exceptions.
+# END GENERATED AZ305 V1

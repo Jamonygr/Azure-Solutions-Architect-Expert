@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-02
+businessOutcome: Detect and triage material service degradation before customers report it while reducing unactionable
+  alerts.
+stakeholders:
+- Site reliability engineering
+- Application owners
+- Security operations
+- Service desk
+functionalRequirements:
+- id: LAB02-REQ-01
+  statement: The design identifies platform, application, dependency, and business signals with explicit owners.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-REQ-02
+  statement: Resource Health and Service Health alerts are separated from routine administrative events and have
+    owned severities.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-REQ-03
+  statement: The selected log alert evaluates an auditable customer-impact query over a suitable window and frequency.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+nonfunctionalRequirements:
+- id: LAB02-REQ-04
+  statement: The workbook leads from business health to dependencies and resource diagnostics without exposing sensitive
+    dimensions.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-REQ-05
+  statement: Every actionable severity maps to a durable team-owned receiver and documented suppression rule.
+  mandatory: true
+  objectiveIds:
+  - IGM-MON-01
+constraints:
+- Legitimate promotion traffic can triple for fifteen minutes and cannot be treated automatically as an incident.
+- Customer-impact signals must continue detecting real payment failure during the same burst window.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- The service emits request rate, latency, failure rate, dependency health, and deployment annotations with consistent
+  dimensions.
+- Service owners provide an approved SLO and action-group escalation roster before live alert changes.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Metric time series, log events, action-group delivery records, and workbook annotations form separate evidence
+    sources.
+  scale: A scheduled promotion creates a threefold fifteen-minute demand spike; absolute baseline request volume
+    is intentionally left for measurement.
+  latency: Detection must be fast enough to precede customer reports, but the exact alert window follows the approved
+    payment-service SLO.
+  availability: Alert routing needs at least one tested receiver path when a team-specific channel or integration
+    is unavailable.
+  rto: The incident-response RTO is not supplied; the exercise measures detection and notification delay for owner
+    approval.
+  rpo: Historical alert and deployment context must cover the investigation window; transactional payment RPO belongs
+    to the workload design.
+  budget: The preferred design trades a small curated alert set for lower query and responder cost than resource-by-resource
+    duplication.
+acceptanceCriteria:
+- LAB02-REQ-01 passes its independent positive and negative assertions.
+- LAB02-REQ-02 passes its independent positive and negative assertions.
+- LAB02-REQ-03 passes its independent positive and negative assertions.
+- LAB02-REQ-04 passes its independent positive and negative assertions.
+- LAB02-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB02-CR-01
+  trigger: The payment API adopts a bursty promotion model that triples legitimate traffic for fifteen minutes,
+    so static latency and error-rate thresholds must be revised without masking genuine customer impact.
+  materialChange: The payment API adopts a bursty promotion model that triples legitimate traffic for fifteen minutes,
+    so static latency and error-rate thresholds must be revised without masking genuine customer impact.
+  mandatoryRequirementId: LAB02-REQ-03
+  expectedRevision: Replace static burst-sensitive thresholds with an SLO and multi-window evaluation that still
+    pages on failed customer transactions.
+# END GENERATED AZ305 V1

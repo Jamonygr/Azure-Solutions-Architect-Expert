@@ -1,0 +1,81 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-05
+number: 5
+slug: 05-secrets-certificates-keys
+title: Secrets, Certificates, and Key Management
+domain: identity-governance-monitoring
+track: azure-powershell
+implementationMode: reference-deployable
+status: offline-validated
+role: Cryptographic services architect
+outcome: A governed Key Vault architecture for secrets, certificates, and keys with explicit rotation, access, and
+  network controls.
+duration: 160 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Key Vault Reader supports configuration inspection; vault, key, role-assignment, private-endpoint,
+  or Managed HSM changes require separately approved data-plane and control-plane roles.
+licensing: Premium Key Vault HSM-backed keys and Managed HSM pools use different pricing, administration, and minimum-cost
+  models.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+objectives:
+  primary:
+  - IGM-KEY-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- CertificateName
+- KeyName
+- VaultName
+- VaultResourceId
+- WorkloadPrincipalId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB05-CP01
+  title: Select vault boundary and service tier
+  requirementIds:
+  - LAB05-REQ-01
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-CP02
+  title: Define key protection and rotation
+  requirementIds:
+  - LAB05-REQ-02
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-CP03
+  title: Govern certificate issuance and renewal
+  requirementIds:
+  - LAB05-REQ-03
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-CP04
+  title: Grant managed-identity data-plane access
+  requirementIds:
+  - LAB05-REQ-04
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-CP05
+  title: Enforce a private network path
+  requirementIds:
+  - LAB05-REQ-05
+  objectiveIds:
+  - IGM-KEY-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

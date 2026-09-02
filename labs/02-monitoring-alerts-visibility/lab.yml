@@ -1,0 +1,86 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-02
+number: 2
+slug: 02-monitoring-alerts-visibility
+title: Monitoring, Alerting, and Operational Visibility
+domain: identity-governance-monitoring
+track: azure-powershell
+implementationMode: reference-deployable
+status: offline-validated
+role: Monitoring and reliability architect
+outcome: An actionable monitoring design that detects customer-impacting conditions, routes owned alerts, and proves
+  noise controls.
+duration: 140 minutes
+difficulty: advanced
+costClass: low
+permissions: Reader and Monitoring Reader support inspection; changing alert rules, processing rules, action groups,
+  or workbooks requires separately approved monitoring contributor rights.
+licensing: Metric alerts, log alerts, notification channels, and workbook queries have distinct Azure Monitor charging
+  behavior that owners must validate.
+safeAnalogue: false
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/azure-monitor/best-practices-alerts
+objectives:
+  primary:
+  - IGM-MON-01
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ActionGroupName
+- ActionGroupResourceId
+- DeprecatedMetricName
+- HealthAlertName
+- RequiredMetricName
+- ScheduledQueryRuleName
+- TargetResourceId
+- WorkbookDisplayName
+- WorkbookJson
+- WorkbookResourceName
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB02-CP01
+  title: Build a layered signal inventory
+  requirementIds:
+  - LAB02-REQ-01
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-CP02
+  title: Design platform and resource-health alerts
+  requirementIds:
+  - LAB02-REQ-02
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-CP03
+  title: Define a query-based service-level alert
+  requirementIds:
+  - LAB02-REQ-03
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-CP04
+  title: Curate an operator workbook
+  requirementIds:
+  - LAB02-REQ-04
+  objectiveIds:
+  - IGM-MON-01
+- id: LAB02-CP05
+  title: Verify action routing and noise controls
+  requirementIds:
+  - LAB02-REQ-05
+  objectiveIds:
+  - IGM-MON-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

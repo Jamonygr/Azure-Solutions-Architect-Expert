@@ -1,0 +1,12 @@
+%% BEGIN GENERATED AZ305 V1
+flowchart LR
+    R["Reduce incident investigation time while giving security and regional operators governed access to complete, correctly routed telemetry."]
+    R --> C1["Establish regional workspace boundaries"]
+    C1 --> C2["Define an Azure Monitor Agent data collection rule"]
+    C2 --> C3["Associate the rule with an explicit resource scope"]
+    C3 --> C4["Route resource logs with diagnostic settings"]
+    C4 --> C5["Validate retention and archive economics"]
+    C5 --> E["Independent positive and negative evidence"]
+    classDef boundary fill:#eef5ff,stroke:#005a9e,color:#111
+    class R,E boundary
+%% END GENERATED AZ305 V1

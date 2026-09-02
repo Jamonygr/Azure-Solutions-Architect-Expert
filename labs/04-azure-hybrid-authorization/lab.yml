@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-04
+number: 4
+slug: 04-azure-hybrid-authorization
+title: Azure and Hybrid Authorization Architecture
+domain: identity-governance-monitoring
+track: azure-cli
+implementationMode: safe-analogue
+status: offline-validated
+role: Hybrid authorization architect
+outcome: A least-privilege Azure and hybrid authorization model with traceable scope, inheritance, and data-plane
+  boundaries.
+duration: 150 minutes
+difficulty: advanced
+costClass: low
+permissions: Reader, Role Based Access Control Reader, and Azure Connected Machine Resource Administrator discovery
+  rights are separated from any role-assignment or local-access mutation.
+licensing: Azure Arc-enabled server features and Microsoft Entra governance or PIM licensing must be verified for
+  time-bound delegation.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/azure/role-based-access-control/best-practices
+objectives:
+  primary:
+  - IGM-AUTHZ-01
+  - IGM-AUTHZ-02
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- ArcServerResourceId
+- CustomRoleName
+- GroupObjectId
+- PrincipalObjectId
+- ResourceGroupId
+- Scope
+- VaultResourceId
+- WorkloadPrincipalId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB04-CP01
+  title: Model scopes and inherited access
+  requirementIds:
+  - LAB04-REQ-01
+  objectiveIds:
+  - IGM-AUTHZ-01
+- id: LAB04-CP02
+  title: Delegate through groups rather than people
+  requirementIds:
+  - LAB04-REQ-02
+  objectiveIds:
+  - IGM-AUTHZ-02
+- id: LAB04-CP03
+  title: Constrain a custom control-plane role
+  requirementIds:
+  - LAB04-REQ-03
+  objectiveIds:
+  - IGM-AUTHZ-01
+- id: LAB04-CP04
+  title: Separate control-plane and data-plane access
+  requirementIds:
+  - LAB04-REQ-04
+  objectiveIds:
+  - IGM-AUTHZ-02
+- id: LAB04-CP05
+  title: Define the Azure Arc authorization boundary
+  requirementIds:
+  - LAB04-REQ-05
+  objectiveIds:
+  - IGM-AUTHZ-01
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

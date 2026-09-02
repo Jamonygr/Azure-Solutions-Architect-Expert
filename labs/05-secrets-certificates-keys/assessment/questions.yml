@@ -1,0 +1,1758 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-05
+questions:
+- id: LAB05-Q01
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'A recommendation on ''Select vault boundary and service tier'' is requested by payment engineering. Approval
+    requires a positive result plus this independent negative assertion: A software-only tier or legacy access-policy
+    model is not silently substituted. What recommendation gives the reviewers the acceptance rule that makes LAB05-REQ-01
+    testable?'
+  options:
+    A: Select Azure Managed HSM with centralized HSM administration before checking Select vault boundary and service
+      tier; then use as justification the claim that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Define key protection and rotation to approve Select vault boundary and service
+      tier. Independently, accept without proof that one control establishes an unrelated acceptance boundary.
+    C: Require the documented positive state for Select vault boundary and service tier; then verify that a software-only
+      tier or legacy access-policy model is not silently substituted.
+    D: Choose Application-owned encrypted configuration in general-purpose storage and skip the Select vault boundary
+      and service tier negative assertion. Next, rely on the claim that the candidate has the lowest implementation
+      effort.
+  answer: C
+  explanations:
+    A: The authored acceptance boundary states that a software-only tier or legacy access-policy model is not silently
+      substituted. The resulting architectural conclusion is that a deployment result cannot prove LAB05-REQ-01,
+      and Azure Managed HSM with centralized HSM administration still has to meet the mandatory boundary.
+    B: The relevant observation is that the HSM-backed key has a ninety-day lifetime and rotates thirty days before
+      expiry with a named application owner. The resulting architectural conclusion is that that outcome belongs
+      to Define key protection and rotation and leaves Select vault boundary and service tier unverified.
+    C: The controlling fact is that a Premium vault boundary satisfies HSM-backed key needs while keeping application
+      secrets and certificates supportable. The resulting architectural conclusion is that the positive state and
+      an independent negative assertion jointly make LAB05-REQ-01 testable.
+    D: The checkpoint specifically records that protect payment cryptographic assets and reduce outage risk caused
+      by unmanaged expiry or overprivileged access. The resulting architectural conclusion is that implementation
+      effort cannot justify skipping the negative assertion or displace LAB05-REQ-01.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q02
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: '''Select vault boundary and service tier'' is assigned to cryptographic governance. The selected architecture
+    is Azure Key Vault Premium with RBAC and private endpoints; object existence alone is not success. Which action
+    produces the intended successful finding?'
+  options:
+    A: Record a Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates
+      supportable. Also, classify it as success for LAB05-REQ-01.
+    B: Use only the negative assertion 'A software-only tier or legacy access-policy model is not silently substituted'
+      as the success result; as a separate check, use the premise that absence proves every required positive property.
+    C: Use the successful finding from Govern certificate issuance and renewal as the result for Select vault boundary
+      and service tier. Afterward, consider it sufficient that a property from the current checkpoint does not need
+      to be inspected.
+    D: Record the failure condition 'A requirement actually needs single-tenant HSM control or unsupported cryptographic
+      functionality' as a successful state; next, take it as conclusive that the command returned an object.
+  answer: A
+  explanations:
+    A: The scenario makes clear that a Premium vault boundary satisfies HSM-backed key needs while keeping application
+      secrets and certificates supportable. The resulting architectural conclusion is that this is the authored
+      target state for Select vault boundary and service tier and directly supports LAB05-REQ-01.
+    B: The architecture evidence must show that a software-only tier or legacy access-policy model is not silently
+      substituted. The resulting architectural conclusion is that this is the independent prohibited-state assertion,
+      not a successful finding.
+    C: The applicable design condition is that issuer, subject, validity, renewal threshold, exportability, and
+      application binding are documented and inspectable. The resulting architectural conclusion is that evidence
+      for Govern certificate issuance and renewal cannot substitute for the properties required at Select vault
+      boundary and service tier.
+    D: 'The review is governed by this fact: a requirement actually needs single-tenant HSM control or unsupported
+      cryptographic functionality. The resulting architectural conclusion is that resource existence or command
+      output does not convert the documented failure condition into success.'
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q03
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'An assurance review of ''Select vault boundary and service tier'' includes security operations. Evidence
+    must address this risk without retaining credentials: A requirement actually needs single-tenant HSM control
+    or unsupported cryptographic functionality. What best demonstrates sufficient, properly scoped evidence?'
+  options:
+    A: Retain vault label, region, SKU, authorization model, business owner, and resource ID only. Afterward, exclude
+      credentials and unrelated response fields.
+    B: Substitute the evidence from Grant managed-identity data-plane access for Select vault boundary and service
+      tier. Before sign-off, rely on the belief that a related checkpoint proves the current expected state.
+    C: Store unredacted Select vault boundary and service tier output with operator, tenant, token, and request
+      context; as an independent condition, proceed on the belief that reproduction requires every captured field.
+    D: Record only the Select vault boundary and service tier positive inspection's exit status; as a second control,
+      treat as decisive the assertion that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The retained result must be reconciled with the fact that vault label, region, SKU, authorization model,
+      business owner, and resource ID only. The resulting architectural conclusion is that it captures the checkpoint's
+      observable properties while keeping the evidence boundary narrow.
+    B: The decision tension comes from the fact that synthetic principal ID, role name, exact scope, assignment
+      ID, and access owner. The resulting architectural conclusion is that that evidence supports Grant managed-identity
+      data-plane access, so it cannot demonstrate A Premium vault boundary satisfies HSM-backed key needs while
+      keeping application secrets and certificates supportable.
+    C: The safe operating boundary says that unredacted implementation output. The resulting architectural conclusion
+      is that identity, tenant, or token material exceeds the non-secret evidence contract.
+    D: The traceable checkpoint outcome is that the positive inspection's exit status. The resulting architectural
+      conclusion is that an exit code alone does not show whether a Premium vault boundary satisfies HSM-backed
+      key needs while keeping application secrets and certificates supportable.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q04
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: Approval of 'Select vault boundary and service tier' is questioned by business continuity. The target is
+    A Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates supportable,
+    but the latest evidence does not show it. Which option is the most likely cause?
+  options:
+    A: Treat 'Name resolution returns the public endpoint or the private endpoint connection is pending' as grounds
+      to reject Select vault boundary and service tier. Next, treat it as established that enforce a private network
+      path's failure model applies unchanged here.
+    B: Investigate a requirement actually needs single-tenant HSM control or unsupported cryptographic functionality.
+      Separately, isolate that cause before changing Azure Key Vault Premium with RBAC and private endpoints.
+    C: Ignore the negative assertion 'A software-only tier or legacy access-policy model is not silently substituted',
+      and then use as justification the claim that a later material change will make it unnecessary.
+    D: Investigate Define key protection and rotation instead of diagnosing Select vault boundary and service tier.
+      Also, accept without proof that a passing result at Define key protection and rotation identifies the current
+      cause.
+  answer: B
+  explanations:
+    A: The recovery guidance assumes that name resolution returns the public endpoint or the private endpoint connection
+      is pending. The resulting architectural conclusion is that that condition belongs to Enforce a private network
+      path and does not by itself invalidate Azure Key Vault Premium with RBAC and private endpoints.
+    B: The failure model establishes that a requirement actually needs single-tenant HSM control or unsupported
+      cryptographic functionality. The resulting architectural conclusion is that it is the checkpoint's causal
+      failure model and should be isolated before retrying Select vault boundary and service tier.
+    C: The WAF consequence identifies that a software-only tier or legacy access-policy model is not silently substituted.
+      The resulting architectural conclusion is that the negative assertion must be evaluated now, independent of
+      a later business change.
+    D: The command-level assertion is anchored in the fact that the HSM-backed key has a ninety-day lifetime and
+      rotates thirty days before expiry with a named application owner. The resulting architectural conclusion is
+      that a passing result at Define key protection and rotation gives no causal evidence for the failure at Select
+      vault boundary and service tier.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q05
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'The implementation review has reached ''Select vault boundary and service tier''. The run encountered this
+    modeled failure: A requirement actually needs single-tenant HSM control or unsupported cryptographic functionality.
+    What should the architect select as the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Remove private endpoints, assignments, certificates, secrets, and keys before
+      the vault; never automate purge; next, base approval on the claim that the failed operation and its returned
+      identifiers do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'A requirement actually needs single-tenant HSM control
+      or unsupported cryptographic functionality'. In addition, use the premise that the first state record and
+      returned identifiers can be discarded.
+    C: Re-score Managed HSM and Key Vault Premium against key custody, API, availability, and cost requirements;
+      during the same review, preserve the current run identity and evidence.
+    D: Change Define key protection and rotation instead; before approval, consider it sufficient that success at
+      Define key protection and rotation will repair the failed state at Select vault boundary and service tier.
+  answer: C
+  explanations:
+    A: The controlling fact is that remove private endpoints, assignments, certificates, secrets, and keys before
+      the vault; never automate purge. Under the stated constraint, cleanup before reconciliation can erase evidence
+      or strand a partially created dependency.
+    B: The authored acceptance boundary states that a requirement actually needs single-tenant HSM control or unsupported
+      cryptographic functionality. Under the stated constraint, discarding the original run identity breaks ownership
+      reconciliation and can duplicate a partial operation.
+    C: re-score Managed HSM and Key Vault Premium against key custody, API, availability, and cost requirements.
+      Under the stated constraint, it corrects the narrow cause while retaining the same recovery trail and decision
+      scope.
+    D: The relevant observation is that the HSM-backed key has a ninety-day lifetime and rotates thirty days before
+      expiry with a named application owner. Under the stated constraint, altering an already separate checkpoint
+      does not repair the modeled failure at Select vault boundary and service tier.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q06
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: The approach to 'Select vault boundary and service tier' is challenged by cryptographic governance. Without
+    making a new change, the team must inspect the risk 'A requirement actually needs single-tenant HSM control
+    or unsupported cryptographic functionality' using the Azure PowerShell lane. Select the read-only, lane-correct
+    inspection.
+  options:
+    A: Rerun the Select vault boundary and service tier implementation command and infer the expected state; during
+      the same review, rely on the claim that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Select vault boundary and service tier: A software-only tier or legacy
+      access-policy model is not silently substituted. Then, rely on the belief that an empty negative result reports
+      every required positive property.'
+    C: 'Inspect the documented properties for Select vault boundary and service tier. Independently, retain this
+      evidence: vault label, region, SKU, authorization model, business owner, and resource ID only.'
+    D: Run the positive inspection for Govern certificate issuance and renewal and apply it to Select vault boundary
+      and service tier; afterward, proceed on the belief that any command from the same lane proves the current
+      checkpoint.
+  answer: C
+  explanations:
+    A: The scenario makes clear that the implementation command. Under the stated constraint, it can mutate state
+      and shell success does not independently assert the expected properties.
+    B: The architecture evidence must show that the negative inspection. Under the stated constraint, absence of
+      the prohibited condition is necessary but does not establish the positive architecture state.
+    C: The checkpoint specifically records that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. Under the stated constraint, the read-only inspection directly
+      tests the properties required at Select vault boundary and service tier.
+    D: The applicable design condition is that the positive inspection for Govern certificate issuance and renewal.
+      Under the stated constraint, it is lane-correct but proves Govern certificate issuance and renewal, not Select
+      vault boundary and service tier.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q07
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'A decision test for ''Select vault boundary and service tier'' includes security operations. A passing
+    positive check does not by itself prove this negative assertion: A software-only tier or legacy access-policy
+    model is not silently substituted. Which response provides the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify the positive properties for Select vault boundary and service tier; in a separate step, independently
+      verify that a software-only tier or legacy access-policy model is not silently substituted.
+    B: Verify only the positive result for Select vault boundary and service tier and report full compliance. Also,
+      take it as conclusive that every prohibited parallel state must therefore be absent.
+    C: Prove only that a software-only tier or legacy access-policy model is not silently substituted and report
+      the intended configuration as present; in a separate step, treat it as established that absence is equivalent
+      to positive-state evidence.
+    D: Use Grant managed-identity data-plane access's negative assertion for Select vault boundary and service tier.
+      As another control, use as justification the claim that negative assertions are interchangeable between checkpoints.
+  answer: A
+  explanations:
+    A: 'The review is governed by this fact: a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable; A software-only tier or legacy access-policy model is not
+      silently substituted. Under the stated constraint, two independent observations prevent a passing positive
+      check from concealing an unsafe parallel state.'
+    B: The retained result must be reconciled with the fact that a Premium vault boundary satisfies HSM-backed key
+      needs while keeping application secrets and certificates supportable. Under the stated constraint, the positive
+      result alone does not test the explicit anti-condition 'A software-only tier or legacy access-policy model
+      is not silently substituted'.
+    C: The decision tension comes from the fact that a software-only tier or legacy access-policy model is not silently
+      substituted. Under the stated constraint, absence evidence cannot demonstrate the required positive state
+      'A Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates
+      supportable'.
+    D: The safe operating boundary says that the workload cannot administer the vault, roles, keys, or certificates.
+      Under the stated constraint, the second assertion is valid for Grant managed-identity data-plane access but
+      leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q08
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'The architecture board reconsiders ''Select vault boundary and service tier'' with business continuity.
+    The board wants the Well-Architected consequence of mitigating this risk: A requirement actually needs single-tenant
+    HSM control or unsupported cryptographic functionality. Which choice gives the team the consequence attributable
+    to this checkpoint?'
+  options:
+    A: 'Record this consequence: Cost Optimization: Key Vault Premium supplies required HSM-backed keys without
+      unnecessary dedicated HSM capacity; next, tie it to LAB05-REQ-01.'
+    B: Use the Enforce a private network path consequence as the result for Select vault boundary and service tier;
+      before approval, treat as decisive the assertion that a pillar statement remains valid when moved away from
+      Enforce a private network path.
+    C: Remove the control responsible for the Select vault boundary and service tier outcome. Separately, base approval
+      on the claim that a moderate cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Cost Optimization: Key Vault Premium supplies required HSM-backed keys without unnecessary dedicated
+      HSM capacity'' as proof that all five pillars pass; for this decision, use the premise that the checkpoint
+      ''Select vault boundary and service tier'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The traceable checkpoint outcome is that cost Optimization: Key Vault Premium supplies required HSM-backed
+      keys without unnecessary dedicated HSM capacity. Under the stated constraint, it states the authored pillar
+      consequence of the control evaluated at Select vault boundary and service tier.'
+    B: 'The failure model establishes that security: private endpoints and denied public access reduce vault exposure
+      and exfiltration paths. Under the stated constraint, that tradeoff belongs to Enforce a private network path
+      and does not explain this checkpoint''s decision.'
+    C: The recovery guidance assumes that the required outcome at Select vault boundary and service tier. Under
+      the stated constraint, cost Optimization cannot remove the acceptance condition 'A Premium vault boundary
+      satisfies HSM-backed key needs while keeping application secrets and certificates supportable'.
+    D: The WAF consequence identifies that a software-only tier or legacy access-policy model is not silently substituted.
+      Under the stated constraint, one positive command cannot establish every pillar, especially while the negative
+      state remains unchecked.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q09
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: 'A review of ''Select vault boundary and service tier'' begins with input from payment engineering. A material
+    change now applies: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration
+    and cannot share the payment application vault boundary; revise the selected service and operating model. What
+    is the correct revision to the decision record?'
+  options:
+    A: Retain Azure Key Vault Premium with RBAC and private endpoints at Select vault boundary and service tier
+      without recalculating criteria or eligibility; afterward, accept without proof that the original weighted
+      result is permanent.
+    B: Re-score Azure Key Vault Premium with RBAC and private endpoints and both alternatives for Select vault boundary
+      and service tier; for this decision, supersede the ADR using the changed evidence for LAB05-REQ-01.
+    C: Select Azure Managed HSM with centralized HSM administration for Select vault boundary and service tier without
+      rechecking its mandatory constraints; then rely on the claim that being different from the current design
+      is an architecture criterion.
+    D: Keep Application-owned encrypted configuration in general-purpose storage eligible at Select vault boundary
+      and service tier by downgrading LAB05-REQ-01. Independently, rely on the belief that stakeholder approval
+      is unnecessary when that requirement blocks the candidate.
+  answer: B
+  explanations:
+    A: azure Key Vault Premium with RBAC and private endpoints. This matters because the original ADR remains historical
+      evidence, but its score cannot answer a changed mandatory condition.
+    B: The command-level assertion is anchored in the fact that azure Key Vault Premium with RBAC and private endpoints
+      at Select vault boundary and service tier. Under the stated constraint, the material change 'The acquired
+      card-processing workload requires single-tenant FIPS-validated HSM administration and cannot share the payment
+      application vault boundary; revise the selected service and operating model.' requires fresh eligibility,
+      weighted analysis, and a superseding decision.
+    C: The controlling fact is that azure Managed HSM with centralized HSM administration. This matters because
+      being different is not a criterion, and the candidate still must avoid the prohibited state at Select vault
+      boundary and service tier.
+    D: The authored acceptance boundary states that lAB05-REQ-01. This matters because an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q10
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP01
+  stem: '''Select vault boundary and service tier'' awaits approval from cryptographic governance. After a partial
+    run, cleanup must follow this dependency: Remove private endpoints, assignments, certificates, secrets, and
+    keys before the vault; never automate purge. Which recommendation supplies the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Govern certificate issuance and renewal before reconciling the current dependency.
+      As another control, consider it sufficient that removing a parent needed to identify Select vault boundary
+      and service tier is harmless.
+    B: Delete candidates by display name before comparing the Select vault boundary and service tier ownership tags;
+      as a separate check, take it as conclusive that the dependency rule 'Remove private endpoints, assignments,
+      certificates, secrets, and keys before the vault; never automate purge' is optional.
+    C: Destroy recoverable copies before retaining the Select vault boundary and service tier negative assertion
+      'A software-only tier or legacy access-policy model is not silently substituted'. Afterward, treat it as established
+      that remaining command logs are sufficient recovery evidence.
+    D: 'Verify exact run-state IDs and ownership tags for Select vault boundary and service tier. Then, follow this
+      dependency rule without purge: Remove private endpoints, assignments, certificates, secrets, and keys before
+      the vault; never automate purge.'
+  answer: D
+  explanations:
+    A: The checkpoint specifically records that delete only synthetic run-owned certificates and never purge recoverable
+      versions. This matters because a cleanup rule for Govern certificate issuance and renewal cannot override
+      the dependency declared for Select vault boundary and service tier.
+    B: The scenario makes clear that vault label, region, SKU, authorization model, business owner, and resource
+      ID only. This matters because names are not ownership proof; deletion requires the exact recorded identifier
+      and every required tag.
+    C: The architecture evidence must show that a software-only tier or legacy access-policy model is not silently
+      substituted. This matters because irreversible purge is outside the lab contract and destroys evidence needed
+      for residual-state validation.
+    D: The relevant observation is that remove private endpoints, assignments, certificates, secrets, and keys before
+      the vault; never automate purge. This matters because exact identity, complete ownership tags, and the authored
+      dependency order constrain cleanup and preserve recovery.
+  remediationAnchor: checkpoint-1
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q11
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: '''Define key protection and rotation'' is reopened at the request of cryptographic governance. Approval
+    requires a positive result plus this independent negative assertion: No enabled production key lacks an expiry
+    and rotation policy. Which action produces the acceptance rule that makes LAB05-REQ-02 testable?'
+  options:
+    A: Select Azure Managed HSM with centralized HSM administration before checking Define key protection and rotation.
+      Next, use the premise that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Select vault boundary and service tier to approve Define key protection and rotation,
+      and then consider it sufficient that one control establishes an unrelated acceptance boundary.
+    C: Require the documented positive state for Define key protection and rotation, and then verify that no enabled
+      production key lacks an expiry and rotation policy.
+    D: Choose Application-owned encrypted configuration in general-purpose storage and skip the Define key protection
+      and rotation negative assertion. Also, take it as conclusive that the candidate has the lowest implementation
+      effort.
+  answer: C
+  explanations:
+    A: 'The review is governed by this fact: no enabled production key lacks an expiry and rotation policy. This
+      matters because a deployment result cannot prove LAB05-REQ-02, and Azure Managed HSM with centralized HSM
+      administration still has to meet the mandatory boundary.'
+    B: The retained result must be reconciled with the fact that a Premium vault boundary satisfies HSM-backed key
+      needs while keeping application secrets and certificates supportable. This matters because that outcome belongs
+      to Select vault boundary and service tier and leaves Define key protection and rotation unverified.
+    C: The applicable design condition is that the HSM-backed key has a ninety-day lifetime and rotates thirty days
+      before expiry with a named application owner. This matters because the positive state and an independent negative
+      assertion jointly make LAB05-REQ-02 testable.
+    D: The decision tension comes from the fact that protect payment cryptographic assets and reduce outage risk
+      caused by unmanaged expiry or overprivileged access. This matters because implementation effort cannot justify
+      skipping the negative assertion or displace LAB05-REQ-02.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q12
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: A design review of 'Define key protection and rotation' includes security operations. The selected architecture
+    is Azure Key Vault Premium with RBAC and private endpoints; object existence alone is not success. What best
+    demonstrates the intended successful finding?
+  options:
+    A: Record the HSM-backed key has a ninety-day lifetime and rotates thirty days before expiry with a named application
+      owner; as a separate check, classify it as success for LAB05-REQ-02.
+    B: Use only the negative assertion 'No enabled production key lacks an expiry and rotation policy' as the success
+      result; next, rely on the belief that absence proves every required positive property.
+    C: Use the successful finding from Govern certificate issuance and renewal as the result for Define key protection
+      and rotation. In addition, proceed on the belief that a property from the current checkpoint does not need
+      to be inspected.
+    D: Record the failure condition 'A dependent application pins a key version and cannot tolerate automated rotation'
+      as a successful state; before approval, treat as decisive the assertion that the command returned an object.
+  answer: A
+  explanations:
+    A: The safe operating boundary says that the HSM-backed key has a ninety-day lifetime and rotates thirty days
+      before expiry with a named application owner. This matters because this is the authored target state for Define
+      key protection and rotation and directly supports LAB05-REQ-02.
+    B: The traceable checkpoint outcome is that no enabled production key lacks an expiry and rotation policy. This
+      matters because this is the independent prohibited-state assertion, not a successful finding.
+    C: The failure model establishes that issuer, subject, validity, renewal threshold, exportability, and application
+      binding are documented and inspectable. This matters because evidence for Govern certificate issuance and
+      renewal cannot substitute for the properties required at Define key protection and rotation.
+    D: The recovery guidance assumes that a dependent application pins a key version and cannot tolerate automated
+      rotation. This matters because resource existence or command output does not convert the documented failure
+      condition into success.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q13
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: 'The team asks business continuity to assess ''Define key protection and rotation''. Evidence must address
+    this risk without retaining credentials: A dependent application pins a key version and cannot tolerate automated
+    rotation. Which option is sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Grant managed-identity data-plane access for Define key protection and rotation;
+      for the recorded decision, treat it as established that a related checkpoint proves the current expected state.
+    B: Store unredacted Define key protection and rotation output with operator, tenant, token, and request context.
+      Then, use as justification the claim that reproduction requires every captured field.
+    C: Record only the Define key protection and rotation positive inspection's exit status; afterward, accept without
+      proof that projected properties and assertion results can be reconstructed later.
+    D: Retain key name, key type, protection class, expiry date, rotation actions, and version count without key
+      material; before approval, exclude credentials and unrelated response fields.
+  answer: D
+  explanations:
+    A: The command-level assertion is anchored in the fact that synthetic principal ID, role name, exact scope,
+      assignment ID, and access owner. This matters because that evidence supports Grant managed-identity data-plane
+      access, so it cannot demonstrate The HSM-backed key has a ninety-day lifetime and rotates thirty days before
+      expiry with a named application owner.
+    B: unredacted implementation output. The checkpoint therefore requires that identity, tenant, or token material
+      exceeds the non-secret evidence contract.
+    C: The controlling fact is that the positive inspection's exit status. The checkpoint therefore requires that
+      an exit code alone does not show whether the HSM-backed key has a ninety-day lifetime and rotates thirty days
+      before expiry with a named application owner.
+    D: The WAF consequence identifies that key name, key type, protection class, expiry date, rotation actions,
+      and version count without key material. This matters because it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q14
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: A recommendation on 'Define key protection and rotation' is requested by payment engineering. The target
+    is The HSM-backed key has a ninety-day lifetime and rotates thirty days before expiry with a named application
+    owner, but the latest evidence does not show it. What should the architect select as the most likely cause?
+  options:
+    A: Treat 'Name resolution returns the public endpoint or the private endpoint connection is pending' as grounds
+      to reject Define key protection and rotation. Also, base approval on the claim that enforce a private network
+      path's failure model applies unchanged here.
+    B: Investigate a dependent application pins a key version and cannot tolerate automated rotation; as an independent
+      condition, isolate that cause before changing Azure Key Vault Premium with RBAC and private endpoints.
+    C: Ignore the negative assertion 'No enabled production key lacks an expiry and rotation policy'; in a separate
+      step, use the premise that a later material change will make it unnecessary.
+    D: Investigate Select vault boundary and service tier instead of diagnosing Define key protection and rotation.
+      As another control, consider it sufficient that a passing result at Select vault boundary and service tier
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The relevant observation is that name resolution returns the public endpoint or the private endpoint connection
+      is pending. The checkpoint therefore requires that that condition belongs to Enforce a private network path
+      and does not by itself invalidate Azure Key Vault Premium with RBAC and private endpoints.
+    B: The authored acceptance boundary states that a dependent application pins a key version and cannot tolerate
+      automated rotation. The checkpoint therefore requires that it is the checkpoint's causal failure model and
+      should be isolated before retrying Define key protection and rotation.
+    C: The checkpoint specifically records that no enabled production key lacks an expiry and rotation policy. The
+      checkpoint therefore requires that the negative assertion must be evaluated now, independent of a later business
+      change.
+    D: The scenario makes clear that a Premium vault boundary satisfies HSM-backed key needs while keeping application
+      secrets and certificates supportable. The checkpoint therefore requires that a passing result at Select vault
+      boundary and service tier gives no causal evidence for the failure at Define key protection and rotation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q15
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: '''Define key protection and rotation'' is assigned to cryptographic governance. The run encountered this
+    modeled failure: A dependent application pins a key version and cannot tolerate automated rotation. Select the
+    safest recovery action.'
+  options:
+    A: 'Perform cleanup immediately: Disable and delete only run-owned key versions; retain recoverability and never
+      purge; before approval, rely on the claim that the failed operation and its returned identifiers do not need
+      reconciliation.'
+    B: Test versionless key references and staged rollover before enabling automatic rotation; then preserve the
+      current run identity and evidence.
+    C: Create a different run identity before diagnosing 'A dependent application pins a key version and cannot
+      tolerate automated rotation'. Separately, rely on the belief that the first state record and returned identifiers
+      can be discarded.
+    D: Change Select vault boundary and service tier instead; for this decision, proceed on the belief that success
+      at Select vault boundary and service tier will repair the failed state at Define key protection and rotation.
+  answer: B
+  explanations:
+    A: The applicable design condition is that disable and delete only run-owned key versions; retain recoverability
+      and never purge. The checkpoint therefore requires that cleanup before reconciliation can erase evidence or
+      strand a partially created dependency.
+    B: The architecture evidence must show that test versionless key references and staged rollover before enabling
+      automatic rotation. The checkpoint therefore requires that it corrects the narrow cause while retaining the
+      same recovery trail and decision scope.
+    C: 'The review is governed by this fact: a dependent application pins a key version and cannot tolerate automated
+      rotation. The checkpoint therefore requires that discarding the original run identity breaks ownership reconciliation
+      and can duplicate a partial operation.'
+    D: The retained result must be reconciled with the fact that a Premium vault boundary satisfies HSM-backed key
+      needs while keeping application secrets and certificates supportable. The checkpoint therefore requires that
+      altering an already separate checkpoint does not repair the modeled failure at Define key protection and rotation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q16
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: An assurance review of 'Define key protection and rotation' includes security operations. Without making
+    a new change, the team must inspect the risk 'A dependent application pins a key version and cannot tolerate
+    automated rotation' using the Azure PowerShell lane. Which response provides the read-only, lane-correct inspection?
+  options:
+    A: Rerun the Define key protection and rotation implementation command and infer the expected state; afterward,
+      take it as conclusive that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Define key protection and rotation: No enabled production key lacks
+      an expiry and rotation policy; then treat it as established that an empty negative result reports every required
+      positive property.'
+    C: 'Inspect the documented properties for Define key protection and rotation. Also, retain this evidence: key
+      name, key type, protection class, expiry date, rotation actions, and version count without key material.'
+    D: Run the positive inspection for Govern certificate issuance and renewal and apply it to Define key protection
+      and rotation. Independently, use as justification the claim that any command from the same lane proves the
+      current checkpoint.
+  answer: C
+  explanations:
+    A: The safe operating boundary says that the implementation command. The checkpoint therefore requires that
+      it can mutate state and shell success does not independently assert the expected properties.
+    B: The traceable checkpoint outcome is that the negative inspection. The checkpoint therefore requires that
+      absence of the prohibited condition is necessary but does not establish the positive architecture state.
+    C: The decision tension comes from the fact that the HSM-backed key has a ninety-day lifetime and rotates thirty
+      days before expiry with a named application owner. The checkpoint therefore requires that the read-only inspection
+      directly tests the properties required at Define key protection and rotation.
+    D: The failure model establishes that the positive inspection for Govern certificate issuance and renewal. The
+      checkpoint therefore requires that it is lane-correct but proves Govern certificate issuance and renewal,
+      not Define key protection and rotation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q17
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: 'Approval of ''Define key protection and rotation'' is questioned by business continuity. A passing positive
+    check does not by itself prove this negative assertion: No enabled production key lacks an expiry and rotation
+    policy. Which choice gives the team the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Define key protection and rotation and report full compliance. As another
+      control, treat as decisive the assertion that every prohibited parallel state must therefore be absent.
+    B: Prove only that no enabled production key lacks an expiry and rotation policy and report the intended configuration
+      as present; as a separate check, base approval on the claim that absence is equivalent to positive-state evidence.
+    C: Use Grant managed-identity data-plane access's negative assertion for Define key protection and rotation.
+      Afterward, use the premise that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Define key protection and rotation. Afterward, independently verify that
+      no enabled production key lacks an expiry and rotation policy.
+  answer: D
+  explanations:
+    A: The WAF consequence identifies that the HSM-backed key has a ninety-day lifetime and rotates thirty days
+      before expiry with a named application owner. The checkpoint therefore requires that the positive result alone
+      does not test the explicit anti-condition 'No enabled production key lacks an expiry and rotation policy'.
+    B: The command-level assertion is anchored in the fact that no enabled production key lacks an expiry and rotation
+      policy. The checkpoint therefore requires that absence evidence cannot demonstrate the required positive state
+      'The HSM-backed key has a ninety-day lifetime and rotates thirty days before expiry with a named application
+      owner'.
+    C: the workload cannot administer the vault, roles, keys, or certificates. In the decision record, the second
+      assertion is valid for Grant managed-identity data-plane access but leaves this checkpoint's prohibited state
+      untested.
+    D: The recovery guidance assumes that the HSM-backed key has a ninety-day lifetime and rotates thirty days before
+      expiry with a named application owner; No enabled production key lacks an expiry and rotation policy. The
+      checkpoint therefore requires that two independent observations prevent a passing positive check from concealing
+      an unsafe parallel state.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q18
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: 'The implementation review has reached ''Define key protection and rotation''. The board wants the Well-Architected
+    consequence of mitigating this risk: A dependent application pins a key version and cannot tolerate automated
+    rotation. What is the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Enforce a private network path consequence as the result for Define key protection and rotation;
+      for this decision, accept without proof that a pillar statement remains valid when moved away from Enforce
+      a private network path.
+    B: Remove the control responsible for the Define key protection and rotation outcome. Before sign-off, rely
+      on the claim that a moderate cost classification outweighs the mandatory architecture state.
+    C: 'Record this consequence: Reliability: scheduled rotation and versionless references turn rollover into an
+      exercised application behavior. Separately, tie it to LAB05-REQ-02.'
+    D: 'Treat ''Reliability: scheduled rotation and versionless references turn rollover into an exercised application
+      behavior'' as proof that all five pillars pass; as an independent condition, rely on the belief that the checkpoint
+      ''Define key protection and rotation'' no longer needs its separate negative check.'
+  answer: C
+  explanations:
+    A: 'The authored acceptance boundary states that security: private endpoints and denied public access reduce
+      vault exposure and exfiltration paths. In the decision record, that tradeoff belongs to Enforce a private
+      network path and does not explain this checkpoint''s decision.'
+    B: The relevant observation is that the required outcome at Define key protection and rotation. In the decision
+      record, cost Optimization cannot remove the acceptance condition 'The HSM-backed key has a ninety-day lifetime
+      and rotates thirty days before expiry with a named application owner'.
+    C: 'The controlling fact is that reliability: scheduled rotation and versionless references turn rollover into
+      an exercised application behavior. In the decision record, it states the authored pillar consequence of the
+      control evaluated at Define key protection and rotation.'
+    D: The checkpoint specifically records that no enabled production key lacks an expiry and rotation policy. In
+      the decision record, one positive command cannot establish every pillar, especially while the negative state
+      remains unchecked.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q19
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: 'The approach to ''Define key protection and rotation'' is challenged by cryptographic governance. A material
+    change now applies: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration
+    and cannot share the payment application vault boundary; revise the selected service and operating model. Which
+    recommendation supplies the correct revision to the decision record?'
+  options:
+    A: Retain Azure Key Vault Premium with RBAC and private endpoints at Define key protection and rotation without
+      recalculating criteria or eligibility. Independently, consider it sufficient that the original weighted result
+      is permanent.
+    B: Select Azure Managed HSM with centralized HSM administration for Define key protection and rotation without
+      rechecking its mandatory constraints. Next, take it as conclusive that being different from the current design
+      is an architecture criterion.
+    C: Keep Application-owned encrypted configuration in general-purpose storage eligible at Define key protection
+      and rotation by downgrading LAB05-REQ-02, and then treat it as established that stakeholder approval is unnecessary
+      when that requirement blocks the candidate.
+    D: Re-score Azure Key Vault Premium with RBAC and private endpoints and both alternatives for Define key protection
+      and rotation; without relying on inference, supersede the ADR using the changed evidence for LAB05-REQ-02.
+  answer: D
+  explanations:
+    A: The architecture evidence must show that azure Key Vault Premium with RBAC and private endpoints. In the
+      decision record, the original ADR remains historical evidence, but its score cannot answer a changed mandatory
+      condition.
+    B: The applicable design condition is that azure Managed HSM with centralized HSM administration. In the decision
+      record, being different is not a criterion, and the candidate still must avoid the prohibited state at Define
+      key protection and rotation.
+    C: 'The review is governed by this fact: lAB05-REQ-02. In the decision record, an architect cannot silently
+      downgrade a stakeholder-owned mandatory requirement to protect a candidate.'
+    D: The scenario makes clear that azure Key Vault Premium with RBAC and private endpoints at Define key protection
+      and rotation. In the decision record, the material change 'The acquired card-processing workload requires
+      single-tenant FIPS-validated HSM administration and cannot share the payment application vault boundary; revise
+      the selected service and operating model.' requires fresh eligibility, weighted analysis, and a superseding
+      decision.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q20
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP02
+  stem: 'A decision test for ''Define key protection and rotation'' includes security operations. After a partial
+    run, cleanup must follow this dependency: Disable and delete only run-owned key versions; retain recoverability
+    and never purge. Choose the dependency-safe cleanup plan.'
+  options:
+    A: Apply the cleanup rule for Govern certificate issuance and renewal before reconciling the current dependency.
+      Afterward, proceed on the belief that removing a parent needed to identify Define key protection and rotation
+      is harmless.
+    B: 'Verify exact run-state IDs and ownership tags for Define key protection and rotation. Independently, follow
+      this dependency rule without purge: Disable and delete only run-owned key versions; retain recoverability
+      and never purge.'
+    C: Delete candidates by display name before comparing the Define key protection and rotation ownership tags;
+      next, treat as decisive the assertion that the dependency rule 'Disable and delete only run-owned key versions;
+      retain recoverability and never purge' is optional.
+    D: Destroy recoverable copies before retaining the Define key protection and rotation negative assertion 'No
+      enabled production key lacks an expiry and rotation policy'. In addition, base approval on the claim that
+      remaining command logs are sufficient recovery evidence.
+  answer: B
+  explanations:
+    A: The decision tension comes from the fact that delete only synthetic run-owned certificates and never purge
+      recoverable versions. In the decision record, a cleanup rule for Govern certificate issuance and renewal cannot
+      override the dependency declared for Define key protection and rotation.
+    B: The retained result must be reconciled with the fact that disable and delete only run-owned key versions;
+      retain recoverability and never purge. In the decision record, exact identity, complete ownership tags, and
+      the authored dependency order constrain cleanup and preserve recovery.
+    C: The safe operating boundary says that key name, key type, protection class, expiry date, rotation actions,
+      and version count without key material. In the decision record, names are not ownership proof; deletion requires
+      the exact recorded identifier and every required tag.
+    D: The traceable checkpoint outcome is that no enabled production key lacks an expiry and rotation policy. In
+      the decision record, irreversible purge is outside the lab contract and destroys evidence needed for residual-state
+      validation.
+  remediationAnchor: checkpoint-2
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q21
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: 'The architecture board reconsiders ''Govern certificate issuance and renewal'' with security operations.
+    Approval requires a positive result plus this independent negative assertion: No enabled certificate approaches
+    expiry without an owned renewal path. What best demonstrates the acceptance rule that makes LAB05-REQ-03 testable?'
+  options:
+    A: Select Azure Managed HSM with centralized HSM administration before checking Govern certificate issuance
+      and renewal. Also, rely on the belief that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Select vault boundary and service tier to approve Govern certificate issuance
+      and renewal; in a separate step, proceed on the belief that one control establishes an unrelated acceptance
+      boundary.
+    C: Require the documented positive state for Govern certificate issuance and renewal. As another control, verify
+      that no enabled certificate approaches expiry without an owned renewal path.
+    D: Choose Application-owned encrypted configuration in general-purpose storage and skip the Govern certificate
+      issuance and renewal negative assertion. As another control, treat as decisive the assertion that the candidate
+      has the lowest implementation effort.
+  answer: C
+  explanations:
+    A: The recovery guidance assumes that no enabled certificate approaches expiry without an owned renewal path.
+      In the decision record, a deployment result cannot prove LAB05-REQ-03, and Azure Managed HSM with centralized
+      HSM administration still has to meet the mandatory boundary.
+    B: The WAF consequence identifies that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. In the decision record, that outcome belongs to Select vault
+      boundary and service tier and leaves Govern certificate issuance and renewal unverified.
+    C: The failure model establishes that issuer, subject, validity, renewal threshold, exportability, and application
+      binding are documented and inspectable. In the decision record, the positive state and an independent negative
+      assertion jointly make LAB05-REQ-03 testable.
+    D: The command-level assertion is anchored in the fact that protect payment cryptographic assets and reduce
+      outage risk caused by unmanaged expiry or overprivileged access. In the decision record, implementation effort
+      cannot justify skipping the negative assertion or displace LAB05-REQ-03.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q22
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: A review of 'Govern certificate issuance and renewal' begins with input from business continuity. The selected
+    architecture is Azure Key Vault Premium with RBAC and private endpoints; object existence alone is not success.
+    Which option is the intended successful finding?
+  options:
+    A: Use only the negative assertion 'No enabled certificate approaches expiry without an owned renewal path'
+      as the success result; before approval, treat it as established that absence proves every required positive
+      property.
+    B: Use the successful finding from Define key protection and rotation as the result for Govern certificate issuance
+      and renewal. Separately, use as justification the claim that a property from the current checkpoint does not
+      need to be inspected.
+    C: Record the failure condition 'The issuer cannot complete validation or the application does not reload a
+      renewed certificate' as a successful state; for this decision, accept without proof that the command returned
+      an object.
+    D: Record issuer, subject, validity, renewal threshold, exportability, and application binding are documented
+      and inspectable. In addition, classify it as success for LAB05-REQ-03.
+  answer: D
+  explanations:
+    A: The controlling fact is that no enabled certificate approaches expiry without an owned renewal path. The
+      independent assertion shows why this is the independent prohibited-state assertion, not a successful finding.
+    B: The authored acceptance boundary states that the HSM-backed key has a ninety-day lifetime and rotates thirty
+      days before expiry with a named application owner. The independent assertion shows why evidence for Define
+      key protection and rotation cannot substitute for the properties required at Govern certificate issuance and
+      renewal.
+    C: The relevant observation is that the issuer cannot complete validation or the application does not reload
+      a renewed certificate. The independent assertion shows why resource existence or command output does not convert
+      the documented failure condition into success.
+    D: issuer, subject, validity, renewal threshold, exportability, and application binding are documented and inspectable.
+      The independent assertion shows why this is the authored target state for Govern certificate issuance and
+      renewal and directly supports LAB05-REQ-03.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q23
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: '''Govern certificate issuance and renewal'' awaits approval from payment engineering. Evidence must address
+    this risk without retaining credentials: The issuer cannot complete validation or the application does not reload
+    a renewed certificate. What should the architect select as sufficient, properly scoped evidence?'
+  options:
+    A: Retain certificate name, issuer class, expiry, non-secret thumbprint, renewal threshold, and consuming service.
+      Before sign-off, exclude credentials and unrelated response fields.
+    B: Substitute the evidence from Grant managed-identity data-plane access for Govern certificate issuance and
+      renewal; afterward, base approval on the claim that a related checkpoint proves the current expected state.
+    C: Store unredacted Govern certificate issuance and renewal output with operator, tenant, token, and request
+      context; then use the premise that reproduction requires every captured field.
+    D: Record only the Govern certificate issuance and renewal positive inspection's exit status. Independently,
+      consider it sufficient that projected properties and assertion results can be reconstructed later.
+  answer: A
+  explanations:
+    A: The checkpoint specifically records that certificate name, issuer class, expiry, non-secret thumbprint, renewal
+      threshold, and consuming service. The independent assertion shows why it captures the checkpoint's observable
+      properties while keeping the evidence boundary narrow.
+    B: The scenario makes clear that synthetic principal ID, role name, exact scope, assignment ID, and access owner.
+      The independent assertion shows why that evidence supports Grant managed-identity data-plane access, so it
+      cannot demonstrate Issuer, subject, validity, renewal threshold, exportability, and application binding are
+      documented and inspectable.
+    C: The architecture evidence must show that unredacted implementation output. The independent assertion shows
+      why identity, tenant, or token material exceeds the non-secret evidence contract.
+    D: The applicable design condition is that the positive inspection's exit status. The independent assertion
+      shows why an exit code alone does not show whether issuer, subject, validity, renewal threshold, exportability,
+      and application binding are documented and inspectable.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q24
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: '''Govern certificate issuance and renewal'' is reopened at the request of cryptographic governance. The
+    target is Issuer, subject, validity, renewal threshold, exportability, and application binding are documented
+    and inspectable, but the latest evidence does not show it. Select the most likely cause.'
+  options:
+    A: Treat 'Name resolution returns the public endpoint or the private endpoint connection is pending' as grounds
+      to reject Govern certificate issuance and renewal. As another control, rely on the claim that enforce a private
+      network path's failure model applies unchanged here.
+    B: Investigate the issuer cannot complete validation or the application does not reload a renewed certificate;
+      afterward, isolate that cause before changing Azure Key Vault Premium with RBAC and private endpoints.
+    C: Ignore the negative assertion 'No enabled certificate approaches expiry without an owned renewal path'; as
+      a separate check, rely on the belief that a later material change will make it unnecessary.
+    D: Investigate Select vault boundary and service tier instead of diagnosing Govern certificate issuance and
+      renewal. Afterward, proceed on the belief that a passing result at Select vault boundary and service tier
+      identifies the current cause.
+  answer: B
+  explanations:
+    A: The retained result must be reconciled with the fact that name resolution returns the public endpoint or
+      the private endpoint connection is pending. The independent assertion shows why that condition belongs to
+      Enforce a private network path and does not by itself invalidate Azure Key Vault Premium with RBAC and private
+      endpoints.
+    B: 'The review is governed by this fact: the issuer cannot complete validation or the application does not reload
+      a renewed certificate. The independent assertion shows why it is the checkpoint''s causal failure model and
+      should be isolated before retrying Govern certificate issuance and renewal.'
+    C: The decision tension comes from the fact that no enabled certificate approaches expiry without an owned renewal
+      path. The independent assertion shows why the negative assertion must be evaluated now, independent of a later
+      business change.
+    D: The safe operating boundary says that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. The independent assertion shows why a passing result at
+      Select vault boundary and service tier gives no causal evidence for the failure at Govern certificate issuance
+      and renewal.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q25
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: 'A design review of ''Govern certificate issuance and renewal'' includes security operations. The run encountered
+    this modeled failure: The issuer cannot complete validation or the application does not reload a renewed certificate.
+    Which response provides the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Delete only synthetic run-owned certificates and never purge recoverable versions;
+      for this decision, take it as conclusive that the failed operation and its returned identifiers do not need
+      reconciliation.'
+    B: Validate issuer permissions and exercise application rebinding with a synthetic certificate before production
+      rollout, and then preserve the current run identity and evidence.
+    C: Create a different run identity before diagnosing 'The issuer cannot complete validation or the application
+      does not reload a renewed certificate'. Before sign-off, treat it as established that the first state record
+      and returned identifiers can be discarded.
+    D: Change Select vault boundary and service tier instead; as an independent condition, use as justification
+      the claim that success at Select vault boundary and service tier will repair the failed state at Govern certificate
+      issuance and renewal.
+  answer: B
+  explanations:
+    A: The failure model establishes that delete only synthetic run-owned certificates and never purge recoverable
+      versions. The independent assertion shows why cleanup before reconciliation can erase evidence or strand a
+      partially created dependency.
+    B: The traceable checkpoint outcome is that validate issuer permissions and exercise application rebinding with
+      a synthetic certificate before production rollout. The independent assertion shows why it corrects the narrow
+      cause while retaining the same recovery trail and decision scope.
+    C: The recovery guidance assumes that the issuer cannot complete validation or the application does not reload
+      a renewed certificate. The independent assertion shows why discarding the original run identity breaks ownership
+      reconciliation and can duplicate a partial operation.
+    D: The WAF consequence identifies that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. The independent assertion shows why altering an already
+      separate checkpoint does not repair the modeled failure at Govern certificate issuance and renewal.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q26
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: The team asks business continuity to assess 'Govern certificate issuance and renewal'. Without making a
+    new change, the team must inspect the risk 'The issuer cannot complete validation or the application does not
+    reload a renewed certificate' using the Azure PowerShell lane. Which choice gives the team the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Govern certificate issuance and renewal implementation command and infer the expected state. Independently,
+      treat as decisive the assertion that absence of a shell error proves every property.
+    B: 'Run only this negative inspection for Govern certificate issuance and renewal: No enabled certificate approaches
+      expiry without an owned renewal path. Next, base approval on the claim that an empty negative result reports
+      every required positive property.'
+    C: 'Inspect the documented properties for Govern certificate issuance and renewal; as a separate check, retain
+      this evidence: certificate name, issuer class, expiry, non-secret thumbprint, renewal threshold, and consuming
+      service.'
+    D: Run the positive inspection for Define key protection and rotation and apply it to Govern certificate issuance
+      and renewal, and then use the premise that any command from the same lane proves the current checkpoint.
+  answer: C
+  explanations:
+    A: the implementation command. Operationally, it can mutate state and shell success does not independently assert
+      the expected properties.
+    B: The controlling fact is that the negative inspection. Operationally, absence of the prohibited condition
+      is necessary but does not establish the positive architecture state.
+    C: The command-level assertion is anchored in the fact that issuer, subject, validity, renewal threshold, exportability,
+      and application binding are documented and inspectable. The independent assertion shows why the read-only
+      inspection directly tests the properties required at Govern certificate issuance and renewal.
+    D: The authored acceptance boundary states that the positive inspection for Define key protection and rotation.
+      Operationally, it is lane-correct but proves Define key protection and rotation, not Govern certificate issuance
+      and renewal.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q27
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: 'A recommendation on ''Govern certificate issuance and renewal'' is requested by payment engineering. A
+    passing positive check does not by itself prove this negative assertion: No enabled certificate approaches expiry
+    without an owned renewal path. What is the assertion pair that proves both conditions independently?'
+  options:
+    A: Verify only the positive result for Govern certificate issuance and renewal and report full compliance. Afterward,
+      accept without proof that every prohibited parallel state must therefore be absent.
+    B: Prove only that no enabled certificate approaches expiry without an owned renewal path and report the intended
+      configuration as present; next, rely on the claim that absence is equivalent to positive-state evidence.
+    C: Use Grant managed-identity data-plane access's negative assertion for Govern certificate issuance and renewal.
+      In addition, rely on the belief that negative assertions are interchangeable between checkpoints.
+    D: Verify the positive properties for Govern certificate issuance and renewal; before approval, independently
+      verify that no enabled certificate approaches expiry without an owned renewal path.
+  answer: D
+  explanations:
+    A: The checkpoint specifically records that issuer, subject, validity, renewal threshold, exportability, and
+      application binding are documented and inspectable. Operationally, the positive result alone does not test
+      the explicit anti-condition 'No enabled certificate approaches expiry without an owned renewal path'.
+    B: The scenario makes clear that no enabled certificate approaches expiry without an owned renewal path. Operationally,
+      absence evidence cannot demonstrate the required positive state 'Issuer, subject, validity, renewal threshold,
+      exportability, and application binding are documented and inspectable'.
+    C: The architecture evidence must show that the workload cannot administer the vault, roles, keys, or certificates.
+      Operationally, the second assertion is valid for Grant managed-identity data-plane access but leaves this
+      checkpoint's prohibited state untested.
+    D: The relevant observation is that issuer, subject, validity, renewal threshold, exportability, and application
+      binding are documented and inspectable; No enabled certificate approaches expiry without an owned renewal
+      path. Operationally, two independent observations prevent a passing positive check from concealing an unsafe
+      parallel state.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q28
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: '''Govern certificate issuance and renewal'' is assigned to cryptographic governance. The board wants the
+    Well-Architected consequence of mitigating this risk: The issuer cannot complete validation or the application
+    does not reload a renewed certificate. Which recommendation supplies the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Enforce a private network path consequence as the result for Govern certificate issuance and renewal;
+      as an independent condition, consider it sufficient that a pillar statement remains valid when moved away
+      from Enforce a private network path.
+    B: Remove the control responsible for the Govern certificate issuance and renewal outcome; for the final assessment,
+      take it as conclusive that a moderate cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Operational Excellence: explicit renewal and rebind ownership prevents unmanaged certificate expiry''
+      as proof that all five pillars pass. Then, treat it as established that the checkpoint ''Govern certificate
+      issuance and renewal'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Operational Excellence: explicit renewal and rebind ownership prevents unmanaged
+      certificate expiry; as an independent condition, tie it to LAB05-REQ-03.'
+  answer: D
+  explanations:
+    A: 'The review is governed by this fact: security: private endpoints and denied public access reduce vault exposure
+      and exfiltration paths. Operationally, that tradeoff belongs to Enforce a private network path and does not
+      explain this checkpoint''s decision.'
+    B: The retained result must be reconciled with the fact that the required outcome at Govern certificate issuance
+      and renewal. Operationally, cost Optimization cannot remove the acceptance condition 'Issuer, subject, validity,
+      renewal threshold, exportability, and application binding are documented and inspectable'.
+    C: The decision tension comes from the fact that no enabled certificate approaches expiry without an owned renewal
+      path. Operationally, one positive command cannot establish every pillar, especially while the negative state
+      remains unchecked.
+    D: 'The applicable design condition is that operational Excellence: explicit renewal and rebind ownership prevents
+      unmanaged certificate expiry. Operationally, it states the authored pillar consequence of the control evaluated
+      at Govern certificate issuance and renewal.'
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q29
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: 'An assurance review of ''Govern certificate issuance and renewal'' includes security operations. A material
+    change now applies: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration
+    and cannot share the payment application vault boundary; revise the selected service and operating model. Choose
+    the correct revision to the decision record.'
+  options:
+    A: Retain Azure Key Vault Premium with RBAC and private endpoints at Govern certificate issuance and renewal
+      without recalculating criteria or eligibility, and then proceed on the belief that the original weighted result
+      is permanent.
+    B: Select Azure Managed HSM with centralized HSM administration for Govern certificate issuance and renewal
+      without rechecking its mandatory constraints. Also, treat as decisive the assertion that being different from
+      the current design is an architecture criterion.
+    C: Re-score Azure Key Vault Premium with RBAC and private endpoints and both alternatives for Govern certificate
+      issuance and renewal; then supersede the ADR using the changed evidence for LAB05-REQ-03.
+    D: Keep Application-owned encrypted configuration in general-purpose storage eligible at Govern certificate
+      issuance and renewal by downgrading LAB05-REQ-03; in a separate step, base approval on the claim that stakeholder
+      approval is unnecessary when that requirement blocks the candidate.
+  answer: C
+  explanations:
+    A: The traceable checkpoint outcome is that azure Key Vault Premium with RBAC and private endpoints. Operationally,
+      the original ADR remains historical evidence, but its score cannot answer a changed mandatory condition.
+    B: The failure model establishes that azure Managed HSM with centralized HSM administration. Operationally,
+      being different is not a criterion, and the candidate still must avoid the prohibited state at Govern certificate
+      issuance and renewal.
+    C: The safe operating boundary says that azure Key Vault Premium with RBAC and private endpoints at Govern certificate
+      issuance and renewal. Operationally, the material change 'The acquired card-processing workload requires single-tenant
+      FIPS-validated HSM administration and cannot share the payment application vault boundary; revise the selected
+      service and operating model.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    D: The recovery guidance assumes that lAB05-REQ-03. Operationally, an architect cannot silently downgrade a
+      stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q30
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP03
+  stem: 'Approval of ''Govern certificate issuance and renewal'' is questioned by business continuity. After a partial
+    run, cleanup must follow this dependency: Delete only synthetic run-owned certificates and never purge recoverable
+    versions. Which answer describes the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Define key protection and rotation before reconciling the current dependency.
+      In addition, use as justification the claim that removing a parent needed to identify Govern certificate issuance
+      and renewal is harmless.
+    B: Delete candidates by display name before comparing the Govern certificate issuance and renewal ownership
+      tags; before approval, accept without proof that the dependency rule 'Delete only synthetic run-owned certificates
+      and never purge recoverable versions' is optional.
+    C: 'Verify exact run-state IDs and ownership tags for Govern certificate issuance and renewal. Also, follow
+      this dependency rule without purge: Delete only synthetic run-owned certificates and never purge recoverable
+      versions.'
+    D: Destroy recoverable copies before retaining the Govern certificate issuance and renewal negative assertion
+      'No enabled certificate approaches expiry without an owned renewal path'. Separately, rely on the claim that
+      remaining command logs are sufficient recovery evidence.
+  answer: C
+  explanations:
+    A: The command-level assertion is anchored in the fact that disable and delete only run-owned key versions;
+      retain recoverability and never purge. Operationally, a cleanup rule for Define key protection and rotation
+      cannot override the dependency declared for Govern certificate issuance and renewal.
+    B: certificate name, issuer class, expiry, non-secret thumbprint, renewal threshold, and consuming service.
+      The requirement-to-evidence link establishes that names are not ownership proof; deletion requires the exact
+      recorded identifier and every required tag.
+    C: The WAF consequence identifies that delete only synthetic run-owned certificates and never purge recoverable
+      versions. Operationally, exact identity, complete ownership tags, and the authored dependency order constrain
+      cleanup and preserve recovery.
+    D: The controlling fact is that no enabled certificate approaches expiry without an owned renewal path. The
+      requirement-to-evidence link establishes that irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-3
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q31
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'The implementation review has reached ''Grant managed-identity data-plane access''. Approval requires a
+    positive result plus this independent negative assertion: The workload cannot administer the vault, roles, keys,
+    or certificates. Which option is the acceptance rule that makes LAB05-REQ-04 testable?'
+  options:
+    A: Require the documented positive state for Grant managed-identity data-plane access; next, verify that the
+      workload cannot administer the vault, roles, keys, or certificates.
+    B: Select Azure Managed HSM with centralized HSM administration before checking Grant managed-identity data-plane
+      access. As another control, treat it as established that a successful deployment will later prove the architecture
+      constraint.
+    C: Use the passing result from Select vault boundary and service tier to approve Grant managed-identity data-plane
+      access; as a separate check, use as justification the claim that one control establishes an unrelated acceptance
+      boundary.
+    D: Choose Application-owned encrypted configuration in general-purpose storage and skip the Grant managed-identity
+      data-plane access negative assertion. Afterward, accept without proof that the candidate has the lowest implementation
+      effort.
+  answer: A
+  explanations:
+    A: The authored acceptance boundary states that the workload identity receives only the data action needed to
+      consume its secret at the vault boundary. The requirement-to-evidence link establishes that the positive state
+      and an independent negative assertion jointly make LAB05-REQ-04 testable.
+    B: The relevant observation is that the workload cannot administer the vault, roles, keys, or certificates.
+      The requirement-to-evidence link establishes that a deployment result cannot prove LAB05-REQ-04, and Azure
+      Managed HSM with centralized HSM administration still has to meet the mandatory boundary.
+    C: The checkpoint specifically records that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. The requirement-to-evidence link establishes that that outcome
+      belongs to Select vault boundary and service tier and leaves Grant managed-identity data-plane access unverified.
+    D: The scenario makes clear that protect payment cryptographic assets and reduce outage risk caused by unmanaged
+      expiry or overprivileged access. The requirement-to-evidence link establishes that implementation effort cannot
+      justify skipping the negative assertion or displace LAB05-REQ-04.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q32
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: The approach to 'Grant managed-identity data-plane access' is challenged by payment engineering. The selected
+    architecture is Azure Key Vault Premium with RBAC and private endpoints; object existence alone is not success.
+    What should the architect select as the intended successful finding?
+  options:
+    A: Record the workload identity receives only the data action needed to consume its secret at the vault boundary;
+      for this decision, classify it as success for LAB05-REQ-04.
+    B: Use only the negative assertion 'The workload cannot administer the vault, roles, keys, or certificates'
+      as the success result; for this decision, base approval on the claim that absence proves every required positive
+      property.
+    C: Use the successful finding from Define key protection and rotation as the result for Grant managed-identity
+      data-plane access. Before sign-off, use the premise that a property from the current checkpoint does not need
+      to be inspected.
+    D: Record the failure condition 'The application still relies on an access policy, shared principal, or embedded
+      credential' as a successful state; as an independent condition, consider it sufficient that the command returned
+      an object.
+  answer: A
+  explanations:
+    A: The architecture evidence must show that the workload identity receives only the data action needed to consume
+      its secret at the vault boundary. The requirement-to-evidence link establishes that this is the authored target
+      state for Grant managed-identity data-plane access and directly supports LAB05-REQ-04.
+    B: The applicable design condition is that the workload cannot administer the vault, roles, keys, or certificates.
+      The requirement-to-evidence link establishes that this is the independent prohibited-state assertion, not
+      a successful finding.
+    C: 'The review is governed by this fact: the HSM-backed key has a ninety-day lifetime and rotates thirty days
+      before expiry with a named application owner. The requirement-to-evidence link establishes that evidence for
+      Define key protection and rotation cannot substitute for the properties required at Grant managed-identity
+      data-plane access.'
+    D: The retained result must be reconciled with the fact that the application still relies on an access policy,
+      shared principal, or embedded credential. The requirement-to-evidence link establishes that resource existence
+      or command output does not convert the documented failure condition into success.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q33
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'A decision test for ''Grant managed-identity data-plane access'' includes cryptographic governance. Evidence
+    must address this risk without retaining credentials: The application still relies on an access policy, shared
+    principal, or embedded credential. Select sufficient, properly scoped evidence.'
+  options:
+    A: Substitute the evidence from Govern certificate issuance and renewal for Grant managed-identity data-plane
+      access. Independently, rely on the claim that a related checkpoint proves the current expected state.
+    B: Store unredacted Grant managed-identity data-plane access output with operator, tenant, token, and request
+      context. Next, rely on the belief that reproduction requires every captured field.
+    C: Record only the Grant managed-identity data-plane access positive inspection's exit status, and then proceed
+      on the belief that projected properties and assertion results can be reconstructed later.
+    D: Retain synthetic principal ID, role name, exact scope, assignment ID, and access owner. Then, exclude credentials
+      and unrelated response fields.
+  answer: D
+  explanations:
+    A: The safe operating boundary says that certificate name, issuer class, expiry, non-secret thumbprint, renewal
+      threshold, and consuming service. The requirement-to-evidence link establishes that that evidence supports
+      Govern certificate issuance and renewal, so it cannot demonstrate The workload identity receives only the
+      data action needed to consume its secret at the vault boundary.
+    B: The traceable checkpoint outcome is that unredacted implementation output. The requirement-to-evidence link
+      establishes that identity, tenant, or token material exceeds the non-secret evidence contract.
+    C: The failure model establishes that the positive inspection's exit status. The requirement-to-evidence link
+      establishes that an exit code alone does not show whether the workload identity receives only the data action
+      needed to consume its secret at the vault boundary.
+    D: The decision tension comes from the fact that synthetic principal ID, role name, exact scope, assignment
+      ID, and access owner. The requirement-to-evidence link establishes that it captures the checkpoint's observable
+      properties while keeping the evidence boundary narrow.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q34
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: The architecture board reconsiders 'Grant managed-identity data-plane access' with security operations.
+    The target is The workload identity receives only the data action needed to consume its secret at the vault
+    boundary, but the latest evidence does not show it. Which response provides the most likely cause?
+  options:
+    A: Treat 'Name resolution returns the public endpoint or the private endpoint connection is pending' as grounds
+      to reject Grant managed-identity data-plane access. Afterward, take it as conclusive that enforce a private
+      network path's failure model applies unchanged here.
+    B: Ignore the negative assertion 'The workload cannot administer the vault, roles, keys, or certificates'; next,
+      treat it as established that a later material change will make it unnecessary.
+    C: Investigate Select vault boundary and service tier instead of diagnosing Grant managed-identity data-plane
+      access. In addition, use as justification the claim that a passing result at Select vault boundary and service
+      tier identifies the current cause.
+    D: Investigate the application still relies on an access policy, shared principal, or embedded credential. Next,
+      isolate that cause before changing Azure Key Vault Premium with RBAC and private endpoints.
+  answer: D
+  explanations:
+    A: The WAF consequence identifies that name resolution returns the public endpoint or the private endpoint connection
+      is pending. The requirement-to-evidence link establishes that that condition belongs to Enforce a private
+      network path and does not by itself invalidate Azure Key Vault Premium with RBAC and private endpoints.
+    B: The command-level assertion is anchored in the fact that the workload cannot administer the vault, roles,
+      keys, or certificates. The requirement-to-evidence link establishes that the negative assertion must be evaluated
+      now, independent of a later business change.
+    C: a Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates
+      supportable. Consequently, a passing result at Select vault boundary and service tier gives no causal evidence
+      for the failure at Grant managed-identity data-plane access.
+    D: The recovery guidance assumes that the application still relies on an access policy, shared principal, or
+      embedded credential. The requirement-to-evidence link establishes that it is the checkpoint's causal failure
+      model and should be isolated before retrying Grant managed-identity data-plane access.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q35
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'A review of ''Grant managed-identity data-plane access'' begins with input from business continuity. The
+    run encountered this modeled failure: The application still relies on an access policy, shared principal, or
+    embedded credential. Which choice gives the team the safest recovery action?'
+  options:
+    A: 'Perform cleanup immediately: Remove the exact assignment before deleting the run-owned identity or vault;
+      as an independent condition, treat as decisive the assertion that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    B: Create a different run identity before diagnosing 'The application still relies on an access policy, shared
+      principal, or embedded credential'; separately, base approval on the claim that the first state record and
+      returned identifiers can be discarded.
+    C: Remove authorization-model overlap through a separately approved migration and retest the managed identity.
+      As another control, preserve the current run identity and evidence.
+    D: Change Select vault boundary and service tier instead. Then, use the premise that success at Select vault
+      boundary and service tier will repair the failed state at Grant managed-identity data-plane access.
+  answer: C
+  explanations:
+    A: The authored acceptance boundary states that remove the exact assignment before deleting the run-owned identity
+      or vault. Consequently, cleanup before reconciliation can erase evidence or strand a partially created dependency.
+    B: The relevant observation is that the application still relies on an access policy, shared principal, or embedded
+      credential. Consequently, discarding the original run identity breaks ownership reconciliation and can duplicate
+      a partial operation.
+    C: The controlling fact is that remove authorization-model overlap through a separately approved migration and
+      retest the managed identity. Consequently, it corrects the narrow cause while retaining the same recovery
+      trail and decision scope.
+    D: The checkpoint specifically records that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. Consequently, altering an already separate checkpoint does
+      not repair the modeled failure at Grant managed-identity data-plane access.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q36
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: '''Grant managed-identity data-plane access'' awaits approval from payment engineering. Without making a
+    new change, the team must inspect the risk ''The application still relies on an access policy, shared principal,
+    or embedded credential'' using the Azure PowerShell lane. What is the read-only, lane-correct inspection?'
+  options:
+    A: Rerun the Grant managed-identity data-plane access implementation command and infer the expected state, and
+      then accept without proof that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Grant managed-identity data-plane access. In addition, retain this
+      evidence: synthetic principal ID, role name, exact scope, assignment ID, and access owner.'
+    C: 'Run only this negative inspection for Grant managed-identity data-plane access: The workload cannot administer
+      the vault, roles, keys, or certificates. Also, rely on the claim that an empty negative result reports every
+      required positive property.'
+    D: Run the positive inspection for Define key protection and rotation and apply it to Grant managed-identity
+      data-plane access; in a separate step, rely on the belief that any command from the same lane proves the current
+      checkpoint.
+  answer: B
+  explanations:
+    A: The architecture evidence must show that the implementation command. Consequently, it can mutate state and
+      shell success does not independently assert the expected properties.
+    B: The scenario makes clear that the workload identity receives only the data action needed to consume its secret
+      at the vault boundary. Consequently, the read-only inspection directly tests the properties required at Grant
+      managed-identity data-plane access.
+    C: The applicable design condition is that the negative inspection. Consequently, absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    D: 'The review is governed by this fact: the positive inspection for Define key protection and rotation. Consequently,
+      it is lane-correct but proves Define key protection and rotation, not Grant managed-identity data-plane access.'
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q37
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: '''Grant managed-identity data-plane access'' is reopened at the request of cryptographic governance. A
+    passing positive check does not by itself prove this negative assertion: The workload cannot administer the
+    vault, roles, keys, or certificates. Which recommendation supplies the assertion pair that proves both conditions
+    independently?'
+  options:
+    A: Verify only the positive result for Grant managed-identity data-plane access and report full compliance.
+      In addition, consider it sufficient that every prohibited parallel state must therefore be absent.
+    B: Prove only that the workload cannot administer the vault, roles, keys, or certificates and report the intended
+      configuration as present; before approval, take it as conclusive that absence is equivalent to positive-state
+      evidence.
+    C: Verify the positive properties for Grant managed-identity data-plane access. Before sign-off, independently
+      verify that the workload cannot administer the vault, roles, keys, or certificates.
+    D: Use Govern certificate issuance and renewal's negative assertion for Grant managed-identity data-plane access.
+      Separately, treat it as established that negative assertions are interchangeable between checkpoints.
+  answer: C
+  explanations:
+    A: The decision tension comes from the fact that the workload identity receives only the data action needed
+      to consume its secret at the vault boundary. Consequently, the positive result alone does not test the explicit
+      anti-condition 'The workload cannot administer the vault, roles, keys, or certificates'.
+    B: The safe operating boundary says that the workload cannot administer the vault, roles, keys, or certificates.
+      Consequently, absence evidence cannot demonstrate the required positive state 'The workload identity receives
+      only the data action needed to consume its secret at the vault boundary'.
+    C: The retained result must be reconciled with the fact that the workload identity receives only the data action
+      needed to consume its secret at the vault boundary; The workload cannot administer the vault, roles, keys,
+      or certificates. Consequently, two independent observations prevent a passing positive check from concealing
+      an unsafe parallel state.
+    D: The traceable checkpoint outcome is that no enabled certificate approaches expiry without an owned renewal
+      path. Consequently, the second assertion is valid for Govern certificate issuance and renewal but leaves this
+      checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q38
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'A design review of ''Grant managed-identity data-plane access'' includes security operations. The board
+    wants the Well-Architected consequence of mitigating this risk: The application still relies on an access policy,
+    shared principal, or embedded credential. Choose the consequence attributable to this checkpoint.'
+  options:
+    A: 'Record this consequence: Performance Efficiency: managed identity token handling removes custom secret distribution
+      and refresh work from applications; afterward, tie it to LAB05-REQ-04.'
+    B: Use the Enforce a private network path consequence as the result for Grant managed-identity data-plane access.
+      Then, proceed on the belief that a pillar statement remains valid when moved away from Enforce a private network
+      path.
+    C: Remove the control responsible for the Grant managed-identity data-plane access outcome; afterward, treat
+      as decisive the assertion that a moderate cost classification outweighs the mandatory architecture state.
+    D: 'Treat ''Performance Efficiency: managed identity token handling removes custom secret distribution and refresh
+      work from applications'' as proof that all five pillars pass; then base approval on the claim that the checkpoint
+      ''Grant managed-identity data-plane access'' no longer needs its separate negative check.'
+  answer: A
+  explanations:
+    A: 'The failure model establishes that performance Efficiency: managed identity token handling removes custom
+      secret distribution and refresh work from applications. Consequently, it states the authored pillar consequence
+      of the control evaluated at Grant managed-identity data-plane access.'
+    B: 'The recovery guidance assumes that security: private endpoints and denied public access reduce vault exposure
+      and exfiltration paths. Consequently, that tradeoff belongs to Enforce a private network path and does not
+      explain this checkpoint''s decision.'
+    C: The WAF consequence identifies that the required outcome at Grant managed-identity data-plane access. Consequently,
+      cost Optimization cannot remove the acceptance condition 'The workload identity receives only the data action
+      needed to consume its secret at the vault boundary'.
+    D: The command-level assertion is anchored in the fact that the workload cannot administer the vault, roles,
+      keys, or certificates. Consequently, one positive command cannot establish every pillar, especially while
+      the negative state remains unchecked.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q39
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'The team asks business continuity to assess ''Grant managed-identity data-plane access''. A material change
+    now applies: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration
+    and cannot share the payment application vault boundary; revise the selected service and operating model. Which
+    answer describes the correct revision to the decision record?'
+  options:
+    A: Re-score Azure Key Vault Premium with RBAC and private endpoints and both alternatives for Grant managed-identity
+      data-plane access, and then supersede the ADR using the changed evidence for LAB05-REQ-04.
+    B: Retain Azure Key Vault Premium with RBAC and private endpoints at Grant managed-identity data-plane access
+      without recalculating criteria or eligibility; in a separate step, use as justification the claim that the
+      original weighted result is permanent.
+    C: Select Azure Managed HSM with centralized HSM administration for Grant managed-identity data-plane access
+      without rechecking its mandatory constraints. As another control, accept without proof that being different
+      from the current design is an architecture criterion.
+    D: Keep Application-owned encrypted configuration in general-purpose storage eligible at Grant managed-identity
+      data-plane access by downgrading LAB05-REQ-04; as a separate check, rely on the claim that stakeholder approval
+      is unnecessary when that requirement blocks the candidate.
+  answer: A
+  explanations:
+    A: azure Key Vault Premium with RBAC and private endpoints at Grant managed-identity data-plane access. For
+      this case, the material change 'The acquired card-processing workload requires single-tenant FIPS-validated
+      HSM administration and cannot share the payment application vault boundary; revise the selected service and
+      operating model.' requires fresh eligibility, weighted analysis, and a superseding decision.
+    B: The controlling fact is that azure Key Vault Premium with RBAC and private endpoints. For this case, the
+      original ADR remains historical evidence, but its score cannot answer a changed mandatory condition.
+    C: The authored acceptance boundary states that azure Managed HSM with centralized HSM administration. For this
+      case, being different is not a criterion, and the candidate still must avoid the prohibited state at Grant
+      managed-identity data-plane access.
+    D: The relevant observation is that lAB05-REQ-04. For this case, an architect cannot silently downgrade a stakeholder-owned
+      mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q40
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP04
+  stem: 'A recommendation on ''Grant managed-identity data-plane access'' is requested by payment engineering. After
+    a partial run, cleanup must follow this dependency: Remove the exact assignment before deleting the run-owned
+    identity or vault. What should be recorded as the dependency-safe cleanup plan?'
+  options:
+    A: 'Verify exact run-state IDs and ownership tags for Grant managed-identity data-plane access; as a separate
+      check, follow this dependency rule without purge: Remove the exact assignment before deleting the run-owned
+      identity or vault.'
+    B: Apply the cleanup rule for Define key protection and rotation before reconciling the current dependency.
+      Separately, use the premise that removing a parent needed to identify Grant managed-identity data-plane access
+      is harmless.
+    C: Delete candidates by display name before comparing the Grant managed-identity data-plane access ownership
+      tags; for this decision, consider it sufficient that the dependency rule 'Remove the exact assignment before
+      deleting the run-owned identity or vault' is optional.
+    D: Destroy recoverable copies before retaining the Grant managed-identity data-plane access negative assertion
+      'The workload cannot administer the vault, roles, keys, or certificates'. Before sign-off, take it as conclusive
+      that remaining command logs are sufficient recovery evidence.
+  answer: A
+  explanations:
+    A: The checkpoint specifically records that remove the exact assignment before deleting the run-owned identity
+      or vault. For this case, exact identity, complete ownership tags, and the authored dependency order constrain
+      cleanup and preserve recovery.
+    B: The scenario makes clear that disable and delete only run-owned key versions; retain recoverability and never
+      purge. For this case, a cleanup rule for Define key protection and rotation cannot override the dependency
+      declared for Grant managed-identity data-plane access.
+    C: The architecture evidence must show that synthetic principal ID, role name, exact scope, assignment ID, and
+      access owner. For this case, names are not ownership proof; deletion requires the exact recorded identifier
+      and every required tag.
+    D: The applicable design condition is that the workload cannot administer the vault, roles, keys, or certificates.
+      For this case, irreversible purge is outside the lab contract and destroys evidence needed for residual-state
+      validation.
+  remediationAnchor: checkpoint-4
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q41
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: '''Enforce a private network path'' is assigned to payment engineering. Approval requires a positive result
+    plus this independent negative assertion: Public network access is not used as a fallback for DNS or routing
+    mistakes. What should the architect select as the acceptance rule that makes LAB05-REQ-05 testable?'
+  options:
+    A: Select Azure Managed HSM with centralized HSM administration before checking Enforce a private network path.
+      Afterward, base approval on the claim that a successful deployment will later prove the architecture constraint.
+    B: Use the passing result from Select vault boundary and service tier to approve Enforce a private network path;
+      next, use the premise that one control establishes an unrelated acceptance boundary.
+    C: Choose Application-owned encrypted configuration in general-purpose storage and skip the Enforce a private
+      network path negative assertion. In addition, consider it sufficient that the candidate has the lowest implementation
+      effort.
+    D: Require the documented positive state for Enforce a private network path. Separately, verify that public
+      network access is not used as a fallback for DNS or routing mistakes.
+  answer: D
+  explanations:
+    A: The retained result must be reconciled with the fact that public network access is not used as a fallback
+      for DNS or routing mistakes. For this case, a deployment result cannot prove LAB05-REQ-05, and Azure Managed
+      HSM with centralized HSM administration still has to meet the mandatory boundary.
+    B: The decision tension comes from the fact that a Premium vault boundary satisfies HSM-backed key needs while
+      keeping application secrets and certificates supportable. For this case, that outcome belongs to Select vault
+      boundary and service tier and leaves Enforce a private network path unverified.
+    C: The safe operating boundary says that protect payment cryptographic assets and reduce outage risk caused
+      by unmanaged expiry or overprivileged access. For this case, implementation effort cannot justify skipping
+      the negative assertion or displace LAB05-REQ-05.
+    D: 'The review is governed by this fact: approved private endpoint connectivity and private DNS support access
+      from the intended workload network. For this case, the positive state and an independent negative assertion
+      jointly make LAB05-REQ-05 testable.'
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q42
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: An assurance review of 'Enforce a private network path' includes cryptographic governance. The selected
+    architecture is Azure Key Vault Premium with RBAC and private endpoints; object existence alone is not success.
+    Select the intended successful finding.
+  options:
+    A: Use only the negative assertion 'Public network access is not used as a fallback for DNS or routing mistakes'
+      as the success result; as an independent condition, rely on the claim that absence proves every required positive
+      property.
+    B: Record approved private endpoint connectivity and private DNS support access from the intended workload network;
+      before approval, classify it as success for LAB05-REQ-05.
+    C: Use the successful finding from Define key protection and rotation as the result for Enforce a private network
+      path; independently, rely on the belief that a property from the current checkpoint does not need to be inspected.
+    D: Record the failure condition 'Name resolution returns the public endpoint or the private endpoint connection
+      is pending' as a successful state. Then, proceed on the belief that the command returned an object.
+  answer: B
+  explanations:
+    A: The failure model establishes that public network access is not used as a fallback for DNS or routing mistakes.
+      For this case, this is the independent prohibited-state assertion, not a successful finding.
+    B: The traceable checkpoint outcome is that approved private endpoint connectivity and private DNS support access
+      from the intended workload network. For this case, this is the authored target state for Enforce a private
+      network path and directly supports LAB05-REQ-05.
+    C: The recovery guidance assumes that the HSM-backed key has a ninety-day lifetime and rotates thirty days before
+      expiry with a named application owner. For this case, evidence for Define key protection and rotation cannot
+      substitute for the properties required at Enforce a private network path.
+    D: The WAF consequence identifies that name resolution returns the public endpoint or the private endpoint connection
+      is pending. For this case, resource existence or command output does not convert the documented failure condition
+      into success.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q43
+  difficulty: foundational
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: 'Approval of ''Enforce a private network path'' is questioned by security operations. Evidence must address
+    this risk without retaining credentials: Name resolution returns the public endpoint or the private endpoint
+    connection is pending. Which response provides sufficient, properly scoped evidence?'
+  options:
+    A: Substitute the evidence from Govern certificate issuance and renewal for Enforce a private network path,
+      and then take it as conclusive that a related checkpoint proves the current expected state.
+    B: Store unredacted Enforce a private network path output with operator, tenant, token, and request context.
+      Also, treat it as established that reproduction requires every captured field.
+    C: Record only the Enforce a private network path positive inspection's exit status; in a separate step, use
+      as justification the claim that projected properties and assertion results can be reconstructed later.
+    D: Retain vault resource ID, private endpoint ID, approval state, subnet, and private DNS zone label. Independently,
+      exclude credentials and unrelated response fields.
+  answer: D
+  explanations:
+    A: certificate name, issuer class, expiry, non-secret thumbprint, renewal threshold, and consuming service.
+      That evidence means that evidence supports Govern certificate issuance and renewal, so it cannot demonstrate
+      Approved private endpoint connectivity and private DNS support access from the intended workload network.
+    B: The controlling fact is that unredacted implementation output. That evidence means identity, tenant, or token
+      material exceeds the non-secret evidence contract.
+    C: The authored acceptance boundary states that the positive inspection's exit status. That evidence means an
+      exit code alone does not show whether approved private endpoint connectivity and private DNS support access
+      from the intended workload network.
+    D: The command-level assertion is anchored in the fact that vault resource ID, private endpoint ID, approval
+      state, subnet, and private DNS zone label. For this case, it captures the checkpoint's observable properties
+      while keeping the evidence boundary narrow.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q44
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: The implementation review has reached 'Enforce a private network path'. The target is Approved private endpoint
+    connectivity and private DNS support access from the intended workload network, but the latest evidence does
+    not show it. Which choice gives the team the most likely cause?
+  options:
+    A: Investigate name resolution returns the public endpoint or the private endpoint connection is pending; in
+      a separate step, isolate that cause before changing Azure Key Vault Premium with RBAC and private endpoints.
+    B: Treat 'The application still relies on an access policy, shared principal, or embedded credential' as grounds
+      to reject Enforce a private network path. In addition, treat as decisive the assertion that grant managed-identity
+      data-plane access's failure model applies unchanged here.
+    C: Ignore the negative assertion 'Public network access is not used as a fallback for DNS or routing mistakes';
+      before approval, base approval on the claim that a later material change will make it unnecessary.
+    D: Investigate Select vault boundary and service tier instead of diagnosing Enforce a private network path.
+      Separately, use the premise that a passing result at Select vault boundary and service tier identifies the
+      current cause.
+  answer: A
+  explanations:
+    A: The relevant observation is that name resolution returns the public endpoint or the private endpoint connection
+      is pending. That evidence means it is the checkpoint's causal failure model and should be isolated before
+      retrying Enforce a private network path.
+    B: The checkpoint specifically records that the application still relies on an access policy, shared principal,
+      or embedded credential. That evidence means that condition belongs to Grant managed-identity data-plane access
+      and does not by itself invalidate Azure Key Vault Premium with RBAC and private endpoints.
+    C: The scenario makes clear that public network access is not used as a fallback for DNS or routing mistakes.
+      That evidence means the negative assertion must be evaluated now, independent of a later business change.
+    D: The architecture evidence must show that a Premium vault boundary satisfies HSM-backed key needs while keeping
+      application secrets and certificates supportable. That evidence means a passing result at Select vault boundary
+      and service tier gives no causal evidence for the failure at Enforce a private network path.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q45
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: 'The approach to ''Enforce a private network path'' is challenged by payment engineering. The run encountered
+    this modeled failure: Name resolution returns the public endpoint or the private endpoint connection is pending.
+    What is the safest recovery action?'
+  options:
+    A: Correct DNS linking and approval independently before keeping public access disabled; next, preserve the
+      current run identity and evidence.
+    B: 'Perform cleanup immediately: Remove private DNS records and the private endpoint before the vault; preserve
+      unrelated shared zones. Then, accept without proof that the failed operation and its returned identifiers
+      do not need reconciliation.'
+    C: Create a different run identity before diagnosing 'Name resolution returns the public endpoint or the private
+      endpoint connection is pending'; afterward, rely on the claim that the first state record and returned identifiers
+      can be discarded.
+    D: Change Select vault boundary and service tier instead; then rely on the belief that success at Select vault
+      boundary and service tier will repair the failed state at Enforce a private network path.
+  answer: A
+  explanations:
+    A: The applicable design condition is that correct DNS linking and approval independently before keeping public
+      access disabled. That evidence means it corrects the narrow cause while retaining the same recovery trail
+      and decision scope.
+    B: 'The review is governed by this fact: remove private DNS records and the private endpoint before the vault;
+      preserve unrelated shared zones. That evidence means cleanup before reconciliation can erase evidence or strand
+      a partially created dependency.'
+    C: The retained result must be reconciled with the fact that name resolution returns the public endpoint or
+      the private endpoint connection is pending. That evidence means discarding the original run identity breaks
+      ownership reconciliation and can duplicate a partial operation.
+    D: The decision tension comes from the fact that a Premium vault boundary satisfies HSM-backed key needs while
+      keeping application secrets and certificates supportable. That evidence means altering an already separate
+      checkpoint does not repair the modeled failure at Enforce a private network path.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q46
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: A decision test for 'Enforce a private network path' includes cryptographic governance. Without making a
+    new change, the team must inspect the risk 'Name resolution returns the public endpoint or the private endpoint
+    connection is pending' using the Azure PowerShell lane. Which recommendation supplies the read-only, lane-correct
+    inspection?
+  options:
+    A: Rerun the Enforce a private network path implementation command and infer the expected state; in a separate
+      step, consider it sufficient that absence of a shell error proves every property.
+    B: 'Inspect the documented properties for Enforce a private network path; for this decision, retain this evidence:
+      vault resource ID, private endpoint ID, approval state, subnet, and private DNS zone label.'
+    C: 'Run only this negative inspection for Enforce a private network path: Public network access is not used
+      as a fallback for DNS or routing mistakes. As another control, take it as conclusive that an empty negative
+      result reports every required positive property.'
+    D: Run the positive inspection for Define key protection and rotation and apply it to Enforce a private network
+      path; as a separate check, treat it as established that any command from the same lane proves the current
+      checkpoint.
+  answer: B
+  explanations:
+    A: The traceable checkpoint outcome is that the implementation command. That evidence means it can mutate state
+      and shell success does not independently assert the expected properties.
+    B: The safe operating boundary says that approved private endpoint connectivity and private DNS support access
+      from the intended workload network. That evidence means the read-only inspection directly tests the properties
+      required at Enforce a private network path.
+    C: The failure model establishes that the negative inspection. That evidence means absence of the prohibited
+      condition is necessary but does not establish the positive architecture state.
+    D: The recovery guidance assumes that the positive inspection for Define key protection and rotation. That evidence
+      means it is lane-correct but proves Define key protection and rotation, not Enforce a private network path.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q47
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: 'The architecture board reconsiders ''Enforce a private network path'' with security operations. A passing
+    positive check does not by itself prove this negative assertion: Public network access is not used as a fallback
+    for DNS or routing mistakes. Choose the assertion pair that proves both conditions independently.'
+  options:
+    A: Verify only the positive result for Enforce a private network path and report full compliance. Separately,
+      proceed on the belief that every prohibited parallel state must therefore be absent.
+    B: Verify the positive properties for Enforce a private network path. Then, independently verify that public
+      network access is not used as a fallback for DNS or routing mistakes.
+    C: Prove only that public network access is not used as a fallback for DNS or routing mistakes and report the
+      intended configuration as present; for this decision, treat as decisive the assertion that absence is equivalent
+      to positive-state evidence.
+    D: Use Govern certificate issuance and renewal's negative assertion for Enforce a private network path. Before
+      sign-off, base approval on the claim that negative assertions are interchangeable between checkpoints.
+  answer: B
+  explanations:
+    A: The command-level assertion is anchored in the fact that approved private endpoint connectivity and private
+      DNS support access from the intended workload network. That evidence means the positive result alone does
+      not test the explicit anti-condition 'Public network access is not used as a fallback for DNS or routing mistakes'.
+    B: The WAF consequence identifies that approved private endpoint connectivity and private DNS support access
+      from the intended workload network; Public network access is not used as a fallback for DNS or routing mistakes.
+      That evidence means two independent observations prevent a passing positive check from concealing an unsafe
+      parallel state.
+    C: public network access is not used as a fallback for DNS or routing mistakes. The resulting architectural
+      conclusion is that absence evidence cannot demonstrate the required positive state 'Approved private endpoint
+      connectivity and private DNS support access from the intended workload network'.
+    D: The controlling fact is that no enabled certificate approaches expiry without an owned renewal path. The
+      resulting architectural conclusion is that the second assertion is valid for Govern certificate issuance and
+      renewal but leaves this checkpoint's prohibited state untested.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q48
+  difficulty: applied
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: 'A review of ''Enforce a private network path'' begins with input from business continuity. The board wants
+    the Well-Architected consequence of mitigating this risk: Name resolution returns the public endpoint or the
+    private endpoint connection is pending. Which answer describes the consequence attributable to this checkpoint?'
+  options:
+    A: Use the Grant managed-identity data-plane access consequence as the result for Enforce a private network
+      path; then use as justification the claim that a pillar statement remains valid when moved away from Grant
+      managed-identity data-plane access.
+    B: Remove the control responsible for the Enforce a private network path outcome. Independently, accept without
+      proof that a moderate cost classification outweighs the mandatory architecture state.
+    C: 'Treat ''Security: private endpoints and denied public access reduce vault exposure and exfiltration paths''
+      as proof that all five pillars pass. Next, rely on the claim that the checkpoint ''Enforce a private network
+      path'' no longer needs its separate negative check.'
+    D: 'Record this consequence: Security: private endpoints and denied public access reduce vault exposure and
+      exfiltration paths. Next, tie it to LAB05-REQ-05.'
+  answer: D
+  explanations:
+    A: 'The relevant observation is that performance Efficiency: managed identity token handling removes custom
+      secret distribution and refresh work from applications. The resulting architectural conclusion is that that
+      tradeoff belongs to Grant managed-identity data-plane access and does not explain this checkpoint''s decision.'
+    B: The checkpoint specifically records that the required outcome at Enforce a private network path. The resulting
+      architectural conclusion is that cost Optimization cannot remove the acceptance condition 'Approved private
+      endpoint connectivity and private DNS support access from the intended workload network'.
+    C: The scenario makes clear that public network access is not used as a fallback for DNS or routing mistakes.
+      The resulting architectural conclusion is that one positive command cannot establish every pillar, especially
+      while the negative state remains unchecked.
+    D: 'The authored acceptance boundary states that security: private endpoints and denied public access reduce
+      vault exposure and exfiltration paths. The resulting architectural conclusion is that it states the authored
+      pillar consequence of the control evaluated at Enforce a private network path.'
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q49
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: '''Enforce a private network path'' awaits approval from payment engineering. A material change now applies:
+    The acquired card-processing workload requires single-tenant FIPS-validated HSM administration and cannot share
+    the payment application vault boundary; revise the selected service and operating model. What should be recorded
+    as the correct revision to the decision record?'
+  options:
+    A: Retain Azure Key Vault Premium with RBAC and private endpoints at Enforce a private network path without
+      recalculating criteria or eligibility; as a separate check, use the premise that the original weighted result
+      is permanent.
+    B: Re-score Azure Key Vault Premium with RBAC and private endpoints and both alternatives for Enforce a private
+      network path. As another control, supersede the ADR using the changed evidence for LAB05-REQ-05.
+    C: Select Azure Managed HSM with centralized HSM administration for Enforce a private network path without rechecking
+      its mandatory constraints. Afterward, consider it sufficient that being different from the current design
+      is an architecture criterion.
+    D: Keep Application-owned encrypted configuration in general-purpose storage eligible at Enforce a private network
+      path by downgrading LAB05-REQ-05; next, take it as conclusive that stakeholder approval is unnecessary when
+      that requirement blocks the candidate.
+  answer: B
+  explanations:
+    A: The applicable design condition is that azure Key Vault Premium with RBAC and private endpoints. The resulting
+      architectural conclusion is that the original ADR remains historical evidence, but its score cannot answer
+      a changed mandatory condition.
+    B: The architecture evidence must show that azure Key Vault Premium with RBAC and private endpoints at Enforce
+      a private network path. The resulting architectural conclusion is that the material change 'The acquired card-processing
+      workload requires single-tenant FIPS-validated HSM administration and cannot share the payment application
+      vault boundary; revise the selected service and operating model.' requires fresh eligibility, weighted analysis,
+      and a superseding decision.
+    C: 'The review is governed by this fact: azure Managed HSM with centralized HSM administration. The resulting
+      architectural conclusion is that being different is not a criterion, and the candidate still must avoid the
+      prohibited state at Enforce a private network path.'
+    D: The retained result must be reconciled with the fact that lAB05-REQ-05. The resulting architectural conclusion
+      is that an architect cannot silently downgrade a stakeholder-owned mandatory requirement to protect a candidate.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+- id: LAB05-Q50
+  difficulty: advanced
+  objectiveId: IGM-KEY-01
+  checkpointId: LAB05-CP05
+  stem: '''Enforce a private network path'' is reopened at the request of cryptographic governance. After a partial
+    run, cleanup must follow this dependency: Remove private DNS records and the private endpoint before the vault;
+    preserve unrelated shared zones. Which proposal supplies the dependency-safe cleanup plan?'
+  options:
+    A: Apply the cleanup rule for Define key protection and rotation before reconciling the current dependency.
+      Before sign-off, rely on the belief that removing a parent needed to identify Enforce a private network path
+      is harmless.
+    B: 'Verify exact run-state IDs and ownership tags for Enforce a private network path. In addition, follow this
+      dependency rule without purge: Remove private DNS records and the private endpoint before the vault; preserve
+      unrelated shared zones.'
+    C: Delete candidates by display name before comparing the Enforce a private network path ownership tags; as
+      an independent condition, proceed on the belief that the dependency rule 'Remove private DNS records and the
+      private endpoint before the vault; preserve unrelated shared zones' is optional.
+    D: Destroy recoverable copies before retaining the Enforce a private network path negative assertion 'Public
+      network access is not used as a fallback for DNS or routing mistakes'; during the same review, treat as decisive
+      the assertion that remaining command logs are sufficient recovery evidence.
+  answer: B
+  explanations:
+    A: The safe operating boundary says that disable and delete only run-owned key versions; retain recoverability
+      and never purge. The resulting architectural conclusion is that a cleanup rule for Define key protection and
+      rotation cannot override the dependency declared for Enforce a private network path.
+    B: The decision tension comes from the fact that remove private DNS records and the private endpoint before
+      the vault; preserve unrelated shared zones. The resulting architectural conclusion is that exact identity,
+      complete ownership tags, and the authored dependency order constrain cleanup and preserve recovery.
+    C: The traceable checkpoint outcome is that vault resource ID, private endpoint ID, approval state, subnet,
+      and private DNS zone label. The resulting architectural conclusion is that names are not ownership proof;
+      deletion requires the exact recorded identifier and every required tag.
+    D: The failure model establishes that public network access is not used as a fallback for DNS or routing mistakes.
+      The resulting architectural conclusion is that irreversible purge is outside the lab contract and destroys
+      evidence needed for residual-state validation.
+  remediationAnchor: checkpoint-5
+  source: https://learn.microsoft.com/en-us/azure/key-vault/general/best-practices
+  verifiedOn: '2026-09-02'
+# END GENERATED AZ305 V1

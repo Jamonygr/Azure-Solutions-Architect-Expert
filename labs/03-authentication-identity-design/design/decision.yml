@@ -1,0 +1,150 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-03
+implementationMode: safe-analogue
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Workforce tenant plus a dedicated External ID external tenant and managed identities
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 4
+    C5: 4
+  weightedTotal: 90.0
+  rationale: Separate workforce and external directories establish clear policy boundaries while managed identities
+    remove application secrets from service access.
+- id: CAND-B
+  name: Single workforce tenant for employees partners and customers
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 4
+    C3: 2
+    C4: 4
+    C5: 4
+  weightedTotal: 66.0
+  rationale: One tenant simplifies administration but couples customer journeys, workforce controls, and regulated
+    profile exposure.
+- id: CAND-C
+  name: Separate workforce tenants with custom application-managed customer credentials
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 2
+    C4: 2
+    C5: 3
+  weightedTotal: 53.0
+  rationale: Multiple workforce tenants isolate organizations, but custom password storage transfers authentication
+    defense and recovery to the application team.
+- id: CAND-D
+  name: New Azure AD B2C tenant storing patient profile attributes
+  eligible: false
+  disqualifiers:
+  - LAB03-REQ-03 requires the current External ID service boundary and excludes regulated health attributes from
+    directory profiles.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 1
+    C4: 2
+    C5: 3
+  weightedTotal: 37.0
+  rationale: This legacy-oriented proposal combines a superseded new-design direction with prohibited health-profile
+    storage.
+selectedCandidate: Workforce tenant plus a dedicated External ID external tenant and managed identities
+rejectedAlternatives:
+- candidate: Single workforce tenant for employees partners and customers
+  reason: Its weak trust-boundary score outweighs the operational convenience of one directory.
+- candidate: Separate workforce tenants with custom application-managed customer credentials
+  reason: Custom customer credentials create avoidable security and lifecycle ownership that managed External ID
+    provides.
+- candidate: New Azure AD B2C tenant storing patient profile attributes
+  reason: It is disqualified by both the current-service and data-boundary requirements.
+risks:
+- risk: Subject-to-profile mapping could expose health attributes in tokens or directory extension fields.
+  mitigation: Use an opaque subject key and assert that issued claims and external user objects contain no regulated
+    fields.
+- risk: Social identity-provider failure can prevent a customer cohort from signing in.
+  mitigation: Define provider-specific monitoring, recovery communication, and an approved alternate authentication
+    journey.
+waf:
+  reliability: Separate populations and provider-aware journeys contain authentication failure to the affected trust
+    path.
+  security: External ID, minimal claims, managed identities, and isolated health profiles reduce credential and
+    data exposure.
+  costOptimization: Monthly-active-user billing and managed federation avoid funding custom password infrastructure.
+  operationalExcellence: Lifecycle owners and journey-specific evidence make failed federation and provisioning
+    easier to diagnose.
+  performanceEfficiency: Tokens carry only authorization context and defer regulated profile retrieval to the workload
+    data tier.
+safeAnalogue: Inspect synthetic tenant, app, claim, and lifecycle fixtures; do not connect to Graph or create any
+  directory object.
+traceability:
+- objectiveId: IGM-AUTH-01
+  requirementId: LAB03-REQ-01
+  checkpointId: LAB03-CP01
+- objectiveId: IGM-AUTH-02
+  requirementId: LAB03-REQ-02
+  checkpointId: LAB03-CP02
+- objectiveId: IGM-AUTH-01
+  requirementId: LAB03-REQ-03
+  checkpointId: LAB03-CP03
+- objectiveId: IGM-AUTH-02
+  requirementId: LAB03-REQ-04
+  checkpointId: LAB03-CP04
+- objectiveId: IGM-AUTH-01
+  requirementId: LAB03-REQ-05
+  checkpointId: LAB03-CP05
+adr:
+  id: ADR-LAB03-001
+  status: accepted
+  context: Northwind Health is modernizing an employee application, a partner collaboration site, and a new patient-facing
+    application. Architects disagree whether all identities belong in the workforce tenant and whether a historical
+    Azure AD B2C pattern should be copied for the patient experience. You must recommend tenant boundaries, Microsoft
+    Entra External ID for the new customer identity scenario, federation and authentication methods, Conditional
+    Access, application registrations, and managed workload identities. The design must account for regulated attributes,
+    self-service journeys, privileged administration, protocol compatibility, and lifecycle ownership. Use GA Microsoft
+    Graph PowerShell inspection commands only and leave post-authentication Azure authorization decisions to Lab
+    04.
+  decision: 'Select Workforce tenant plus a dedicated External ID external tenant and managed identities: Separate
+    workforce and external directories establish clear policy boundaries while managed identities remove application
+    secrets from service access.'
+  consequences:
+  - Application teams must maintain the opaque link between external subjects and health profiles.
+  - Identity operations now own two tenant policy surfaces and provider-specific runbooks.
+revisedDecision:
+  changeRequestId: LAB03-CR-01
+  selectedCandidate: Workforce tenant plus a dedicated External ID external tenant and managed identities
+  reason: LAB03-REQ-03 makes the native and social authentication journey mandatory, so External ID is retained
+    with opaque subject claims that never write health attributes to the directory.
+  mandatoryRequirementId: LAB03-REQ-03
+  waf:
+    reliability: Provider-specific fallback and monitoring isolate a social federation disruption.
+    security: Opaque subject claims keep regulated data outside the external directory and tokens.
+    costOptimization: Managed native authentication avoids developing and auditing a password service.
+    operationalExcellence: Journey tests separately verify federation, token claims, and profile lookup.
+    performanceEfficiency: Minimal tokens reduce sign-in payload and leave profile queries to the regional application
+      store.
+# END GENERATED AZ305 V1

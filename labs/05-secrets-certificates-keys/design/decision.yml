@@ -1,0 +1,149 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-05
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Azure Key Vault Premium with RBAC and private endpoints
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 4
+    C3: 5
+    C4: 4
+    C5: 3
+  weightedTotal: 88.0
+  rationale: Premium vaults provide HSM-backed keys, secret and certificate management, managed-identity access,
+    and a bounded private application interface.
+- id: CAND-B
+  name: Azure Managed HSM with centralized HSM administration
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 5
+    C4: 3
+    C5: 2
+  weightedTotal: 77.0
+  rationale: Managed HSM creates a single-tenant cryptographic boundary and distinct administration model, but does
+    not replace general secret and certificate storage.
+- id: CAND-C
+  name: Application-owned encrypted configuration in general-purpose storage
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 2
+    C2: 2
+    C3: 2
+    C4: 2
+    C5: 4
+  weightedTotal: 44.0
+  rationale: Application encryption can protect stored values but transfers key hierarchy, rotation, audit, and
+    recovery duties to each workload.
+- id: CAND-D
+  name: Plaintext secrets in deployment variables and source-controlled parameters
+  eligible: false
+  disqualifiers:
+  - LAB05-REQ-02 requires nonexportable or protected cryptographic material with least-privilege access and rotation
+    evidence.
+  scores:
+    C1: 1
+    C2: 1
+    C3: 1
+    C4: 2
+    C5: 5
+  weightedTotal: 31.0
+  rationale: Plaintext variables minimize initial setup but expose credentials to build logs, repositories, and
+    broad deployment identities.
+selectedCandidate: Azure Key Vault Premium with RBAC and private endpoints
+rejectedAlternatives:
+- candidate: Azure Managed HSM with centralized HSM administration
+  reason: The initial shared application scope does not justify moving every asset into a costlier key-only HSM
+    pool.
+- candidate: Application-owned encrypted configuration in general-purpose storage
+  reason: It provides weaker centralized control and creates duplicated key-management code across payment applications.
+- candidate: Plaintext secrets in deployment variables and source-controlled parameters
+  reason: The proposal is ineligible because it cannot meet the mandatory secret-protection boundary.
+risks:
+- risk: Enabling a private endpoint without validated name resolution can make the vault unreachable to payment
+    workloads.
+  mitigation: Test private DNS resolution and a permitted managed-identity operation before disabling the public
+    path.
+- risk: Separating Managed HSM administration can leave too few trained recovery officers.
+  mitigation: Assign independent deputies, rehearse quorum and recovery procedures, and monitor administrator-role
+    expiry.
+waf:
+  reliability: Soft delete, purge protection, tested rotation, and explicit HSM recovery ownership reduce key-loss
+    outages.
+  security: RBAC, private endpoints, managed identities, and a separate single-tenant HSM boundary enforce cryptographic
+    least privilege.
+  costOptimization: Premium vaults remain the economical shared service and Managed HSM is limited to the workload
+    that mandates it.
+  operationalExcellence: Expiry inventory, rotation alerts, and recovery drills turn cryptographic lifecycle into
+    an auditable runbook.
+  performanceEfficiency: Applications reuse managed identities and private endpoints while key-operation throughput
+    is benchmarked per service.
+safeAnalogue: null
+traceability:
+- objectiveId: IGM-KEY-01
+  requirementId: LAB05-REQ-01
+  checkpointId: LAB05-CP01
+- objectiveId: IGM-KEY-01
+  requirementId: LAB05-REQ-02
+  checkpointId: LAB05-CP02
+- objectiveId: IGM-KEY-01
+  requirementId: LAB05-REQ-03
+  checkpointId: LAB05-CP03
+- objectiveId: IGM-KEY-01
+  requirementId: LAB05-REQ-04
+  checkpointId: LAB05-CP04
+- objectiveId: IGM-KEY-01
+  requirementId: LAB05-REQ-05
+  checkpointId: LAB05-CP05
+adr:
+  id: ADR-LAB05-001
+  status: accepted
+  context: Litware Financial runs signing, encryption, and TLS-dependent services across multiple subscriptions.
+    Teams store secrets in separate vaults, rotate keys inconsistently, and confuse Key Vault Premium with Managed
+    HSM. A planned payment service needs hardware-protected signing keys, short-lived certificates, managed-identity
+    access, private connectivity, and evidence that recovery and rotation are configured without exporting sensitive
+    material. As the cryptographic-services architect, select the appropriate vault boundaries and tiers, define
+    ownership and separation of duties, and produce a command-verifiable lifecycle. The design must never place
+    secret values, keys, certificates, access tokens, connection strings, or recovery material in repository state
+    or retained evidence.
+  decision: 'Select Azure Key Vault Premium with RBAC and private endpoints: Premium vaults provide HSM-backed keys,
+    secret and certificate management, managed-identity access, and a bounded private application interface.'
+  consequences:
+  - Platform teams operate shared premium vaults while a separate security team owns Managed HSM administration.
+  - Private DNS and managed-identity readiness become deployment prerequisites for payment services.
+revisedDecision:
+  changeRequestId: LAB05-CR-01
+  selectedCandidate: Azure Managed HSM with centralized HSM administration
+  reason: LAB05-REQ-01 makes the cryptographic service boundary a mandatory decision, so the acquired processor
+    selects single-tenant Managed HSM while shared secrets and certificates remain in Key Vault.
+  mandatoryRequirementId: LAB05-REQ-01
+  waf:
+    reliability: Dedicated HSM recovery officers and drills become necessary for the acquired workload.
+    security: The processor receives a nonshared HSM trust and administration boundary.
+    costOptimization: Only mandated processor keys incur the continuously allocated HSM cost.
+    operationalExcellence: Two service inventories and escalation paths must be maintained without mixing ownership.
+    performanceEfficiency: Processor key-operation throughput is sized independently from ordinary vault transactions.
+# END GENERATED AZ305 V1

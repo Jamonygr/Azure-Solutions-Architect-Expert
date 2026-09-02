@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-07
+businessOutcome: Replace manual attestations with repeatable technical evidence while ensuring access ends when
+  business need ends.
+stakeholders:
+- Compliance control owners
+- Microsoft Entra administrators
+- Application sponsors
+- Internal audit
+functionalRequirements:
+- id: LAB07-REQ-01
+  statement: Each applicable control maps to an initiative definition, effect, evaluation scope, owner, and evidence
+    source.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-02
+- id: LAB07-REQ-02
+  statement: Assignment scope, noncompliant resources, exemption category, expiry, and remediation owner are reviewable
+    independently.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-03
+- id: LAB07-REQ-03
+  statement: A business-owned catalog contains only approved groups, applications, and sites for the partner population.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-02
+nonfunctionalRequirements:
+- id: LAB07-REQ-04
+  statement: Guest, access-package, and privileged populations have recurring reviews with named reviewers and deny-by-default
+    handling.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-03
+- id: LAB07-REQ-05
+  statement: Administrators are eligible for scoped, time-bound activation with approval and auditable justification
+    where risk warrants it.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-02
+constraints:
+- External partner access must be reviewed quarterly by the accountable resource owner.
+- Every compliance exemption must have an expiry no later than ninety days and an escalation path.
+- Use only the PowerShell/Graph command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Each regulated resource and access package maps to a named business owner.
+- Evidence can store immutable identifiers and outcomes without retaining personal or secret fields.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: Policy compliance, exemption expiry, access-package assignments, review decisions, and lifecycle events
+    form the evidence chain.
+  scale: External partners and regulated resources change continuously; exact user and assignment counts are inventory-derived.
+  latency: Revocation must follow a denied or expired review promptly, with the acceptable processing window owned
+    by compliance.
+  availability: Reviewer absence needs escalation to a deputy so a quarterly campaign cannot silently auto-approve
+    access.
+  rto: Restoring the evidence workflow is a governance objective; production workload RTO is not governed by this
+    decision.
+  rpo: Review decisions and exemption history must not be lost between quarterly attestations because they support
+    audit reconstruction.
+  budget: Governance automation is justified by recurring campaigns and expiring exceptions rather than a one-time
+    compliance snapshot.
+acceptanceCriteria:
+- LAB07-REQ-01 passes its independent positive and negative assertions.
+- LAB07-REQ-02 passes its independent positive and negative assertions.
+- LAB07-REQ-03 passes its independent positive and negative assertions.
+- LAB07-REQ-04 passes its independent positive and negative assertions.
+- LAB07-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB07-CR-01
+  trigger: A regulator now requires quarterly evidence that external partner access was reviewed by the resource
+    owner and that every exemption expired within ninety days; revise evidence flow and escalation.
+  materialChange: A regulator now requires quarterly evidence that external partner access was reviewed by the resource
+    owner and that every exemption expired within ninety days; revise evidence flow and escalation.
+  mandatoryRequirementId: LAB07-REQ-04
+  expectedRevision: Add quarterly resource-owner campaigns, ninety-day exemption bounds, and overdue escalation
+    to the evidence flow.
+# END GENERATED AZ305 V1

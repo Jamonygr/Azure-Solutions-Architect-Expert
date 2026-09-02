@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-05
+businessOutcome: Protect payment cryptographic assets and reduce outage risk caused by unmanaged expiry or overprivileged
+  access.
+stakeholders:
+- Payment engineering
+- Cryptographic governance
+- Security operations
+- Business continuity
+functionalRequirements:
+- id: LAB05-REQ-01
+  statement: A Premium vault boundary satisfies HSM-backed key needs while keeping application secrets and certificates
+    supportable.
+  mandatory: true
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-REQ-02
+  statement: The HSM-backed key has a ninety-day lifetime and rotates thirty days before expiry with a named application
+    owner.
+  mandatory: true
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-REQ-03
+  statement: Issuer, subject, validity, renewal threshold, exportability, and application binding are documented
+    and inspectable.
+  mandatory: true
+  objectiveIds:
+  - IGM-KEY-01
+nonfunctionalRequirements:
+- id: LAB05-REQ-04
+  statement: The workload identity receives only the data action needed to consume its secret at the vault boundary.
+  mandatory: true
+  objectiveIds:
+  - IGM-KEY-01
+- id: LAB05-REQ-05
+  statement: Approved private endpoint connectivity and private DNS support access from the intended workload network.
+  mandatory: true
+  objectiveIds:
+  - IGM-KEY-01
+constraints:
+- Payment secrets and keys require private access, RBAC authorization, rotation evidence, and recoverable deletion
+  controls.
+- The acquired card workload requires a single-tenant FIPS-validated HSM administration boundary separate from application
+  vaults.
+- Use only the Azure PowerShell command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Applications support managed identity and can rotate key or secret references without embedding credentials.
+- Security owners approve emergency recovery responsibilities before enabling a production cryptographic boundary.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: The inventory distinguishes secrets, certificates, encryption keys, HSM keys, owners, expiry dates, and
+    recovery settings.
+  scale: Multiple applications share payment-vault operations, while the acquired processor introduces one separately
+    governed HSM workload.
+  latency: Cryptographic calls remain on private network paths; the owner must benchmark workload-specific operation
+    latency before sizing.
+  availability: Vault regional resiliency and application retry behavior are assessed separately from Managed HSM
+    disaster-recovery procedures.
+  rto: Key-access restoration must fit the payment-service recovery objective, but no numerical value is supplied
+    in the scenario.
+  rpo: Cryptographic material must remain recoverable through soft delete and purge protection; rotation history
+    loss is not accepted.
+  budget: Premium vaults suit shared application assets, while the fixed Managed HSM cost is justified only for
+    the acquired regulated boundary.
+acceptanceCriteria:
+- LAB05-REQ-01 passes its independent positive and negative assertions.
+- LAB05-REQ-02 passes its independent positive and negative assertions.
+- LAB05-REQ-03 passes its independent positive and negative assertions.
+- LAB05-REQ-04 passes its independent positive and negative assertions.
+- LAB05-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB05-CR-01
+  trigger: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration and cannot
+    share the payment application vault boundary; revise the selected service and operating model.
+  materialChange: The acquired card-processing workload requires single-tenant FIPS-validated HSM administration
+    and cannot share the payment application vault boundary; revise the selected service and operating model.
+  mandatoryRequirementId: LAB05-REQ-01
+  expectedRevision: Split the acquired processor keys into Managed HSM while retaining Key Vault for application
+    secrets and certificates.
+# END GENERATED AZ305 V1

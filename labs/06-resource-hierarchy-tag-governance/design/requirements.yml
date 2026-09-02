@@ -1,0 +1,85 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-06
+businessOutcome: Make ownership, environment, cost, and residency consistently discoverable across a growing subscription
+  estate.
+stakeholders:
+- Cloud center of excellence
+- Business-unit technology leads
+- FinOps
+- Risk and compliance
+functionalRequirements:
+- id: LAB06-REQ-01
+  statement: Platform, landing-zone, sandbox, and decommissioned archetypes reflect policy and delegation needs
+    rather than team names.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-REQ-02
+  statement: The workload subscription is attached to the production landing-zone archetype with explicit platform
+    dependencies.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-REQ-03
+  statement: Resources sharing deployment, ownership, and deletion lifecycles are grouped together and tagged consistently.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-01
+nonfunctionalRequirements:
+- id: LAB06-REQ-04
+  statement: Required tags use canonical names and controlled values that serve ownership, cost, data, and environment
+    decisions.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-01
+- id: LAB06-REQ-05
+  statement: Resource Graph produces an explainable inventory grouped by ownership and cost dimensions.
+  mandatory: true
+  objectiveIds:
+  - IGM-GOV-01
+constraints:
+- Enterprise security guardrails must inherit across a growing subscription estate.
+- The regulated subsidiary retains its own administrators and billing while resources remain exclusively in approved
+  European regions.
+- Use only the Azure CLI command lane for learner implementation.
+- Keep all live changes behind explicit execution and acknowledgement switches.
+- Retain only sanitized command evidence and synthetic fixture identifiers.
+assumptions:
+- Subscriptions can be reorganized under management groups without changing workload resource identifiers.
+- Ownership, environment, data classification, and cost-center values have accountable authoritative sources.
+- West Europe is the configurable primary example and North Europe is the configurable secondary example.
+- The learner has administrator-level Azure operations knowledge but receives no pre-existing authenticated context.
+- Offline fixtures demonstrate contract behavior rather than live Azure service behavior.
+facts:
+  data: The governance model classifies subscriptions and resources by owner, environment, residency, workload,
+    and financial responsibility.
+  scale: Multiple business units and a separately billed subsidiary require hierarchy that grows by archetype instead
+    of reporting-line depth.
+  latency: Policy evaluation is not an application latency control; remediation timing is measured as a governance
+    compliance SLO.
+  availability: Moving or restructuring management groups must not create a window without inherited security and
+    allowed-location controls.
+  rto: Governance restoration means reapplying the versioned hierarchy and assignments; a numerical business-service
+    RTO is not applicable.
+  rpo: Policy, initiative, exemption, and tag definitions require version-controlled recovery with no unrecorded
+    production change.
+  budget: Subscription chargeback stays separate for the subsidiary and shared-platform cost is allocated with governed
+    tags.
+acceptanceCriteria:
+- LAB06-REQ-01 passes its independent positive and negative assertions.
+- LAB06-REQ-02 passes its independent positive and negative assertions.
+- LAB06-REQ-03 passes its independent positive and negative assertions.
+- LAB06-REQ-04 passes its independent positive and negative assertions.
+- LAB06-REQ-05 passes its independent positive and negative assertions.
+changeRequest:
+  id: LAB06-CR-01
+  trigger: A regulated subsidiary must retain its own administrators and billing while inheriting enterprise security
+    guardrails and keeping resources exclusively in approved European regions; revise hierarchy and tagging decisions.
+  materialChange: A regulated subsidiary must retain its own administrators and billing while inheriting enterprise
+    security guardrails and keeping resources exclusively in approved European regions; revise hierarchy and tagging
+    decisions.
+  mandatoryRequirementId: LAB06-REQ-01
+  expectedRevision: Add a regulated-subsidiary archetype with separate billing and administration beneath immutable
+    European guardrails.
+# END GENERATED AZ305 V1

@@ -1,0 +1,83 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+id: LAB-07
+number: 7
+slug: 07-compliance-identity-governance
+title: Compliance and Identity Governance
+domain: identity-governance-monitoring
+track: azure-powershell
+implementationMode: safe-analogue
+status: offline-validated
+role: Compliance and identity governance architect
+outcome: A continuous compliance and identity lifecycle design with accountable exceptions, review evidence, and
+  least standing privilege.
+duration: 170 minutes
+difficulty: advanced
+costClass: moderate
+permissions: Resource Policy Reader and directory governance read roles support assessment; policy assignments,
+  access packages, reviews, and lifecycle workflows require separate approved roles and tenant acknowledgement.
+licensing: Microsoft Entra ID Governance capabilities can require per-user licensing; Azure Policy remediation may
+  also create workload-specific service charges.
+safeAnalogue: true
+sourceUrls:
+- https://learn.microsoft.com/en-us/entra/id-governance/identity-governance-overview
+objectives:
+  primary:
+  - IGM-GOV-02
+  - IGM-GOV-03
+  reinforced: []
+inputs:
+- SubscriptionId
+- TenantId
+- RunId
+- Location
+- SecondaryLocation
+- ResourceGroup
+- WorkloadName
+- ExpiresOn
+- CatalogId
+- InitiativeName
+- PolicyAssignmentName
+- PolicyCategory
+- PolicyScope
+- ReviewDefinitionId
+- Execute
+- AcknowledgeCost
+- AcknowledgeTenantChange
+checkpoints:
+- id: LAB07-CP01
+  title: Map controls to policy initiatives
+  requirementIds:
+  - LAB07-REQ-01
+  objectiveIds:
+  - IGM-GOV-02
+- id: LAB07-CP02
+  title: Evaluate assignments exemptions and compliance state
+  requirementIds:
+  - LAB07-REQ-02
+  objectiveIds:
+  - IGM-GOV-03
+- id: LAB07-CP03
+  title: Design entitlement-management catalogs
+  requirementIds:
+  - LAB07-REQ-03
+  objectiveIds:
+  - IGM-GOV-02
+- id: LAB07-CP04
+  title: Require recurring access reviews
+  requirementIds:
+  - LAB07-REQ-04
+  objectiveIds:
+  - IGM-GOV-03
+- id: LAB07-CP05
+  title: Minimize standing privileged roles
+  requirementIds:
+  - LAB07-REQ-05
+  objectiveIds:
+  - IGM-GOV-02
+assessment:
+  enabled: true
+  questionCount: 50
+lastOfflineValidated: '2026-09-02'
+lastLiveVerified: null
+# END GENERATED AZ305 V1

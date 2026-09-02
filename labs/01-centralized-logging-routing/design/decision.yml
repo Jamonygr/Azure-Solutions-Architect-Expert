@@ -1,0 +1,147 @@
+# BEGIN GENERATED AZ305 V1
+schemaVersion: 1.0.0
+labId: LAB-01
+implementationMode: reference-deployable
+criteria:
+- id: C1
+  name: Mandatory requirements fit
+  weight: 30
+- id: C2
+  name: Reliability and recovery
+  weight: 25
+- id: C3
+  name: Security and governance
+  weight: 20
+- id: C4
+  name: Operational manageability
+  weight: 15
+- id: C5
+  name: Cost and performance efficiency
+  weight: 10
+candidates:
+- id: CAND-A
+  name: Regional workspaces with cross-workspace queries and policy-driven routing
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 5
+    C2: 5
+    C3: 5
+    C4: 4
+    C5: 3
+  weightedTotal: 93.0
+  rationale: Region-bound workspaces satisfy residency and isolate collection failure while DCR routing and cross-workspace
+    views preserve a common operating experience.
+- id: CAND-B
+  name: Central Log Analytics workspace with DCR-based collection and archive export
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 3
+    C2: 3
+    C3: 3
+    C4: 5
+    C5: 4
+  weightedTotal: 68.0
+  rationale: Centralization simplifies queries and governance, but exporting after ingestion does not cure an in-region
+    processing requirement.
+- id: CAND-C
+  name: Dedicated workspace per workload with independent retention and access
+  eligible: true
+  disqualifiers: []
+  scores:
+    C1: 4
+    C2: 4
+    C3: 4
+    C4: 2
+    C5: 2
+  weightedTotal: 70.0
+  rationale: Workload isolation gives precise access and retention control but multiplies policy, query, commitment-tier,
+    and incident-correlation overhead.
+- id: CAND-D
+  name: One global workspace retaining every stream interactively for seven years
+  eligible: false
+  disqualifiers:
+  - LAB01-REQ-01 requires the workspace boundary to remain in the approved data region with intentional retention.
+  scores:
+    C1: 1
+    C2: 3
+    C3: 1
+    C4: 4
+    C5: 1
+  weightedTotal: 39.0
+  rationale: A global all-hot workspace is operationally familiar but crosses the residency boundary and applies
+    the most expensive retention to low-value traces.
+selectedCandidate: Regional workspaces with cross-workspace queries and policy-driven routing
+rejectedAlternatives:
+- candidate: Central Log Analytics workspace with DCR-based collection and archive export
+  reason: Its simpler operations do not compensate for weaker residency fit and a larger regional failure domain.
+- candidate: Dedicated workspace per workload with independent retention and access
+  reason: Workspace proliferation raises management and ingestion cost without improving the mandated regional boundary.
+- candidate: One global workspace retaining every stream interactively for seven years
+  reason: The candidate is disqualified by the regional security-record mandate.
+risks:
+- risk: A DCR association omission can create a silent telemetry gap for one workload or region.
+  mitigation: Reconcile source inventory to DCR and DCRA resource IDs and fail the coverage assertion for any unmatched
+    source.
+- risk: Cross-workspace permissions can expose regulated records to regional operators who need only application
+    telemetry.
+  mitigation: Separate table access and workbook scopes, then test both an allowed query and a denied cross-boundary
+    query.
+waf:
+  reliability: Independent regional ingestion limits correlated collection loss and makes partial query behavior
+    explicit.
+  security: Workspace and table boundaries enforce residency and least-privilege access for security evidence.
+  costOptimization: Thirty-day trace search and archived audit retention align price with access frequency instead
+    of duplicating streams.
+  operationalExcellence: Policy-assigned DCRs and shared workbooks make coverage drift and incident handoffs observable.
+  performanceEfficiency: Regional ingestion reduces collection paths, while scoped cross-workspace queries avoid
+    scanning unrelated tables.
+safeAnalogue: null
+traceability:
+- objectiveId: IGM-LOG-01
+  requirementId: LAB01-REQ-01
+  checkpointId: LAB01-CP01
+- objectiveId: IGM-LOG-02
+  requirementId: LAB01-REQ-02
+  checkpointId: LAB01-CP02
+- objectiveId: IGM-LOG-01
+  requirementId: LAB01-REQ-03
+  checkpointId: LAB01-CP03
+- objectiveId: IGM-LOG-02
+  requirementId: LAB01-REQ-04
+  checkpointId: LAB01-CP04
+- objectiveId: IGM-LOG-01
+  requirementId: LAB01-REQ-05
+  checkpointId: LAB01-CP05
+adr:
+  id: ADR-LAB01-001
+  status: accepted
+  context: Contoso Retail has acquired two regional brands whose Azure resources emit platform logs, application
+    telemetry, and security events into unrelated destinations. Operations cannot correlate an incident across subscriptions,
+    while the security team requires immutable export of selected control-plane records and regional teams need
+    bounded access to their own data. You are the lead solutions architect. Design a centralized logging platform
+    that uses Azure Monitor Agent, data collection rules and associations, resource diagnostic settings, and deliberate
+    retention rather than a legacy agent. The design must limit duplicate ingestion, preserve data sovereignty,
+    expose routing evidence through commands, and separate collection architecture from the alerting decisions owned
+    by Lab 02.
+  decision: 'Select Regional workspaces with cross-workspace queries and policy-driven routing: Region-bound workspaces
+    satisfy residency and isolate collection failure while DCR routing and cross-workspace views preserve a common
+    operating experience.'
+  consequences:
+  - Incident queries must name the intended regional workspace set and tolerate an unavailable region.
+  - Platform owners must govern DCR association coverage and table-specific retention as separate controls.
+revisedDecision:
+  changeRequestId: LAB01-CR-01
+  selectedCandidate: Regional workspaces with cross-workspace queries and policy-driven routing
+  reason: LAB01-REQ-05 makes the seven-year in-region evidence boundary mandatory, so the regional-workspace decision
+    is retained with archive retention for security tables and thirty-day trace search.
+  mandatoryRequirementId: LAB01-REQ-05
+  waf:
+    reliability: Each region keeps collecting its own control-plane stream during a remote workspace outage.
+    security: Long-lived records never traverse the mandated regional boundary.
+    costOptimization: Only the regulated stream receives seven-year retention and application traces remain thirty-day
+      searchable.
+    operationalExcellence: DCR and table-policy evidence reveals exactly which stream follows each rule.
+    performanceEfficiency: Routine trace queries scan short-lived regional tables instead of the seven-year archive.
+# END GENERATED AZ305 V1
